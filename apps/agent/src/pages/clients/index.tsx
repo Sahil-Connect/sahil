@@ -1,24 +1,23 @@
-import { useGetClients, useRegisterClient } from "@/hooks/clients";
+import { useGetClients } from "@/hooks/clients";
 import { ListClients } from "@/componens/clients/ListClients";
+import { InsertNewClient } from "@/componens/clients/InsertNewClient";
 
 export default function Business() {
   const { error, data, loading } = useGetClients();
-  const { insertClient } = useRegisterClient();
+
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+      <div>
         <div>
-        <h3>Hello, Business</h3>
-        <button onClick={(e) => insertClient({
-          variables: { object: {
-            name: "Some Random!"
-          } }
-        })}>Insert</button>
+          <div>
+          <h3>Register, Business</h3>
+          <p>This form is designed to gather essential information about your business, ensuring a seamless integration into our platform.</p>
+          </div>
+
+          <InsertNewClient />
         </div>
-        <div>
-        {data && <ListClients clients={data} />}
-        </div>
+        <div>{data && <ListClients clients={data} />}</div>
       </div>
     </main>
   );
