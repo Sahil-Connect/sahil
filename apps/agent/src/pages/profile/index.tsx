@@ -2,7 +2,6 @@ import { useGetUsers } from "@/hooks/users";
 
 export default function Profile() {
   const { error, data, loading } = useGetUsers();
-  console.log(data);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
