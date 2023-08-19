@@ -13,8 +13,7 @@ export default function Business() {
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div>
         <h3>Hello, Business</h3>
-        
-        <button onClick={signOut}>Insert</button>
+        <button onClick={(e) => signOut()}>Insert</button>
         </div>
         <div>
         {data && <ListClients clients={data} />}
