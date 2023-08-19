@@ -24,6 +24,7 @@ export const InsertNewClient = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="form-control">
       <input
         type="text"
         placeholder="Type here"
@@ -31,7 +32,8 @@ export const InsertNewClient = () => {
   
         {...register("businessName")}
       />
-      <input type="submit" />
+      </div>
+      <input type="submit" className="btn btn-primary bg-black"/>
     </form>
   );
 };

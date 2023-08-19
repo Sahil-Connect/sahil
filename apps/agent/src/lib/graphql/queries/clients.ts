@@ -9,6 +9,14 @@ query getClients {
         id
         updated_at
         name
-      }
+        addresses {
+            city
+            created_at
+            id
+            latitude
+            longitude
+            updated_at
+        }
+    }
 }
 `;
