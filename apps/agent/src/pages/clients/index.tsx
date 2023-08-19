@@ -1,5 +1,5 @@
-import { ListClients } from "@/componens/clients/ListClients";
-import { InsertNewClient } from "@/componens/clients/InsertNewClient";
+import { ListClients } from "@/components/clients/ListClients";
+import { InsertNewClient } from "@/components/clients/InsertNewClient";
 
 export default function Business() {
   return (
