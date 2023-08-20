@@ -1,7 +1,14 @@
 "use client";
+import { FC } from "react";
 
-import * as React from "react";
+export type Props = {
+  cta: string;
+};
 
-export const Button = () => {
-  return <button onClick={() => alert("boop")}>Boop</button>;
+export const Button: FC<Props> = ({ cta }) => {
+  return (
+    <button className="btn" onClick={() => alert("boop")}>
+      {cta}
+    </button>
+  );
 };

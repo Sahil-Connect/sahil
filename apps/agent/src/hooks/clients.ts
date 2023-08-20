@@ -10,5 +10,5 @@ export const useGetClients = () => {
 export const useRegisterClient = () => {
     const [insertClient, { data, loading, error }] = useMutation(INSERT_NEW_CLIENT);
 
-    return {loading, insertClient}
+    return {loading, insertClient, error};
 }
