@@ -14,8 +14,8 @@ export const ListBusinesses = () => {
     return (
       <div className="card card-compact bg-white shadow">
         <div className="card-body">
-        <h3 className="card-title">Error loading businesses</h3>
-        <p>Check your network connection. You can also try refreshing the page.</p>
+        <h3 className="card-title">Something went wrong...</h3>
+        <p>Error loading businesses, check your network connection. You can also try refreshing the page.</p>
         <div className="card-actions">
           <button className="btn btn-sm btn-secondary">Reload</button>
           <button className="btn btn-sm btn-outline">Go Back</button>

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { FETCH_BUSINESSES } from "@/lib/graphql/queries/clients";
-import { INSERT_NEW_BUSINESS } from "@/lib/graphql/mutations/clients";
+import { FETCH_BUSINESSES } from "@/lib/graphql/queries/businesses";
+import { INSERT_NEW_BUSINESS } from "@/lib/graphql/mutations/businesses";
 
 export const useFetchBusinesses = () => {
     const { error, data, loading } = useQuery(FETCH_BUSINESSES);
