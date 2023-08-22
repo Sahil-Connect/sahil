@@ -6,8 +6,12 @@ import Link from 'next/link';
 const Navbar = () => {
   const links = [
     {
-      name: 'Clients',
-      href: '/clients',
+      name: 'Businesses',
+      href: '/businesses',
+    },
+    {
+      name: 'Orders',
+      href: '/orders',
     },
     {
       name: 'Suppliers',
@@ -19,7 +23,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <header className='navbar bg-base-100'>
+    <header className='navbar bg-white shadow'>
       <div className='navbar-start'>
         <Link href='/'>
           <Image
@@ -30,7 +34,7 @@ const Navbar = () => {
             className='h-10 w-16 object-contain'
           />
         </Link>
-        <span className='normal-case text-xl'>Agent</span>
+        <span className='normal-case text-xl'>Sahil Agent</span>
       </div>
       <nav className='navbar-end'>
         <ul className='menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-4'>
@@ -41,9 +45,6 @@ const Navbar = () => {
               </li>
             );
           })}
-          <Link href='/auth' className='btn btn-primary btn-sm'>
-            Sign In
-          </Link>
         </ul>
         <div className='dropdown dropdown-end'>
           <label tabIndex={0} className='btn btn-ghost lg:hidden'>
