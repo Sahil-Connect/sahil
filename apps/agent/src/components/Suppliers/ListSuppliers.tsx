@@ -1,9 +1,7 @@
 import { SupplierOverviewCard } from "./SupplierOverviewCard";
 import { useFetchSuppliers } from "@/hooks/suppliers";
-<<<<<<< HEAD
+
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-=======
->>>>>>> 087bedb (feat: supplier route and queries)
 
 export type SahilSupplier = {
   name: string;
@@ -13,11 +11,9 @@ export type SahilSupplier = {
 
 export const ListSuppliers = () => {
   const { data: suppliers, error, loading } = useFetchSuppliers();
-<<<<<<< HEAD
-  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
-=======
 
->>>>>>> 087bedb (feat: supplier route and queries)
+  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
+
   if (error) {
     return (
       <div className="card card-compact bg-white shadow">
