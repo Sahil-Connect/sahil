@@ -1,5 +1,4 @@
 import { ListBusinesses } from "@/components/Businesses/ListBusinesses";
-import { InsertNewBusiness } from "@/components/Businesses/AddNewBusiness";
 
 export default function Business() {
   return (
@@ -18,9 +17,7 @@ export default function Business() {
             <button className="btn btn-sm btn-primary">Register New Business</button>
           </div>
         </div>
-        <div className="">
-          <ListBusinesses />
-        </div>
+        <ListBusinesses />
       </div>
     </main>
   );
