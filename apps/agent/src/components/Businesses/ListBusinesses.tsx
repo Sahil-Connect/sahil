@@ -1,19 +1,26 @@
-import { ClientOverviewCard } from "./BusinessOverviewCard";
+import { BusinessOverviewCard } from "./BusinessOverviewCard";
 import { useFetchBusinesses } from "@/hooks/businesses";
 
-export type SahilClient = {
+export type SahilBusiness = {
   name: string;
   id: string;
 };
 
 
 export const ListBusinesses = () => {
-  const { data: clients, error, loading } = useFetchBusinesses();
+  const { data: businesses, error, loading } = useFetchBusinesses();
 
   if (error) {
     return (
-      <div>
-        <p>Error loading clients</p>
+      <div className="card card-compact bg-white shadow">
+        <div className="card-body">
+        <h3 className="card-title">Error loading businesses</h3>
+        <p>Check your network connection. You can also try refreshing the page.</p>
+        <div className="card-actions">
+          <button className="btn btn-sm btn-secondary">Reload</button>
+          <button className="btn btn-sm btn-outline">Go Back</button>
+        </div>
+        </div>
       </div>
     );
   }
@@ -21,15 +28,15 @@ export const ListBusinesses = () => {
   if (loading) {
     return (
       <div>
-        <p>Loading clients...</p>
+        <p>Loading businesses...</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-2">
-      {clients && clients.map((client: SahilClient) => (
-        <ClientOverviewCard key={client.id} client={client} />
+      {businesses && businesses.map((business: SahilBusiness) => (
+        <BusinessOverviewCard key={business.id} business={business} />
       ))}
     </div>
   );

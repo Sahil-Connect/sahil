@@ -10,7 +10,7 @@ type Props = {
   client: SahilClient;
 };
 
-export const ClientOverviewCard: FC<Props> = ({ client }) => {
+export const BusinessOverviewCard: FC<Props> = ({ client }) => {
 
   return (
     <div className="card card-compact shadow">
