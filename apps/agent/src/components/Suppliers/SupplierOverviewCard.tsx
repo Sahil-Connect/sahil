@@ -1,5 +1,4 @@
 import { FC } from "react";
-// import { Button } from "ui";
 
 export type SahilSupplier = {
   name: string;

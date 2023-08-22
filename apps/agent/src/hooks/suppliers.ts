@@ -3,12 +3,12 @@ import { FETCH_SUPPLIERS, FETCH_SUPPLIER_BY_PK } from "@/lib/graphql/queries/sup
 import { INSERT_NEW_SUPPLIER } from "@/lib/graphql/mutations/suppliers";
 
 export const useFetchSuppliers = () => {
-    const { error, data, loading, refetch } = useQuery(FETCH_SUPPLIERS);
+    const { error, data, loading } = useQuery(FETCH_SUPPLIERS);
     return { error, data: data?.suppliers, loading };
 }
 
 export const useFetchSupplierByPK = (id: string) => {
-    const { error, data, loading, refetch } = useQuery(FETCH_SUPPLIER_BY_PK, {
+    const { error, data, loading } = useQuery(FETCH_SUPPLIER_BY_PK, {
         variables: {
             id
         }
