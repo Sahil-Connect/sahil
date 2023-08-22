@@ -1,5 +1,5 @@
-import { ListClients } from "@/components/clients/ListClients";
-import { InsertNewClient } from "@/components/clients/InsertNewClient";
+import { ListBusinesses } from "@/components/Businesses/ListBusinesses";
+import { InsertNewBusiness } from "@/components/Businesses/AddNewBusiness";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Business() {
@@ -11,12 +11,12 @@ export default function Business() {
         <button onClick={(e) => signOut()}>Insert</button>
         </div>
         <div>
-        <ListClients />
+        <ListBusinesses />
           <div>
           <h3>Register, Business</h3>
           <p>This form is designed to gather essential information about your business, ensuring a seamless integration into our platform.</p>
           </div>
-          <InsertNewClient />
+          <InsertNewBusiness />
         </div>
       </div>
     </main>

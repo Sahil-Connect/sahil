@@ -1,5 +1,5 @@
-import { ClientOverviewCard } from "./ClientOverviewCard";
-import { useGetClients } from "@/hooks/clients";
+import { ClientOverviewCard } from "./BusinessOverviewCard";
+import { useFetchBusinesses } from "@/hooks/businesses";
 
 export type SahilClient = {
   name: string;
@@ -7,8 +7,8 @@ export type SahilClient = {
 };
 
 
-export const ListClients = () => {
-  const { data: clients, error, loading } = useGetClients();
+export const ListBusinesses = () => {
+  const { data: clients, error, loading } = useFetchBusinesses();
 
   if (error) {
     return (

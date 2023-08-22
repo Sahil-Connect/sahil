@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRegisterClient } from "@/hooks/clients";
+import { useRegisterBusiness } from "@/hooks/businesses";
 import { useInsertUser } from "@/hooks/users";
 
 type Inputs = {
@@ -7,14 +7,14 @@ type Inputs = {
   businessType: string;
 };
 
-export const InsertNewClient = () => {
+export const InsertNewBusiness = () => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const { insertClient, loading, error } = useRegisterClient();
+  const { insertClient, loading, error } = useRegisterBusiness();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     insertClient({
       variables: {

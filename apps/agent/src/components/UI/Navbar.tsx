@@ -6,8 +6,8 @@ import Link from 'next/link';
 const Navbar = () => {
   const links = [
     {
-      name: 'Clients',
-      href: '/clients',
+      name: 'Businesses',
+      href: '/businesses',
     },
     {
       name: 'Suppliers',
@@ -30,7 +30,7 @@ const Navbar = () => {
             className='h-10 w-16 object-contain'
           />
         </Link>
-        <span className='normal-case text-xl'>Agent</span>
+        <span className='normal-case text-xl'>Sahil Agent</span>
       </div>
       <nav className='navbar-end'>
         <ul className='menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-4'>
