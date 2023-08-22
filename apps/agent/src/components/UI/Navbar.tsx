@@ -19,7 +19,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <header className='navbar bg-base-100'>
+    <header className='navbar bg-white shadow'>
       <div className='navbar-start'>
         <Link href='/'>
           <Image
@@ -41,9 +41,6 @@ const Navbar = () => {
               </li>
             );
           })}
-          <Link href='/auth' className='btn btn-primary btn-sm'>
-            Sign In
-          </Link>
         </ul>
         <div className='dropdown dropdown-end'>
           <label tabIndex={0} className='btn btn-ghost lg:hidden'>
