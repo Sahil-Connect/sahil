@@ -10,6 +10,10 @@ const Navbar = () => {
       href: '/businesses',
     },
     {
+      name: 'Orders',
+      href: '/orders',
+    },
+    {
       name: 'Suppliers',
       href: '/suppliers',
     },
