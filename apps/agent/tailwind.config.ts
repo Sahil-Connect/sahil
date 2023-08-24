@@ -6,6 +6,36 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  theme: {
+    fontFamily: {
+      montserrat: ['Montserrat', 'sans-serif'],
+    },
+    screens: {
+      xs: '320px',
+      sm: '520px',
+      md: '568px',
+      lg: '768px',
+      xl: '820px',
+      xxl: '968px',
+      '2xl': '1024px',
+      '3xl': '1200px',
+      '4xl': '1400px',
+      '5xl': '1700px',
+    },
+    extend: {
+      colors: {
+        'black': '#232323',
+        'blackDark': '#121212',
+        'green': '#067a46',
+        'greenDark': '#056835',
+        'gray': '#C3C3D5',
+        'white': '#F6F6F7',
+      },
+      backgroundImage: {
+        'gradient': 'linear-gradient(90deg, #232323 0%, #232323 100%)',
+      },
+    },
+  },
   plugins: [require('daisyui')],
   daisyui: {
     themes: [

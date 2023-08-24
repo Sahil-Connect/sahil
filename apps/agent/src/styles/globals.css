@@ -1,3 +1,102 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root{
+    --header-height: 3.5rem;
+    --biggest-fs: 2.25rem;
+    --bigger-fs: 1.75rem;
+    --h1-fs: 1.5rem;
+    --h2-fs: 1.25rem;
+    --h3-fs: 1rem;
+    --normal-fs: .938rem;
+    --small-fs: .813rem;
+    --smaller-fs: .75rem;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+  }
+  @media screen and (min-width: 968px) {
+    :root{
+      --biggest-fs: 4rem;
+      --bigger-fs: 3.25rem;
+      --h1-fs: 2.25rem;
+      --h2-fs: 1.5rem;
+      --h3-fs: 1.25rem;
+      --normal-fs: 1rem;
+      --small-fs: .875rem;
+      --smaller-fs: .813rem;
+    }
+  }
+}
+*,
+*::before,
+*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  @apply scroll-smooth h-full;
+}
+body{
+  @apply font-montserrat text-[theme("colors.black")] bg-[theme("colors.white")] text-[length:var(--normal-fs)] font-medium transition-[0.4s] duration-[ease-in-out];
+}
+h1,h2,h3{
+  @apply font-bold;
+}
+ul{
+  @apply list-none;
+}
+a {
+  @apply no-underline text-inherit;
+}
+img {
+  @apply max-w-full h-auto;
+}
+
+@layer components {
+  .sahcontainer {
+    @apply px-2 sm:max-w-[520px] w-full md:mx-auto md:max-w-[568px] lg:max-w-[768px] xl:max-w-[820px] xxl:max-w-[968px] 2xl:max-w-[1024px] 3xl:max-w-[1200px] 4xl:max-w-[1400px] 5xl:max-w-[1700px];
+  }
+  .section {
+    @apply pt-[4.5rem] pb-8 px-0 lg:pt-24;
+  }
+  .section-title {
+    @apply text-center text-[length:var(--h2-fs)] mb-4;
+  }
+  .section-subtitle {
+    @apply block text-center text-[length:var(--normal-fs)] font-bold text-[theme("colors.red")];
+  }
+  button, input{
+    @apply font-montserrat outline-[none] border-[none];
+  }
+  .button{
+    @apply inline-block bg-[theme("colors.green")] text-[theme("colors.white")] px-8 py-2 font-medium rounded-[3rem] transition duration-[3000];
+  }
+  .button:active{
+    @apply scale-[0.98];
+  }
+  .button:hover{
+    @apply bg-[theme("colors.greenDark")];
+  }
+  ::-webkit-scrollbar{
+    @apply w-[.6rem] bg-[theme("colors.gray")];
+  }
+  ::-webkit-scrollbar-thumb{
+    @apply bg-[theme("colors.green")];
+  }
+  .header{
+    @apply fixed top-0 left-0 w-full z-[100] bg-transparent;
+  }
+  @media screen and (max-width: 968px){
+    .nav-menu {
+      @apply fixed bg-[#efefef] top-0 -right-full w-[70%] h-full shadow-[-1px_0_4px_hsla(38,4%,15%,0.15)] transition-[0.4s] z-10 pt-24 pb-14 px-8;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .section {
+      @apply pt-14 pb-4 px-0;
+    }
+  }
+}
