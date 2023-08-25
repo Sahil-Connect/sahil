@@ -4,7 +4,7 @@ import {
 
 export const FETCH_SUPPLIERS = gql`
 query getSuppliers {
-    supplier {
+    suppliers {
         created_at
         id
         name
@@ -13,8 +13,8 @@ query getSuppliers {
 `;
 
 export const INSERT_NEW_SUPPLIER = gql`
-mutation registerSupplier($object: supplier_insert_input!) {
-    insert_supplier_one(object: $object) {
+mutation registerSupplier($object: suppliers_insert_input!) {
+    insert_suppliers_one(object: $object) {
         id
         name
     }

@@ -24,7 +24,9 @@ export const RegisterNewSupplier = () => {
 
     const supplier = await registerSupplier({
       variables: {
-        ...validtedInput,
+        object: { 
+            name: validtedInput.supplierName
+        },
       },
     });
   };
