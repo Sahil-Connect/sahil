@@ -1,5 +1,6 @@
 import { SupplierOverviewCard } from "./SupplierOverviewCard";
 import { useFetchSuppliers } from "@/hooks/suppliers";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export type SahilSupplier = {
   name: string;
@@ -9,7 +10,7 @@ export type SahilSupplier = {
 
 export const ListSuppliers = () => {
   const { data: suppliers, error, loading } = useFetchSuppliers();
-
+  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
   if (error) {
     return (
       <div className="card card-compact bg-white shadow">
@@ -34,9 +35,9 @@ export const ListSuppliers = () => {
   }
 
   return (
-    <div className="space-y-2">
-      {suppliers && suppliers.map((business: SahilSupplier) => (
-        <SupplierOverviewCard key={business.id} business={business} />
+    <div className="space-y-2" ref={parent}>
+      {suppliers && suppliers.map((supplier: SahilSupplier) => (
+        <SupplierOverviewCard key={supplier.id} supplier={supplier} />
       ))}
     </div>
   );
