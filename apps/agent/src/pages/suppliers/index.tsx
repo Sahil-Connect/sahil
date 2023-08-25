@@ -1,4 +1,5 @@
-import { ListSuppliers } from "@/components/Suppliers/ListSuppliers";
+import { RegisterNewSupplier, ListSuppliers } from "@/components/Suppliers";
+
 
 export default function Suppliers() {
   return (
@@ -17,6 +18,7 @@ export default function Suppliers() {
             <button className="btn btn-sm btn-primary">Register New Supplier</button>
           </div>
         </div>
+        <RegisterNewSupplier />
         <ListSuppliers />
       </div>
     </main>

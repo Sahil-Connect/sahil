@@ -1,6 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRegisterBusiness } from "@/hooks/businesses";
-import { useInsertUser } from "@/hooks/users";
 import { z } from "zod";
 
 type Inputs = {
@@ -11,7 +10,7 @@ type Inputs = {
 const businessSchema = z.object({
   businessName: z.string(),
   businessType: z.string(),
-})
+});
 
 export const InsertNewBusiness = () => {
   const {
@@ -52,7 +51,7 @@ export const InsertNewBusiness = () => {
           {...register("businessType")}
         />
       </div>
-      <input type="submit" className="btn btn-primary" />
+      <input type="submit" className="btn btn-sm btn-primary" />
     </form>
   );
 };
