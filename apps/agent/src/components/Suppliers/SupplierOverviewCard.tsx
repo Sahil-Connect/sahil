@@ -11,11 +11,11 @@ type Props = {
 };
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
-
+  console.log(supplier)
   return (
     <div className="card card-compact shadow">
       <div className="card-body">
-        <h2 className="card-title">{supplier.name}</h2>
+        <h2 className="card-title">Hello</h2>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import {
 
 export const FETCH_SUPPLIERS = gql`
 query getSuppliers {
-    supplier {
+    suppliers {
         created_at
         id
         name
