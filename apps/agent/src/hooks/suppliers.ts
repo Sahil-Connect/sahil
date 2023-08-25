@@ -4,7 +4,7 @@ import { INSERT_NEW_SUPPLIER } from "@/lib/graphql/mutations/suppliers";
 
 export const useFetchSuppliers = () => {
     const { error, data, loading } = useQuery(FETCH_SUPPLIERS);
-    return { error, data: data?.supplier, loading };
+    return { error, data: data?.suppliers, loading };
 }
 
 export const useRegisterSupplier = () => {
