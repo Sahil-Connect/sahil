@@ -1,4 +1,5 @@
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["ui"],
-};
+}
+
+module.exports = nextConfig
