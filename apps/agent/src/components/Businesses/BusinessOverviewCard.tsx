@@ -1,24 +1,24 @@
 import { FC } from "react";
 // import { Button } from "ui";
 
-export type SahilClient = {
+export type SahilBusiness = {
   name: string;
   id: string;
 };
 
 type Props = {
-  client: SahilClient;
+  business: SahilBusiness;
 };
 
-export const ClientOverviewCard: FC<Props> = ({ client }) => {
+export const BusinessOverviewCard: FC<Props> = ({ business }) => {
 
   return (
-    <div className="card w-96 bg-rose-900 shadow-xl">
+    <div className="card card-compact shadow">
       <div className="card-body">
-        <h2 className="card-title">{client.name}</h2>
+        <h2 className="card-title">{business.name}</h2>
         <div>
           {
-            client.addresses && client.addresses.map(address => (
+            business.addresses && business.addresses.map(address => (
               <div>
                 <p>{address.city}</p>
               </div>
