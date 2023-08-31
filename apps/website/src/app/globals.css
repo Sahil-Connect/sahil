@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+  @apply scroll-smooth;
+}
+body{
+  @apply font-montserrat text-base font-medium h-full text-[theme('colors.black')] bg-[theme('colors.white')] transition-[0.4s] duration-[ease-in-out] xxl:text-basexl;
+}
+
+h1,h2,h3{ @apply font-bold; }
+h1{ @apply text-h1 xxl:text-h1xl; }
+h2{ @apply text-h2 xxl:text-h2xl; }
+h3{ @apply text-h3 xxl:text-h3xl; }
+ul{ @apply list-none; }
+
+@layer components {
+  .container {
+    @apply px-2 sm:max-w-[520px] w-full md:mx-auto md:max-w-[568px] lg:max-w-[768px] xl:max-w-[820px] xxl:max-w-[968px] 2xl:max-w-[1024px] 3xl:max-w-[1220px] 4xl:max-w-[1400px] 5xl:max-w-[1700px];
+  }
+  .section {
+    @apply pt-[4.5rem] pb-8 px-0 lg:pt-24;
+  }
+  button, input{
+    @apply font-montserrat outline-0 border-0;
+  }
+  .button{
+    @apply inline-block bg-[theme('colors.green')] text-[theme('colors.white')] px-6 py-2 font-medium rounded-[3rem] transition duration-[3000];
+  }
+  .button:active{
+    @apply scale-[0.98];
+  }
+  .button:hover{
+    @apply bg-[theme('colors.green-dark')];
+  }
+  ::-webkit-scrollbar{
+    @apply w-[.6rem] bg-[theme('colors.gray')];
+  }
+  ::-webkit-scrollbar-thumb{
+    @apply bg-[theme('colors.green')];
+  }
+  .header{
+    @apply fixed top-0 left-0 w-full z-[100] bg-transparent;
+  }
+  @media screen and (max-width: 968px){
+    .nav-menu {
+      @apply fixed bg-[#efefef] top-0 -right-full w-[70%] h-full shadow-[-1px_0_4px_hsla(38,4%,15%,0.15)] transition-[0.4s] z-10 pt-24 pb-14 px-8;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .section {
+      @apply pt-14 pb-4 px-0;
+    }
+  }
+}
