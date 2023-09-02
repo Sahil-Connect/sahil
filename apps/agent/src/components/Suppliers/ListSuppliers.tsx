@@ -1,6 +1,5 @@
 import { SupplierOverviewCard } from "./SupplierOverviewCard";
 import { useFetchSuppliers } from "@/hooks/suppliers";
-
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export type SahilSupplier = {
@@ -38,7 +37,7 @@ export const ListSuppliers = () => {
   }
 
   return (
-    <div className="space-y-2" ref={parent}>
+    <div className="flex gap-2" ref={parent}>
       {suppliers && suppliers.map((supplier: SahilSupplier) => (
         <SupplierOverviewCard key={supplier.id} supplier={supplier} />
       ))}
