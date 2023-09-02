@@ -26,7 +26,8 @@ export const SupplierBusinessInfoForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 w-full">
+    
         <div className="form-control">
           <label className="label">
             <span className="label-text">

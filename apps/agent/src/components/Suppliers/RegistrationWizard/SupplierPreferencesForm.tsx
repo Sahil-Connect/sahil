@@ -34,13 +34,13 @@ export const SupplierPreferencesForm: FC<Props> = () => {
           <label className="label">
             <span className="label-text">Zones of Operation</span>
           </label>
-          <select className="select select-ghost w-full max-w-xs">
+          <select className="select select-sm w-full max-w-xs">
             <option disabled selected>
-              Pick the best JS framework
+              Souq Konyo Konyo
             </option>
-            <option>Svelte</option>
-            <option>Vue</option>
-            <option>React</option>
+            <option>Munuki</option>
+            <option>Atlabara</option>
+            <option>Hai thoura</option>
           </select>
           {errors.supplierName?.message && (
             <p>{errors.supplierName?.message}</p>
