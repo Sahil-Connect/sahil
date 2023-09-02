@@ -18,7 +18,7 @@ export default function Suppliers() {
             <button className="btn btn-sm btn-primary">Register New Supplier</button>
           </div>
         </div>
-        <RegisterNewSupplier />
+
         <ListSuppliers />
       </div>
     </main>
