@@ -1,11 +1,7 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react';
+import React from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../../../public/logo.png';
-import Overlay from './Overlay';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
 const links = [
   {
@@ -31,61 +27,25 @@ const links = [
 ];
 
 const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [scrollHeader, setScrollHeader] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const handleClick = () => {
-    setShowMenu(true);
-    setShowOverlay(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const handleClose = () => {
-    setShowMenu(false);
-    setShowOverlay(false);
-    document.body.style.overflow = 'auto';
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event: { target: any; }) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setShowMenu(false);
-        setShowOverlay(false);
-        document.body.style.overflow = 'auto';
-      }
-    };
-    if (showMenu && showOverlay) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showMenu, showOverlay]);
-
-  const scrollBg = () => {
-    if(window.scrollY >= 10){
-      setScrollHeader(true);
-    }else{
-      setScrollHeader(false);
-    }
-  }
-  useEffect(() => {
-    window.addEventListener('scroll', scrollBg);
-    return () => {
-      window.removeEventListener('scroll', scrollBg);
-    };
-  }, []);
-
   return (
-    <>
-      {showOverlay && <Overlay />}
-      <header className={`fixed top-0 left-0 w-full z-[100] bg-transparent ${scrollHeader ? 'bg-white shadow-[0_0_4px_rgba(14,55,63,0.15)] ' : ''}`}>
-        <nav className='container h-[3.5rem] flex items-center justify-between lg:h-[calc(3.5rem_+_1.5rem)]'>
-          <Link href='/' className='flex items-center gap-x-1 text-black font-bold text-h2 lg:text-h1'>
+    <header className='container'>
+      <nav className='navbar bg-base-100 p-0 lg:min-h-[5rem]'>
+        <div className='navbar-start'>
+          <div className='dropdown'>
+            <label tabIndex={0} className='btn btn-ghost lg:hidden'>
+              <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h8m-8 6h16' /></svg>
+            </label>
+            <ul tabIndex={0} className='menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-white rounded-box w-52'>
+              {links.map(({ name, href }) => {
+                return (
+                  <li key={name}>
+                    <Link href={href} className='text-black font-semibold transition-[0.4s] hover:text-green-dark'>{name}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <Link href='/' className='flex items-center gap-x-1 text-black font-bold text-h2'>
             <Image
               src={logo}
               alt={'Sahil'}
@@ -94,29 +54,23 @@ const Navbar = () => {
             />
             Sahil
           </Link>
-          <div className={`nav-menu ${showMenu ? 'right-0' : ''}`} ref={menuRef}>
-            <ul className='flex flex-col items-center gap-y-8 xxl:flex-row gap-x-12' onClick={handleClose}>
-              {links.map(({ name, href }) => {
-                return (
+        </div>
+        <div className='navbar-center hidden lg:flex'>
+          <ul className='menu menu-horizontal px-1 xxl:gap-x-6'>
+            {links.map(({ name, href }) => {
+              return (
                 <li key={name}>
-                  <Link href={href} className='text-black font-semibold transition-[0.4s] hover:text-green-dark'>{name}</Link>
+                  <Link href={href} className='text-black text-base font-semibold transition-[0.4s] hover:text-green-dark xxl:text-basexl'>{name}</Link>
                 </li>
-                );
-              })}
-            </ul>
-            <div className='absolute top-4 right-6 text-2xl cursor-pointer font-bold xxl:hidden' onClick={handleClose}>
-              <AiOutlineClose />
-            </div>
-          </div>
-          <div className='inline-flex text-xl cursor-pointer text-black font-bold xxl:hidden' onClick={handleClick}>
-            <AiOutlineMenu />
-          </div>
-          <Link href='/' className='button hidden xxl:block'>
-            Get Started
-          </Link>
-        </nav>
-      </header>
-    </>
+              );
+            })}
+          </ul>
+        </div>
+        <div className='navbar-end'>
+          <a className='btn btn-primary'>Get Started</a>
+        </div>
+      </nav>
+    </header>
   )
 }
 
