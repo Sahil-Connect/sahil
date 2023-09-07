@@ -46,7 +46,6 @@ const config: Config = {
       colors: {
         'black': '#232323',
         'black-dark': '#121212',
-        'red': '#B13126',
         'green': '#067a46',
         'green-dark': '#056835',
         'gray': '#C3C3D5',
@@ -60,6 +59,27 @@ const config: Config = {
   corePlugins: {
     container: false,
   },
-  plugins: [],
+  plugins: [require('daisyui')],
+  // daisyui: {
+  //   themes: ['lemonade'],
+  // },
+  daisyui: {
+    themes: [
+      {
+        lemonade: {
+          ...require('daisyui/src/theming/themes')['[data-theme=lemonade]'],
+          'primary': '#067a46',
+          'secondary': '#056835',
+          'accent': '#40efcf',
+          'neutral': '#2d2f39',
+          'base-100': '#ffffff',
+          'info': '#76d1e5',
+          'success': '#22a05b',
+          'warning': '#f0bc2d',
+          'error': '#e33631',
+        },
+      },
+    ],
+  },
 };
 export default config;

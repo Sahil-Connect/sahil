@@ -1,4 +1,4 @@
-import './globals.css'
+import "../styles/globals.css"
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={`text-base font-medium h-full scroll-smooth xxl:text-basexl ${montserrat.className}`}>{children}</body>
     </html>
   );
 }
