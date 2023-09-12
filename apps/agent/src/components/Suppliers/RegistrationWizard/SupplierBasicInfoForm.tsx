@@ -1,26 +1,27 @@
+import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-type Inputs = {
-  supplierName: string;
-};
 
 const supplierInfoSchema = z.object({
   supplierName: z.string().min(2, { message: "required" }),
 });
 
-export const SupplierBasicInfoForm = () => {
+type FormData = z.infer<typeof supplierInfoSchema>
+
+type Props = {}
+
+export const SupplierBasicInfoForm: FC<Props> = () => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<FormData>({
     resolver: zodResolver(supplierInfoSchema),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validtedInput = supplierInfoSchema.parse(data);
   };
 

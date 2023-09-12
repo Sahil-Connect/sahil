@@ -1,2 +1,2 @@
-export * from "./AddNewSupplier";
+export * from "./RegistrationWizard/AddNewSupplier";
 export * from "./ListSuppliers";
