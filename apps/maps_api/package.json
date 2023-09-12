@@ -1,0 +1,11 @@
+{
+  "name": "maps_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@apollo/server": "^4.9.3",
+    "graphql": "^16.8.0"
+  }
+}
