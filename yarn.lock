@@ -1135,6 +1135,7 @@ asynckit@^0.4.0:
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
 autoprefixer@10.4.15:
+autoprefixer@10.4.15, autoprefixer@^10.4.15:
   version "10.4.15"
   resolved "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.4.15.tgz"
   integrity sha512-KCuPB8ZCIqFdA4HwKXsvz7j6gvSDNhDP7WnUjBleRkKjPdvCmHFuQ77ocavI8FT6NdvlBnE2UFr2H4Mycn8Vew==
