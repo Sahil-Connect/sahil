@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { servicesData } from '../../data/dummyData'
+import { servicesData } from '../../data/constants'
 
 const Services = () => {
   return (
