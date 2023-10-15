@@ -2,6 +2,9 @@ import { create } from 'zustand'
 
 export const useSupplierFormStore = create((set) => ({
   step: 1,
+  currenntStep: {
+    label: ""
+  },
   steps: [
     {
       id: 1,
@@ -22,5 +25,7 @@ export const useSupplierFormStore = create((set) => ({
       active: false
     },
   ],
-  moveForward: () => set((state) => ({ step: state.step + 1 })),
+  nextStep: () => set((state) => ({ ...state, currentStep: {
+
+  } })),
 }))

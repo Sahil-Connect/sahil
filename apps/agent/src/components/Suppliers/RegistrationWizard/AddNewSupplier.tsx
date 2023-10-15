@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import { SupplierBasicInfoForm, SupplierBusinessInfoForm, SupplierPreferencesForm } from ".";
 import { useSupplierFormStore } from "./store";
 
-const Steps = () => {
-  const { steps } = useSupplierFormStore((state) => state);
+const Steps = ({ steps }) => {
+  const INITIAL_STEP = "Business Info";
   return (
     <ul className="steps ">
     {
@@ -17,15 +17,15 @@ const Steps = () => {
 
 export const RegisterNewSupplier = () => {
   const router = useRouter();
-  const { step } = useSupplierFormStore((state) => state);
+  const { step, steps } = useSupplierFormStore((state) => state);
 
   return (
     <div className="space-y-2">
-      <Steps />
+      <Steps steps={steps} />
       <div className="w-96 ">
-        {step === 1 ?<SupplierBasicInfoForm /> : null }
-        {step === 2 ? <SupplierBusinessInfoForm /> : null}
-        {step === 3 ? <SupplierPreferencesForm /> : null}
+        {step === "Business Info" ?<SupplierBasicInfoForm /> : null }
+        {step === "Contact Details" ? <SupplierBusinessInfoForm /> : null}
+        {step === "Preferences" ? <SupplierPreferencesForm /> : null}
       </div>
     </div>
   );
