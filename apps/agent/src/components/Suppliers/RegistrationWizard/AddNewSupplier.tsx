@@ -23,8 +23,8 @@ export const RegisterNewSupplier = () => {
     console.log(data);
     // navigateToNextPage();
     
-    gotToStep(step);
-    router.push(`/suppliers/new/${currentStep.path}`);
+    // gotToStep(step);
+   // router.push(`/suppliers/new/${currentStep.path}`);
     // console.log(input);
   }
 

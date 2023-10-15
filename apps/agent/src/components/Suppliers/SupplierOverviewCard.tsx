@@ -11,7 +11,6 @@ type Props = {
 };
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
-
   return (
     <div className="card card-compact shadow">
       <div className="card-body">
