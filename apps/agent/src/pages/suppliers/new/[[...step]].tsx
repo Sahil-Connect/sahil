@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { RegisterNewSupplier } from "@/components/Suppliers";
 import Head from "next/head";
+import { z } from "zod";
 
 export default function SupplierRegistrationPage() {
   return (
@@ -8,10 +9,8 @@ export default function SupplierRegistrationPage() {
       <Head>
         <title>Sahil</title>
       </Head>
-      <main className="min-h-screen p-4 flex items-start justify-center">
-        <div className="space-y-2">
-          <h1 className="text-3xl text-center">Supplier Registration Form</h1>
-          <div className="divider"></div>
+      <main className="min-h-screen p-8 flex items-start">
+        <div className="space-y-2 w-full">
           <RegisterNewSupplier />
         </div>
       </main>

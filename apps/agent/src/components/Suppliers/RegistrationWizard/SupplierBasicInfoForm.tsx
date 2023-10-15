@@ -1,7 +1,13 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSupplierFormStore } from "./useSupplierFormStore";
+import { useRouter } from 'next/router';
+import { useParams } from "next/navigation";
+
+const INITIAL_STEP = "Business Info";
+const steps = ["Business Info", "Contact Details", "Preferences"] as const;
 
 const supplierBasicInfoSchema = z.object({
   contactName: z.string().min(2, { message: "required" }).trim(),
@@ -11,11 +17,15 @@ const supplierBasicInfoSchema = z.object({
 
 type FormData = z.infer<typeof supplierBasicInfoSchema>;
 
-type Props = {
-  submitPageForm: any;
-};
+type Props = {};
 
-export const SupplierBasicInfoForm: FC<Props> = ({ submitPageForm }) => {
+const stepRouteSchema = z.object({
+  step: z.array(z.enum(steps)).default([INITIAL_STEP]),
+});
+
+export const SupplierBasicInfoForm: FC<Props> = () => {
+  const { currentStep, nextStep, prevStep, updateStepData } =
+  useSupplierFormStore((state) => state);
   const {
     register,
     handleSubmit,
@@ -24,10 +34,17 @@ export const SupplierBasicInfoForm: FC<Props> = ({ submitPageForm }) => {
   } = useForm<FormData>({
     resolver: zodResolver(supplierBasicInfoSchema),
   });
+  const router = useRouter();
+  const params = useParams();
+  const result = stepRouteSchema.safeParse(params);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierBasicInfoSchema.parse(data);
-    submitPageForm(validatedInput);
+    updateStepData(validatedInput);
+    nextStep(currentStep);
+    router.push(`/suppliers/new/contact`);
+    
+    // submitPageForm(validatedInput);
   };
 
   return (
@@ -46,7 +63,11 @@ export const SupplierBasicInfoForm: FC<Props> = ({ submitPageForm }) => {
             {...register("supplierName")}
           />
           {errors.supplierName?.message && (
-            <p>{errors.supplierName?.message}</p>
+            <label className="label">
+              <span className="label-text-alt text-error">
+                {errors.supplierName?.message}
+              </span>
+            </label>
           )}
         </div>
         <div className="form-control">
@@ -59,7 +80,13 @@ export const SupplierBasicInfoForm: FC<Props> = ({ submitPageForm }) => {
             className="input input-sm input-bordered w-full"
             {...register("contactName")}
           />
-          {errors.contactName?.message && <p>{errors.contactName?.message}</p>}
+          {errors.contactName?.message && (
+            <label className="label">
+              <span className="label-text-alt text-error">
+                {errors.contactName?.message}
+              </span>
+            </label>
+          )}
         </div>
         <div className="form-control">
           <label className="label">
@@ -72,7 +99,11 @@ export const SupplierBasicInfoForm: FC<Props> = ({ submitPageForm }) => {
             {...register("description")}
           />
         </div>
-        <input type="submit" className="btn btn-sm btn-primary w-full" />
+        <input
+          type="submit"
+          className="btn btn-sm btn-primary"
+          value="Continue"
+        />
       </form>
     </>
   );

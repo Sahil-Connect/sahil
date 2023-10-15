@@ -16,11 +16,7 @@ const Navbar = () => {
     {
       name: 'Suppliers',
       href: '/suppliers',
-    },
-    {
-      name: 'Profile',
-      href: '/profile',
-    },
+    }
   ];
   return (
     <header className='navbar bg-white shadow'>
