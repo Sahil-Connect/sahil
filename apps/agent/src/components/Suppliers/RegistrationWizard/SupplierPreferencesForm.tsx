@@ -3,28 +3,31 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type Inputs = {
-  supplierName: string;
-};
+type FormData = z.infer<typeof supplierBasicInfoSchema>;
 
-type Props = {};
+type Props = {
+  submitPageForm: any;
+};
 
 const supplierInfoSchema = z.object({
   supplierName: z.string().min(2, { message: "required" }),
 });
 
-export const SupplierPreferencesForm: FC<Props> = () => {
+export const SupplierPreferencesForm: FC<Props> = ({
+  submitPageForm
+}) => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<FormData>({
     resolver: zodResolver(supplierInfoSchema),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const validtedInput = supplierInfoSchema.parse(data);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const validatedInput = supplierInfoSchema.parse(data);
+    submitPageForm(validatedInput);
   };
 
   return (
@@ -34,7 +37,7 @@ export const SupplierPreferencesForm: FC<Props> = () => {
           <label className="label">
             <span className="label-text">Zones of Operation</span>
           </label>
-          <select className="select select-sm w-full max-w-xs">
+          <select className="select select-sm w-full max-w-xs" title="zone">
             <option disabled selected>
               Souq Konyo Konyo
             </option>
