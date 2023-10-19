@@ -49,20 +49,30 @@ export const SupplierBusinessInfoForm: FC<Props> = () => {
             className="input input-sm input-bordered w-full"
             {...register("contactName")}
           />
-          {errors.contactName?.message && <p>{errors.contactName?.message}</p>}
+          {errors.contactName?.message && (
+            <label className="label">
+              <span className="label-text-alt text-error">
+                {errors.contactName?.message}
+              </span>
+            </label>
+          )}
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Contact Email</span>
+            <span className="label-text">Email Address</span>
           </label>
           <input
             type="email"
-            placeholder="Contact Email"
+            placeholder="john@sahil.com"
             className="input input-sm input-bordered w-full"
             {...register("contactEmail")}
           />
           {errors.contactEmail?.message && (
-            <p>{errors.contactEmail?.message}</p>
+            <label className="label">
+              <span className="label-text-alt text-error">
+                {errors.contactEmail?.message}
+              </span>
+            </label>
           )}
         </div>
         <div className="form-control">
@@ -75,7 +85,13 @@ export const SupplierBusinessInfoForm: FC<Props> = () => {
             className="input input-sm input-bordered w-full"
             {...register("phoneNumber")}
           />
-          {errors.phoneNumber?.message && <p>{errors.phoneNumber?.message}</p>}
+          {errors.phoneNumber?.message && (
+            <label className="label">
+              <span className="label-text-alt text-error">
+                {errors.phoneNumber?.message}
+              </span>
+            </label>
+          )}
         </div>
         <div className="form-control">
           <label className="label">
@@ -88,7 +104,11 @@ export const SupplierBusinessInfoForm: FC<Props> = () => {
             {...register("streetAddress")}
           />
           {errors.streetAddress?.message && (
-            <p>{errors.streetAddress?.message}</p>
+            <label className="label">
+              <span className="label-text-alt text-error">
+                {errors.streetAddress?.message}
+              </span>
+            </label>
           )}
         </div>
         <input type="submit" className="btn btn-sm btn-primary w-full" />

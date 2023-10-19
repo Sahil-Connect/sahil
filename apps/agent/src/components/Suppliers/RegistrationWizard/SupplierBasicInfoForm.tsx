@@ -43,8 +43,6 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
     updateStepData(validatedInput);
     nextStep(currentStep);
     router.push(`/suppliers/new/contact`);
-    
-    // submitPageForm(validatedInput);
   };
 
   return (

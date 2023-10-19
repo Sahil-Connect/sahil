@@ -7,68 +7,89 @@ import { useSupplierFormStore } from "./useSupplierFormStore";
 import { usePathname, useRouter } from "next/navigation";
 import { useRegisterSupplier } from "@/hooks/suppliers";
 
+const StepsPaginator = ({}) => {
+  const { steps, nextStep, prevStep, currentStep } = useSupplierFormStore(
+    (state) => state
+  );
+  const router = useRouter();
+
+  const goToPrevStep = () => {
+    prevStep();
+    router.push(`/suppliers/new/${currentStep}`);
+  };
+  const goToNextStep = () => {
+    nextStep();
+    router.push(`/suppliers/new/${currentStep}`);
+  };
+
+  return (
+    <div className="join grid grid-cols-2">
+      <button
+        className={`join-item btn btn-sm btn-ghost`}
+        onClick={goToPrevStep}
+      >
+        Previous
+      </button>
+      <button
+        className={`join-item btn btn-sm btn-secondary`}
+        onClick={goToNextStep}
+      >
+        Next
+      </button>
+    </div>
+  );
+};
+
 export const RegisterNewSupplier = () => {
   const { error, insertSupplier, loading } = useRegisterSupplier();
-  const { steps, nextStep, prevStep, currentStep, formData } =
-    useSupplierFormStore((state) => state);
-  const router = useRouter();
-  const pathname = usePathname();
+  const { steps, currentStep, formData } = useSupplierFormStore(
+    (state) => state
+  );
 
-  const navigateToNextPage = (step) => {
-    router.push(`/suppliers/new/${step.path}`);
-    nextStep(step);
-  };
+  const pathname = usePathname();
 
   const submitForm = () => {
     insertSupplier(formData);
   };
 
-  console.log(currentStep);
-
-  console.log(formData);
+  const headers = [
+    {
+      title: "Business Info",
+    },
+    {
+      title: "Contact Details",
+    },
+    {
+      title: "Preferences",
+    },
+  ];
 
   return (
     <div className="flex gap-8">
       <div className="basis-2/5 space-y-4">
-        <div className="flex justify-between items-start w-full">
-          <h1 className="text-2xl">{currentStep.label}</h1>
+        <div className="flex justify-between items-center w-full">
           <div>
-            <div className="join grid grid-cols-2">
-              <button
-                className="join-item btn btn-sm btn-outline btn-disabled"
-                onClick={() => prevStep()}
-              >
-                Previous
-              </button>
-              <button
-                className="join-item btn btn-sm btn-outline"
-                onClick={() => nextStep()}
-              >
-                Next
-              </button>
-            </div>
+            <p>Step 1 out of 3</p>
           </div>
+          <StepsPaginator />
         </div>
         <div className="card card-compact shadow">
           <div className="card-body">
-            {currentStep.label === "Business Info" ? (
-              <SupplierBasicInfoForm />
-            ) : null}
-            {currentStep.label === "Contact Details" ? (
+            <h2 className="card-title">{headers[0].title}</h2>
+            {currentStep === "business_info" ? <SupplierBasicInfoForm /> : null}
+            {currentStep === "contact_details" ? (
               <SupplierBusinessInfoForm />
             ) : null}
-            {currentStep.label === "Preferences" ? (
-              <SupplierPreferencesForm />
-            ) : null}
+            {currentStep === "preferences" ? <SupplierPreferencesForm /> : null}
           </div>
         </div>
       </div>
 
       <div className="basis-1/5">
         <ul className="steps steps-vertical ">
-          <li className="step step-secondary">Business Info</li>
-          <li className="step">Contact Details</li>
-          <li className="step">Preferences</li>
+          {headers.map((step, index) => (
+            <li className={`step`} key={index}>{step.title}</li>
+          ))}
           <li className="step">Complete Registration</li>
         </ul>
       </div>

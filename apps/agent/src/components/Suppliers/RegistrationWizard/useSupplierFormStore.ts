@@ -1,59 +1,48 @@
 import { create } from 'zustand';
 
-const INITIAL_STEP = "Business Info";
+const INITIAL_STEP = "business_info";
+
+const steps = [
+  "business_info",
+  "contact_details",
+  "preferences",
+] as const;
+
+const getNextStep = () => {
+
+}
 
 export const useSupplierFormStore = create((set) => ({
-  step: 1,
-  currentStep: {
-    label: INITIAL_STEP,
-    id: 1
-  },
+  currentStep: INITIAL_STEP,
   formData: {},
-  steps: [
-    {
-      id: 1,
-      label: "Business Info",
-      path: "info",
-      active: true,
-    },
-    {
-      id: 2,
-      label: "Contact Details",
-      path: "contact",
-      active: false,
-    },
-    {
-      id: 3,
-      label: "Preferences",
-      path: "preferences",
-      active: false,
-    },
-  ],
-  nextStep: (currentStep = {}) => {
-    // console.log(currentStep);
+  steps,
+  nextStep: (currentStep: typeof steps[number]) => {
+    console.log("yerrrr");
     set((state) => {
-      const nextStep = state.steps.find(step => step.id === currentStep.id + 1);
-      console.log(nextStep);
+      const currentIndex = steps.indexOf(currentStep || state.currentStep);
+      if (currentIndex !== -1 && currentIndex < steps.length - 1) {
+        return ({
+          ...state,
+          currentStep: steps[currentIndex + 1]
+        });
+      }
       return ({
-        ...state,
-        currentStep: {
-          label: nextStep.label,
-          id: nextStep.id
-        }
-      })
+        ...state
+      });
     });
   },
-  prevStep: (currentStep = {}) => {
-    console.log(currentStep);
+  prevStep: (currentStep: typeof steps[number]) => {
     set((state) => {
-      const nextStep = state.steps.find(step => step.id === currentStep.id - 1);
+      const currentIndex = steps.indexOf(currentStep || state.currentStep);
+      if (currentIndex !== -1 && currentIndex < steps.length - 1) {
+        return ({
+          ...state,
+          currentStep: steps[currentIndex - 1]
+        });
+      }
       return ({
-        ...state,
-        currentStep: {
-          label: nextStep.label,
-          id: nextStep.id
-        }
-      })
+        ...state
+      });
     });
   },
   updateStepData: (formData = {}) => {

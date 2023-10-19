@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 type Props = {};
 
 const supplierPrefencesSchema = z.object({
-  supplierName: z.string().min(2, { message: "required" }),
+  zone: z.string(),
 });
 
 type FormData = z.infer<typeof supplierPrefencesSchema>;
@@ -40,7 +40,7 @@ export const SupplierPreferencesForm: FC<Props> = () => {
           <label className="label">
             <span className="label-text">Zones of Operation</span>
           </label>
-          <select className="select select-sm w-full max-w-xs" title="zone">
+          <select {...register("zone")} className="select select-sm w-full max-w-xs" title="zone">
             <option disabled selected>
               Souq Konyo Konyo
             </option>
