@@ -1,4 +1,4 @@
-import { RegisterNewSupplier, ListSuppliers } from "@/components/Suppliers";
+import { ListSuppliers } from "@/components/Suppliers";
 
 
 export default function Suppliers() {
