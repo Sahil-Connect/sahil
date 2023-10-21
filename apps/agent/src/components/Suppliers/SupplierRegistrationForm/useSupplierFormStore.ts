@@ -6,6 +6,7 @@ const steps = [
   "business_info",
   "contact_details",
   "preferences",
+  "preview"
 ] as const;
 
 export type StepDirection = "prev" | "next";
@@ -14,11 +15,13 @@ export type FormState = Record<string, any>;
 
 export const useSupplierFormStore = create((set) => ({
   currentStep: INITIAL_STEP,
-  formData: {},
+  formData: {
+    supplierName: "Well"
+  },
   steps,
-  goToStep: (currentStep: typeof steps[number], direction: StepDirection) => {
+  goToStep: (direction: StepDirection) => {
     set((state: FormState) => {
-      const currentIndex = steps.indexOf(currentStep || state.currentStep);
+      const currentIndex = steps.indexOf(state.currentStep);
       if (currentIndex !== -1 && currentIndex <= steps.length - 1) {
         return ({
           ...state,
@@ -30,12 +33,27 @@ export const useSupplierFormStore = create((set) => ({
       });
     });
   },
+  updateStepByIndex: (stepIndex: number) => {
+    set((state: FormState) => {
+      const currentIndex = steps.indexOf(state.currentStep);
+      if (currentIndex !== -1 && currentIndex <= steps.length - 1) {
+        return ({
+          ...state,
+          currentStep: steps[stepIndex]
+        });
+      }
+      return ({
+        ...state
+      });
+    })
+  },
   updateStepData: (formData: Record<string, any>) => {
     set((state: FormState) => {
       return ({
         ...state,
         formData: {
-          ...formData
+          ...state.formData,
+          ...formData,
         }
       })
     })

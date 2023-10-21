@@ -5,9 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSupplierFormStore } from "./useSupplierFormStore";
 import { useRouter } from "next/router";
 
-type Props = {
-  submitForm: () => void;
-};
+type Props = {};
 
 const supplierPrefencesSchema = z.object({
   zone: z.string(),
@@ -32,7 +30,7 @@ export const SupplierPreferencesForm: FC<Props> = ({ submitForm }) => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierPrefencesSchema.parse(data);
     updateStepData(validatedInput);
-    goToStep("preview", "next");
+    goToStep("next");
     router.push(`/suppliers/new/preview`);
   };
 

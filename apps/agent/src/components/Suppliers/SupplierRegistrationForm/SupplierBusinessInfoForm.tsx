@@ -32,7 +32,7 @@ export const SupplierBusinessInfoForm: FC<Props> = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierContactInfoSchema.parse(data);
     updateStepData(validatedInput);
-    goToStep("preferences", "next");
+    goToStep("next");
     router.push(`/suppliers/new/preferences`);
   };
 

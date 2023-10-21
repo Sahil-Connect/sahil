@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import Head from "next/head";
 import { z } from "zod";
 import {
+  PreviewSupplierInfo,
   SupplierBasicInfoForm,
   SupplierBusinessInfoForm,
   SupplierPreferencesForm,
-} from "@/components/Suppliers/RegistrationWizard/";
-import { useSupplierFormStore } from "@/components/Suppliers/RegistrationWizard/useSupplierFormStore";
+} from "@/components/Suppliers/SupplierRegistrationForm";
+import { useSupplierFormStore } from "@/components/Suppliers/SupplierRegistrationForm/useSupplierFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useRegisterSupplier } from "@/hooks/suppliers";
 import { INITIAL_STEP } from "@/components/Suppliers/constants";
@@ -19,11 +20,11 @@ const StepsPaginator = ({}) => {
   const currentIndex = steps.indexOf(currentStep);
 
   const goToPrevStep = () => {
-    goToStep(currentStep, "prev");
+    goToStep("prev");
     router.push(`/suppliers/new/${steps[currentIndex - 1]}`);  
   };
   const goTogoToStep = () => {
-    goToStep(currentStep, "next");
+    goToStep("next");
     router.push(`/suppliers/new/${steps[currentIndex + 1]}`);  
   };
 
@@ -47,7 +48,7 @@ const StepsPaginator = ({}) => {
 
 export default function SupplierRegistrationPage() {
   const { error, insertSupplier, loading } = useRegisterSupplier();
-  const { steps, currentStep, formData, goToStep } = useSupplierFormStore(
+  const { steps, currentStep, formData, goToStep, updateStepByIndex } = useSupplierFormStore(
     (state) => state
   );
   const router = useRouter();
@@ -62,22 +63,21 @@ export default function SupplierRegistrationPage() {
 
   const result = stepRouteSchema.safeParse(params);
 
-  const updateStepByIndex = (step: (typeof steps)[number]) => {
+  const handleUpdateStepByIndex = (step: (typeof steps)[number]) => {
     const stepIndex = steps.indexOf(step);
     if(stepIndex === currentIndex) {
       return;
     }
-    if(stepIndex > currentIndex) {
-      goToStep(currentStep, "next");
-      router.push(`/suppliers/new/${steps[currentIndex + 1]}`);
-    } else if (stepIndex < currentIndex) {
-      goToStep(currentStep, "prev");
-      router.push(`/suppliers/new/${steps[currentIndex - 1]}`);
-    }
+    updateStepByIndex(stepIndex);
+    router.push(`/suppliers/new/${steps[stepIndex]}`);
   };
 
-  const submitForm = () => {
-    insertSupplier(formData);
+  const submitForm = async (formData: Record<string, any>) => {
+    return insertSupplier({
+      variables: {
+        object: formData
+      }
+    });
   };
 
   const headers = [
@@ -93,7 +93,15 @@ export default function SupplierRegistrationPage() {
       title: "Preferences",
       step: "preferences",
     },
+    {
+      title: "Complete Registration",
+      step: "preview"
+    }
   ];
+
+  useEffect(() => {
+    router.push(`/suppliers/new/${currentStep}`);
+  }, []);
 
   return (
     <>
@@ -123,8 +131,11 @@ export default function SupplierRegistrationPage() {
                     <SupplierBusinessInfoForm />
                   ) : null}
                   {currentStep === "preferences" ? (
-                    <SupplierPreferencesForm submitForm={submitForm} />
+                    <SupplierPreferencesForm />
                   ) : null}
+                  {
+                    currentStep === "preview" ? <PreviewSupplierInfo submitForm={submitForm} /> : null
+                  }
                 </div>
               </div>
             </div>
@@ -137,7 +148,7 @@ export default function SupplierRegistrationPage() {
                       step === currentStep ? "step-secondary" : null
                     }`}
                     key={index}
-                    onClick={() => updateStepByIndex(step)}
+                    onClick={() => handleUpdateStepByIndex(step)}
                   >
                     {title}
                   </li>

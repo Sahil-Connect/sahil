@@ -24,8 +24,12 @@ const stepRouteSchema = z.object({
 });
 
 export const SupplierBasicInfoForm: FC<Props> = () => {
-  const { currentStep, goToStep, updateStepData } =
+  const { currentStep, goToStep, updateStepData, formData } =
   useSupplierFormStore((state) => state);
+
+  const defaultValues = {
+
+  }
   const {
     register,
     handleSubmit,
@@ -34,6 +38,7 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
   } = useForm<FormData>({
     resolver: zodResolver(supplierBasicInfoSchema),
   });
+  
   const router = useRouter();
   const params = useParams();
   const result = stepRouteSchema.safeParse(params);
@@ -41,8 +46,8 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierBasicInfoSchema.parse(data);
     updateStepData(validatedInput);
-    goToStep("contact_details", "next");
-    router.push(`/suppliers/new/contact`);
+    goToStep("next");
+    router.push(`/suppliers/new/contact_details`);
   };
 
   return (
@@ -59,6 +64,7 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
             placeholder="Energy Suppliers"
             className="input input-sm input-bordered w-full"
             {...register("supplierName")}
+            defaultValue={formData.supplierName}
           />
           {errors.supplierName?.message && (
             <label className="label">
