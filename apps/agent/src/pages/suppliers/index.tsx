@@ -1,7 +1,9 @@
 import { ListSuppliers } from "@/components/Suppliers";
+import { useRouter } from "next/router";
 
 
 export default function Suppliers() {
+  const router = useRouter();
   return (
     <main className='min-h-screen p-8'>
       <div className="space-y-4">
@@ -15,7 +17,7 @@ export default function Suppliers() {
             <p></p>
           </div>
           <div>
-            <button className="btn btn-sm btn-primary">Register New Supplier</button>
+            <button className="btn btn-sm btn-primary" onClick={() => router.push("/suppliers/new/business_info")}>Register Supplier</button>
           </div>
         </div>
 
