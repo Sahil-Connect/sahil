@@ -12,3 +12,12 @@ query getSuppliers {
 }
 `;
 
+export const FETCH_SUPPLIER_BY_PK = gql`
+query getSupplierByPK($id: uuid!) {
+    suppliers_by_pk(id: $id) {
+      created_at
+      id
+      name
+    }
+}
+`;

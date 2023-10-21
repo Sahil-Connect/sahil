@@ -1,10 +1,19 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { FETCH_SUPPLIERS } from "@/lib/graphql/queries/suppliers";
+import { FETCH_SUPPLIERS, FETCH_SUPPLIER_BY_PK } from "@/lib/graphql/queries/suppliers";
 import { INSERT_NEW_SUPPLIER } from "@/lib/graphql/mutations/suppliers";
 
 export const useFetchSuppliers = () => {
     const { error, data, loading } = useQuery(FETCH_SUPPLIERS);
     return { error, data: data?.suppliers, loading };
+}
+
+export const useFetchSupplierByPK = (id: string) => {
+    const { error, data, loading } = useQuery(FETCH_SUPPLIER_BY_PK, {
+        variables: {
+            id
+        }
+    });
+    return { error, data: data?.suppliers_by_pk, loading };
 }
 
 export const useRegisterSupplier = () => {
