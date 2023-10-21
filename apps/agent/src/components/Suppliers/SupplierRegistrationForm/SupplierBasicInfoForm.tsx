@@ -27,9 +27,8 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
   const { currentStep, goToStep, updateStepData, formData } =
   useSupplierFormStore((state) => state);
 
-  const defaultValues = {
-
-  }
+  const defaultValues = {}
+  
   const {
     register,
     handleSubmit,
@@ -83,6 +82,7 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
             placeholder="John Doe"
             className="input input-sm input-bordered w-full"
             {...register("contactName")}
+            defaultValue={formData.contactName}
           />
           {errors.contactName?.message && (
             <label className="label">
@@ -101,6 +101,7 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
             placeholder="Description"
             className="textarea textarea-bordered w-full"
             {...register("description")}
+            defaultValue={formData.description}
           />
         </div>
         <input

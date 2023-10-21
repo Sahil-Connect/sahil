@@ -1,17 +1,12 @@
 import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
 import { useRouter } from "next/router";
-import { useSupplierFormStore } from "./useSupplierFormStore";
+import { useRegisterSupplier } from "@/hooks/suppliers";
+import toast, { Toaster } from "react-hot-toast";
 
-type Props = {
-  submitForm: (formData: Record<string, any>) => any;
-};
+type Props = {};
 
-export const PreviewSupplierInfo: FC<Props> = ({ submitForm }) => {
-  const { currentStep, formData } = useSupplierFormStore(
-    (state) => state
-  );
+export const PreviewSupplierInfo: FC<Props> = () => {
   const {
     register,
     handleSubmit,
@@ -19,17 +14,30 @@ export const PreviewSupplierInfo: FC<Props> = ({ submitForm }) => {
     formState: { errors },
   } = useForm<FormData>();
   const router = useRouter();
+
+  const { error, insertSupplier, loading, supplier } = useRegisterSupplier();
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const response = await submitForm(formData);
-    console.log(response);
-    // router.push(`/suppliers/1`);
+    const response = await insertSupplier({
+      variables: {
+        object: data,
+      },
+    });
+    const supplier = response.data?.insert_suppliers_one;
+    router.push(`/suppliers/${supplier?.id}`);
   };
 
-  console.log(formData);
+  if (error) {
+    toast.error("Something went wrong");
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h3>Hello, there!</h3>
-      <input type="submit" />
-    </form>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+        <h3>Save Supplier Information</h3>
+        <input type="submit" className="btn btn-sm btn-primary" />
+      </form>
+      <Toaster position="top-center" reverseOrder={false} />
+    </>
   );
 };

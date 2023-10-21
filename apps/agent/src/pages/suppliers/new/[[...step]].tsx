@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Head from "next/head";
 import { z } from "zod";
 import {
@@ -9,7 +8,6 @@ import {
 } from "@/components/Suppliers/SupplierRegistrationForm";
 import { useSupplierFormStore } from "@/components/Suppliers/SupplierRegistrationForm/useSupplierFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { useRegisterSupplier } from "@/hooks/suppliers";
 import { INITIAL_STEP } from "@/components/Suppliers/constants";
 
 const StepsPaginator = ({}) => {
@@ -47,8 +45,7 @@ const StepsPaginator = ({}) => {
 };
 
 export default function SupplierRegistrationPage() {
-  const { error, insertSupplier, loading } = useRegisterSupplier();
-  const { steps, currentStep, formData, goToStep, updateStepByIndex } = useSupplierFormStore(
+  const { steps, currentStep, updateStepByIndex } = useSupplierFormStore(
     (state) => state
   );
   const router = useRouter();
@@ -72,14 +69,6 @@ export default function SupplierRegistrationPage() {
     router.push(`/suppliers/new/${steps[stepIndex]}`);
   };
 
-  const submitForm = async (formData: Record<string, any>) => {
-    return insertSupplier({
-      variables: {
-        object: formData
-      }
-    });
-  };
-
   const headers = [
     {
       title: "Business Info",
@@ -99,14 +88,10 @@ export default function SupplierRegistrationPage() {
     }
   ];
 
-  useEffect(() => {
-    router.push(`/suppliers/new/${currentStep}`);
-  }, []);
-
   return (
     <>
       <Head>
-        <title>Sahil</title>
+        <title>Sahil - {headers[currentIndex].title}</title>
       </Head>
       <main className="min-h-screen p-8 flex items-start">
         <div className="space-y-4 w-full">
@@ -124,18 +109,17 @@ export default function SupplierRegistrationPage() {
               <div className="card card-compact shadow">
                 <div className="card-body">
                   <h2 className="card-title">{headers[currentIndex].title}</h2>
-                  {currentStep === "business_info" ? (
+                  {currentStep === "business_info" && (
                     <SupplierBasicInfoForm />
-                  ) : null}
-                  {currentStep === "contact_details" ? (
+                  )}
+                  {currentStep === "contact_details" && (
                     <SupplierBusinessInfoForm />
-                  ) : null}
-                  {currentStep === "preferences" ? (
+                  )}
+                  {currentStep === "preferences" && (
                     <SupplierPreferencesForm />
-                  ) : null}
+                  )}
                   {
-                    currentStep === "preview" ? <PreviewSupplierInfo submitForm={submitForm} /> : null
-                  }
+                    currentStep === "preview" && <PreviewSupplierInfo />}
                 </div>
               </div>
             </div>

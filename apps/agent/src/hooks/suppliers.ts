@@ -9,6 +9,5 @@ export const useFetchSuppliers = () => {
 
 export const useRegisterSupplier = () => {
     const [insertSupplier, { data, loading, error }] = useMutation(INSERT_NEW_SUPPLIER);
-
-    return { loading, insertSupplier, error };
+    return { supplier: data?.insert_suppliers_one, loading, insertSupplier, error };
 }

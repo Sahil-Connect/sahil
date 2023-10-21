@@ -16,7 +16,9 @@ export type FormState = Record<string, any>;
 export const useSupplierFormStore = create((set) => ({
   currentStep: INITIAL_STEP,
   formData: {
-    supplierName: "Well"
+    supplierName: "",
+    contactName: "",
+    description: ""
   },
   steps,
   goToStep: (direction: StepDirection) => {
