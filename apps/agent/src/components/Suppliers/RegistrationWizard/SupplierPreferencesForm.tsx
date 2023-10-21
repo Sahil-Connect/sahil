@@ -5,7 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSupplierFormStore } from "./useSupplierFormStore";
 import { useRouter } from "next/router";
 
-type Props = {};
+type Props = {
+  submitForm: () => void;
+};
 
 const supplierPrefencesSchema = z.object({
   zone: z.string(),
@@ -13,9 +15,10 @@ const supplierPrefencesSchema = z.object({
 
 type FormData = z.infer<typeof supplierPrefencesSchema>;
 
-export const SupplierPreferencesForm: FC<Props> = () => {
-  const { currentStep, nextStep, prevStep, updateStepData } =
-    useSupplierFormStore((state) => state);
+export const SupplierPreferencesForm: FC<Props> = ({ submitForm }) => {
+  const { currentStep, goToStep, updateStepData } = useSupplierFormStore(
+    (state) => state
+  );
   const {
     register,
     handleSubmit,
@@ -29,7 +32,7 @@ export const SupplierPreferencesForm: FC<Props> = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierPrefencesSchema.parse(data);
     updateStepData(validatedInput);
-    nextStep(currentStep);
+    goToStep("preview", "next");
     router.push(`/suppliers/new/preview`);
   };
 
@@ -40,17 +43,18 @@ export const SupplierPreferencesForm: FC<Props> = () => {
           <label className="label">
             <span className="label-text">Zones of Operation</span>
           </label>
-          <select {...register("zone")} className="select select-sm w-full max-w-xs" title="zone">
-            <option disabled selected>
-              Souq Konyo Konyo
-            </option>
+          <select
+            {...register("zone")}
+            className="select select-sm w-full max-w-xs"
+            title="zone"
+            defaultValue="Souq Konyo Konyo"
+          >
+            <option disabled>Souq Konyo Konyo</option>
             <option>Munuki</option>
             <option>Atlabara</option>
             <option>Hai thoura</option>
           </select>
-          {errors.supplierName?.message && (
-            <p>{errors.supplierName?.message}</p>
-          )}
+          {errors.zone?.message && <p>{errors.zone?.message}</p>}
         </div>
         <input type="submit" className="btn btn-sm btn-primary" />
       </form>

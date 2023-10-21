@@ -24,7 +24,7 @@ const stepRouteSchema = z.object({
 });
 
 export const SupplierBasicInfoForm: FC<Props> = () => {
-  const { currentStep, nextStep, prevStep, updateStepData } =
+  const { currentStep, goToStep, updateStepData } =
   useSupplierFormStore((state) => state);
   const {
     register,
@@ -41,7 +41,7 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierBasicInfoSchema.parse(data);
     updateStepData(validatedInput);
-    nextStep(currentStep);
+    goToStep("contact_details", "next");
     router.push(`/suppliers/new/contact`);
   };
 

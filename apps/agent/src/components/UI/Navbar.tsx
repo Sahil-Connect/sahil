@@ -3,21 +3,22 @@ import React from 'react';
 import logo from '../../../public/logo.png';
 import Link from 'next/link';
 
+const links = [
+  {
+    name: 'Businesses',
+    href: '/businesses',
+  },
+  {
+    name: 'Orders',
+    href: '/orders',
+  },
+  {
+    name: 'Suppliers',
+    href: '/suppliers',
+  }
+];
+
 const Navbar = () => {
-  const links = [
-    {
-      name: 'Businesses',
-      href: '/businesses',
-    },
-    {
-      name: 'Orders',
-      href: '/orders',
-    },
-    {
-      name: 'Suppliers',
-      href: '/suppliers',
-    }
-  ];
   return (
     <header className='navbar bg-white shadow'>
       <div className='navbar-start'>

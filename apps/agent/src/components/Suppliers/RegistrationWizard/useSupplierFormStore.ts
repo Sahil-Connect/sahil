@@ -1,6 +1,6 @@
+import exp from 'constants';
 import { create } from 'zustand';
-
-const INITIAL_STEP = "business_info";
+import { INITIAL_STEP } from '../constants';
 
 const steps = [
   "business_info",
@@ -8,22 +8,21 @@ const steps = [
   "preferences",
 ] as const;
 
-const getNextStep = () => {
+export type StepDirection = "prev" | "next";
 
-}
+export type FormState = Record<string, any>;
 
 export const useSupplierFormStore = create((set) => ({
   currentStep: INITIAL_STEP,
   formData: {},
   steps,
-  nextStep: (currentStep: typeof steps[number]) => {
-    console.log("yerrrr");
-    set((state) => {
+  goToStep: (currentStep: typeof steps[number], direction: StepDirection) => {
+    set((state: FormState) => {
       const currentIndex = steps.indexOf(currentStep || state.currentStep);
-      if (currentIndex !== -1 && currentIndex < steps.length - 1) {
+      if (currentIndex !== -1 && currentIndex <= steps.length - 1) {
         return ({
           ...state,
-          currentStep: steps[currentIndex + 1]
+          currentStep: direction === "prev" ? steps[currentIndex - 1] : steps[currentIndex + 1]
         });
       }
       return ({
@@ -31,22 +30,8 @@ export const useSupplierFormStore = create((set) => ({
       });
     });
   },
-  prevStep: (currentStep: typeof steps[number]) => {
-    set((state) => {
-      const currentIndex = steps.indexOf(currentStep || state.currentStep);
-      if (currentIndex !== -1 && currentIndex < steps.length - 1) {
-        return ({
-          ...state,
-          currentStep: steps[currentIndex - 1]
-        });
-      }
-      return ({
-        ...state
-      });
-    });
-  },
-  updateStepData: (formData = {}) => {
-    set((state) => {
+  updateStepData: (formData: Record<string, any>) => {
+    set((state: FormState) => {
       return ({
         ...state,
         formData: {
