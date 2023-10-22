@@ -1,5 +1,5 @@
 export * from "./ListSuppliers";
-export * from "./LatestOrders";
+export * from "./SupplierOrderHistory";
 export * from "./ServiceZones";
 export * from "./SupplierProfileOverview";
 export * from "./ProductsList";

@@ -13,9 +13,9 @@ const ProductOverviewCard = ({ product }) => {
   return (
     <div className="card card-compact shadow">
       <div className="card-body">
+      <div className="flex justify-between items-center">
         <h3 className="card-title">{product.name}</h3>
-        <div>
-          <p>Available</p>
+        <div className="badge">Available</div>
         </div>
       </div>
     </div>
