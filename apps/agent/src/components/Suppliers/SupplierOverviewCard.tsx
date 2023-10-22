@@ -1,5 +1,4 @@
 import { FC } from "react";
-// import { Button } from "ui";
 
 export type SahilSupplier = {
   name: string;
@@ -11,7 +10,6 @@ type Props = {
 };
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
-
   return (
     <div className="card card-compact shadow">
       <div className="card-body">
