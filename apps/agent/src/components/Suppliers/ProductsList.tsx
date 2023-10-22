@@ -13,9 +13,9 @@ const ProductOverviewCard = ({ product }) => {
   return (
     <div className="card card-compact shadow">
       <div className="card-body">
+        <div className="flex justify-between items-center">
         <h3 className="card-title">{product.name}</h3>
-        <div>
-          <p>Available</p>
+        <div className="badge">Available</div>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@ export const ProductsList = () => {
   return (
     <div className="grow space-y-2">
       <div className="flex justify-between items-center">
-        <h3 className="text-xl">Products</h3>
+        <h3 className="text-xl">Available Products</h3>
         <button className="btn btn-sm">View All</button>
       </div>
       <div className="space-y-2">
