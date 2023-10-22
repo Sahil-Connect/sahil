@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useFetchSupplierByPK } from "@/hooks/suppliers";
 import {
+  Clients,
   LatestOrders,
   ProductsList,
   ServiceZones,
@@ -16,18 +17,24 @@ export default function SupplierPage() {
     loading,
   } = useFetchSupplierByPK(supplierId as string);
   if (error) {
+    console.log(error);
     return <p>Failed</p>;
   }
   return (
     <div className="min-h-screen p-8 space-y-4">
-      <ServiceZones />
-      <div className="flex gap-8">
-        <div className="flex justify-between basis-4/5 gap-4">
-          <LatestOrders />
-          <ProductsList />
+      <div className="flex gap-4">
+        <div className="space-y-2">
+          <SupplierProfileOverview supplier={supplier} />
+          <ServiceZones />
         </div>
-        <div className="basis-1/5">
-          <SupplierProfileOverview supplier={supplier}/>
+        <div className="basis-4/5 space-y-2">
+          <div className="flex justify-between gap-4">
+            <LatestOrders />
+            <ProductsList />
+          </div>
+          <div>
+            <Clients />
+          </div>
         </div>
       </div>
     </div>

@@ -41,7 +41,10 @@ const OrderOverviewCard = ({ order }) => {
 export const LatestOrders = () => {
   return (
     <div className="space-y-2 grow">
-      <h3 className="text-xl">Latest Orders</h3>
+      <div className="flex justify-between items-center">
+        <h3 className="text-xl">Latest Orders</h3>
+        <button className="btn btn-sm">View All</button>
+      </div>
       <div className="space-y-2">
         {orders.map((order) => (
           <OrderOverviewCard order={order} key={order.id} />
