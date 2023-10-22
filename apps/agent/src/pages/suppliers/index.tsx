@@ -14,6 +14,7 @@ export default function Suppliers() {
               Users can register through agents, an app, or USSD codes and set
               delivery preferences.
             </p>
+            <p></p>
           </div>
           <div>
             <button className="btn btn-sm btn-primary" onClick={() => router.push("/suppliers/new/business_info")}>Register Supplier</button>

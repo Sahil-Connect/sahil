@@ -18,10 +18,6 @@ query getSupplierByPK($id: uuid!) {
       created_at
       id
       name
-      description
-      phoneNumber
-      contactName
-      contactEmail
     }
 }
 `;
