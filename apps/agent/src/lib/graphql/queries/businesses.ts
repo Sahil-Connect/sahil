@@ -20,3 +20,20 @@ query getClients {
     }
 }
 `;
+
+export const FETCH_BUSINESS_BY_PK = gql`
+query getBusinessByPK($id: uuid!) {
+    business_by_pk(id: $id) {
+        id
+        name
+        agent {
+            name
+            id
+        }
+        addresses {
+            city
+            street_address
+        }
+    }
+}
+`;
