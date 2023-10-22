@@ -97,6 +97,21 @@ export default function SupplierRegistrationPage() {
         <div className="space-y-4 w-full">
           <h1 className="text-2xl">Supplier Registration Form</h1>
           <div className="flex gap-8">
+          <div className="basis-1/5">
+              <ul className="steps steps-vertical ">
+                {headers.map(({ step, title }, index) => (
+                  <li
+                    className={`step ${
+                      step === currentStep ? "step-secondary" : null
+                    }`}
+                    key={index}
+                    onClick={() => handleUpdateStepByIndex(step)}
+                  >
+                    {title}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <div className="basis-2/5 space-y-4">
               <div className="flex justify-between items-center w-full">
                 <div>
@@ -122,22 +137,6 @@ export default function SupplierRegistrationPage() {
                     currentStep === "preview" && <PreviewSupplierInfo />}
                 </div>
               </div>
-            </div>
-
-            <div className="basis-1/5">
-              <ul className="steps steps-vertical ">
-                {headers.map(({ step, title }, index) => (
-                  <li
-                    className={`step ${
-                      step === currentStep ? "step-secondary" : null
-                    }`}
-                    key={index}
-                    onClick={() => handleUpdateStepByIndex(step)}
-                  >
-                    {title}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ const steps = ["Business Info", "Contact Details", "Preferences"] as const;
 const supplierBasicInfoSchema = z.object({
   contactName: z.string().min(2, { message: "required" }).trim(),
   description: z.string().trim(),
-  supplierName: z.string().min(2, { message: "required" }).trim(),
+  name: z.string().min(2, { message: "required" }).trim(),
 });
 
 type FormData = z.infer<typeof supplierBasicInfoSchema>;
@@ -24,11 +24,11 @@ const stepRouteSchema = z.object({
 });
 
 export const SupplierBasicInfoForm: FC<Props> = () => {
-  const { currentStep, goToStep, updateStepData, formData } =
+  const { goToStep, updateStepData, formData } =
   useSupplierFormStore((state) => state);
 
   const defaultValues = {}
-  
+
   const {
     register,
     handleSubmit,
@@ -62,13 +62,13 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
             type="text"
             placeholder="Energy Suppliers"
             className="input input-sm input-bordered w-full"
-            {...register("supplierName")}
-            defaultValue={formData.supplierName}
+            {...register("name")}
+            defaultValue={formData.name}
           />
-          {errors.supplierName?.message && (
+          {errors.name?.message && (
             <label className="label">
               <span className="label-text-alt text-error">
-                {errors.supplierName?.message}
+                {errors.name?.message}
               </span>
             </label>
           )}

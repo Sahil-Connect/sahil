@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useRegisterSupplier } from "@/hooks/suppliers";
 import toast, { Toaster } from "react-hot-toast";
+import { useSupplierFormStore } from "./useSupplierFormStore";
 
 type Props = {};
 
@@ -14,17 +15,20 @@ export const PreviewSupplierInfo: FC<Props> = () => {
     formState: { errors },
   } = useForm<FormData>();
   const router = useRouter();
+  const formData = useSupplierFormStore((state) => state.formData);
 
   const { error, insertSupplier, loading, supplier } = useRegisterSupplier();
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  console.log(supplier);
+
+  const onSubmit: SubmitHandler<FormData> = async () => {
     const response = await insertSupplier({
       variables: {
-        object: data,
+        object: formData,
       },
     });
-    const supplier = response.data?.insert_suppliers_one;
-    router.push(`/suppliers/${supplier?.id}`);
+    const newSupplier = response.data?.insert_suppliers_one;
+    router.push(`/suppliers/${newSupplier?.id}`);
   };
 
   if (error) {

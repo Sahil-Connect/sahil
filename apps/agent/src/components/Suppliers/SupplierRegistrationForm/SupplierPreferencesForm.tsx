@@ -13,10 +13,11 @@ const supplierPrefencesSchema = z.object({
 
 type FormData = z.infer<typeof supplierPrefencesSchema>;
 
-export const SupplierPreferencesForm: FC<Props> = ({ submitForm }) => {
-  const { currentStep, goToStep, updateStepData } = useSupplierFormStore(
-    (state) => state
-  );
+export const SupplierPreferencesForm: FC<Props> = () => {
+  const { goToStep, updateStepData } = useSupplierFormStore((state) => ({
+    goToStep: state.goToStep,
+    updateStepData: state.updateStepData,
+  }));
   const {
     register,
     handleSubmit,

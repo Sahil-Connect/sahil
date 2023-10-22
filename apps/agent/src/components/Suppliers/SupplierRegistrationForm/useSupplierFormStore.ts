@@ -1,4 +1,3 @@
-import exp from 'constants';
 import { create } from 'zustand';
 import { INITIAL_STEP } from '../constants';
 
@@ -16,7 +15,7 @@ export type FormState = Record<string, any>;
 export const useSupplierFormStore = create((set) => ({
   currentStep: INITIAL_STEP,
   formData: {
-    supplierName: "",
+    name: "",
     contactName: "",
     description: ""
   },
