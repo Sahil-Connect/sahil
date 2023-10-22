@@ -9,4 +9,7 @@ export type StepDirection = "prev" | "next";
 
 export type FormState = Record<string, any>;
 
-export const useOrderFormStore = create((set) => ({});
+export const useOrderFormStore = create((set) => ({
+    currentStep: "basic_info",
+    steps
+}));

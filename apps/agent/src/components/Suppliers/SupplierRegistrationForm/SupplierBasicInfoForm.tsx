@@ -4,10 +4,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSupplierFormStore } from "./useSupplierFormStore";
 import { useRouter } from 'next/router';
-import { useParams } from "next/navigation";
-
-const INITIAL_STEP = "Business Info";
-const steps = ["Business Info", "Contact Details", "Preferences"] as const;
 
 const supplierBasicInfoSchema = z.object({
   contactName: z.string().min(2, { message: "required" }).trim(),
@@ -19,15 +15,9 @@ type FormData = z.infer<typeof supplierBasicInfoSchema>;
 
 type Props = {};
 
-const stepRouteSchema = z.object({
-  step: z.array(z.enum(steps)).default([INITIAL_STEP]),
-});
-
 export const SupplierBasicInfoForm: FC<Props> = () => {
   const { goToStep, updateStepData, formData } =
   useSupplierFormStore((state) => state);
-
-  const defaultValues = {}
 
   const {
     register,
@@ -39,8 +29,6 @@ export const SupplierBasicInfoForm: FC<Props> = () => {
   });
   
   const router = useRouter();
-  const params = useParams();
-  const result = stepRouteSchema.safeParse(params);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierBasicInfoSchema.parse(data);
