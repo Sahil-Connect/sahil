@@ -1,8 +1,11 @@
 import { create } from 'zustand';
 
 const steps = [
-    "basic_info",
-    "preview"
+    "order_details",
+    "product_selection",
+    "delivery_details",
+    "payment_details",
+    "summary"
 ] as const;
 
 export type StepDirection = "prev" | "next";
@@ -10,6 +13,12 @@ export type StepDirection = "prev" | "next";
 export type FormState = Record<string, any>;
 
 export const useOrderFormStore = create((set) => ({
-    currentStep: "basic_info",
-    steps
+    currentStep: "order_details",
+    steps,
+    updateStepByIndex: (stepIndex: number) => {
+
+    },
+    updateStepData: () => {
+
+    }
 }));

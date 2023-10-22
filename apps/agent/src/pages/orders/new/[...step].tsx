@@ -2,9 +2,21 @@ import Head from "next/head";
 import { z } from "zod";
 import { useOrderFormStore } from "@/components/Orders/OrderProcessingForm/useOrderFormStore";
 import { PaymentDetails } from "@/components/Orders/OrderProcessingForm";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 export default function NewOrderPage() {
-  const { steps } = useOrderFormStore((state) => state);
+  const { steps, currentStep, updateStepByIndex } = useOrderFormStore((state) => state);
+  const currentIndex = steps.indexOf(currentStep);
+  const router = useRouter();
+
+  const handleUpdateStepByIndex = (step: (typeof steps)[number]) => {
+    const stepIndex = steps.indexOf(step);
+    if(stepIndex === currentIndex) {
+      return;
+    }
+    updateStepByIndex(stepIndex);
+    router.push(`/suppliers/new/${steps[stepIndex]}`);
+  };
 
   const headers = [
     {
@@ -28,6 +40,7 @@ export default function NewOrderPage() {
       step: "preview",
     },
   ];
+
   return (
     <div className="min-h-screen p-8">
       <h3>Place New Order</h3>
@@ -41,10 +54,12 @@ export default function NewOrderPage() {
             ))}
           </ul>
         </div>
+        <div className="grow">
         <div className="card card-compact shadow">
             <div className="card-body">
             <PaymentDetails />
             </div>
+        </div>
         </div>
       </div>
     </div>

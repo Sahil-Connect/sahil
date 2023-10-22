@@ -112,7 +112,7 @@ export default function SupplierRegistrationPage() {
                 ))}
               </ul>
             </div>
-            <div className="basis-2/5 space-y-4">
+            <div className="grow space-y-4">
               <div className="flex justify-between items-center w-full">
                 <div>
                   <p>
