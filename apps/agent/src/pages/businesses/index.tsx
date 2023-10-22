@@ -1,6 +1,8 @@
 import { ListBusinesses } from "@/components/Businesses/ListBusinesses";
+import { useRouter } from "next/router";
 
 export default function Business() {
+  const router = useRouter();
   return (
     <main className="min-h-screen p-8">
       <div className="space-y-4">
@@ -14,7 +16,7 @@ export default function Business() {
             <p></p>
           </div>
           <div>
-            <button className="btn btn-sm btn-primary">Register New Business</button>
+            <button className="btn btn-sm btn-primary" onClick={() => router.push("/businesses/new/basic_info")}>Register Business</button>
           </div>
         </div>
         <ListBusinesses />
