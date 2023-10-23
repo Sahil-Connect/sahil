@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+import { HiPlus } from 'react-icons/hi2';
+
 export default function OrdersPage() {
   const router = useRouter();
   return (
@@ -8,7 +10,7 @@ export default function OrdersPage() {
           <div>
           <h1 className="text-3xl">Orders</h1>
           </div>
-          <button className="btn btn-sm btn-primary" onClick={() => router.push("/orders/new/order_details")}>New Order</button>
+          <button className="btn btn-sm btn-primary" onClick={() => router.push("/orders/new/order_details")}><HiPlus /> New Order</button>
         </div>
       </div>
     </main>
