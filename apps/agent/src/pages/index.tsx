@@ -5,49 +5,30 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main className="min-h-screen p-8 bg-base-200">
+    <main className="min-h-screen p-8">
       <div className="space-y-4">
-        <div>
-          <h1 className="text-3xl">Welcome, Keji Lumori</h1>
-          <p>Munuki Market</p>
-          <p>Wednesday, 23rd Aug</p>
-        </div>
-        <div className="flex gap-2 items-start">
-          <div className="card card-compact bg-base-100">
-            <div className="card-body">
-              <div className="space-y-2">
-                <h2 className="card-title">Register Business or Supplier</h2>
-                <p>
-                  Users can register through agents, an app, or USSD codes and
-                  set delivery preferences.
-                </p>
-                <button className="btn btn-sm btn-primary">Proceed</button>
-              </div>
-            </div>
+        <div className="flex justify-between">
+          <div>
+            <h1 className="text-3xl">Hi, Keji Lumori</h1>
+            <p>Wednesday, 23rd Aug</p>
           </div>
-
-          <div className="card card-compact bg-base-100">
-            <div className="card-body">
-              <div className="space-y-2">
-                <h2 className="card-title">Place Order</h2>
-                <p>
-                  Users can register through agents, an app, or USSD codes and
-                  set delivery preferences.
-                </p>
-                <button className="btn btn-sm btn-primary">Proceed</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact bg-base-100">
-            <div className="card-body">
-              <div className="space-y-2">
-                <h2 className="card-title">Manage Order</h2>
-                <p>
-                  Users can register through agents, an app, or USSD codes and
-                  set delivery preferences.
-                </p>
-                <button className="btn btn-sm btn-primary">Proceed</button>
-              </div>
+          <div className="flex gap-2">
+            <button className="btn btn-sm">New Order</button>
+            <div className="dropdown dropdown-hover">
+              <label tabIndex={0} className="btn btn-sm btn-primary">
+                Register Customer
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 my-2"
+              >
+                <li>
+                  <a>Business</a>
+                </li>
+                <li>
+                  <a>Supplier</a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

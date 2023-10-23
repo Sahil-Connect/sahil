@@ -8,7 +8,7 @@ export default function OrdersPage() {
           <div>
           <h1 className="text-3xl">Orders</h1>
           </div>
-          <button className="btn btn-sm btn-primary" onClick={() => router.push("/orders/new/basic_info")}>New Order</button>
+          <button className="btn btn-sm btn-primary" onClick={() => router.push("/orders/new/order_details")}>New Order</button>
         </div>
       </div>
     </main>

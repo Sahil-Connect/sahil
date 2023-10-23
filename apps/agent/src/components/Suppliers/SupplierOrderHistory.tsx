@@ -9,7 +9,7 @@ const orders = [
     destination: "Hai Thoura",
     status: "Cancelled",
     delivery: "Pick-up Point",
-    payment: "Cash",
+    payment: "MOMO Pay",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const orders = [
     origin: "Souq Munuki",
     destination: "Atlabara",
     status: "Pending",
-    delivery: "Pick-up Point",
+    delivery: "Delivery Address",
     payment: "Cash",
   },
   {
@@ -27,7 +27,7 @@ const orders = [
     destination: "Gudelle",
     status: "Fulfilled",
     delivery: "Pick-up Point",
-    payment: "Cash",
+    payment: "MOMO Pay",
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const orders = [
     origin: "Souq Munuki",
     destination: "Custom Market",
     status: "Fulfilled",
-    delivery: "Pick-up Point",
+    delivery: "Delivery Address",
     payment: "Cash",
   },
 ];
