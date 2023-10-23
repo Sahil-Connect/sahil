@@ -12,9 +12,9 @@ export const DeliveryDetails = () => {
       <h3 className="text-2xl">Delivery Details</h3>
 
       <div className="space-y-2">
-        <h3 className="text-xl text-primary">Delivery Information</h3>
         <div className="card card-compact shadow">
           <div className="card-body">
+            <h3 className="card-title">Delivery Information</h3>
             <div className="flex gap-2">
               <div className="form-control">
                 <label className="label">
@@ -22,7 +22,7 @@ export const DeliveryDetails = () => {
                 </label>
                 <input
                   type="text"
-                  className="input input-sm input-bordered w-full bg-primary-content"
+                  className="input input-sm input-bordered w-full bg-slate-100"
                   placeholder="Keji Lumuro"
                 />
               </div>
@@ -32,7 +32,7 @@ export const DeliveryDetails = () => {
                 </label>
                 <input
                   type="text"
-                  className="input input-sm input-bordered w-full bg-primary-content"
+                  className="input input-sm input-bordered w-full bg-slate-100"
                   placeholder="+211-9813231392"
                 />
               </div>
@@ -77,16 +77,16 @@ export const DeliveryDetails = () => {
               <input
                 type="date"
                 placeholder="Energy Suppliers"
-                className="input input-sm input-bordered w-full bg-primary-content"
+                className="input input-sm input-bordered bg-slate-100"
               />
             </div>
           </div>
         </div>
       </div>
       <div className="space-y-2">
-        <h3 className="text-xl text-primary">Delivery Type</h3>
         <div className="card card-compact shadow">
           <div className="card-body">
+            <h3 className="card-title">Delivery Type</h3>
             <div className="flex gap-2">
               <div className="form-control">
                 <label className="label cursor-pointer">
@@ -124,7 +124,7 @@ export const DeliveryDetails = () => {
               <label className="label">
                 <span className="label-text">Choose pick up location</span>
               </label>
-              <select className="select select-sm select-bordered">
+              <select className="select select-sm select-bordered bg-slate-100">
                 <option>Custom Market</option>
                 <option>Souq Konyo Konyo</option>
                 <option>Souq Munuki</option>

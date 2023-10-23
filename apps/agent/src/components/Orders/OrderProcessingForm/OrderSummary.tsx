@@ -47,10 +47,10 @@ const ProductSummary = ({ product }) => {
       <div className="flex justify-between gap-2 items-center">
         <div className="flex gap-2">
           <p>{product.name}</p>
-          <p className="text-neutral-content">{product.price} SSP</p>
+          <div className="badge">{product.quantity}x</div>
         </div>
         <div className="flex gap-2 items-center">
-          <div className="badge">{product.quantity} Units</div>
+          <p className="text-bold">{product.price} SSP</p>
           <button className="btn btn-xs btn-square btn-ghost">
             <HiXMark />
           </button>
@@ -86,12 +86,12 @@ export const OrderSummary = () => {
               <ul className="space-y-2">
                 <li>
                   <p className="flex justify-between">
-                    Items <span>{products.length}</span>
+                  Total Items <span>{products.length} items</span>
                   </p>
                 </li>
                 <li>
                   <p className="flex justify-between">
-                    Total Price <span>15000 SSP</span>
+                    Total Price <span>28600 SSP</span>
                   </p>
                 </li>
               </ul>
@@ -150,9 +150,12 @@ export const OrderSummary = () => {
           </div>
         </div>
       </div>
+      <div className="flex gap-2">
+        <button className="btn btn-sm"><HiXMark /> Cancel</button>
       <div className="btn btn-sm btn-primary">
         <input type="submit" value="Place Order" />
         <HiOutlineCheckCircle />
+      </div>
       </div>
     </form>
   );

@@ -93,11 +93,13 @@ export default function SupplierRegistrationPage() {
       <Head>
         <title>Sahil - {headers[currentIndex].title}</title>
       </Head>
-      <main className="min-h-screen p-8 flex items-start">
+      <main className="min-h-screen flex items-start">
         <div className="space-y-4 w-full">
+          <div className="bg-base-200 p-4">
           <h1 className="text-2xl">Supplier Registration Form</h1>
-          <div className="flex gap-8">
-          <div className="basis-1/5">
+          </div>
+          <div className="flex">
+          <div className="basis-1/5 p-4">
               <ul className="steps steps-vertical ">
                 {headers.map(({ step, title }, index) => (
                   <li
@@ -112,7 +114,8 @@ export default function SupplierRegistrationPage() {
                 ))}
               </ul>
             </div>
-            <div className="grow space-y-4">
+            <div className="divider divider-horizontal"></div>
+            <div className="grow space-y-4 p-4">
               <div className="flex justify-between items-center w-full">
                 <div>
                   <p>
@@ -121,6 +124,7 @@ export default function SupplierRegistrationPage() {
                 </div>
                 <StepsPaginator />
               </div>
+              <div className="divider"></div>
               <div className="card card-compact shadow">
                 <div className="card-body">
                   <h2 className="card-title">{headers[currentIndex].title}</h2>

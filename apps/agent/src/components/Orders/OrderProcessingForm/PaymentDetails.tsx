@@ -3,6 +3,12 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "./useOrderFormStore";
+import {
+  HiXMark,
+  HiOutlineCreditCard,
+  HiOutlineCurrencyDollar,
+  HiArrowRight,
+} from "react-icons/hi2";
 
 const paymentDetailsSchema = z.object({
   paymentMethod: z.string(),
@@ -22,38 +28,48 @@ export const PaymentDetails = () => {
   return (
     <form className="space-y-2">
       <h3 className="text-xl">Payment Details</h3>
-      <div className="form-control">
-        <div className="label">
-          <span className="label-text">Preferred Payment Method</span>
+      <div className="card card-compact shadow">
+        <div className="card-body">
+          <div className="flex gap-2">
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <input type="radio" name="pickup" className="radio radio-sm" />
+                <div className="flex ml-4 items-center gap-2">
+                  <span className="shadow p-2 rounded-md">
+                    <HiOutlineCreditCard />
+                  </span>
+                  <span className="label-text">Momo Pay</span>
+                </div>
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <input
+                  type="radio"
+                  name="address"
+                  className="radio radio-sm checked:bg-secondary"
+                  checked
+                />
+                <div className="flex ml-4 items-center gap-2">
+                  <span className="shadow p-2 rounded-md">
+                    <HiOutlineCurrencyDollar />
+                  </span>
+                  <span className="label-text">Cash On Delivery</span>
+                </div>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text">Cash</span>
-          <input
-            type="radio"
-            name="radio-10"
-            className="radio checked:bg-red-500"
-            checked
-          />
-        </label>
+      <div className="flex gap-2">
+        <button className="btn btn-sm">
+          <HiXMark /> Cancel
+        </button>
+        <div className="btn btn-sm btn-primary">
+          <input type="submit" value="Continue" />
+          <HiArrowRight />
+        </div>
       </div>
-      <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text">Momo Pay</span>
-          <input
-            type="radio"
-            name="radio-10"
-            className="radio checked:bg-blue-500"
-            checked
-          />
-        </label>
-      </div>
-      <input
-        type="submit"
-        className="btn btn-sm btn-primary"
-        value="continue"
-      />
     </form>
   );
 };

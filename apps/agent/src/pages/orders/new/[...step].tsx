@@ -88,22 +88,23 @@ export default function NewOrderPage() {
             ))}
           </ul>
         </div>
-        <div className="divider divider-horizontal "></div>
+        <div className="divider divider-horizontal"></div>
         <div className="grow space-y-2 p-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
-              <p className="text-neutral-content">Step 3 of 5</p>
+              <h3 className="text-xl text-neutral-content">Step 5 of 5</h3>
             </div>
             <div className="join grid grid-cols-2">
               <button className="join-item btn btn-outline btn-sm shadow-">
                 <HiArrowLeft /> Prevous
               </button>
-              <button className="join-item btn btn-sm shadow- btn-primary">
+              <button className="join-item btn btn-sm shadow- btn-secondary">
                 Next <HiArrowRight />
               </button>
             </div>
           </div>
-          <OrderSummary />
+          <div className="divider"></div>
+          <ProductSelection />
         </div>
       </div>
     </div>
