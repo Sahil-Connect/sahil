@@ -9,6 +9,7 @@ import {
   HiMinus,
   HiPlus,
   HiMiniMagnifyingGlass,
+  HiOutlineTruck
 } from "react-icons/hi2";
 
 const productSelectionSchema = z.object({
@@ -88,7 +89,7 @@ const ProductSummary = ({ product }) => {
 };
 
 const SupplierSummary = ({ supplier }) => {
-  return <div className="badge">{supplier.name}</div>;
+  return <div className="badge badge-md badge-outline badge-primary gap-2"><HiOutlineTruck /> {supplier.name}</div>;
 };
 
 export const ProductSelection = () => {
@@ -117,7 +118,7 @@ export const ProductSelection = () => {
             <div className="flex gap-2 items-center">
               <h3 className="text-xl">Recommended Suppliers</h3>
               <div>
-                <p className="text-primary">3 Suppliers</p>
+                <p>3 Suppliers</p>
               </div>
             </div>
             <div className="flex gap-2">
@@ -134,7 +135,7 @@ export const ProductSelection = () => {
             <div className="flex justify-between">
               <h3 className="text-xl">
                 Available Products{" "}
-                <span className="text-primary text-sm">3000 products</span>
+                <span className="text-sm">3000 products</span>
               </h3>
               <div className="join grid grid-cols-2">
                 <button className="join-item btn btn-sm btn-square">

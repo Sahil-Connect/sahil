@@ -16,7 +16,7 @@ import {
   HiOutlineCreditCard,
   HiOutlineTruck,
   HiOutlineCheckCircle,
-  HiOutlineQueueList
+  HiOutlineQueueList,
 } from "react-icons/hi2";
 
 export default function NewOrderPage() {
@@ -65,7 +65,7 @@ export default function NewOrderPage() {
 
   return (
     <div className="min-h-screen space-y-4">
-      <div className="flex gap-2 items-center p-4 bg-base-200 border border-b-2">
+      <div className="flex gap-2 items-center p-4 bg-base-200">
         <h1 className="text-2xl">Place New Order</h1>
       </div>
       <div className="flex">
@@ -79,9 +79,13 @@ export default function NewOrderPage() {
                 key={index}
                 onClick={() => {}}
               >
-                <div className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
-                  title === "Order Confirmation" ? "bg-primary-content text-primary-focus" : null
-                }`}>
+                <div
+                  className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
+                    title === "Order Confirmation"
+                      ? "bg-primary-content text-primary-focus"
+                      : null
+                  }`}
+                >
                   {icon} {title}
                 </div>
               </li>
