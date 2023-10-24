@@ -93,7 +93,8 @@ export const DeliveryDetails = () => {
                   <input
                     type="radio"
                     name="pickup"
-                    className="radio radio-sm"
+                    className="radio radio-sm checked:bg-secondary"
+                    checked
                   />
                   <div className="flex ml-4 items-center gap-2">
                     <span className="shadow p-2 rounded-md">
@@ -108,8 +109,7 @@ export const DeliveryDetails = () => {
                   <input
                     type="radio"
                     name="address"
-                    className="radio radio-sm checked:bg-secondary"
-                    checked
+                    className="radio radio-sm"
                   />
                   <div className="flex ml-4 items-center gap-2">
                     <span className="shadow p-2 rounded-md">

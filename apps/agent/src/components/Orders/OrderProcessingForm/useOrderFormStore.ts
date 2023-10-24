@@ -13,12 +13,21 @@ export type StepDirection = "prev" | "next";
 
 export type FormState = Record<string, any>;
 
-export const useOrderFormStore = create((set) => ({
+type OrderFormStore = {
+    currentStep: typeof steps[number];
+    steps: typeof steps;
+    goToStep: (direction: StepDirection) => void;
+    updateStepByIndex: (stepIndex: number) => void;
+    updateStepFormData: (formData: any) => void;
+    formData: any;
+}
+
+export const useOrderFormStore = create<OrderFormStore>((set) => ({
     currentStep: INITIAL_STEP,
     formData: {},
     steps,
     goToStep: (direction: StepDirection) => {
-        set((state: FormState) => {
+        set((state) => {
             const currentIndex = steps.indexOf(state.currentStep);
             if (currentIndex !== -1 && currentIndex <= steps.length - 1) {
                 return ({
@@ -32,17 +41,28 @@ export const useOrderFormStore = create((set) => ({
         });
     },
     updateStepByIndex: (stepIndex: number) => {
-
+        set((state) => {
+            const currentIndex = steps.indexOf(state.currentStep);
+            if (currentIndex !== -1 && currentIndex <= steps.length - 1) {
+                return ({
+                    ...state,
+                    currentStep: steps[stepIndex]
+                });
+            }
+            return ({
+                ...state
+            });
+        });
     },
     updateStepFormData: (formData: Record<string, any>) => {
-        set((state: FormState) => {
-          return ({
-            ...state,
-            formData: {
-              ...state.formData,
-              ...formData,
-            }
-          })
+        set((state) => {
+            return ({
+                ...state,
+                formData: {
+                    ...state.formData,
+                    ...formData,
+                }
+            })
         });
-      }
+    }
 }));

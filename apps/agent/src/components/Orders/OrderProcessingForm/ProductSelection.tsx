@@ -18,39 +18,6 @@ const productSelectionSchema = z.object({
   clientId: z.string(),
 });
 
-const products = [
-  {
-    id: 1,
-    price: 300,
-    name: "Bottled Water",
-    stock: 15,
-  },
-  {
-    id: 2,
-    price: 5000,
-    name: "Sugar",
-    stock: 15,
-  },
-  {
-    id: 3,
-    price: 5000,
-    name: "Sugar",
-    stock: 15,
-  },
-  {
-    id: 4,
-    price: 5000,
-    name: "Sugar",
-    stock: 15,
-  },
-  {
-    id: 5,
-    price: 5000,
-    name: "Sugar",
-    stock: 15,
-  },
-];
-
 const suppliers = [
   {
     id: 1,
@@ -99,6 +66,12 @@ const SupplierSummary = ({ supplier }) => {
 };
 
 export const ProductSelection = () => {
+
+  const { data: products, error, loading } = useFetchProducts();
+  const { updateStepFormData } = useOrderFormStore(state => state);
+
+  console.log(products);
+
   return (
     <form className="space-y-2">
       <h3 className="text-xl">Product Selection</h3>

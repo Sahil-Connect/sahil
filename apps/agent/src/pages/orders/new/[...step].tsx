@@ -76,14 +76,14 @@ export default function NewOrderPage() {
             {headers.map(({ icon, step, title }, index) => (
               <li
                 className={`step ${
-                  title === "Order Details" ? "step-primary" : null
+                  title === "Delivery Details" ? "step-primary" : null
                 }`}
                 key={index}
                 onClick={() => {}}
               >
                 <div
                   className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
-                    title === "Order Details"
+                    title === "Delivery Details"
                       ? "bg-primary-content text-primary-focus"
                       : null
                   }`}
@@ -98,7 +98,7 @@ export default function NewOrderPage() {
         <div className="grow space-y-2 p-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
-              <h3 className="text-xl text-neutral-content">Step 5 of 5</h3>
+              <h3 className="text-xl text-neutral-content">Step 3 of 5</h3>
             </div>
             <div className="join grid grid-cols-2">
               <button className="join-item btn btn-outline btn-sm shadow-">

@@ -3,11 +3,10 @@ import {
 } from "@apollo/client";
 
 export const FETCH_ORDERS = gql`
-query getSuppliers {
-    suppliers {
+query getOrders {
+    orders {
         created_at
         id
-        name
     }
 }
 `;
