@@ -10,7 +10,7 @@ import { useSupplierFormStore } from "@/components/Suppliers/SupplierRegistratio
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { INITIAL_STEP } from "@/components/Suppliers/constants";
 
-const StepsPaginator = ({}) => {
+const StepsPaginator = () => {
   const { steps, goToStep, currentStep } = useSupplierFormStore(
     (state) => state
   );
@@ -21,7 +21,7 @@ const StepsPaginator = ({}) => {
     goToStep("prev");
     router.push(`/suppliers/new/${steps[currentIndex - 1]}`);  
   };
-  const goTogoToStep = () => {
+  const goToNextStep = () => {
     goToStep("next");
     router.push(`/suppliers/new/${steps[currentIndex + 1]}`);  
   };
@@ -36,7 +36,7 @@ const StepsPaginator = ({}) => {
       </button>
       <button
         className={`join-item btn btn-sm btn-secondary ${currentIndex === steps.length - 1 ? "btn-disabled" : null }`}
-        onClick={goTogoToStep}
+        onClick={goToNextStep}
       >
         Next
       </button>
