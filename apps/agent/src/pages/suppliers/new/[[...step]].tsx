@@ -6,7 +6,7 @@ import {
   SupplierBusinessInfoForm,
   SupplierPreferencesForm,
 } from "@/components/Suppliers/SupplierRegistrationForm";
-import { useSupplierFormStore } from "@/components/Suppliers/SupplierRegistrationForm/useSupplierFormStore";
+import { useSupplierFormStore } from "@/hooks/useSupplierFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { INITIAL_STEP } from "@/components/Suppliers/constants";
 

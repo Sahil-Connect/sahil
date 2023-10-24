@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFetchProducts } from "@/hooks/products";
 import { useFetchSuppliers } from "@/hooks/suppliers";
-import { useOrderItemsStore } from "./OrderProcessingForm/useOrderItemsStore";
+import { useOrderItemsStore } from "../../hooks/useOrderItemsStore";
 import {
   HiArrowLeft,
   HiArrowRight,

@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSupplierFormStore } from "./useSupplierFormStore";
+import { useSupplierFormStore } from "../../../hooks/useSupplierFormStore";
 import { useRouter } from "next/router";
 
 const supplierPrefencesSchema = z.object({

@@ -2,11 +2,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useOrderFormStore } from "./useOrderFormStore";
+import { useOrderFormStore } from "../../../hooks/useOrderFormStore";
 import {
   HiXMark,
   HiOutlineCreditCard,
-  HiOutlineCurrencyDollar,
+  HiOutlineBanknotes,
   HiArrowRight,
 } from "react-icons/hi2";
 
@@ -52,7 +52,7 @@ export const PaymentDetails = () => {
                 />
                 <div className="flex ml-4 items-center gap-2">
                   <span className="shadow p-2 rounded-md">
-                    <HiOutlineCurrencyDollar />
+                    <HiOutlineBanknotes />
                   </span>
                   <span className="label-text">Cash On Delivery</span>
                 </div>

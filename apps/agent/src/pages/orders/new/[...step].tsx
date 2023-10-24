@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { z } from "zod";
-import { useOrderFormStore } from "@/components/Orders/OrderProcessingForm/useOrderFormStore";
+import { useOrderFormStore } from "@/hooks/useOrderFormStore";
 import {
   DeliveryDetails,
   OrderDetails,
@@ -17,7 +17,8 @@ import {
   HiOutlineTruck,
   HiOutlineCheckCircle,
   HiOutlineQueueList,
-  HiCursorArrowRipple
+  HiCursorArrowRipple,
+  HiOutlineBuildingStorefront,
 } from "react-icons/hi2";
 
 const StepsPaginator = () => {
@@ -48,6 +49,63 @@ const StepsPaginator = () => {
       >
         Next <HiArrowRight />
       </button>
+    </div>
+  );
+};
+
+const OrderSideOverview = () => {
+  return (
+    <div className="basis-1/5 space-y-2 pr-4">
+      <h3 className="text-xl">Order: ED-15</h3>
+      <ul className="space-y-4">
+        <li>
+          <div className="flex items-center gap-2">
+            <span className="shadow p-2 rounded-md">
+              <HiOutlineBuildingStorefront />
+            </span>
+            Notos Bar & Grill
+          </div>
+        </li>
+        <li>
+          <div className="flex items-center gap-2">
+            <span className="shadow p-2 rounded-md">
+              <HiOutlineBuildingStorefront />
+            </span>
+            Pick Up Location
+          </div>
+        </li>
+        <li>
+          <div className="flex items-center gap-2">
+            <span className="shadow p-2 rounded-md">
+              <HiOutlineBuildingStorefront />
+            </span>
+            Scheduled Delivery
+          </div>
+        </li>
+      </ul>
+      <div className="divider"></div>
+      <ul className="space-y-4">
+        <li className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <span className="shadow p-2 rounded-md">
+              <HiOutlineBuildingStorefront />
+            </span>
+            Total Items
+          </div>
+          <p>5</p>
+        </li>
+        <li className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <span className="shadow p-2 rounded-md">
+              <HiOutlineBuildingStorefront />
+            </span>
+            Total Price
+          </div>
+          <p>5000 SSP</p>
+        </li>
+        <li>Processed by: Emmanuel Gatwech</li>
+        <li>Wednesday 24 Oct</li>
+      </ul>
     </div>
   );
 };
@@ -101,30 +159,31 @@ export default function NewOrderPage() {
       <div className="flex gap-2 justify-between items-center py-4 px-8 bg-base-200">
         <h1 className="text-2xl">Order Processing Form</h1>
         <div className="flex gap-2 items-center">
-          <h3>ED-15</h3>
           <div className="indicator">
-          <span className="indicator-item badge">5</span> 
-          <button className="btn btn-sm"><HiOutlineShoppingCart /> </button>
+            <span className="indicator-item badge">5</span>
+            <button className="btn btn-sm" title="Shopping Cart" type="button">
+              <HiOutlineShoppingCart />{" "}
+            </button>
           </div>
         </div>
       </div>
       <div className="flex">
-        <div className="basis-1/5 px-2">
-          <ul className="steps steps-vertical w-full ">
+        <div className="basis-1/5 pl-4">
+          <ul className="steps steps-vertical w-full">
             {headers.map(({ icon, step, title }, index) => (
               <li
                 className={`step ${
-                  title === "Delivery Details" ? "step-primary" : null
+                  currentStep === step ? "step-primary" : null
                 }`}
                 key={index}
                 onClick={() => handleUpdateStepByIndex(step)}
               >
                 <div
                   className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
-                    title === "Delivery Details"
+                    currentStep === step
                       ? "bg-primary-content text-primary-focus"
                       : null
-                  }`}
+                  } hover:bg-slate-100 cursor-pointer`}
                 >
                   {icon} {title}
                 </div>
@@ -133,23 +192,25 @@ export default function NewOrderPage() {
           </ul>
         </div>
         <div className="divider divider-horizontal"></div>
-        <div className="grow space-y-2 p-4">
+        <div className="grow space-y-2 py-4 pr-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
               <h3 className="text-xl">
-                {headers[steps.indexOf(currentStep)].title} <span className="text-md text-neutral-content">{steps.indexOf(currentStep) + 1} out of{" "}
-                {steps.length}</span>
+                {headers[steps.indexOf(currentStep)].title}{" "}
+                <span className="text-md text-neutral-content">
+                  {steps.indexOf(currentStep) + 1} out of {steps.length}
+                </span>
               </h3>
             </div>
             <StepsPaginator />
           </div>
-          <div className="divider"></div>
           {currentStep === "order_details" && <OrderDetails />}
           {currentStep === "product_selection" && <ProductSelection />}
           {currentStep === "delivery_details" && <DeliveryDetails />}
           {currentStep === "payment_details" && <PaymentDetails />}
           {currentStep === "summary" && <OrderSummary />}
         </div>
+
       </div>
     </div>
   );
