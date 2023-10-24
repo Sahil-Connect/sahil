@@ -17,7 +17,7 @@ type FormData = z.infer<typeof supplierContactInfoSchema>;
 type Props = {};
 
 export const SupplierBusinessInfoForm: FC<Props> = () => {
-  const { currentStep, goToStep, updateStepData } =
+  const { currentStep, goToStep, updateStepFormData } =
     useSupplierFormStore((state) => state);
   const {
     register,
@@ -31,7 +31,7 @@ export const SupplierBusinessInfoForm: FC<Props> = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierContactInfoSchema.parse(data);
-    updateStepData(validatedInput);
+    updateStepFormData(validatedInput);
     goToStep("next");
     router.push(`/suppliers/new/preferences`);
   };

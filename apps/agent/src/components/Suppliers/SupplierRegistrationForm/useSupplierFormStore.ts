@@ -48,7 +48,7 @@ export const useSupplierFormStore = create((set) => ({
       });
     })
   },
-  updateStepData: (formData: Record<string, any>) => {
+  updateStepFormData: (formData: Record<string, any>) => {
     set((state: FormState) => {
       return ({
         ...state,
@@ -57,6 +57,6 @@ export const useSupplierFormStore = create((set) => ({
           ...formData,
         }
       })
-    })
+    });
   }
 }))

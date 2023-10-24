@@ -14,9 +14,9 @@ const supplierPrefencesSchema = z.object({
 type FormData = z.infer<typeof supplierPrefencesSchema>;
 
 export const SupplierPreferencesForm: FC<Props> = () => {
-  const { goToStep, updateStepData } = useSupplierFormStore((state) => ({
+  const { goToStep, updateStepFormData } = useSupplierFormStore((state) => ({
     goToStep: state.goToStep,
-    updateStepData: state.updateStepData,
+    updateStepFormData: state.updateStepFormData,
   }));
   const {
     register,
@@ -30,7 +30,7 @@ export const SupplierPreferencesForm: FC<Props> = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierPrefencesSchema.parse(data);
-    updateStepData(validatedInput);
+    updateStepFormData(validatedInput);
     goToStep("next");
     router.push(`/suppliers/new/preview`);
   };

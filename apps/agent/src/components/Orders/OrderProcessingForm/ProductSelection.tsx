@@ -3,13 +3,15 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "./useOrderFormStore";
+import { useFetchProducts } from "@/hooks/products";
 import {
   HiArrowLeft,
   HiArrowRight,
   HiMinus,
   HiPlus,
   HiMiniMagnifyingGlass,
-  HiOutlineTruck
+  HiOutlineTruck,
+  HiXMark
 } from "react-icons/hi2";
 
 const productSelectionSchema = z.object({
@@ -89,7 +91,11 @@ const ProductSummary = ({ product }) => {
 };
 
 const SupplierSummary = ({ supplier }) => {
-  return <div className="badge badge-md badge-outline badge-primary gap-2"><HiOutlineTruck /> {supplier.name}</div>;
+  return (
+    <div className="badge badge-md badge-outline badge-primary gap-2">
+      <HiOutlineTruck /> {supplier.name}
+    </div>
+  );
 };
 
 export const ProductSelection = () => {
@@ -138,7 +144,12 @@ export const ProductSelection = () => {
                 <span className="text-sm">3000 products</span>
               </h3>
               <div className="join grid grid-cols-2">
-                <button className="join-item btn btn-sm btn-square">
+                <button
+                  className="join-item btn btn-sm btn-square"
+                  name="left"
+                  type="button"
+                  aria-label="left"
+                >
                   <HiArrowLeft />
                 </button>
                 <button className="join-item btn btn-sm btn-square">
@@ -154,11 +165,15 @@ export const ProductSelection = () => {
           </div>
         </div>
       </div>
-      <input
-        type="submit"
-        className="btn btn-sm btn-primary"
-        value="continue"
-      />
+      <div className="flex gap-2">
+        <button className="btn btn-sm">
+          <HiXMark /> Cancel
+        </button>
+        <div className="btn btn-sm btn-primary">
+          <input type="submit" value="continue" />
+          <HiArrowRight />
+        </div>
+      </div>
     </form>
   );
 };

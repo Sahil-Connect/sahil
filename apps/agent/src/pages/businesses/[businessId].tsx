@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useFetchBusinesssByPK } from "@/hooks/businesses";
+import { useFetchBusinessByPK } from "@/hooks/businesses";
 import {
   BusinessOrderHistory,
   BusinessProfileOverview,
@@ -12,7 +12,7 @@ export default function BusinessPage() {
     data: business,
     error,
     loading,
-  } = useFetchBusinesssByPK(businessId as string);
+  } = useFetchBusinessByPK(businessId as string);
 
   if (error) {
     return <p>Failed</p>;

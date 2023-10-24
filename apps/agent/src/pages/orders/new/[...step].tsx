@@ -63,6 +63,8 @@ export default function NewOrderPage() {
     },
   ];
 
+  console.log(currentStep);
+
   return (
     <div className="min-h-screen space-y-4">
       <div className="flex gap-2 items-center p-4 bg-base-200">
@@ -74,14 +76,14 @@ export default function NewOrderPage() {
             {headers.map(({ icon, step, title }, index) => (
               <li
                 className={`step ${
-                  title === "Order Confirmation" ? "step-primary" : null
+                  title === "Order Details" ? "step-primary" : null
                 }`}
                 key={index}
                 onClick={() => {}}
               >
                 <div
                   className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
-                    title === "Order Confirmation"
+                    title === "Order Details"
                       ? "bg-primary-content text-primary-focus"
                       : null
                   }`}
@@ -108,7 +110,21 @@ export default function NewOrderPage() {
             </div>
           </div>
           <div className="divider"></div>
-          <ProductSelection />
+          {
+            currentStep === "order_details" && <OrderDetails />
+          }
+                    {
+            currentStep === "product_selection" && <ProductSelection />
+          }
+                    {
+            currentStep === "delivery_details" && <DeliveryDetails />
+          }
+                    {
+            currentStep === "payment_details" && <PaymentDetails />
+          }
+          {
+            currentStep === "summary" && <OrderSummary />
+          }
         </div>
       </div>
     </div>
