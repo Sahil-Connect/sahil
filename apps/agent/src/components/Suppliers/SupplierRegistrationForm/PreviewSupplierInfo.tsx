@@ -5,9 +5,7 @@ import { useRegisterSupplier } from "@/hooks/suppliers";
 import toast, { Toaster } from "react-hot-toast";
 import { useSupplierFormStore } from "./useSupplierFormStore";
 
-type Props = {};
-
-export const PreviewSupplierInfo: FC<Props> = () => {
+export const PreviewSupplierInfo = () => {
   const {
     register,
     handleSubmit,

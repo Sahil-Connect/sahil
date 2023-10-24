@@ -27,9 +27,9 @@ export const PaymentDetails = () => {
   });
   return (
     <form className="space-y-2">
-      <h3 className="text-xl">Payment Details</h3>
       <div className="card card-compact shadow">
         <div className="card-body">
+        <h3 className="card-title">Payment Method</h3>
           <div className="flex gap-2">
             <div className="form-control">
               <label className="label cursor-pointer">

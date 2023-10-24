@@ -19,23 +19,27 @@ const StepsPaginator = () => {
 
   const goToPrevStep = () => {
     goToStep("prev");
-    router.push(`/suppliers/new/${steps[currentIndex - 1]}`);  
+    router.push(`/suppliers/new/${steps[currentIndex - 1]}`);
   };
   const goToNextStep = () => {
     goToStep("next");
-    router.push(`/suppliers/new/${steps[currentIndex + 1]}`);  
+    router.push(`/suppliers/new/${steps[currentIndex + 1]}`);
   };
 
   return (
     <div className="join grid grid-cols-2">
       <button
-        className={`join-item btn btn-sm btn-ghost ${ currentIndex <= 0 ? "btn-disabled" : null }`}
+        className={`join-item btn btn-sm btn-ghost ${
+          currentIndex <= 0 ? "btn-disabled" : null
+        }`}
         onClick={goToPrevStep}
       >
         Previous
       </button>
       <button
-        className={`join-item btn btn-sm btn-secondary ${currentIndex === steps.length - 1 ? "btn-disabled" : null }`}
+        className={`join-item btn btn-sm btn-secondary ${
+          currentIndex === steps.length - 1 ? "btn-disabled" : null
+        }`}
         onClick={goToNextStep}
       >
         Next
@@ -62,7 +66,7 @@ export default function SupplierRegistrationPage() {
 
   const handleUpdateStepByIndex = (step: (typeof steps)[number]) => {
     const stepIndex = steps.indexOf(step);
-    if(stepIndex === currentIndex) {
+    if (stepIndex === currentIndex) {
       return;
     }
     updateStepByIndex(stepIndex);
@@ -84,8 +88,8 @@ export default function SupplierRegistrationPage() {
     },
     {
       title: "Complete Registration",
-      step: "preview"
-    }
+      step: "preview",
+    },
   ];
 
   return (
@@ -96,10 +100,10 @@ export default function SupplierRegistrationPage() {
       <main className="min-h-screen flex items-start">
         <div className="space-y-4 w-full">
           <div className="bg-base-200 p-4">
-          <h1 className="text-2xl">Supplier Registration Form</h1>
+            <h1 className="text-2xl">Supplier Registration Form</h1>
           </div>
           <div className="flex">
-          <div className="basis-1/5 p-4">
+            <div className="basis-1/5 p-4">
               <ul className="steps steps-vertical ">
                 {headers.map(({ step, title }, index) => (
                   <li
@@ -118,9 +122,9 @@ export default function SupplierRegistrationPage() {
             <div className="grow space-y-4 p-4">
               <div className="flex justify-between items-center w-full">
                 <div>
-                  <p>
+                  <h3 className="text-xl text-neutral-content">
                     Step {steps.indexOf(currentStep) + 1} out of {steps.length}
-                  </p>
+                  </h3>
                 </div>
                 <StepsPaginator />
               </div>
@@ -128,17 +132,12 @@ export default function SupplierRegistrationPage() {
               <div className="card card-compact shadow">
                 <div className="card-body">
                   <h2 className="card-title">{headers[currentIndex].title}</h2>
-                  {currentStep === "business_info" && (
-                    <SupplierBasicInfoForm />
-                  )}
+                  {currentStep === "business_info" && <SupplierBasicInfoForm />}
                   {currentStep === "contact_details" && (
                     <SupplierBusinessInfoForm />
                   )}
-                  {currentStep === "preferences" && (
-                    <SupplierPreferencesForm />
-                  )}
-                  {
-                    currentStep === "preview" && <PreviewSupplierInfo />}
+                  {currentStep === "preferences" && <SupplierPreferencesForm />}
+                  {currentStep === "preview" && <PreviewSupplierInfo />}
                 </div>
               </div>
             </div>

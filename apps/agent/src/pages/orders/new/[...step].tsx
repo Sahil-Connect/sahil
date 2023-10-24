@@ -12,11 +12,12 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import {
   HiArrowLeft,
   HiArrowRight,
-  HiOutlineShoppingBag,
-  HiOutlineCreditCard,
+  HiOutlineShoppingCart,
+  HiOutlineCurrencyDollar,
   HiOutlineTruck,
   HiOutlineCheckCircle,
   HiOutlineQueueList,
+  HiCursorArrowRipple
 } from "react-icons/hi2";
 
 const StepsPaginator = () => {
@@ -76,7 +77,7 @@ export default function NewOrderPage() {
     {
       title: "Product Selection",
       step: "product_selection",
-      icon: <HiOutlineShoppingBag />,
+      icon: <HiCursorArrowRipple />,
     },
     {
       title: "Delivery Details",
@@ -86,7 +87,7 @@ export default function NewOrderPage() {
     {
       title: "Payment Details",
       step: "payment_details",
-      icon: <HiOutlineCreditCard />,
+      icon: <HiOutlineCurrencyDollar />,
     },
     {
       title: "Order Confirmation",
@@ -95,12 +96,17 @@ export default function NewOrderPage() {
     },
   ];
 
-  console.log(currentStep);
-
   return (
     <div className="min-h-screen space-y-4">
-      <div className="flex gap-2 items-center p-4 bg-base-200">
-        <h1 className="text-2xl">Place New Order</h1>
+      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-base-200">
+        <h1 className="text-2xl">Order Processing Form</h1>
+        <div className="flex gap-2 items-center">
+          <h3>ED-15</h3>
+          <div className="indicator">
+          <span className="indicator-item badge">5</span> 
+          <button className="btn btn-sm"><HiOutlineShoppingCart /> </button>
+          </div>
+        </div>
       </div>
       <div className="flex">
         <div className="basis-1/5 px-2">
@@ -130,7 +136,10 @@ export default function NewOrderPage() {
         <div className="grow space-y-2 p-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
-              <h3 className="text-xl text-neutral-content">Step 3 of 5</h3>
+              <h3 className="text-xl">
+                {headers[steps.indexOf(currentStep)].title} <span className="text-md text-neutral-content">{steps.indexOf(currentStep) + 1} out of{" "}
+                {steps.length}</span>
+              </h3>
             </div>
             <StepsPaginator />
           </div>

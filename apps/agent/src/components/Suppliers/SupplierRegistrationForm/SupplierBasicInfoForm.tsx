@@ -13,9 +13,7 @@ const supplierBasicInfoSchema = z.object({
 
 type FormData = z.infer<typeof supplierBasicInfoSchema>;
 
-type Props = {};
-
-export const SupplierBasicInfoForm: FC<Props> = () => {
+export const SupplierBasicInfoForm = () => {
   const { formData, goToStep, updateStepFormData } = useSupplierFormStore(
     (state) => ({
       formData: state.formData,

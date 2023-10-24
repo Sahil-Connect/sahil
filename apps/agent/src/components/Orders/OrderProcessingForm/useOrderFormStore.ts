@@ -14,15 +14,19 @@ export type StepDirection = "prev" | "next";
 export type FormState = Record<string, any>;
 
 type OrderFormStore = {
+    client: any;
     currentStep: typeof steps[number];
     steps: typeof steps;
     goToStep: (direction: StepDirection) => void;
     updateStepByIndex: (stepIndex: number) => void;
     updateStepFormData: (formData: any) => void;
     formData: any;
+    orderItems: any[];
+    setOrderItems: (items: any) => void;
 }
 
 export const useOrderFormStore = create<OrderFormStore>((set) => ({
+    client: {},
     currentStep: INITIAL_STEP,
     formData: {},
     steps,
@@ -39,6 +43,10 @@ export const useOrderFormStore = create<OrderFormStore>((set) => ({
                 ...state
             });
         });
+    },
+    orderItems: [],
+    setOrderItems: (items) => {
+
     },
     updateStepByIndex: (stepIndex: number) => {
         set((state) => {

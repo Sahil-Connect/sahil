@@ -9,8 +9,6 @@ import {
 export const DeliveryDetails = () => {
   return (
     <form className="space-y-2">
-      <h3 className="text-2xl">Delivery Details</h3>
-
       <div className="space-y-2">
         <div className="card card-compact shadow">
           <div className="card-body">

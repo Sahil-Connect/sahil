@@ -5,15 +5,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSupplierFormStore } from "./useSupplierFormStore";
 import { useRouter } from "next/router";
 
-type Props = {};
-
 const supplierPrefencesSchema = z.object({
   zone: z.string(),
 });
 
 type FormData = z.infer<typeof supplierPrefencesSchema>;
 
-export const SupplierPreferencesForm: FC<Props> = () => {
+export const SupplierPreferencesForm = () => {
   const { goToStep, updateStepFormData } = useSupplierFormStore((state) => ({
     goToStep: state.goToStep,
     updateStepFormData: state.updateStepFormData,
