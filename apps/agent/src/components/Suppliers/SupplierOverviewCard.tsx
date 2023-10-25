@@ -59,8 +59,9 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   );
 };
 
-const formatCategoryName = (categoryName: string) => {
-  // Replace "_and_" with " & ", split the category name by underscores, capitalize each word, and join them back with spaces
+export const formatCategoryName = (categoryName: string) => {
+  // Replace "_and_" with " & ", split the category name by underscores, 
+  // capitalize each word, and join them back with spaces
   return categoryName
     .replace(/_and_/g, ' & ')
     .split('_')
@@ -71,7 +72,7 @@ const formatCategoryName = (categoryName: string) => {
 const generateInitials = (name: string) => {
   return name
     .split(' ')
-    .slice(0, 3) // Take the first three words
-    .map((word) => word.charAt(0).toUpperCase()) // Get the first letter of each word
-    .join(''); // Concatenate the initials
+    .slice(0, 3)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join('');
 };
