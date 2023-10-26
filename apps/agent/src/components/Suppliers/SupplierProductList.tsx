@@ -4,6 +4,7 @@ import {
   HiOutlineBanknotes,
   HiOutlineCube,
   HiEllipsisHorizontal,
+  HiOutlineXMark,
 } from 'react-icons/hi2';
 
 type SahilProduct = {
@@ -57,10 +58,10 @@ export default SupplierProductList;
 
 const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
   return (
-    <div className='w-full h-full bg-base-100 card card-compact shadow'>
+    <div className='w-fit h-full bg-base-100 card card-compact shadow'>
       <div className='card-body h-full flex-col justify-between'>
         <div className='flex flex-col justify-start'>
-          <div className='flex justify-between'>
+          <div className='flex justify-between items-start'>
             <h3 className='card-title w-11/12'>{product.name}</h3>
             <button className='text-2xl'>
               <HiEllipsisHorizontal />

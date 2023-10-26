@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useMutation, useQuery } from '@apollo/client';
 import {
@@ -5,9 +6,9 @@ import {
   FETCH_SUPPLIERS,
   FETCH_SUPPLIER_BY_PK,
   FETCH_SUPPLIER_PRODUCTS,
+  FETCH_SUPPLIER_PRODUCT_BY_NAME,
 } from '@/lib/graphql/queries/suppliers';
 import { INSERT_NEW_SUPPLIER } from '@/lib/graphql/mutations/suppliers';
-import { useMemo } from 'react';
 
 export const useFetchSuppliers = () => {
   const router = useRouter();
@@ -36,17 +37,24 @@ export const useFetchSupplierByPK = (id: string) => {
 export const useFetchSupplierProducts = (page: number = 0, id?: string) => {
   const router = useRouter();
   const { supplierId } = router.query;
-  const { error, data, loading } = useQuery(FETCH_SUPPLIER_PRODUCTS, {
+  const { product } = router.query;
+
+  const graphqlQuery = product
+    ? FETCH_SUPPLIER_PRODUCT_BY_NAME
+    : FETCH_SUPPLIER_PRODUCTS;
+
+  const { error, data, loading } = useQuery(graphqlQuery, {
     variables: {
       id: id || supplierId,
-      offset: page * 8,
+      offset: page * 4,
+      name: `%${product}%`,
     },
   });
 
   // Memoize the result based on the page and ids
   const memoizedData = useMemo(() => {
     return { error, data: data?.products, loading };
-  }, [page, id, supplierId, error, data, loading]);
+  }, [page, id, product, supplierId, error, data, loading]);
 
   return memoizedData;
 };

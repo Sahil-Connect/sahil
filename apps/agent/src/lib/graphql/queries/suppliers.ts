@@ -67,9 +67,31 @@ export const FETCH_SUPPLIER_PRODUCTS = gql`
   ) {
     products(
       where: { supplier_id: { _eq: $id } }
-      limit: 8
+      limit: 4
       offset: $offset
       order_by: $order_by
+    ) {
+      id
+      name
+      description
+      inStock
+      quantity
+      price
+    }
+  }
+`;
+
+export const FETCH_SUPPLIER_PRODUCT_BY_NAME = gql`
+  query getSupplierProductByName(
+    $id: uuid!
+    $offset: Int = 0
+    $name: String = ""
+    $limit: Int = 4
+  ) {
+    products(
+      where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }
+      limit: $limit
+      offset: $offset
     ) {
       id
       name
