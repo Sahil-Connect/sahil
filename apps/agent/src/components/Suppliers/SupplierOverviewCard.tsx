@@ -31,10 +31,8 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
             href={`/suppliers/${supplier.id}`}
             className='avatar placeholder h-fit'
           >
-            <div className='bg-neutral-focus text-neutral-content rounded-full w-20'>
-              <span className='text-base'>
-                {generateInitials(supplier.name)}
-              </span>
+            <div className='bg-neutral-focus text-base text-neutral-content rounded-full w-20'>
+              <span>{generateInitials(supplier.name)}</span>
             </div>
           </Link>
           <HiEllipsisHorizontal />
@@ -76,14 +74,12 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
               <span className='shadow rounded-md p-2'>
                 <HiOutlineMapPin />
               </span>
-
               <p>{supplier.streetAddress}</p>
             </div>
             <div className='flex items-center gap-2'>
               <span className='shadow rounded-md p-2'>
                 <HiOutlinePhone />
               </span>
-
               <p>{supplier.phoneNumber}</p>
             </div>
           </div>
