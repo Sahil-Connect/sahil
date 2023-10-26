@@ -58,3 +58,25 @@ export const FETCH_SUPPLIER_BY_PK = gql`
     }
   }
 `;
+
+export const FETCH_SUPPLIER_PRODUCTS = gql`
+  query getSupplierProducts(
+    $id: uuid!
+    $offset: Int = 0
+    $order_by: [products_order_by!] = {}
+  ) {
+    products(
+      where: { supplier_id: { _eq: $id } }
+      limit: 8
+      offset: $offset
+      order_by: $order_by
+    ) {
+      id
+      name
+      description
+      inStock
+      quantity
+      price
+    }
+  }
+`;

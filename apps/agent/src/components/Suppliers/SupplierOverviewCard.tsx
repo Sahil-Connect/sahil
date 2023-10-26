@@ -35,7 +35,9 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
               <span>{generateInitials(supplier.name)}</span>
             </div>
           </Link>
-          <HiEllipsisHorizontal />
+          <button>
+            <HiEllipsisHorizontal />
+          </button>
         </div>
         <div className='space-y-2'>
           <Link href={`/suppliers/${supplier.id}`} className='card-title'>

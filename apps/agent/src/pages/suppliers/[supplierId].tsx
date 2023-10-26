@@ -3,7 +3,7 @@ import { useFetchSupplierByPK } from '@/hooks/suppliers';
 import {
   Clients,
   SupplierOrderHistory,
-  ProductsList,
+  SupplierProducts,
   ServiceZones,
   SupplierProfileOverview,
 } from '@/components/Suppliers';
@@ -29,8 +29,8 @@ export default function SupplierPage() {
         </div>
         <div className='basis-4/5 space-y-2'>
           <div className='flex justify-between gap-4'>
-            <SupplierOrderHistory />
-            <ProductsList />
+            <SupplierProducts />
+            {/* <SupplierOrderHistory /> */}
           </div>
           <div>
             <Clients />

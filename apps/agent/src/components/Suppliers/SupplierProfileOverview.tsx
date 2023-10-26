@@ -6,7 +6,7 @@ import {
   HiOutlineUser,
 } from 'react-icons/hi2';
 
-export type SahilSupplier = {
+type SahilSupplier = {
   id: string;
   name: string;
   phoneNumber: string;
@@ -35,7 +35,6 @@ export const SupplierProfileOverview = ({
           </div>
         </div>
         <h2 className='card-title'>{supplier?.name}</h2>
-        <p>{supplier?.description}</p>
         <div className='flex flex-wrap gap-2'>
           {supplier?.categories.map(({ category_name: name }) => {
             return (
@@ -48,6 +47,7 @@ export const SupplierProfileOverview = ({
             );
           })}
         </div>
+        <p>{supplier?.description}</p>
         <div className='divider'>Contact Info</div>
         <div className='space-y-2'>
           <div className='flex items-center gap-2'>
