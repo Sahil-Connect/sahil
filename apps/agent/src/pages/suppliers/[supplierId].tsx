@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useFetchSupplierByPK } from '@/hooks/suppliers';
 import {
-  Clients,
   SupplierOrderHistory,
   SupplierProducts,
   ServiceZones,
@@ -27,14 +26,9 @@ export default function SupplierPage() {
           <SupplierProfileOverview supplier={supplier} />
           <ServiceZones />
         </div>
-        <div className='basis-4/5 space-y-2'>
-          <div className='flex justify-between gap-4'>
-            <SupplierProducts />
-            {/* <SupplierOrderHistory /> */}
-          </div>
-          <div>
-            <Clients />
-          </div>
+        <div className='basis-4/5 space-y-4'>
+          <SupplierProducts />
+          <SupplierOrderHistory />
         </div>
       </div>
     </div>

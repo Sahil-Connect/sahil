@@ -45,7 +45,7 @@ const SupplierProductList = ({ page }: { page: number }) => {
     );
   return (
     <div>
-      <div className='grid place-items-center grid-cols-auto-250 gap-4'>
+      <div className='grid place-items-center grid-cols-auto-250 gap-2'>
         {products?.map((product: any) => (
           <ProductOverviewCard key={product.id} product={product} />
         ))}
@@ -58,7 +58,7 @@ export default SupplierProductList;
 
 const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
   return (
-    <div className='w-fit h-full bg-base-100 card card-compact shadow'>
+    <div className='w-full h-full bg-base-100 card card-compact shadow'>
       <div className='card-body h-full flex-col justify-between'>
         <div className='flex flex-col justify-start'>
           <div className='flex justify-between items-start'>

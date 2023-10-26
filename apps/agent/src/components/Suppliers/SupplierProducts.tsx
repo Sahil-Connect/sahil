@@ -41,13 +41,13 @@ export const SupplierProducts = () => {
   return (
     <div className='grow space-y-2 bg-base-200 p-4 rounded-xl'>
       <div className='flex flex-col lg:flex-row justify-between lg:items-center'>
-        <h3 className='text-xl'>Products</h3>
+        <h3 className='text-xl font-semibold'>Products</h3>
         <div className='flex flex-col md:flex-row gap-2 items-end'>
           <div className='form-control'>
             <div className='input-group relative'>
               <input
                 type='text'
-                placeholder='Search…'
+                placeholder='Product name'
                 className='input input-sm input-bordered'
                 value={name}
                 onChange={({ target }) => setName(target.value)}
@@ -74,9 +74,7 @@ export const SupplierProducts = () => {
           </button>
         </div>
       </div>
-      <SupplierProductList page={page} />
-
-      <div className='flex justify-between'>
+      <div className='flex justify-between px-2'>
         <button onClick={() => handlePrev()} className='btn btn-sm btn-outline'>
           Prev
         </button>
@@ -87,6 +85,7 @@ export const SupplierProducts = () => {
           Next
         </button>
       </div>
+      <SupplierProductList page={page} />
     </div>
   );
 };
