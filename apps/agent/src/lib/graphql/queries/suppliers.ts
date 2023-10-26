@@ -1,22 +1,38 @@
 import { gql } from '@apollo/client';
 
 export const FETCH_SUPPLIERS = gql`
-  query getSuppliers(
-    $category_name: supplier_categories_enum_enum_comparison_exp = {}
+  query getSuppliers($offset: Int = 0, $limit: Int = 10) {
+    suppliers(offset: $offset, limit: $limit) {
+      id
+      name
+      streetAddress
+      phoneNumber
+      contactName
+      zone
+      categories {
+        category_name
+      }
+    }
+  }
+`;
+
+export const FETCH_FILTERED_SUPPLIERS = gql`
+  query getFilteredSuppliers(
+    $category_name: supplier_categories_enum_enum
     $offset: Int = 0
-    $order_by: [suppliers_order_by!] = {}
     $limit: Int = 10
   ) {
     suppliers(
-      where: { categories: { category_name: $category_name } }
+      where: { categories: { category_name: { _eq: $category_name } } }
       offset: $offset
-      order_by: $order_by
       limit: $limit
     ) {
       id
       name
       streetAddress
       phoneNumber
+      contactName
+      zone
       categories {
         category_name
       }

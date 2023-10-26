@@ -1,16 +1,15 @@
-import {
-  SupplierOverviewCard,
-  formatCategoryName,
-} from './SupplierOverviewCard';
+import { SupplierOverviewCard } from './SupplierOverviewCard';
 import { useFetchSuppliers } from '@/hooks/suppliers';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { useRouter } from 'next/router';
+import { da } from 'date-fns/locale';
 
 export type SahilSupplier = {
   id: string;
   name: string;
   phoneNumber: string;
   streetAddress: string;
+  contactName: string;
+  zone: string;
   categories: Array<{
     category_name: string;
   }>;
@@ -47,65 +46,23 @@ export const ListSuppliers = () => {
     );
   }
 
-  return (
-    <section>
-      <FilterSuppliers />
-      <div className='flex flex-col gap-2' ref={parent}>
-        {suppliers &&
-          suppliers.map((supplier: SahilSupplier) => (
-            <SupplierOverviewCard key={supplier.id} supplier={supplier} />
-          ))}
+  if (suppliers.length === 0) {
+    return (
+      <div>
+        <p>There are 0 suppliers</p>
       </div>
-    </section>
-  );
-};
+    );
+  }
 
-const FilterSuppliers = () => {
-  const router = useRouter();
-
-  const handleCategoryChange = (event: { target: { value: string } }) => {
-    const selectedCategory = event.target.value;
-
-    router.push({
-      pathname: router.pathname,
-      query: { category: selectedCategory },
-    });
-  };
-
-  const categories = [
-    'agricultural_supplies',
-    'construction_materials',
-    'electronics_appliances',
-    'transportation_solutions',
-    'educational_materials',
-    'energy_solutions',
-    'clothing_and_textiles',
-    'health_and_safety',
-    'home_and_living',
-    'beauty_and_care',
-    'office_supplies',
-    'food_beverages',
-    'waste_recycling',
-    'water_sanitation',
-  ];
   return (
-    <div className='bg-primary/30 rounded-xl shadow mb-4 w-full flex justify-between items-center'>
-      <p className='ml-4'>All Suppliers</p>
-      <select
-        onChange={handleCategoryChange}
-        className='select select-primary select-bordered'
-      >
-        <option disabled selected>
-          Filter Category
-        </option>
-        {categories.map((category) => {
-          return (
-            <option key={category} value={category}>
-              {formatCategoryName(category)}
-            </option>
-          );
-        })}
-      </select>
-    </div>
+    <section
+      className='grid place-items-center gap-6 grid-cols-auto-250 xl:grid-cols-4'
+      ref={parent}
+    >
+      {suppliers &&
+        suppliers.map((supplier: SahilSupplier) => (
+          <SupplierOverviewCard key={supplier.id} supplier={supplier} />
+        ))}
+    </section>
   );
 };
