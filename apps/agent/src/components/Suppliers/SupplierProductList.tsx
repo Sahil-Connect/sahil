@@ -1,11 +1,6 @@
-import { useState } from 'react';
 import { useFetchSupplierProducts } from '@/hooks/suppliers';
-import {
-  HiOutlineBanknotes,
-  HiOutlineCube,
-  HiEllipsisHorizontal,
-  HiOutlineXMark,
-} from 'react-icons/hi2';
+import { HiOutlineBanknotes, HiOutlineCube } from 'react-icons/hi2';
+import EditProductModal from './EditProductModal';
 
 type SahilProduct = {
   id: string;
@@ -63,9 +58,7 @@ const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
         <div className='flex flex-col justify-start'>
           <div className='flex justify-between items-start'>
             <h3 className='card-title w-11/12'>{product.name}</h3>
-            <button className='text-2xl'>
-              <HiEllipsisHorizontal />
-            </button>
+            <EditProductModal product={product} />
           </div>
           <p
             className={`text-xs font-bold tracking-wider ${

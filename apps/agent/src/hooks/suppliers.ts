@@ -8,7 +8,11 @@ import {
   FETCH_SUPPLIER_PRODUCTS,
   FETCH_SUPPLIER_PRODUCT_BY_NAME,
 } from '@/lib/graphql/queries/suppliers';
-import { INSERT_NEW_SUPPLIER } from '@/lib/graphql/mutations/suppliers';
+import {
+  DELETE_PRODUCT_BY_PK,
+  INSERT_NEW_SUPPLIER,
+  UPDATE_PRODUCT_BY_PK,
+} from '@/lib/graphql/mutations/suppliers';
 
 export const useFetchSuppliers = () => {
   const router = useRouter();
@@ -25,10 +29,12 @@ export const useFetchSuppliers = () => {
   return { error, data: data?.suppliers, loading };
 };
 
-export const useFetchSupplierByPK = (id: string) => {
+export const useFetchSupplierByPK = (id?: string) => {
+  const router = useRouter();
+  const { supplierId } = router.query;
   const { error, data, loading } = useQuery(FETCH_SUPPLIER_BY_PK, {
     variables: {
-      id,
+      id: id || supplierId,
     },
   });
   return { error, data: data?.suppliers_by_pk, loading };
@@ -66,6 +72,32 @@ export const useRegisterSupplier = () => {
     supplier: data?.insert_suppliers_one,
     loading,
     insertSupplier,
+    error,
+  };
+};
+
+export const useEditProduct = () => {
+  const [updateProduct, { data, loading, error }] =
+    useMutation(UPDATE_PRODUCT_BY_PK);
+  return {
+    updated: data?.update_products_by_pk,
+    loading,
+    updateProduct,
+    error,
+  };
+};
+
+export const useDeleteProduct = () => {
+  const [deleteProduct, { data, loading, error }] = useMutation(
+    DELETE_PRODUCT_BY_PK,
+    {
+      refetchQueries: [FETCH_SUPPLIER_PRODUCTS],
+    }
+  );
+  return {
+    deleted: data?.delete_products_by_pk,
+    loading,
+    deleteProduct,
     error,
   };
 };

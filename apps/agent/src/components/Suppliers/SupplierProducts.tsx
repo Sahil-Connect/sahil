@@ -68,7 +68,7 @@ export const SupplierProducts = () => {
               </button>
             </div>
           </div>
-          <button className='btn btn-sm btn-outline normal-case'>
+          <button className='btn btn-sm btn-primary normal-case'>
             <HiOutlinePlusCircle className='text-xl' />
             Add Product
           </button>

@@ -8,13 +8,7 @@ import {
 } from '@/components/Suppliers';
 
 export default function SupplierPage() {
-  const router = useRouter();
-  const { supplierId } = router.query;
-  const {
-    data: supplier,
-    error,
-    loading,
-  } = useFetchSupplierByPK(supplierId as string);
+  const { data: supplier, error, loading } = useFetchSupplierByPK();
   if (error) {
     console.log(error);
     return <p>Failed</p>;
