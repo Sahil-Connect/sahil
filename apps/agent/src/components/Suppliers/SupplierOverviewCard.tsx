@@ -71,13 +71,19 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
               <p>{supplier.contactName}</p>
             </div>
           </div>
-          <div>
+          <div className='space-y-2'>
             <div className='flex items-center gap-2'>
-              <HiOutlineMapPin />
+              <span className='shadow rounded-md p-2'>
+                <HiOutlineMapPin />
+              </span>
+
               <p>{supplier.streetAddress}</p>
             </div>
             <div className='flex items-center gap-2'>
-              <HiOutlinePhone />
+              <span className='shadow rounded-md p-2'>
+                <HiOutlinePhone />
+              </span>
+
               <p>{supplier.phoneNumber}</p>
             </div>
           </div>

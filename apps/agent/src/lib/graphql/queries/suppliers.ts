@@ -50,6 +50,11 @@ export const FETCH_SUPPLIER_BY_PK = gql`
       phoneNumber
       contactName
       contactEmail
+      streetAddress
+      zone
+      categories {
+        category_name
+      }
     }
   }
 `;

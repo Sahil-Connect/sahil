@@ -1,6 +1,7 @@
 import { ListSuppliers } from '@/components/Suppliers';
 import FilterSuppliersModal from '@/components/Suppliers/FilterSuppliersModal';
 import { useRouter } from 'next/router';
+import { HiOutlinePlusCircle } from 'react-icons/hi2';
 
 export default function Suppliers() {
   const router = useRouter();
@@ -17,9 +18,10 @@ export default function Suppliers() {
         <div className='w-full lg:w-fit flex justify-end gap-4'>
           <FilterSuppliersModal />
           <button
-            className='btn btn-primary'
+            className='btn btn-sm btn-primary normal-case'
             onClick={() => router.push('/suppliers/new/business_info')}
           >
+            <HiOutlinePlusCircle className='text-lg' />
             Register Supplier
           </button>
         </div>

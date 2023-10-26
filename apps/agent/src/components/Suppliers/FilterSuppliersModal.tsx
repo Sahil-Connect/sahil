@@ -38,7 +38,7 @@ const FilterSuppliersModal = () => {
   return (
     <>
       <button
-        className='btn normal-case'
+        className='btn btn-sm normal-case'
         onClick={() =>
           document.getElementById('filter_suppliers_modal')?.showModal()
         }
