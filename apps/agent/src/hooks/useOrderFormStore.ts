@@ -1,28 +1,19 @@
 import { create } from 'zustand';
-import { INITIAL_STEP } from '../components/Orders/constants';
+import { INITIAL_STEP, steps } from '@/components/Orders/constants';
+import { FormDataState, OrderItem, StepDirection } from '@/components/Orders/types';
 
-const steps = [
-    "order_details",
-    "product_selection",
-    "delivery_details",
-    "payment_details",
-    "summary"
-] as const;
-
-export type StepDirection = "prev" | "next";
-
-export type FormState = Record<string, any>;
+export type SahilBusinessPartner = Record<string, any>;
 
 type OrderFormStore = {
-    client: any;
+    client: SahilBusinessPartner;
     currentStep: typeof steps[number];
     steps: typeof steps;
     goToStep: (direction: StepDirection) => void;
     updateStepByIndex: (stepIndex: number) => void;
-    updateStepFormData: (formData: any) => void;
-    formData: any;
-    orderItems: any[];
-    setOrderItems: (items: any) => void;
+    updateStepFormData: (formData: FormDataState) => void;
+    formData: FormDataState;
+    orderItems: OrderItem[];
+    setOrderItems: (items: OrderItem[]) => void;
 }
 
 export const useOrderFormStore = create<OrderFormStore>((set) => ({
@@ -46,7 +37,12 @@ export const useOrderFormStore = create<OrderFormStore>((set) => ({
     },
     orderItems: [],
     setOrderItems: (items) => {
-
+        set((state) => {
+            return ({
+                ...state,
+                orderItems: items
+            })
+        });
     },
     updateStepByIndex: (stepIndex: number) => {
         set((state) => {

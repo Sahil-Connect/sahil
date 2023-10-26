@@ -64,7 +64,7 @@ export default function SupplierRegistrationPage() {
 
   const result = stepRouteSchema.safeParse(params);
 
-  const handleUpdateStepByIndex = (step: (typeof steps)[number]) => {
+  const onUpdateStepByIndex = (step: (typeof steps)[number]) => {
     const stepIndex = steps.indexOf(step);
     if (stepIndex === currentIndex) {
       return;
@@ -111,7 +111,7 @@ export default function SupplierRegistrationPage() {
                       step === currentStep ? "step-secondary" : null
                     }`}
                     key={index}
-                    onClick={() => handleUpdateStepByIndex(step)}
+                    onClick={() => onUpdateStepByIndex(step)}
                   >
                     {title}
                   </li>
