@@ -19,15 +19,28 @@ import {
   HiSignalSlash,
 } from "react-icons/hi2";
 
+export const formatCost = (cost) => cost.toLocaleString(
+  "en-SS",
+  {
+    style: "currency",
+    currency: "SSP"
+  }
+);
+
 export const ProductsCatalogue = () => {
   const { data, error, loading, productsCount } = useFetchProducts();
 
   const { addOrderItem, orderItems, setProducts, products } =
     useOrderItemsStore((state) => state);
-  // setProducts(data)
+
   const orderItemsMap = new Map(
     orderItems.map((item) => [item.productId, item])
   );
+
+  useEffect(() => {
+    setProducts(data);
+  }, [data, setProducts]);
+  console.log(orderItems);
 
   if (error) {
     return (
@@ -68,21 +81,16 @@ export const ProductsCatalogue = () => {
     );
   }
 
-  useEffect(() => {
-    setProducts(data);
-  }, [setProducts]);
-  console.log(orderItems);
-
   const onAddOrderItem = (product: any) => {
-    console.log("Adding product to order", product);
     addOrderItem({
+      ...product,
       productId: product.id,
       quantity: 1,
     });
     console.log(orderItems);
   };
   const onRemoveOrderItem = (product: any) => {
-    console.log("Adding product to order", product);
+    console.log("remove product to order", product);
   };
 
   return (
@@ -113,7 +121,7 @@ export const ProductsCatalogue = () => {
           <div className="bg-base-200 flex items-center justify-between p-2 rounded-xl">
             <div>
               <p className="text-bold">
-                {products.length} ITEMS out of {productsCount.count}
+                {products?.length} ITEMS out of {productsCount.count}
               </p>
             </div>
             <div className="flex gap-2">
@@ -129,7 +137,7 @@ export const ProductsCatalogue = () => {
             </div>
           </div>
           <div className="flex flex-wrap gap-4">
-            {products.map((product) => {
+            {products && products?.map((product) => {
               const isInCart = orderItemsMap.has(product.id);
               return (
                 <ProductSummary
@@ -137,7 +145,7 @@ export const ProductsCatalogue = () => {
                   product={product}
                   onAddOrderItem={onAddOrderItem}
                   onRemoveOrderItem={onRemoveOrderItem}
-                  isInCart
+                  isInCart={isInCart}
                 />
               );
             })}
@@ -159,7 +167,7 @@ export const ProductSummary: FC<ProductSummaryProps> = ({
   onAddOrderItem,
   product,
   onRemoveOrderItem,
-  isInCart = false
+  isInCart
 }) => {
 
   return (
@@ -176,11 +184,11 @@ export const ProductSummary: FC<ProductSummaryProps> = ({
             <span className="shadow p-2 rounded-md">
               <HiOutlineBanknotes />
             </span>
-            {product.price} SSP
+            {formatCost(product.price)}
           </div>
         </div>
         <div className="card-actions items-center">
-          {!product.isInCart ? (
+          {!isInCart ? (
             <button
               className="btn btn-xs"
               onClick={() => onAddOrderItem(product)}
@@ -192,8 +200,8 @@ export const ProductSummary: FC<ProductSummaryProps> = ({
           ) : (
             <div className="flex justify-between w-full">
               <button
-                className="btn btn-xs"
-                onClick={() => onAddOrderItem(product)}
+                className="btn btn-xs btn-warning"
+                onClick={() => onRemoveOrderItem(product)}
                 type="button"
                 title="Add Item"
               >

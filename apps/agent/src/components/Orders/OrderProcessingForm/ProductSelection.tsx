@@ -17,7 +17,6 @@ type FormData = z.infer<typeof productSelectionSchema>;
 export const ProductSelection = () => {
   const { client, formData, goToStep, updateStepFormData } = useOrderFormStore((state) => state);
 
-  console.log(client);
   const {
     register,
     handleSubmit,
@@ -30,21 +29,19 @@ export const ProductSelection = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const validatedInput = orderDetailsSchema.parse(data);
+    console.log("yerrrrr");
+    // const validatedInput = productSelectionSchema.parse(data);
 
-    updateStepFormData(validatedInput);
-    goToStep("next");
-    router.push(`/orders/new/delivery_details`);
+    // updateStepFormData(validatedInput);
+    // goToStep("next");
+    // router.push(`/orders/new/delivery_details`);
   };
   return (
     <>
-      <form className="space-y-2">
-      <SearchProductCatalogue />
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+     
       <ProductsCatalogue />
         <div className="flex gap-2">
-          <button className="btn btn-sm">
-            <HiXMark /> Cancel
-          </button>
           <div className="btn btn-sm btn-primary">
             <input type="submit" value="continue" />
             <HiArrowRight />
@@ -68,7 +65,7 @@ export const SearchProductCatalogue = () => {
             />
           </div>
           <div>
-            <button className="btn btn-sm btn-primary">
+            <button className="btn btn-sm btn-primary" type="button">
               <HiMiniMagnifyingGlass /> Search
             </button>
           </div>
