@@ -44,7 +44,7 @@ const StepsPaginator = () => {
         <HiArrowLeft /> Previous
       </button>
       <button
-        className="join-item btn btn-sm btn-secondary"
+        className="join-item btn btn-sm btn-neutral"
         onClick={goToNextStep}
       >
         Next <HiArrowRight />

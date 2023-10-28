@@ -4,10 +4,16 @@ import {
 
 export const FETCH_PRODUCTS = gql`
 query getProducts {
-    products {
+    products(limit: 10, order_by: { created_at: desc }) {
+        discount
         id
         name
         price
     }
+    products_aggregate {
+    aggregate {
+      count(columns: id, distinct: true)
+    }
+  }
 }
 `;

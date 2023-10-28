@@ -12,6 +12,49 @@ const productSelectionSchema = z.object({
   clientId: z.string(),
 });
 
+type FormData = z.infer<typeof productSelectionSchema>;
+
+export const ProductSelection = () => {
+  const { client, formData, goToStep, updateStepFormData } = useOrderFormStore((state) => state);
+
+  console.log(client);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(productSelectionSchema),
+  });
+
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const validatedInput = orderDetailsSchema.parse(data);
+
+    updateStepFormData(validatedInput);
+    goToStep("next");
+    router.push(`/orders/new/delivery_details`);
+  };
+  return (
+    <>
+      <form className="space-y-2">
+      <SearchProductCatalogue />
+      <ProductsCatalogue />
+        <div className="flex gap-2">
+          <button className="btn btn-sm">
+            <HiXMark /> Cancel
+          </button>
+          <div className="btn btn-sm btn-primary">
+            <input type="submit" value="continue" />
+            <HiArrowRight />
+          </div>
+        </div>
+      </form>
+    </>
+  );
+};
+
 export const SearchProductCatalogue = () => {
   return (
     <div className="card card-compact card-bordered">
@@ -32,28 +75,5 @@ export const SearchProductCatalogue = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-export const ProductSelection = () => {
-  const { client, formData, updateStepFormData } = useOrderFormStore((state) => state);
-
-  console.log(client);
-  return (
-    <>
-      <form className="space-y-2">
-      <SearchProductCatalogue />
-      <ProductsCatalogue />
-        <div className="flex gap-2">
-          <button className="btn btn-sm">
-            <HiXMark /> Cancel
-          </button>
-          <div className="btn btn-sm btn-primary">
-            <input type="submit" value="continue" />
-            <HiArrowRight />
-          </div>
-        </div>
-      </form>
-    </>
   );
 };
