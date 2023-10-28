@@ -14,6 +14,7 @@ type OrderFormStore = {
     formData: FormDataState;
     orderItems: OrderItem[];
     setOrderItems: (items: OrderItem[]) => void;
+    setCurrentClient: (client: SahilBusinessPartner) => void;
 }
 
 export const useOrderFormStore = create<OrderFormStore>((set) => ({
@@ -68,5 +69,13 @@ export const useOrderFormStore = create<OrderFormStore>((set) => ({
                 }
             })
         });
-    }
+    },
+    setCurrentClient: (client) => {
+        set((state) => {
+            return ({
+                ...state,
+                client
+            })
+        });
+    },
 }));

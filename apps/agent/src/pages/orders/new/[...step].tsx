@@ -13,7 +13,7 @@ import {
   HiArrowLeft,
   HiArrowRight,
   HiOutlineShoppingCart,
-  HiOutlineCurrencyDollar,
+  HiOutlineBanknotes,
   HiOutlineTruck,
   HiOutlineCheckCircle,
   HiOutlineQueueList,
@@ -38,13 +38,13 @@ const StepsPaginator = () => {
   return (
     <div className="join grid grid-cols-2">
       <button
-        className="join-item btn btn-outline btn-sm shadow"
+        className="join-item btn btn-sm"
         onClick={goToPrevStep}
       >
         <HiArrowLeft /> Previous
       </button>
       <button
-        className="join-item btn btn-sm shadow- btn-secondary"
+        className="join-item btn btn-sm btn-secondary"
         onClick={goToNextStep}
       >
         Next <HiArrowRight />
@@ -131,26 +131,31 @@ export default function NewOrderPage() {
       title: "Order Details",
       step: "order_details",
       icon: <HiOutlineQueueList />,
+      completed: true,
     },
     {
       title: "Product Selection",
       step: "product_selection",
       icon: <HiCursorArrowRipple />,
+      completed: false,
     },
     {
       title: "Delivery Details",
       step: "delivery_details",
       icon: <HiOutlineTruck />,
+      completed: false
     },
     {
       title: "Payment Details",
       step: "payment_details",
-      icon: <HiOutlineCurrencyDollar />,
+      icon: <HiOutlineBanknotes />,
+      completed: false
     },
     {
       title: "Order Confirmation",
       step: "summary",
       icon: <HiOutlineCheckCircle />,
+      completed: false
     },
   ];
 
@@ -160,7 +165,7 @@ export default function NewOrderPage() {
         <h1 className="text-2xl">Order Processing Form</h1>
         <div className="flex gap-2 items-center">
           <div className="indicator">
-            <span className="indicator-item badge">5</span>
+            <span className="indicator-item badge badge-accent">5</span>
             <button className="btn btn-sm" title="Shopping Cart" type="button">
               <HiOutlineShoppingCart />{" "}
             </button>
@@ -170,13 +175,14 @@ export default function NewOrderPage() {
       <div className="flex">
         <div className="basis-1/5 pl-4">
           <ul className="steps steps-vertical w-full">
-            {headers.map(({ icon, step, title }, index) => (
+            {headers.map(({ completed, icon, step, title }, index) => (
               <li
                 className={`step ${
                   currentStep === step ? "step-primary" : null
-                }`}
+                } ${completed ? "step-success" : null }`}
                 key={index}
                 onClick={() => handleUpdateStepByIndex(step)}
+                data-content={`${completed ? "✓" : index + 1} `}
               >
                 <div
                   className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
@@ -192,7 +198,7 @@ export default function NewOrderPage() {
           </ul>
         </div>
         <div className="divider divider-horizontal"></div>
-        <div className="grow space-y-2 py-4 pr-4">
+        <div className="grow space-y-4 py-4 pr-4  basis-3/5">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
               <h3 className="text-xl">

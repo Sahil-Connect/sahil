@@ -14,7 +14,7 @@ const productSelectionSchema = z.object({
 
 export const SearchProductCatalogue = () => {
   return (
-    <div className="card card-compact shadow">
+    <div className="card card-compact card-bordered">
       <div className="card-body">
         <div className="flex items-center gap-2 ">
           <div className="form-control flex-grow">
@@ -25,7 +25,7 @@ export const SearchProductCatalogue = () => {
             />
           </div>
           <div>
-            <button className="btn btn-sm ">
+            <button className="btn btn-sm btn-primary">
               <HiMiniMagnifyingGlass /> Search
             </button>
           </div>
@@ -43,7 +43,6 @@ export const ProductSelection = () => {
     <>
       <form className="space-y-2">
       <SearchProductCatalogue />
-      <RecommendedSuppliers />
       <ProductsCatalogue />
         <div className="flex gap-2">
           <button className="btn btn-sm">

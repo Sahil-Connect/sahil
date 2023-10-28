@@ -3,13 +3,9 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "../../../hooks/useOrderFormStore";
+import { useFetchBusinesses } from "@/hooks/businesses";
 import {
-  HiArrowLeft,
   HiArrowRight,
-  HiMinus,
-  HiPlus,
-  HiMiniMagnifyingGlass,
-  HiOutlineTruck,
   HiXMark,
 } from "react-icons/hi2";
 
@@ -20,27 +16,8 @@ const orderDetailsSchema = z.object({
 
 type FormData = z.infer<typeof orderDetailsSchema>;
 
-const businesses = [
-  {
-    name: "Sunset Juba",
-    id: "c6dbf0b7-1a17-4edb-beb4-492c95b5328f",
-  },
-  {
-    name: "Notos Bar & Grill",
-    id: "0558c571-a892-400c-9c2a-eeb23341802b",
-  },
-  {
-    name: "Radisson Blu",
-    id: "e87924e8-69e4-4171-bd89-0c8963e03d08",
-  },
-  {
-    name: "Amigos Bar & Restaurant",
-    id: "328968ca-5d0e-48f1-93da-ae8b8c0e9208",
-  },
-];
-
 export const OrderDetails = () => {
-  const { goToStep, updateStepFormData, formData } = useOrderFormStore(
+  const { goToStep, updateStepFormData, formData, setCurrentClient } = useOrderFormStore(
     (state) => state
   );
 
@@ -57,48 +34,52 @@ export const OrderDetails = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = orderDetailsSchema.parse(data);
+    const client = businesses.find(business => business.id === data.clientId);
     updateStepFormData(validatedInput);
+    setCurrentClient(client);
     goToStep("next");
     router.push(`/orders/new/product_selection`);
   };
 
   const onExit = () => {
-    console.log("Exiting now!!");
-  }
+    router.push("/orders");
+  };
+
+  const { data: businesses, loading: businessLoading, error: businessesError } = useFetchBusinesses();
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <div className="card card-compact shadow">
         <div className="card-body">
-        <h3 className="card-title">Order Details</h3>
+          <h3 className="card-title text-sm">Client Information</h3>
           <div className="form-control">
-            <div className="label">
-              <span className="label-text">Client</span>
+              <div className="label">
+                <span className="label-text">Client</span>
+              </div>
+              <select
+                {...register("clientId")}
+                className="select select-bordered select-sm w-full max-w-xs bg-slate-100"
+              >
+                {businesses && businesses.map((business) => (
+                  <option value={business.id} key={business.id}>
+                    {business.name}
+                  </option>
+                ))}
+              </select>
             </div>
-            <select
-              {...register("clientId")}
-              className="select select-bordered select-sm w-full max-w-xs"
-            >
-              {businesses.map((business) => (
-                <option value={business.id} key={business.id}>
-                  {business.name}
-                </option>
-              ))}
-            </select>
-          </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Notes</span>
+              <span className="label-text">Notes (optional)</span>
             </label>
             <input
               type="textarea"
               placeholder="Notes"
-              className="textarea textarea-bordered w-full"
+              className="textarea textarea-bordered w-full bg-slate-100"
               {...register("notes")}
             />
           </div>
           <div className="card-actions">
             <div className="flex gap-2">
-              <button className="btn btn-sm" onClick={() => onExit()}>
+              <button className="btn btn-sm" onClick={() => onExit()} type="button">
                 <HiXMark /> Cancel
               </button>
               <div className="btn btn-sm btn-primary">
