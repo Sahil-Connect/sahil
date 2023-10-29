@@ -25,7 +25,7 @@ const OrderSummary = ({ order }) => {
           </button>
         </div>
         <div className="space-y-2">
-          <Link href={`/suppliers/${order.id}`} className="card-title">
+          <Link href={`/orders/${order.id}`} className="card-title">
             Order ID
           </Link>
         </div>

@@ -1,13 +1,9 @@
 import {
-  HiArrowLeft,
-  HiArrowRight,
-  HiMinus,
-  HiPlus,
-  HiMiniMagnifyingGlass,
   HiOutlineTruck,
   HiXMark,
 } from "react-icons/hi2";
 import { useFetchSuppliers } from "@/hooks/suppliers";
+import { Card } from "ui";
 
 export const RecommendedSuppliers = () => {
   const { data: suppliers, error, loading } = useFetchSuppliers();

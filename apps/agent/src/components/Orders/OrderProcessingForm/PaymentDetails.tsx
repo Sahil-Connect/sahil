@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useOrderFormStore } from "../../../hooks/useOrderFormStore";
+import { useOrderFormStore } from "@/hooks/useOrderFormStore";
 import {
   HiXMark,
   HiOutlineCreditCard,
@@ -16,7 +16,7 @@ const paymentDetailsSchema = z.object({
 
 type FormData = z.infer<typeof paymentDetailsSchema>;
 
-export const PaymentDetails = () => {
+export const PaymentDetails = ({ navigateToNextStep }) => {
   const {
     register,
     handleSubmit,
@@ -25,11 +25,15 @@ export const PaymentDetails = () => {
   } = useForm<FormData>({
     resolver: zodResolver(paymentDetailsSchema),
   });
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    // const validatedInput = .parse(data);
+    // navigateToNextStep("");
+  };
   return (
-    <form className="space-y-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <div className="card card-compact shadow">
         <div className="card-body">
-        <h3 className="card-title">Payment Method</h3>
+          <h3 className="card-title">Payment Method</h3>
           <div className="flex gap-2">
             <div className="form-control">
               <label className="label cursor-pointer">

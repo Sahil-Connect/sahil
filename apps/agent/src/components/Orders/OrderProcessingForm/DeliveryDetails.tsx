@@ -1,3 +1,9 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/router";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useOrderFormStore } from "@/hooks/useOrderFormStore";
+
 import {
   HiArrowRight,
   HiOutlineBolt,
@@ -6,7 +12,25 @@ import {
   HiOutlineMapPin,
 } from "react-icons/hi2";
 
-export const DeliveryDetails = () => {
+const deliveryDetailsSchema = z.object({
+  paymentMethod: z.string(),
+});
+
+type FormData = z.infer<typeof deliveryDetailsSchema>;
+
+export const DeliveryDetails = ({ navigateToNextStep }) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(deliveryDetailsSchemaa),
+  });
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    // const validatedInput = .parse(data);
+    // navigateToNextStep("");
+  };
   return (
     <form className="space-y-2">
       <div className="space-y-2">

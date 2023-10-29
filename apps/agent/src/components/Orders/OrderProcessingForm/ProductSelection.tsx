@@ -14,7 +14,7 @@ const productSelectionSchema = z.object({
 
 type FormData = z.infer<typeof productSelectionSchema>;
 
-export const ProductSelection = () => {
+export const ProductSelection = ({ navigateToNextStep }) => {
   const { client, formData, goToStep, updateStepFormData } = useOrderFormStore((state) => state);
 
   const {
@@ -33,8 +33,7 @@ export const ProductSelection = () => {
     // const validatedInput = productSelectionSchema.parse(data);
 
     // updateStepFormData(validatedInput);
-    // goToStep("next");
-    // router.push(`/orders/new/delivery_details`);
+    navigateToNextStep("delivery_details")
   };
   return (
     <>
