@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFetchProducts } from "@/hooks/products";
 import { useOrderItemsStore } from "../../hooks/useOrderItemsStore";
+import { Card } from "ui";
 import {
   HiArrowLeft,
   HiArrowRight,
@@ -19,13 +20,11 @@ import {
   HiSignalSlash,
 } from "react-icons/hi2";
 
-export const formatCost = (cost) => cost.toLocaleString(
-  "en-SS",
-  {
+export const formatCost = (cost) =>
+  cost.toLocaleString("en-SS", {
     style: "currency",
-    currency: "SSP"
-  }
-);
+    currency: "SSP",
+  });
 
 export const ProductsCatalogue = () => {
   const { data, error, loading, productsCount } = useFetchProducts();
@@ -44,40 +43,34 @@ export const ProductsCatalogue = () => {
 
   if (error) {
     return (
-      <div className="card card-compact card-bordered">
-        <div className="card-body">
-          <span className="shadow p-2 rounded-md w-fit text-2xl">
-            <HiSignalSlash />
-          </span>
-          <h3 className="card-title">Unable to load products...</h3>
-          <p>
-            Products aren't loading due to a technical problem on our side.
-            Please try again. If the issue coninues,{" "}
-            <span className="text-primary">contact support.</span>
-          </p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-sm btn-warning">
-              <HiArrowPath /> try again
-            </button>
-          </div>
+      <Card title="Unable to load products...">
+        <span className="shadow p-2 rounded-md w-fit text-2xl">
+          <HiSignalSlash />
+        </span>
+        <p>
+          Products aren't loading due to a technical problem on our side. Please
+          try again. If the issue coninues,{" "}
+          <span className="text-primary">contact support.</span>
+        </p>
+        <div className="card-actions justify-end">
+          <button className="btn btn-sm btn-warning">
+            <HiArrowPath /> try again
+          </button>
         </div>
-      </div>
+      </Card>
     );
   }
 
   if (loading) {
     return (
-      <div className="card card-compact shadow">
-        <div className="card-body">
-          <h3 className="card-title text-sm">Available Products</h3>
-          <div className="flex items-center justify-center text-center">
-            <div>
-              <span className="loading loading-spinner loading-lg"></span>
-              <p>Loading Products</p>
-            </div>
+      <Card title="Available Products" titleSize="sm">
+        <div className="flex items-center justify-center text-center">
+          <div>
+            <span className="loading loading-spinner loading-lg"></span>
+            <p>Loading Products</p>
           </div>
         </div>
-      </div>
+      </Card>
     );
   }
 
@@ -94,50 +87,49 @@ export const ProductsCatalogue = () => {
   };
 
   return (
-    <div className="card card-compact shadow bg-white">
-      <div className="card-body">
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <h3 className="card-title text-sm">Available Products</h3>
-            <div className="join grid grid-cols-2">
-              <button
-                className="join-item btn btn-sm btn-square"
-                name="left"
-                type="button"
-                aria-label="left"
-                title="left"
-              >
-                <HiArrowLeft />
-              </button>
-              <button
-                className="join-item btn btn-sm btn-square btn-neutral"
-                tile="right"
-                type="button"
-              >
-                <HiArrowRight />
-              </button>
-            </div>
+    <Card title="Available Products" titleSize="sm">
+      <div className="space-y-2">
+        <div className="flex justify-between">
+          <div className="join grid grid-cols-2">
+            <button
+              className="join-item btn btn-sm btn-square"
+              name="left"
+              type="button"
+              aria-label="left"
+              title="left"
+            >
+              <HiArrowLeft />
+            </button>
+            <button
+              className="join-item btn btn-sm btn-square btn-neutral"
+              tile="right"
+              type="button"
+            >
+              <HiArrowRight />
+            </button>
           </div>
-          <div className="bg-base-200 flex items-center justify-between p-2 rounded-xl">
-            <div>
-              <p className="text-bold">
-                {products?.length} ITEMS out of {productsCount.count}
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <button className="btn btn-sm btn-secondary">
-                <HiOutlineFunnel /> Filter
-              </button>
-              <select className="select select-sm bg-secondary w-full max-w-xs">
-                <option disabled>Sort by</option>
-                <option>Lowest - Highest</option>
-                <option>Highest - Lowest</option>
-                <option>Newest</option>
-              </select>
-            </div>
+        </div>
+        <div className="bg-base-200 flex items-center justify-between p-2 rounded-xl">
+          <div>
+            <p className="text-bold">
+              {products?.length} ITEMS out of {productsCount.count}
+            </p>
           </div>
-          <div className="flex flex-wrap gap-4">
-            {products && products?.map((product) => {
+          <div className="flex gap-2">
+            <button className="btn btn-sm btn-secondary">
+              <HiOutlineFunnel /> Filter
+            </button>
+            <select className="select select-sm bg-secondary w-full max-w-xs">
+              <option disabled>Sort by</option>
+              <option>Lowest - Highest</option>
+              <option>Highest - Lowest</option>
+              <option>Newest</option>
+            </select>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-4">
+          {products &&
+            products?.map((product) => {
               const isInCart = orderItemsMap.has(product.id);
               return (
                 <ProductSummary
@@ -149,10 +141,9 @@ export const ProductsCatalogue = () => {
                 />
               );
             })}
-          </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
@@ -167,9 +158,8 @@ export const ProductSummary: FC<ProductSummaryProps> = ({
   onAddOrderItem,
   product,
   onRemoveOrderItem,
-  isInCart
+  isInCart,
 }) => {
-
   return (
     <div className="card card-compact card-bordered basis-1/4 grow">
       <div className="card-body">

@@ -8,7 +8,7 @@ export type CardProps = {
 
 export const Card: FC<CardProps> = ({ children, title, titleSize = "md" }) => {
   return (
-    <div className={"card card-compact card-bordered"}>
+    <div className={"bg-white card card-compact card-bordered"}>
       <div className="card-body">
         <h2 className={`card-title text-${titleSize}`}>{title}</h2>
         {children}

@@ -6,7 +6,7 @@ export type FormControlProps = {
 };
 export const FormControl: FC<FormControlProps> = ({ children, label }) => {
   return (
-    <div className="form-control">
+    <div className="form-control w-full max-w-xs">
       <label className="label">
         <span className="label-text">{label}</span>
       </label>

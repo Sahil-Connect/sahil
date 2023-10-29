@@ -1,9 +1,7 @@
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
+import { Card } from "ui";
 import {
   HiOutlineCheckCircle,
-  HiOutlineChatBubbleOvalLeft,
-  HiOutlineCalendarDays,
-  HiOutlineDevicePhoneMobile,
   HiOutlinePrinter,
   HiOutlineUserCircle,
   HiXMark,
@@ -11,13 +9,11 @@ import {
   HiMinus,
 } from "react-icons/hi2";
 
-export const formatCost = (cost) => cost.toLocaleString(
-  "en-SS",
-  {
+export const formatCost = (cost) =>
+  cost.toLocaleString("en-SS", {
     style: "currency",
-    currency: "SSP"
-  }
-);
+    currency: "SSP",
+  });
 
 const ProductSummary = ({ product }) => {
   return (
@@ -61,45 +57,39 @@ export const OrderSummary = () => {
           <HiOutlinePrinter /> Print
         </button>
       </div>
-      <div className="card card-compact shadow">
-        <div className="card-body">
-          <h3 className="card-title text-sm">
-            Order: ED-15{" "}
-            <span className="text-md text-primary">(5 products)</span>
-          </h3>
-          <div className="space-y-2">
-            {orderItems.map((product) => (
-              <ProductSummary key={product.id} product={product} />
-            ))}
+      <Card title="Order: ED-15" titleSize="sm">
+        <div className="space-y-2">
+          {orderItems.map((product) => (
+            <ProductSummary key={product.id} product={product} />
+          ))}
+        </div>
+      </Card>
+      <Card title="Summary" titleSize="sm">
+        <ul className="space-y-2">
+          <li>
+            <p className="flex justify-between">
+              Total Items <span>{totalItems} items</span>
+            </p>
+          </li>
+          <li>
+            <p className="flex justify-between">
+              Total Cost <span>{formatCost(totalCost)}</span>
+            </p>
+          </li>
+        </ul>
+        <div className="divider"></div>
+        <div className="card-actions">
+          <div className="flex gap-2">
+            <button className="btn btn-sm">
+              <HiXMark /> Cancel
+            </button>
+            <div className="btn btn-sm btn-primary">
+              <input type="submit" value="Place Order" />
+              <HiOutlineCheckCircle />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="card card-compact shadow">
-        <div className="card-body">
-          <h3 className="card-title text-sm">Summary</h3>
-          <ul className="space-y-2">
-            <li>
-              <p className="flex justify-between">
-                Total Items <span>{totalItems} items</span>
-              </p>
-            </li>
-            <li>
-              <p className="flex justify-between">
-                Total Cost <span>{formatCost(totalCost)}</span>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="flex gap-2">
-        <button className="btn btn-sm">
-          <HiXMark /> Cancel
-        </button>
-        <div className="btn btn-sm btn-primary">
-          <input type="submit" value="Place Order" />
-          <HiOutlineCheckCircle />
-        </div>
-      </div>
+      </Card>
     </form>
   );
 };

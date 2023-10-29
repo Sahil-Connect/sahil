@@ -38,7 +38,6 @@ export const ProductSelection = ({ navigateToNextStep }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-     
       <ProductsCatalogue />
         <div className="flex gap-2">
           <div className="btn btn-sm btn-primary">

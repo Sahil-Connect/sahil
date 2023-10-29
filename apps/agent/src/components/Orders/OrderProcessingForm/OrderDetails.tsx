@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "../../../hooks/useOrderFormStore";
 import { useFetchBusinesses } from "@/hooks/businesses";
 import { HiArrowRight, HiXMark } from "react-icons/hi2";
-import { FormControl } from "ui";
+import { Card, FormControl } from "ui";
 
 const orderDetailsSchema = z.object({
   clientId: z.string(),
@@ -48,9 +48,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
   } = useFetchBusinesses();
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-      <div className="card card-compact shadow">
-        <div className="card-body">
-          <h3 className="card-title text-sm">Client Information</h3>
+      <Card title="Client Information" titleSize="sm">
           <div className="form-control">
             <div className="label">
               <span className="label-text">Client</span>
@@ -90,8 +88,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      </Card>
     </form>
   );
 };
