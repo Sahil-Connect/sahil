@@ -3,7 +3,6 @@ import { Card } from "ui";
 import {
   HiOutlineCheckCircle,
   HiOutlinePrinter,
-  HiOutlineUserCircle,
   HiXMark,
   HiPlus,
   HiMinus,
@@ -38,7 +37,7 @@ const ProductSummary = ({ product }) => {
 };
 
 export const OrderSummary = () => {
-  const { orderItems } = useOrderItemsStore((state) => state);
+  const orderItems = useOrderItemsStore((state) => state.orderItems);
   const { totalItems, totalCost } = orderItems?.reduce(
     (totals, product) => ({
       totalItems: totals.totalItems + product.quantity,

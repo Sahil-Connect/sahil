@@ -6,12 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useFetchProducts } from "@/hooks/products";
 import { useOrderItemsStore } from "../../hooks/useOrderItemsStore";
 import { Card } from "ui";
+// import { formatCost } from "@sahil/lib";
 import {
   HiArrowLeft,
   HiArrowRight,
   HiMinus,
   HiPlus,
-  HiOutlineChevronUpDown,
   HiOutlineFunnel,
   HiOutlineShoppingCart,
   HiXMark,
@@ -20,11 +20,13 @@ import {
   HiSignalSlash,
 } from "react-icons/hi2";
 
-export const formatCost = (cost) =>
-  cost.toLocaleString("en-SS", {
+export const formatCost = (cost) => cost.toLocaleString(
+  "en-SS",
+  {
     style: "currency",
-    currency: "SSP",
-  });
+    currency: "SSP"
+  }
+);
 
 export const ProductsCatalogue = () => {
   const { data, error, loading, productsCount } = useFetchProducts();
@@ -39,7 +41,6 @@ export const ProductsCatalogue = () => {
   useEffect(() => {
     setProducts(data);
   }, [data, setProducts]);
-  console.log(orderItems);
 
   if (error) {
     return (
@@ -80,7 +81,6 @@ export const ProductsCatalogue = () => {
       productId: product.id,
       quantity: 1,
     });
-    console.log(orderItems);
   };
   const onRemoveOrderItem = (product: any) => {
     console.log("remove product to order", product);
@@ -102,7 +102,7 @@ export const ProductsCatalogue = () => {
             </button>
             <button
               className="join-item btn btn-sm btn-square btn-neutral"
-              tile="right"
+              title="right"
               type="button"
             >
               <HiArrowRight />
@@ -119,7 +119,7 @@ export const ProductsCatalogue = () => {
             <button className="btn btn-sm btn-secondary">
               <HiOutlineFunnel /> Filter
             </button>
-            <select className="select select-sm bg-secondary w-full max-w-xs">
+            <select className="select select-sm bg-secondary w-full max-w-xs" title="sort">
               <option disabled>Sort by</option>
               <option>Lowest - Highest</option>
               <option>Highest - Lowest</option>
@@ -148,18 +148,18 @@ export const ProductsCatalogue = () => {
 };
 
 type ProductSummaryProps = {
-  onAddOrderItem: () => void;
+  onAddOrderItem: (item: any) => void;
   product: any;
-  onRemoveOrderItem: () => void;
+  onRemoveOrderItem: (item: any) => void;
   isInCart: boolean;
 };
 
-export const ProductSummary: FC<ProductSummaryProps> = ({
+export const ProductSummary = ({
   onAddOrderItem,
   product,
   onRemoveOrderItem,
   isInCart,
-}) => {
+}: ProductSummaryProps) => {
   return (
     <div className="card card-compact card-bordered basis-1/4 grow">
       <div className="card-body">

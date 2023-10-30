@@ -36,7 +36,11 @@ export const PaymentDetails = ({ navigateToNextStep }) => {
         <div className="flex gap-2">
           <div className="form-control">
             <label className="label cursor-pointer">
-              <input type="radio" name="pickup" className="radio radio-sm" />
+              <input
+                type="radio"
+                className="radio radio-sm checked:bg-secondary"
+                {...register("paymentMethod")}
+              />
               <div className="flex ml-4 items-center gap-2">
                 <span className="shadow p-2 rounded-md">
                   <HiOutlineCreditCard />
@@ -49,9 +53,8 @@ export const PaymentDetails = ({ navigateToNextStep }) => {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="address"
                 className="radio radio-sm checked:bg-secondary"
-                checked
+                {...register("paymentMethod")}
               />
               <div className="flex ml-4 items-center gap-2">
                 <span className="shadow p-2 rounded-md">

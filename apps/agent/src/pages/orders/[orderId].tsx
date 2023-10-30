@@ -21,7 +21,7 @@ export default function OrderPage() {
                 <div className="badge">Pickup Location</div>
               </div>
               <div className="card-actions justify-end">
-                <button className="btn btn-sm btn-primary">Re-Order</button>
+                <button className="btn btn-sm btn-primary">Order Again</button>
               </div>
             </div>
           </div>

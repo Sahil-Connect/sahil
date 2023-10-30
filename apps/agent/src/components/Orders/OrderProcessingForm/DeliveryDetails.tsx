@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "@/hooks/useOrderFormStore";
-import { Card, FormControl, Input, Select } from "ui";
+import { Card, FormControl, FormControlError, Input, Select } from "ui";
 
 import {
   HiArrowRight,
@@ -14,7 +14,13 @@ import {
 } from "react-icons/hi2";
 
 const deliveryDetailsSchema = z.object({
-  paymentMethod: z.string(),
+  contactName: z.string(),
+  mobileNumber: z.string(),
+  deliveryDate: z.string(),
+  deliveryType: z.string(),
+  scheduleType: z.string(),
+  pickupLocation: z.string(),
+  deliveryAddress: z.string(),
 });
 
 type FormData = z.infer<typeof deliveryDetailsSchema>;
@@ -29,6 +35,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
     resolver: zodResolver(deliveryDetailsSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    console.log("woooooo");
     // const validatedInput = .parse(data);
     // navigateToNextStep("");
   };
@@ -37,16 +44,29 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
       <Card title="Delivery Information">
         <div className="flex gap-2">
           <FormControl label="Name">
-            <Input placeholder="Keji Lumuro" />
+            <Input placeholder="Keji Lumuro" {...register("contactName")} />
+            {errors.contactName?.message && (
+              <FormControlError message={errors.contactName?.message} />
+            )}
           </FormControl>
           <FormControl label="Mobile Number">
-            <Input placeholder="+211-9813231392" />
+            <Input
+              placeholder="+211-9813231392"
+              {...register("mobileNumber")}
+            />
+            {errors.mobileNumber?.message && (
+              <FormControlError message={errors.mobileNumber?.message} />
+            )}
           </FormControl>
         </div>
         <div className="flex gap-8">
           <div className="form-control">
             <label className="label cursor-pointer">
-              <input type="radio" name="immediate" className="radio radio-sm" />
+              <input
+                type="radio"
+                className="radio radio-sm"
+                {...register("scheduleType")}
+              />
               <div className="flex ml-4 items-center gap-2">
                 <span className="shadow p-2 rounded-md">
                   <HiOutlineBolt />
@@ -54,13 +74,16 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
                 <span className="label-text">Immediate</span>
               </div>
             </label>
+            {errors.contactName?.message && (
+              <FormControlError message={errors.contactName?.message} />
+            )}
           </div>
           <div className="form-control">
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="scheduled"
                 className="radio radio-sm checked:bg-secondary"
+                {...register("scheduleType")}
               />
               <div className="flex ml-4 items-center gap-2">
                 <span className="shadow p-2 rounded-md">
@@ -69,11 +92,19 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
                 <span className="label-text">Scheduled</span>
               </div>
             </label>
+            {errors.contactName?.message && (
+              <FormControlError message={errors.contactName?.message} />
+            )}
           </div>
         </div>
-        <FormControl label="Date">
-          <Input type="date" />
-        </FormControl>
+        {false && (
+          <FormControl label="Date">
+            <Input type="date" {...register("deliveryDate")} />
+            {errors.deliveryDate?.message && (
+              <FormControlError message={errors.deliveryDate?.message} />
+            )}
+          </FormControl>
+        )}
       </Card>
       <Card title="Delivery Type">
         <div className="flex gap-2">
@@ -81,8 +112,8 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="pickup"
                 className="radio radio-sm checked:bg-secondary"
+                {...register("deliveryType")}
               />
               <div className="flex ml-4 items-center gap-2">
                 <span className="shadow p-2 rounded-md">
@@ -91,10 +122,17 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
                 <span className="label-text">Pick Up Location</span>
               </div>
             </label>
+            {errors.deliveryType?.message && (
+              <FormControlError message={errors.deliveryType?.message} />
+            )}
           </div>
           <div className="form-control">
             <label className="label cursor-pointer">
-              <input type="radio" name="address" className="radio radio-sm" />
+              <input
+                type="radio"
+                className="radio radio-sm"
+                {...register("deliveryType")}
+              />
               <div className="flex ml-4 items-center gap-2">
                 <span className="shadow p-2 rounded-md">
                   <HiOutlineMapPin />
@@ -102,17 +140,26 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
                 <span className="label-text">Physical Address</span>
               </div>
             </label>
+            {errors.deliveryType?.message && (
+              <FormControlError message={errors.deliveryType?.message} />
+            )}
           </div>
         </div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Choose pick up location</span>
-          </label>
-          <Select
-            options={["Custom Market", "Souq Konyo Konyo", "Souq Munuki"]}
-            title="Pickup Location"
-          />
-        </div>
+        {false && (
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Choose pick up location</span>
+            </label>
+            <Select
+              options={["Custom Market", "Souq Konyo Konyo", "Souq Munuki"]}
+              title="Pickup Location"
+              {...register("pickupLocation")}
+            />
+            {errors.pickupLocation?.message && (
+              <FormControlError message={errors.pickupLocation?.message} />
+            )}
+          </div>
+        )}
       </Card>
       <div className="btn btn-sm btn-primary">
         <input type="submit" value="Continue" />
