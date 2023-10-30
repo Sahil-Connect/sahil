@@ -7,7 +7,18 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      inter: ['Inter', 'sans-serif'],
+    },
     extend: {
+      colors: {
+        'black': '#232323',
+        'black-dark': '#121212',
+        'green': '#067a46',
+        'green-dark': '#056835',
+        'gray': '#C3C3D5',
+        'white': '#FAFAFA',
+      },
       gridTemplateColumns: {
         // Auto column grid with a min of 250px
         'auto-250': 'repeat(auto-fit, minmax(250px, 1fr))',
@@ -16,7 +27,22 @@ const config: Config = {
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ["lemonade"],
+    themes: [
+      {
+        lemonade: {
+          ...require('daisyui/src/theming/themes')['[data-theme=lemonade]'],
+          'primary': '#067a46',
+          'secondary': '#056835',
+          'accent': '#40efcf',
+          'neutral': '#2d2f39',
+          'base-100': '#ffffff',
+          'info': '#76d1e5',
+          'success': '#22a05b',
+          'warning': '#f0bc2d',
+          'error': '#e33631',
+        },
+      },
+    ],
   },
 };
 export default config;

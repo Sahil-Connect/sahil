@@ -34,27 +34,24 @@ const links = [
 
 const Navbar = () => {
   return (
-    <header className="navbar bg-white shadow">
-      <div className="navbar-start">
-        <Link href="/">
+    <header className='navbar bg-white shadow'>
+      <div className='navbar-start'>
+        <Link href='/' className='font-semibold flex items-center text-base lg:text-lg'>
           <Image
             src={logo}
-            alt="Sahil"
-            height={100}
-            loading="eager"
-            className="h-10 w-16 object-contain"
+            alt='Sahil'
+            loading='eager'
+            className='h-10 w-8 object-contain md:w-16'
           />
+          Sahil Agent
         </Link>
-        <span className="normal-case text-xl">Sahil Agent</span>
       </div>
       <nav className="navbar-end">
         <ul className="menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-4">
           {links.map(({ name, href, icon }) => {
             return (
               <li key={name}>
-                <Link href={href}>
-                  {icon} {name}
-                </Link>
+                <Link href={href} className='text-base font-semibold transition-[0.4s] hover:text-green-dark'>{name}</Link>
               </li>
             );
           })}
@@ -88,16 +85,17 @@ const Navbar = () => {
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
+              width="24"
+              height="24"
               viewBox="0 0 24 24"
-              stroke="currentColor"
             >
-              <path
+              <path 
+                fill="none"
+                stroke="currentColor"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
+                strokeWidth="1.5"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
               />
             </svg>
           </label>
@@ -108,7 +106,7 @@ const Navbar = () => {
             {links.map(({ name, href }) => {
               return (
                 <li key={name}>
-                  <Link href={href}>{name}</Link>
+                  <Link href={href} className='text-base font-semibold'>{name}</Link>
                 </li>
               );
             })}
