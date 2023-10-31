@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useFetchProducts } from "@/hooks/products";
 import { useOrderItemsStore } from "../../hooks/useOrderItemsStore";
 import { Card } from "ui";
-// import { formatCost } from "@sahil/lib";
+import { formatCost } from "@sahil/lib";
 import {
   HiArrowLeft,
   HiArrowRight,
@@ -19,14 +19,6 @@ import {
   HiArrowPath,
   HiSignalSlash,
 } from "react-icons/hi2";
-
-export const formatCost = (cost) => cost.toLocaleString(
-  "en-SS",
-  {
-    style: "currency",
-    currency: "SSP"
-  }
-);
 
 export const ProductsCatalogue = () => {
   const { data, error, loading, productsCount } = useFetchProducts();

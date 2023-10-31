@@ -41,7 +41,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
   };
   return (
     <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
-      <Card title="Delivery Information">
+      <Card title="Delivery Information" titleSize="sm">
         <div className="flex gap-2">
           <FormControl label="Name">
             <Input placeholder="Keji Lumuro" {...register("contactName")} />
@@ -106,7 +106,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
           </FormControl>
         )}
       </Card>
-      <Card title="Delivery Type">
+      <Card title="Delivery Type" titleSize="sm">
         <div className="flex gap-2">
           <div className="form-control">
             <label className="label cursor-pointer">

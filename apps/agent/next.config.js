@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["lib", "ui"],
+  transpilePackages: ["@sahil/lib", "ui"],
 }
 
 module.exports = nextConfig

@@ -1,5 +1,6 @@
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
 import { Card } from "ui";
+import { formatCost } from "@sahil/lib";
 import {
   HiOutlineCheckCircle,
   HiOutlinePrinter,
@@ -7,12 +8,6 @@ import {
   HiPlus,
   HiMinus,
 } from "react-icons/hi2";
-
-export const formatCost = (cost) =>
-  cost.toLocaleString("en-SS", {
-    style: "currency",
-    currency: "SSP",
-  });
 
 const ProductSummary = ({ product }) => {
   return (
