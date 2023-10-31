@@ -5,10 +5,10 @@ import {
   SupplierBasicInfoForm,
   SupplierBusinessInfoForm,
   SupplierPreferencesForm,
-} from "@/components/Suppliers/SupplierRegistrationForm";
+} from "@/Suppliers/SupplierRegistrationForm";
 import { useSupplierFormStore } from "@/hooks/useSupplierFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { INITIAL_STEP } from "@/components/Suppliers/constants";
+import { INITIAL_STEP } from "@/Suppliers/constants";
 
 const StepsPaginator = () => {
   const { steps, goToStep, currentStep } = useSupplierFormStore(

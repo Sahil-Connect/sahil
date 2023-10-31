@@ -5,7 +5,7 @@ import {
   SupplierProducts,
   ServiceZones,
   SupplierProfileOverview,
-} from '@/components/Suppliers';
+} from '@/Suppliers';
 
 export default function SupplierPage() {
   const { data: supplier, error, loading } = useFetchSupplierByPK();

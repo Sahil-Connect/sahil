@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { INITIAL_STEP } from '../components/Suppliers/constants';
+import { INITIAL_STEP } from '../Suppliers/constants';
 
 const steps = [
   "business_info",

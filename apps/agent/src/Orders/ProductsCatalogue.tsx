@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFetchProducts } from "@/hooks/products";
-import { useOrderItemsStore } from "../../hooks/useOrderItemsStore";
+import { useOrderItemsStore } from "../hooks/useOrderItemsStore";
 import { Card } from "ui";
 import { formatCost } from "@sahil/lib";
 import {
