@@ -36,7 +36,7 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
               <span>{generateInitials(supplier.name)}</span>
             </div>
           </Link>
-          <button>
+          <button title="More Horizontal">
             <HiEllipsisHorizontal />
           </button>
         </div>

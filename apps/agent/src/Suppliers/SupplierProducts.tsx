@@ -56,6 +56,7 @@ export const SupplierProducts = () => {
                 <button
                   onClick={() => handleReset()}
                   className='absolute right-10 top-2 text-lg'
+                  title="Reset"
                 >
                   <HiOutlineXMark />
                 </button>
@@ -63,6 +64,7 @@ export const SupplierProducts = () => {
               <button
                 onClick={handleSearch}
                 className='btn btn-sm btn-primary btn-square'
+                title="Search"
               >
                 <HiMagnifyingGlass />
               </button>
