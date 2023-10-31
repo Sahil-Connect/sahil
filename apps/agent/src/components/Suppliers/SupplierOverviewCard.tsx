@@ -24,14 +24,14 @@ type Props = {
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   return (
-    <div className='w-full h-full card card-compact shadow bg-base-200/40'>
+    <div className='w-full h-full card card-compact card-bordered bg-base-200/40'>
       <div className='card-body justify-between'>
         <div className='flex justify-between text-4xl'>
           <Link
             href={`/suppliers/${supplier.id}`}
             className='avatar placeholder h-fit'
           >
-            <div className='bg-neutral-focus text-base text-neutral-content rounded-full w-20'>
+            <div className='bg-neutral-focus text-base text-neutral-content rounded-full w-12'>
               <span>{generateInitials(supplier.name)}</span>
             </div>
           </Link>

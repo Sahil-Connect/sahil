@@ -81,7 +81,7 @@ export const ProductsCatalogue = () => {
   return (
     <Card title="Available Products" titleSize="sm">
       <div className="space-y-2">
-        <div className="flex justify-between">
+        <div className="flex justify-end">
           <div className="join grid grid-cols-2">
             <button
               className="join-item btn btn-sm btn-square"
