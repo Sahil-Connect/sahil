@@ -4,7 +4,7 @@ import { INSERT_NEW_BUSINESS } from "@/lib/graphql/mutations/businesses";
 
 export const useFetchBusinesses = () => {
     const { error, data, loading } = useQuery(FETCH_BUSINESSES);
-    return { error, data: data?.business, loading };
+    return { error, data: data?.business, loading, businessCount: data?.business_aggregate?.aggregate };
 }
 
 export const useFetchBusinessByPK = (id: string) => {

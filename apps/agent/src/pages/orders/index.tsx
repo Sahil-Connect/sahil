@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { HiPlus, HiOutlineDocumentMagnifyingGlass } from 'react-icons/hi2';
-import { OrdersList } from "@/Orders/OrdersList";
+import { ListOrders } from "@/Orders/ListOrders";
 
 export default function OrdersPage() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function OrdersPage() {
           <button className="btn btn-sm btn-primary" onClick={() => router.push("/orders/new/order_details")}><HiPlus /> New Order</button>
           </div>
         </div>
-        <OrdersList />
+        <ListOrders />
       </div>
     </main>
   );

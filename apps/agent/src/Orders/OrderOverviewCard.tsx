@@ -1,4 +1,3 @@
-import { useFetchOrders } from "@/hooks/orders";
 import { FC } from "react";
 import { Card } from "ui";
 import Link from "next/link";
@@ -8,7 +7,7 @@ import {
   HiEllipsisVertical,
 } from "react-icons/hi2";
 
-const OrderSummary = ({ order }) => {
+export const OrderOverviewCard = ({ order }) => {
   return (
     <Card>
       <div className="justify-between">
@@ -62,32 +61,5 @@ const OrderSummary = ({ order }) => {
         </div>
       </div>
     </Card>
-  );
-};
-
-export const OrdersList = () => {
-  const { data: orders, error, loading } = useFetchOrders();
-  if (error) {
-    return <p>Failed to load orders</p>;
-  }
-
-  if (loading) {
-    return <p>Loading Orders</p>;
-  }
-
-  return (
-    <section className="space-y-2">
-      <div className="bg-secondary-content flex p-2 rounded-xl justify-between items-center">
-        <div className="text-secondary-focus">Saturday 28 Oct</div>
-        <div>
-          <button className="btn btn-sm">Filter</button>
-        </div>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {orders?.map((order) => (
-          <OrderSummary key={order.id} order={order} />
-        ))}
-      </div>
-    </section>
   );
 };

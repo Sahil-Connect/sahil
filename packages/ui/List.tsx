@@ -17,8 +17,7 @@ export const ListErrorState: FC<ListAsyncResultProps> = ({
   heading,
   message,
 }) => (
-  <Card>
-    <h3 className="card-title">{heading}</h3>
+  <Card title={heading} titleSize="sm">
     <p>{message}</p>
     <div className="card-actions">
       <button className="btn btn-sm btn-secondary">Reload</button>
@@ -27,16 +26,11 @@ export const ListErrorState: FC<ListAsyncResultProps> = ({
   </Card>
 );
 export const ListLoadingState: FC<ListAsyncResultProps> = ({
-  heading,
+  heading = "Loading Data",
   message,
 }) => (
-  <Card>
-    <h3 className="card-title">{heading}</h3>
-    <p>{message}</p>
-    <div className="card-actions">
-      <button className="btn btn-sm btn-secondary">Reload</button>
-      <button className="btn btn-sm btn-outline">Go Back</button>
-    </div>
+  <Card title={heading} titleSize="sm">
+    <span className="loading loading-spinner loading-lg"></span>
   </Card>
 );
 

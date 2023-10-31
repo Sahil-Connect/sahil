@@ -10,6 +10,11 @@ query getCouriers {
         avatar
         name
     }
+    couriers_aggregate {
+      aggregate {
+        count(columns: id, distinct: true)
+      }
+    }
 }
 `;
 

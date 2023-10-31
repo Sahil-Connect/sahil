@@ -8,5 +8,10 @@ query getOrders {
         created_at
         id
     }
+    orders_aggregate {
+      aggregate {
+        count(columns: id, distinct: true)
+      }
+    }
 }
 `;

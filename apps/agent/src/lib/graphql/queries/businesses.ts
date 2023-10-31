@@ -18,6 +18,11 @@ query getClients {
             updated_at
         }
     }
+    business_aggregate {
+      aggregate {
+        count(columns: id, distinct: true)
+      }
+    }
 }
 `;
 

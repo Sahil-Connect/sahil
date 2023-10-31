@@ -1,7 +1,6 @@
 import { SupplierOverviewCard } from "./SupplierOverviewCard";
 import { useFetchSuppliers } from "@/hooks/suppliers";
-import { JoinGrid, List, ListHeader, ListErrorState } from "ui";
-import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
+import { List, ListHeader, ListErrorState } from "ui";
 
 export type SahilSupplier = {
   id: string;
@@ -36,7 +35,7 @@ export const ListSuppliers = () => {
   return (
     <section className="space-y-4">
       <ListHeader
-        size={suppliersCount.count}
+        size={suppliersCount?.count}
         sizeLabel="Suppliers"
         title="Suppliers"
       />
