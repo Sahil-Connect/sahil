@@ -2,19 +2,28 @@ import Image from 'next/image';
 import React from 'react';
 import logo from '../../../public/logo.png';
 import Link from 'next/link';
+import { HiOutlineBriefcase, HiOutlineQueueList, HiOutlineTruck, HiOutlineBuildingOffice } from "react-icons/hi2";
 
 const links = [
   {
     name: 'Businesses',
     href: '/businesses',
+    icon: <HiOutlineBriefcase />
+  },
+  {
+    name: 'Couriers',
+    href: '/couriers',
+    icon: <HiOutlineTruck />
   },
   {
     name: 'Orders',
     href: '/orders',
+    icon: <HiOutlineQueueList />
   },
   {
     name: 'Suppliers',
     href: '/suppliers',
+    icon: <HiOutlineBuildingOffice />
   }
 ];
 
@@ -35,10 +44,10 @@ const Navbar = () => {
       </div>
       <nav className='navbar-end'>
         <ul className='menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-4'>
-          {links.map(({ name, href }) => {
+          {links.map(({ name, href, icon }) => {
             return (
               <li key={name}>
-                <Link href={href}>{name}</Link>
+                <Link href={href}>{icon} {name}</Link>
               </li>
             );
           })}

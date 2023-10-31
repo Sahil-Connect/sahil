@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { parseISO, format } from "date-fns";
+import { formatDateTime } from "@sahil/lib/dates";
 import Link from "next/link";
 
 export type SahilBusiness = {
@@ -12,8 +12,7 @@ type Props = {
 };
 
 export const BusinessOverviewCard: FC<Props> = ({ business }) => {
-  const date = parseISO(business.created_at);
-  const formattedDate = format(date, "MMMM d, yyyy HH:mm:ss");
+  const formattedDate = formatDateTime(business.created_at);
   return (
     <div className="card card-compact shadow">
       <div className="card-body">
