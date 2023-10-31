@@ -1,6 +1,7 @@
 import { useFetchSupplierProducts } from '@/hooks/suppliers';
 import { HiOutlineBanknotes, HiOutlineCube } from 'react-icons/hi2';
 import EditProductModal from './EditProductModal';
+import { formatCurrency } from '@sahil/lib';
 
 type SahilProduct = {
   id: string;
@@ -88,9 +89,4 @@ const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
       </div>
     </div>
   );
-};
-
-const formatCurrency = (number: number) => {
-  const formattedNumber = number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-  return `${formattedNumber} SSP`;
 };

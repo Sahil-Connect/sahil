@@ -5,6 +5,7 @@ import {
   HiOutlinePhone,
   HiEllipsisHorizontal,
 } from 'react-icons/hi2';
+import { formatCategoryName, generateInitials } from "@sahil/lib/strings";
 
 export type SahilSupplier = {
   id: string;
@@ -89,22 +90,4 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
       </div>
     </div>
   );
-};
-
-export const formatCategoryName = (categoryName: string) => {
-  // Replace "_and_" with " & ", split the category name by underscores,
-  // capitalize each word, and join them back with spaces
-  return categoryName
-    .replace(/_and_/g, ' & ')
-    .split('_')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-};
-
-const generateInitials = (name: string) => {
-  return name
-    .split(' ')
-    .slice(0, 3)
-    .map((word) => word.charAt(0).toUpperCase())
-    .join('');
 };
