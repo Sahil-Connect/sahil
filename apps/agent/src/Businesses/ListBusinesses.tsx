@@ -37,7 +37,7 @@ export const ListBusinesses = () => {
   }
 
   return (
-    <div className="space-y-2" ref={parent}>
+    <div className="grid place-items-center gap-4 grid-cols-auto-250 xl:grid-cols-4" ref={parent}>
       {businesses &&
         businesses.map((business: SahilBusiness) => (
           <BusinessOverviewCard key={business.id} business={business} />
