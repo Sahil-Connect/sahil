@@ -1,14 +1,14 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 export type CardProps = {
-  children: any;
+  children: ReactNode | ReactNode[];
   title?: string;
   titleSize?: string;
 };
 
-export const Card: FC<CardProps> = ({ children, title, titleSize = "md" }) => {
+export const Card = ({ children, title, titleSize = "md" }: CardProps) => {
   return (
-    <div className={"card card-compact shadow"}>
+    <div className={"card card-compact shadow bg-white"}>
       <div className="card-body">
         <h2 className={`card-title text-${titleSize}`}>{title}</h2>
         {children}

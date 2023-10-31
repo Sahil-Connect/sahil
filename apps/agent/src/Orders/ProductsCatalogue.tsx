@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFetchProducts } from "@/hooks/products";
 import { useOrderItemsStore } from "../hooks/useOrderItemsStore";
-import { Card } from "ui";
+import { Card, JoinGrid } from "ui";
 import { formatCost } from "@sahil/lib";
 import {
   HiArrowLeft,
@@ -82,7 +82,7 @@ export const ProductsCatalogue = () => {
     <Card title="Available Products" titleSize="sm">
       <div className="space-y-2">
         <div className="flex justify-end">
-          <div className="join grid grid-cols-2">
+          <JoinGrid>
             <button
               className="join-item btn btn-sm btn-square"
               name="left"
@@ -99,7 +99,7 @@ export const ProductsCatalogue = () => {
             >
               <HiArrowRight />
             </button>
-          </div>
+          </JoinGrid>
         </div>
         <div className="bg-base-200 flex items-center justify-between p-2 rounded-xl">
           <div>

@@ -1,5 +1,6 @@
 import { useFetchOrders } from "@/hooks/orders";
 import { FC } from "react";
+import { Card } from "ui";
 import Link from "next/link";
 import {
   HiOutlineMapPin,
@@ -9,8 +10,8 @@ import {
 
 const OrderSummary = ({ order }) => {
   return (
-    <div className="w-full h-full card card-compact bg-base-200/40">
-      <div className="card-body justify-between">
+    <Card>
+      <div className="justify-between">
         <div className="flex justify-between">
           <Link
             href={`/orders/${order.id}`}
@@ -60,7 +61,7 @@ const OrderSummary = ({ order }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
@@ -82,7 +83,7 @@ export const OrdersList = () => {
           <button className="btn btn-sm">Filter</button>
         </div>
       </div>
-      <div className="grid place-items-center gap-4 grid-cols-auto-250 xl:grid-cols-4">
+      <div className="flex flex-wrap gap-2">
         {orders?.map((order) => (
           <OrderSummary key={order.id} order={order} />
         ))}

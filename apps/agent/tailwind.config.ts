@@ -19,10 +19,6 @@ const config: Config = {
         'gray': '#C3C3D5',
         'white': '#FAFAFA',
       },
-      gridTemplateColumns: {
-        // Auto column grid with a min of 250px
-        'auto-250': 'repeat(auto-fit, minmax(250px, 1fr))',
-      },
     },
   },
   plugins: [require('daisyui')],

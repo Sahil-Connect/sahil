@@ -9,6 +9,7 @@ import {
 import { useSupplierFormStore } from "@/hooks/useSupplierFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { INITIAL_STEP } from "@/Suppliers/constants";
+import { JoinGrid } from "ui";
 
 const StepsPaginator = () => {
   const { steps, goToStep, currentStep } = useSupplierFormStore(
@@ -27,7 +28,7 @@ const StepsPaginator = () => {
   };
 
   return (
-    <div className="join grid grid-cols-2">
+    <JoinGrid>
       <button
         className={`join-item btn btn-sm btn-ghost ${
           currentIndex <= 0 ? "btn-disabled" : null
@@ -44,7 +45,7 @@ const StepsPaginator = () => {
       >
         Next
       </button>
-    </div>
+    </JoinGrid>
   );
 };
 

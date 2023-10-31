@@ -56,7 +56,7 @@ export const ListSuppliers = () => {
 
   return (
     <section
-      className='grid place-items-center gap-4 grid-cols-auto-250 xl:grid-cols-4'
+      className='flex flex-wrap gap-2'
       ref={parent}
     >
       {suppliers &&

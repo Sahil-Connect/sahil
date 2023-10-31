@@ -1,10 +1,11 @@
-import Link from 'next/link';
-import { parseISO, format } from 'date-fns';
+import Link from "next/link";
+import { parseISO, format } from "date-fns";
+import { Card, JoinGrid } from "ui";
 import {
   HiOutlineCalendarDays,
   HiOutlineMapPin,
   HiOutlineFlag,
-} from 'react-icons/hi2';
+} from "react-icons/hi2";
 
 const orders = [
   {
@@ -46,29 +47,29 @@ const orders = [
 ];
 
 enum OrderStatus {
-  Cancelled = 'Cancelled',
-  Pending = 'Pending',
-  Fulfilled = 'Fulfilled',
+  Cancelled = "Cancelled",
+  Pending = "Pending",
+  Fulfilled = "Fulfilled",
 }
 
 const orderStyles: Record<OrderStatus, string> = {
-  [OrderStatus.Cancelled]: 'error',
-  [OrderStatus.Pending]: 'info',
-  [OrderStatus.Fulfilled]: 'success',
+  [OrderStatus.Cancelled]: "error",
+  [OrderStatus.Pending]: "info",
+  [OrderStatus.Fulfilled]: "success",
 };
 
 export const SupplierOrderHistory = () => {
   return (
-    <div className='bg-base-200 space-y-2 grow p-4 rounded-xl'>
-      <div className='flex justify-between items-center'>
-        <h3 className='text-xl font-semibold'>Order History</h3>
-        <button className='btn btn-sm'>View All</button>
+    <div className="bg-base-200 space-y-2 grow p-4 rounded-xl">
+      <div className="flex justify-between items-center">
+        <h3 className="text-lg">Order History</h3>
+        <button className="btn btn-sm btn-secondary">View All</button>
       </div>
-      <div className='flex justify-between px-2'>
-        <button className='btn btn-sm btn-outline'>Prev</button>
-        <button className='btn btn-sm btn-secondary'>Next</button>
-      </div>
-      <div className='grid place-items-center grid-cols-auto-250 gap-4'>
+      <JoinGrid>
+        <button className="join-item btn btn-sm btn-outline">Prev</button>
+        <button className="join-item btn btn-sm btn-secondary">Next</button>
+      </JoinGrid>
+      <div className="flex flex-wrap gap-2">
         {orders.map((order) => (
           <OrderSummary order={order} key={order.id} />
         ))}
@@ -79,43 +80,41 @@ export const SupplierOrderHistory = () => {
 
 const OrderSummary = ({ order }) => {
   const date = parseISO(order.createdAt);
-  const formattedDate = format(date, 'MMMM d, yyyy HH:mm:ss');
-  const statusStyle = orderStyles[order.status] || 'default';
+  const formattedDate = format(date, "MMMM d, yyyy HH:mm:ss");
+  const statusStyle = orderStyles[order.status] || "default";
   return (
-    <div className='h-full w-full card card-compact shadow bg-base-100'>
-      <div className='card-body'>
-        <div>
-          <Link href={`/orders/${order.id}`}>
-            <h3 className='card-title'>Order ID: ED-{order.id}</h3>
-          </Link>
-          <div className='flex gap-2'>
-            <div className='badge badge-sm'>{order.payment}</div>
-            <div className='badge badge-sm'>{order.delivery}</div>
-            <div className={`badge badge-sm badge-${statusStyle}`}>
-              {order.status}
-            </div>
+    <Card>
+      <div>
+        <Link href={`/orders/${order.id}`}>
+          <h3 className="card-title">Order ID: ED-{order.id}</h3>
+        </Link>
+        <div className="flex gap-2">
+          <div className="badge badge-sm">{order.payment}</div>
+          <div className="badge badge-sm">{order.delivery}</div>
+          <div className={`badge badge-sm badge-${statusStyle}`}>
+            {order.status}
           </div>
         </div>
-        <div className='flex items-center gap-2'>
-          <span className='shadow rounded-md p-2'>
-            <HiOutlineCalendarDays />
-          </span>
-          <p>{formattedDate}</p>
-        </div>
-
-        <div className='flex items-center gap-1'>
-          <span className='shadow rounded-md p-2'>
-            <HiOutlineMapPin />
-          </span>
-          <p>{order.origin}</p>
-        </div>
-        <div className='flex items-center gap-1'>
-          <span className='shadow rounded-md p-2'>
-            <HiOutlineFlag />
-          </span>
-          <p>{order.destination}</p>
-        </div>
       </div>
-    </div>
+      <div className="flex items-center gap-2">
+        <span className="shadow rounded-md p-2">
+          <HiOutlineCalendarDays />
+        </span>
+        <p>{formattedDate}</p>
+      </div>
+
+      <div className="flex items-center gap-1">
+        <span className="shadow rounded-md p-2">
+          <HiOutlineMapPin />
+        </span>
+        <p>{order.origin}</p>
+      </div>
+      <div className="flex items-center gap-1">
+        <span className="shadow rounded-md p-2">
+          <HiOutlineFlag />
+        </span>
+        <p>{order.destination}</p>
+      </div>
+    </Card>
   );
 };
