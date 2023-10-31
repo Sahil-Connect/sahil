@@ -9,7 +9,7 @@ import {
   PaymentDetails,
   ProductSelection,
   StepsPaginator,
-} from "@/components/Orders/OrderProcessingForm";
+} from "@/Orders/OrderProcessingForm";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import {
   HiOutlineShoppingCart,

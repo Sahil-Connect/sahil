@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFetchProducts } from "@/hooks/products";
-import { useOrderItemsStore } from "../../hooks/useOrderItemsStore";
+import { useOrderItemsStore } from "../hooks/useOrderItemsStore";
 import { Card } from "ui";
 import { formatCost } from "@sahil/lib";
 import {
@@ -81,7 +81,7 @@ export const ProductsCatalogue = () => {
   return (
     <Card title="Available Products" titleSize="sm">
       <div className="space-y-2">
-        <div className="flex justify-between">
+        <div className="flex justify-end">
           <div className="join grid grid-cols-2">
             <button
               className="join-item btn btn-sm btn-square"

@@ -1,4 +1,4 @@
-import { ListBusinesses } from "@/components/Businesses/ListBusinesses";
+import { ListBusinesses } from "@/Businesses/ListBusinesses";
 import { useRouter } from "next/router";
 
 export default function Business() {

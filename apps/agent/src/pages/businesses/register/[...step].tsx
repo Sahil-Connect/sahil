@@ -8,7 +8,7 @@ import {
   BusinessInfoSummary,
   BusinessFormSteps,
   BusinessStepsPaginator,
-} from "@/components/Businesses/BusinessRegistrationForm";
+} from "@/Businesses/BusinessRegistrationForm";
 import {
   HiOutlineCheckCircle,
   HiOutlineQueueList,

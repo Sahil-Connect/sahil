@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useOrderFormStore } from "../../../hooks/useOrderFormStore";
+import { useOrderFormStore } from "../../hooks/useOrderFormStore";
 import { useFetchBusinesses } from "@/hooks/businesses";
 import { HiArrowRight, HiXMark } from "react-icons/hi2";
 import { Card, FormControl } from "ui";

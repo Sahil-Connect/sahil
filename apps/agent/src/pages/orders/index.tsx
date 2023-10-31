@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { HiPlus, HiOutlineDocumentMagnifyingGlass } from 'react-icons/hi2';
-import { OrdersList } from "@/components/Orders/OrdersList";
+import { OrdersList } from "@/Orders/OrdersList";
 
 export default function OrdersPage() {
   const router = useRouter();

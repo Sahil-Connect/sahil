@@ -3,7 +3,7 @@ import { useFetchBusinessByPK } from "@/hooks/businesses";
 import {
   BusinessOrderHistory,
   BusinessProfileOverview,
-} from "@/components/Businesses";
+} from "@/Businesses";
 
 export default function BusinessPage() {
   const router = useRouter();

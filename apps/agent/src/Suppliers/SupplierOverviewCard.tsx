@@ -5,6 +5,7 @@ import {
   HiOutlinePhone,
   HiEllipsisHorizontal,
 } from 'react-icons/hi2';
+import { formatCategoryName, generateInitials } from "@sahil/lib/strings";
 
 export type SahilSupplier = {
   id: string;
@@ -24,18 +25,18 @@ type Props = {
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   return (
-    <div className='w-full h-full card card-compact shadow bg-base-200/40'>
+    <div className='w-full h-full card card-compact card-bordered bg-base-200/40'>
       <div className='card-body justify-between'>
         <div className='flex justify-between text-4xl'>
           <Link
             href={`/suppliers/${supplier.id}`}
             className='avatar placeholder h-fit'
           >
-            <div className='bg-neutral-focus text-base text-neutral-content rounded-full w-20'>
+            <div className='bg-neutral-focus text-base text-neutral-content rounded-full w-12'>
               <span>{generateInitials(supplier.name)}</span>
             </div>
           </Link>
-          <button>
+          <button title="More Horizontal">
             <HiEllipsisHorizontal />
           </button>
         </div>
@@ -89,22 +90,4 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
       </div>
     </div>
   );
-};
-
-export const formatCategoryName = (categoryName: string) => {
-  // Replace "_and_" with " & ", split the category name by underscores,
-  // capitalize each word, and join them back with spaces
-  return categoryName
-    .replace(/_and_/g, ' & ')
-    .split('_')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-};
-
-const generateInitials = (name: string) => {
-  return name
-    .split(' ')
-    .slice(0, 3)
-    .map((word) => word.charAt(0).toUpperCase())
-    .join('');
 };
