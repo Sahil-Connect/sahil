@@ -6,6 +6,7 @@ import {
   HiOutlineBugAnt,
   HiOutlineBriefcase
 } from "react-icons/hi2";
+import Link from "next/link";
 
 export const AgentToolBar = () => {
   return (
@@ -24,23 +25,22 @@ export const AgentToolBar = () => {
             className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 my-2"
           >
             <li>
-              <a href="/businesses/register/business_info">
+              <Link href="/businesses/register/business_info">
                 <HiOutlineBriefcase /> Business
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/couriers/register/personal_info">
+              <Link href="/couriers/register/personal_info">
                 <HiOutlineTruck /> Courier
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/suppliers/register/business_info">
+              <Link href="/suppliers/register/business_info">
                 <HiOutlineBuildingOffice /> Supplier
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
-        <button className="btn btn-sm btn-error"><HiOutlineBugAnt /> Report Problem</button>
       </div>
     </div>
   );

@@ -1,23 +1,27 @@
-import { useFetchCouriers } from "@/hooks/couriers";
-import { CourierOveriewCard } from "./CourierOverviewCard";
+import { useFetchLatestDeliveries } from "@/hooks/couriers";
+import { DeliveryOverviewCard } from "./DeliveryOverviewCard";
 import { JoinGrid } from "ui";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
 
-export const ListCouriers = () => {
-  const { data: couriers, error, loading } = useFetchCouriers();
+export const LatestDeliveries = ({ courierId }) => {
+  const {
+    data: deliveries,
+    error,
+    loading,
+  } = useFetchLatestDeliveries(courierId);
   if (error) {
-    return <p>Failed to load couriers</p>;
+    return <p>Failed to load deliveries</p>;
   }
 
   if (loading) {
-    return <p>Loading</p>;
+    return <p>Loading deliveries</p>;
   }
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex gap-2 items-center">
           <h3 className="text-lg">Latest Deliveries</h3>
-          <div className="badge badge-accent">2 Couries</div>
+          <div className="badge badge-accent">45 deliveries</div>
         </div>
         <div>
           <JoinGrid>
@@ -34,8 +38,8 @@ export const ListCouriers = () => {
         </div>
       </div>
       <div className="flex flex-wrap gap-2">
-        {couriers.map((courier) => (
-          <CourierOveriewCard key={courier.id} courier={courier} />
+        {deliveries.map((delivery) => (
+          <DeliveryOverviewCard key={delivery.id} delivery={delivery} />
         ))}
       </div>
     </section>
