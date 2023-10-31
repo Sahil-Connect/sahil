@@ -4,6 +4,8 @@ import {
   CourierStats,
   CourierProfileOveriew,
   LatestDeliveries,
+  ZoneInformation,
+  VehicleInfo,
 } from "@/Couriers";
 export default function CourierPage() {
   const router = useRouter();
@@ -23,8 +25,12 @@ export default function CourierPage() {
   return (
     <main className="p-8 space-y-4">
       <section className="flex gap-4">
-        <CourierProfileOveriew courier={courier}/>
-        <LatestDeliveries courierId={courierId} />
+        <CourierProfileOveriew courier={courier} />
+        <div className="space-y-2">
+          <LatestDeliveries courierId={courierId} />
+          <VehicleInfo />
+          <ZoneInformation />
+        </div>
       </section>
     </main>
   );

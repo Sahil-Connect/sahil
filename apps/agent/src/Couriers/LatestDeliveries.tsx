@@ -20,8 +20,8 @@ export const LatestDeliveries = ({ courierId }) => {
     <section className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex gap-2 items-center">
-            <h3 className="text-lg">Latest Deliveries</h3>
-            <div className="badge badge-accent">45 deliveries</div>
+          <h3 className="text-lg">Latest Deliveries</h3>
+          <div className="badge badge-accent">45 deliveries</div>
         </div>
         <div>
           <JoinGrid>

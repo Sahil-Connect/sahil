@@ -5,7 +5,7 @@ type SelectProps = {
   title?: string;
 };
 
-export const Select = ({ options, title = "Select Input" }) => {
+export const Select: FC<SelectProps> = ({ options, title = "Select Input" }) => {
   return (
     <select
       className="select select-sm select-bordered bg-slate-100"

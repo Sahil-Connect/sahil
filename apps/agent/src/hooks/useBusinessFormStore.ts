@@ -1,10 +1,10 @@
-wwimport { create } from 'zustand';
+import { create } from 'zustand';
 import { INITIAL_STEP, steps } from '@/Orders/constants';
 export type StepDirection = "prev" | "next";
 
 export type SahilBusinessPartner = Record<string, any>;
 
-type CourierFormStore = {
+type OrderFormStore = {
     currentStep: typeof steps[number];
     steps: typeof steps;
     goToStep: (direction: StepDirection) => void;
@@ -13,7 +13,7 @@ type CourierFormStore = {
     formData: Record<string, any>;
 }
 
-export const useCourierFormStore = create<CourierFormStore>((set) => ({
+export const useBusinessFormStore = create<OrderFormStore>((set) => ({
     currentStep: INITIAL_STEP,
     formData: {},
     steps,
