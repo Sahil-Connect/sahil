@@ -13,6 +13,11 @@ export const FETCH_SUPPLIERS = gql`
         category_name
       }
     }
+    suppliers_aggregate {
+      aggregate {
+        count(columns: id, distinct: true)
+      }
+    }
   }
 `;
 

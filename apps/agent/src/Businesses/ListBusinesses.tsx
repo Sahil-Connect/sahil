@@ -1,6 +1,6 @@
 import { BusinessOverviewCard } from "./BusinessOverviewCard";
 import { useFetchBusinesses } from "@/hooks/businesses";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { List, ListHeader, ListErrorState } from "ui";
 
 export type SahilBusiness = {
   name: string;
@@ -8,40 +8,27 @@ export type SahilBusiness = {
 };
 
 export const ListBusinesses = () => {
-  const { data: businesses, error, loading } = useFetchBusinesses();
-  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
+  const { data: businesses, error, loading, businessCount } = useFetchBusinesses();
   if (error) {
     return (
-      <div className="card card-compact bg-white shadow">
-        <div className="card-body">
-          <h3 className="card-title">Something went wrong...</h3>
-          <p>
-            Error loading businesses, check your network connection. You can
-            also try refreshing the page.
-          </p>
-          <div className="card-actions">
-            <button className="btn btn-sm btn-secondary">Reload</button>
-            <button className="btn btn-sm btn-outline">Go Back</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div>
-        <p>Loading businesses...</p>
-      </div>
+      <ListErrorState
+        heading="Unable to load products..."
+        message="Products aren't loading due to a technical problem on our side. Please
+      try again."
+      />
     );
   }
 
   return (
-    <div className="grid place-items-center gap-4 grid-cols-auto-250 xl:grid-cols-4" ref={parent}>
-      {businesses &&
-        businesses.map((business: SahilBusiness) => (
+    <section className="space-y-4">
+      <ListHeader size={businessCount?.count} sizeLabel="Businsses" title="Businsses" />
+      <List
+        data={businesses}
+        loading={loading}
+        renderItem={(business: SahilBusiness) => (
           <BusinessOverviewCard key={business.id} business={business} />
-        ))}
-    </div>
+        )}
+      />
+    </section>
   );
 };

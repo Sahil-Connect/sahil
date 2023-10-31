@@ -3,7 +3,7 @@ import { FETCH_COURIERS, FETCH_COURIER_BY_PK } from "@/lib/graphql/queries/couri
 
 export const useFetchCouriers = () => {
     const { error, data, loading } = useQuery(FETCH_COURIERS);
-    return { error, data: data?.couriers, loading };
+    return { error, data: data?.couriers, loading, couriersCount: data?.couriers_aggregate?.aggregate };
 }
 
 export const useFetchCourierByPK = (id: string) => {

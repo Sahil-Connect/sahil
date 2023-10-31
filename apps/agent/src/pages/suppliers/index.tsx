@@ -10,10 +10,6 @@ export default function Suppliers() {
       <section className='flex flex-col lg:flex-row justify-between items-start gap-4'>
         <div>
           <h1 className='text-3xl'>Partner Suppliers</h1>
-          <p>
-            Users can register through agents, an app, or USSD codes and set
-            delivery preferences.
-          </p>
         </div>
         <div className='w-full lg:w-fit flex justify-end gap-4'>
           <FilterSuppliersModal />

@@ -1,7 +1,6 @@
-import { SupplierOverviewCard } from './SupplierOverviewCard';
-import { useFetchSuppliers } from '@/hooks/suppliers';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { da } from 'date-fns/locale';
+import { SupplierOverviewCard } from "./SupplierOverviewCard";
+import { useFetchSuppliers } from "@/hooks/suppliers";
+import { List, ListHeader, ListErrorState } from "ui";
 
 export type SahilSupplier = {
   id: string;
@@ -16,53 +15,37 @@ export type SahilSupplier = {
 };
 
 export const ListSuppliers = () => {
-  const { data: suppliers, error, loading } = useFetchSuppliers();
-
-  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
+  const {
+    data: suppliers,
+    error,
+    loading,
+    suppliersCount,
+  } = useFetchSuppliers();
 
   if (error) {
     return (
-      <div className='card card-compact bg-white shadow'>
-        <div className='card-body'>
-          <h3 className='card-title'>Something went wrong...</h3>
-          <p>
-            Error loading suppliers, check your network connection. You can also
-            try refreshing the page.
-          </p>
-          <div className='card-actions'>
-            <button className='btn btn-sm btn-secondary'>Reload</button>
-            <button className='btn btn-sm btn-outline'>Go Back</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div>
-        <p>Loading suppliers...</p>
-      </div>
-    );
-  }
-
-  if (suppliers.length === 0) {
-    return (
-      <div>
-        <p>There are 0 suppliers</p>
-      </div>
+      <ListErrorState
+        heading="Unable to load products..."
+        message="Products aren't loading due to a technical problem on our side. Please
+      try again."
+      />
     );
   }
 
   return (
-    <section
-      className='grid place-items-center gap-4 grid-cols-auto-250 xl:grid-cols-4'
-      ref={parent}
-    >
-      {suppliers &&
-        suppliers.map((supplier: SahilSupplier) => (
+    <section className="space-y-4">
+      <ListHeader
+        size={suppliersCount?.count}
+        sizeLabel="Suppliers"
+        title="Suppliers"
+      />
+      <List
+        data={suppliers}
+        loading={loading}
+        renderItem={(supplier: SahilSupplier) => (
           <SupplierOverviewCard key={supplier.id} supplier={supplier} />
-        ))}
+        )}
+      />
     </section>
   );
 };
