@@ -14,10 +14,7 @@ import {
   UPDATE_PRODUCT_BY_PK,
 } from '@/lib/graphql/mutations/suppliers';
 
-export const useFetchSuppliers = () => {
-  const router = useRouter();
-  const { query } = router;
-  const category = query.category;
+export const useFetchSuppliers = (category?: string) => {
 
   const graphqlQuery = category ? FETCH_FILTERED_SUPPLIERS : FETCH_SUPPLIERS;
   const { error, data, loading } = useQuery(graphqlQuery, {
@@ -26,7 +23,10 @@ export const useFetchSuppliers = () => {
     },
   });
 
-  return { error, data: data?.suppliers, loading };
+  console.log(error);
+  console.log(data);
+
+  return { error, data: data?.suppliers, loading, suppliersCount: data?.suppliers_aggregate?.aggregate };
 };
 
 export const useFetchSupplierByPK = (id?: string) => {

@@ -8,5 +8,6 @@ export * from "./FormControl";
 export * from "./Header";
 export * from "./Input";
 export * from "./JoinGrid";
+export * from "./List";
 export * from "./Select";
 export * from "./Steps";

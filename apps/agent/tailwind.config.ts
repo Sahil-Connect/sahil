@@ -6,21 +6,6 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {
-    fontFamily: {
-      inter: ['Inter', 'sans-serif'],
-    },
-    extend: {
-      colors: {
-        'black': '#232323',
-        'black-dark': '#121212',
-        'green': '#067a46',
-        'green-dark': '#056835',
-        'gray': '#C3C3D5',
-        'white': '#FAFAFA',
-      },
-    },
-  },
   plugins: [require('daisyui')],
   daisyui: {
     themes: [

@@ -26,7 +26,7 @@ type Props = {
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   return (
-    <Card>
+    <Card className="basis-1/4 grow">
       <div className="justify-between">
         <div className="flex justify-between text-4xl">
           <Link
