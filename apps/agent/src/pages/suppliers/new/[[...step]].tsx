@@ -6,11 +6,11 @@ import {
   SupplierBusinessInfoForm,
   SupplierPreferencesForm,
 } from "@/components/Suppliers/SupplierRegistrationForm";
-import { useSupplierFormStore } from "@/components/Suppliers/SupplierRegistrationForm/useSupplierFormStore";
+import { useSupplierFormStore } from "@/hooks/useSupplierFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { INITIAL_STEP } from "@/components/Suppliers/constants";
 
-const StepsPaginator = ({}) => {
+const StepsPaginator = () => {
   const { steps, goToStep, currentStep } = useSupplierFormStore(
     (state) => state
   );
@@ -19,24 +19,28 @@ const StepsPaginator = ({}) => {
 
   const goToPrevStep = () => {
     goToStep("prev");
-    router.push(`/suppliers/new/${steps[currentIndex - 1]}`);  
+    router.push(`/suppliers/new/${steps[currentIndex - 1]}`);
   };
-  const goTogoToStep = () => {
+  const goToNextStep = () => {
     goToStep("next");
-    router.push(`/suppliers/new/${steps[currentIndex + 1]}`);  
+    router.push(`/suppliers/new/${steps[currentIndex + 1]}`);
   };
 
   return (
     <div className="join grid grid-cols-2">
       <button
-        className={`join-item btn btn-sm btn-ghost ${ currentIndex <= 0 ? "btn-disabled" : null }`}
+        className={`join-item btn btn-sm btn-ghost ${
+          currentIndex <= 0 ? "btn-disabled" : null
+        }`}
         onClick={goToPrevStep}
       >
         Previous
       </button>
       <button
-        className={`join-item btn btn-sm btn-secondary ${currentIndex === steps.length - 1 ? "btn-disabled" : null }`}
-        onClick={goTogoToStep}
+        className={`join-item btn btn-sm btn-secondary ${
+          currentIndex === steps.length - 1 ? "btn-disabled" : null
+        }`}
+        onClick={goToNextStep}
       >
         Next
       </button>
@@ -60,9 +64,9 @@ export default function SupplierRegistrationPage() {
 
   const result = stepRouteSchema.safeParse(params);
 
-  const handleUpdateStepByIndex = (step: (typeof steps)[number]) => {
+  const onUpdateStepByIndex = (step: (typeof steps)[number]) => {
     const stepIndex = steps.indexOf(step);
-    if(stepIndex === currentIndex) {
+    if (stepIndex === currentIndex) {
       return;
     }
     updateStepByIndex(stepIndex);
@@ -84,8 +88,8 @@ export default function SupplierRegistrationPage() {
     },
     {
       title: "Complete Registration",
-      step: "preview"
-    }
+      step: "preview",
+    },
   ];
 
   return (
@@ -93,11 +97,13 @@ export default function SupplierRegistrationPage() {
       <Head>
         <title>Sahil - {headers[currentIndex].title}</title>
       </Head>
-      <main className="min-h-screen p-8 flex items-start">
+      <main className="min-h-screen flex items-start">
         <div className="space-y-4 w-full">
-          <h1 className="text-2xl">Supplier Registration Form</h1>
-          <div className="flex gap-8">
-          <div className="basis-1/5">
+          <div className="bg-base-200 p-4">
+            <h1 className="text-2xl">Supplier Registration Form</h1>
+          </div>
+          <div className="flex">
+            <div className="basis-1/5 p-4">
               <ul className="steps steps-vertical ">
                 {headers.map(({ step, title }, index) => (
                   <li
@@ -105,36 +111,33 @@ export default function SupplierRegistrationPage() {
                       step === currentStep ? "step-secondary" : null
                     }`}
                     key={index}
-                    onClick={() => handleUpdateStepByIndex(step)}
+                    onClick={() => onUpdateStepByIndex(step)}
                   >
                     {title}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="basis-2/5 space-y-4">
+            <div className="divider divider-horizontal"></div>
+            <div className="grow space-y-4 p-4">
               <div className="flex justify-between items-center w-full">
                 <div>
-                  <p>
+                  <h3 className="text-xl text-neutral-content">
                     Step {steps.indexOf(currentStep) + 1} out of {steps.length}
-                  </p>
+                  </h3>
                 </div>
                 <StepsPaginator />
               </div>
+              <div className="divider"></div>
               <div className="card card-compact shadow">
                 <div className="card-body">
                   <h2 className="card-title">{headers[currentIndex].title}</h2>
-                  {currentStep === "business_info" && (
-                    <SupplierBasicInfoForm />
-                  )}
+                  {currentStep === "business_info" && <SupplierBasicInfoForm />}
                   {currentStep === "contact_details" && (
                     <SupplierBusinessInfoForm />
                   )}
-                  {currentStep === "preferences" && (
-                    <SupplierPreferencesForm />
-                  )}
-                  {
-                    currentStep === "preview" && <PreviewSupplierInfo />}
+                  {currentStep === "preferences" && <SupplierPreferencesForm />}
+                  {currentStep === "preview" && <PreviewSupplierInfo />}
                 </div>
               </div>
             </div>

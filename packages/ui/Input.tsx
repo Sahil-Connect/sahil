@@ -1,15 +1,16 @@
 import { FC } from "react";
 
-type Props = {
-  type: string;
+type InputProps = {
+  placeholder?: string;
+  type?: string;
 };
 
-export const Input: FC<Props> = ({ type, ...props }) => {
+export const Input: FC<InputProps> = ({ type = "text", ...props }) => {
   return (
     <input
-      className="input input-bordered w-full"
+      className="input input-sm input-bordered w-full bg-slate-100"
       type={type}
-      placeholder="..."
+      placeholder={props.placeholder || "..."}
       {...props}
     />
   );

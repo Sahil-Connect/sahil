@@ -2,10 +2,8 @@ import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSupplierFormStore } from "./useSupplierFormStore";
+import { useSupplierFormStore } from "../../../hooks/useSupplierFormStore";
 import { useRouter } from "next/router";
-
-type Props = {};
 
 const supplierPrefencesSchema = z.object({
   zone: z.string(),
@@ -13,10 +11,10 @@ const supplierPrefencesSchema = z.object({
 
 type FormData = z.infer<typeof supplierPrefencesSchema>;
 
-export const SupplierPreferencesForm: FC<Props> = () => {
-  const { goToStep, updateStepData } = useSupplierFormStore((state) => ({
+export const SupplierPreferencesForm = () => {
+  const { goToStep, updateStepFormData } = useSupplierFormStore((state) => ({
     goToStep: state.goToStep,
-    updateStepData: state.updateStepData,
+    updateStepFormData: state.updateStepFormData,
   }));
   const {
     register,
@@ -30,7 +28,7 @@ export const SupplierPreferencesForm: FC<Props> = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierPrefencesSchema.parse(data);
-    updateStepData(validatedInput);
+    updateStepFormData(validatedInput);
     goToStep("next");
     router.push(`/suppliers/new/preview`);
   };

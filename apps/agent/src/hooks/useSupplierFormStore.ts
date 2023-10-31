@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { INITIAL_STEP } from '../constants';
+import { INITIAL_STEP } from '../components/Suppliers/constants';
 
 const steps = [
   "business_info",
@@ -12,7 +12,16 @@ export type StepDirection = "prev" | "next";
 
 export type FormState = Record<string, any>;
 
-export const useSupplierFormStore = create((set) => ({
+type SupplierFormStore = {
+  currentStep: typeof steps[number];
+  steps: typeof steps;
+  goToStep: (direction: StepDirection) => void;
+  updateStepByIndex: (stepIndex: number) => void;
+  updateStepFormData: (formData: any) => void;
+  formData: any;
+};
+
+export const useSupplierFormStore = create<SupplierFormStore>((set) => ({
   currentStep: INITIAL_STEP,
   formData: {
     name: "",
@@ -35,7 +44,7 @@ export const useSupplierFormStore = create((set) => ({
     });
   },
   updateStepByIndex: (stepIndex: number) => {
-    set((state: FormState) => {
+    set((state) => {
       const currentIndex = steps.indexOf(state.currentStep);
       if (currentIndex !== -1 && currentIndex <= steps.length - 1) {
         return ({
@@ -46,10 +55,10 @@ export const useSupplierFormStore = create((set) => ({
       return ({
         ...state
       });
-    })
+    });
   },
-  updateStepData: (formData: Record<string, any>) => {
-    set((state: FormState) => {
+  updateStepFormData: (formData: Record<string, any>) => {
+    set((state) => {
       return ({
         ...state,
         formData: {
@@ -57,6 +66,6 @@ export const useSupplierFormStore = create((set) => ({
           ...formData,
         }
       })
-    })
+    });
   }
 }))

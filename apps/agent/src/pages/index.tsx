@@ -1,99 +1,99 @@
-import { Inter } from "next/font/google";
-// import { Button } from "ui";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Card } from "ui";
+import {
+  HiArrowLeft,
+  HiArrowRight,
+  HiMinus,
+  HiPlus,
+  HiOutlineChevronUpDown,
+  HiOutlineFunnel,
+  HiOutlineShoppingCart,
+  HiXMark,
+  HiOutlineBanknotes,
+  HiArrowPath,
+  HiSignalSlash,
+  HiOutlineBuildingOffice,
+  HiOutlineUsers,
+  HiOutlineTruck,
+} from "react-icons/hi2";
 
 export default function Home() {
   return (
-    <main className="min-h-screen p-8 bg-base-200">
+    <main className="min-h-screen p-8">
       <div className="space-y-4">
-        <div>
-          <h1 className="text-3xl">Welcome, Keji Lumori</h1>
-          <p>Munuki Market</p>
-          <p>Wednesday, 23rd Aug</p>
-        </div>
-        <div className="flex gap-2 items-start">
-          <div className="card card-compact bg-base-100">
-            <div className="card-body">
-              <div className="space-y-2">
-                <h2 className="card-title">Register Business or Supplier</h2>
-                <p>
-                  Users can register through agents, an app, or USSD codes and
-                  set delivery preferences.
-                </p>
-                <button className="btn btn-sm btn-primary">Proceed</button>
-              </div>
-            </div>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl">Hi, Keji Lumori</h1>
           </div>
-
-          <div className="card card-compact bg-base-100">
-            <div className="card-body">
-              <div className="space-y-2">
-                <h2 className="card-title">Place Order</h2>
-                <p>
-                  Users can register through agents, an app, or USSD codes and
-                  set delivery preferences.
-                </p>
-                <button className="btn btn-sm btn-primary">Proceed</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact bg-base-100">
-            <div className="card-body">
-              <div className="space-y-2">
-                <h2 className="card-title">Manage Order</h2>
-                <p>
-                  Users can register through agents, an app, or USSD codes and
-                  set delivery preferences.
-                </p>
-                <button className="btn btn-sm btn-primary">Proceed</button>
-              </div>
+          <div className="flex gap-2">
+            <button className="btn btn-sm">
+              <HiPlus /> New Order
+            </button>
+            <div className="dropdown dropdown-hover">
+              <label tabIndex={0} className="btn btn-sm btn-primary">
+                <HiOutlineUsers /> Register Customer
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 my-2"
+              >
+                <li>
+                  <a href="/businesses/new/business_info">
+                    <HiOutlineBuildingOffice /> Business
+                  </a>
+                </li>
+                <li>
+                  <a href="/suppliers/new/business_info">
+                    <HiOutlineTruck /> Supplier
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+        <div className="divider">Wednesday</div>
         <div className="space-y-2">
           <div className="flex justify-between items-start">
             <div>
-              <h3 className="text-2xl">New Orders</h3>
+              <h3 className="text-xl">Wednesday, 23rd Aug</h3>
+            </div>
+          </div>
+          <div className="bg-base-200 p-2 rounded-lg flex justify-between items-center">
+            <div>
+              <div className="badge badge-accent">3 Orders</div>
+            </div>
+            <div className="flex gap-2">
+              <button className="btn btn-sm">Filter</button>
+              <button className="btn btn-sm">Sort by</button>
             </div>
           </div>
           <div className="flex gap-2">
-            <div className="card card-compact bg-base-100">
-              <div className="card-body">
-                <h2 className="card-title">Fish 10kgs</h2>
-                <p>Cheben Gabriel</p>
-                <div>
-                  <p>Souq Libya --- Midan Jamus </p>
-                  <p>Cash</p>
+            <Card title="Fish 10kgs" titleSize="sm">
+              <p>Cheben Gabriel</p>
+              <div className="space-y-2">
+                <p>Souq Libya --- Midan Jamus </p>
+                <div className="badge">
+                  <HiOutlineBanknotes /> Cash
                 </div>
               </div>
-            </div>
-            <div className="card card-compact bg-base-100">
-              <div className="card-body">
-                <h2 className="card-title">Oil 15L</h2>
-                <p>Cheben Gabriel</p>
-                <div>
-                  <p>Souq Libya --- Midan Jamus </p>
-                  <p>MGurush</p>
+            </Card>
+            <Card title="Oil 15L" titleSize="sm">
+              <p>Cheben Gabriel</p>
+              <div className="space-y-2">
+                <p>Souq Libya --- Midan Jamus </p>
+                <div className="badge">
+                  <HiOutlineBanknotes /> MGurush
                 </div>
               </div>
-            </div>
-            <div className="card card-compact bg-base-100">
-              <div className="card-body">
-                <h2 className="card-title">Milk 7L</h2>
-                <p>Cheben Gabriel</p>
-                <div>
-                  <p>Souq Libya --- Midan Jamus </p>
-                  <p>MomoPay</p>
+            </Card>
+            <Card title="Milk 7L" titleSize="sm">
+              <p>Cheben Gabriel</p>
+              <div className="space-y-2">
+                <p>Souq Libya --- Midan Jamus </p>
+                <div className="badge">
+                  <HiOutlineBanknotes /> MomoPay
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div>
-            <h3 className="text-2xl">Parcels</h3>
-            <p>Shows the items that are currently in store.</p>
+            </Card>
           </div>
         </div>
       </div>

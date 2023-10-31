@@ -1,11 +1,11 @@
 "use client";
 import { FC } from "react";
 
-export type Props = {
+export type ButtonProps = {
   cta: string;
 };
 
-export const Button: FC<Props> = ({ cta }) => {
+export const Button: FC<ButtonProps> = ({ cta = "button" }) => {
   return (
     <button className="btn" onClick={() => alert("boop")}>
       {cta}
