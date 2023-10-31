@@ -1,6 +1,6 @@
 import { SupplierOverviewCard } from "./SupplierOverviewCard";
 import { useFetchSuppliers } from "@/hooks/suppliers";
-import { JoinGrid, List, ListErrorState } from "ui";
+import { JoinGrid, List, ListHeader, ListErrorState } from "ui";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
 
 export type SahilSupplier = {
@@ -35,24 +35,11 @@ export const ListSuppliers = () => {
 
   return (
     <section className="space-y-4">
-      <div className="flex items-center justify-between bg-primary">
-        <div className="flex gap-2 items-center">
-          <h3 className="text-lg">Suppliers</h3>
-          <div className="badge badge-accent">
-            {suppliersCount.count} Suppliers
-          </div>
-        </div>
-        <div>
-          <JoinGrid>
-            <button className="join-item btn btn-sm" title="Left">
-              <HiArrowLeft />
-            </button>
-            <button className="join-item btn btn-sm" title="Right">
-              <HiArrowRight />
-            </button>
-          </JoinGrid>
-        </div>
-      </div>
+      <ListHeader
+        size={suppliersCount.count}
+        sizeLabel="Suppliers"
+        title="Suppliers"
+      />
       <List
         data={suppliers}
         loading={loading}

@@ -16,33 +16,29 @@ type ListAsyncResultProps = {
 export const ListErrorState: FC<ListAsyncResultProps> = ({
   heading,
   message,
-}) => {
-  return (
-    <Card>
-      <h3 className="card-title">{heading}</h3>
-      <p>{message}</p>
-      <div className="card-actions">
-        <button className="btn btn-sm btn-secondary">Reload</button>
-        <button className="btn btn-sm btn-outline">Go Back</button>
-      </div>
-    </Card>
-  );
-};
+}) => (
+  <Card>
+    <h3 className="card-title">{heading}</h3>
+    <p>{message}</p>
+    <div className="card-actions">
+      <button className="btn btn-sm btn-secondary">Reload</button>
+      <button className="btn btn-sm btn-outline">Go Back</button>
+    </div>
+  </Card>
+);
 export const ListLoadingState: FC<ListAsyncResultProps> = ({
   heading,
   message,
-}) => {
-  return (
-    <Card>
-      <h3 className="card-title">{heading}</h3>
-      <p>{message}</p>
-      <div className="card-actions">
-        <button className="btn btn-sm btn-secondary">Reload</button>
-        <button className="btn btn-sm btn-outline">Go Back</button>
-      </div>
-    </Card>
-  );
-};
+}) => (
+  <Card>
+    <h3 className="card-title">{heading}</h3>
+    <p>{message}</p>
+    <div className="card-actions">
+      <button className="btn btn-sm btn-secondary">Reload</button>
+      <button className="btn btn-sm btn-outline">Go Back</button>
+    </div>
+  </Card>
+);
 
 export const List = <T extends unknown>({
   data,
