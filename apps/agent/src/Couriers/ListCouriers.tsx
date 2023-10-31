@@ -1,29 +1,19 @@
-const couriers = [
-    {
-        id: 1,
-        name: "Wani Michael",
-    },
-    {
-        id: 2,
-        name: "Maged Faiz"
-    },
-    {
-        id: 3,
-        name: "Maged Faiz"
-    }
-];
-
-const CourierOveriewCard = ({ courier }) => {
-    return (
-        <div>
-            <h3>{courier.name}</h3>
-        </div>
-    )
-}
+import { useFetchCouriers } from "@/hooks/couriers";
+import { CourierOveriewCard } from "./CourierOverviewCard";
 
 export const ListCouriers = () => {
+    const { data: couriers, error, loading } = useFetchCouriers();
+    if(error) {
+        return (
+            <p>Failed to load couriers</p>
+        )
+    }
+
+    if(loading) {
+        return (<p>Loading</p>)
+    }
     return (
-        <div>
+        <div className="flex flex-wrap gap-2">
             {
                 couriers.map(courier =><CourierOveriewCard  key={courier.id} courier={courier}/>)
             }

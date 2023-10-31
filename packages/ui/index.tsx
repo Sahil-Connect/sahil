@@ -1,6 +1,7 @@
 import * as React from "react";
 
 // component exports
+export * from "./Avatar";
 export * from "./Button";
 export * from "./Card";
 export * from "./FormControl";
