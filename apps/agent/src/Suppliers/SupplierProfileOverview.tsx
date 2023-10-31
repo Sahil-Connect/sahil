@@ -1,4 +1,4 @@
-import { formatCategoryName } from './SupplierOverviewCard';
+import { formatCategoryName } from '@sahil/lib/strings';
 import {
   HiOutlinePhone,
   HiOutlineMapPin,

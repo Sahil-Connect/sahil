@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { HiOutlineFunnel, HiFunnel, HiXMark } from 'react-icons/hi2';
-import { formatCategoryName } from './SupplierOverviewCard';
+import { formatCategoryName } from '@sahil/lib/strings';
 
 const FilterSuppliersModal = () => {
   const [category, setCategory] = useState<string>('');

@@ -1,7 +1,9 @@
-export const CourierProfileOveriew = () => {
+import { Avatar, Card } from "ui";
+export const CourierProfileOveriew = ({ courier }) => {
     return (
-        <div>
-            <h3>Hello</h3>
-        </div>
+        <Card>
+            <Avatar src={courier.avatar} alt={courier.name}/>
+            <h3>{courier.name}</h3>
+        </Card>
     )
 };

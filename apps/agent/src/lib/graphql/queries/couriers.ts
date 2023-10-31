@@ -12,3 +12,13 @@ query getCouriers {
     }
 }
 `;
+
+export const FETCH_COURIER_BY_PK = gql`
+query getCouriersByPK($id: uuid!) {
+    couriers_by_pk(id: $id) {
+        id
+        name
+        avatar
+    }
+}
+`;
