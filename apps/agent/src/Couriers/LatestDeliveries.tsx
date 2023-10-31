@@ -28,7 +28,10 @@ export const LatestDeliveries = ({ courierId }) => {
             <button className="join-item btn btn-xs" title="Arrow Left">
               <HiArrowLeft />
             </button>
-            <button className="join-item btn btn-xs" title="Arrow Left">
+            <button
+              className="join-item btn btn-xs btn-secondary"
+              title="Arrow Right"
+            >
               <HiArrowRight />
             </button>
           </JoinGrid>

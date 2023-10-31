@@ -41,7 +41,6 @@ export const AgentToolBar = () => {
             </li>
           </ul>
         </div>
-        <button className="btn btn-sm btn-error"><HiOutlineBugAnt /> Report Problem</button>
       </div>
     </div>
   );

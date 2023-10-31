@@ -24,9 +24,13 @@ export default function CourierPage() {
 
   return (
     <main className="p-8 space-y-4">
-      <section className="flex gap-4">
-        <CourierProfileOveriew courier={courier} />
-        <div className="space-y-2">
+      <CourierStats />
+      <section className="flex">
+        <div className="basis-1/4">
+          <CourierProfileOveriew courier={courier} />
+        </div>
+        <div className="divider divider-horizontal"></div>
+        <div className="space-y-2 grow">
           <LatestDeliveries courierId={courierId} />
           <VehicleInfo />
           <ZoneInformation />

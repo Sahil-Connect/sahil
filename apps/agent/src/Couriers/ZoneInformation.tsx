@@ -1,3 +1,4 @@
+import { Avatar, Card } from "ui";
 export const ZoneInformation = () => {
-  return <p>Souq Munuki</p>;
+  return <Card>Souq Munuki</Card>;
 };
