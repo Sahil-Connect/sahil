@@ -1,0 +1,22 @@
+{
+  "name": "payments",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "compile": "tsc -p .",
+    "clean": "rm -r ./dist",
+    "dev": "npm run compile && node ./dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "node": "^21.1.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@apollo/datasource-rest": "^6.2.2",
+    "@apollo/server": "^4.9.5",
+    "graphql": "^16.8.1"
+  }
+}
