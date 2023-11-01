@@ -76,9 +76,11 @@ const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
         </p>
       </div>
 
-      <p className='text-sm'>{product.description}</p>
+      <div className='grow grid items-center'>
+        <p className='text-sm'>{product.description}</p>
+      </div>
 
-      <div className='flex flex-wrap items-center gap-2 mt-2 w-max'>
+      <div className='flex flex-wrap items-center gap-2'>
         <div className='flex items-center gap-1'>
           <span className='text-lg shadow rounded-md p-2'>
             <HiOutlineBanknotes />
