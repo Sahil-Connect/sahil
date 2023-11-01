@@ -16,7 +16,7 @@ export const ListHeader = ({
   title,
 }: ListHeaderProps) => {
   return (
-    <div className="flex items-center justify-between bg-primary">
+    <div className="flex items-center justify-between">
       <div className="flex gap-2 items-center">
         <h3 className="text-lg">{title}</h3>
         <div className="badge badge-accent">

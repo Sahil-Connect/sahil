@@ -1,6 +1,6 @@
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["ui"],
+  transpilePackages: ["ui", "@sahil/configs"],
 }
 
 module.exports = nextConfig

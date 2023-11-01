@@ -17,7 +17,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "tailwindcss": "^3.3.3",
-    "ui": "*"
+    "ui": "*",
+    "@sahil/configs": "*"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",

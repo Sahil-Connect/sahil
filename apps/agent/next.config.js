@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["@sahil/lib", "ui"],
+  transpilePackages: ['@sahil/lib', 'ui', '@sahil/configs'],
   images: {
     remotePatterns: [
       {
@@ -11,6 +11,6 @@ const nextConfig = {
       },
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -26,8 +26,8 @@ type Props = {
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   return (
-    <Card className="basis-1/4 grow">
-      <div className="justify-between">
+    <Card className="">
+      
         <div className="flex justify-between text-4xl">
           <Link
             href={`/suppliers/${supplier.id}`}
@@ -41,7 +41,7 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
             <HiEllipsisHorizontal />
           </button>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 grow">
           <Link href={`/suppliers/${supplier.id}`} className="card-title">
             {supplier.name}
           </Link>
@@ -88,7 +88,7 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
             </div>
           </div>
         </div>
-      </div>
+      
     </Card>
   );
 };

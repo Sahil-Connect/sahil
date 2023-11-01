@@ -1,13 +1,12 @@
 import type { Config } from 'tailwindcss';
 
+const baseConfig: Config = require('@sahil/configs/tailwind/tailwind.config');
+
+
 const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  ...baseConfig,
   theme: {
+    ...baseConfig.theme,
     fontFamily: {
       montserrat: ['Montserrat', 'sans-serif'],
     },
@@ -24,6 +23,7 @@ const config: Config = {
       '5xl': '1700px',
     },
     extend: {
+      ...baseConfig.theme?.extend,
       fontSize: {
         'smaller': '.75rem',
         'small': '.813rem',
@@ -59,7 +59,7 @@ const config: Config = {
   corePlugins: {
     container: false,
   },
-  plugins: [require('daisyui')],
+  plugins: [...baseConfig.plugins, require('daisyui')],
   // daisyui: {
   //   themes: ['lemonade'],
   // },

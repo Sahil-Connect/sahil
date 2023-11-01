@@ -9,8 +9,8 @@ export type CardProps = {
 
 export const Card = ({ children, className, title, titleSize = "md" }: CardProps) => {
   return (
-    <div className={`card card-compact shadow bg-white ${className}`}>
-      <div className="card-body">
+    <div className={`card card-compact card-bordered bg-base-100 w-full h-full ${className}`}>
+      <div className="card-body flex-col h-full">
         <h2 className={`card-title text-${titleSize}`}>{title}</h2>
         {children}
       </div>
