@@ -21,7 +21,9 @@ export default function SupplierPage() {
           <ServiceZones />
         </div>
         <div className='basis-4/5 space-y-4'>
-          <SupplierProducts />
+          <SupplierProducts
+            productsCount={supplier?.products_aggregate.aggregate.count}
+          />
           <SupplierOrderHistory />
         </div>
       </div>
