@@ -15,16 +15,12 @@ import {
 } from '@/lib/graphql/mutations/suppliers';
 
 export const useFetchSuppliers = (category?: string) => {
-
   const graphqlQuery = category ? FETCH_FILTERED_SUPPLIERS : FETCH_SUPPLIERS;
   const { error, data, loading } = useQuery(graphqlQuery, {
     variables: {
       category_name: category!,
     },
   });
-
-  console.log(error);
-  console.log(data);
 
   return { error, data: data?.suppliers, loading, suppliersCount: data?.suppliers_aggregate?.aggregate };
 };
@@ -58,11 +54,9 @@ export const useFetchSupplierProducts = (page: number = 0, id?: string) => {
   });
 
   // Memoize the result based on the page and ids
-  const memoizedData = useMemo(() => {
+  return useMemo(() => {
     return { error, data: data?.products, loading };
   }, [page, id, product, supplierId, error, data, loading]);
-
-  return memoizedData;
 };
 
 export const useRegisterSupplier = () => {

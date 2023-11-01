@@ -5,6 +5,7 @@ type Props = {
   onUpdateStepByIndex: (step: any) => void;
 };
 
+// Create a generic steps component similar to <List />
 export const BusinessFormSteps = ({
   currentStep,
   headers,

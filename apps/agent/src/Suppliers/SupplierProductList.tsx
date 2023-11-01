@@ -19,7 +19,7 @@ const SupplierProductList = ({ page }: { page: number }) => {
   if (error)
     return (
       <div>
-        <p>An error occurred, couldn't load products1</p>
+        <p>An error occurred, couldn't load products.</p>
       </div>
     );
 

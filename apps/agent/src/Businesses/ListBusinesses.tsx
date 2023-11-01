@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BusinessOverviewCard } from "./BusinessOverviewCard";
 import { useFetchBusinesses } from "@/hooks/businesses";
 import { List, ListHeader, ListErrorState } from "ui";
@@ -8,20 +9,35 @@ export type SahilBusiness = {
 };
 
 export const ListBusinesses = () => {
-  const { data: businesses, error, loading, businessCount } = useFetchBusinesses();
-  if (error) {
-    return (
-      <ListErrorState
-        heading="Unable to load products..."
-        message="Products aren't loading due to a technical problem on our side. Please
-      try again."
-      />
-    );
-  }
+  const [page, setPage] = useState(0);
+  const {
+    data: businesses,
+    error,
+    loading,
+    businessCount,
+  } = useFetchBusinesses();
+
+  const onNextPage = () => {
+    setPage((prev) => prev + 1);
+  };
+  const onPreviousPage = () => {
+    setPage((prev) => {
+      if (page > 0) {
+        return prev;
+      }
+      return prev - 1;
+    });
+  };
 
   return (
     <section className="space-y-4">
-      <ListHeader size={businessCount?.count} sizeLabel="Businsses" title="Businsses" />
+      <ListHeader
+        onNextPage={onNextPage}
+        onPreviousPage={onPreviousPage}
+        size={businessCount?.count}
+        sizeLabel="Businsses"
+        title="Businsses"
+      />
       <List
         data={businesses}
         loading={loading}

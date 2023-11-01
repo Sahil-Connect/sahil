@@ -1,9 +1,11 @@
 import { FC, Fragment } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Card } from "./Card";
+import type { ApolloError } from "@apollo/client";
 
 type ListProps<T> = {
   data: T[];
+  error?: ApolloError;
   loading?: boolean;
   renderItem: (item: T) => JSX.Element;
 };
@@ -36,11 +38,21 @@ export const ListLoadingState: FC<ListAsyncResultProps> = ({
 
 export const List = <T extends unknown>({
   data,
+  error,
   loading,
   renderItem,
 }: ListProps<T>) => {
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
+  if (error) {
+    return (
+      <ListErrorState
+        heading="Unable to load products..."
+        message="Products aren't loading due to a technical problem on our side. Please
+      try again."
+      />
+    );
+  }
   if (data?.length === 0) {
     return (
       <div>

@@ -1,6 +1,6 @@
 import { SupplierOverviewCard } from "./SupplierOverviewCard";
 import { useFetchSuppliers } from "@/hooks/suppliers";
-import { List, ListHeader, ListErrorState } from "ui";
+import { List, ListHeader } from "ui";
 
 export type SahilSupplier = {
   id: string;
@@ -22,16 +22,6 @@ export const ListSuppliers = () => {
     suppliersCount,
   } = useFetchSuppliers();
 
-  if (error) {
-    return (
-      <ListErrorState
-        heading="Unable to load products..."
-        message="Products aren't loading due to a technical problem on our side. Please
-      try again."
-      />
-    );
-  }
-
   return (
     <section className="space-y-4">
       <ListHeader
@@ -41,6 +31,7 @@ export const ListSuppliers = () => {
       />
       <List
         data={suppliers}
+        error={error}
         loading={loading}
         renderItem={(supplier: SahilSupplier) => (
           <SupplierOverviewCard key={supplier.id} supplier={supplier} />
