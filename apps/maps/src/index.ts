@@ -1,9 +1,11 @@
+import { config } from "dotenv";
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 import { Client } from "@googlemaps/google-maps-services-js";
 import type { GeocodeRequest, GeocodeResult } from '@googlemaps/google-maps-services-js';
 
+config();
 export const typeDefs = `#graphql
     type Places {
         name: String
@@ -219,7 +221,7 @@ const server = new ApolloServer<ContextValue>({
 
 const { url } = await startStandaloneServer(server, {
     context: async () => {
-        const key = process.env.key;
+        const key = process.env.API_KEY;
         const googleDirectionsAPI = new GoogleDirectionsAPI({ key });
         const googleGeocodingAPI = new GoogleGeocodingAPI({ key });
         const googlePlacesAPI = new GooglePlacesAPI({ key });
