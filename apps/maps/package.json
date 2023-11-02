@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/datasource-rest": "^6.1.0",
     "@apollo/server": "^4.9.3",
+    "@googlemaps/google-maps-services-js": "^3.3.41",
     "graphql": "^16.8.0"
   },
   "devDependencies": {
