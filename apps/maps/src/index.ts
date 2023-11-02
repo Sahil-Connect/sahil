@@ -48,7 +48,7 @@ class GooglePlacesAPI extends RESTDataSource {
         request.params.set('location', `4.859363,31.571251`);
         request.params.set('radius', `100`);
         request.params.set('type', `restaurant`);
-        request.params.set('key', `AIzaSyCL9sSCrI2VKvzRDFY3fAlh7wgUGZp5jcA`);
+        request.params.set('key', ``);
     }
     
     async getRestaurants() {
