@@ -45,3 +45,19 @@ export const DELETE_PRODUCT_BY_PK = gql`
     }
   }
 `;
+
+export const ADD_NEW_PRODUCT = gql`
+  mutation addNewProduct($product: products_insert_input = {}) {
+    insert_products_one(object: $product) {
+      created_at
+      description
+      discount
+      id
+      inStock
+      name
+      price
+      quantity
+      supplier_id
+    }
+  }
+`;

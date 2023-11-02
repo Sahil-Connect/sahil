@@ -1,5 +1,4 @@
-import { FC, ReactNode } from 'react';
-import { IconType } from 'react-icons';
+import { ReactNode } from 'react';
 import { HiXMark } from 'react-icons/hi2';
 
 export type ModalProps = {
@@ -28,14 +27,14 @@ const Modal = ({
   return (
     <>
       <button
-        className={`btn btn-${btnSize} btn-${btnStyle} ${className}`}
+        className={`btn btn-${btnSize} btn-${btnStyle}  ${className}`}
         onClick={() => document.getElementById(id)?.showModal()}
       >
         {icon}
         {CTA}
       </button>
       <dialog id={id} className='modal'>
-        <div className='modal-box justify-items-center'>
+        <div className='modal-box'>
           <form method='dialog'>
             {/* if there is a button in form, it will close the modal */}
             <button

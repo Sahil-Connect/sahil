@@ -5,6 +5,9 @@ export type JoinGridProps = {
   cols?: number;
 };
 export const JoinGrid: FC<JoinGridProps> = ({ children, cols = 2 }) => {
-  const classes = `join grid grid-cols-` + `${cols}`;
-  return <div className={classes}>{children}</div>;
+  return (
+    <div className={`join grid  ${cols ? `grid-cols-${cols}` : 'grid-cols-2'}`}>
+      {children}
+    </div>
+  );
 };

@@ -9,6 +9,7 @@ import {
   FETCH_SUPPLIER_PRODUCT_BY_NAME,
 } from '@/lib/graphql/queries/suppliers';
 import {
+  ADD_NEW_PRODUCT,
   DELETE_PRODUCT_BY_PK,
   INSERT_NEW_SUPPLIER,
   UPDATE_PRODUCT_BY_PK,
@@ -22,7 +23,12 @@ export const useFetchSuppliers = (category?: string) => {
     },
   });
 
-  return { error, data: data?.suppliers, loading, suppliersCount: data?.suppliers_aggregate?.aggregate };
+  return {
+    error,
+    data: data?.suppliers,
+    loading,
+    suppliersCount: data?.suppliers_aggregate?.aggregate,
+  };
 };
 
 export const useFetchSupplierByPK = (id?: string) => {
@@ -89,9 +95,24 @@ export const useDeleteProduct = () => {
     }
   );
   return {
-    deleted: data?.delete_products_by_pk,
+    data: data?.delete_products_by_pk,
     loading,
     deleteProduct,
+    error,
+  };
+};
+
+export const useAddNewProduct = () => {
+  const [addNewProduct, { data, loading, error }] = useMutation(
+    ADD_NEW_PRODUCT,
+    {
+      refetchQueries: [FETCH_SUPPLIER_PRODUCTS],
+    }
+  );
+  return {
+    data: data?.delete_products_by_pk,
+    loading,
+    addNewProduct,
     error,
   };
 };

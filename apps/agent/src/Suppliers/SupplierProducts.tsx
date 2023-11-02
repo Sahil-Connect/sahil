@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import SupplierProductList from './SupplierProductList';
-import {
-  HiOutlinePlusCircle,
-  HiMagnifyingGlass,
-  HiOutlineXMark,
-} from 'react-icons/hi2';
+import AddNewProductModal from './AddNewProductModal';
+import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 type props = {
   productsCount: number;
@@ -14,6 +11,7 @@ type props = {
 export const SupplierProducts = ({ productsCount }: props) => {
   const [name, setName] = useState('');
   const router = useRouter();
+  const { supplierId } = router.query;
 
   const onInputChange = (e: { target: { value: string } }) => {
     const value = e.target.value;
@@ -24,7 +22,6 @@ export const SupplierProducts = ({ productsCount }: props) => {
   };
 
   const handleSearch = () => {
-    const { supplierId } = router.query;
     const query = { product: name };
     const queryString = new URLSearchParams(query).toString();
     const newUrl = `/suppliers/${supplierId}?${queryString}`;
@@ -61,10 +58,7 @@ export const SupplierProducts = ({ productsCount }: props) => {
               </button>
             </div>
           </div>
-          <button className='btn btn-sm btn-primary normal-case'>
-            <HiOutlinePlusCircle className='text-xl' />
-            Add Product
-          </button>
+          <AddNewProductModal supplier_id={supplierId as string} />
         </div>
       </div>
       <SupplierProductList productsCount={productsCount} />
