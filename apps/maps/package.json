@@ -5,12 +5,14 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "compile": "tsc",
-    "start": "npm run compile && node ./dist/index.js"
+    "compile": "tsc -p .",
+    "clean": "rm -r ./dist",
+    "dev": "npm run compile && node ./dist/index.js"
   },
   "dependencies": {
     "@apollo/datasource-rest": "^6.1.0",
     "@apollo/server": "^4.9.3",
+    "@googlemaps/google-maps-services-js": "^3.3.41",
     "graphql": "^16.8.0"
   },
   "devDependencies": {
