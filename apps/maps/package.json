@@ -5,8 +5,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "compile": "tsc",
-    "start": "npm run compile && node ./dist/index.js"
+    "compile": "tsc -p .",
+    "clean": "rm -r ./dist",
+    "dev": "npm run compile && node ./dist/index.js"
   },
   "dependencies": {
     "@apollo/datasource-rest": "^6.1.0",

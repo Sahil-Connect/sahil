@@ -6,10 +6,21 @@ import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 
 export const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
-  type Query {}
+  type Places {
+        name: String
+        lat: String
+        long: String
+        rating: Float
+        address: String
+        location: String
+    }
+
+    type Query {
+        places: [Places]
+    }
 `;
 
-class GooglePlacesAPI extends RESTDataSource {
+class GoogleDirectionsAPI extends RESTDataSource {
     override baseURL = '';
 
     constructor(options: { token?: string; cache: KeyValueCache }) {
@@ -18,6 +29,35 @@ class GooglePlacesAPI extends RESTDataSource {
 
 }
 
+class GoogleGeocodingAPI extends RESTDataSource {
+    override baseURL = '';
+
+    constructor(options: { token?: string; cache: KeyValueCache }) {
+        super(options);
+    }
+}
+
+class GooglePlacesAPI extends RESTDataSource {
+    override baseURL = 'https://maps.googleapis.com/maps/';
+
+    constructor(options: { token?: string; cache: KeyValueCache }) {
+        super(options);
+    }
+
+    override willSendRequest(_path: string, request: AugmentedRequest) {
+        request.params.set('location', `4.859363,31.571251`);
+        request.params.set('radius', `100`);
+        request.params.set('type', `restaurant`);
+        request.params.set('key', `AIzaSyCL9sSCrI2VKvzRDFY3fAlh7wgUGZp5jcA`);
+    }
+    
+    async getRestaurants() {
+        const { results } = await this.get(`/maps/api/place/nearbysearch/json`);
+        return results;
+    }
+}
+
+
 interface ContextValue {
     dataSources: {
         googlePlacesAPI: GooglePlacesAPI;
@@ -25,11 +65,10 @@ interface ContextValue {
 }
 
 const resolvers = {
-    Mutation: {
-
-    },
     Query: {
-
+        places: async (_, __, { dataSources }) => {
+            return dataSources.googlePlacesAPI.getRestaurants();
+        }
     }
 };
 
