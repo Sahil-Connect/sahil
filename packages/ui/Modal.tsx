@@ -24,11 +24,17 @@ const Modal = ({
   CloseBtnRef,
   className,
 }: ModalProps) => {
+  const handleOpenModal = () => {
+    if (document) {
+      (document.getElementById(id) as HTMLFormElement).showModal();
+    }
+  };
+
   return (
     <>
       <button
         className={`btn btn-${btnSize} btn-${btnStyle} normal-case  ${className}`}
-        onClick={() => document.getElementById(id)?.showModal()}
+        onClick={handleOpenModal}
       >
         {icon}
         {CTA}
