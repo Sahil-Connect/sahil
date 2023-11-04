@@ -7,7 +7,7 @@ import {
 } from 'react-hook-form';
 import { FormControl } from './FormControl';
 
-type InputProps<T> = {
+type InputProps<T extends FieldValues> = {
   label?: string;
   name: Path<T>;
   register: UseFormRegister<T>;
@@ -18,7 +18,7 @@ type InputProps<T> = {
   valueAsNumber?: boolean;
 };
 
-export const Input = <T,>({
+export const Input = <T extends FieldValues>({
   name,
   register,
   errors,

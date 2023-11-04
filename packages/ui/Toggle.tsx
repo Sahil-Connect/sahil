@@ -7,7 +7,7 @@ import {
 } from 'react-hook-form';
 import { FormControl } from './FormControl';
 
-type ToggleProps<T> = {
+type ToggleProps<T extends FieldValues> = {
   label?: string;
   name: Path<T>;
   register: UseFormRegister<T>;
@@ -15,7 +15,7 @@ type ToggleProps<T> = {
   isChecked?: boolean;
 };
 
-export const Toggle = <T,>({
+export const Toggle = <T extends FieldValues>({
   name,
   register,
   errors,
