@@ -35,7 +35,6 @@ export const LatestOrders = () => {
         {orders.map((order) => (
           <div key={order.id} className="basis-1/4">
             <Card title={order.orderId} titleSize="sm">
-              <p>Cheben Gabriel</p>
               <div className="space-y-2">
                 <div className="badge badge-outline gap-2">
                   <HiOutlineBanknotes /> Cash

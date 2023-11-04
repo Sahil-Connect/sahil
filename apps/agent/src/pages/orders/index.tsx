@@ -45,6 +45,8 @@ export default function OrdersPage() {
           </button>
         </div>
       </div>
+      <div className="divider"></div>
+      <h3 className="text-lg">Overview</h3>
       <Stats stats={stats} />
       <ListOrders />
     </section>
