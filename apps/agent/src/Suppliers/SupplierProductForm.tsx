@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect } from 'react';
+=======
+import React from 'react';
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,7 +18,11 @@ export const supplierProductSchema = z.object({
   discount: z
     .number()
     .min(0, 'Discount cannot be negative.')
+<<<<<<< HEAD
     .max(90, 'Discount cannot be more than 90.'),
+=======
+    .max(100, 'Discount cannot be more than 100.'),
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
 });
 
 export type ProductFormData = z.infer<typeof supplierProductSchema>;
@@ -22,24 +30,34 @@ export type ProductFormData = z.infer<typeof supplierProductSchema>;
 type SupplierProductFormProps = {
   onSubmit: SubmitHandler<ProductFormData>;
   loading?: boolean;
+<<<<<<< HEAD
   initial?: ProductFormData;
+=======
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
 };
 
 const SupplierProductForm = ({
   loading,
   onSubmit,
+<<<<<<< HEAD
   initial,
+=======
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
 }: SupplierProductFormProps) => {
   const {
     register,
     handleSubmit,
     watch,
+<<<<<<< HEAD
     setValue,
+=======
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
     formState: { errors },
   } = useForm<ProductFormData>({
     resolver: zodResolver(supplierProductSchema),
   });
 
+<<<<<<< HEAD
   useEffect(() => {
     if (initial) {
       setValue('id', initial.id);
@@ -52,14 +70,19 @@ const SupplierProductForm = ({
     }
   }, [initial, setValue]);
 
+=======
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
   const price = watch('price');
   const discount = watch('discount');
   const inStock = watch('inStock');
 
   const discountedPrice = Math.round(price - price * (discount / 100));
 
+<<<<<<< HEAD
   const showDiscountedPrice = discount > 0 && discount < 90 && discountedPrice;
 
+=======
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
   return (
     <form
       onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}
@@ -76,14 +99,22 @@ const SupplierProductForm = ({
         <Input
           label='Price (SSP)'
           name='price'
+<<<<<<< HEAD
           type='number'
           register={register}
           errors={errors}
           defaultValue={0}
+=======
+          register={register}
+          errors={errors}
+          defaultValue={0}
+          valueAsNumber={true}
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
         />
         <Input
           label='Quantity'
           name='quantity'
+<<<<<<< HEAD
           type='number'
           register={register}
           errors={errors}
@@ -96,11 +127,29 @@ const SupplierProductForm = ({
             label='Discount (%)'
             name='discount'
             type='number'
+=======
+          register={register}
+          errors={errors}
+          defaultValue={0}
+          valueAsNumber={true}
+        />
+      </div>
+      <div className='w-full flex gap-4'>
+        <div>
+          <Input
+            label='Discount (%)'
+            name='discount'
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
             register={register}
             errors={errors}
             defaultValue={0}
+            valueAsNumber={true}
           />
+<<<<<<< HEAD
           {showDiscountedPrice && (
+=======
+          {discount > 0 && discountedPrice > 0 && (
+>>>>>>> 2a9f006 (feat: refactored Input & Toggle components)
             <p className='text-sm text-primary'>
               New Price {discountedPrice} SSP
             </p>
