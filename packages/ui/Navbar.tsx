@@ -12,7 +12,7 @@ type NavbarLink = {
 
 export type NavbarProps = {
   links: NavbarLink[];
-  logo: string;
+  logo?: string;
 };
 
 export const Navbar: FC<NavbarProps> = ({ links, logo }) => {
@@ -23,12 +23,14 @@ export const Navbar: FC<NavbarProps> = ({ links, logo }) => {
           href="/"
           className="font-semibold flex items-center text-base lg:text-lg"
         >
-          <Image
-            src={logo}
-            alt="Sahil"
-            loading="eager"
-            className="h-10 w-8 object-contain md:w-16"
-          />
+          {logo && (
+            <Image
+              src={logo}
+              alt="Sahil"
+              loading="eager"
+              className="h-10 w-8 object-contain md:w-16"
+            />
+          )}
           Sahil Agent
         </Link>
       </div>
