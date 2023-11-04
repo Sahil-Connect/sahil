@@ -3,55 +3,40 @@ import SupplierProductForm from './SupplierProductForm';
 import Modal from 'ui/Modal';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import { useAddNewProduct } from '@/hooks/suppliers';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-type SahilProduct = {
-  id?: string;
-  name: string;
-  description: string;
-  inStock: boolean;
-  price: number;
-  quantity: number;
-  discount: number;
-  supplier_id: string;
-};
+export const supplierProductSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(0, 'Name is required').trim(),
+  description: z.string().min(0, 'Description is required').trim(),
+  inStock: z.boolean().default(false),
+  price: z.number().lte(0, "Price can't be a negative").default(0),
+  quantity: z.number().default(0),
+  discount: z.number().default(0),
+});
 
-const initial: SahilProduct = {
-  name: '',
-  description: '',
-  inStock: false,
-  price: 0,
-  quantity: 0,
-  discount: 0,
-  supplier_id: '',
-};
+type FormData = z.infer<typeof supplierProductSchema>;
 
 const AddNewProductModal = ({ supplier_id }: { supplier_id: string }) => {
-  const [product, setProduct] = useState<SahilProduct>(initial);
   const closeBtn = useRef<HTMLButtonElement>(null);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(supplierProductSchema),
+  });
 
   const { addNewProduct, loading } = useAddNewProduct();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const validatedInput = supplierProductSchema.parse(data);
+    const product = { ...validatedInput, supplier_id };
 
-    setProduct((prevProduct) => ({
-      ...prevProduct!,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
-
-  const handleAdd = (e: { preventDefault: () => void }) => {
-    if (product.name && product.description && !loading) {
-      const _product = { ...product, supplier_id: supplier_id };
-      addNewProduct({
-        variables: {
-          product: _product,
-        },
-      }).then(() => {
-        setProduct(initial);
-        closeBtn.current?.click();
-      });
-    }
+    console.log(product);
   };
 
   return (
@@ -63,20 +48,18 @@ const AddNewProductModal = ({ supplier_id }: { supplier_id: string }) => {
       CloseBtnRef={closeBtn}
       title='New Product'
     >
-      <SupplierProductForm
-        product={product}
-        onInputChange={handleInputChange}
-      />
-      <div className='my-4 flex flex-row justify-end gap-4'>
-        <button
-          onClick={handleAdd}
-          className={`btn normal-case btn-primary ${
-            loading && 'animate-pulse'
-          }`}
-        >
-          Add
-        </button>
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <SupplierProductForm register={register} errors={errors} />
+        <div className='my-4 flex flex-row justify-end gap-4'>
+          <button
+            className={`btn normal-case btn-primary ${
+              loading && 'animate-pulse'
+            }`}
+          >
+            Add
+          </button>
+        </div>
+      </form>
     </Modal>
   );
 };

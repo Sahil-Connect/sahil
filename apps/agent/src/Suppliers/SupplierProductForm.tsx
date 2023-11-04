@@ -1,4 +1,7 @@
 import React from 'react';
+import { UseFormRegister, FieldErrors } from 'react-hook-form';
+import { supplierProductSchema } from './AddNewProductModal';
+import { z } from 'zod';
 
 type SahilProduct = {
   id?: string;
@@ -11,14 +14,16 @@ type SahilProduct = {
   supplier_id: string;
 };
 
+type FormData = z.infer<typeof supplierProductSchema>;
+
 type SupplierProductFormProps = {
-  product: SahilProduct;
-  onInputChange: React.ChangeEventHandler<HTMLInputElement>;
+  register: UseFormRegister<FormData>; // Add register from react-hook-form
+  errors: FieldErrors<FormData>;
 };
 
 const SupplierProductForm = ({
-  product,
-  onInputChange,
+  register,
+  errors,
 }: SupplierProductFormProps) => {
   return (
     <div className='flex flex-col gap-1'>
@@ -30,10 +35,9 @@ const SupplierProductForm = ({
           type='text'
           placeholder='Type here'
           className='input input-bordered w-full max-w-lg'
-          name='name'
-          value={product.name}
-          onChange={onInputChange}
+          {...register('name')}
         />
+        {errors && <p className='text-error'>{errors.name?.message}</p>}
       </div>
       <div className='form-control w-full max-w-lg'>
         <label className='label'>
@@ -43,10 +47,9 @@ const SupplierProductForm = ({
           type='text'
           placeholder='Type here'
           className='input input-bordered w-full max-w-lg'
-          name='description'
-          value={product.description}
-          onChange={onInputChange}
+          {...register('description')}
         />
+        {errors && <p className='text-error'>{errors.description?.message}</p>}
       </div>
       <div className='w-full flex gap-4'>
         <div className='form-control w-1/2'>
@@ -57,10 +60,10 @@ const SupplierProductForm = ({
             type='number'
             placeholder='Type here'
             className='input input-bordered'
-            name='price'
-            value={product.price}
-            onChange={onInputChange}
+            {...register('price')}
+            defaultValue={0}
           />
+          {errors && <p className='text-error'>{errors.price?.message}</p>}
         </div>
         <div className='form-control w-1/2'>
           <label className='label'>
@@ -70,10 +73,10 @@ const SupplierProductForm = ({
             type='number'
             placeholder='Type here'
             className='input input-bordered'
-            name='quantity'
-            value={product.quantity}
-            onChange={onInputChange}
+            {...register('quantity')}
+            defaultValue={0}
           />
+          {errors && <p className='text-error'>{errors.quantity?.message}</p>}
         </div>
       </div>
       <div className='form-control justify-start w-fit'>
@@ -81,13 +84,10 @@ const SupplierProductForm = ({
           <span className='label-text font-medium'>Available</span>
           <input
             type='checkbox'
-            className={`toggle toggle-lg ${
-              product.inStock ? 'toggle-primary' : ''
-            }`}
-            name='inStock'
-            checked={product.inStock}
-            onChange={onInputChange}
+            className={`toggle toggle-lg `}
+            {...register('inStock')}
           />
+          {errors && <p className='text-error'>{errors.inStock?.message}</p>}
         </label>
       </div>
     </div>

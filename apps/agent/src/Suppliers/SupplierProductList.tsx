@@ -12,6 +12,8 @@ type SahilProduct = {
   inStock: boolean;
   price: number;
   quantity: number;
+  discount: number;
+  supplier_id: string;
 };
 
 type props = {
