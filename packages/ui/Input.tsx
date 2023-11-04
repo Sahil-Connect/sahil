@@ -12,7 +12,7 @@ type InputProps<T> = {
   name: Path<T>;
   register: UseFormRegister<T>;
   errors: DeepMap<FieldValues, FieldError>;
-  type?: string;
+  type?: 'text' | 'email' | 'password' | 'number';
   placeholder?: string;
   defaultValue?: string | number;
   valueAsNumber?: boolean;

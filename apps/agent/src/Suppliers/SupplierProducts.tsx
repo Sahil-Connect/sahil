@@ -61,7 +61,7 @@ export const SupplierProducts = ({ productsCount }: props) => {
           <AddNewProductModal supplier_id={supplierId as string} />
         </div>
       </div>
-      {/* <SupplierProductList productsCount={productsCount} /> */}
+      <SupplierProductList productsCount={productsCount} />
     </div>
   );
 };

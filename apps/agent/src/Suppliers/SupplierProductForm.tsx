@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,7 +14,7 @@ export const supplierProductSchema = z.object({
   discount: z
     .number()
     .min(0, 'Discount cannot be negative.')
-    .max(100, 'Discount cannot be more than 100.'),
+    .max(90, 'Discount cannot be more than 90.'),
 });
 
 export type ProductFormData = z.infer<typeof supplierProductSchema>;
@@ -22,26 +22,43 @@ export type ProductFormData = z.infer<typeof supplierProductSchema>;
 type SupplierProductFormProps = {
   onSubmit: SubmitHandler<ProductFormData>;
   loading?: boolean;
+  initial?: ProductFormData;
 };
 
 const SupplierProductForm = ({
   loading,
   onSubmit,
+  initial,
 }: SupplierProductFormProps) => {
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<ProductFormData>({
     resolver: zodResolver(supplierProductSchema),
   });
+
+  useEffect(() => {
+    if (initial) {
+      setValue('id', initial.id);
+      setValue('name', initial.name || '');
+      setValue('description', initial.description || '');
+      setValue('inStock', initial.inStock || false);
+      setValue('price', initial.price || 0);
+      setValue('quantity', initial.quantity || 0);
+      setValue('discount', initial.discount || 0);
+    }
+  }, [initial, setValue]);
 
   const price = watch('price');
   const discount = watch('discount');
   const inStock = watch('inStock');
 
   const discountedPrice = Math.round(price - price * (discount / 100));
+
+  const showDiscountedPrice = discount > 0 && discount < 90 && discountedPrice;
 
   return (
     <form
@@ -59,6 +76,7 @@ const SupplierProductForm = ({
         <Input
           label='Price (SSP)'
           name='price'
+          type='number'
           register={register}
           errors={errors}
           defaultValue={0}
@@ -67,6 +85,7 @@ const SupplierProductForm = ({
         <Input
           label='Quantity'
           name='quantity'
+          type='number'
           register={register}
           errors={errors}
           defaultValue={0}
@@ -74,16 +93,17 @@ const SupplierProductForm = ({
         />
       </div>
       <div className='w-full flex gap-4'>
-        <div>
+        <div className='w-full'>
           <Input
             label='Discount (%)'
             name='discount'
+            type='number'
             register={register}
             errors={errors}
             defaultValue={0}
             valueAsNumber={true}
           />
-          {discount > 0 && discountedPrice > 0 && (
+          {showDiscountedPrice && (
             <p className='text-sm text-primary'>
               New Price {discountedPrice} SSP
             </p>

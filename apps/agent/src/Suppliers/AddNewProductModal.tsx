@@ -16,13 +16,12 @@ const AddNewProductModal = ({ supplier_id }: { supplier_id: string }) => {
   const onSubmit: SubmitHandler<ProductFormData> = async (data) => {
     const validatedInput = supplierProductSchema.parse(data);
     const product = { ...validatedInput, supplier_id };
-    console.log(product);
 
-    // addNewProduct({
-    //   variables: {
-    //     product,
-    //   },
-    // }).then(() => closeBtn.current?.click());
+    addNewProduct({
+      variables: {
+        product,
+      },
+    }).then(() => closeBtn.current?.click());
   };
 
   return (
