@@ -1,11 +1,13 @@
+/* eslint-disable turbo/no-undeclared-env-vars */
 import { config } from "dotenv";
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 import { Client } from "@googlemaps/google-maps-services-js";
-import type { GeocodeRequest, GeocodeResult } from '@googlemaps/google-maps-services-js';
-
+import type { GeocodeResult } from '@googlemaps/google-maps-services-js';
 config();
+
+const key = process.env.API_KEY as string;
+
 export const typeDefs = `#graphql
     type Places {
         name: String
@@ -55,7 +57,7 @@ export const typeDefs = `#graphql
     type Directions {
         routes: DirectionRoute
         startLocation: GeoCoords
-        endLocatio: GeoCoords
+        endLocation: GeoCoords
     }
 
     type Query {
@@ -189,49 +191,58 @@ class GoogleGeocodingAPI {
     }
 }
 
-interface ContextValue {
-    googleGeocodingAPI: GoogleGeocodingAPI;
+async function address(_: any, { lat, lng }: any, { googleGeocodingAPI }: any) {
+    return googleGeocodingAPI.reverseGeocode(lat, lng);
+}
+
+async function coords(_: any, { address }: any, { googleGeocodingAPI }: any) {
+    return googleGeocodingAPI.geocode({ address });
+}
+
+async function directions(_: any, { origin, destination }: any, { googleDirectionsAPI }: any) {
+    return googleDirectionsAPI.getDirections(origin, destination);
+}
+
+async function places(_: any, { lat, lng, ...rest }: any, { googlePlacesAPI }: any) {
+    console.log("...rest:", ...rest);
+    return googlePlacesAPI.getNearbyPlaces(lat, lng, {
+        radius: 50,
+        type: "hotel"
+    });
 }
 
 const resolvers = {
     Query: {
-        address: async (_, { lat, lng }, { googleGeocodingAPI }) => {
-            return googleGeocodingAPI.reverseGeocode(lat, lng);
-        },
-        coords: async (_, { address }, { googleGeocodingAPI }) => {
-            return googleGeocodingAPI.geocode({ address });
-        },
-        directions: async (_, { origin, destination }, { googleDirectionsAPI }) => {
-            return googleDirectionsAPI.getDirections(origin, destination);
-        },
-        places: async (_, { lat, lng, ...rest }, { googlePlacesAPI }) => {
-            console.log("rest:", rest);
-            return googlePlacesAPI.getNearbyPlaces(lat, lng, {
-                radius: 50,
-                type: "hotel"
-            });
-        },
+        address,
+        coords,
+        directions,
+        places,
     }
 };
+
+interface ContextValue {
+    googleDirectionsAPI: GoogleDirectionsAPI;
+    googleGeocodingAPI: GoogleGeocodingAPI;
+    googlePlacesAPI: GooglePlacesAPI;
+}
+
 
 const server = new ApolloServer<ContextValue>({
     typeDefs: typeDefs,
     resolvers,
 });
 
-const { url } = await startStandaloneServer(server, {
+startStandaloneServer(server, {
     context: async () => {
-        const key = process.env.API_KEY;
-        const googleDirectionsAPI = new GoogleDirectionsAPI({ key });
-        const googleGeocodingAPI = new GoogleGeocodingAPI({ key });
-        const googlePlacesAPI = new GooglePlacesAPI({ key });
+        // We create new instances of our data sources with each request,
+        // passing in our server's cache.
         return {
-            googleDirectionsAPI,
-            googleGeocodingAPI,
-            googlePlacesAPI
+            googleDirectionsAPI: new GoogleDirectionsAPI({ key }),
+            googleGeocodingAPI: new GoogleGeocodingAPI({ key }),
+            googlePlacesAPI: new GooglePlacesAPI({ key })
         }
     },
     listen: { port: 4000 },
+}).then(({ url }) => {
+    console.log(`🚀  Server ready at: ${url}`);
 });
-
-console.log(`🚀  Server ready at: ${url}`);
