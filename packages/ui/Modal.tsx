@@ -8,7 +8,7 @@ export type ModalProps = {
   CTA?: string;
   icon: ReactNode;
   CloseBtnRef: React.RefObject<HTMLButtonElement>;
-  btnStyle?: 'primary' | 'secondary' | 'accent' | 'ghost';
+  btnStyle?: 'primary' | 'secondary' | 'accent' | 'ghost' | 'error';
   btnSize?: 'xs' | 'sm' | 'md' | 'lg';
   className?: string;
 };
@@ -27,7 +27,7 @@ const Modal = ({
   return (
     <>
       <button
-        className={`btn btn-${btnSize} btn-${btnStyle}  ${className}`}
+        className={`btn btn-${btnSize} btn-${btnStyle} normal-case  ${className}`}
         onClick={() => document.getElementById(id)?.showModal()}
       >
         {icon}

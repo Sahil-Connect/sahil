@@ -5,7 +5,7 @@ import SupplierProductForm, {
   supplierProductSchema,
 } from './SupplierProductForm';
 import Modal from 'ui/Modal';
-import { HiEllipsisHorizontal } from 'react-icons/hi2';
+import { HiOutlinePencilSquare } from 'react-icons/hi2';
 import { SubmitHandler } from 'react-hook-form';
 
 const EditProductModal = ({ product }: { product: ProductFormData }) => {
@@ -34,9 +34,10 @@ const EditProductModal = ({ product }: { product: ProductFormData }) => {
 
   return (
     <Modal
-      btnSize='xs'
-      btnStyle='ghost'
-      icon={<HiEllipsisHorizontal />}
+      btnSize='sm'
+      btnStyle='primary'
+      icon={<HiOutlinePencilSquare />}
+      CTA='Edit'
       id={`edit-${product.id}-modal`}
       CloseBtnRef={closeBtn}
       title='Edit Product'

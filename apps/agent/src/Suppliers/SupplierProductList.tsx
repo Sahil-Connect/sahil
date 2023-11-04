@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { useFetchSupplierProducts } from '@/hooks/suppliers';
-import { HiOutlineBanknotes, HiOutlineCube } from 'react-icons/hi2';
+import {
+  HiOutlineBanknotes,
+  HiOutlineCube,
+  HiEllipsisHorizontal,
+} from 'react-icons/hi2';
 import EditProductModal from './EditProductModal';
 import { formatCurrency } from '@sahil/lib';
 import { Card, List, ListHeader } from 'ui';
+import DeleteProductModal from './DeleteProductModal';
 
 type SahilProduct = {
   id: string;
@@ -67,7 +72,19 @@ const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
       <div className='flex flex-col justify-start'>
         <div className='flex justify-between items-start'>
           <h3 className='card-title w-11/12'>{product.name}</h3>
-          <EditProductModal product={product} />
+          <div className='dropdown dropdown-end'>
+            <label tabIndex={0} className='btn btn-sm btn-ghost m-1'>
+              <HiEllipsisHorizontal />
+            </label>
+            <ul
+              tabIndex={0}
+              className='dropdown-content z-[1] menu p-2 shadow-xl border border-neutral bg-base-100 rounded-box w-36 space-y-2'
+            >
+              <EditProductModal product={product} />
+
+              <DeleteProductModal name={product.name} id={product.id} />
+            </ul>
+          </div>
         </div>
         <p
           className={`text-xs font-bold tracking-wider ${
