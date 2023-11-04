@@ -23,7 +23,7 @@ export default function CourierPage() {
   }
 
   return (
-    <main className="p-8 space-y-4">
+    <>
       <CourierStats />
       <section className="flex">
         <div className="basis-1/4">
@@ -36,6 +36,6 @@ export default function CourierPage() {
           <ZoneInformation />
         </div>
       </section>
-    </main>
+    </>
   );
 }

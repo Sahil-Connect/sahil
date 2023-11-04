@@ -1,71 +1,79 @@
 import {
   HiOutlineArrowTrendingDown,
   HiOutlineArrowTrendingUp,
-  HiOutlineCalendar
+  HiOutlineCalendar,
+  HiOutlineChevronLeft,
+  HiOutlineChevronRight,
+  HiOutlineBriefcase,
+  HiOutlineTruck,
+  HiOutlineClipboardDocument,
 } from "react-icons/hi2";
+import { IconButton, Select, Stats, Stat } from "ui";
 
-type Trend = "positive" | "negative";
+const stats: Stat[] = [
+  {
+    title: "Reports",
+    value: 9,
+    desc: "Nov 1st - Dec 1st",
+    icon: HiOutlineArrowTrendingDown,
+    trend: "negative",
+    percentage: 2,
+    brandIcon: HiOutlineClipboardDocument,
+  },
+  {
+    title: "Registered Businesses",
+    value: 4,
+    desc: "Nov 1st - Dec 1st",
+    icon: HiOutlineArrowTrendingUp,
+    trend: "positive",
+    percentage: 3,
+    brandIcon: HiOutlineBriefcase,
+  },
+  {
+    title: "Processed Orders",
+    value: 7,
+    desc: "Nov 1st - Dec 1st",
+    icon: HiOutlineArrowTrendingUp,
+    trend: "positive",
+    percentage: 15,
+    brandIcon: HiOutlineCalendar,
+  },
+  {
+    title: "Registered Suppliers",
+    value: 5,
+    desc: "Nov 1st - Dec 1st",
+    icon: HiOutlineArrowTrendingDown,
+    trend: "negative",
+    percentage: 5,
+    brandIcon: HiOutlineTruck,
+  },
+];
+
+const intervals = [
+  { id: 1, title: "Last 7 Days", active: false },
+  { id: 2, title: "Last 30 Days", active: true },
+  { id: 3, title: "All Time", active: false },
+];
 
 export const AgentStats = () => {
-  const stats = [
-    {
-      id: 1,
-      title: "Reports",
-      value: 9,
-      description: "Oct 1st - Nov 1st",
-      performance: 25,
-      icon: <HiOutlineArrowTrendingDown />,
-      trend: "negative",
-    },
-    {
-      id: 2,
-      title: "Registered Businesses",
-      value: 40,
-      description: "Oct 1st - Nov 1st",
-      performance: 25,
-      icon: <HiOutlineArrowTrendingDown />,
-      trend: "negative",
-    },
-    {
-      id: 3,
-      title: "Processed Orders",
-      value: 201,
-      description: "Oct 1st - Nov 1st",
-      performance: 5,
-      icon: <HiOutlineArrowTrendingUp />,
-      trend: "positive",
-    },
-    {
-      id: 4,
-      title: "Registered Suppliers",
-      value: 17,
-      description: "Oct 1st - Nov 1st",
-      performance: 7,
-      icon: <HiOutlineArrowTrendingDown />,
-      trend: "negative",
-    },
-  ];
   return (
-    <section className="space-y-2">
-      <div className="flex items-center justify-between">
+    <section className="space-y-4">
+      <div className="flex items-center justify-between bg-slate-200">
         <h3 className="text-lg">Overview</h3>
-        <div>
-          <div className="badge gap-2"><HiOutlineCalendar /> October 1st - November 1st </div>
+        <div className="flex items-center gap-2">
+          {intervals.map((interval) => (
+            <div key={interval.id} className={"badge bg-rose-200"}>
+              {interval.title}
+            </div>
+          ))}
+          <IconButton title="Left" icon={HiOutlineChevronLeft} />
+          <div className="badge py-4 gap-2">
+            <HiOutlineCalendar /> October 1st - November 1st{" "}
+          </div>
+          <IconButton title="Right" icon={HiOutlineChevronRight} />
         </div>
       </div>
-      <div className="flex gap-2">
-        {stats.map((stat) => (
-          <div className="grow" key={stat.id}>
-            <div className="stats shadow">
-              <div className="stat place-items-center">
-                <div className="stat-title">{stat.title}</div>
-                <div className="stat-value">{stat.value}</div>
-                <div className="stat-desc">{stat.description}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Stats stats={stats} />
     </section>
   );
 };

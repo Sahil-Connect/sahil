@@ -1,6 +1,7 @@
 {
-    "extends": "tsconfig/nextjs.json",
+    "extends": "tsconfig/base.json",
     "compilerOptions": {
+      "baseUrl": ".",
       "rootDirs": ["src"],
       "outDir": "dist",
       "lib": ["es2020"],
@@ -9,5 +10,6 @@
       "moduleResolution": "node",
       "esModuleInterop": true,
       "types": ["node"]
-    }
+    },
+    "exclude": ["node_modules", "dist"]
   }

@@ -29,6 +29,16 @@ export const ListBusinesses = () => {
     });
   };
 
+  if (error) {
+    return (
+      <ListErrorState
+        heading="Unable to load products..."
+        message="Products aren't loading due to a technical problem on our side. Please
+      try again."
+      />
+    );
+  }
+
   return (
     <section className="space-y-4">
       <ListHeader
