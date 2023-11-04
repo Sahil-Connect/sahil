@@ -13,3 +13,4 @@ export * from './ListHeader';
 export * from './Select';
 export * from './Steps';
 export * from './Modal';
+export * from './Toggle';

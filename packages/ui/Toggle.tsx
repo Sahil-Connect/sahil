@@ -7,35 +7,27 @@ import {
 } from 'react-hook-form';
 import { FormControl } from './FormControl';
 
-type InputProps<T> = {
+type ToggleProps<T> = {
   label?: string;
   name: Path<T>;
   register: UseFormRegister<T>;
   errors: DeepMap<FieldValues, FieldError>;
-  type?: string;
-  placeholder?: string;
-  defaultValue?: string | number;
-  valueAsNumber?: boolean;
+  isChecked?: boolean;
 };
 
-export const Input = <T,>({
+export const Toggle = <T,>({
   name,
   register,
   errors,
-  type = 'text',
-  placeholder = 'Type here',
   label = name,
-  defaultValue,
-  valueAsNumber = false,
-}: InputProps<T>) => {
+  isChecked,
+}: ToggleProps<T>) => {
   return (
     <FormControl label={label}>
       <input
-        type={type}
-        placeholder={placeholder}
-        className='input input-bordered w-full max-w-lg'
-        defaultValue={defaultValue}
-        {...register(name, { valueAsNumber: valueAsNumber })}
+        type='checkbox'
+        className={`toggle toggle-lg ${isChecked && 'toggle-primary'}`}
+        {...register(name)}
       />
       {errors[name] && <p className='text-error'>{errors[name]?.message}</p>}
     </FormControl>

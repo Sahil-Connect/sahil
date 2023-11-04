@@ -1,96 +1,115 @@
 import React from 'react';
-import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import { supplierProductSchema } from './AddNewProductModal';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Input, Toggle } from 'ui';
 
-type SahilProduct = {
-  id?: string;
-  name: string;
-  description: string;
-  inStock: boolean;
-  price: number;
-  quantity: number;
-  discount: number;
-  supplier_id: string;
-};
+export const supplierProductSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(3, 'Name cannot be less than 3 characters.').trim(),
+  description: z.string().min(1, 'Description cannot be less than 10.').trim(),
+  inStock: z.boolean(),
+  price: z.number().min(0, 'Price cannot be negative.'),
+  quantity: z.number().min(0, 'Quantity cannot be negative.'),
+  discount: z
+    .number()
+    .min(0, 'Discount cannot be negative.')
+    .max(100, 'Discount cannot be more than 100.'),
+});
 
-type FormData = z.infer<typeof supplierProductSchema>;
+export type ProductFormData = z.infer<typeof supplierProductSchema>;
 
 type SupplierProductFormProps = {
-  register: UseFormRegister<FormData>; // Add register from react-hook-form
-  errors: FieldErrors<FormData>;
+  onSubmit: SubmitHandler<ProductFormData>;
+  loading?: boolean;
 };
 
 const SupplierProductForm = ({
-  register,
-  errors,
+  loading,
+  onSubmit,
 }: SupplierProductFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<ProductFormData>({
+    resolver: zodResolver(supplierProductSchema),
+  });
+
+  const price = watch('price');
+  const discount = watch('discount');
+  const inStock = watch('inStock');
+
+  const discountedPrice = Math.round(price - price * (discount / 100));
+
   return (
-    <div className='flex flex-col gap-1'>
-      <div className='form-control w-full max-w-lg'>
-        <label className='label'>
-          <span className='label-text font-medium'>Name</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          className='input input-bordered w-full max-w-lg'
-          {...register('name')}
+    <form
+      onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}
+      className='flex flex-col gap-1'
+    >
+      <Input label='Name' name='name' register={register} errors={errors} />
+      <Input
+        label='Description'
+        name='description'
+        register={register}
+        errors={errors}
+      />
+      <div className='w-full flex gap-4'>
+        <Input
+          label='Price (SSP)'
+          name='price'
+          register={register}
+          errors={errors}
+          defaultValue={0}
+          valueAsNumber={true}
         />
-        {errors && <p className='text-error'>{errors.name?.message}</p>}
-      </div>
-      <div className='form-control w-full max-w-lg'>
-        <label className='label'>
-          <span className='label-text font-medium'>Description</span>
-        </label>
-        <input
-          type='text'
-          placeholder='Type here'
-          className='input input-bordered w-full max-w-lg'
-          {...register('description')}
+        <Input
+          label='Quantity'
+          name='quantity'
+          register={register}
+          errors={errors}
+          defaultValue={0}
+          valueAsNumber={true}
         />
-        {errors && <p className='text-error'>{errors.description?.message}</p>}
       </div>
       <div className='w-full flex gap-4'>
-        <div className='form-control w-1/2'>
-          <label className='label'>
-            <span className='label-text font-medium'>Price (SSP)</span>
-          </label>
-          <input
-            type='number'
-            placeholder='Type here'
-            className='input input-bordered'
-            {...register('price')}
+        <div>
+          <Input
+            label='Discount (%)'
+            name='discount'
+            register={register}
+            errors={errors}
             defaultValue={0}
+            valueAsNumber={true}
           />
-          {errors && <p className='text-error'>{errors.price?.message}</p>}
+          {discount > 0 && discountedPrice > 0 && (
+            <p className='text-sm text-primary'>
+              New Price {discountedPrice} SSP
+            </p>
+          )}
         </div>
-        <div className='form-control w-1/2'>
-          <label className='label'>
-            <span className='label-text font-medium'>Quantity</span>
-          </label>
-          <input
-            type='number'
-            placeholder='Type here'
-            className='input input-bordered'
-            {...register('quantity')}
-            defaultValue={0}
-          />
-          {errors && <p className='text-error'>{errors.quantity?.message}</p>}
-        </div>
+
+        <Toggle
+          label='Available'
+          name='inStock'
+          register={register}
+          errors={errors}
+          isChecked={inStock}
+        />
       </div>
-      <div className='form-control justify-start w-fit'>
-        <label className='label cursor-pointer gap-2'>
-          <span className='label-text font-medium'>Available</span>
-          <input
-            type='checkbox'
-            className={`toggle toggle-lg `}
-            {...register('inStock')}
-          />
-          {errors && <p className='text-error'>{errors.inStock?.message}</p>}
-        </label>
+
+      <div className='my-4 flex flex-row justify-end gap-4'>
+        <button
+          type='submit'
+          className={`btn normal-case btn-primary ${
+            loading && 'animate-pulse'
+          }`}
+        >
+          Submit
+        </button>
       </div>
-    </div>
+    </form>
   );
 };
 
