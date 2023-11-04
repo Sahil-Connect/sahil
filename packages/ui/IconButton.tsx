@@ -7,7 +7,7 @@ export type IconButtonProps = IconProps & {
 
 export const IconButton: FC<IconButtonProps> = ({ icon, title }) => {
     return (
-        <button className="btn btn-sm btn-circle" title={title}>
+        <button className="btn btn-xs btn-circle btn-ghost" title={title}>
             <Icon icon={icon} />
         </button>
     )

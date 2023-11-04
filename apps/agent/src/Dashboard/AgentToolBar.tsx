@@ -4,7 +4,7 @@ import {
   HiOutlineUsers,
   HiOutlineTruck,
   HiOutlineBugAnt,
-  HiOutlineBriefcase
+  HiOutlineBriefcase,
 } from "react-icons/hi2";
 import Link from "next/link";
 
@@ -16,13 +16,13 @@ export const AgentToolBar = () => {
         <button className="btn btn-sm btn-outline">
           <HiPlus /> New Order
         </button>
-        <div className="dropdown dropdown-hover">
+        <div className="dropdown">
           <label tabIndex={0} className="btn btn-sm btn-primary">
-            <HiOutlineUsers /> Register
+            <HiOutlineUsers /> Register User
           </label>
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 my-2"
+            className="dropdown-content grow  w-full z-[1] menu p-2 border bg-base-100 rounded-box mt-4"
           >
             <li>
               <Link href="/businesses/register/business_info">

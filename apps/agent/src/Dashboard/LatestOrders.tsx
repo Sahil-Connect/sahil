@@ -1,5 +1,5 @@
-import { Card } from "ui";
-import { HiOutlineBanknotes } from "react-icons/hi2";
+import { Card, IconButton } from "ui";
+import { HiOutlineBanknotes, HiOutlinePlusCircle } from "react-icons/hi2";
 
 const orders = [
   {
@@ -17,7 +17,7 @@ const orders = [
   {
     id: 4,
     orderId: "ED-20",
-  }
+  },
 ];
 
 export const LatestOrders = () => {
@@ -26,6 +26,7 @@ export const LatestOrders = () => {
       <div className="flex items-center justify-between">
         <div className="flex gap-2 items-center">
           <h3 className="text-lg">Latest Orders</h3>
+          <IconButton icon={HiOutlinePlusCircle} title="Add" />
           <div className="badge badge-accent">3 Orders</div>
         </div>
         <button className="btn btn-xs btn-secondary">View All</button>
