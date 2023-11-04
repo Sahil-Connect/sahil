@@ -1,7 +1,7 @@
-import { AccountQuickViewCard } from "./AccountQuickViewCard";
+import { TransactionQuickViewCard } from "./TransactionQuickView";
 import { IconButton } from "ui";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
-const accounts = [
+const transactions = [
   {
     id: 1,
     name: "Hello, World",
@@ -10,17 +10,21 @@ const accounts = [
     id: 2,
     name: "Hello, World",
   },
+  {
+    id: 3,
+    name: "Hello, World",
+  }
 ];
-export const ListAccounts = () => {
+export const ListTransactions = () => {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <h3 className="text-lg">Accounts</h3>
         <IconButton icon={HiOutlinePlusCircle} />
       </div>
-      <div className="flex gap-2">
-        {accounts.map((account) => (
-          <AccountQuickViewCard key={account.id} account={account} />
+      <div className="space-y-2">
+        {transactions.map((transaction) => (
+          <TransactionQuickViewCard key={transaction.id} transaction={transaction} />
         ))}
       </div>
     </div>
