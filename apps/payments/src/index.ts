@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { CacheOptions, PostRequest, RESTDataSource } from '@apollo/datasource-rest';
+import { AugmentedRequest, CacheOptions, PostRequest, RESTDataSource } from '@apollo/datasource-rest';
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 
 export const typeDefs = `#graphql
@@ -104,14 +104,16 @@ type Mutation {
 
 class MomoAPI extends RESTDataSource {
     override baseURL = 'https://sandbox.momodeveloper.mtn.com/';
+    private token: string = "";
 
     constructor(options: { token?: string; cache: KeyValueCache }) {
         super(options);
     }
 
-    // willSendRequest(request) {
-    //     request.headers.set('Authorization', `Basic ${this.token}`);
-    // }
+    override willSendRequest(_path: string, request: AugmentedRequest) {
+        request.headers['Authorisation'] = `Bearer ${this.token}`;
+        request.headers['Ocp-Apim-Subscription-Key'] = ``;
+    }
 
     async requestToPay(body: PostRequest<CacheOptions> | undefined) {
         return this.post(`collection/v1_0/requesttopay`, body);
@@ -122,7 +124,13 @@ class MomoAPI extends RESTDataSource {
     }
 
     async getAccountBalance() {
-        return this.get(`collection/v1_0/account/balance`);
+        try {
+            const res = await this.get(`collection/v1_0/account/balance`);
+            console.log(res);
+            return res;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async getBasicUserInfo(accountHolderMSISDN: any) {
@@ -197,6 +205,7 @@ const resolvers = {
 const server = new ApolloServer<ContextValue>({
     typeDefs: typeDefs,
     resolvers,
+    introspection: true
 });
 
 startStandaloneServer(server, {
