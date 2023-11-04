@@ -13,9 +13,10 @@ type NavbarLink = {
 export type NavbarProps = {
   links: NavbarLink[];
   logo?: string;
+  header?: string;
 };
 
-export const Navbar: FC<NavbarProps> = ({ links, logo }) => {
+export const Navbar: FC<NavbarProps> = ({ links, logo, header }) => {
   return (
     <header className="navbar bg-white shadow-sm">
       <div className="navbar-start">
@@ -31,7 +32,7 @@ export const Navbar: FC<NavbarProps> = ({ links, logo }) => {
               className="h-10 w-8 object-contain md:w-16"
             />
           )}
-          Sahil Agent
+          {header}
         </Link>
       </div>
       <nav className="navbar-end">
