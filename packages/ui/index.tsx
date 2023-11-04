@@ -10,5 +10,6 @@ export * from "./Input";
 export * from "./JoinGrid";
 export * from "./List";
 export * from "./ListHeader";
+export * from "./Stats";
 export * from "./Select";
 export * from "./Steps";
