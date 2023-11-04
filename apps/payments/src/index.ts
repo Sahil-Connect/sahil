@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { AugmentedRequest, RESTDataSource } from '@apollo/datasource-rest';
+import { CacheOptions, PostRequest, RESTDataSource } from '@apollo/datasource-rest';
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 
 export const typeDefs = `#graphql
@@ -95,7 +95,7 @@ type Mutation {
   type Query {
     accountBalance: AccountBalanceResponse
     basicUserInfo(accountHolderMSISDN: String!): BasicUserInfoResponse
-    paymentStatus(x_referenceId: String!): PaymentStatusResponse
+    paymentStatus(referenceId: String!): PaymentStatusResponse
     preApprovalStatus(referenceId: String!): PreApprovalStatusResponse
     userInfoWithConsent: UserInfoWithConsentResponse
     requestToPayTransactionStatus(referenceId: String!): RequestToPayTransactionStatusResponse
@@ -104,18 +104,16 @@ type Mutation {
 
 class MomoAPI extends RESTDataSource {
     override baseURL = 'https://sandbox.momodeveloper.mtn.com/';
-    private token?: string;
 
     constructor(options: { token?: string; cache: KeyValueCache }) {
         super(options);
-        this.token = options.token;
     }
 
     // willSendRequest(request) {
     //     request.headers.set('Authorization', `Basic ${this.token}`);
     // }
 
-    async requestToPay(body) {
+    async requestToPay(body: PostRequest<CacheOptions> | undefined) {
         return this.post(`collection/v1_0/requesttopay`, body);
     }
 
@@ -127,15 +125,15 @@ class MomoAPI extends RESTDataSource {
         return this.get(`collection/v1_0/account/balance`);
     }
 
-    async getBasicUserInfo(accountHolderMSISDN) {
+    async getBasicUserInfo(accountHolderMSISDN: any) {
         return this.get(`collection/v1_0/accountholder/msisdn/${accountHolderMSISDN}/basicuserinfo`);
     }
 
-    async getPaymentStatus(x_referenceId) {
-        return this.get(`collection/v2_0/payment/${x_referenceId}`);
+    async getPaymentStatus(referenceId: any): Promise<Record<string, any>> {
+        return this.get(`collection/v2_0/payment/${referenceId}`);
     }
 
-    async getPreApprovalStatus(referenceId) {
+    async getPreApprovalStatus(referenceId: any) {
         return this.get(`collection/v2_0/preapproval/${referenceId}`);
     }
 
@@ -143,7 +141,7 @@ class MomoAPI extends RESTDataSource {
         return this.get(`collection/oauth2/v1_0/userinfo`);
     }
 
-    async getRequestToPayTransactionStatus(referenceId) {
+    async getRequestToPayTransactionStatus(referenceId: any) {
         return this.get(`collection/v1_0/requesttopay/${referenceId}`);
     }
 }
@@ -154,34 +152,45 @@ interface ContextValue {
     };
 }
 
+async function accountBalance(_: any, __: any, { dataSources }: any) {
+    return dataSources.momoAPI.getAccountBalance();
+}
+
+async function basicUserInfo(_: any, { accountHolderMSISDN }: any, { dataSources }: any) {
+    return dataSources.momoAPI.getBasicUserInfo(accountHolderMSISDN);
+}
+async function paymentStatus(_: any, { referenceId }: any, { dataSources }: any) {
+    return dataSources.momoAPI.getPaymentStatus(referenceId);
+}
+async function preApprovalStatus(_: any, { referenceId }: any, { dataSources }: any) {
+    return dataSources.momoAPI.getPreApprovalStatus(referenceId);
+}
+async function userInfoWithConsent(_: any, __: any, { dataSources }: any) {
+    return dataSources.momoAPI.getUserInfoWithConsent();
+}
+async function requestToPayTransactionStatus(_: any, { referenceId }: any, { dataSources }: any) {
+    return dataSources.momoAPI.getRequestToPayTransactionStatus(referenceId);
+}
+
 const resolvers = {
     Mutation: {
-        requestToPay: async (_, { amount, currency, externalId, partyIdType, partyId, payerMessage, payeeNote }, { dataSources }) => {
+        requestToPay: async (_: any, { amount, currency, externalId, partyIdType, partyId, payerMessage, payeeNote }: any, { dataSources }: any) => {
             return dataSources.momoAPI.requestToPay({ amount, currency, externalId, partyIdType, partyId, payerMessage, payeeNote });
         },
-        createAccessToken: async (_, __, { dataSources }) => {
+        createAccessToken: async (_: any, __: any, { dataSources }: any) => {
             return dataSources.momoAPI.createAcccessToken();
         }
     },
     Query: {
-        accountBalance: async (_, __, { dataSources }) => {
-            return dataSources.momoAPI.getAccountBalance();
-        },
-        basicUserInfo: async (_, { accountHolderMSISDN }, { dataSources }) => {
-            return dataSources.momoAPI.getBasicUserInfo(accountHolderMSISDN);
-        },
-        paymentStatus: async (_, { x_referenceId }, { dataSources }) => {
-            return dataSources.momoAPI.getPaymentStatus(x_referenceId);
-        },
-        preApprovalStatus: async (_, { referenceId }, { dataSources }) => {
-            return dataSources.momoAPI.getPreApprovalStatus(referenceId);
-        },
-        userInfoWithConsent: async (_, __, { dataSources }) => {
-            return dataSources.momoAPI.getUserInfoWithConsent();
-        },
-        requestToPayTransactionStatus: async (_, { referenceId }, { dataSources }) => {
-            return dataSources.momoAPI.getRequestToPayTransactionStatus(referenceId);
-        }
+        // account queries
+        accountBalance,
+        basicUserInfo,
+        userInfoWithConsent,
+
+        // payment queries
+        paymentStatus,
+        preApprovalStatus,
+        requestToPayTransactionStatus
     }
 };
 
@@ -190,7 +199,7 @@ const server = new ApolloServer<ContextValue>({
     resolvers,
 });
 
-const { url } = await startStandaloneServer(server, {
+startStandaloneServer(server, {
     context: async () => {
         const { cache } = server;
         return {
@@ -202,6 +211,6 @@ const { url } = await startStandaloneServer(server, {
         };
     },
     listen: { port: 4000 },
+}).then(({ url }) => {
+    console.log(`🚀  Server ready at: ${url}`);
 });
-
-console.log(`🚀  Server ready at: ${url}`);
