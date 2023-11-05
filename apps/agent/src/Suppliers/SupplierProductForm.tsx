@@ -80,7 +80,6 @@ const SupplierProductForm = ({
           register={register}
           errors={errors}
           defaultValue={0}
-          valueAsNumber={true}
         />
         <Input
           label='Quantity'
@@ -89,7 +88,6 @@ const SupplierProductForm = ({
           register={register}
           errors={errors}
           defaultValue={0}
-          valueAsNumber={true}
         />
       </div>
       <div className='w-full flex gap-4'>
@@ -101,7 +99,6 @@ const SupplierProductForm = ({
             register={register}
             errors={errors}
             defaultValue={0}
-            valueAsNumber={true}
           />
           {showDiscountedPrice && (
             <p className='text-sm text-primary'>

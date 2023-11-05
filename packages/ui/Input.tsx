@@ -15,7 +15,6 @@ type InputProps<T extends FieldValues> = {
   type?: 'text' | 'email' | 'password' | 'number';
   placeholder?: string;
   defaultValue?: string | number;
-  valueAsNumber?: boolean;
 };
 
 export const Input = <T extends FieldValues>({
@@ -26,7 +25,6 @@ export const Input = <T extends FieldValues>({
   placeholder = 'Type here',
   label = name,
   defaultValue,
-  valueAsNumber = false,
 }: InputProps<T>) => {
   return (
     <FormControl label={label}>
@@ -35,7 +33,7 @@ export const Input = <T extends FieldValues>({
         placeholder={placeholder}
         className='input input-bordered w-full max-w-lg'
         defaultValue={defaultValue}
-        {...register(name, { valueAsNumber: valueAsNumber })}
+        {...register(name, { valueAsNumber: type === 'number' })}
       />
       {errors[name] && <p className='text-error'>{errors[name]?.message}</p>}
     </FormControl>

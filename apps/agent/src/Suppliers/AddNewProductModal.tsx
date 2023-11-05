@@ -8,6 +8,15 @@ import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import { useAddNewProduct } from '@/hooks/suppliers';
 import { SubmitHandler } from 'react-hook-form';
 
+let productEmptyState = {
+  name: '',
+  description: '',
+  inStock: false,
+  price: 0,
+  quantity: 0,
+  discount: 0,
+};
+
 const AddNewProductModal = ({ supplier_id }: { supplier_id: string }) => {
   const closeBtn = useRef<HTMLButtonElement>(null);
 
@@ -21,7 +30,10 @@ const AddNewProductModal = ({ supplier_id }: { supplier_id: string }) => {
       variables: {
         product,
       },
-    }).then(() => closeBtn.current?.click());
+    }).then(() => {
+      productEmptyState = { ...productEmptyState };
+      closeBtn.current?.click();
+    });
   };
 
   return (
@@ -33,7 +45,11 @@ const AddNewProductModal = ({ supplier_id }: { supplier_id: string }) => {
       CloseBtnRef={closeBtn}
       title='New Product'
     >
-      <SupplierProductForm loading={loading} onSubmit={onSubmit} />
+      <SupplierProductForm
+        loading={loading}
+        onSubmit={onSubmit}
+        initial={productEmptyState}
+      />
     </Modal>
   );
 };
