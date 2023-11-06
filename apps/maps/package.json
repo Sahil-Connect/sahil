@@ -13,11 +13,22 @@
     "@apollo/datasource-rest": "^6.1.0",
     "@apollo/server": "^4.9.3",
     "@googlemaps/google-maps-services-js": "^3.3.41",
+    "apollo-server-core": "^3.12.1",
+    "apollo-server-express": "^3.12.1",
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "graphql": "^16.8.0"
+    "express": "^4.18.2",
+    "graphql": "^16.8.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.6.0",
     "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": "18.17.0"
   }
 }

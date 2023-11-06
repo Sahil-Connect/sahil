@@ -1,10 +1,12 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import { config } from "dotenv";
+import * as dotenv from "dotenv";
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { Client } from "@googlemaps/google-maps-services-js";
 import type { GeocodeResult } from '@googlemaps/google-maps-services-js';
-config();
+
+
+dotenv.config();
 
 const key = process.env.API_KEY as string;
 

@@ -1,20 +1,34 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
-const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+const baseConfig: Config = require('@sahil/configs/tailwind/tailwind.config');
+
+const extendedConfig: Config = {
+  ...baseConfig,
   theme: {
+    ...baseConfig.theme,
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+      ...baseConfig.theme?.extend,
     },
   },
-  plugins: [],
-}
-export default config
+  plugins: [...baseConfig.plugins, require('daisyui')],
+  daisyui: {
+    themes: [
+      {
+        lemonade: {
+          ...require('daisyui/src/theming/themes')['[data-theme=lemonade]'],
+          primary: '#067a46',
+          secondary: '#056835',
+          accent: '#40efcf',
+          neutral: '#2d2f39',
+          'base-100': '#ffffff',
+          info: '#76d1e5',
+          success: '#22a05b',
+          warning: '#f0bc2d',
+          error: '#e33631',
+        },
+      },
+    ],
+  },
+};
+
+module.exports = extendedConfig;

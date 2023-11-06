@@ -1,10 +1,15 @@
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
-import { CacheOptions, PostRequest, RESTDataSource } from '@apollo/datasource-rest';
+import express from "express";
+import http from 'http';
+import cors from 'cors';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { AugmentedRequest, CacheOptions, PostRequest, RESTDataSource } from '@apollo/datasource-rest';
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
+import * as dotenv from "dotenv";
 
+dotenv.config();
 export const typeDefs = `#graphql
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
   type RequestToPayResponse {
     status: String
     message: String
@@ -104,14 +109,16 @@ type Mutation {
 
 class MomoAPI extends RESTDataSource {
     override baseURL = 'https://sandbox.momodeveloper.mtn.com/';
+    private token: string = "";
 
     constructor(options: { token?: string; cache: KeyValueCache }) {
         super(options);
     }
 
-    // willSendRequest(request) {
-    //     request.headers.set('Authorization', `Basic ${this.token}`);
-    // }
+    override willSendRequest(_path: string, request: AugmentedRequest) {
+        request.headers['Authorisation'] = `Bearer ${this.token}`;
+        request.headers['Ocp-Apim-Subscription-Key'] = ``;
+    }
 
     async requestToPay(body: PostRequest<CacheOptions> | undefined) {
         return this.post(`collection/v1_0/requesttopay`, body);
@@ -122,7 +129,13 @@ class MomoAPI extends RESTDataSource {
     }
 
     async getAccountBalance() {
-        return this.get(`collection/v1_0/account/balance`);
+        try {
+            const res = await this.get(`collection/v1_0/account/balance`);
+            console.log(res);
+            return res;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async getBasicUserInfo(accountHolderMSISDN: any) {
@@ -144,12 +157,6 @@ class MomoAPI extends RESTDataSource {
     async getRequestToPayTransactionStatus(referenceId: any) {
         return this.get(`collection/v1_0/requesttopay/${referenceId}`);
     }
-}
-
-interface ContextValue {
-    dataSources: {
-        momoAPI: MomoAPI;
-    };
 }
 
 async function accountBalance(_: any, __: any, { dataSources }: any) {
@@ -194,23 +201,32 @@ const resolvers = {
     }
 };
 
+const app = express();
+const httpServer = http.createServer(app);
+
+interface ContextValue {
+    dataSources?: {
+        momoAPI: MomoAPI;
+    };
+}
+
+
 const server = new ApolloServer<ContextValue>({
     typeDefs: typeDefs,
     resolvers,
+    introspection: true,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 
-startStandaloneServer(server, {
-    context: async () => {
-        const { cache } = server;
-        return {
-            // We create new instances of our data sources with each request,
-            // passing in our server's cache.
-            dataSources: {
-                momoAPI: new MomoAPI({ cache }),
-            },
-        };
-    },
-    listen: { port: 4000 },
-}).then(({ url }) => {
-    console.log(`🚀  Server ready at: ${url}`);
-});
+
+await server.start();
+
+app.use(
+    '/graphql',
+    cors<cors.CorsRequest>(),
+    express.json(),
+    expressMiddleware(server),
+);
+
+await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+console.log(`🚀 Server ready at http://localhost:4000/graphql`);
