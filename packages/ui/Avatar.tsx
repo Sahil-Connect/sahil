@@ -1,7 +1,7 @@
 export const Avatar = ({ alt, src }) => {
   return (
     <div className="avatar">
-      <div className="w-12 rounded-full ring ring-offset-base-100 ring-offset-2">
+      <div className="w-12 rounded-full shadow">
         <img src={src} alt={alt} />
       </div>
     </div>

@@ -5,12 +5,12 @@ const businesses = [
   {
     id: 1,
     name: "Notos Bar & Grill",
-    avatar: "https://avatars.githubusercontent.com/u/21015204?v=4",
+    avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1699295128/Chef-restaurant-logo-illustrations-template-on-transparent-background-PNG.png",
   },
   {
     id: 2,
     name: "Amigos Bar & Restaurant",
-    avatar: "https://avatars.githubusercontent.com/u/91534137?v=4",
+    avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1699295128/Chef-restaurant-logo-illustrations-template-on-transparent-background-PNG.png",
   },
 ];
 export const BusinessesOverview = () => {

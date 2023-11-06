@@ -70,7 +70,7 @@ export const SupplierOrderHistory = () => {
         onNextPage={() => {}}
         onPreviousPage={() => {}}
         size={orders.length}
-        limit={4}
+        limit={3}
         sizeLabel='Orders'
       />
 
@@ -86,7 +86,7 @@ export const SupplierOrderHistory = () => {
 
 const OrderSummary = ({ order }) => {
   const date = parseISO(order.createdAt);
-  const formattedDate = format(date, 'MMMM d, yyyy HH:mm:ss');
+  const formattedDate = format(date, 'MMMM d, HH:mm');
   const statusStyle = orderStyles[order.status] || 'default';
   return (
     <Card>
@@ -95,7 +95,6 @@ const OrderSummary = ({ order }) => {
           <h3 className='card-title'>Order ID: ED-{order.id}</h3>
         </Link>
         <div className='flex gap-2'>
-          <div className='badge badge-sm'>{order.payment}</div>
           <div className='badge badge-sm'>{order.delivery}</div>
           <div className={`badge badge-sm badge-${statusStyle}`}>
             {order.status}

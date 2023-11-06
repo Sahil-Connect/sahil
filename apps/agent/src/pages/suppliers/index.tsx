@@ -30,23 +30,25 @@ export default function Suppliers() {
   const router = useRouter();
   return (
     <>
-      <section className="flex flex-col lg:flex-row justify-between items-start gap-4 space-y-4">
-        <div>
-          <h1 className="text-3xl">Partner Suppliers</h1>
+      <section className="space-y-4">
+        <div className="flex justify-between items-start flex-wrap gap-4">
+          <div>
+            <h1 className="text-3xl">Partner Suppliers</h1>
+          </div>
+          <div className="w-full lg:w-fit flex justify-end gap-4">
+            <FilterSuppliersModal />
+            <button
+              className="btn btn-sm btn-primary normal-case"
+              onClick={() => router.push("/suppliers/new/business_info")}
+            >
+              <HiOutlinePlusCircle className="text-lg" />
+              Register Supplier
+            </button>
+          </div>
         </div>
-        <div className="w-full lg:w-fit flex justify-end gap-4">
-          <FilterSuppliersModal />
-          <button
-            className="btn btn-sm btn-primary normal-case"
-            onClick={() => router.push("/suppliers/new/business_info")}
-          >
-            <HiOutlinePlusCircle className="text-lg" />
-            Register Supplier
-          </button>
-        </div>
+        <Stats stats={stats} />
+        <ListSuppliers />
       </section>
-      <Stats stats={stats} />
-      <ListSuppliers />
     </>
   );
 }
