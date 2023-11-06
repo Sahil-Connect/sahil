@@ -29,7 +29,7 @@ export const OrderOverviewCard = ({ order }) => {
             Order ID
           </Link>
         </div>
-        <div className="mt-2 bg-base-100 p-4 rounded-xl flex flex-col gap-4">
+        <div className="mt-2 bg-base-200 p-4 rounded-xl flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <div className="space-y-1 font-semibold">
               <span className="opacity-70 text-sm font-normal">
@@ -38,7 +38,7 @@ export const OrderOverviewCard = ({ order }) => {
               <p>Hello</p>
             </div>
             <div className="space-y-1 font-semibold">
-              <span className="opacity-70 text-sm font-normal">
+              <span className="opacity-70  text-sm font-normal">
                 Contact Name
               </span>
               <p>Hello</p>
@@ -46,13 +46,13 @@ export const OrderOverviewCard = ({ order }) => {
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="shadow rounded-md p-2">
+              <span className="shadow bg-white rounded-md p-2">
                 <HiOutlineMapPin />
               </span>
               <p>Well</p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="shadow rounded-md p-2">
+              <span className="shadow bg-white rounded-md p-2">
                 <HiOutlinePhone />
               </span>
               <p>Well</p>

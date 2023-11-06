@@ -9,6 +9,7 @@ import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 import axios from "axios";
 import * as dotenv from "dotenv";
 dotenv.config();
+import { v4 as uuidv4 } from 'uuid';
 
 const apiKey = process.env.API_KEY;
 const apiUser = process.env.API_USER;
@@ -145,7 +146,8 @@ class MomoAPI extends RESTDataSource {
     override willSendRequest(_path: string, request: AugmentedRequest) {
         request.headers['Authorization'] = `Bearer ${this.token}`;
         request.headers['Ocp-Apim-Subscription-Key'] = subscriptionKey;
-        request.headers['X-Target-Environment'] = "sandbox";
+        request.headers['X-Target-Environment'] = uuidv4();
+        request.headers['X-Reference-Id'] = "sandbox";
     }
 
     async requestToPay(body: PostRequest<CacheOptions> | undefined) {
