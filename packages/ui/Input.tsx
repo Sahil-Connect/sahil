@@ -1,17 +1,41 @@
-import { FC } from "react";
+import {
+  DeepMap,
+  FieldError,
+  FieldValues,
+  UseFormRegister,
+  Path,
+} from 'react-hook-form';
+import { FormControl } from './FormControl';
 
-type InputProps = {
+type InputProps<T extends FieldValues> = {
+  label?: string;
+  name: Path<T>;
+  register: UseFormRegister<T>;
+  errors: DeepMap<FieldValues, FieldError>;
+  type?: 'text' | 'email' | 'password' | 'number';
   placeholder?: string;
-  type?: string;
+  defaultValue?: string | number;
 };
 
-export const Input: FC<InputProps> = ({ type = "text", ...props }) => {
+export const Input = <T extends FieldValues>({
+  name,
+  register,
+  errors,
+  type = 'text',
+  placeholder = 'Type here',
+  label = name,
+  defaultValue,
+}: InputProps<T>) => {
   return (
-    <input
-      className="input input-sm input-bordered w-full bg-slate-100"
-      type={type}
-      placeholder={props.placeholder || "..."}
-      {...props}
-    />
+    <FormControl label={label}>
+      <input
+        type={type}
+        placeholder={placeholder}
+        className='input input-bordered w-full max-w-lg'
+        defaultValue={defaultValue}
+        {...register(name, { valueAsNumber: type === 'number' })}
+      />
+      {errors[name] && <p className='text-error'>{errors[name]?.message}</p>}
+    </FormControl>
   );
 };

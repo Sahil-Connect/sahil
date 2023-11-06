@@ -15,13 +15,15 @@ export default function SupplierPage() {
   }
   return (
     <div className='min-h-screen p-8 space-y-4'>
-      <div className='flex flex-col md:flex-row gap-4'>
+      <div className='flex flex-col lg:flex-row gap-4'>
         <div className='space-y-2'>
           <SupplierProfileOverview supplier={supplier} />
           <ServiceZones />
         </div>
         <div className='basis-4/5 space-y-4'>
-          <SupplierProducts />
+          <SupplierProducts
+            productsCount={supplier?.products_aggregate.aggregate.count}
+          />
           <SupplierOrderHistory />
         </div>
       </div>

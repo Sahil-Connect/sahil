@@ -60,6 +60,11 @@ export const FETCH_SUPPLIER_BY_PK = gql`
       categories {
         category_name
       }
+      products_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
