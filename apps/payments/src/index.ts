@@ -96,9 +96,23 @@ type RequestToPayTransactionStatusResponse {
     reason: String
 }
 
+input RequestToPayInput {
+  amount: Float!
+  payer: PayerInput!
+  externalId: String!
+  payerMessage: String
+  payeeNote: String
+  currency: String
+}
+
+input PayerInput {
+  partyId: String!
+  partyIdType: String!
+}
+
 
 type Mutation {
-    requestToPay(amount: Float!, currency: String!, externalId: String!, partyIdType: String!, partyId: String!, payerMessage: String, payeeNote: String): RequestToPayResponse
+    requestToPay(object: RequestToPayInput): RequestToPayResponse
     createAccessToken: CreateAccessTokenResponse
 }
 
@@ -146,12 +160,18 @@ class MomoAPI extends RESTDataSource {
     override willSendRequest(_path: string, request: AugmentedRequest) {
         request.headers['Authorization'] = `Bearer ${this.token}`;
         request.headers['Ocp-Apim-Subscription-Key'] = subscriptionKey;
-        request.headers['X-Target-Environment'] = uuidv4();
-        request.headers['X-Reference-Id'] = "sandbox";
+        request.headers['X-Target-Environment'] = "sandbox";
+        request.headers['X-Reference-Id'] = uuidv4();
     }
 
-    async requestToPay(body: PostRequest<CacheOptions> | undefined) {
-        return this.post(`collection/v1_0/requesttopay`, body);
+    async requestToPay(body) {
+        try {
+            const resp = await this.post(`collection/v1_0/requesttopay`, { body: {...body?.object}});
+            return resp;
+        } catch (err) {
+            console.log(err);
+        }
+        
     }
 
     async getAccountBalance() {
@@ -202,8 +222,8 @@ async function requestToPayTransactionStatus(_: any, { referenceId }: any, { dat
 
 const resolvers = {
     Mutation: {
-        requestToPay: async (_: any, { amount, currency, externalId, partyIdType, partyId, payerMessage, payeeNote }: any, { dataSources }: any) => {
-            return dataSources.momoAPI.requestToPay({ amount, currency, externalId, partyIdType, partyId, payerMessage, payeeNote });
+        requestToPay: async (_: any, args: any, { dataSources }: any) => {
+            return dataSources.momoAPI.requestToPay({ ...args });
         },
         createAccessToken: async (_: any, __: any, { dataSources }: any) => {
             return dataSources.momoAuthAPI.createAcccessToken();
