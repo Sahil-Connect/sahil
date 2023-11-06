@@ -34,7 +34,7 @@ export default function CourierRegistrationPage() {
       return;
     }
     updateStepByIndex(stepIndex);
-    router.push(`/courier/new/${steps[stepIndex]}`);
+    router.push(`/couriers/register/${steps[stepIndex]}`);
   };
 
   const headers = [
