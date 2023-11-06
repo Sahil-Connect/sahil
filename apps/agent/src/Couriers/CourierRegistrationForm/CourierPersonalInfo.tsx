@@ -24,18 +24,15 @@ const courierInfoSchema = z.object({
 type FormData = z.infer<typeof courierInfoSchema>;
 
 export const CourierPersonalInfo = () => {
-  const { formData, goToStep, updateStepFormData } = useCourierFormStore(
-    (state) => ({
-      formData: state.formData,
-      goToStep: state.goToStep,
-      updateStepFormData: state.updateStepFormData,
-    })
-  );
+  const { goToStep, updateStepFormData } = useCourierFormStore((state) => ({
+    formData: state.formData,
+    goToStep: state.goToStep,
+    updateStepFormData: state.updateStepFormData,
+  }));
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(courierInfoSchema),
