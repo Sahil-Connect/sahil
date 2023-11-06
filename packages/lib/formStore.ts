@@ -6,16 +6,16 @@ type FormState = Record<string, any>;
 
 type FormStore<T> = {
   currentStep: T;
-  steps: T[];
+  steps: readonly T[];
   goToStep: (direction: StepDirection) => void;
   updateStepByIndex: (stepIndex: number) => void;
   updateStepFormData: (formData: Record<string, any>) => void;
-  formData: any;
+  formData: Record<string, any>;
 };
 
 export const createFormStore = <T extends string>(
   initialStep: T,
-  steps: T[]
+  steps: readonly T[]
 ) => {
   return create<FormStore<T>>((set) => ({
     currentStep: initialStep,
