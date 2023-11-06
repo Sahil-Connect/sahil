@@ -1,4 +1,5 @@
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
+import { useOrderFormStore } from "@/hooks/useOrderFormStore";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Card } from "ui";
 import { formatCost } from "@sahil/lib";
@@ -12,6 +13,7 @@ import {
   HiMinus,
 } from "react-icons/hi2";
 import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
+import { usePlaceBusinessOrder } from "@/hooks/orders";
 
 const ProductSummary = ({ product }) => {
   return (
@@ -42,7 +44,10 @@ const checkoutSchema = z.object({
 type FormData = z.infer<typeof checkoutSchema>;
 
 export const OrderSummary = () => {
-  const { requesTtoPay, loading, error } = useRequesTtoPay();
+  const { requesTtoPay, loading: payLoading, error: payError } = useRequesTtoPay();
+  const { placeOrder, loading: orderLoading, error: orderError } = usePlaceBusinessOrder();
+  const { client } = useOrderFormStore(state => state);
+  console.log(client);
   const {
     register,
     handleSubmit,
@@ -68,15 +73,26 @@ export const OrderSummary = () => {
     // const validatedInput = .parse(data);
     // navigateToNextStep("");
     try {
+      const order = await placeOrder({
+        variables: {
+          object: {
+            origin: "Souq Munuki",
+            destination: "Souq Custom"
+          }
+        }
+      });
+      console.log("order:", order);
       const res = await requesTtoPay({
         variables: {
           amount: totalCost,
-          externalId: "",
-          partyId: "",
-          partyIdType: ""
+          externalId: "6353636",
+          partyId: "0787024989",
+          partyIdType: "MSISDN",
+          payerMessage: "Hey",
+          payeeNote: "Sahil Order"
         }
       });
-      console.log("res");
+      console.log("res:", res);
     } catch (err) {
       console.log("no:", err);
     }

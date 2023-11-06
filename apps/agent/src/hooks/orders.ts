@@ -8,7 +8,7 @@ export const useFetchOrders = () => {
 }
 
 export const usePlaceBusinessOrder = () => {
-    const [insertBusinessOrder, { data, loading, error }] = useMutation(INSERT_NEW_ORDER);
+    const [placeOrder, { data, loading, error }] = useMutation(INSERT_NEW_ORDER);
 
-    return {loading, insertBusinessOrder, error};
+    return {loading, placeOrder, error};
 }
