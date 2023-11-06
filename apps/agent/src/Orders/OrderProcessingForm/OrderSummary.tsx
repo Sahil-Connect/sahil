@@ -84,12 +84,16 @@ export const OrderSummary = () => {
       console.log("order:", order);
       const res = await requesTtoPay({
         variables: {
-          amount: totalCost,
-          externalId: "6353636",
-          partyId: "0787024989",
-          partyIdType: "MSISDN",
-          payerMessage: "Hey",
-          payeeNote: "Sahil Order"
+          object: {
+            amount: totalCost,
+            payer: {
+              partyId: "0787024989",
+              partyIdType: "MSISDN",
+            },
+            externalId: "6353636",
+            payerMessage: "Hey",
+            payeeNote: "Sahil Order"
+          }
         }
       });
       console.log("res:", res);
