@@ -1,10 +1,15 @@
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import express from "express";
+import http from 'http';
+import cors from 'cors';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { AugmentedRequest, CacheOptions, PostRequest, RESTDataSource } from '@apollo/datasource-rest';
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
+import * as dotenv from "dotenv";
 
+dotenv.config();
 export const typeDefs = `#graphql
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
   type RequestToPayResponse {
     status: String
     message: String
@@ -154,12 +159,6 @@ class MomoAPI extends RESTDataSource {
     }
 }
 
-interface ContextValue {
-    dataSources: {
-        momoAPI: MomoAPI;
-    };
-}
-
 async function accountBalance(_: any, __: any, { dataSources }: any) {
     return dataSources.momoAPI.getAccountBalance();
 }
@@ -202,24 +201,32 @@ const resolvers = {
     }
 };
 
+const app = express();
+const httpServer = http.createServer(app);
+
+interface ContextValue {
+    dataSources?: {
+        momoAPI: MomoAPI;
+    };
+}
+
+
 const server = new ApolloServer<ContextValue>({
     typeDefs: typeDefs,
     resolvers,
-    introspection: true
+    introspection: true,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 
-startStandaloneServer(server, {
-    context: async () => {
-        const { cache } = server;
-        return {
-            // We create new instances of our data sources with each request,
-            // passing in our server's cache.
-            dataSources: {
-                momoAPI: new MomoAPI({ cache }),
-            },
-        };
-    },
-    listen: { port: 4000 },
-}).then(({ url }) => {
-    console.log(`🚀  Server ready at: ${url}`);
-});
+
+await server.start();
+
+app.use(
+    '/graphql',
+    cors<cors.CorsRequest>(),
+    express.json(),
+    expressMiddleware(server),
+);
+
+await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+console.log(`🚀 Server ready at http://localhost:4000/graphql`);
