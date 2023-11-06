@@ -36,7 +36,7 @@ export const SupplierBasicInfoForm = () => {
     const validatedInput = supplierBasicInfoSchema.parse(data);
     updateStepFormData(validatedInput);
     goToStep('next');
-    router.push(`/suppliers/new/contact_details`);
+    router.push(`/suppliers/register/contact_details`);
   };
 
   return (

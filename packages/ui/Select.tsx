@@ -1,19 +1,39 @@
-import { FC } from "react";
+import { FormControl } from './FormControl';
+import {
+  DeepMap,
+  FieldError,
+  FieldValues,
+  Path,
+  UseFormRegister,
+} from 'react-hook-form';
 
-type SelectProps = {
+type SelectProps<T extends FieldValues> = {
   options: any[];
-  title?: string;
+  label?: string;
+  name: Path<T>;
+  register: UseFormRegister<T>;
+  errors: DeepMap<FieldValues, FieldError>;
 };
 
-export const Select: FC<SelectProps> = ({ options, title = "Select Input" }) => {
+export const Select = <T extends FieldValues>({
+  options,
+  label = 'Select Input',
+  name,
+  register,
+  errors,
+}: SelectProps<T>) => {
   return (
-    <select
-      className="select select-sm select-bordered bg-slate-100"
-      title={title}
-    >
-      {options.map((option, index) => (
-        <option key={index}>{option}</option>
-      ))}
-    </select>
+    <FormControl label={label}>
+      <select
+        className='select select-sm select-bordered w-full max-w-lg'
+        title={label}
+        {...register(name)}
+      >
+        {options.map((option, index) => (
+          <option key={index}>{option}</option>
+        ))}
+      </select>
+      {errors[name] && <p className='text-error'>{errors[name]?.message}</p>}
+    </FormControl>
   );
 };
