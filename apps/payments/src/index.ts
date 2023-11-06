@@ -6,9 +6,16 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { AugmentedRequest, CacheOptions, PostRequest, RESTDataSource } from '@apollo/datasource-rest';
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
+import axios from "axios";
 import * as dotenv from "dotenv";
-
 dotenv.config();
+import { v4 as uuidv4 } from 'uuid';
+
+const apiKey = process.env.API_KEY;
+const apiUser = process.env.API_USER;
+const subscriptionKey = process.env.OCP_APIM_SUBSCRIPTION_KEY;
+
+
 export const typeDefs = `#graphql
   type RequestToPayResponse {
     status: String
@@ -107,35 +114,49 @@ type Mutation {
 }
 `;
 
-class MomoAPI extends RESTDataSource {
-    override baseURL = 'https://sandbox.momodeveloper.mtn.com/';
-    private token: string = "";
+class MomoAuthAPI extends RESTDataSource {
 
-    constructor(options: { token?: string; cache: KeyValueCache }) {
+    override baseURL = 'https://sandbox.momodeveloper.mtn.com/';
+    private token: string;
+
+    constructor(options: { token?: string; cache?: KeyValueCache, key?: string }) {
         super(options);
     }
 
     override willSendRequest(_path: string, request: AugmentedRequest) {
-        request.headers['Authorisation'] = `Bearer ${this.token}`;
-        request.headers['Ocp-Apim-Subscription-Key'] = ``;
+        request.headers['Authorisation'] = `Basic ${this.token}`;
+        request.headers['Ocp-Apim-Subscription-Key'] = subscriptionKey;
+    }
+
+    async createAcccessToken() {
+        return this.post(`collection/token/`);
+    }
+}
+
+class MomoAPI extends RESTDataSource {
+    override baseURL = 'https://sandbox.momodeveloper.mtn.com/';
+    private token: string;
+
+    constructor(options) {
+        super(options);
+        const { token, cache, key } = options;
+        this.token = token;
+    }
+
+    override willSendRequest(_path: string, request: AugmentedRequest) {
+        request.headers['Authorization'] = `Bearer ${this.token}`;
+        request.headers['Ocp-Apim-Subscription-Key'] = subscriptionKey;
+        request.headers['X-Target-Environment'] = uuidv4();
+        request.headers['X-Reference-Id'] = "sandbox";
     }
 
     async requestToPay(body: PostRequest<CacheOptions> | undefined) {
         return this.post(`collection/v1_0/requesttopay`, body);
     }
 
-    async createAcccessToken() {
-        return this.post(`collection/token/`);
-    }
-
     async getAccountBalance() {
-        try {
-            const res = await this.get(`collection/v1_0/account/balance`);
-            console.log(res);
-            return res;
-        } catch (error) {
-            console.log(error);
-        }
+        const res = await this.get(`collection/v1_0/account/balance`);
+        return res;
     }
 
     async getBasicUserInfo(accountHolderMSISDN: any) {
@@ -185,7 +206,7 @@ const resolvers = {
             return dataSources.momoAPI.requestToPay({ amount, currency, externalId, partyIdType, partyId, payerMessage, payeeNote });
         },
         createAccessToken: async (_: any, __: any, { dataSources }: any) => {
-            return dataSources.momoAPI.createAcccessToken();
+            return dataSources.momoAuthAPI.createAcccessToken();
         }
     },
     Query: {
@@ -205,27 +226,65 @@ const app = express();
 const httpServer = http.createServer(app);
 
 interface ContextValue {
-    dataSources?: {
+    dataSources: {
         momoAPI: MomoAPI;
     };
 }
 
 
-const server = new ApolloServer<ContextValue>({
+const server = new ApolloServer({
     typeDefs: typeDefs,
     resolvers,
     introspection: true,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+
 });
 
 
 await server.start();
 
+async function validateAccessToken(req, res, next) {
+    console.log("yerrr");
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+        // validate
+    } else {
+        const headers = {
+            "Ocp-Apim-Subscription-Key": subscriptionKey,
+            "Authorization": `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`
+        }
+
+        const response = await axios.post("https://sandbox.momodeveloper.mtn.com/collection/token/", {}, {
+            headers
+        });
+        req.headers.access_token = response.data.access_token;
+        //console.log(response.headers);
+    }
+    // req.locals.access_tokn = "yerrrrr";
+
+    // No token in the request, generate a new access token
+    // const newToken = dataSources.momoAPI.createAcccessToken();
+    // req.headers.authorization = `Bearer ${newToken}`;
+    next();
+}
+
 app.use(
     '/graphql',
     cors<cors.CorsRequest>(),
     express.json(),
-    expressMiddleware(server),
+    validateAccessToken,
+    expressMiddleware(server, {
+        context: async ({ req }) => {
+            // console.log("check:", req.headers?.access_token);
+            return ({
+                dataSources: {
+                    momoAPI: new MomoAPI({ key: apiKey, token: req.headers?.access_token }),
+                    momoAuthAPI: new MomoAuthAPI({ key: apiKey })
+                }
+            })
+        }
+    }),
 );
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));

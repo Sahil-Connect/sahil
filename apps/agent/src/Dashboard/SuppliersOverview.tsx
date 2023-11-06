@@ -5,12 +5,12 @@ const suppliers = [
   {
     id: 1,
     name: "Energi Dealers",
-    avatar: "https://avatars.githubusercontent.com/u/21015204?v=4",
+    avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1699295129/138b9b22dbc85be57c3898716fcdfd4c.jpg",
   },
   {
     id: 2,
     name: "Twins Construction",
-    avatar: "https://avatars.githubusercontent.com/u/91534137?v=4",
+    avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1699295129/138b9b22dbc85be57c3898716fcdfd4c.jpg",
   },
 ];
 export const SuppliersOverview = () => {

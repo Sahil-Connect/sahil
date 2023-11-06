@@ -16,7 +16,6 @@ type Props = {
 
 export const BusinessOverviewCard: FC<Props> = ({ business }) => {
   return (
-    <div className="basis-1/4">
       <Card>
         <div className="flex justify-between text-4xl">
           <Link
@@ -52,6 +51,6 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
             ))}
         </div>
       </Card>
-    </div>
+  
   );
 };

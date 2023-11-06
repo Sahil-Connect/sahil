@@ -19,7 +19,7 @@ export default function BusinessPage() {
   }
 
   return (
-    <div className="min-h-screen p-8 space-y-4">
+    <div className="space-y-4">
       <div className="text-sm breadcrumbs">
         <ul>
           <li>

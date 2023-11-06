@@ -1,6 +1,10 @@
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
+import { useOrderFormStore } from "@/hooks/useOrderFormStore";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Card } from "ui";
 import { formatCost } from "@sahil/lib";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   HiOutlineCheckCircle,
   HiOutlinePrinter,
@@ -8,6 +12,8 @@ import {
   HiPlus,
   HiMinus,
 } from "react-icons/hi2";
+import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
+import { usePlaceBusinessOrder } from "@/hooks/orders";
 
 const ProductSummary = ({ product }) => {
   return (
@@ -31,7 +37,25 @@ const ProductSummary = ({ product }) => {
   );
 };
 
+const checkoutSchema = z.object({
+  amount: z.string().optional()
+});
+
+type FormData = z.infer<typeof checkoutSchema>;
+
 export const OrderSummary = () => {
+  const { requesTtoPay, loading: payLoading, error: payError } = useRequesTtoPay();
+  const { placeOrder, loading: orderLoading, error: orderError } = usePlaceBusinessOrder();
+  const { client } = useOrderFormStore(state => state);
+  console.log(client);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(checkoutSchema),
+  });
   const orderItems = useOrderItemsStore((state) => state.orderItems);
   const { totalItems, totalCost } = orderItems?.reduce(
     (totals, product) => ({
@@ -44,8 +68,38 @@ export const OrderSummary = () => {
     }
   );
 
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    console.log("woooooo");
+    // const validatedInput = .parse(data);
+    // navigateToNextStep("");
+    try {
+      const order = await placeOrder({
+        variables: {
+          object: {
+            origin: "Souq Munuki",
+            destination: "Souq Custom"
+          }
+        }
+      });
+      console.log("order:", order);
+      const res = await requesTtoPay({
+        variables: {
+          amount: totalCost,
+          externalId: "6353636",
+          partyId: "0787024989",
+          partyIdType: "MSISDN",
+          payerMessage: "Hey",
+          payeeNote: "Sahil Order"
+        }
+      });
+      console.log("res:", res);
+    } catch (err) {
+      console.log("no:", err);
+    }
+  };
+
   return (
-    <form className="space-y-2">
+    <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex justify-end">
         <button className="btn btn-sm btn-secondary">
           <HiOutlinePrinter /> Print

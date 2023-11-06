@@ -18,6 +18,7 @@ const paymentDetailsSchema = z.object({
 type FormData = z.infer<typeof paymentDetailsSchema>;
 
 export const PaymentDetails = ({ navigateToNextStep }) => {
+  const updateStepFormData = useOrderFormStore(state => state.updateStepFormData);
   const {
     register,
     handleSubmit,
@@ -27,8 +28,10 @@ export const PaymentDetails = ({ navigateToNextStep }) => {
     resolver: zodResolver(paymentDetailsSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    // const validatedInput = .parse(data);
-    // navigateToNextStep("");
+    const validatedInput = paymentDetailsSchema.parse(data);
+
+    updateStepFormData(validatedInput);
+    navigateToNextStep("summary");
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
