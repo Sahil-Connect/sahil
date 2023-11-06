@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useSupplierFormStore } from "../../hooks/useSupplierFormStore";
-import { useRouter } from "next/router";
+import { FC } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useSupplierFormStore } from '../../hooks/useSupplierFormStore';
+import { useRouter } from 'next/router';
 
 const supplierPrefencesSchema = z.object({
   zone: z.string(),
@@ -29,22 +29,22 @@ export const SupplierPreferencesForm = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = supplierPrefencesSchema.parse(data);
     updateStepFormData(validatedInput);
-    goToStep("next");
-    router.push(`/suppliers/new/preview`);
+    goToStep('next');
+    router.push(`/suppliers/register/preview`);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Zones of Operation</span>
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-2'>
+        <div className='form-control'>
+          <label className='label'>
+            <span className='label-text'>Zones of Operation</span>
           </label>
           <select
-            {...register("zone")}
-            className="select select-sm w-full max-w-xs"
-            title="zone"
-            defaultValue="Souq Konyo Konyo"
+            {...register('zone')}
+            className='select select-sm w-full max-w-xs'
+            title='zone'
+            defaultValue='Souq Konyo Konyo'
           >
             <option disabled>Souq Konyo Konyo</option>
             <option>Munuki</option>
@@ -53,7 +53,7 @@ export const SupplierPreferencesForm = () => {
           </select>
           {errors.zone?.message && <p>{errors.zone?.message}</p>}
         </div>
-        <input type="submit" className="btn btn-sm btn-primary" />
+        <input type='submit' className='btn btn-sm btn-primary' />
       </form>
     </>
   );

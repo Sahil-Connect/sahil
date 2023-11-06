@@ -20,11 +20,11 @@ const StepsPaginator = () => {
 
   const goToPrevStep = () => {
     goToStep('prev');
-    router.push(`/suppliers/new/${steps[currentIndex - 1]}`);
+    router.push(`/suppliers/register/${steps[currentIndex - 1]}`);
   };
   const goToNextStep = () => {
     goToStep('next');
-    router.push(`/suppliers/new/${steps[currentIndex + 1]}`);
+    router.push(`/suppliers/register/${steps[currentIndex + 1]}`);
   };
 
   return (
@@ -73,7 +73,7 @@ export default function SupplierRegistrationPage() {
       return;
     }
     updateStepByIndex(stepIndex);
-    router.push(`/suppliers/new/${steps[stepIndex]}`);
+    router.push(`/suppliers/register/${steps[stepIndex]}`);
   };
 
   const headers = [
