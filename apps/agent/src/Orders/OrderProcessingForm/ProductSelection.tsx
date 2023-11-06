@@ -9,7 +9,7 @@ import { RecommendedSuppliers } from "../RecommendedSuppliers";
 import { HiArrowRight, HiMiniMagnifyingGlass, HiXMark } from "react-icons/hi2";
 
 const productSelectionSchema = z.object({
-  clientId: z.string(),
+  // clientId: z.string(),
 });
 
 type FormData = z.infer<typeof productSelectionSchema>;
@@ -30,10 +30,10 @@ export const ProductSelection = ({ navigateToNextStep }) => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("yerrrrr");
-    // const validatedInput = productSelectionSchema.parse(data);
+    const validatedInput = productSelectionSchema.parse(data);
 
-    // updateStepFormData(validatedInput);
-    navigateToNextStep("delivery_details")
+    updateStepFormData(validatedInput);
+    navigateToNextStep("delivery_details");
   };
   return (
     <>

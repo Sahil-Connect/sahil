@@ -84,7 +84,7 @@ export default function NewOrderPage() {
   ];
 
   return (
-    <main className="min-h-screen space-y-4">
+    <section className="space-y-4">
       <div className="flex gap-2 justify-between items-center py-4 px-8 bg-base-200">
         <h1 className="text-2xl">Order Processing Form</h1>
         <div className="flex gap-2 items-center">
@@ -126,6 +126,6 @@ export default function NewOrderPage() {
           {currentStep === "summary" && <OrderSummary />}
         </div>
       </div>
-    </main>
+    </section>
   );
 }

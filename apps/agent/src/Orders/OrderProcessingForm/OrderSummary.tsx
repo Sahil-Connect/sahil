@@ -1,6 +1,9 @@
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Card } from "ui";
 import { formatCost } from "@sahil/lib";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   HiOutlineCheckCircle,
   HiOutlinePrinter,
@@ -8,6 +11,7 @@ import {
   HiPlus,
   HiMinus,
 } from "react-icons/hi2";
+import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
 
 const ProductSummary = ({ product }) => {
   return (
@@ -31,7 +35,22 @@ const ProductSummary = ({ product }) => {
   );
 };
 
+const checkoutSchema = z.object({
+  amount: z.string().optional()
+});
+
+type FormData = z.infer<typeof checkoutSchema>;
+
 export const OrderSummary = () => {
+  const { requesTtoPay, loading, error } = useRequesTtoPay();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(checkoutSchema),
+  });
   const orderItems = useOrderItemsStore((state) => state.orderItems);
   const { totalItems, totalCost } = orderItems?.reduce(
     (totals, product) => ({
@@ -44,8 +63,27 @@ export const OrderSummary = () => {
     }
   );
 
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    console.log("woooooo");
+    // const validatedInput = .parse(data);
+    // navigateToNextStep("");
+    try {
+      const res = await requesTtoPay({
+        variables: {
+          amount: totalCost,
+          externalId: "",
+          partyId: "",
+          partyIdType: ""
+        }
+      });
+      console.log("res");
+    } catch (err) {
+      console.log("no:", err);
+    }
+  };
+
   return (
-    <form className="space-y-2">
+    <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex justify-end">
         <button className="btn btn-sm btn-secondary">
           <HiOutlinePrinter /> Print

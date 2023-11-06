@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "@/hooks/useOrderFormStore";
-import { Card, FormControl, FormControlError, Input, Select } from "ui";
+import { Card, FormControl, FormControlError, Select } from "ui";
 
 import {
   HiArrowRight,
@@ -14,18 +14,19 @@ import {
 } from "react-icons/hi2";
 
 const deliveryDetailsSchema = z.object({
-  contactName: z.string(),
-  mobileNumber: z.string(),
-  deliveryDate: z.string(),
-  deliveryType: z.string(),
-  scheduleType: z.string(),
-  pickupLocation: z.string(),
-  deliveryAddress: z.string(),
+  contactName: z.string().optional(),
+  mobileNumber: z.string().optional(),
+  deliveryDate: z.string().optional(),
+  deliveryType: z.string().optional(),
+  scheduleType: z.string().optional(),
+  pickupLocation: z.string().optional(),
+  deliveryAddress: z.string().optional(),
 });
 
 type FormData = z.infer<typeof deliveryDetailsSchema>;
 
 export const DeliveryDetails = ({ navigateToNextStep }) => {
+  const updateStepFormData = useOrderFormStore(state => state.updateStepFormData);
   const {
     register,
     handleSubmit,
@@ -36,21 +37,23 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
   });
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("woooooo");
-    // const validatedInput = .parse(data);
-    // navigateToNextStep("");
+    const validatedInput = deliveryDetailsSchema.parse(data);
+
+    updateStepFormData(validatedInput);
+    navigateToNextStep("payment_details")
   };
   return (
     <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <Card title="Delivery Information" titleSize="sm">
         <div className="flex gap-2">
           <FormControl label="Name">
-            <Input placeholder="Keji Lumuro" {...register("contactName")} />
+            <input placeholder="Keji Lumuro" {...register("contactName")} />
             {errors.contactName?.message && (
               <FormControlError message={errors.contactName?.message} />
             )}
           </FormControl>
           <FormControl label="Mobile Number">
-            <Input
+            <input
               placeholder="+211-9813231392"
               {...register("mobileNumber")}
             />
@@ -99,7 +102,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
         </div>
         {false && (
           <FormControl label="Date">
-            <Input type="date" {...register("deliveryDate")} />
+            <input type="date" {...register("deliveryDate")} />
             {errors.deliveryDate?.message && (
               <FormControlError message={errors.deliveryDate?.message} />
             )}
