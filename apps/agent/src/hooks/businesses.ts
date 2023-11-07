@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import { FETCH_BUSINESSES, FETCH_BUSINESS_BY_PK } from "@/lib/graphql/queries/businesses";
 import { INSERT_NEW_BUSINESS } from "@/lib/graphql/mutations/businesses";
@@ -7,11 +8,13 @@ export const useFetchBusinesses = () => {
     return { error, data: data?.business, loading, businessCount: data?.business_aggregate?.aggregate };
 }
 
-export const useFetchBusinessByPK = (id: string) => {
+export const useFetchBusinessByPK = (id?: string) => {
+    const router = useRouter();
+    const { businessId } = router.query;
     const { error, data, loading } = useQuery(FETCH_BUSINESS_BY_PK, {
         variables: {
-            id
-        }
+            id: id || businessId,
+        },
     });
     return { error, data: data?.business_by_pk, loading };
 }
