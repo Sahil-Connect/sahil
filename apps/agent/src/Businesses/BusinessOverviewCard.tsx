@@ -63,7 +63,7 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
       <div className="mt-3">
         {business.addresses && business.addresses.map((address, index) => (
           <div key={index} className="flex items-center gap-2">
-            <span>
+            <span className="shadow rounded-md p-2">
               <HiOutlineMapPin />
             </span>
             <p className="truncate ...">
@@ -74,7 +74,7 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
       </div>
       <div className="mt-3">
         <div className="flex items-center gap-2">
-          <span>
+          <span className="shadow rounded-md p-2">
             <HiOutlinePhone />
           </span>
           <p>{business.phoneNumber}</p>
