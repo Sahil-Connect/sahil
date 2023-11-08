@@ -1,7 +1,8 @@
 import { HiPlus } from "react-icons/hi2";
+import { Stats } from "ui";
 export const CourierStats = () => {
   return (
-    <div className="stats shadow">
+    <Stats className="stats shadow">
       <div className="stat">
         <div className="stat-figure text-primary">
           <HiPlus />
@@ -35,6 +36,6 @@ export const CourierStats = () => {
         <div className="stat-title">Tasks done</div>
         <div className="stat-desc text-secondary">31 tasks remaining</div>
       </div>
-    </div>
+    </Stats>
   );
 };

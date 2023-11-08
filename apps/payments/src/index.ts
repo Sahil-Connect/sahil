@@ -161,22 +161,30 @@ class MomoAPI extends RESTDataSource {
         request.headers['Authorization'] = `Bearer ${this.token}`;
         request.headers['Ocp-Apim-Subscription-Key'] = subscriptionKey;
         request.headers['X-Target-Environment'] = "sandbox";
-        request.headers['X-Reference-Id'] = uuidv4();
     }
 
     async requestToPay(body) {
         try {
-            const resp = await this.post(`collection/v1_0/requesttopay`, { body: {...body?.object}});
+            const resp = await this.post(`collection/v1_0/requesttopay`, {
+                body: { ...body?.object },
+                headers: {
+                    'X-Reference-Id': uuidv4()
+                }
+            });
             return resp;
         } catch (err) {
             console.log(err);
         }
-        
+
     }
 
     async getAccountBalance() {
-        const res = await this.get(`collection/v1_0/account/balance`);
-        return res;
+        try {
+            const res = await this.get(`collection/v1_0/account/balance`);
+            return res;
+        } catch (err) {
+
+        }
     }
 
     async getBasicUserInfo(accountHolderMSISDN: any) {
@@ -222,9 +230,12 @@ async function requestToPayTransactionStatus(_: any, { referenceId }: any, { dat
 
 const resolvers = {
     Mutation: {
+        // payments mutations
         requestToPay: async (_: any, args: any, { dataSources }: any) => {
             return dataSources.momoAPI.requestToPay({ ...args });
         },
+
+        // auth mutations
         createAccessToken: async (_: any, __: any, { dataSources }: any) => {
             return dataSources.momoAuthAPI.createAcccessToken();
         }
@@ -235,7 +246,7 @@ const resolvers = {
         basicUserInfo,
         userInfoWithConsent,
 
-        // payment queries
+        // payments queries
         paymentStatus,
         preApprovalStatus,
         requestToPayTransactionStatus
@@ -296,11 +307,11 @@ app.use(
     validateAccessToken,
     expressMiddleware(server, {
         context: async ({ req }) => {
-            // console.log("check:", req.headers?.access_token);
+            const { cache } = server;
             return ({
                 dataSources: {
-                    momoAPI: new MomoAPI({ key: apiKey, token: req.headers?.access_token }),
-                    momoAuthAPI: new MomoAuthAPI({ key: apiKey })
+                    momoAPI: new MomoAPI({ cache, key: apiKey, token: req.headers?.access_token }),
+                    momoAuthAPI: new MomoAuthAPI({ cache, key: apiKey })
                 }
             })
         }

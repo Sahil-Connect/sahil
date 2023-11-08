@@ -5,7 +5,7 @@ import {
   UseFormRegister,
   Path,
 } from 'react-hook-form';
-import { FormControl } from './FormControl';
+import { FormControl, FormControlError } from './FormControl';
 
 type InputProps<T extends FieldValues> = {
   label?: string;
@@ -35,7 +35,7 @@ export const Input = <T extends FieldValues>({
         defaultValue={defaultValue}
         {...register(name, { valueAsNumber: type === 'number' })}
       />
-      {errors[name] && <p className='text-error'>{errors[name]?.message}</p>}
+      {errors[name] && <FormControlError message={errors[name]?.message} />}
     </FormControl>
   );
 };
