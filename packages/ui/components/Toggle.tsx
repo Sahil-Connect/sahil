@@ -4,8 +4,8 @@ import {
   FieldValues,
   UseFormRegister,
   Path,
-} from 'react-hook-form';
-import { FormControl } from './FormControl';
+} from "react-hook-form";
+import { FormControl, FormControlError } from "./FormControl";
 
 type ToggleProps<T extends FieldValues> = {
   label?: string;
@@ -25,11 +25,11 @@ export const Toggle = <T extends FieldValues>({
   return (
     <FormControl label={label}>
       <input
-        type='checkbox'
-        className={`toggle toggle-lg ${isChecked && 'toggle-primary'}`}
+        type="checkbox"
+        className={`toggle toggle-lg ${isChecked && "toggle-primary"}`}
         {...register(name)}
       />
-      {errors[name] && <p className='text-error'>{errors[name]?.message}</p>}
+      {errors[name] && <FormControlError message={errors[name]?.message} />}
     </FormControl>
   );
 };

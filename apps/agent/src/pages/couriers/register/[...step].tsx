@@ -11,6 +11,26 @@ import { INITIAL_STEP } from '@/Couriers/constants';
 import { useCourierFormStore } from '@/hooks/useCourierFormStore';
 import { CourierFormSummary } from '@/Couriers/CourierRegistrationForm/CourierFormSummary';
 
+
+  const headers = [
+    {
+      title: 'Personal Information',
+      step: 'personal_info' as const,
+    },
+    {
+      title: 'Contact Details',
+      step: 'contact_details' as const,
+    },
+    {
+      title: 'Vehicle Information',
+      step: 'vehicle_info' as const,
+    },
+    {
+      title: 'Summary',
+      step: 'summary' as const,
+    },
+  ];
+
 export default function CourierRegistrationPage() {
   const { steps, currentStep, updateStepByIndex } = useCourierFormStore(
     (state) => state
@@ -37,37 +57,18 @@ export default function CourierRegistrationPage() {
     router.push(`/couriers/register/${steps[stepIndex]}`);
   };
 
-  const headers = [
-    {
-      title: 'Personal Information',
-      step: 'personal_info' as const,
-    },
-    {
-      title: 'Contact Details',
-      step: 'contact_details' as const,
-    },
-    {
-      title: 'Vehicle Information',
-      step: 'vehicle_info' as const,
-    },
-    {
-      title: 'Summary',
-      step: 'summary' as const,
-    },
-  ];
-
   return (
     <>
       <Head>
         <title>Sahil - {headers[currentIndex]?.title}</title>
       </Head>
-      <main className='min-h-screen flex items-start'>
+      <section className='flex items-start'>
         <div className='space-y-4 w-full'>
           <div className='bg-base-200 p-4'>
             <h1 className='text-2xl'>Courier Registration Form</h1>
           </div>
           <div className='flex'>
-            <div className='basis-1/5 p-4'>
+            <div className='basis-1/5'>
               <ul className='steps steps-vertical '>
                 {headers.map(({ step, title }, index) => (
                   <li
@@ -93,7 +94,7 @@ export default function CourierRegistrationPage() {
                 <CourierFormStepPaginator />
               </div>
               <div className='divider'></div>
-              <div className='card card-compact shadow'>
+              <div className='card card-compact card-borderd'>
                 <div className='card-body'>
                   <h2 className='card-title'>{headers[currentIndex]?.title}</h2>
                   {currentStep === 'personal_info' && <CourierPersonalInfo />}
@@ -107,7 +108,7 @@ export default function CourierRegistrationPage() {
             </div>
           </div>
         </div>
-      </main>
+      </section>
     </>
   );
 }

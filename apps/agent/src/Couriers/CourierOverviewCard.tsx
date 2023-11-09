@@ -1,35 +1,45 @@
-import { Avatar, Card } from 'ui';
-import Link from 'next/link';
+import { FC } from "react";
+import { Avatar, Card } from "ui";
+import Link from "next/link";
 
-type SahilCourier = {
-  id: string;
-  avatar: string;
+export type CourierRideType = "Car" | "Bike";
+export type CourierRideStatus = "Active" | "Inactive" | "Maintenance";
+
+export type CourierRide = {
+  type: CourierRide;
+  status: CourierRideStatus;
+  numberPlate: string;
+  model: string;
   name: string;
-  gender: string;
+  year: string;
+};
+
+export type SahilCourier = {
+  id: string;
+  avatar?: string;
+  name: string;
+  gender?: string;
   DOB: Date;
   email: string;
   phoneNumber: number;
-  rides: [
-    {
-      type: 'Car' | 'Bike';
-      status: 'Active' | 'Inactive' | 'Maintenance';
-    }
-  ];
+  rides: CourierRide[];
 };
 
 type CourierOverviewCardProps = {
   courier: SahilCourier;
 };
 
-export const CourierOverviewCard = ({ courier }: CourierOverviewCardProps) => {
+export const CourierOverviewCard: FC<CourierOverviewCardProps> = ({
+  courier,
+}) => {
   return (
     <Card>
       <Avatar src={courier.avatar} alt={courier.name} />
-      <Link href={`/couriers/${courier.id}`} className='text-lg font-semibold'>
-        <h3>{courier.name}</h3>
+      <Link href={`/couriers/${courier.id}`}>
+        <h3 className="card-title text-lg font-semibold">{courier.name}</h3>
       </Link>
-      <div className='flex flex-col gap-2'>
-        <div className='flex items-center'>
+      <div className="flex flex-col">
+        <div className="flex items-center gap-2">
           <div>
             <p>{courier.gender}</p>
           </div>

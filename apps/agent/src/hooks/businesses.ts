@@ -11,7 +11,7 @@ export const useFetchBusinessByPK = (id: string) => {
     const { error, data, loading } = useQuery(FETCH_BUSINESS_BY_PK, {
         variables: {
             id
-        }
+        },
     });
     return { error, data: data?.business_by_pk, loading };
 }

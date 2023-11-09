@@ -7,11 +7,11 @@ export default function Business() {
       <section className="space-y-4">
         <div className="flex justify-between items-start flex-wrap gap-4">
           <div>
-            <h1 className="relative text-2xl inline-block z-[1] before:absolute before:left-0 before:bottom-1 before:w-full before:h-1.5 before:bg-[#84faa1] before:z-[-1] md:text-3xl">Partner Businesses</h1>
+            <h1 className="text-2xl md:text-3xl">Partner Businesses</h1>
           </div>
           <div>
             <button 
-              className="btn btn-sm btn-primary normal-case rounded-none"
+              className="btn btn-sm btn-primary normal-case"
               onClick={() => router.push("/businesses/new/basic_info")}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24">

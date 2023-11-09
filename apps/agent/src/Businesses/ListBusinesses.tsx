@@ -6,6 +6,12 @@ import { List, ListHeader, ListErrorState } from "ui";
 export type SahilBusiness = {
   name: string;
   id: string;
+  contactName: string;
+  type: string;
+  phoneNumber: string;
+  addresses: Array<{
+    street_address: string,
+  }>;
 };
 
 export const ListBusinesses = () => {

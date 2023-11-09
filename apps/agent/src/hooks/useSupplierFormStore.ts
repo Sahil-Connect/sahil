@@ -1,5 +1,5 @@
 import { INITIAL_STEP } from '../Suppliers/constants';
-import { createFormStore } from '@sahil/lib';
+import { useCreateFormStore } from '@sahil/lib';
 
 const steps = [
   'business_info',
@@ -8,4 +8,4 @@ const steps = [
   'preview',
 ] as const;
 
-export const useSupplierFormStore = createFormStore(INITIAL_STEP, steps);
+export const useSupplierFormStore = useCreateFormStore(INITIAL_STEP, steps);
