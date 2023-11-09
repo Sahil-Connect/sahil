@@ -3,7 +3,7 @@ import SupplierProductForm, {
   ProductFormData,
   supplierProductSchema,
 } from './SupplierProductForm';
-import Modal from 'ui/Modal';
+import Modal from 'ui/components/Modal';
 import { HiOutlinePlusCircle } from 'react-icons/hi2';
 import { useAddNewProduct } from '@/hooks/suppliers';
 import { SubmitHandler } from 'react-hook-form';

@@ -22,7 +22,7 @@ export const ListTransactions = () => {
         <h3 className="text-lg">Accounts</h3>
         <IconButton icon={HiOutlinePlusCircle} />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-2 bg-red-300">
         {transactions.map((transaction) => (
           <TransactionQuickViewCard key={transaction.id} transaction={transaction} />
         ))}

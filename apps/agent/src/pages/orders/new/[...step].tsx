@@ -19,6 +19,40 @@ import {
   HiOutlineQueueList,
   HiCursorArrowRipple,
 } from "react-icons/hi2";
+import { StepDirection, StepItem } from "ui/components/MultiStepForm"
+
+const headers: Array<StepItem> = [
+  {
+    title: "Order Details",
+    step: "order_details",
+    icon: HiOutlineQueueList,
+    completed: true,
+  },
+  {
+    title: "Product Selection",
+    step: "product_selection",
+    icon: HiCursorArrowRipple,
+    completed: false,
+  },
+  {
+    title: "Delivery Details",
+    step: "delivery_details",
+    icon: HiOutlineTruck,
+    completed: false,
+  },
+  {
+    title: "Payment Details",
+    step: "payment_details",
+    icon: HiOutlineBanknotes,
+    completed: false,
+  },
+  {
+    title: "Order Confirmation",
+    step: "summary",
+    icon: HiOutlineCheckCircle,
+    completed: false,
+  },
+];
 
 export default function NewOrderPage() {
   const { currentStep, goToStep, steps, updateStepByIndex } = useOrderFormStore(
@@ -36,52 +70,15 @@ export default function NewOrderPage() {
     router.push(`/orders/new/${steps[stepIndex]}`);
   };
 
-  const onPrevStep = () => {
-    goToStep("prev");
-    router.push(`/orders/new/${steps[currentIndex - 1]}`);
-  };
-  const onNextStep = () => {
-    goToStep("next");
-    router.push(`/orders/new/${steps[currentIndex + 1]}`);
+  const onStepChange = (path: string, step: StepDirection): void => {
+    goToStep(step);
+    router.push(`/${path}/${ step === "prev" ? steps[currentIndex - 1] : steps[currentIndex + 1]}`);
   };
 
   const navigateToNextStep = (path: string) => {
     goToStep("next");
     router.push(`/orders/new/${path}`);
   };
-
-  const headers = [
-    {
-      title: "Order Details",
-      step: "order_details",
-      icon: <HiOutlineQueueList />,
-      completed: true,
-    },
-    {
-      title: "Product Selection",
-      step: "product_selection",
-      icon: <HiCursorArrowRipple />,
-      completed: false,
-    },
-    {
-      title: "Delivery Details",
-      step: "delivery_details",
-      icon: <HiOutlineTruck />,
-      completed: false,
-    },
-    {
-      title: "Payment Details",
-      step: "payment_details",
-      icon: <HiOutlineBanknotes />,
-      completed: false,
-    },
-    {
-      title: "Order Confirmation",
-      step: "summary",
-      icon: <HiOutlineCheckCircle />,
-      completed: false,
-    },
-  ];
 
   return (
     <section className="space-y-4">
@@ -108,8 +105,7 @@ export default function NewOrderPage() {
         <div className="grow space-y-4 py-4 pr-4 basis-3/5">
           <StepsPaginator
             headers={headers}
-            onPrevStep={onPrevStep}
-            onNextStep={onNextStep}
+            onStepChange={onStepChange}
           />
           {currentStep === "order_details" && (
             <OrderDetails navigateToNextStep={navigateToNextStep} />
