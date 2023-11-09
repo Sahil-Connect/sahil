@@ -1,4 +1,4 @@
 import { INITIAL_STEP, steps } from '@/Couriers/constants';
-import { createFormStore } from '@sahil/lib';
+import { useCreateFormStore } from '@sahil/lib';
 
-export const useCourierFormStore = createFormStore(INITIAL_STEP, steps);
+export const useCourierFormStore = useCreateFormStore(INITIAL_STEP, steps);

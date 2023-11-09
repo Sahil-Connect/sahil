@@ -16,7 +16,7 @@ export type NavbarProps = {
   header?: string;
 };
 
-export const Navbar: FC<NavbarProps> = ({ links, logo, header }) => {
+export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil"}) => {
   return (
     <header className="navbar bg-white shadow-sm">
       <div className="navbar-start">

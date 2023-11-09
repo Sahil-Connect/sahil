@@ -1,4 +1,4 @@
-import { FormControl } from './FormControl';
+import { FormControl, FormControlError } from './FormControl';
 import {
   DeepMap,
   FieldError,
@@ -33,7 +33,7 @@ export const Select = <T extends FieldValues>({
           <option key={index}>{option}</option>
         ))}
       </select>
-      {errors[name] && <p className='text-error'>{errors[name]?.message}</p>}
+      {errors[name] && <FormControlError message={errors[name]?.message} />}
     </FormControl>
   );
 };
