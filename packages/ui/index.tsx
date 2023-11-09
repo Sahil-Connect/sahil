@@ -1,20 +1,20 @@
 import * as React from 'react';
 
 // component exports
-export * from './Avatar';
-export * from './Button';
-export * from './Card';
-export * from './FormControl';
-export * from './Header';
-export * from './Icon';
-export * from './IconButton';
-export * from './Input';
-export * from './JoinGrid';
-export * from './List';
-export * from './ListHeader';
-export * from './Navbar';
-export * from './Stats';
-export * from './Select';
-export * from './Steps';
-export * from './Modal';
-export * from './Toggle';
+export * from './components/Avatar';
+export * from './components/Button';
+export * from './components/Card';
+export * from './components/FormControl';
+export * from './components/Header';
+export * from './components/Icon';
+export * from './components/IconButton';
+export * from './components/Input';
+export * from './components/JoinGrid';
+export * from './components/List';
+export * from './components/ListHeader';
+export * from './components/Navbar';
+export * from './components/Stats';
+export * from './components/Select';
+export * from './components/Steps';
+export * from './components/Modal';
+export * from './components/Toggle';

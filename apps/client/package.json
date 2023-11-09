@@ -13,7 +13,8 @@
     "react-dom": "^18",
     "next": "14.0.1",
     "ui": "*",
-    "@sahil/lib": "*"
+    "@sahil/lib": "*",
+    "@sahil/configs": "*"
   },
   "devDependencies": {
     "typescript": "^5",

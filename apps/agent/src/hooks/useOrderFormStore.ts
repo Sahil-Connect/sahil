@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { INITIAL_STEP, steps } from '@/Orders/constants';
-import { FormDataState, OrderItem, StepDirection } from '@/Orders/types';
+import { FormDataState, OrderItem, StepDirection } from 'ui/components/MultiStepForm';
 
 export type SahilBusinessPartner = Record<string, any>;
 

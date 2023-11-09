@@ -1,7 +1,14 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import { Stats, Stat } from "ui";
+const inter = Inter({ subsets: ['latin'] });
 
-const inter = Inter({ subsets: ['latin'] })
+
+const stats: Stat = [
+  {
+    title: ""
+  }
+]
 
 export default function Home() {
   return (

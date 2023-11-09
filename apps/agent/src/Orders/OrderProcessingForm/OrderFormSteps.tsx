@@ -1,8 +1,9 @@
-import { Steps } from "ui";
+import { Step, Steps } from "ui";
+import { StepDirection, StepItem } from "ui/components/MultiStepForm";
 type Props = {
   currentStep: string;
-  headers: any[];
-  onUpdateStepByIndex: (step: any) => void;
+  headers: StepItem[];
+  onUpdateStepByIndex: (step: StepDirection) => void;
 };
 
 export const OrderFormSteps = ({
@@ -11,27 +12,11 @@ export const OrderFormSteps = ({
   onUpdateStepByIndex,
 }: Props) => {
   return (
-    <Steps direction="vertical">
-      {headers.map(({ completed, icon, step, title }, index) => (
-        <li
-          className={`step ${currentStep === step ? "step-primary" : null} ${
-            completed ? "step-success" : null
-          }`}
-          key={index}
-          onClick={() => onUpdateStepByIndex(step)}
-          data-content={`${completed ? "✓" : index + 1} `}
-        >
-          <div
-            className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
-              currentStep === step
-                ? "bg-primary-content text-primary-focus"
-                : null
-            } hover:bg-slate-100 cursor-pointer`}
-          >
-            {icon} {title}
-          </div>
-        </li>
-      ))}
-    </Steps>
+    <Steps
+      direction="vertical"
+      steps={headers}
+      onUpdateStepByIndex={onUpdateStepByIndex}
+      currentStep={currentStep}
+    />
   );
 };

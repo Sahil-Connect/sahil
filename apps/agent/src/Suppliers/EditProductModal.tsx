@@ -4,7 +4,7 @@ import SupplierProductForm, {
   ProductFormData,
   supplierProductSchema,
 } from './SupplierProductForm';
-import Modal from 'ui/Modal';
+import Modal from 'ui/components/Modal';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
 import { SubmitHandler } from 'react-hook-form';
 

@@ -37,7 +37,7 @@ const links = [
 export default function Layout({ children, ...props }: LayoutProps) {
   return (
     <>
-      <Navbar links={links} logo={logo} header="Sahil Agent"/>
+      <Navbar links={links} logo={logo} header="Sahil Agent" />
       <main className="min-h-screen p-8">{children}</main>
     </>
   );

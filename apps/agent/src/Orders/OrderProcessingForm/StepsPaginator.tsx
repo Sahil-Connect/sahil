@@ -3,11 +3,10 @@ import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
 import { JoinGrid } from "ui";
 type Props = {
   headers: any[];
-  onPrevStep: () => void;
-  onNextStep: () => void;
+  onStepChange: (path: string, step) => void;
 };
 
-export const StepsPaginator = ({ headers, onNextStep, onPrevStep }: Props) => {
+export const StepsPaginator = ({ headers, onStepChange }: Props) => {
   const { steps, currentStep } = useOrderFormStore((state) => state);
   return (
     <>
@@ -21,12 +20,15 @@ export const StepsPaginator = ({ headers, onNextStep, onPrevStep }: Props) => {
           </h3>
         </div>
         <JoinGrid>
-          <button className="join-item btn btn-sm" onClick={onPrevStep}>
+          <button
+            className="join-item btn btn-sm"
+            onClick={() => onStepChange("orders/new", "prev")}
+          >
             <HiArrowLeft /> Previous
           </button>
           <button
             className="join-item btn btn-sm btn-neutral"
-            onClick={onNextStep}
+            onClick={() => onStepChange("orders/new", "next")}
           >
             Next <HiArrowRight />
           </button>

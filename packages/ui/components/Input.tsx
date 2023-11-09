@@ -1,23 +1,13 @@
-import {
-  DeepMap,
-  FieldError,
-  FieldValues,
-  UseFormRegister,
-  Path,
-} from 'react-hook-form';
 import { FormControl, FormControlError } from './FormControl';
+import { BaseInputProps } from '../types';
 
-type InputProps<T extends FieldValues> = {
-  label?: string;
-  name: Path<T>;
-  register: UseFormRegister<T>;
-  errors: DeepMap<FieldValues, FieldError>;
+type InputProps = BaseInputProps<unknown> & {
   type?: 'text' | 'email' | 'password' | 'number' | 'date';
   placeholder?: string;
   defaultValue?: string | number;
 };
 
-export const Input = <T extends FieldValues>({
+export const Input = ({
   name,
   register,
   errors,
@@ -25,7 +15,7 @@ export const Input = <T extends FieldValues>({
   placeholder = 'Type here',
   label = name,
   defaultValue,
-}: InputProps<T>) => {
+}: InputProps) => {
   return (
     <FormControl label={label}>
       <input
@@ -35,7 +25,7 @@ export const Input = <T extends FieldValues>({
         defaultValue={defaultValue}
         {...register(name, { valueAsNumber: type === 'number' })}
       />
-      {errors[name] && <FormControlError message={errors[name]?.message} />}
+      {errors[name] && <FormControlError message={errors[name]?.message} /> }
     </FormControl>
   );
 };

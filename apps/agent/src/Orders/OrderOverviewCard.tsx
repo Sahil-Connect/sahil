@@ -29,7 +29,7 @@ export const OrderOverviewCard = ({ order }) => {
             Order ID
           </Link>
         </div>
-        <div className="mt-2 bg-base-200 p-4 rounded-xl flex flex-col gap-4">
+        <div className="mt-2 bg-grey-200 p-4 rounded-xl flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <div className="space-y-1 font-semibold">
               <span className="opacity-70 text-sm font-normal">

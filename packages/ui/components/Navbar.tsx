@@ -18,7 +18,7 @@ export type NavbarProps = {
 
 export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil"}) => {
   return (
-    <header className="navbar bg-white shadow-sm">
+    <header className="navbar bg-primary text-white shadow-sm">
       <div className="navbar-start">
         <Link
           href="/"
