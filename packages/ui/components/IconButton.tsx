@@ -1,14 +1,17 @@
 import { FC } from "react";
 import { Icon, IconProps } from "./Icon";
+import { twMerge } from "tailwind-merge";
 
 export type IconButtonProps = IconProps & {
-    title?: string;
-}
+  className?: any;
+  title?: string;
+};
 
-export const IconButton: FC<IconButtonProps> = ({ icon, title }) => {
-    return (
-        <button className="btn btn-xs btn-circle btn-ghost" title={title}>
-            <Icon icon={icon} />
-        </button>
-    )
-}
+export const IconButton: FC<IconButtonProps> = ({ className, icon, title }) => {
+  const merged = twMerge("btn btn-xs btn-square", className);
+  return (
+    <button className={merged} title={title}>
+      <Icon icon={icon} />
+    </button>
+  );
+};

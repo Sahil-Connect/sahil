@@ -1,5 +1,5 @@
 import {
-    gql,
+  gql,
 } from "@apollo/client";
 
 export const FETCH_ORDERS = gql`
@@ -26,6 +26,25 @@ query getorderByPK($id: uuid!) {
     orderId
     origin
     status
+    order_items {
+      id
+      product {
+        id
+        name
+        quantity
+        price
+      }
+    }
+    status
+    agent {
+      name
+    }
+    order_items_aggregate {
+      aggregate {
+        count
+      }
+    }
+    origin
   }
 }
 `;
