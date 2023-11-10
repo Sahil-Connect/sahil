@@ -22,7 +22,7 @@ type Props = {
 
 export const BusinessOverviewCard: FC<Props> = ({ business }) => {
   return (
-    <Card>
+    <Card className="w-full">
       <div className="flex justify-between text-4xl">
         <Link
           href={`/businesses/${business.id}`}

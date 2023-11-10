@@ -33,7 +33,7 @@ export const CourierOverviewCard: FC<CourierOverviewCardProps> = ({
   courier,
 }) => {
   return (
-    <Card>
+    <Card className="w-full">
       <Avatar src={courier.avatar} alt={courier.name} />
       <Link href={`/couriers/${courier.id}`}>
         <h3 className="card-title text-lg font-semibold">{courier.name}</h3>

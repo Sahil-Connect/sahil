@@ -34,7 +34,7 @@ export const OrderProgress = () => {
       <Card title="Order Progress" height="h-fit" titleSize="sm">
         <div className="space-y-4">
           {progress.map((step) => (
-            <div className="flex gap-8 items-center" key={step.id}>
+            <div className="flex justify-between items-center" key={step.id}>
               <div className="basis-2/5">
                 <div className="flex gap-4 items-center">
                   <span className="p-2 shadow rounded-lg w-fit">

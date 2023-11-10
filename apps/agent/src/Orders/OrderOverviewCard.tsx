@@ -9,7 +9,7 @@ import {
 
 export const OrderOverviewCard = ({ order }) => {
   return (
-    <Card>
+    <Card className="w-full">
       <div className="justify-between">
         <div className="flex justify-between">
           <Link

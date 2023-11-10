@@ -44,7 +44,19 @@ query getorderByPK($id: uuid!) {
         count
       }
     }
-    origin
   }
 }
+`;
+
+export const FETCH_ORDER_DELIVERIES = gql`
+query getOrderDeliveries($orderId: uuid!) {
+  delivery {
+    orderId
+    status
+    orderId
+    id
+    created_at
+    courierId
+  }
+  }
 `;

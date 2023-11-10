@@ -17,4 +17,5 @@ export * from './components/Stats';
 export * from './components/Select';
 export * from './components/Steps';
 export * from './components/Modal';
+export * from "./components/Tabs";
 export * from './components/Toggle';
