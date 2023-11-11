@@ -5,8 +5,19 @@ import {
 export const FETCH_ORDERS = gql`
 query getOrders {
     orders {
-        created_at
-        id
+      id
+      created_at
+      destination
+      id
+      orderId
+      customerId
+      origin
+      status
+      business {
+      contactName
+      phoneNumber
+      name
+    }
     }
     orders_aggregate {
       aggregate {
@@ -24,6 +35,7 @@ query getorderByPK($id: uuid!) {
     destination
     id
     orderId
+    customerId
     origin
     status
     order_items {
@@ -59,4 +71,14 @@ query getOrderDeliveries($orderId: uuid!) {
     courierId
   }
   }
+`;
+
+export const FETCH_ORDERS_STATS = gql`
+query getOrdersStats($startDate: timestamptz, $endDate: timestamptz) {
+  orders_aggregate(where: {created_at: {_gte: $startDate, _lte: $endDate}}) {
+    aggregate {
+      count
+    }
+  }
+}
 `;

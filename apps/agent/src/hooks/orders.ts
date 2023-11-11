@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { FETCH_ORDERS, FETCH_ORDER_BY_PK, FETCH_ORDER_DELIVERIES  } from "@/lib/graphql/queries/orders";
+import { FETCH_ORDERS, FETCH_ORDER_BY_PK, FETCH_ORDER_DELIVERIES, FETCH_ORDERS_STATS  } from "@/lib/graphql/queries/orders";
 import { INSERT_NEW_ORDER } from "@/lib/graphql/mutations/orders";
 
 export const useFetchOrders = () => {
@@ -18,7 +18,6 @@ export const useFetchOrderByPK = (id: string) => {
 }
 
 export const useFetchOrderDeliveriesByPK = (id, status) => {
-    console.log("id:", id);
     const { error, data, loading } = useQuery(FETCH_ORDER_DELIVERIES, {
         variables: {
             orderId: id,
@@ -32,4 +31,10 @@ export const usePlaceBusinessOrder = () => {
     const [placeOrder, { data, loading, error }] = useMutation(INSERT_NEW_ORDER);
 
     return {loading, placeOrder, error};
+}
+
+export const useGetOrdersStats = () => {
+    const { data, loading, error } = useQuery(FETCH_ORDERS_STATS);
+
+    return { error, ordersCount: data?.orders_aggregate?.aggregate, loading };
 }

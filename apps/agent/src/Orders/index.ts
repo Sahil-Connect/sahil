@@ -5,3 +5,4 @@ export * from "./OrderOverview";
 export * from "./OrderPreferences";
 export * from "./OrderProgress";
 export * from "./OrderClient";
+export * from "./OrderDetails";

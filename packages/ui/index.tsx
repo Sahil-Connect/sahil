@@ -13,6 +13,7 @@ export * from './components/JoinGrid';
 export * from './components/List';
 export * from './components/ListHeader';
 export * from './components/Navbar';
+export * from "./components/ProfileOverviewCard";
 export * from './components/Stats';
 export * from './components/Select';
 export * from './components/Steps';

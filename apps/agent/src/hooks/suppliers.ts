@@ -7,6 +7,7 @@ import {
   FETCH_SUPPLIER_BY_PK,
   FETCH_SUPPLIER_PRODUCTS,
   FETCH_SUPPLIER_PRODUCT_BY_NAME,
+  FETCH_SUPPLIER_ORDERS
 } from '@/lib/graphql/queries/suppliers';
 import {
   ADD_NEW_PRODUCT,
@@ -116,3 +117,12 @@ export const useAddNewProduct = () => {
     error,
   };
 };
+
+export const useFetchSupplierOrders = (supplierId?: string) => {
+  const { error, data, loading } = useQuery(FETCH_SUPPLIER_ORDERS, {
+      variables: {
+          supplierId
+      }
+  });
+  return { error, data: data?.order_supplier, loading, ordersCount: data?.orders_aggregate?.aggregate };
+}
