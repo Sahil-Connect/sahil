@@ -232,6 +232,7 @@ interface ContextValue {
 const server = new ApolloServer<ContextValue>({
     typeDefs: typeDefs,
     resolvers,
+    introspection: true,
 });
 
 startStandaloneServer(server, {
