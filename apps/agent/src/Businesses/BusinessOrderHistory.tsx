@@ -1,50 +1,13 @@
 import Link from "next/link";
-import { parseISO, format } from "date-fns";
-import { Card, JoinGrid, List, ListHeader } from "ui";
+import {  useFetchBusinessOrders } from "@/hooks/businesses";
+import { useRouter } from "next/router";
+import { formatDateTime } from "@sahil/lib/dates";
+import { Card, JoinGrid, List, ListHeader, ListErrorState } from "ui";
 import {
   HiOutlineCalendarDays,
   HiOutlineMapPin,
   HiOutlineFlag,
 } from "react-icons/hi2";
-
-const orders = [
-  {
-    id: 1,
-    createdAt: "2023-08-12T20:54:29.03552+00:00",
-    origin: "Souq Munuki",
-    destination: "Hai Thoura",
-    status: "Cancelled",
-    delivery: "Pick-up Point",
-    payment: "MOMO Pay",
-  },
-  {
-    id: 2,
-    createdAt: "2023-08-12T20:54:02.1659+00:00",
-    origin: "Souq Munuki",
-    destination: "Atlabara",
-    status: "Pending",
-    delivery: "Delivery Address",
-    payment: "Cash",
-  },
-  {
-    id: 3,
-    createdAt: "2023-08-14T16:54:29.03552+00:00",
-    origin: "Souq Munuki",
-    destination: "Gudelle",
-    status: "Fulfilled",
-    delivery: "Pick-up Point",
-    payment: "MOMO Pay",
-  },
-  {
-    id: 4,
-    createdAt: "2023-08-13T10:54:29.03552+00:00",
-    origin: "Souq Munuki",
-    destination: "Custom Market",
-    status: "Fulfilled",
-    delivery: "Delivery Address",
-    payment: "Cash",
-  },
-];
 
 enum OrderStatus {
   Cancelled = "Cancelled",
@@ -59,6 +22,19 @@ const orderStyles: Record<OrderStatus, string> = {
 };
   
 export const BusinessOrderHistory = () => {
+  const router = useRouter();
+  const { businessId: customerId } = router.query;
+  const { data: orders, error, loading, ordersCount } = useFetchBusinessOrders(customerId as string);
+  if (error) {
+    return (
+      <ListErrorState
+        heading="Unable to load products..."
+        message="Products aren't loading due to a technical problem on our side. Please
+      try again."
+      />
+    );
+  }
+
   return (
     <div className="bg-base-200 space-y-2 grow p-4 rounded-xl">
       <div className="flex justify-between items-center">
@@ -68,14 +44,14 @@ export const BusinessOrderHistory = () => {
       <ListHeader
         onNextPage={() => {}}
         onPreviousPage={() => {}}
-        size={orders.length}
+        size={ordersCount?.count}
         limit={3}
         sizeLabel='Orders'
       />
       <List
         data={orders}
-        error={undefined}
-        loading={undefined}
+        error={error}
+        loading={loading}
         renderItem={(order) => <OrderSummary order={order} key={order.id} />}
       />
     </div>
@@ -83,17 +59,14 @@ export const BusinessOrderHistory = () => {
 };
 
 const OrderSummary = ({ order }) => {
-  const date = parseISO(order.createdAt);
-  const formattedDate = format(date, 'MMMM d, HH:mm');
   const statusStyle = orderStyles[order.status] || 'default';
   return (
-    <Card>
+    <Card className='bg-white h-full w-2/5'>
       <div>
         <Link href={`/orders/${order.id}`}>
-          <h3 className='card-title'>Order ID: ED-{order.id}</h3>
+          <h3 className='card-title'>Order ID: #{order.id.slice(0, 8).toLocaleUpperCase()}</h3>
         </Link>
         <div className='flex flex-wrap gap-2 gap-y-4'>
-          <div className='badge badge-sm'>{order.delivery}</div>
           <div className={`badge badge-sm badge-${statusStyle}`}>
             {order.status}
           </div>
@@ -103,7 +76,7 @@ const OrderSummary = ({ order }) => {
         <span className='shadow rounded-md p-2'>
           <HiOutlineCalendarDays />
         </span>
-        <p>{formattedDate}</p>
+        <p>{formatDateTime(order?.created_at)}</p>
       </div>
       <div className='flex items-center gap-1'>
         <span className='shadow rounded-md p-2'>

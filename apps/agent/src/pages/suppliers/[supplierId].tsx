@@ -8,6 +8,8 @@ import {
 } from '@/Suppliers';
 
 export default function SupplierPage() {
+  const router = useRouter();
+  const { supplierId } = router.query;
   const { data: supplier, error, loading } = useFetchSupplierByPK();
   if (error) {
     console.log(error);
@@ -24,7 +26,7 @@ export default function SupplierPage() {
           <SupplierProducts
             productsCount={supplier?.products_aggregate.aggregate.count}
           />
-          <SupplierOrderHistory />
+          <SupplierOrderHistory supplierId={supplierId} />
         </div>
       </div>
     </div>

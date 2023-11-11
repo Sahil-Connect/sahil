@@ -16,5 +16,8 @@
     "react": "^17.0.2",
     "tsconfig": "*",
     "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "tailwind-merge": "^2.0.0"
   }
 }

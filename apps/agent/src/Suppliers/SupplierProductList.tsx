@@ -68,7 +68,7 @@ export default SupplierProductList;
 
 const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
   return (
-    <Card>
+    <Card className='bg-white h-full'>
       <div className='flex flex-col justify-start'>
         <div className='flex justify-between items-start'>
           <h3 className='card-title w-11/12'>{product.name}</h3>

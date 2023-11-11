@@ -32,6 +32,31 @@ query getClients {
 }
 `;
 
+export const FETCH_BUSINESS_ORDERS = gql`
+query getBusinessOrders($customerId: uuid) {
+    orders(where: {_or: [{customerId: {_eq: $customerId}}, {customerId: {_is_null: true}}]}) {
+      id
+      created_at
+      destination
+      id
+      orderId
+      customerId
+      origin
+      status
+      business {
+      contactName
+      phoneNumber
+      name
+    }
+    }
+    orders_aggregate {
+      aggregate {
+        count(columns: id, distinct: true)
+      }
+    }
+}
+`;
+
 export const FETCH_BUSINESS_BY_PK = gql`
 query getBusinessByPK($id: uuid!) {
   business_by_pk(id: $id) {
