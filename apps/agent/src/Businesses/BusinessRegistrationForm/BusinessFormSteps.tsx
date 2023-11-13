@@ -27,7 +27,7 @@ export const BusinessFormSteps = ({
               currentStep === step
                 ? "bg-primary-content text-primary-focus"
                 : null
-            } hover:bg-slate-100 cursor-pointer`}
+            } hover:bg-gray-100 cursor-pointer`}
           >
             {icon} {title}
           </div>

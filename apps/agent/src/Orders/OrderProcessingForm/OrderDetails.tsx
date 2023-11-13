@@ -55,7 +55,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
             </div>
             <select
               {...register("clientId")}
-              className="select select-bordered select-sm w-full max-w-xs bg-slate-100"
+              className="select select-bordered select-sm w-full max-w-xs bg-gray-100"
             >
               {businesses &&
                 businesses.map((business) => (
@@ -69,7 +69,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
             <input
               type="textarea"
               placeholder="Notes"
-              className="textarea textarea-bordered w-full bg-slate-100"
+              className="textarea textarea-bordered w-full bg-gray-100"
               {...register("notes")}
             />
           </FormControl>

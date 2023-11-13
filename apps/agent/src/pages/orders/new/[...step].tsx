@@ -82,7 +82,7 @@ export default function NewOrderPage() {
 
   return (
     <section className="space-y-4">
-      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-base-200">
+      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-gray-100">
         <h1 className="text-2xl">Order Processing Form</h1>
         <div className="flex gap-2 items-center">
           <div className="indicator">

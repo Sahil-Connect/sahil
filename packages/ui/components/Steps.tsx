@@ -28,7 +28,7 @@ export const Step: FC<StepProps> = ({
       <div
         className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
           currentStep === step ? "bg-primary-content text-primary-focus" : null
-        } hover:bg-slate-100 cursor-pointer`}
+        } hover:bg-gray-100 cursor-pointer`}
       >
         <Icon icon={icon} /> {title}
       </div>

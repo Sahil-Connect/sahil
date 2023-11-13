@@ -12,7 +12,7 @@ export const CourierOverview = ({ order }) => {
 
   return (
     <Card>
-      <div className="flex gap-8 items-center">
+      <div className="flex gap-4 items-center">
         <div className="flex gap-2 items-center">
           <Avatar
             alt="Ladu Lumori"

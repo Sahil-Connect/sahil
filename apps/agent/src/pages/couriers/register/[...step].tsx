@@ -62,9 +62,9 @@ export default function CourierRegistrationPage() {
       <Head>
         <title>Sahil - {headers[currentIndex]?.title}</title>
       </Head>
-      <section className='flex items-start'>
+      <section>
         <div className='space-y-4 w-full'>
-          <div className='bg-base-200 p-4'>
+          <div className='bg-gray-100 p-4'>
             <h1 className='text-2xl'>Courier Registration Form</h1>
           </div>
           <div className='flex'>

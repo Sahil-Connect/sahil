@@ -71,7 +71,7 @@ export default function BusinessRegistrationPage() {
   ];
   return (
     <section className="min-h-screen space-y-4">
-      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-base-200">
+      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-gray-100">
         <h1 className="text-2xl">Register New Business</h1>
       </div>
       <div className="flex">

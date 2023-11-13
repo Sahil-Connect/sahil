@@ -13,16 +13,15 @@ const key = process.env.API_KEY as string;
 export const typeDefs = `#graphql
     type Places {
         name: String
-        lat: String
-        lng: String
-        rating: Float
+        lat: Float
+        lng: Float
         address: String
         location: String
     }
 
     type GeoCoords {
-        lat: String
-        lng: String
+        lat: Float
+        lng: Float
     }
     type LocationByCoords {
         location: GeoCoords
@@ -63,10 +62,10 @@ export const typeDefs = `#graphql
     }
 
     type Query {
-        address(lat: String!, lng: String): Address
-        coords(address: String): LocationByCoords
-        directions(origin: String!, destination: String): Directions
-        places: [Places]
+        address(lat: Float!, lng: Float!): Address
+        coords(address: String!): LocationByCoords
+        directions(origin: String!, destination: String!): Directions
+        places(lat: Float!, lng: Float!): [Places]
     }
 `;
 
@@ -121,30 +120,30 @@ class GooglePlacesAPI {
         this.client = new Client({});
         this._key = key;
     }
-    async getNearbyPlaces(lat: string, lng: string, {
-        radius = 100,
-        type = "hotel"
-    }): Promise<any> {
+    async getNearbyPlaces(lat: number, lng: number): Promise<any> {
+        console.log("yrrrrr");
         try {
             const response = await this.client.placesNearby({
                 params: {
                     key: this._key,
                     location: `${lat},${lng}`,
-                    radius,
-                    type
+                    radius: 100,
+                    type: "hotel"
                 }
             });
-            console.log("response", response);
-            return [
-                {
-                    name: "String",
-                    lat: "String",
-                    lng: "String",
-                    rating: "String",
+            console.log("response", response?.data?.results);
+            console.log("************");
+            console.log("response", response?.data?.results?.geometry);
+            const t = response?.data?.results?.map(place => {
+                return ({
+                    name: place.name,
+                    lat: place.geometry.location.lat,
+                    lng: place.geometry.location.lng,
                     address: "String",
                     location: "String"
-                }
-            ];
+                })
+            })
+            return t;
         } catch (error) {
             console.log("no", error);
         }
@@ -205,12 +204,9 @@ async function directions(_: any, { origin, destination }: any, { googleDirectio
     return googleDirectionsAPI.getDirections(origin, destination);
 }
 
-async function places(_: any, { lat, lng, ...rest }: any, { googlePlacesAPI }: any) {
-    console.log("...rest:", ...rest);
-    return googlePlacesAPI.getNearbyPlaces(lat, lng, {
-        radius: 50,
-        type: "hotel"
-    });
+async function places(_: any, { lat, lng }: any, { googlePlacesAPI }: any) {
+    console.log("...rest:");
+    return googlePlacesAPI.getNearbyPlaces(lat, lng);
 }
 
 const resolvers = {

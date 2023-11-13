@@ -67,7 +67,7 @@ const FilterSuppliersModal = () => {
           <div className='my-4 flex flex-col items-end gap-4'>
             <div className='space-y-2'>
               <span>Select a category</span>
-              <div className='bg-base-200 py-4 px-2 rounded-xl text-sm flex flex-wrap gap-2'>
+              <div className='bg-gray-100 py-4 px-2 rounded-xl text-sm flex flex-wrap gap-2'>
                 {categories.map((cat) => {
                   return (
                     <button key={cat} onClick={() => handleCategoryClick(cat)}>

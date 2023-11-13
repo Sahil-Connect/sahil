@@ -66,7 +66,7 @@ export default function TrackOrdersPage() {
                 <input
                   type="text"
                   placeholder="#ED3413"
-                  className="input input-sm input-bordered bg-slate-100"
+                  className="input input-sm input-bordered bg-gray-100"
                 />
               </div>
               <div className="btn btn-sm btn-primary">

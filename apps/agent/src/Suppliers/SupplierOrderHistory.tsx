@@ -25,7 +25,7 @@ const orderStyles: Record<OrderStatus, string> = {
 export const SupplierOrderHistory = ({ supplierId }) => {
   const { data: orders, error, loading, ordersCount } = useFetchSupplierOrders(supplierId);
   return (
-    <div className='bg-base-200 space-y-2 grow p-4 rounded-xl'>
+    <div className='bg-gray-100 space-y-2 grow p-4 rounded-xl'>
       <div className='flex justify-between items-center'>
         <h3 className='text-lg'>Order History</h3>
         <button className='btn btn-sm btn-secondary'>View All</button>

@@ -10,6 +10,7 @@ import axios from "axios";
 import * as dotenv from "dotenv";
 dotenv.config();
 import { v4 as uuidv4 } from 'uuid';
+import { z } from "zod";
 
 const apiKey = process.env.API_KEY;
 const apiUser = process.env.API_USER;
@@ -320,3 +321,5 @@ app.use(
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
 console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+
+

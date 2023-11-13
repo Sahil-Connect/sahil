@@ -36,7 +36,7 @@ export const BusinessOrderHistory = () => {
   }
 
   return (
-    <div className="bg-base-200 space-y-2 grow p-4 rounded-xl">
+    <div className="bg-gray-100 space-y-2 grow p-4 rounded-xl">
       <div className="flex justify-between items-center">
         <h3 className="text-xl">Latest Orders</h3>
         <button className="btn btn-sm">View All</button>

@@ -101,7 +101,7 @@ export const ProductsCatalogue = () => {
             </button>
           </JoinGrid>
         </div>
-        <div className="bg-base-200 flex items-center justify-between p-2 rounded-xl">
+        <div className="bg-gray-100 flex items-center justify-between p-2 rounded-xl">
           <div>
             <p className="text-bold">
               {products?.length} ITEMS out of {productsCount.count}
