@@ -20,7 +20,7 @@ export type StatProps = {
 
 export const Stats: FC<StatProps> = ({ stats }) => {
   return (
-    <div className="stats shadow w-full">
+    <div className="stats shadow-sm w-full">
       {stats.map(
         ({ icon, title, value, desc, trend, brandIcon, percentage }, index) => (
           <div className="stat" key={index}>

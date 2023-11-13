@@ -2,6 +2,7 @@ import { FC, Fragment } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Card } from './Card';
 import type { ApolloError } from '@apollo/client';
+import Image from "next/image";
 
 type ListProps<T> = {
   data: T[];
@@ -55,7 +56,9 @@ export const List = <T extends unknown>({
   }
   if (data?.length === 0) {
     return (
-      <div>
+      <div className='mx-auto w-full'>
+        <Image src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658948724/inspirers/images/e63b28db-a6fc-4a1c-9b32-2bc14aec6ac3.png' alt='Empty' height="200" width="200"/>
+        <p>No Data</p>
         <p>No Data</p>
       </div>
     );
@@ -64,7 +67,7 @@ export const List = <T extends unknown>({
     return <ListLoadingState />;
   }
   return (
-    <div className='grid place-items-center grid-cols-auto-250 xl:grid-cols-4 gap-2' ref={parent}>
+    <div className='grid grid-cols-auto-250 xl:grid-cols-3 gap-2' ref={parent}>
       {data.map((item, index) => (
         <Fragment key={index}>{renderItem(item)}</Fragment>
       ))}

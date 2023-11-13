@@ -30,33 +30,29 @@ export const SupplierProfileOverview = ({
   return (
     <Card height="h-fit">
       <div className="avatar placeholder">
-        <div className="bg-neutral-focus text-neutral-content rounded-full w-20">
+        <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
           <span>{generateInitials(supplier?.name)}</span>
         </div>
       </div>
       <h2 className="card-title">{supplier?.name}</h2>
-      <div className="flex flex-wrap gap-2">
-        {supplier?.categories.map(({ category_name: name }) => {
-          return (
-            <span
-              key={name}
-              className="badge badge-sm badge-outline opacity-80"
-            >
-              {formatCategoryName(name)}
-            </span>
-          );
-        })}
-      </div>
       <p>{supplier?.description}</p>
-      <div className="divider">Contact Info</div>
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
+      <div className="mt-2 flex flex-col p-4  gap-4 border border-solid border-[#d2d6db] rounded-lg ">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <span className="shadow rounded-md p-2">
+              <HiOutlineUser />
+            </span>
+            <p>{supplier?.contactName}</p>
+          </div>
+          <div className="flex items-center gap-2">
           <span className="shadow rounded-md p-2">
             <HiOutlineUser />
           </span>
           <p>{supplier?.contactName}</p>
         </div>
-
+        </div>
+      </div>
+      <div className="space-y-2">
         <div className="flex items-center gap-2">
           <span className="shadow rounded-md p-2">
             <HiOutlineMapPin />

@@ -53,7 +53,7 @@ const OrderSummary = ({ order }) => {
 
   const statusStyle = orderStyles[order.status] || 'default';
   return (
-    <Card className='bg-white h-full'>
+    <Card className='bg-white h-full grow max-w-lg'>
       <div>
         <Link href={`/orders/${order.id}`}>
           <h3 className='card-title'>Order ID: ED-{order.id}</h3>
