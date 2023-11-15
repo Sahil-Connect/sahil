@@ -17,11 +17,10 @@ export const useFetchOrderByPK = (id: string) => {
     return { error, data: data?.orders_by_pk, loading };
 }
 
-export const useFetchOrderDeliveriesByPK = (id, status) => {
+export const useFetchOrderDeliveriesByPK = (id) => {
     const { error, data, loading } = useQuery(FETCH_ORDER_DELIVERIES, {
         variables: {
             orderId: id,
-            status
         },
     });
     return { error, data: data?.delivery, loading };

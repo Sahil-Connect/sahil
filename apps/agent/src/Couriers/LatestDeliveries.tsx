@@ -1,7 +1,7 @@
 import { useFetchLatestDeliveries } from "@/hooks/couriers";
 import { DeliveryOverviewCard } from "./DeliveryOverviewCard";
 import { JoinGrid } from "ui";
-import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
+import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 export const LatestDeliveries = ({ courierId }) => {
   const {
@@ -26,13 +26,13 @@ export const LatestDeliveries = ({ courierId }) => {
         <div>
           <JoinGrid>
             <button className="join-item btn btn-xs" title="Arrow Left">
-              <HiArrowLeft />
+              <HiArrowSmallLeft />
             </button>
             <button
               className="join-item btn btn-xs btn-secondary"
               title="Arrow Right"
             >
-              <HiArrowRight />
+              <HiArrowSmallRight />
             </button>
           </JoinGrid>
         </div>

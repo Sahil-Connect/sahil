@@ -26,7 +26,7 @@ type Props = {
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   return (
-    <Card className="w-full">
+    <Card>
         <div className="flex justify-between text-4xl">
           <Link
             href={`/suppliers/${supplier.id}`}

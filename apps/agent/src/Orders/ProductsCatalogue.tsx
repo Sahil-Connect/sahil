@@ -8,8 +8,8 @@ import { useOrderItemsStore } from "../hooks/useOrderItemsStore";
 import { Card, JoinGrid } from "ui";
 import { formatCost } from "@sahil/lib";
 import {
-  HiArrowLeft,
-  HiArrowRight,
+  HiArrowSmallLeft,
+  HiArrowSmallRight,
   HiMinus,
   HiPlus,
   HiOutlineFunnel,
@@ -90,14 +90,14 @@ export const ProductsCatalogue = () => {
               aria-label="left"
               title="left"
             >
-              <HiArrowLeft />
+              <HiArrowSmallLeft />
             </button>
             <button
               className="join-item btn btn-sm btn-square btn-neutral"
               title="right"
               type="button"
             >
-              <HiArrowRight />
+              <HiArrowSmallRight />
             </button>
           </JoinGrid>
         </div>

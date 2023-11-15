@@ -7,6 +7,7 @@ import {
   HiOutlineCalendarDays,
   HiOutlineMapPin,
   HiOutlineFlag,
+  HiOutlineRocketLaunch
 } from 'react-icons/hi2';
 
 
@@ -14,12 +15,14 @@ enum OrderStatus {
   Cancelled = 'Cancelled',
   Pending = 'Pending',
   Fulfilled = 'Fulfilled',
+  Enroute = "ENROUTE"
 }
 
 const orderStyles: Record<OrderStatus, string> = {
   [OrderStatus.Cancelled]: 'error',
   [OrderStatus.Pending]: 'info',
   [OrderStatus.Fulfilled]: 'success',
+  [OrderStatus.Enroute]: "accent"
 };
 
 export const SupplierOrderHistory = ({ supplierId }) => {
@@ -30,15 +33,6 @@ export const SupplierOrderHistory = ({ supplierId }) => {
         <h3 className='text-lg'>Order History</h3>
         <button className='btn btn-sm btn-secondary'>View All</button>
       </div>
-
-      <ListHeader
-        onNextPage={() => {}}
-        onPreviousPage={() => {}}
-        size={ordersCount?.count}
-        limit={3}
-        sizeLabel='Orders'
-      />
-
       <List
         data={orders}
         error={error}
@@ -51,19 +45,13 @@ export const SupplierOrderHistory = ({ supplierId }) => {
 
 const OrderSummary = ({ order }) => {
 
-  const statusStyle = orderStyles[order.status] || 'default';
+  const statusStyle = orderStyles[order.status];
   return (
     <Card className='bg-white h-full grow max-w-lg'>
       <div>
         <Link href={`/orders/${order.id}`}>
-          <h3 className='card-title'>Order ID: ED-{order.id}</h3>
+          <h3 className='card-title text-sm'>Order ID: #{order.id.slice(0, 8).toLocaleUpperCase()}</h3>
         </Link>
-        <div className='flex flex-wrap gap-2'>
-          <div className='badge badge-sm'>{order.delivery}</div>
-          <div className={`badge badge-sm badge-${statusStyle}`}>
-            {order.status}
-          </div>
-        </div>
       </div>
       <div className='flex items-center gap-2'>
         <span className='shadow rounded-md p-2'>
@@ -84,6 +72,12 @@ const OrderSummary = ({ order }) => {
         </span>
         <p>{order.destination}</p>
       </div>
+      <div className='flex flex-wrap gap-2'>
+          <div className={`badge badge-${statusStyle} gap-2`}>
+            <HiOutlineRocketLaunch />
+            {order.status}
+          </div>
+        </div>
     </Card>
   );
 };

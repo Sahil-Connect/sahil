@@ -17,11 +17,12 @@ export default function SupplierPage() {
   }
   return (
     <div className='space-y-4'>
-      <div className='flex flex-col lg:flex-row gap-4'>
+      <div className='flex flex-col lg:flex-row sm:gap-1'>
         <div className='space-y-2'>
           <SupplierProfileOverview supplier={supplier} />
           <ServiceZones />
         </div>
+        <div className='divider divider-horizontal'></div>
         <div className='basis-5/6 space-y-4'>
           <SupplierProducts
             productsCount={supplier?.products_aggregate.aggregate.count}

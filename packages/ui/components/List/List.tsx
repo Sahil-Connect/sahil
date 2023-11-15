@@ -1,14 +1,16 @@
 import { FC, Fragment } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { Card } from './Card';
+import { Card } from '../Card';
 import type { ApolloError } from '@apollo/client';
-import Image from "next/image";
+import { ListEmptyState } from './ListEmptyState';
 
 type ListProps<T> = {
   data: T[];
   error?: ApolloError;
   loading?: boolean;
   renderItem: (item: T) => JSX.Element;
+
+  cols?: number;
 };
 
 type ListAsyncResultProps = {
@@ -42,6 +44,7 @@ export const List = <T extends unknown>({
   error,
   loading,
   renderItem,
+  cols = 3
 }: ListProps<T>) => {
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
@@ -56,21 +59,18 @@ export const List = <T extends unknown>({
   }
   if (data?.length === 0) {
     return (
-      <div className='mx-auto w-full'>
-        <Image src='https://res.cloudinary.com/dwacr3zpp/image/upload/v1658948724/inspirers/images/e63b28db-a6fc-4a1c-9b32-2bc14aec6ac3.png' alt='Empty' height="200" width="200"/>
-        <p>No Data</p>
-        <p>No Data</p>
-      </div>
+      <ListEmptyState />
     );
   }
   if (loading) {
     return <ListLoadingState />;
   }
   return (
-    <div className='grid grid-cols-auto-250 xl:grid-cols-3 gap-2' ref={parent}>
+    <div className={`grid grid-cols-auto-250 xl:grid-cols-${cols} gap-2`} ref={parent}>
       {data.map((item, index) => (
         <Fragment key={index}>{renderItem(item)}</Fragment>
       ))}
     </div>
   );
 };
+

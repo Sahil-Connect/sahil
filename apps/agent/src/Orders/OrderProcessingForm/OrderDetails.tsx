@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "../../hooks/useOrderFormStore";
 import { useFetchBusinesses } from "@/hooks/businesses";
-import { HiArrowRight, HiXMark } from "react-icons/hi2";
+import { HiArrowSmallRight, HiXMark } from "react-icons/hi2";
 import { Card, FormControl } from "ui";
 
 const orderDetailsSchema = z.object({
@@ -84,7 +84,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
               </button>
               <div className="btn btn-sm btn-primary">
                 <input type="submit" value="continue" />
-                <HiArrowRight />
+                <HiArrowSmallRight />
               </div>
             </div>
           </div>

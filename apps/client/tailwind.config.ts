@@ -4,6 +4,17 @@ const baseConfig: Config = require('@sahil/configs/tailwind/tailwind.config');
 
 const extendedConfig: Config = {
   ...baseConfig,
+  content: [
+    ...baseConfig.content,
+    './src/Addresses/**/**.{js,ts,jsx,tsx,mdx}',
+    './src/Maps/**/*.{js,ts,tsx,tsx,mdx}',
+    './src/Payments/**/*.{js,ts,tsx,tsx,mdx}',
+    './src/Reports/**/*.{js,ts,tsx,tsx,mdx}',
+    './src/Zones/**/*.{js,ts,tsx,tsx,mdx}',
+    './src/Businesses/**/*.{js,ts,tsx,tsx,mdx}',
+    './src/Suppliers/**/*.{js,ts,tsx,tsx,mdx}',
+    './src/Layout/*.{js,ts,tsx,tsx,mdx}',
+  ],
   theme: {
     ...baseConfig.theme,
     extend: {

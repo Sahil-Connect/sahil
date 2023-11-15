@@ -39,7 +39,7 @@ export default function Suppliers() {
             <FilterSuppliersModal />
             <button
               className="btn btn-sm btn-primary normal-case"
-              onClick={() => router.push("/suppliers/new/business_info")}
+              onClick={() => router.push("/suppliers/register/business_info")}
             >
               <HiOutlinePlusCircle className="text-lg" />
               Register Supplier

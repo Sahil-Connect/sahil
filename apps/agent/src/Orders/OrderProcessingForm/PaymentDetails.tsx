@@ -8,7 +8,7 @@ import {
   HiXMark,
   HiOutlineCreditCard,
   HiOutlineBanknotes,
-  HiArrowRight,
+  HiArrowSmallRight,
 } from "react-icons/hi2";
 
 const paymentDetailsSchema = z.object({
@@ -75,7 +75,7 @@ export const PaymentDetails = ({ navigateToNextStep }) => {
             </button>
             <div className="btn btn-sm btn-primary">
               <input type="submit" value="Continue" />
-              <HiArrowRight />
+              <HiArrowSmallRight />
             </div>
           </div>
         </div>

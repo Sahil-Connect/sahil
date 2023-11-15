@@ -1,4 +1,4 @@
-import { HiArrowRight } from "react-icons/hi2";
+import { HiArrowSmallRight } from "react-icons/hi2";
 import { Card } from "ui";
 
 
@@ -71,7 +71,7 @@ export default function TrackOrdersPage() {
               </div>
               <div className="btn btn-sm btn-primary">
                 <input type="submit" value="Search" />
-                <HiArrowRight />
+                <HiArrowSmallRight />
               </div>
             </form>
           </Card>

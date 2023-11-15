@@ -6,7 +6,7 @@ import { useOrderFormStore } from "@/hooks/useOrderFormStore";
 import { ProductsCatalogue } from "../ProductsCatalogue";
 import { RecommendedSuppliers } from "../RecommendedSuppliers";
 
-import { HiArrowRight, HiMiniMagnifyingGlass, HiXMark } from "react-icons/hi2";
+import { HiArrowSmallRight, HiMiniMagnifyingGlass, HiXMark } from "react-icons/hi2";
 
 const productSelectionSchema = z.object({
   // clientId: z.string(),
@@ -42,7 +42,7 @@ export const ProductSelection = ({ navigateToNextStep }) => {
         <div className="flex gap-2">
           <div className="btn btn-sm btn-primary">
             <input type="submit" value="continue" />
-            <HiArrowRight />
+            <HiArrowSmallRight />
           </div>
         </div>
       </form>

@@ -6,7 +6,7 @@ import { useOrderFormStore } from "@/hooks/useOrderFormStore";
 import { Card, FormControl, FormControlError, Select } from "ui";
 
 import {
-  HiArrowRight,
+  HiArrowSmallRight,
   HiOutlineBolt,
   HiOutlineCalendarDays,
   HiOutlineBuildingOffice,
@@ -167,7 +167,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
       </Card>
       <div className="btn btn-sm btn-primary">
         <input type="submit" value="Continue" />
-        <HiArrowRight />
+        <HiArrowSmallRight />
       </div>
     </form>
   );

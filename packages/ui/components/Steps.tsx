@@ -30,7 +30,7 @@ export const Step: FC<StepProps> = ({
           currentStep === step ? "bg-primary-content text-primary-focus" : null
         } hover:bg-gray-100 cursor-pointer`}
       >
-        <Icon icon={icon} /> {title}
+       { icon && <Icon icon={icon} /> } {title}
       </div>
     </li>
   );

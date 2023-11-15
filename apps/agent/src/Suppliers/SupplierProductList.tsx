@@ -44,14 +44,6 @@ const SupplierProductList = ({ productsCount }: props) => {
 
   return (
     <div className='space-y-4'>
-      <ListHeader
-        onNextPage={handleNext}
-        onPreviousPage={handlePrev}
-        size={productsCount}
-        limit={4}
-        sizeLabel='Products'
-      />
-
       <List
         data={products}
         error={error}

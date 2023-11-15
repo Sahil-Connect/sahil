@@ -1,5 +1,5 @@
 import { JoinGrid } from 'ui';
-import { HiArrowLeft, HiArrowRight } from 'react-icons/hi2';
+import { HiArrowSmallLeft, HiArrowSmallRight } from 'react-icons/hi2';
 
 export type ListHeaderProps = {
   onPreviousPage?: () => void;
@@ -33,14 +33,14 @@ export const ListHeader = ({
               title='Left'
               onClick={onPreviousPage}
             >
-              <HiArrowLeft />
+              <HiArrowSmallLeft />
             </button>
             <button
               className='join-item btn btn-sm'
               title='Right'
               onClick={onNextPage}
             >
-              <HiArrowRight />
+              <HiArrowSmallRight />
             </button>
           </JoinGrid>
         )}
