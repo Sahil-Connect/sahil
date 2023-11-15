@@ -4,7 +4,6 @@ export type IconProps =  {
   icon: IconType;
 };
 
-export const Icon = ({ icon, size = "20" }: IconProps) =>
-  icon({
+export const Icon = ({ icon, size = "20" }: IconProps) => icon({
     size,
-  });
+});

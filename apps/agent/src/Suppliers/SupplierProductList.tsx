@@ -44,14 +44,6 @@ const SupplierProductList = ({ productsCount }: props) => {
 
   return (
     <div className='space-y-4'>
-      <ListHeader
-        onNextPage={handleNext}
-        onPreviousPage={handlePrev}
-        size={productsCount}
-        limit={4}
-        sizeLabel='Products'
-      />
-
       <List
         data={products}
         error={error}
@@ -86,20 +78,13 @@ const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
             </ul>
           </div>
         </div>
-        <p
-          className={`text-xs font-bold tracking-wider ${
-            product.inStock ? 'text-green-600' : 'text-red-600'
-          }`}
-        >
-          {product.inStock ? 'Available' : 'Out of Stock'}
-        </p>
       </div>
 
       <div className='grow grid items-center'>
         <p className='text-sm'>{product.description}</p>
       </div>
 
-      <div className='flex flex-wrap items-center gap-2'>
+      <div className='flex flex-wrap justify-between items-center gap-2'>
         <div className='flex items-center gap-1'>
           <span className='text-lg shadow rounded-md p-2'>
             <HiOutlineBanknotes />
@@ -113,6 +98,13 @@ const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
           <p>{product.quantity} items</p>
         </div>
       </div>
+      {
+          !product.inStock &&         <div
+          className={`badge font-bold tracking-wider text-red-600 `}
+        >
+          Out of Stock
+        </div>
+        }
     </Card>
   );
 };

@@ -36,7 +36,7 @@ export const BusinessOrderHistory = () => {
   }
 
   return (
-    <div className="bg-base-200 space-y-2 grow p-4 rounded-xl">
+    <div className="bg-gray-100 space-y-2 grow p-4 rounded-xl">
       <div className="flex justify-between items-center">
         <h3 className="text-xl">Latest Orders</h3>
         <button className="btn btn-sm">View All</button>
@@ -61,7 +61,7 @@ export const BusinessOrderHistory = () => {
 const OrderSummary = ({ order }) => {
   const statusStyle = orderStyles[order.status] || 'default';
   return (
-    <Card className='bg-white h-full w-2/5'>
+    <Card className='bg-white h-full'>
       <div>
         <Link href={`/orders/${order.id}`}>
           <h3 className='card-title'>Order ID: #{order.id.slice(0, 8).toLocaleUpperCase()}</h3>

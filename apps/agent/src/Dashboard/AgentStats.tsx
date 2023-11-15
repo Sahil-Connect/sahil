@@ -58,11 +58,11 @@ const intervals = [
 export const AgentStats = () => {
   return (
     <section className="space-y-4">
-      <div className="flex items-center justify-between bg-slate-200">
+      <div className="flex items-center justify-between ">
         <h3 className="text-lg">Overview</h3>
         <div className="flex items-center gap-2">
           {intervals.map((interval) => (
-            <div key={interval.id} className={"badge bg-rose-200"}>
+            <div key={interval.id} className={"badge"}>
               {interval.title}
             </div>
           ))}

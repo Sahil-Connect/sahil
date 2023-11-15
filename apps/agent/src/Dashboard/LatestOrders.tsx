@@ -1,5 +1,5 @@
 import { Card, IconButton } from "ui";
-import { HiOutlineBanknotes, HiOutlinePlusCircle } from "react-icons/hi2";
+import { HiOutlineBanknotes, HiOutlinePlusCircle, HiArrowSmallRight } from "react-icons/hi2";
 
 const orders = [
   {
@@ -29,7 +29,7 @@ export const LatestOrders = () => {
           <IconButton icon={HiOutlinePlusCircle} title="Add" />
           <div className="badge badge-accent">3 Orders</div>
         </div>
-        <button className="btn btn-xs btn-secondary">View All</button>
+        <button className="btn btn-xs">View All <HiArrowSmallRight /> </button>
       </div>
       <div className="flex gap-2">
         {orders.map((order) => (

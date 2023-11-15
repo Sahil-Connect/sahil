@@ -16,7 +16,7 @@ export const OrderClient = ({ businessId }) => {
 
   return (
     <div className="grow space-y-2">
-      <Card className="grow" titleSize="sm">
+      <Card className="grow " titleSize="sm" >
         <div className="flex justify-between">
           <Link
             href={`/suppliers/${business.id}`}
@@ -29,16 +29,16 @@ export const OrderClient = ({ businessId }) => {
           </button>
         </div>
         <h3 className="text-sm">{business?.name}</h3>
-        <div className="mt-2 flex flex-col p-4 gap-4 border border-solid border-[#d2d6db] rounded-lg ">
+        <div className="mt-2 flex flex-col p-4  gap-4 border border-solid border-[#d2d6db] rounded-lg ">
           <div className="flex justify-between items-center">
             <div className="space-y-1 font-semibold">
-              <span className="opacity-70 text-sm font-normal">
+              <span className="text-gray-600 text-sm font-normal">
                 Business Type
               </span>
               <p className="capitalize">{business.type}</p>
             </div>
             <div className="space-y-1 font-semibold">
-              <span className="opacity-70 text-sm font-normal">
+              <span className="text-gray-600 text-sm font-normal">
                 Contact Name
               </span>
               <p className="capitalize">{business.contactName}</p>

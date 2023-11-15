@@ -21,7 +21,7 @@ export const Input = ({
       <input
         type={type}
         placeholder={placeholder}
-        className='input input-bordered w-full max-w-lg'
+        className='input input-sm input-bordered w-full max-w-lg'
         defaultValue={defaultValue}
         {...register(name, { valueAsNumber: type === 'number' })}
       />

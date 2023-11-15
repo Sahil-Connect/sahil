@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
 import { Card, FormControl } from "ui";
-import { HiArrowRight } from "react-icons/hi2";
+import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 const businessInfoSchema = z.object({
   name: z.string().min(2, { message: "Must be more than 2 characters" }),
@@ -35,13 +35,13 @@ export const BusinessInfo = () => {
         <FormControl label="Name of your business">
           <input
             type="text"
-            className="input input-sm input-bordered w-full bg-slate-100"
+            className="input input-sm input-bordered w-full bg-gray-100"
             placeholder="Keji's Foods"
           />
         </FormControl>
         <div className="btn btn-sm btn-primary w-fit">
           <input type="submit" value="Continue" />
-          <HiArrowRight />
+          <HiArrowSmallRight />
         </div>
       </Card>
     </form>

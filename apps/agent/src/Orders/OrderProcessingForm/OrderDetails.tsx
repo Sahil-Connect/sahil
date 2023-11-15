@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "../../hooks/useOrderFormStore";
 import { useFetchBusinesses } from "@/hooks/businesses";
-import { HiArrowRight, HiXMark } from "react-icons/hi2";
+import { HiArrowSmallRight, HiXMark } from "react-icons/hi2";
 import { Card, FormControl } from "ui";
 
 const orderDetailsSchema = z.object({
@@ -55,7 +55,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
             </div>
             <select
               {...register("clientId")}
-              className="select select-bordered select-sm w-full max-w-xs bg-slate-100"
+              className="select select-bordered select-sm w-full max-w-xs bg-gray-100"
             >
               {businesses &&
                 businesses.map((business) => (
@@ -69,7 +69,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
             <input
               type="textarea"
               placeholder="Notes"
-              className="textarea textarea-bordered w-full bg-slate-100"
+              className="textarea textarea-bordered w-full bg-gray-100"
               {...register("notes")}
             />
           </FormControl>
@@ -84,7 +84,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
               </button>
               <div className="btn btn-sm btn-primary">
                 <input type="submit" value="continue" />
-                <HiArrowRight />
+                <HiArrowSmallRight />
               </div>
             </div>
           </div>

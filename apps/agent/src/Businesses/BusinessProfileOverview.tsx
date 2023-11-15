@@ -33,7 +33,6 @@ export const BusinessProfileOverview = ({
       </div>
       <h3 className="card-title">{business?.name}</h3>
       <p>{business?.description}</p>
-      <div className='divider'>Contact Info</div>
       <div className='space-y-2'>
         <div className='flex items-center gap-2'>
           <span className='shadow rounded-md p-2'>
@@ -63,10 +62,6 @@ export const BusinessProfileOverview = ({
           </span>
           <p>{business?.phoneNumber}</p>
         </div>
-      </div>
-      <div className='divider'>More Business Info</div>
-      <div className='space-y-2'>
-        <p>This business is registered by: <span className="font-bold text-lg">{business?.agent?.name}</span></p>
       </div>
     </Card>
   );

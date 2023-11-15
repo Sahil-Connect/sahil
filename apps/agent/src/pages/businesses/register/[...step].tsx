@@ -16,6 +16,33 @@ import {
   HiOutlineHeart,
 } from "react-icons/hi2";
 
+const headers = [
+  {
+    title: "Business Information",
+    step: "business_info",
+    icon: HiOutlineQueueList,
+    completed: false,
+  },
+  {
+    title: "Address Information",
+    step: "address_info",
+    icon: HiOutlineMapPin,
+    completed: false,
+  },
+  {
+    title: "Preferences",
+    step: "preferences",
+    icon: HiOutlineHeart,
+    completed: false,
+  },
+  {
+    title: "Summary",
+    step: "summary",
+    icon: HiOutlineCheckCircle,
+    completed: false,
+  },
+];
+
 export default function BusinessRegistrationPage() {
   const { currentStep, goToStep, steps, updateStepByIndex } =
     useBusinessFormStore((state) => state);
@@ -43,39 +70,13 @@ export default function BusinessRegistrationPage() {
     goToStep("next");
     router.push(`/businesses/register/${path}`);
   };
-  const headers = [
-    {
-      title: "Business Information",
-      step: "business_info",
-      icon: <HiOutlineQueueList />,
-      completed: false,
-    },
-    {
-      title: "Address Information",
-      step: "address_info",
-      icon: <HiOutlineMapPin />,
-      completed: false,
-    },
-    {
-      title: "Preferences",
-      step: "preferences",
-      icon: <HiOutlineHeart />,
-      completed: false,
-    },
-    {
-      title: "Summary",
-      step: "summary",
-      icon: <HiOutlineCheckCircle />,
-      completed: false,
-    },
-  ];
   return (
     <section className="min-h-screen space-y-4">
-      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-base-200">
+      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-gray-100">
         <h1 className="text-2xl">Register New Business</h1>
       </div>
       <div className="flex">
-        <div className="basis-1/5 pl-4">
+        <div className="basis-1/5">
           <BusinessFormSteps
             currentStep={currentStep}
             onUpdateStepByIndex={onUpdateStepByIndex}

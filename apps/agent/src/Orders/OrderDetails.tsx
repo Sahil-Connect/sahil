@@ -10,25 +10,25 @@ import {
 
 export const OrderDetails = ({ order }) => {
   return (
-    <Card title="Order Details" titleSize="sm">
+    <Card title="Order Details" titleSize="sm" >
       <div className="space-y-4">
-        <div className="flex gap-8 items-center">
+        <div className="flex gap-4 items-center">
           <div className="flex gap-2 items-center">
-            <span className="p-2 shadow rounded-lg w-fit">
+            <span className="p-2 shadow rounded w-fit">
               <HiOutlineMapPin />
             </span>
             <p>{order?.origin}</p>
           </div>
           <div className="flex gap-2 items-center">
-            <span className="p-2 shadow rounded-lg w-fit">
+            <span className="p-2 shadow rounded w-fit">
               <HiOutlineFlag />
             </span>
             <p>{order?.destination}</p>
           </div>
         </div>
-        <div className="flex gap-8 items-center">
-          <div className="flex gap-4 items-center">
-            <span className="p-2 border text-secondary rounded-lg w-fit">
+        <div className="flex gap-8 items-center ">
+          <div className="flex gap-4 items-center  grow">
+            <span className="p-2 border text-primary rounded w-fit">
               <HiCalendarDays />
             </span>
             <div>
@@ -36,8 +36,8 @@ export const OrderDetails = ({ order }) => {
               <h3 className="text-md">{formatDateTime(order?.created_at)}</h3>
             </div>
           </div>
-          <div className="flex gap-4 items-center">
-            <span className="p-2 border text-secondary rounded-lg w-fit">
+          <div className="flex gap-4 items-center  grow">
+            <span className="p-2 border text-primary rounded w-fit">
               <HiOutlineHandRaised />
             </span>
             <div>
@@ -45,9 +45,8 @@ export const OrderDetails = ({ order }) => {
               <h3 className="text-md">{order?.status}</h3>
             </div>
           </div>
-
-          <div className="flex gap-4 items-center">
-            <span className="p-2 border text-secondary rounded-lg w-fit">
+          <div className="flex gap-4 items-center  grow">
+            <span className="p-2 border text-primary rounded w-fit">
               <HiOutlineMapPin />
             </span>
             <div>
@@ -55,8 +54,8 @@ export const OrderDetails = ({ order }) => {
               <h3 className="text-md">Pickup Location</h3>
             </div>
           </div>
-          <div className="flex gap-4 items-center">
-            <span className="p-2 border text-secondary rounded-lg w-fit">
+          <div className="flex gap-4 items-center  grow">
+            <span className="p-2 border text-primary rounded w-fit">
               <HiOutlineBanknotes />
             </span>
             <div>
