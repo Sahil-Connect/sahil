@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   transpilePackages: ['@sahil/lib', 'ui', '@sahil/configs'],
   images: {
     remotePatterns: [
