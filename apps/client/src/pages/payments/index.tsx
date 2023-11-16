@@ -6,7 +6,7 @@ export default function Payments() {
   console.log(data);
   return (
     <section className="min-h-screen">
-      <h1 className="font-medium leading-none text-md md:text-2xl">Payments</h1>
+      <h1 className="font-medium leading-none text-lg md:text-2xl">Payments</h1>
       <div className="divider"></div>
       <ListAccounts />
       <div className="flex gap-2">
