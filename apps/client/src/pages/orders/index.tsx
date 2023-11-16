@@ -1,14 +1,8 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Orders() {
   return (
-    <main
-      className={`min-h-screen p-4`}
-    >
-      <h1>Hello</h1>
-    </main>
+    <section className="min-h-screen">
+      <h1 className="font-medium leading-none text-lg md:text-2xl">Orders Page</h1>
+    </section>
   )
 }
