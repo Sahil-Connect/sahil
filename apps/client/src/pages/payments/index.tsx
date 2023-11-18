@@ -1,3 +1,4 @@
+import { MinHeight } from "ui"
 import { ListAccounts, ListTransactions } from "@/Payments";
 import { useGetAccountBalance } from "@/hooks/accounts";
 
@@ -5,7 +6,7 @@ export default function Payments() {
   const { data } = useGetAccountBalance();
   console.log(data);
   return (
-    <section className="min-h-screen">
+    <MinHeight>
       <h1 className="font-medium leading-none text-lg md:text-2xl">Payments</h1>
       <div className="divider"></div>
       <ListAccounts />
@@ -17,6 +18,6 @@ export default function Payments() {
           <ListTransactions />
         </div>
       </div>
-    </section>
+    </MinHeight>
   );
 }

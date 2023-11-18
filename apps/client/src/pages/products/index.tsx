@@ -1,8 +1,9 @@
+import { MinHeight } from "ui"
 
 export default function Products() {
   return (
-    <section className="min-h-screen">
+    <MinHeight>
       <h1 className="font-medium leading-none text-lg md:text-2xl">Products Page</h1>
-    </section>
+    </MinHeight>
   )
 }
