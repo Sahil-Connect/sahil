@@ -20,7 +20,6 @@ export * from './components/Steps';
 export * from './components/Modal';
 export * from "./components/Tabs";
 export * from './components/Toggle';
-export * from './components/MinHeight';
 export * from './components/Wrapper';
 export * from './components/SidebarWrapper';
 
