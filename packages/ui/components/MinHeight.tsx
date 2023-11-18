@@ -6,7 +6,7 @@ export type MinHeightProps = {
 
 export const MinHeight = ({ children }: MinHeightProps) => {
   return (
-    <div className="min-h-screen bg-[#999999]">
+    <div className="min-h-screen">
       {children}
     </div>
   );
