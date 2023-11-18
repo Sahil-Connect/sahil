@@ -1,9 +1,10 @@
-import { MinHeight } from "ui"
 
 export default function Support() {
   return (
-    <MinHeight>
-      <h1 className="font-medium leading-none text-lg md:text-2xl">Support Page</h1>
-    </MinHeight>
+    <section className="space-y-4">
+      <div>
+        <h1 className="font-medium leading-none text-lg md:text-2xl">Support Page</h1>
+      </div>
+    </section>
   )
 }
