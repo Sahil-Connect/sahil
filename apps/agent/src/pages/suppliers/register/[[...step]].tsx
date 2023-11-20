@@ -5,11 +5,14 @@ import {
   SupplierBasicInfoForm,
   SupplierBusinessInfoForm,
   SupplierPreferencesForm,
+  SupplierFormSteps
 } from '@/Suppliers/SupplierRegistrationForm';
 import { useSupplierFormStore } from '@/hooks/useSupplierFormStore';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import { INITIAL_STEP } from '@/Suppliers/constants';
 import { JoinGrid } from 'ui';
+import { Card, IconButton } from "ui";
+import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 const StepsPaginator = () => {
   const { steps, goToStep, currentStep } = useSupplierFormStore(
@@ -35,6 +38,7 @@ const StepsPaginator = () => {
         }`}
         onClick={goToPrevStep}
       >
+        <HiArrowSmallLeft />
         Previous
       </button>
       <button
@@ -44,10 +48,38 @@ const StepsPaginator = () => {
         onClick={goToNextStep}
       >
         Next
+        <HiArrowSmallRight />
       </button>
     </JoinGrid>
   );
 };
+
+const headers = [
+  {
+    title: 'Business Info',
+    step: 'business_info' as const,
+    icon: HiArrowSmallRight,
+    completed: false,
+  },
+  {
+    title: 'Contact Details',
+    step: 'contact_details' as const,
+    icon: HiArrowSmallRight,
+    completed: false,
+  },
+  {
+    title: 'Preferences',
+    step: 'preferences' as const,
+    icon: HiArrowSmallRight,
+    completed: false,
+  },
+  {
+    title: 'Summary',
+    step: 'preview' as const,
+    icon: HiArrowSmallRight,
+    completed: false,
+  },
+];
 
 export default function SupplierRegistrationPage() {
   const { steps, currentStep, updateStepByIndex } = useSupplierFormStore(
@@ -76,25 +108,6 @@ export default function SupplierRegistrationPage() {
     router.push(`/suppliers/register/${steps[stepIndex]}`);
   };
 
-  const headers = [
-    {
-      title: 'Business Info',
-      step: 'business_info' as const,
-    },
-    {
-      title: 'Contact Details',
-      step: 'contact_details' as const,
-    },
-    {
-      title: 'Preferences',
-      step: 'preferences' as const,
-    },
-    {
-      title: 'Complete Registration',
-      step: 'preview' as const,
-    },
-  ];
-
   return (
     <>
       <Head>
@@ -102,24 +115,14 @@ export default function SupplierRegistrationPage() {
       </Head>
       <main className='min-h-screen flex items-start'>
         <div className='space-y-4 w-full'>
-          <div className='bg-base-200 p-4'>
+          <div className='bg-gray-100 p-4'>
             <h1 className='text-2xl'>Supplier Registration Form</h1>
           </div>
           <div className='flex'>
             <div className='basis-1/5 p-4'>
-              <ul className='steps steps-vertical '>
-                {headers.map(({ step, title }, index) => (
-                  <li
-                    className={`step ${
-                      step === currentStep ? 'step-secondary' : null
-                    }`}
-                    key={index}
-                    onClick={() => onUpdateStepByIndex(step)}
-                  >
-                    {title}
-                  </li>
-                ))}
-              </ul>
+              <SupplierFormSteps             headers={headers}
+            currentStep={currentStep}
+            onUpdateStepByIndex={onUpdateStepByIndex} />
             </div>
             <div className='divider divider-horizontal'></div>
             <div className='grow space-y-4 p-4'>
@@ -132,8 +135,7 @@ export default function SupplierRegistrationPage() {
                 <StepsPaginator />
               </div>
               <div className='divider'></div>
-              <div className='card card-compact shadow'>
-                <div className='card-body'>
+              <Card>
                   <h2 className='card-title'>{headers[currentIndex].title}</h2>
                   {currentStep === 'business_info' && <SupplierBasicInfoForm />}
                   {currentStep === 'contact_details' && (
@@ -141,8 +143,7 @@ export default function SupplierRegistrationPage() {
                   )}
                   {currentStep === 'preferences' && <SupplierPreferencesForm />}
                   {currentStep === 'preview' && <PreviewSupplierInfo />}
-                </div>
-              </div>
+                </Card>
             </div>
           </div>
         </div>

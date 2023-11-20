@@ -1,3 +1,4 @@
+import { Card } from "ui";
 const zones = [
   {
     id: 1,
@@ -19,8 +20,7 @@ const zones = [
 
 export const ServiceZones = () => {
   return (
-    <div className="card card-compact shadow">
-      <div className="card-body">
+    <Card>
         <h3 className="text-xl">Service Zones</h3>
         <div className="flex flex-wrap gap-2">
           {zones.map((zone) => (
@@ -33,7 +33,6 @@ export const ServiceZones = () => {
             <button className="btn btn-sm btn-primary">Add Zone</button>
             <button className="btn btn-sm">View Map</button>
         </div>
-      </div>
-    </div>
+    </Card>
   );
 };

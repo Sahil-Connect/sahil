@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
   "scripts": {
-    "compile": "tsc -p .",
+    "compile": "tsc -p tsconfig.json",
     "clean": "rm -r ./dist",
     "dev": "npm run compile && node ./dist/index.js"
   },

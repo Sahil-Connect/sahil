@@ -1,5 +1,5 @@
 import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
-import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
+import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 import { JoinGrid } from "ui";
 
 type Props = {
@@ -15,6 +15,7 @@ export const BusinessStepsPaginator = ({
   onPrevStep,
 }: Props) => {
   const { steps, currentStep } = useBusinessFormStore((state) => state);
+  const currentIndex = steps.indexOf(currentStep);
   return (
     <>
       <div className="flex justify-between items-center">
@@ -27,14 +28,21 @@ export const BusinessStepsPaginator = ({
           </h3>
         </div>
         <JoinGrid>
-          <button className="join-item btn btn-sm" onClick={onPrevStep}>
-            <HiArrowLeft /> Previous
+          <button
+            onClick={onPrevStep}
+            className={`join-item btn btn-sm btn-ghost ${
+              currentIndex <= 0 ? "btn-disabled" : null
+            }`}
+          >
+            <HiArrowSmallLeft /> Previous
           </button>
           <button
-            className="join-item btn btn-sm btn-neutral"
+            className={`join-item btn btn-sm btn-secondary ${
+              currentIndex === steps.length - 1 ? "btn-disabled" : null
+            }`}
             onClick={onNextStep}
           >
-            Next <HiArrowRight />
+            Next <HiArrowSmallRight />
           </button>
         </JoinGrid>
       </div>

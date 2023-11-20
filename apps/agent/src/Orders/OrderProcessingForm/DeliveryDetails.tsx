@@ -6,7 +6,7 @@ import { useOrderFormStore } from "@/hooks/useOrderFormStore";
 import { Card, FormControl, FormControlError, Select } from "ui";
 
 import {
-  HiArrowRight,
+  HiArrowSmallRight,
   HiOutlineBolt,
   HiOutlineCalendarDays,
   HiOutlineBuildingOffice,
@@ -47,7 +47,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
       <Card title="Delivery Information" titleSize="sm">
         <div className="flex gap-2">
           <FormControl label="Name">
-            <input placeholder="Keji Lumuro" {...register("contactName")} />
+            <input placeholder="Keji Lumuro" {...register("contactName")} className='input input-bordered w-full max-w-lg' />
             {errors.contactName?.message && (
               <FormControlError message={errors.contactName?.message} />
             )}
@@ -55,6 +55,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
           <FormControl label="Mobile Number">
             <input
               placeholder="+211-9813231392"
+              className='input input-bordered w-full max-w-lg'
               {...register("mobileNumber")}
             />
             {errors.mobileNumber?.message && (
@@ -166,7 +167,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
       </Card>
       <div className="btn btn-sm btn-primary">
         <input type="submit" value="Continue" />
-        <HiArrowRight />
+        <HiArrowSmallRight />
       </div>
     </form>
   );

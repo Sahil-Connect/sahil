@@ -18,9 +18,6 @@ export const Tabs = () => {
           <HiOutlineBeaker /> Order Progress
         </a>
       </div>
-      <div>
-        <h3>Man!</h3>
-      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Avatar, Card, IconButton } from "ui";
-import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { HiOutlinePlusCircle, HiArrowSmallRight } from "react-icons/hi2";
 
 const businesses = [
   {
@@ -22,7 +22,7 @@ export const BusinessesOverview = () => {
           <IconButton icon={HiOutlinePlusCircle} title="Add" />
           <div className="badge badge-accent">34 businesses</div>
         </div>
-        <button className="btn btn-xs btn-secondary">View All</button>
+        <button className="btn btn-xs">View All <HiArrowSmallRight/></button>
       </div>
       <div className="flex gap-2">
         {businesses.map((business) => (

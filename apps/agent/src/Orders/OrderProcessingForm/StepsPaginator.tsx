@@ -1,5 +1,5 @@
 import { useOrderFormStore } from "@/hooks/useOrderFormStore";
-import { HiArrowLeft, HiArrowRight } from "react-icons/hi2";
+import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 import { JoinGrid } from "ui";
 type Props = {
   headers: any[];
@@ -8,6 +8,7 @@ type Props = {
 
 export const StepsPaginator = ({ headers, onStepChange }: Props) => {
   const { steps, currentStep } = useOrderFormStore((state) => state);
+  const currentIndex = steps.indexOf(currentStep);
   return (
     <>
       <div className="flex justify-between items-center">
@@ -21,16 +22,20 @@ export const StepsPaginator = ({ headers, onStepChange }: Props) => {
         </div>
         <JoinGrid>
           <button
-            className="join-item btn btn-sm"
+        className={`join-item btn btn-sm btn-ghost ${
+          currentIndex <= 0 ? "btn-disabled" : null
+        }`}
             onClick={() => onStepChange("orders/new", "prev")}
           >
-            <HiArrowLeft /> Previous
+            <HiArrowSmallLeft /> Previous
           </button>
           <button
-            className="join-item btn btn-sm btn-neutral"
+        className={`join-item btn btn-sm btn-secondary ${
+          currentIndex === steps.length - 1 ? "btn-disabled" : null
+        }`}
             onClick={() => onStepChange("orders/new", "next")}
           >
-            Next <HiArrowRight />
+            Next <HiArrowSmallRight />
           </button>
         </JoinGrid>
       </div>

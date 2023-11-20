@@ -36,7 +36,7 @@ export const SupplierProducts = ({ productsCount }: props) => {
   };
 
   return (
-    <div className='grow space-y-2 bg-base-200 p-4 rounded-xl'>
+    <div className='grow space-y-2 bg-gray-100 p-4 rounded-xl'>
       <div className='flex flex-col lg:flex-row justify-between lg:items-center'>
         <h3 className='text-xl font-semibold'>Products</h3>
         <div className='flex flex-col md:flex-row gap-2 items-end'>
