@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useFetchBusinessOrders } from '@/hooks/businesses';
-import { useRouter } from 'next/router';
 import { formatDateTime } from '@sahil/lib/dates';
 import { Card, JoinGrid, List, ListHeader, ListErrorState } from 'ui';
 import {
@@ -24,14 +23,15 @@ const orderStyles: Record<OrderStatus, string> = {
 
 export const BusinessOrderHistory = () => {
   const [offset, setOffset] = useState(0);
-  const router = useRouter();
-  const { businessId: customerId } = router.query;
   const {
     data: orders,
     error,
     loading,
     ordersCount,
-  } = useFetchBusinessOrders({ customerId: customerId as string, offset });
+  } = useFetchBusinessOrders({
+    customerId: 'e87924e8-69e4-4171-bd89-0c8963e03d08',
+    offset,
+  });
   if (error) {
     return (
       <ListErrorState
@@ -46,7 +46,7 @@ export const BusinessOrderHistory = () => {
     <div className='bg-gray-100 space-y-2 grow p-4 rounded-xl'>
       <div className='flex justify-between items-center'>
         <h3 className='text-xl'>Latest Orders</h3>
-        <button className='btn btn-sm'>View All</button>
+        <button className='btn btn-sm btn-primary'>New Order</button>
       </div>
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 4)}

@@ -4,6 +4,8 @@ import { HiArrowSmallLeft, HiArrowSmallRight } from 'react-icons/hi2';
 export type ListHeaderProps = {
   onPreviousPage?: () => void;
   onNextPage?: () => void;
+  isNextDisabled?: boolean;
+  isPrevDisabled?: boolean;
   size?: number;
   limit?: number;
   sizeLabel?: string;
@@ -12,6 +14,8 @@ export type ListHeaderProps = {
 export const ListHeader = ({
   onNextPage,
   onPreviousPage,
+  isNextDisabled = false,
+  isPrevDisabled = false,
   size,
   limit,
   sizeLabel,
@@ -32,6 +36,7 @@ export const ListHeader = ({
               className='join-item btn btn-sm'
               title='Left'
               onClick={onPreviousPage}
+              disabled={isPrevDisabled}
             >
               <HiArrowSmallLeft />
             </button>
@@ -39,6 +44,7 @@ export const ListHeader = ({
               className='join-item btn btn-sm'
               title='Right'
               onClick={onNextPage}
+              disabled={isNextDisabled}
             >
               <HiArrowSmallRight />
             </button>

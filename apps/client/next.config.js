@@ -2,6 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@sahil/lib', 'ui', '@sahil/configs'],
-}
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+      },
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
