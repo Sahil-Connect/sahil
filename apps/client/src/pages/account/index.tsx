@@ -2,7 +2,7 @@ import { BusinessProfileOverview, BusinessOrderHistory } from '@/Businesses';
 import { useGetAccountBalance } from '@/hooks/accounts';
 import { useFetchBusinessByPK } from '@/hooks/businesses';
 import { Card } from 'ui';
-import { useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Account() {
   const {
@@ -72,12 +72,14 @@ const MomoUserInfo = () => {
 
 const MomoAccountBalance = () => {
   const { data, loading, refetch } = useGetAccountBalance();
+  const [isRefetching, setIsRefetching] = useState(false);
 
-  useEffect(() => {
-    if (data === null) {
-      refetch();
+  const handleRefetch = async () => {
+    if (!isRefetching) {
+      setIsRefetching(true);
+      await refetch().then(() => setIsRefetching(false));
     }
-  }, [data, refetch]);
+  };
 
   return (
     <Card>
@@ -85,7 +87,7 @@ const MomoAccountBalance = () => {
         <div>
           <p className='text-gray-400 text-sm'>Currency</p>
           {loading ? (
-            <div className='w-12 h-4 bg-base-100 animate-pulse' />
+            <div className='w-12 h-4 bg-base-200 animate-pulse' />
           ) : (
             <p>{data?.currency}</p>
           )}
@@ -93,12 +95,29 @@ const MomoAccountBalance = () => {
         <div>
           <p className='text-gray-400 text-sm'>Balance</p>
           {loading ? (
-            <div className='w-12 h-4 bg-base-100 animate-pulse' />
+            <div className='w-12 h-4 bg-base-200 animate-pulse' />
           ) : (
             <p>{data?.availableBalance}</p>
           )}
         </div>
       </div>
+      {data === null && (
+        <div className='card-actions flex-col'>
+          <p>
+            {isRefetching
+              ? 'Refetching balance...'
+              : "Couldn't fetch account balance."}
+          </p>
+          <button
+            onClick={handleRefetch}
+            className={`btn btn-sm btn-secondary ${
+              isRefetching && 'animate-pulse'
+            }`}
+          >
+            Reload
+          </button>
+        </div>
+      )}
     </Card>
   );
 };
