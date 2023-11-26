@@ -42,6 +42,7 @@ export const FETCH_BUSINESS_ORDERS = gql`
           { customerId: { _eq: $customerId } }
           { customerId: { _is_null: true } }
         ]
+        customerId: { _eq: $customerId }
       }
       limit: $limit
       offset: $offset
@@ -60,7 +61,7 @@ export const FETCH_BUSINESS_ORDERS = gql`
         name
       }
     }
-    orders_aggregate {
+    orders_aggregate(where: { customerId: { _eq: $customerId } }) {
       aggregate {
         count(columns: id, distinct: true)
       }

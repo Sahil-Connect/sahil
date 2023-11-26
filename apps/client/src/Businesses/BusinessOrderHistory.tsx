@@ -23,6 +23,7 @@ const orderStyles: Record<OrderStatus, string> = {
 
 export const BusinessOrderHistory = () => {
   const [offset, setOffset] = useState(0);
+  console.log(offset + 4);
   const {
     data: orders,
     error,
@@ -50,7 +51,9 @@ export const BusinessOrderHistory = () => {
       </div>
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 4)}
-        onPreviousPage={() => setOffset((prev) => (prev < 0 ? 0 : prev - 4))}
+        onPreviousPage={() => setOffset((prev) => prev - 4)}
+        isNextDisabled={offset + 4 >= ordersCount}
+        isPrevDisabled={offset === 0}
         size={ordersCount?.count}
         limit={3}
         sizeLabel='Orders'

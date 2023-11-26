@@ -1,34 +1,41 @@
-import Link from "next/link";
-import {  useFetchBusinessOrders } from "@/hooks/businesses";
-import { useRouter } from "next/router";
-import { formatDateTime } from "@sahil/lib/dates";
-import { Card, JoinGrid, List, ListHeader, ListErrorState } from "ui";
+import Link from 'next/link';
+import { useFetchBusinessOrders } from '@/hooks/businesses';
+import { useRouter } from 'next/router';
+import { formatDateTime } from '@sahil/lib/dates';
+import { Card, JoinGrid, List, ListHeader, ListErrorState } from 'ui';
 import {
   HiOutlineCalendarDays,
   HiOutlineMapPin,
   HiOutlineFlag,
-} from "react-icons/hi2";
+} from 'react-icons/hi2';
+import { useState } from 'react';
 
 enum OrderStatus {
-  Cancelled = "Cancelled",
-  Pending = "Pending",
-  Fulfilled = "Fulfilled",
-};
+  Cancelled = 'Cancelled',
+  Pending = 'Pending',
+  Fulfilled = 'Fulfilled',
+}
 
 const orderStyles: Record<OrderStatus, string> = {
-  [OrderStatus.Cancelled]: "error",
-  [OrderStatus.Pending]: "info",
-  [OrderStatus.Fulfilled]: "success",
+  [OrderStatus.Cancelled]: 'error',
+  [OrderStatus.Pending]: 'info',
+  [OrderStatus.Fulfilled]: 'success',
 };
-  
+
 export const BusinessOrderHistory = () => {
+  const [offset, setOffset] = useState(0);
   const router = useRouter();
   const { businessId: customerId } = router.query;
-  const { data: orders, error, loading, ordersCount } = useFetchBusinessOrders(customerId as string);
+  const {
+    data: orders,
+    error,
+    loading,
+    ordersCount,
+  } = useFetchBusinessOrders({ customerId: customerId as string, offset });
   if (error) {
     return (
       <ListErrorState
-        heading="Unable to load products..."
+        heading='Unable to load products...'
         message="Products aren't loading due to a technical problem on our side. Please
       try again."
       />
@@ -36,14 +43,16 @@ export const BusinessOrderHistory = () => {
   }
 
   return (
-    <div className="bg-gray-100 space-y-2 grow p-4 rounded-xl">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl">Latest Orders</h3>
-        <button className="btn btn-sm">View All</button>
+    <div className='bg-gray-100 space-y-2 grow p-4 rounded-xl'>
+      <div className='flex justify-between items-center'>
+        <h3 className='text-xl'>Latest Orders</h3>
+        <button className='btn btn-sm'>View All</button>
       </div>
       <ListHeader
-        onNextPage={() => {}}
-        onPreviousPage={() => {}}
+        onNextPage={() => setOffset((prev) => prev + 4)}
+        onPreviousPage={() => setOffset((prev) => prev - 4)}
+        isNextDisabled={offset + 4 >= ordersCount}
+        isPrevDisabled={offset === 0}
         size={ordersCount?.count}
         limit={3}
         sizeLabel='Orders'
@@ -64,7 +73,9 @@ const OrderSummary = ({ order }) => {
     <Card className='bg-white h-full'>
       <div>
         <Link href={`/orders/${order.id}`}>
-          <h3 className='card-title'>Order ID: #{order.id.slice(0, 8).toLocaleUpperCase()}</h3>
+          <h3 className='card-title'>
+            Order ID: #{order.id.slice(0, 8).toLocaleUpperCase()}
+          </h3>
         </Link>
         <div className='flex flex-wrap gap-2 gap-y-4'>
           <div className={`badge badge-sm badge-${statusStyle}`}>
@@ -93,4 +104,3 @@ const OrderSummary = ({ order }) => {
     </Card>
   );
 };
-  
