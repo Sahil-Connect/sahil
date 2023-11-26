@@ -23,7 +23,6 @@ const orderStyles: Record<OrderStatus, string> = {
 
 export const BusinessOrderHistory = () => {
   const [offset, setOffset] = useState(0);
-  console.log(offset + 4);
   const {
     data: orders,
     error,

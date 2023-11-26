@@ -1,5 +1,12 @@
 {
-  "cSpell.words": ["daisyui", "formkit", "hookform", "Sahil", "tailwindcss"],
+  "cSpell.words": [
+    "daisyui",
+    "formkit",
+    "hookform",
+    "Momo",
+    "Sahil",
+    "tailwindcss"
+  ],
   "spellright.language": ["en"],
   "spellright.documentTypes": ["markdown", "latex", "plaintext"]
 }
