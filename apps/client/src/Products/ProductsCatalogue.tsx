@@ -39,7 +39,7 @@ export const ProductsCatalogue = () => {
 
   if (loading) {
     return (
-      <Card title='Available Products' titleSize='sm'>
+      <Card titleSize='sm'>
         <div className='flex items-center justify-center text-center'>
           <div>
             <span className='loading loading-spinner loading-lg'></span>
@@ -50,7 +50,7 @@ export const ProductsCatalogue = () => {
     );
   }
   return (
-    <>
+    <Card>
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 12)}
         onPreviousPage={() => setOffset((prev) => prev - 12)}
@@ -58,7 +58,7 @@ export const ProductsCatalogue = () => {
         isPrevDisabled={offset === 0}
         size={productsCount}
         limit={12}
-        sizeLabel='Total Products'
+        sizeLabel='Products'
       />
       <List
         data={products}
@@ -69,7 +69,7 @@ export const ProductsCatalogue = () => {
           <ProductSummary product={product} key={product.id} />
         )}
       />
-    </>
+    </Card>
   );
 };
 
