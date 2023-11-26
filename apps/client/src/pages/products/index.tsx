@@ -1,10 +1,12 @@
+import { ProductsCatalogue } from '@/Products/ProductsCatalogue';
 
 export default function Products() {
   return (
-    <section className="space-y-4">
-      <div>
-        <h1 className="font-medium leading-none text-lg md:text-2xl">Products Page</h1>
+    <section className='space-y-2'>
+      <div className='flex justify-between items-center'>
+        <h3 className='text-2xl'>Available Products</h3>
       </div>
+      <ProductsCatalogue />
     </section>
-  )
+  );
 }
