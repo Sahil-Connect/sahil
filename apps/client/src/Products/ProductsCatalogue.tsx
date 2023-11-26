@@ -49,8 +49,6 @@ export const ProductsCatalogue = () => {
       </Card>
     );
   }
-
-  console.log(productsCount);
   return (
     <>
       <ListHeader
