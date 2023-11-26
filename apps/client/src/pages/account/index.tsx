@@ -2,7 +2,8 @@ import { ListAccounts, ListTransactions } from '@/Account';
 import { useGetAccountBalance } from '@/hooks/accounts';
 
 export default function Payments() {
-  const { data } = useGetAccountBalance();
+  const { data, loading } = useGetAccountBalance();
+  if (loading) return <p>Loading...</p>;
   console.log(data);
   return (
     <section className='space-y-4'>
