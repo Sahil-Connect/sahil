@@ -1,7 +1,7 @@
 import { HiArrowSmallRight } from "react-icons/hi2";
 import { Card } from "ui";
 import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '1200px',
@@ -13,9 +13,9 @@ const center = {
   lng: 31.57125000000001
 };
 
-const googleMapsApiKey = process.env.NEXT_PUBLIC_API_KEY as string;
+const currentLocation = { lat: 4.8607273, lng: 31.5791123};
 
-console.log(googleMapsApiKey);
+const googleMapsApiKey = process.env.NEXT_PUBLIC_API_KEY as string;
 function MyComponent() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -40,11 +40,14 @@ function MyComponent() {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={20}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
         { /* Child components, such as markers, info windows, etc. */ }
+        {currentLocation && (
+        <Marker position={currentLocation} title="Current Location" />
+      )}
         <></>
       </GoogleMap>
   ) : <></>
@@ -53,13 +56,11 @@ function MyComponent() {
 export default function Home() {
   return (
     <section className="space-y-4">
-      <div>
+      <Card>
         <h1 className="font-medium leading-none text-lg md:text-2xl">
-          Dashboard
+          Radisson Blu
         </h1>
-        <p className="text-sm">Welcome back, Keji.</p>
-      </div>
-
+      </Card>
       <MyComponent />
     </section>
   )
