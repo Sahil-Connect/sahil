@@ -13,6 +13,7 @@ const extendedConfig: Config = {
     './src/Zones/**/*.{js,ts,tsx,tsx,mdx}',
     './src/Businesses/**/*.{js,ts,tsx,tsx,mdx}',
     './src/Suppliers/**/*.{js,ts,tsx,tsx,mdx}',
+    './src/Products/**/*.{js,ts,tsx,tsx,mdx}',
     './src/Layout/*.{js,ts,tsx,tsx,mdx}',
   ],
   theme: {

@@ -3,6 +3,7 @@ import { useFetchBusinessOrders } from "@/hooks/businesses";
 import { useState } from "react";
 import { List, ListHeader, ListErrorState } from "ui";
 
+const MSISDN = "0910060031";
 
 export const OrderHistory = () => {
     const [offset, setOffset] = useState(0);
