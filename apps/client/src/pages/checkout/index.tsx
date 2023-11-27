@@ -6,6 +6,7 @@ import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
 import Link from "next/link";
 import { formatCurrency } from "@sahil/lib";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import {
   HiArrowSmallLeft,
   HiArrowSmallRight,
@@ -19,10 +20,9 @@ import {
   HiSignalSlash,
   HiOutlineReceiptPercent,
 } from "react-icons/hi2";
+import { usePlaceBusinessOrder } from "@/hooks/orders";
 
 export const OrderItem = ({ price, quantity, title }) => {
-  console.log(price);
-  console.log(quantity);
   return (
     <Card className="bg-white">
       <div className="flex justify-between items-center">
@@ -54,7 +54,6 @@ export const OrderItems = ({ items }) => {
     }
   );
 
-  console.log(items);
   return (
     <>
       <Card title="Order Items" titleSize="sm" className="bg-gray-100">
@@ -74,34 +73,53 @@ export const OrderItems = ({ items }) => {
 };
 
 function calculateTotal(arr) {
-    // Initialize total items and total price
-    let totalItems = 0;
-    let totalPrice = 0;
+  // Initialize total items and total price
+  let totalItems = 0;
+  let totalPrice = 0;
 
-    // Iterate through the array
-    for (const item of arr) {
-        // Add quantity to total items
-        totalItems += item.quantity;
+  // Iterate through the array
+  for (const item of arr) {
+    // Add quantity to total items
+    totalItems += item.quantity;
 
-        // Calculate subtotal for the current item
-        const subtotal = item.price * item.quantity;
+    // Calculate subtotal for the current item
+    const subtotal = item.price * item.quantity;
 
-        // Add subtotal to total price
-        totalPrice += subtotal;
-    }
+    // Add subtotal to total price
+    totalPrice += subtotal;
+  }
 
-    // Return an object with total items and total price
-    return {
-        totalItems,
-        totalPrice,
-    };
+  // Return an object with total items and total price
+  return {
+    totalItems,
+    totalPrice,
+  };
 }
 
-
 export default function CheckoutPage() {
+  const {
+    placeOrder,
+    loading: orderLoading,
+    error: orderError,
+  } = usePlaceBusinessOrder();
   const { orderItems } = useOrderItemsStore((state) => state);
-
   const { totalItems, totalPrice } = calculateTotal(orderItems);
+  const router = useRouter();
+
+  const onConfirmOrder = async () => {
+    try {
+      const order = await placeOrder({
+        variables: {
+          object: {
+            origin: "Souq Munuki",
+            destination: "Souq Custom",
+            customerId: "e87924e8-69e4-4171-bd89-0c8963e03d08",
+          },
+        },
+      });
+      router.push("/orders");
+    } catch (error) {}
+  };
 
   return (
     <section>
@@ -123,21 +141,24 @@ export default function CheckoutPage() {
               </div>
             </div>
             <div className="card-actions">
-              <button className="btn btn-sm btn-primary">
+              <button
+                className="btn btn-sm btn-primary"
+                onClick={onConfirmOrder}
+              >
                 <HiOutlineShoppingCart /> Confirm Order
               </button>
             </div>
           </Card>
           <Card title="Powered by Momo" titleSize="sm">
             <div className=" flex items-center justify-center">
-            <Image
-              src={
-                "https://res.cloudinary.com/dwacr3zpp/image/upload/v1701061672/BrandGuid-mtnmomo.svg"
-              }
-              alt="brand"
-              height={"200"}
-              width={"200"}
-            />
+              <Image
+                src={
+                  "https://res.cloudinary.com/dwacr3zpp/image/upload/v1701061672/BrandGuid-mtnmomo.svg"
+                }
+                alt="brand"
+                height={"200"}
+                width={"200"}
+              />
             </div>
           </Card>
         </div>

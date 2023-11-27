@@ -47,7 +47,6 @@ export const OrderSummary = () => {
   const { requesTtoPay, loading: payLoading, error: payError } = useRequesTtoPay();
   const { placeOrder, loading: orderLoading, error: orderError } = usePlaceBusinessOrder();
   const { client } = useOrderFormStore(state => state);
-  console.log(client);
   const {
     register,
     handleSubmit,
@@ -68,6 +67,8 @@ export const OrderSummary = () => {
     }
   );
 
+  console.log(client);
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("woooooo");
     // const validatedInput = .parse(data);
@@ -77,7 +78,8 @@ export const OrderSummary = () => {
         variables: {
           object: {
             origin: "Souq Munuki",
-            destination: "Souq Custom"
+            destination: "Souq Custom",
+            customerId: ""
           }
         }
       });
