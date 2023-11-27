@@ -1,13 +1,13 @@
-import { useFetchOrders } from "@/hooks/orders";
-import { List, ListHeader, ListErrorState } from "ui";
-import { OrderOverviewCard } from "./OrderOverviewCard";
+import { useFetchOrders } from '@/hooks/orders';
+import { List, ListHeader, ListErrorState } from 'ui';
+import { OrderOverviewCard } from './OrderOverviewCard';
 
 export const ListOrders = () => {
   const { data: orders, error, loading, ordersCount } = useFetchOrders();
   if (error) {
     return (
       <ListErrorState
-        heading="Unable to load products..."
+        heading='Unable to load products...'
         message="Products aren't loading due to a technical problem on our side. Please
       try again."
       />
@@ -15,11 +15,12 @@ export const ListOrders = () => {
   }
 
   return (
-    <section className="space-y-4">
-      <ListHeader size={ordersCount?.count} sizeLabel="Orders" title="Orders" />
+    <section className='space-y-4'>
+      <ListHeader size={ordersCount?.count} sizeLabel='Orders' title='Orders' />
       <List
         data={orders}
         loading={loading}
+        cols={4}
         renderItem={(order) => (
           <OrderOverviewCard key={order.id} order={order} />
         )}
