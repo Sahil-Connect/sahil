@@ -89,7 +89,7 @@ export const OrderSummary = () => {
           object: {
             amount: totalCost,
             payer: {
-              partyId: "0787024989",
+              partyId: "0910060031",
               partyIdType: "MSISDN",
             },
             externalId: "6353636",
