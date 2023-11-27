@@ -1,6 +1,6 @@
-import { SupplierOverviewCard } from "./SupplierOverviewCard";
-import { useFetchSuppliers } from "@/hooks/suppliers";
-import { List, ListHeader } from "ui";
+import { SupplierOverviewCard } from './SupplierOverviewCard';
+import { useFetchSuppliers } from '@/hooks/suppliers';
+import { List, ListHeader } from 'ui';
 
 export type SahilSupplier = {
   id: string;
@@ -23,16 +23,17 @@ export const ListSuppliers = () => {
   } = useFetchSuppliers();
 
   return (
-    <section className="space-y-4">
+    <section className='space-y-4'>
       <ListHeader
         size={suppliersCount?.count}
-        sizeLabel="Suppliers"
-        title="Suppliers"
+        sizeLabel='Suppliers'
+        title='Suppliers'
       />
       <List
         data={suppliers}
         error={error}
         loading={loading}
+        cols={4}
         renderItem={(supplier: SahilSupplier) => (
           <SupplierOverviewCard key={supplier.id} supplier={supplier} />
         )}

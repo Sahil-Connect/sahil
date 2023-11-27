@@ -13,15 +13,15 @@ export const useFetchProducts = ({
   limit?: number;
 }) => {
   const router = useRouter();
-  const { product } = router.query;
+  const { name } = router.query;
 
-  const graphqlQuery = product ? FETCH_PRODUCTS_BY_NAME : FETCH_PRODUCTS;
+  const graphqlQuery = name ? FETCH_PRODUCTS_BY_NAME : FETCH_PRODUCTS;
 
   const { error, data, loading } = useQuery(graphqlQuery, {
     variables: {
       offset,
       limit,
-      name: `%${product}%`,
+      name: `%${name}%`,
     },
   });
   return {

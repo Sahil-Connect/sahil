@@ -17,7 +17,7 @@ export default function Products() {
 
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const query = { product: name };
+    const query = { name };
     const queryString = new URLSearchParams(query).toString();
     const newUrl = `/products?${queryString}`;
     router.push(newUrl, undefined, { shallow: true });

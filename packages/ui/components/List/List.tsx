@@ -44,7 +44,7 @@ export const List = <T extends unknown>({
   error,
   loading,
   renderItem,
-  cols = 3
+  cols = 3,
 }: ListProps<T>) => {
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
@@ -58,19 +58,19 @@ export const List = <T extends unknown>({
     );
   }
   if (data?.length === 0) {
-    return (
-      <ListEmptyState />
-    );
+    return <ListEmptyState />;
   }
   if (loading) {
     return <ListLoadingState />;
   }
   return (
-    <div className={`grid grid-cols-auto-250 xl:grid-cols-${cols} gap-2`} ref={parent}>
+    <div
+      className={`grid grid-cols-auto-250 2xl:grid-cols-4 gap-2`}
+      ref={parent}
+    >
       {data.map((item, index) => (
         <Fragment key={index}>{renderItem(item)}</Fragment>
       ))}
     </div>
   );
 };
-
