@@ -63,9 +63,9 @@ const Footer = () => {
                 <div>
                     <h3 className="text-h3 font-bold mb-2 lg:text-h3xl">Contact Info</h3>
                     <ul className="flex flex-col gap-y-3">
-                        <li><p className="p-1 font-medium text-base lg:text-basexl transition-[0.25s] duration-[ease] hover:text-green">Juba - South Sudan</p></li>
+                        <li><p className="p-1 font-medium text-base lg:text-basexl transition-[0.25s] duration-[ease] hover:text-green">Juba, South Sudan</p></li>
+                        <li><p className="p-1 font-medium text-base lg:text-basexl transition-[0.25s] duration-[ease] hover:text-green">KN 78 Street, Kigali, Rwanda</p></li>
                         <li><a href="mailto:sahil.business@gmail.com" className="p-1 font-medium text-base lg:text-basexl transition-[0.25s] duration-[ease] hover:text-green">sahil.business@gmail.com</a></li>
-                        <li><a href="tel:+211912000000" className="p-1 font-medium text-base lg:text-basexl transition-[0.25s] duration-[ease] hover:text-green">+211-912-000-000</a></li>
                     </ul>
                 </div>
             </div>

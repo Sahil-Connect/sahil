@@ -57,19 +57,19 @@ export const featuresData: FeaturesData[] = [
     {
         id: 1,
         image: featureOne,
-        title: 'User Registration',
+        title: 'Register with Us',
         desc: 'Enabling access, personalized experiences, security, and community engagement. A fundamental feature for tailored interactions and trust-building in digital platforms.',
     },
     {
         id: 2,
         image: featureTwo,
-        title: 'Matching Process',
+        title: 'Choose what you want',
         desc: 'Establish a supply chain by connecting with suitable suppliers. The app matches businesses with suitable suppliers based on user requirements and supplier inventory.',
     },
     {
         id: 3,
         image: featureThree,
-        title: 'Delivery Process',
+        title: 'Delivery Complete',
         desc: 'Flexible delivery. Choose from community pick-up points or input specific addresses. Includes confirmation, coordination, validation, and delivery time selection.',
     },
 ];

@@ -1,7 +1,5 @@
-import Image from 'next/image'
-import { featuresData } from '../../data/constants'
-
-const Features = () => {
+import Image from 'next/image';
+const Features = ({ featuresData }) => {
   return (
     <section className="pt-16 pb-8 px-0 lg:pt-24">
         <div className="flex flex-col items-center justify-center">
@@ -18,13 +16,13 @@ const Features = () => {
                     return(
                         <li key={id}>
                             <div className="px-[25px] py-10 border border-solid border-[#d2d6db] rounded-2xl">
-                                <div className="flex justify-center flex-nowrap items-center w-16 h-16 border border-solid border-[#1a1a1a] bg-[#84faa1] rounded-[8rem] mb-5">
+                                <div className="flex justify-center flex-nowrap items-center w-16 h-16 bg-[#84faa1] rounded-[8rem] mb-5">
                                     <div className="flex justify-center items-center">
                                         <Image
                                             src={image}
                                             alt={title}
                                             loading='eager'
-                                            className='w-[2.5rem] h-[2.5rem] align-middle justify-self-center'
+                                            className='w-[2rem] h-[2rem] align-middle justify-self-center'
                                         />
                                     </div>
                                 </div>
