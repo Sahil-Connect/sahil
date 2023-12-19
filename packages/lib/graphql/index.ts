@@ -1,3 +1,4 @@
+export * from './queries/momo';
 export * from './queries/businesses';
 export * from './queries/couriers';
 export * from './queries/locations';
