@@ -1,34 +1,32 @@
-import {
-    gql,
-  } from "@apollo/client";
-  
-  export const FETCH_ORDERS = gql`
+import { gql } from '@apollo/client';
+
+export const FETCH_ORDERS = gql`
   query getOrders {
-      orders {
-        id
-        created_at
-        destination
-        id
-        orderId
-        customerId
-        origin
-        status
-        business {
+    orders {
+      id
+      created_at
+      destination
+      id
+      orderId
+      customerId
+      origin
+      status
+      business {
         contactName
         phoneNumber
         name
       }
+    }
+    orders_aggregate {
+      aggregate {
+        count(columns: id, distinct: true)
       }
-      orders_aggregate {
-        aggregate {
-          count(columns: id, distinct: true)
-        }
-      }
+    }
   }
-  `;
-  
-  export const FETCH_ORDER_BY_PK = gql`
-  query getorderByPK($id: uuid!) {
+`;
+
+export const FETCH_ORDER_BY_PK = gql`
+  query getOrderByPK($id: uuid!) {
     orders_by_pk(id: $id) {
       id
       created_at
@@ -58,9 +56,9 @@ import {
       }
     }
   }
-  `;
-  
-  export const FETCH_ORDER_DELIVERIES = gql`
+`;
+
+export const FETCH_ORDER_DELIVERIES = gql`
   query getOrderDeliveries($orderId: uuid!) {
     delivery {
       orderId
@@ -70,15 +68,17 @@ import {
       created_at
       courierId
     }
-    }
-  `;
-  
-  export const FETCH_ORDERS_STATS = gql`
+  }
+`;
+
+export const FETCH_ORDERS_STATS = gql`
   query getOrdersStats($startDate: timestamptz, $endDate: timestamptz) {
-    orders_aggregate(where: {created_at: {_gte: $startDate, _lte: $endDate}}) {
+    orders_aggregate(
+      where: { created_at: { _gte: $startDate, _lte: $endDate } }
+    ) {
       aggregate {
         count
       }
     }
   }
-  `;
+`;

@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { FETCH_PRODUCTS } from '@/lib/graphql/queries/products';
+import { FETCH_PRODUCTS } from '@sahil/lib/graphql';
 
 export const useFetchProducts = ({
   limit = 12,

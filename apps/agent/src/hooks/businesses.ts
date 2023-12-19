@@ -3,8 +3,8 @@ import {
   FETCH_BUSINESSES,
   FETCH_BUSINESS_BY_PK,
   FETCH_BUSINESS_ORDERS,
-} from '@/lib/graphql/queries/businesses';
-import { INSERT_NEW_BUSINESS } from '@/lib/graphql/mutations/businesses';
+  INSERT_NEW_BUSINESS,
+} from '@sahil/lib/graphql';
 
 export const useFetchBusinesses = () => {
   const { error, data, loading } = useQuery(FETCH_BUSINESSES);
