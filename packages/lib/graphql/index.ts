@@ -15,3 +15,5 @@ export * from './mutations/payments';
 export * from './mutations/suppliers';
 export * from './mutations/users';
 // export * from './mutations/locations'
+
+export * from './createApolloClient';
