@@ -9,7 +9,7 @@ export const Features = () => {
       <GridContainer>
         <div className="flex flex-col items-center justify-center lg:flex-row lg:gap-4">
           <div className="mb-10 lg:w-6/12">
-            <h1 className="text-center font-bold mb-4 text-2xl lg:text-5xl lg:text-left">
+            <h1 className="text-center font-bold mb-4 text-2xl md:text-3xl lg:text-5xl lg:text-left">
               Navigate through our <span className="block"><span className="yellow-line">core features</span></span>
             </h1>
             <p className="text-center text-gray-600 max-w-[50ch] lg:text-left">

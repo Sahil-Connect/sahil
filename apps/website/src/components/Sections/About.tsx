@@ -15,7 +15,7 @@ export const About = () => {
               <div className="inline-block font-jakarta font-semibold bg-lime px-4 py-1 rounded-[2rem] mb-2">
                 <span>About Us</span>
               </div>
-              <h3 className="text-xl font-semibold my-3 lg:text-2xl">
+              <h3 className="text-xl font-semibold my-3 md:text-3xl">
                 Who are We
               </h3>
             </div>
