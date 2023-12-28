@@ -1,14 +1,14 @@
 import { 
   SectionWrapper, 
-  GridContainer, 
+  GridContainer 
 } from '@/components/shared';
 
-export const About = () => {
+export const RegistrationRole = () => {
   return (
     <SectionWrapper>
       <GridContainer>
-        <div className="grid items-center gap-12 grid-rows-[auto] lg:grid-cols-[1fr_1fr]">
-         about us
+        <div>
+          registrationRoleData
         </div>
       </GridContainer>
     </SectionWrapper>
