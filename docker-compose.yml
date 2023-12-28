@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-api
+    image: api
+    restart: always
+    depends_on: [database]
+    ports:
+      - '3001:3000'
+
+  database:
+    container_name: database
+    image: postgres
+    ports:
+      - '5432:5432'
