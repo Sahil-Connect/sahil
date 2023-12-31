@@ -19,7 +19,7 @@ export const Features = () => {
           <div className="mx-4 lg:mx-0 lg:w-6/12">
             <ol className="relative border-s border-gray-200">
               <li className="mb-10 ms-6 lg:ms-10">
-                <span className="absolute flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 bg-primary rounded-full -start-3 ring-8 ring-green-50">
+                <span className="absolute flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 bg-primary rounded-full -start-3 lg:-start-4 ring-8 ring-green-50">
                   <svg className="text-gray-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M10 7v2h2v8h2V7z"/>
                   </svg>
@@ -32,7 +32,7 @@ export const Features = () => {
                 </p>
               </li>
               <li className="mb-10 ms-6 lg:ms-10">
-                <span className="absolute flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 bg-primary rounded-full -start-3 ring-8 ring-green-50">
+                <span className="absolute flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 bg-primary rounded-full -start-3 lg:-start-4 ring-8 ring-green-50">
                   <svg className="text-gray-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M9 7v2h4v2h-2a2 2 0 0 0-2 2v4h6v-2h-4v-2h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                   </svg>
@@ -45,7 +45,7 @@ export const Features = () => {
                 </p>
               </li>
               <li className="ms-6 lg:ms-10">
-                <span className="absolute flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 bg-primary rounded-full -start-3 ring-8 ring-green-50">
+                <span className="absolute flex items-center justify-center w-6 h-6 lg:w-8 lg:h-8 bg-primary rounded-full -start-3 lg:-start-4 ring-8 ring-green-50">
                   <svg className="text-gray-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M15 15v-1.5a1.5 1.5 0 0 0-1.5-1.5a1.5 1.5 0 0 0 1.5-1.5V9a2 2 0 0 0-2-2H9v2h4v2h-2v2h2v2H9v2h4a2 2 0 0 0 2-2"/>
                   </svg>
