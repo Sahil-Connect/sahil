@@ -28,7 +28,7 @@ export const Footer = () => {
                 alt={'Sahil logo'}
                 className='w-10 max-w-full object-contain'
               />
-              Sahil
+              sahil
             </Link>
             <p className="max-w-[50ch] mb-3">Empowering businesses.</p>
             <h3 className="text-lg">Follow us on:</h3>

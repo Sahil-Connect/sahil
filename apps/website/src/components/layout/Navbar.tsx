@@ -57,7 +57,7 @@ export const Navbar = () => {
                 loading='eager'
                 className='w-10 max-w-full object-contain'
               />
-              Sahil
+              sahil
             </Link>
           </div>
           <div className='navbar-center hidden lg:flex'>
