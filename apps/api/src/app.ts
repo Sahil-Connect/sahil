@@ -10,7 +10,3 @@ const connection = connect(databaseURL);
 
 /** initialize middleware */
 init(app);
-
-// app.get("/", (req: Request, res: Response) => {
-//   res.send("Express + TypeScript Server");
-// });
