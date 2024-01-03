@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "build": "tsc --project ./tsconfig.json",
     "dev": "npx ts-node src/server.ts"
   },
   "dependencies": {
