@@ -1,10 +1,7 @@
 import { Worker } from "bullmq";
 
 const worker = new Worker("ordersWorker", async (job) => {
-  // Will print { foo: 'bar'} for the first job
-  // and { qux: 'baz' } for the second.
   console.log(job.data);
-  console.log("yerrrrr");
 });
 
 worker.on("completed", (job) => {

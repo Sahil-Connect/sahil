@@ -2,6 +2,7 @@ import { NextFunction, Response, Router, Request } from "express";
 const ordersRouter = Router();
 import { pushIntoOrders } from "../enqueue";
 import { z } from "zod";
+import { logger } from "../lib/winston";
 
 const orderSchema = z.object({
   orderId: z.string(),
@@ -10,15 +11,13 @@ const orderSchema = z.object({
 ordersRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const queueEvent = await pushIntoOrders(req.body);
-    console.log(req.body);
+    await pushIntoOrders(req.body);
+    logger.info("Request Body", req.body);
     const validatedInput = orderSchema.parse(req.body);
-    console.log(validatedInput);
+    logger.info("Validated Input", validatedInput);
     res.send({
       orders: [],
     });
-
-
   }
 );
 
