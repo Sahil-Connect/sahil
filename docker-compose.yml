@@ -1,16 +1,28 @@
 version: '3'
 
 services:
-  api:
-    container_name: api
+  # Website
+  sahilwebsite:
+    container_name: sahil-website
     build:
       context: .
-      dockerfile: ./docker/Dockerfile-api
-    image: api
+      dockerfile: ./infra/docker/Dockerfile.website
+    image: sahil-website
+    restart: always
+    ports:
+      - '3000:3000'
+
+  # API
+  sahilapi:
+    container_name: sahil-api
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.api
+    image: sahil-api
     restart: always
     depends_on: [database]
     ports:
-      - '3001:3000'
+      - '3001:3001'
 
   database:
     container_name: database
