@@ -5,19 +5,24 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "work:order": "ts-node ./src/orders/worker.ts"
   },
   "dependencies": {
     "@sahil/lib": "*",
+    "@sendgrid/mail": "^8.1.0",
     "bullmq": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "helmet": "^7.1.0",
+    "ioredis": "^5.3.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.2",
     "pg": "^8.11.3",
+    "rrule": "^2.8.1",
     "uuid": "^9.0.1",
+    "web-push": "^3.6.6",
     "winston": "^3.11.0",
     "zod": "^3.22.4"
   },

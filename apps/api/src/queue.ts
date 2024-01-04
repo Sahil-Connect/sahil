@@ -1,4 +1,5 @@
 import { Queue } from "bullmq";
+import { connection } from "./lib/ioredis";
 
 export enum Queues {
   Event = "Event",
@@ -15,5 +16,5 @@ const queueConfig = {
 }
 
 export function create(name: Queues, config = queueConfig) {
-  return new Queue(name);
+  return new Queue(name, { connection });
 }
