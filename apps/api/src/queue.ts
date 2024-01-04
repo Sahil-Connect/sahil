@@ -1,12 +1,19 @@
-import { Queue } from 'bullmq';
+import { Queue } from "bullmq";
 
 export enum Queues {
   Event = "Event",
   Mail = "Mail",
   Notification = "Notification",
-  Order = "Order"
+  Order = "Order",
 }
 
-export function create(name: Queues) {
+const queueConfig = {
+  connection: {
+    host: "http://127.0.0.1",
+    port: 6379,
+  },
+}
+
+export function create(name: Queues, config = queueConfig) {
   return new Queue(name);
 }

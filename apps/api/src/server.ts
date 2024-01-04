@@ -1,5 +1,6 @@
 import { app } from "./app";
 import { databaseURL, port } from "./config";
+import { logger } from "./lib/winston";
 
 const listen = () => {
     return new Promise<void>((resolve, reject) =>
@@ -13,8 +14,7 @@ const listen = () => {
   };
   
   listen().then(() =>
-    // tslint:disable-next-line:no-console
-    console.info(
+    logger.info(
       `Listening on http://localhost:${port}.`,
       `Press CTRL-C to stop\n`
     )

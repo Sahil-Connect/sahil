@@ -5,6 +5,7 @@ import { logger } from "../lib/winston";
 import { logRequest } from "../middleware/requestLogger";
 import { validate } from "../middleware/zodValidate";
 import { initOrder } from "./operations/initOrder";
+import { processOrder } from "./operations/processOrder";
 
 const ordersRouter = Router();
 
@@ -12,7 +13,6 @@ const orderSchema = z.object({
   orderId: z.string(),
 });
 
-ordersRouter.use(validate(orderSchema));
 ordersRouter.use(logRequest);
 
 type OrdersActionType = {
@@ -27,6 +27,7 @@ type OrdersActionType = {
 
 ordersRouter.post(
   "/",
+  validate(orderSchema),
   async (req: Request, res: Response<OrdersActionType>, next: NextFunction) => {
     try {
       // @ts-ignore
@@ -40,5 +41,14 @@ ordersRouter.post(
     }
   }
 );
+
+ordersRouter.post("/process", async (req, res, next) => {
+  try {
+    // const order = processOrder(req.body);
+    res.send({ status: "success" });
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default ordersRouter;

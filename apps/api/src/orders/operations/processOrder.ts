@@ -8,14 +8,11 @@ type OrderAttributes = {
   processedBy: string;
 };
 
-export const initOrder = (
+export const processOrder = (
   attributes: OrderAttributes
 ): Promise<OrderAttributes> => {
   return new Promise<OrderAttributes>((resolve) => {
 
-    // check for clients that can process this order
-    // update order status based on this information
-    // alert the notifications service
     resolve({
       created_at: new Date(),
       customerId: "string",
