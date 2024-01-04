@@ -24,7 +24,6 @@ export const SupplierBasicInfoForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(supplierBasicInfoSchema),

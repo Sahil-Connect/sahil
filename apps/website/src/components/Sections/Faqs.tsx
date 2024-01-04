@@ -36,3 +36,13 @@ const Faqs = () => {
 }
 
 export default Faqs
+
+
+/**
+ * # Copy app source
+COPY ../../ .
+
+EXPOSE 8080
+ 
+CMD [ "yarn dev"]
+ */
