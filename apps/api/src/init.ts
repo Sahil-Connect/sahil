@@ -3,8 +3,7 @@ const express = require("express");
 import cors from "cors";
 // import compression from "compression";
 import * as helmet from "helmet";
-// import morganLogger from "morgan";
-// import { catchErrors } from "./utils/errors";
+import { catchErrors } from "./middleware/errors";
 
 export function init(app: any) {
   app.use(cors());
@@ -17,5 +16,5 @@ export function init(app: any) {
   // app.use(helmet());
   // app.use(morganLogger("dev"));
   app.use(routers);
-  // app.use(catchErrors);
+  app.use(catchErrors);
 }
