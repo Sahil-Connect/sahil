@@ -1,8 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client';
-import {
-  FETCH_PRODUCTS,
-  FETCH_PRODUCTS_BY_NAME,
-} from '@/lib/graphql/queries/products';
+import { FETCH_PRODUCTS, FETCH_PRODUCTS_BY_NAME } from '@sahil/lib/graphql';
 import { useRouter } from 'next/router';
 
 export const useFetchProducts = ({
