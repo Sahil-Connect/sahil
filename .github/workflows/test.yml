@@ -1,0 +1,23 @@
+name: Test before Merging a PR
+
+on:
+  push:
+  pull_request:
+
+env:
+  TEST_DATABASE_URI: ${{ secrets.TEST_DATABASE_URI }}
+
+jobs:
+  build:
+    if: ${{ false }}  # disable for now
+    runs-on: ubuntu-latest
+
+    services:
+    #services to be tested
+
+
+    strategy:
+    #nextjs versions
+
+    steps:
+    #checkout & test 
