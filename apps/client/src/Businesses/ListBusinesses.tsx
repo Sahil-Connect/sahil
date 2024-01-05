@@ -51,8 +51,8 @@ export const ListBusinesses = () => {
         onNextPage={onNextPage}
         onPreviousPage={onPreviousPage}
         size={businessCount?.count}
-        sizeLabel="Businsses"
-        title="Businsses"
+        sizeLabel="Businesses"
+        title="Businesses"
       />
       <List
         data={businesses}
