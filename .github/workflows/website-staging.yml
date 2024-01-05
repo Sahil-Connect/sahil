@@ -1,0 +1,72 @@
+name: Website Stagging to Cloud Run
+
+on:
+  push:
+    branches:
+    - develop
+
+env:
+  REGION: "us-east1"
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+  GCP_PROJECT_NUMBER: ${{ secrets.GCP_PROJECT_NUMBER }}
+
+jobs:
+  build:
+    name: Build the app
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone
+      uses: actions/checkout@v3
+    - run: echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-web-dev:$GITHUB_SHA" >> $GITHUB_ENV
+
+    - name: Authenticate the service account
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: '${{ env.GCP_SA_KEY }}'
+
+    - name: Install gcloud on the job runner
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        service_account_key: '${{ env.GCP_SA_KEY }}'
+        project_id: '${{ env.GCP_PROJECT_ID }}'
+        export_default_credentials: true
+
+    - name: Authorize admin account to push docker image
+      run: gcloud auth configure-docker
+
+    - name: Use gcloud CLI
+      run: 'gcloud info'
+
+    - name: Build a docker image
+      run: |-
+        docker build -f devops/docker/Dockerfile.website -t ${{ env.IMAGE }} .
+
+    - name: Push image to gcr.io
+      run: docker push ${{ env.IMAGE }}
+
+  stagging:
+    needs: build
+    name: Deploy to stagging env
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone
+      uses: actions/checkout@v3
+      
+    - name: Terraform Plan and Apply
+      working-directory: infra/terraform/cloudrun
+      run: |
+        terraform init
+        terraform plan \
+          -out=tfplan \
+          -var="project_id=${{ env.GCP_PROJECT_ID }}" \
+          -var="project_number=${{env.GCP_PROJECT_NUMBER}}" \
+          -var="service_account=${{env.GCP_PROJECT_NUMBER}}-compute@developer.gserviceaccount.com" \
+          -var="region=${{ env.REGION }}" \
+          -var="service_name=sahil-website-development" \
+          -var="image_url=${{ env.IMAGE }}" \
+          -var="concurrency=80" \
+          -var="timeout=300" \
+        terraform apply tfplan
