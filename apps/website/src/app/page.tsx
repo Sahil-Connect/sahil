@@ -6,7 +6,7 @@ import {
   RegistrationRole,
   Cta,
   Faqs,
- } from "../components/sections";
+} from "../components/segments";
 
 export default function Page() {
   return (
