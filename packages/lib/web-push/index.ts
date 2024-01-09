@@ -15,10 +15,14 @@ const urlBase64ToUint8Array = (base64String: string) => {
 };
 
 // Registers the service worker
-export const registerServiceWorker = async () => {
+export const registerServiceWorker = async (
+  workerURL: string,
+  options?: {}
+) => {
   if ('serviceWorker' in navigator && 'PushManager' in window) {
-    const registration = await navigator.serviceWorker.register('./worker.ts', {
+    const registration = await navigator.serviceWorker.register(workerURL, {
       scope: '/',
+      ...options,
     });
     console.log('Service Worker Registered');
     return registration;
@@ -53,23 +57,33 @@ export const unsubscribeFromPush = async (subscription: PushSubscription) => {
 };
 
 // Sends the push subscription to the server
-export const sendNotification = async (
-  subscription: PushSubscription,
-  serverUrl: string
-) => {
+export const sendNotification = async ({
+  subscription,
+  serverUrl,
+  data,
+}: {
+  subscription: PushSubscription;
+  serverUrl: string;
+  data?: any;
+}) => {
+  const requestBody = {
+    subscription: subscription,
+    data: data,
+  };
+
   const response = await fetch(serverUrl, {
     method: 'POST',
-    body: JSON.stringify(subscription),
+    body: JSON.stringify(requestBody),
     headers: {
       'Content-Type': 'application/json',
     },
   });
 
   if (!response.ok) {
-    throw new Error('Failed to send subscription to server');
+    throw new Error('Failed to send notification request to server');
   }
 
-  console.log('Subscription sent to server');
+  console.log('Notification request sent to server');
 };
 
 // Request Notifications Permissions

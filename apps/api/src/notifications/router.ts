@@ -5,8 +5,8 @@ const router = Router();
 
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const subscription = req.body;
-    const payload = JSON.stringify({ title: 'Push Test' });
+    const subscription = req.body.subscription;
+    const payload = JSON.stringify(req.body.data);
 
     await sendPushNotification(subscription, payload);
     res.status(201).json({ message: 'Notification sent' });
