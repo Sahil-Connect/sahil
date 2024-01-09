@@ -1,6 +1,11 @@
 {
   "private": true,
   "scripts": {
+    "build-api": "turbo run build --filter=api",
+    "dev-api": "turbo run dev --filter=api",
+    "build-agent": "turbo run build --filter=agent",
+    "dev-agent": "turbo run dev --filter=agent",
+    "build-3": "turbo run build --filter=website, --filter=api, --filter=agent",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
