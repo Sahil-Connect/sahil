@@ -21,12 +21,29 @@ Design an algorithm that matches businesses with suitable suppliers based on the
 
 ## DevOps
 
+### Local dev env for hasura
+
+```
+docker compose up -d sahil-hasura-local-dev
+```
+
+```
+docker compose down sahil-hasura-local-dev sahil-pgdb hasura-data-connector
+```
+
+### Local dev env for API
+
+```
+docker compose up -d sahil-api-local-dev
+```
+
+```
+docker compose down sahil-api-local-dev sahil-pgdb
+```
+
+
 ### Run the apps locally with Docker
 
 ```
-docker compose build [SERVICE] eg. sahilwebsite
-```
-
-```
-docker compose up -d sahilwebsite
+docker compose up -d [SERVICE] eg. sahil-website, sahil-agent, sahil-api
 ```
