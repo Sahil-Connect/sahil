@@ -2,12 +2,12 @@ import { Router } from "express";
 
 import orders from "../orders/router";
 import users from "../users/router";
-import subscribe from "../subscribe/router";
+import notifications from "../notifications/router";
 
 const router = Router();
 
 router.use("/orders", orders);
 router.use("/users", users);
-router.use("/subscribe", subscribe);
+router.use("/notifications", notifications);
 
 export default router;
