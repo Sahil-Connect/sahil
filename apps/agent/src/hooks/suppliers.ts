@@ -5,16 +5,14 @@ import {
   FETCH_FILTERED_SUPPLIERS,
   FETCH_SUPPLIERS,
   FETCH_SUPPLIER_BY_PK,
-  FETCH_SUPPLIER_PRODUCTS,
   FETCH_SUPPLIER_PRODUCT_BY_NAME,
-  FETCH_SUPPLIER_ORDERS
-} from '@/lib/graphql/queries/suppliers';
-import {
-  ADD_NEW_PRODUCT,
-  DELETE_PRODUCT_BY_PK,
+  FETCH_SUPPLIER_PRODUCTS,
   INSERT_NEW_SUPPLIER,
   UPDATE_PRODUCT_BY_PK,
-} from '@/lib/graphql/mutations/suppliers';
+  DELETE_PRODUCT_BY_PK,
+  ADD_NEW_PRODUCT,
+  FETCH_SUPPLIER_ORDERS,
+} from '@sahil/lib/graphql';
 
 export const useFetchSuppliers = (category?: string) => {
   const graphqlQuery = category ? FETCH_FILTERED_SUPPLIERS : FETCH_SUPPLIERS;
@@ -120,9 +118,14 @@ export const useAddNewProduct = () => {
 
 export const useFetchSupplierOrders = (supplierId?: string) => {
   const { error, data, loading } = useQuery(FETCH_SUPPLIER_ORDERS, {
-      variables: {
-          supplierId
-      }
+    variables: {
+      supplierId,
+    },
   });
-  return { error, data: data?.order_supplier, loading, ordersCount: data?.orders_aggregate?.aggregate };
-}
+  return {
+    error,
+    data: data?.order_supplier,
+    loading,
+    ordersCount: data?.orders_aggregate?.aggregate,
+  };
+};

@@ -1,9 +1,23 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-import { ApolloProvider } from "@apollo/client";
-import { client } from "@/lib/graphql/apolloClient";
-import { SessionProvider } from "next-auth/react";
-import Layout from "@/Layout/layout";
+import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
+import { ApolloProvider } from '@apollo/client';
+import { SessionProvider } from 'next-auth/react';
+import Layout from '@/Layout/layout';
+import { createApolloClient } from '@sahil/lib/graphql';
+
+const graphqlUri = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT;
+
+const httpOptions = {
+  headers: {
+    'x-hasura-admin-secret':
+      process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET,
+  },
+};
+
+const client = createApolloClient({
+  uri: graphqlUri,
+  httpOptions,
+});
 
 export default function App({
   Component,
@@ -11,9 +25,11 @@ export default function App({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-    <ApolloProvider client={client}>
-      <Layout><Component {...pageProps} /></Layout>
-    </ApolloProvider>
+      <ApolloProvider client={client}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
     </SessionProvider>
   );
 }

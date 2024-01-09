@@ -1,11 +1,23 @@
 import "../styles/globals.css"
 import type { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
+import { Alata, Plus_Jakarta_Sans } from 'next/font/google'
+import { Navbar, Footer } from "@/components/layout";
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const alata = Alata({
+  weight: '400', 
+  subsets: ['latin'],
+  variable: '--font-alata',
+  display: 'swap',
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Sahil',
+  title: 'Home - Sahil App',
   description: 'Connecting you with suppliers and customers',
 }
 
@@ -16,7 +28,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`text-base font-medium h-full scroll-smooth xxl:text-basexl ${montserrat.className}`}>{children}</body>
+      <body className={`${alata.variable} ${jakarta.variable} font-alata font-medium antialiased text-zinc-900 min-h-full leading-normal`}>
+        <Navbar />
+          {children}
+        <Footer />
+      </body>
     </html>
   );
 }

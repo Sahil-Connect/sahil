@@ -17,3 +17,16 @@ Allow users to register and set their delivery preferences, including frequency 
 Design an algorithm that matches businesses with suitable suppliers based on their specified requirements.
 
 ### Delivery Process
+
+
+## DevOps
+
+### Run the apps locally with Docker
+
+```
+docker compose build [SERVICE] eg. sahilwebsite
+```
+
+```
+docker compose up -d sahilwebsite
+```

@@ -1,0 +1,46 @@
+name: Test on Pull Request & Push
+
+on:
+  push:
+    branches: ['main', 'develop']
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    name: Format, Build and Test
+    #if: ${{ false }}  # disable for now
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    # To use Remote Caching, uncomment the next lines and follow the steps below.
+    # env:
+    #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    #  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --ignore-engines
+
+      #- name: Format 
+      # run: yarn format
+
+      #- name: Linting 
+      # run: yarn lint
+
+      - name: Build
+        run: yarn build --filter=website
+
+      #- name: Test
+      #  run: yarn test

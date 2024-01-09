@@ -1,14 +1,13 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { GET_USERS } from "@/lib/graphql/queries/users";
-import { INSERT_NEW_USER } from "@/lib/graphql/mutations/users";
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_USERS, INSERT_NEW_USER } from '@sahil/lib/graphql';
 
 export const useGetUsers = () => {
-    const { error, data, loading } = useQuery(GET_USERS);
-    return { error, data: data?.users, loading };
-}
+  const { error, data, loading } = useQuery(GET_USERS);
+  return { error, data: data?.users, loading };
+};
 
 export const useInsertUser = () => {
-    const [insertUser, { data, loading, error }] = useMutation(INSERT_NEW_USER);
+  const [insertUser, { data, loading, error }] = useMutation(INSERT_NEW_USER);
 
-    return { error, data: data?.users, loading };
-}
+  return { error, data: data?.users, loading };
+};

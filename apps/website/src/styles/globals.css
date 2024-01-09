@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .container {
-    @apply px-2 sm:max-w-[540px] w-full md:mx-auto md:max-w-[568px] lg:max-w-[768px] xl:max-w-[820px] xxl:max-w-[968px] 2xl:max-w-[1024px] 3xl:max-w-[1220px] 4xl:max-w-[1400px] 5xl:max-w-[1700px];
+@layer base{
+  h1,h2,h3,h4{
+    @apply font-jakarta;
   }
-  ::-webkit-scrollbar{
-    @apply w-[.6rem] bg-[theme('colors.gray')];
-  }
-  ::-webkit-scrollbar-thumb{
-    @apply bg-[theme('colors.green')];
+}
+
+@layer components{
+  .yellow-line{
+    @apply relative inline-block z-[1] before:absolute before:left-0 before:bottom-1 before:w-full before:h-2 before:bg-accent before:z-[-1];
   }
 }
