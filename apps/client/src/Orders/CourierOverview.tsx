@@ -3,7 +3,7 @@ import { useFetchOrderDeliveriesByPK } from "@/hooks/orders";
 import { Avatar, Card } from "ui";
 import { HiOutlinePhone, HiOutlineStar } from "react-icons/hi2";
 
-export const CourierOverview = ({ order }) => {
+export const CourierOverview = ({ order }: {order:any}) => {
   const {
     error: deliveryerror,
     data: delivery,

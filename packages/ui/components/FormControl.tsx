@@ -6,7 +6,7 @@ export type FormControlProps = {
   label: string;
 };
 
-export const FormControlError = ({ message }) => {
+export const FormControlError = ({ message }: {message: string}) => {
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
   return (
     <label className='label'>

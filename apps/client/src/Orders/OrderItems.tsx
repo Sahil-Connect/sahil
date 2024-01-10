@@ -2,7 +2,12 @@ import { Card } from "ui";
 import { HiOutlineBanknotes, HiOutlineReceiptPercent } from "react-icons/hi2";
 import { formatCurrency } from "@sahil/lib";
 
-export const OrderItem = ({ price, quantity, title }) => {
+type props = {
+  price: number,
+  quantity: number,
+  title: string
+}
+export const OrderItem = ({ price, quantity, title }: props) => {
   return (
     <Card className="bg-white">
     <div className="flex justify-between items-center">
@@ -22,9 +27,21 @@ export const OrderItem = ({ price, quantity, title }) => {
   );
 };
 
-export const OrderItems = ({ items }) => {
+type orderItemsProps = {
+  items: Array<{
+    id: string;
+    product: {
+      id: string;
+      name: string;
+      quantity: number;
+      price: number;
+    };
+  }>
+}
+
+export const OrderItems = ({ items }: orderItemsProps) => {
   const { totalItems, totalCost } = items?.reduce(
-    (totals, product) => ({
+    (totals, {product}) => ({
       totalItems: totals.totalItems + product.quantity,
       totalCost: totals.totalCost + product.price * product.quantity,
     }),

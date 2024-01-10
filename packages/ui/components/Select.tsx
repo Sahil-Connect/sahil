@@ -1,7 +1,7 @@
 import { FormControl, FormControlError } from './FormControl';
 import { BaseInputProps } from '../types';
 
-type SelectProps = BaseInputProps<unknown> & {
+type SelectProps = BaseInputProps<any> & {
   options: any[];
 };
 

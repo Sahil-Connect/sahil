@@ -101,7 +101,7 @@ export const ProductsCatalogue = () => {
         error={error}
         loading={loading}
         cols={4}
-        renderItem={(product) => {
+        renderItem={(product: any) => {
           const isInCart = orderItemsMap.has(product.id);
           return (
             <ProductSummary

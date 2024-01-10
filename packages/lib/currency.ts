@@ -1,4 +1,4 @@
-export const formatCost = (cost) => cost.toLocaleString(
+export const formatCost = (cost: number) => cost.toLocaleString(
   "en-SS",
   {
     style: "currency",

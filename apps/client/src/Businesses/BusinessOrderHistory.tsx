@@ -21,6 +21,14 @@ const orderStyles: Record<OrderStatus, string> = {
   [OrderStatus.Fulfilled]: 'success',
 };
 
+type Order = {
+  id: string;
+  status: OrderStatus;
+  created_at: string;
+  origin: string;
+  destination: string;
+};
+
 export const BusinessOrderHistory = () => {
   const [offset, setOffset] = useState(0);
   const {
@@ -61,13 +69,13 @@ export const BusinessOrderHistory = () => {
         data={orders}
         error={error}
         loading={loading}
-        renderItem={(order) => <OrderSummary order={order} key={order.id} />}
+        renderItem={(order: any) => <OrderSummary order={order} key={order.id} />}
       />
     </div>
   );
 };
 
-const OrderSummary = ({ order }) => {
+const OrderSummary = ({ order }: {order:Order}) => {
   const statusStyle = orderStyles[order.status] || 'default';
   return (
     <Card className='bg-white h-full'>

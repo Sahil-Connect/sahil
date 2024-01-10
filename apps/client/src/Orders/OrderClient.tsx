@@ -8,7 +8,7 @@ import {
   HiOutlineDocumentCheck,
 } from "react-icons/hi2";
 import Link from "next/link";
-export const OrderClient = ({ businessId }) => {
+export const OrderClient = ({ businessId }: {businessId: string}) => {
   const { error, data: business, loading } = useFetchBusinessByPK(businessId);
 
   if (error) return <p>error</p>;

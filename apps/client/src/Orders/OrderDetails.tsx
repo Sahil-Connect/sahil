@@ -8,7 +8,7 @@ import {
   HiOutlineFlag,
 } from "react-icons/hi2";
 
-export const OrderDetails = ({ order }) => {
+export const OrderDetails = ({ order }: {order:any}) => {
   return (
     <Card title="Order Details" titleSize="sm" >
       <div className="space-y-4">

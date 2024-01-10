@@ -16,8 +16,8 @@ export const ListHeader = ({
   onPreviousPage,
   isNextDisabled = false,
   isPrevDisabled = false,
-  size,
-  limit,
+  size = 0,
+  limit = 0,
   sizeLabel,
   title,
 }: ListHeaderProps) => {
@@ -30,7 +30,7 @@ export const ListHeader = ({
         </div>
       </div>
       <div>
-        {size > limit && (
+        {size >= limit && (
           <JoinGrid>
             <button
               className='join-item btn btn-sm'

@@ -1,7 +1,7 @@
 import { FormControl, FormControlError } from './FormControl';
 import { BaseInputProps } from '../types';
 
-type InputProps = BaseInputProps<unknown> & {
+type InputProps = BaseInputProps<any> & {
   type?: 'text' | 'email' | 'password' | 'number' | 'date';
   placeholder?: string;
   defaultValue?: string | number;

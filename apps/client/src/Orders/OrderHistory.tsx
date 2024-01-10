@@ -37,7 +37,7 @@ export const OrderHistory = () => {
       <List
         data={orders}
         loading={loading}
-        renderItem={(order) => (
+        renderItem={(order: any) => (
           <OrderOverview key={order.id} order={order} />
         )}
       />

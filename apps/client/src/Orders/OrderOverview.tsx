@@ -11,7 +11,7 @@ import {
 } from "react-icons/hi2";
   
   
-  export const OrderOverview = ({ order }) => {
+  export const OrderOverview = ({ order }: {order:any}) => {
     return (
         <>
     <Card className="w-full">

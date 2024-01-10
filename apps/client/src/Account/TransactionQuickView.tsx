@@ -1,6 +1,14 @@
 import { Card, Icon } from "ui";
 import { HiOutlineBanknotes } from "react-icons/hi2";
-export const TransactionQuickViewCard = ({ transaction }) => {
+
+type props = {
+  transaction: {
+    id: number;
+    name: string;
+  }
+}
+
+export const TransactionQuickViewCard = ({ transaction }: props) => {
   return (
     <Card>
       <div className="flex gap-2 items-center justify-between">

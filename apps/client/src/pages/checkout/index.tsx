@@ -23,7 +23,13 @@ import {
 import { usePlaceBusinessOrder } from "@/hooks/orders";
 import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
 
-export const OrderItem = ({ price, quantity, title }) => {
+type props = {
+  price: number,
+  quantity: number,
+  title: string
+}
+
+export const OrderItem = ({ price, quantity, title }: props) => {
   return (
     <Card className="bg-white">
       <div className="flex justify-between items-center">
@@ -43,9 +49,21 @@ export const OrderItem = ({ price, quantity, title }) => {
   );
 };
 
-export const OrderItems = ({ items }) => {
+type orderItemsProps = {
+  items: Array<{
+    id: string;
+    product: {
+      id: string;
+      name: string;
+      quantity: number;
+      price: number;
+    };
+  }>
+}
+
+export const OrderItems = ({ items }:orderItemsProps) => {
   const { totalItems, totalCost } = items?.reduce(
-    (totals, product) => ({
+    (totals, {product}) => ({
       totalItems: totals.totalItems + product.quantity,
       totalCost: totals.totalCost + product.price * product.quantity,
     }),
@@ -62,9 +80,9 @@ export const OrderItems = ({ items }) => {
           {items?.map((item) => (
             <OrderItem
               key={item.id}
-              title={item?.name}
-              quantity={item?.quantity}
-              price={item?.price}
+              title={item?.product?.name}
+              quantity={item?.product?.quantity}
+              price={item?.product?.price}
             />
           ))}
         </ul>
@@ -73,7 +91,7 @@ export const OrderItems = ({ items }) => {
   );
 };
 
-function calculateTotal(arr) {
+function calculateTotal(arr: any) {
   // Initialize total items and total price
   let totalItems = 0;
   let totalPrice = 0;
@@ -144,7 +162,7 @@ export default function CheckoutPage() {
     <section>
       <div className="flex">
         <div className="basis-4/6">
-          <OrderItems items={orderItems} />
+          {/* <OrderItems items={orderItems} /> */}
         </div>
         <div className="divider divider-horizontal"></div>
         <div className="grow space-y-2">
