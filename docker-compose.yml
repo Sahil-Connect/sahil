@@ -22,12 +22,8 @@ services:
     restart: always
     ports:
       - '8000:8000'
-    environment:
-      - NODE_ENV=development
-      - DATABASE_URL=postgresql://sahiladmin:sahiladminpwd@postgres:5432/sahil
-      - REDIS_URL=redis://redis:6379
-    depends_on: 
-      - sahil-api-local-dev
+    env_file:
+      - .env.development
 
   #### LOCAL DEV ENVIRONMENTS ####
 
@@ -40,9 +36,9 @@ services:
     restart: always
     environment:
       ## postgres database to store Hasura metadata
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://sahiladmin:sahiladminpwd@sahil-pgdb:5432/sahil
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@sahil-pgdb:5432/${POSTGRES_DB}
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
-      PG_DATABASE_URL: postgres://sahiladmin:sahiladminpwd@sahil-pgdb:5432/sahil
+      PG_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@sahil-pgdb:5432/${POSTGRES_DB}
       ## enable the console served by server
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
@@ -80,10 +76,11 @@ services:
 
   # API
   sahil-api-local-dev:
-    container_name: sahil-redis
+    container_name: sahil-redis-postgres
     image: redis:6.0-alpine
+    restart: always
     environment:
-      REDIS_PASSWORD: sahiladminpwd
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     ports: 
       - '6379:6379'
     volumes:
@@ -98,15 +95,15 @@ services:
     container_name: sahil-pgdb
     restart: always
     environment:
-      POSTGRES_USER: sahiladmin
-      POSTGRES_PASSWORD: sahiladminpwd
-      POSTGRES_DB: sahil
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - '5432:5432'
     volumes:
     - sahil_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U sahiladmin"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 5s
       timeout: 5s
       retries: 3
