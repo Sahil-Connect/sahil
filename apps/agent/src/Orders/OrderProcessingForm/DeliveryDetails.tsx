@@ -156,7 +156,9 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
             </label>
             <Select
               options={["Custom Market", "Souq Konyo Konyo", "Souq Munuki"]}
-              title="Pickup Location"
+              label="Pickup Location"
+              errors={errors}
+              register={register}
               {...register("pickupLocation")}
             />
             {errors.pickupLocation?.message && (

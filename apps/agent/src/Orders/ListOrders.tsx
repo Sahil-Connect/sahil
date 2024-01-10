@@ -21,7 +21,7 @@ export const ListOrders = () => {
         data={orders}
         loading={loading}
         cols={4}
-        renderItem={(order) => (
+        renderItem={(order: any) => (
           <OrderOverviewCard key={order.id} order={order} />
         )}
       />

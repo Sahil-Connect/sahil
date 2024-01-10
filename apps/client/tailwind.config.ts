@@ -1,10 +1,10 @@
 import type { Config } from 'tailwindcss';
-import baseConfig from '@sahil/configs/tailwind/tailwind.config'
+import baseConfig from '@sahil/configs/tailwind/tailwind.config';
 
 const extendedConfig: Config = {
   ...baseConfig,
   content: [
-    ...baseConfig.content as Array<string>,
+    ...(baseConfig.content as Array<string>),
     './src/Addresses/**/**.{js,ts,jsx,tsx,mdx}',
     './src/Maps/**/*.{js,ts,tsx,tsx,mdx}',
     './src/Payments/**/*.{js,ts,tsx,tsx,mdx}',
