@@ -25,6 +25,19 @@ services:
     env_file:
       - .env.development
 
+  # AGENT
+  sahil-agent:
+    container_name: sahil-agent
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.agent
+    image: sahil-agent
+    restart: always
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.development
+
   #### LOCAL DEV ENVIRONMENTS ####
 
   # HASURA ENGINE
