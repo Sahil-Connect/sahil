@@ -1,26 +1,41 @@
-name: Website Stagging to Cloud Run
+name: Website test Stagging to Cloud Run
 
 on:
   push:
-    branches:
-    - develop
+    branches: ['develop']
+    # check which application has been changed 
+    paths:
+      - 'apps/website/**'
+      - '.github/workflows/website-staging.yml'
+
 
 env:
-  REGION: "us-east1"
+  REGION: "us-central1"
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
   GCP_PROJECT_NUMBER: ${{ secrets.GCP_PROJECT_NUMBER }}
+  SERVICE: "sahil-website-stagging"
 
 jobs:
   build:
-    name: Build the app
+    name: Build - Push - Deploy
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    outputs:
+      output1: ${{ steps.step1.outputs.IMAGE }}
 
     steps:
     - name: Clone
       uses: actions/checkout@v3
-    - run: echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-web-dev:$GITHUB_SHA" >> $GITHUB_ENV
+      id: step1
+    - run: |
+        echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-website:stagging-$GITHUB_SHA" >> $GITHUB_ENV
 
+    # GCP auth & image pushing
     - name: Authenticate the service account
       uses: google-github-actions/auth@v1
       with:
@@ -41,32 +56,44 @@ jobs:
 
     - name: Build a docker image
       run: |-
-        docker build -f devops/docker/Dockerfile.website -t ${{ env.IMAGE }} .
+        docker build -f infra/docker/Dockerfile.website -t ${{ env.IMAGE }} .
 
     - name: Push image to gcr.io
       run: docker push ${{ env.IMAGE }}
 
-  stagging:
-    needs: build
-    name: Deploy to stagging env
-    runs-on: ubuntu-latest
+    - name: Deploy to Cloud Run
+      id: deploy
+      uses: google-github-actions/deploy-cloudrun@v0
+      with:
+        service: ${{ env.SERVICE }}
+        region: ${{ env.REGION }}
+        image: ${{ env.IMAGE }}
+        # NOTE: env variables here
+        #  env_vars: |
+        #  NODE_ENV=production
+        #  PORT=3000
 
-    steps:
-    - name: Clone
-      uses: actions/checkout@v3
+    # If required, use the Cloud Run url output in later steps
+    - name: Show Output
+      run: echo ${{ steps.deploy.outputs.url }}
+
+  # stagging:
+  #   needs: build
+  #   name: Deploy to stagging env
+  #   runs-on: ubuntu-latest
       
-    - name: Terraform Plan and Apply
-      working-directory: infra/terraform/cloudrun
-      run: |
-        terraform init
-        terraform plan \
-          -out=tfplan \
-          -var="project_id=${{ env.GCP_PROJECT_ID }}" \
-          -var="project_number=${{env.GCP_PROJECT_NUMBER}}" \
-          -var="service_account=${{env.GCP_PROJECT_NUMBER}}-compute@developer.gserviceaccount.com" \
-          -var="region=${{ env.REGION }}" \
-          -var="service_name=sahil-website-development" \
-          -var="image_url=${{ env.IMAGE }}" \
-          -var="concurrency=80" \
-          -var="timeout=300" \
-        terraform apply tfplan
+  # - name: Terraform Plan and Apply
+  #   working-directory: devops/terraform/cloudrun
+  #   run: |
+  #     terraform init
+  #     terraform plan \
+  #       -out=tfplan \
+  #       -var="project_id=${{ env.GCP_PROJECT_ID }}" \
+  #       -var="project_number=${{env.GCP_PROJECT_NUMBER}}" \
+  #       -var="service_account=${{env.GCP_PROJECT_NUMBER}}-compute@developer.gserviceaccount.com" \
+  #       -var="region=us-central1" \
+  #       -var="service_name=sahil-test" \
+  #       -var="image_url=${{ env.IMAGE }}" \
+  #       -var="concurrency=80" \
+  #       -var="timeout=300" \
+  #     terraform apply tfplan
