@@ -1,8 +1,6 @@
 name: Test on Pull Request & Push
 
 on:
-  push:
-    branches: ['main', 'develop']
   pull_request:
     types: [opened, synchronize]
 
