@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const FETCH_PRODUCTS = gql`
   query getProducts($offset: Int = 0, $limit: Int = 12) {
@@ -22,7 +22,11 @@ export const FETCH_PRODUCTS = gql`
 `;
 
 export const FETCH_PRODUCTS_BY_NAME = gql`
-  query getProductsByName($offset: Int = 0, $limit: Int = 12, $name: String = "") {
+  query getProductsByName(
+    $offset: Int = 0
+    $limit: Int = 12
+    $name: String = ""
+  ) {
     products(
       limit: $limit
       order_by: { created_at: desc }

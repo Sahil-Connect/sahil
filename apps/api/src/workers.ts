@@ -14,6 +14,6 @@ import concurrently from "concurrently";
     }
   );
   logger.info("Queues Started", {
-    Queue: "Name"
+    Queue: "Name",
   });
 })();

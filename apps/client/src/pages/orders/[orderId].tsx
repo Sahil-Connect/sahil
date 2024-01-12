@@ -5,11 +5,11 @@ import {
   OrderPreferences,
   OrderClient,
   OrderDetails,
-} from '@/Orders';
-import { Tabs } from 'ui';
+} from "@/Orders";
+import { Tabs } from "ui";
 
-import { useFetchOrderByPK } from '@/hooks/orders';
-import { useRouter } from 'next/router';
+import { useFetchOrderByPK } from "@/hooks/orders";
+import { useRouter } from "next/router";
 
 export default function OrderPage() {
   const router = useRouter();
@@ -19,12 +19,12 @@ export default function OrderPage() {
   if (loading) return <p>loading</p>;
   return (
     <section>
-      <div className='flex'>
-        <div className='grow space-y-2'>
+      <div className="flex">
+        <div className="grow space-y-2">
           <OrderClient businessId={order?.customerId} />
         </div>
-        <div className='divider divider-horizontal'></div>
-        <div className='basis-4/6 space-y-2'>
+        <div className="divider divider-horizontal"></div>
+        <div className="basis-4/6 space-y-2">
           <OrderOverview order={order} />
           <Tabs />
           {true ? (

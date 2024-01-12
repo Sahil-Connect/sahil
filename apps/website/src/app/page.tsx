@@ -1,4 +1,4 @@
-import { 
+import {
   Hero,
   Features,
   About,

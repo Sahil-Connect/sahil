@@ -18,7 +18,9 @@ const paymentDetailsSchema = z.object({
 type FormData = z.infer<typeof paymentDetailsSchema>;
 
 export const PaymentDetails = ({ navigateToNextStep }) => {
-  const updateStepFormData = useOrderFormStore(state => state.updateStepFormData);
+  const updateStepFormData = useOrderFormStore(
+    (state) => state.updateStepFormData
+  );
   const {
     register,
     handleSubmit,

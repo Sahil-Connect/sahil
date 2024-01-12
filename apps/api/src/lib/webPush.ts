@@ -1,9 +1,9 @@
-import { WebPushPrivateVapidKey, WebPushPublicVapidKey } from '../config';
+import { WebPushPrivateVapidKey, WebPushPublicVapidKey } from "../config";
 
-const webPush = require('web-push');
+const webPush = require("web-push");
 
 webPush.setVapidDetails(
-  'mailto:test@test.com',
+  "mailto:test@test.com",
   WebPushPublicVapidKey,
   WebPushPrivateVapidKey
 );

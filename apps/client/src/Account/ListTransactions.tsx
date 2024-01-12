@@ -13,7 +13,7 @@ const transactions = [
   {
     id: 3,
     name: "Hello, World",
-  }
+  },
 ];
 export const ListTransactions = () => {
   return (
@@ -24,7 +24,10 @@ export const ListTransactions = () => {
       </div>
       <div className="space-y-2 bg-red-300">
         {transactions.map((transaction) => (
-          <TransactionQuickViewCard key={transaction.id} transaction={transaction} />
+          <TransactionQuickViewCard
+            key={transaction.id}
+            transaction={transaction}
+          />
         ))}
       </div>
     </div>

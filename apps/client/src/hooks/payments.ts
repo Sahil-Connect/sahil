@@ -1,9 +1,9 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from "@apollo/client";
 import {
   GET_PAYMENT_STATUS,
   GET_PREAPPROVAL_STATUS,
   REQUEST_TO_PAY_STATUS,
-} from '@sahil/lib/graphql';
+} from "@sahil/lib/graphql";
 
 export const useGetPaymentStatus = () => {
   const { error, data, loading } = useQuery(GET_PAYMENT_STATUS);

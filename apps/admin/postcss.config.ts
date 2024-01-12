@@ -1,4 +1,4 @@
-const baseConfig = require('@sahil/configs/tailwind/postcss.config.js');
+const baseConfig = require("@sahil/configs/tailwind/postcss.config.js");
 
 module.exports = {
   ...baseConfig,

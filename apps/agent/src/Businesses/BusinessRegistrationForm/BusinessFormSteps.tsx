@@ -5,7 +5,6 @@ type Props = {
   onUpdateStepByIndex: (step: any) => void;
 };
 
-
 export const BusinessFormSteps = ({
   currentStep,
   headers,

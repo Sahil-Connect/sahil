@@ -38,15 +38,23 @@ const ProductSummary = ({ product }) => {
 };
 
 const checkoutSchema = z.object({
-  amount: z.string().optional()
+  amount: z.string().optional(),
 });
 
 type FormData = z.infer<typeof checkoutSchema>;
 
 export const OrderSummary = () => {
-  const { requesTtoPay, loading: payLoading, error: payError } = useRequesTtoPay();
-  const { placeOrder, loading: orderLoading, error: orderError } = usePlaceBusinessOrder();
-  const { client } = useOrderFormStore(state => state);
+  const {
+    requesTtoPay,
+    loading: payLoading,
+    error: payError,
+  } = useRequesTtoPay();
+  const {
+    placeOrder,
+    loading: orderLoading,
+    error: orderError,
+  } = usePlaceBusinessOrder();
+  const { client } = useOrderFormStore((state) => state);
   const {
     register,
     handleSubmit,
@@ -79,9 +87,9 @@ export const OrderSummary = () => {
           object: {
             origin: "Souq Munuki",
             destination: "Souq Custom",
-            customerId: ""
-          }
-        }
+            customerId: "",
+          },
+        },
       });
       console.log("order:", order);
       const res = await requesTtoPay({
@@ -94,9 +102,9 @@ export const OrderSummary = () => {
             },
             externalId: "6353636",
             payerMessage: "Hey",
-            payeeNote: "Sahil Order"
-          }
-        }
+            payeeNote: "Sahil Order",
+          },
+        },
       });
       console.log("res:", res);
     } catch (err) {

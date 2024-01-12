@@ -1,4 +1,4 @@
-import { GridContainer } from './GridContainer';
+import { GridContainer } from "./GridContainer";
 
 interface PageTitleProps {
   title: string;
@@ -12,7 +12,9 @@ export const PageTitle = ({ title, subtitle, description }: PageTitleProps) => {
       <GridContainer>
         <div className="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center">
           <div>
-            <h1 className="text-3xl font-bold mb-2 md:mb-0 md:text-4xl">{title}</h1>
+            <h1 className="text-3xl font-bold mb-2 md:mb-0 md:text-4xl">
+              {title}
+            </h1>
             <div>{subtitle}</div>
           </div>
           <p className="hidden md:block md:max-w-md md:text-justify">
@@ -21,5 +23,5 @@ export const PageTitle = ({ title, subtitle, description }: PageTitleProps) => {
         </div>
       </GridContainer>
     </section>
-  )
-}
+  );
+};

@@ -1,8 +1,7 @@
 import { HiArrowSmallRight } from "react-icons/hi2";
 import { Card } from "ui";
 
-
-import React from 'react'
+import React from "react";
 
 export default function TrackOrdersPage() {
   return (
@@ -31,7 +30,6 @@ export default function TrackOrdersPage() {
           </Card>
         </div>
       </div>
-
     </main>
   );
 }

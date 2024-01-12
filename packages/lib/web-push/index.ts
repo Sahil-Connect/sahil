@@ -1,9 +1,9 @@
 // Converts a URL-safe base64 string to a Uint8Array
 const urlBase64ToUint8Array = (base64String: string) => {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding)
-    .replace(/\-/g, '+')
-    .replace(/_/g, '/');
+    .replace(/\-/g, "+")
+    .replace(/_/g, "/");
 
   const rawData = window.atob(base64);
   const outputArray = new Uint8Array(rawData.length);
@@ -19,16 +19,16 @@ export const registerServiceWorker = async (
   workerURL: string,
   options?: {}
 ) => {
-  if ('serviceWorker' in navigator && 'PushManager' in window) {
+  if ("serviceWorker" in navigator && "PushManager" in window) {
     const registration = await navigator.serviceWorker.register(workerURL, {
-      scope: '/',
+      scope: "/",
       ...options,
     });
-    console.log('Service Worker Registered');
+    console.log("Service Worker Registered");
     return registration;
   } else {
-    console.error('Service Worker or Push Messaging not supported');
-    throw new Error('Service Worker or Push Messaging not supported');
+    console.error("Service Worker or Push Messaging not supported");
+    throw new Error("Service Worker or Push Messaging not supported");
   }
 };
 
@@ -41,7 +41,7 @@ export const subscribeToPush = async (
     userVisibleOnly: true,
     applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
   });
-  console.log('Push Subscribed');
+  console.log("Push Subscribed");
   return subscription;
 };
 
@@ -49,9 +49,9 @@ export const subscribeToPush = async (
 export const unsubscribeFromPush = async (subscription: PushSubscription) => {
   const successful = await subscription.unsubscribe();
   if (successful) {
-    console.log('Unsubscribed from Push Notifications');
+    console.log("Unsubscribed from Push Notifications");
   } else {
-    console.error('Failed to unsubscribe from Push Notifications');
+    console.error("Failed to unsubscribe from Push Notifications");
   }
   return successful;
 };
@@ -72,45 +72,45 @@ export const sendNotification = async ({
   };
 
   const response = await fetch(serverUrl, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify(requestBody),
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 
   if (!response.ok) {
-    throw new Error('Failed to send notification request to server');
+    throw new Error("Failed to send notification request to server");
   }
 
-  console.log('Notification request sent to server');
+  console.log("Notification request sent to server");
 };
 
 // Request Notifications Permissions
 export const requestNotificationPermission = async (): Promise<string> => {
-  if (!('Notification' in window)) {
-    alert('This browser does not support notifications.');
-    return 'denied';
+  if (!("Notification" in window)) {
+    alert("This browser does not support notifications.");
+    return "denied";
   }
 
-  if (Notification.permission === 'granted') {
-    console.log('Permission to receive notifications has been granted');
-    return 'granted';
+  if (Notification.permission === "granted") {
+    console.log("Permission to receive notifications has been granted");
+    return "granted";
   }
 
   try {
     const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
-      console.log('Permission to receive notifications has been granted');
+    if (permission === "granted") {
+      console.log("Permission to receive notifications has been granted");
     } else {
-      console.log('Permission to receive notifications has been denied');
+      console.log("Permission to receive notifications has been denied");
     }
     return permission;
   } catch (error) {
     console.error(
-      'An error occurred while requesting notification permission',
+      "An error occurred while requesting notification permission",
       error
     );
-    return 'denied';
+    return "denied";
   }
 };
