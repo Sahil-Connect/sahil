@@ -1,10 +1,7 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
-
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const HASURA_GRAPHQL_ADMIN_SECRET = ""
 const HASURA_GRAPHQL_ENDPOINT = "";
-
 
 const config: CodegenConfig = {
   overwrite: true,
@@ -17,10 +14,17 @@ const config: CodegenConfig = {
     },
   }
 ],
-  documents: "packages/lib/graphql/**/*.ts",
+  documents: [
+    "packages/lib/graphql/**/*.{ts,tsx}",
+    "packages/lib/graphql/queries/mutations/!payments.{ts,tsx}",
+  ],
+  ignoreNoDocuments: true,
   generates: {
-    './packages/lib/graphql/globalTypes.ts': {
-      preset: 'client'
+    './packages/lib/graphql/__generated__/': {
+      preset: 'client',
+      presetConfig: {
+        gqlTagName: "gql",
+      }
     }
   }
 };

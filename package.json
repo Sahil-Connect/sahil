@@ -5,7 +5,8 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.0",
@@ -18,6 +19,7 @@
     "add": "^2.0.6",
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
+    "husky": "^8.0.3",
     "prettier": "^2.5.1",
     "ts-node": "^10.9.2",
     "turbo": "latest",

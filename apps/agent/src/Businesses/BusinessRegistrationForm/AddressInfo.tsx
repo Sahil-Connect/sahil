@@ -1,3 +1,5 @@
+import { Business } from "@sahil/lib/graphql/generated/graphql";
+
 export const AddressInfo = () => {
     return (
         <div>
