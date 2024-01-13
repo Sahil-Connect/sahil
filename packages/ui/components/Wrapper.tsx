@@ -5,9 +5,5 @@ export type WrapperProps = {
 };
 
 export const Wrapper = ({ children }: WrapperProps) => {
-  return (
-    <div className="min-h-screen p-8 bg-gray-50">
-      {children}
-    </div>
-  );
+  return <div className="min-h-screen p-8 bg-gray-50">{children}</div>;
 };

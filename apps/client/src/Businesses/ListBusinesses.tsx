@@ -10,7 +10,7 @@ export type SahilBusiness = {
   type: string;
   phoneNumber: string;
   addresses: Array<{
-    street_address: string,
+    street_address: string;
   }>;
 };
 

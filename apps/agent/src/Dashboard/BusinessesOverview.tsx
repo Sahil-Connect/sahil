@@ -5,12 +5,14 @@ const businesses = [
   {
     id: 1,
     name: "Notos Bar & Grill",
-    avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1699295128/Chef-restaurant-logo-illustrations-template-on-transparent-background-PNG.png",
+    avatar:
+      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1699295128/Chef-restaurant-logo-illustrations-template-on-transparent-background-PNG.png",
   },
   {
     id: 2,
     name: "Amigos Bar & Restaurant",
-    avatar: "https://res.cloudinary.com/dwacr3zpp/image/upload/v1699295128/Chef-restaurant-logo-illustrations-template-on-transparent-background-PNG.png",
+    avatar:
+      "https://res.cloudinary.com/dwacr3zpp/image/upload/v1699295128/Chef-restaurant-logo-illustrations-template-on-transparent-background-PNG.png",
   },
 ];
 export const BusinessesOverview = () => {
@@ -22,7 +24,9 @@ export const BusinessesOverview = () => {
           <IconButton icon={HiOutlinePlusCircle} title="Add" />
           <div className="badge badge-accent">34 businesses</div>
         </div>
-        <button className="btn btn-xs">View All <HiArrowSmallRight/></button>
+        <button className="btn btn-xs">
+          View All <HiArrowSmallRight />
+        </button>
       </div>
       <div className="flex gap-2">
         {businesses.map((business) => (

@@ -10,13 +10,10 @@ userRouter.get(
   }
 );
 
-userRouter.get(
-  "/",
-  (req: Request, res: Response, next: NextFunction) => {
-    res.send({
-      hi: "Message",
-    });
-  }
-);
+userRouter.get("/", (req: Request, res: Response, next: NextFunction) => {
+  res.send({
+    hi: "Message",
+  });
+});
 
 export default userRouter;

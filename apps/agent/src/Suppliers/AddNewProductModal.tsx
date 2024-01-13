@@ -1,16 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 import SupplierProductForm, {
   ProductFormData,
   supplierProductSchema,
-} from './SupplierProductForm';
-import Modal from 'ui/components/Modal';
-import { HiOutlinePlusCircle } from 'react-icons/hi2';
-import { useAddNewProduct } from '@/hooks/suppliers';
-import { SubmitHandler } from 'react-hook-form';
+} from "./SupplierProductForm";
+import Modal from "ui/components/Modal";
+import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { useAddNewProduct } from "@/hooks/suppliers";
+import { SubmitHandler } from "react-hook-form";
 
 let productEmptyState = {
-  name: '',
-  description: '',
+  name: "",
+  description: "",
   inStock: false,
   price: 0,
   quantity: 0,
@@ -38,12 +38,12 @@ const AddNewProductModal = ({ supplier_id }: { supplier_id: string }) => {
 
   return (
     <Modal
-      btnSize='sm'
+      btnSize="sm"
       icon={<HiOutlinePlusCircle />}
-      CTA='Add Product'
-      id='add-product'
+      CTA="Add Product"
+      id="add-product"
       CloseBtnRef={closeBtn}
-      title='New Product'
+      title="New Product"
     >
       <SupplierProductForm
         loading={loading}

@@ -106,7 +106,11 @@ export default function CheckoutPage() {
   const { orderItems } = useOrderItemsStore((state) => state);
   const { totalItems, totalPrice } = calculateTotal(orderItems);
   const router = useRouter();
-  const { requesTtoPay, loading: payLoading, error: payError } = useRequesTtoPay();
+  const {
+    requesTtoPay,
+    loading: payLoading,
+    error: payError,
+  } = useRequesTtoPay();
 
   const onConfirmOrder = async () => {
     try {
@@ -129,14 +133,14 @@ export default function CheckoutPage() {
             },
             externalId: "6353636",
             payerMessage: "Hey",
-            payeeNote: "Sahil Order"
-          }
-        }
+            payeeNote: "Sahil Order",
+          },
+        },
       });
       console.log("res:", res);
       router.push("/orders");
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   };
 

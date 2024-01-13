@@ -13,7 +13,7 @@ const queueConfig = {
     host: "http://127.0.0.1",
     port: 6379,
   },
-}
+};
 
 export function create(name: Queues, config = queueConfig) {
   return new Queue(name, { connection });

@@ -1,8 +1,6 @@
 import { formatDateTime } from "@sahil/lib/dates";
 import { Card } from "ui";
-import {
-  HiOutlinePrinter,
-} from "react-icons/hi2";
+import { HiOutlinePrinter } from "react-icons/hi2";
 
 export const OrderPreferences = ({ order }) => {
   return (

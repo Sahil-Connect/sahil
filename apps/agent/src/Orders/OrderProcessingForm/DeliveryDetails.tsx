@@ -26,7 +26,9 @@ const deliveryDetailsSchema = z.object({
 type FormData = z.infer<typeof deliveryDetailsSchema>;
 
 export const DeliveryDetails = ({ navigateToNextStep }) => {
-  const updateStepFormData = useOrderFormStore(state => state.updateStepFormData);
+  const updateStepFormData = useOrderFormStore(
+    (state) => state.updateStepFormData
+  );
   const {
     register,
     handleSubmit,
@@ -40,14 +42,18 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
     const validatedInput = deliveryDetailsSchema.parse(data);
 
     updateStepFormData(validatedInput);
-    navigateToNextStep("payment_details")
+    navigateToNextStep("payment_details");
   };
   return (
     <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <Card title="Delivery Information" titleSize="sm">
         <div className="flex gap-2">
           <FormControl label="Name">
-            <input placeholder="Keji Lumuro" {...register("contactName")} className='input input-bordered w-full max-w-lg' />
+            <input
+              placeholder="Keji Lumuro"
+              {...register("contactName")}
+              className="input input-bordered w-full max-w-lg"
+            />
             {errors.contactName?.message && (
               <FormControlError message={errors.contactName?.message} />
             )}
@@ -55,7 +61,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
           <FormControl label="Mobile Number">
             <input
               placeholder="+211-9813231392"
-              className='input input-bordered w-full max-w-lg'
+              className="input input-bordered w-full max-w-lg"
               {...register("mobileNumber")}
             />
             {errors.mobileNumber?.message && (

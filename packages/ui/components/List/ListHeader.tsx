@@ -1,5 +1,5 @@
-import { JoinGrid } from 'ui';
-import { HiArrowSmallLeft, HiArrowSmallRight } from 'react-icons/hi2';
+import { JoinGrid } from "ui";
+import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 export type ListHeaderProps = {
   onPreviousPage?: () => void;
@@ -22,10 +22,10 @@ export const ListHeader = ({
   title,
 }: ListHeaderProps) => {
   return (
-    <div className='flex items-center justify-between'>
-      <div className='flex gap-2 items-center'>
-        <h3 className='text-lg'>{title}</h3>
-        <div className='badge badge-accent'>
+    <div className="flex items-center justify-between">
+      <div className="flex gap-2 items-center">
+        <h3 className="text-lg">{title}</h3>
+        <div className="badge badge-accent">
           {size} {sizeLabel}
         </div>
       </div>
@@ -33,16 +33,16 @@ export const ListHeader = ({
         {size > limit && (
           <JoinGrid>
             <button
-              className='join-item btn btn-sm'
-              title='Left'
+              className="join-item btn btn-sm"
+              title="Left"
               onClick={onPreviousPage}
               disabled={isPrevDisabled}
             >
               <HiArrowSmallLeft />
             </button>
             <button
-              className='join-item btn btn-sm'
-              title='Right'
+              className="join-item btn btn-sm"
+              title="Right"
               onClick={onNextPage}
               disabled={isNextDisabled}
             >

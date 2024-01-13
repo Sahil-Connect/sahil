@@ -12,7 +12,6 @@ export const processOrder = (
   attributes: OrderAttributes
 ): Promise<OrderAttributes> => {
   return new Promise<OrderAttributes>((resolve) => {
-
     resolve({
       created_at: new Date(),
       customerId: "string",

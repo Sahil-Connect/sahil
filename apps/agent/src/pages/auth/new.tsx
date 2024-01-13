@@ -10,7 +10,6 @@ const SignInPage: NextPage = ({ providers }: any) => {
   return (
     <div className="p-4">
       <h1>Sahil</h1>
-
     </div>
   );
 };

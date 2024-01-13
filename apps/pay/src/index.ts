@@ -1,21 +1,25 @@
-import { ApolloServer } from '@apollo/server';
+import { ApolloServer } from "@apollo/server";
 import express from "express";
-import http from 'http';
-import cors from 'cors';
-import { expressMiddleware } from '@apollo/server/express4';
-import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { AugmentedRequest, CacheOptions, PostRequest, RESTDataSource } from '@apollo/datasource-rest';
-import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
+import http from "http";
+import cors from "cors";
+import { expressMiddleware } from "@apollo/server/express4";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+import {
+  AugmentedRequest,
+  CacheOptions,
+  PostRequest,
+  RESTDataSource,
+} from "@apollo/datasource-rest";
+import type { KeyValueCache } from "@apollo/utils.keyvaluecache";
 import axios from "axios";
 import * as dotenv from "dotenv";
 dotenv.config();
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
 const apiKey = process.env.API_KEY;
 const apiUser = process.env.API_USER;
 const subscriptionKey = process.env.OCP_APIM_SUBSCRIPTION_KEY;
-
 
 export const typeDefs = `#graphql
   type RequestToPayResponse {
@@ -130,196 +134,221 @@ type Mutation {
 `;
 
 class MomoAuthAPI extends RESTDataSource {
+  override baseURL = "https://sandbox.momodeveloper.mtn.com/";
+  private token: string;
 
-    override baseURL = 'https://sandbox.momodeveloper.mtn.com/';
-    private token: string;
+  constructor(options: {
+    token?: string;
+    cache?: KeyValueCache;
+    key?: string;
+  }) {
+    super(options);
+  }
 
-    constructor(options: { token?: string; cache?: KeyValueCache, key?: string }) {
-        super(options);
-    }
+  override willSendRequest(_path: string, request: AugmentedRequest) {
+    request.headers["Authorisation"] = `Basic ${this.token}`;
+    request.headers["Ocp-Apim-Subscription-Key"] = subscriptionKey;
+  }
 
-    override willSendRequest(_path: string, request: AugmentedRequest) {
-        request.headers['Authorisation'] = `Basic ${this.token}`;
-        request.headers['Ocp-Apim-Subscription-Key'] = subscriptionKey;
-    }
-
-    async createAcccessToken() {
-        return this.post(`collection/token/`);
-    }
+  async createAcccessToken() {
+    return this.post(`collection/token/`);
+  }
 }
 
 class MomoAPI extends RESTDataSource {
-    override baseURL = 'https://sandbox.momodeveloper.mtn.com/';
-    private token: string;
+  override baseURL = "https://sandbox.momodeveloper.mtn.com/";
+  private token: string;
 
-    constructor(options) {
-        super(options);
-        const { token, cache, key } = options;
-        this.token = token;
+  constructor(options) {
+    super(options);
+    const { token, cache, key } = options;
+    this.token = token;
+  }
+
+  override willSendRequest(_path: string, request: AugmentedRequest) {
+    request.headers["Authorization"] = `Bearer ${this.token}`;
+    request.headers["Ocp-Apim-Subscription-Key"] = subscriptionKey;
+    request.headers["X-Target-Environment"] = "sandbox";
+  }
+
+  async requestToPay(body) {
+    try {
+      const resp = await this.post(`collection/v1_0/requesttopay`, {
+        body: { ...body?.object },
+        headers: {
+          "X-Reference-Id": uuidv4(),
+        },
+      });
+      return resp;
+    } catch (err) {
+      console.log(err);
     }
+  }
 
-    override willSendRequest(_path: string, request: AugmentedRequest) {
-        request.headers['Authorization'] = `Bearer ${this.token}`;
-        request.headers['Ocp-Apim-Subscription-Key'] = subscriptionKey;
-        request.headers['X-Target-Environment'] = "sandbox";
-    }
+  async getAccountBalance() {
+    try {
+      const res = await this.get(`collection/v1_0/account/balance`);
+      return res;
+    } catch (err) {}
+  }
 
-    async requestToPay(body) {
-        try {
-            const resp = await this.post(`collection/v1_0/requesttopay`, {
-                body: { ...body?.object },
-                headers: {
-                    'X-Reference-Id': uuidv4()
-                }
-            });
-            return resp;
-        } catch (err) {
-            console.log(err);
-        }
+  async getBasicUserInfo(accountHolderMSISDN: any) {
+    return this.get(
+      `collection/v1_0/accountholder/msisdn/${accountHolderMSISDN}/basicuserinfo`
+    );
+  }
 
-    }
+  async getPaymentStatus(referenceId: any): Promise<Record<string, any>> {
+    return this.get(`collection/v2_0/payment/${referenceId}`);
+  }
 
-    async getAccountBalance() {
-        try {
-            const res = await this.get(`collection/v1_0/account/balance`);
-            return res;
-        } catch (err) {
+  async getPreApprovalStatus(referenceId: any) {
+    return this.get(`collection/v2_0/preapproval/${referenceId}`);
+  }
 
-        }
-    }
+  async getUserInfoWithConsent() {
+    return this.get(`collection/oauth2/v1_0/userinfo`);
+  }
 
-    async getBasicUserInfo(accountHolderMSISDN: any) {
-        return this.get(`collection/v1_0/accountholder/msisdn/${accountHolderMSISDN}/basicuserinfo`);
-    }
-
-    async getPaymentStatus(referenceId: any): Promise<Record<string, any>> {
-        return this.get(`collection/v2_0/payment/${referenceId}`);
-    }
-
-    async getPreApprovalStatus(referenceId: any) {
-        return this.get(`collection/v2_0/preapproval/${referenceId}`);
-    }
-
-    async getUserInfoWithConsent() {
-        return this.get(`collection/oauth2/v1_0/userinfo`);
-    }
-
-    async getRequestToPayTransactionStatus(referenceId: any) {
-        return this.get(`collection/v1_0/requesttopay/${referenceId}`);
-    }
+  async getRequestToPayTransactionStatus(referenceId: any) {
+    return this.get(`collection/v1_0/requesttopay/${referenceId}`);
+  }
 }
 
 async function accountBalance(_: any, __: any, { dataSources }: any) {
-    return dataSources.momoAPI.getAccountBalance();
+  return dataSources.momoAPI.getAccountBalance();
 }
 
-async function basicUserInfo(_: any, { accountHolderMSISDN }: any, { dataSources }: any) {
-    return dataSources.momoAPI.getBasicUserInfo(accountHolderMSISDN);
+async function basicUserInfo(
+  _: any,
+  { accountHolderMSISDN }: any,
+  { dataSources }: any
+) {
+  return dataSources.momoAPI.getBasicUserInfo(accountHolderMSISDN);
 }
-async function paymentStatus(_: any, { referenceId }: any, { dataSources }: any) {
-    return dataSources.momoAPI.getPaymentStatus(referenceId);
+async function paymentStatus(
+  _: any,
+  { referenceId }: any,
+  { dataSources }: any
+) {
+  return dataSources.momoAPI.getPaymentStatus(referenceId);
 }
-async function preApprovalStatus(_: any, { referenceId }: any, { dataSources }: any) {
-    return dataSources.momoAPI.getPreApprovalStatus(referenceId);
+async function preApprovalStatus(
+  _: any,
+  { referenceId }: any,
+  { dataSources }: any
+) {
+  return dataSources.momoAPI.getPreApprovalStatus(referenceId);
 }
 async function userInfoWithConsent(_: any, __: any, { dataSources }: any) {
-    return dataSources.momoAPI.getUserInfoWithConsent();
+  return dataSources.momoAPI.getUserInfoWithConsent();
 }
-async function requestToPayTransactionStatus(_: any, { referenceId }: any, { dataSources }: any) {
-    return dataSources.momoAPI.getRequestToPayTransactionStatus(referenceId);
+async function requestToPayTransactionStatus(
+  _: any,
+  { referenceId }: any,
+  { dataSources }: any
+) {
+  return dataSources.momoAPI.getRequestToPayTransactionStatus(referenceId);
 }
 
 const resolvers = {
-    Mutation: {
-        // payments mutations
-        requestToPay: async (_: any, args: any, { dataSources }: any) => {
-            return dataSources.momoAPI.requestToPay({ ...args });
-        },
-
-        // auth mutations
-        createAccessToken: async (_: any, __: any, { dataSources }: any) => {
-            return dataSources.momoAuthAPI.createAcccessToken();
-        }
+  Mutation: {
+    // payments mutations
+    requestToPay: async (_: any, args: any, { dataSources }: any) => {
+      return dataSources.momoAPI.requestToPay({ ...args });
     },
-    Query: {
-        // account queries
-        accountBalance,
-        basicUserInfo,
-        userInfoWithConsent,
 
-        // payments queries
-        paymentStatus,
-        preApprovalStatus,
-        requestToPayTransactionStatus
-    }
+    // auth mutations
+    createAccessToken: async (_: any, __: any, { dataSources }: any) => {
+      return dataSources.momoAuthAPI.createAcccessToken();
+    },
+  },
+  Query: {
+    // account queries
+    accountBalance,
+    basicUserInfo,
+    userInfoWithConsent,
+
+    // payments queries
+    paymentStatus,
+    preApprovalStatus,
+    requestToPayTransactionStatus,
+  },
 };
 
 const app = express();
 const httpServer = http.createServer(app);
 
 interface ContextValue {
-    dataSources: {
-        momoAPI: MomoAPI;
-    };
+  dataSources: {
+    momoAPI: MomoAPI;
+  };
 }
 
-
 const server = new ApolloServer({
-    typeDefs: typeDefs,
-    resolvers,
-    introspection: true,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-
+  typeDefs: typeDefs,
+  resolvers,
+  introspection: true,
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
-
 
 await server.start();
 
 async function validateAccessToken(req, res, next) {
-    console.log("yerrr");
-    const authHeader = req.headers.authorization;
+  console.log("yerrr");
+  const authHeader = req.headers.authorization;
 
-    if (authHeader) {
-        // validate
-    } else {
-        const headers = {
-            "Ocp-Apim-Subscription-Key": subscriptionKey,
-            "Authorization": `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`
-        }
+  if (authHeader) {
+    // validate
+  } else {
+    const headers = {
+      "Ocp-Apim-Subscription-Key": subscriptionKey,
+      Authorization: `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString(
+        "base64"
+      )}`,
+    };
 
-        const response = await axios.post("https://sandbox.momodeveloper.mtn.com/collection/token/", {}, {
-            headers
-        });
-        req.headers.access_token = response.data.access_token;
-        //console.log(response.headers);
-    }
-    // req.locals.access_tokn = "yerrrrr";
+    const response = await axios.post(
+      "https://sandbox.momodeveloper.mtn.com/collection/token/",
+      {},
+      {
+        headers,
+      }
+    );
+    req.headers.access_token = response.data.access_token;
+    //console.log(response.headers);
+  }
+  // req.locals.access_tokn = "yerrrrr";
 
-    // No token in the request, generate a new access token
-    // const newToken = dataSources.momoAPI.createAcccessToken();
-    // req.headers.authorization = `Bearer ${newToken}`;
-    next();
+  // No token in the request, generate a new access token
+  // const newToken = dataSources.momoAPI.createAcccessToken();
+  // req.headers.authorization = `Bearer ${newToken}`;
+  next();
 }
 
 app.use(
-    '/graphql',
-    cors<cors.CorsRequest>(),
-    express.json(),
-    validateAccessToken,
-    expressMiddleware(server, {
-        context: async ({ req }) => {
-            const { cache } = server;
-            return ({
-                dataSources: {
-                    momoAPI: new MomoAPI({ cache, key: apiKey, token: req.headers?.access_token }),
-                    momoAuthAPI: new MomoAuthAPI({ cache, key: apiKey })
-                }
-            })
-        }
-    }),
+  "/graphql",
+  cors<cors.CorsRequest>(),
+  express.json(),
+  validateAccessToken,
+  expressMiddleware(server, {
+    context: async ({ req }) => {
+      const { cache } = server;
+      return {
+        dataSources: {
+          momoAPI: new MomoAPI({
+            cache,
+            key: apiKey,
+            token: req.headers?.access_token,
+          }),
+          momoAuthAPI: new MomoAuthAPI({ cache, key: apiKey }),
+        },
+      };
+    },
+  })
 );
 
-await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+await new Promise<void>((resolve) =>
+  httpServer.listen({ port: 4000 }, resolve)
+);
 console.log(`🚀 Server ready at http://localhost:4000/graphql`);
-
-

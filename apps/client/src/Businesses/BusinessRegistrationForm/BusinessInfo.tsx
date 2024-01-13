@@ -27,7 +27,6 @@ export const BusinessInfo = () => {
   const { formData } = useBusinessFormStore((state) => state);
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = businessInfoSchema.parse(data);
-    
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
