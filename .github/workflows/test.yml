@@ -39,8 +39,8 @@ jobs:
       #- name: Linting 
       # run: yarn lint
 
-      - name: Codegen
-        run: yarn codegen
+      # - name: Codegen
+      #   run: yarn codegen
 
       - name: Build
         run: yarn build --filter=website
