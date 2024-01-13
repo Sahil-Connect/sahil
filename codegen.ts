@@ -15,9 +15,7 @@ const config: CodegenConfig = {
       },
     },
   ],
-  documents: [
-    "packages/lib/graphql/**/*.{ts,tsx}"
-  ],
+  documents: ["packages/lib/graphql/**/*.{ts,tsx}"],
   ignoreNoDocuments: true,
   generates: {
     "./packages/lib/graphql/__generated__/": {
