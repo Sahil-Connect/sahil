@@ -1,5 +1,5 @@
 {
-  "globalEnv": ["HASURA_GRAPHQL_ADMIN_SECRET"],
+  "globalDotEnv": [".env"],
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
@@ -11,9 +11,6 @@
     "dev": {
       "cache": false,
       "persistent": true
-    },
-    "codegen": {
-      "env": ["HASURA_GRAPHQL_ADMIN_SECRET"]
     }
   }
 }

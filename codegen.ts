@@ -1,7 +1,7 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 
-const HASURA_GRAPHQL_ADMIN_SECRET = "";
-const HASURA_GRAPHQL_ENDPOINT = "";
+const HASURA_GRAPHQL_ADMIN_SECRET = process.env.HASURA_GRAPHQL_ADMIN_SECRET;
+const HASURA_GRAPHQL_ENDPOINT = process.env.HASURA_GRAPHQL_ENDPOINT;
 
 const config: CodegenConfig = {
   overwrite: true,
@@ -16,8 +16,7 @@ const config: CodegenConfig = {
     },
   ],
   documents: [
-    "packages/lib/graphql/**/*.{ts,tsx}",
-    "packages/lib/graphql/queries/mutations/!payments.{ts,tsx}",
+    "packages/lib/graphql/**/*.{ts,tsx}"
   ],
   ignoreNoDocuments: true,
   generates: {
