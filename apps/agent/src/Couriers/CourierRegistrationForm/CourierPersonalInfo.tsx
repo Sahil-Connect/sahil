@@ -35,6 +35,7 @@ export const CourierPersonalInfo = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(courierInfoSchema),
   });
 

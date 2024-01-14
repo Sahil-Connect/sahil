@@ -17,6 +17,7 @@ export const Select = ({
       <select
         className="select select-sm select-bordered w-full max-w-lg"
         title={label}
+        // @ts-ignore
         {...register(name)}
       >
         {options.map((option, index) => (

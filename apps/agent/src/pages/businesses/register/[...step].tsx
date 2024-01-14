@@ -91,13 +91,13 @@ export default function BusinessRegistrationPage() {
             onNextStep={onNextStep}
           />
           {currentStep === "business_info" && (
-            <BusinessInfo navigateToNextStep={navigateToNextStep} />
+            <BusinessInfo />
           )}
           {currentStep === "address_info" && (
-            <AddressInfo navigateToNextStep={navigateToNextStep} />
+            <AddressInfo />
           )}
           {currentStep === "summary" && (
-            <BusinessInfoSummary navigateToNextStep={navigateToNextStep} />
+            <BusinessInfoSummary />
           )}
         </div>
       </div>

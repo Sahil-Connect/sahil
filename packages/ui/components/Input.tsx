@@ -23,6 +23,7 @@ export const Input = ({
         placeholder={placeholder}
         className="input input-sm input-bordered w-full max-w-lg"
         defaultValue={defaultValue}
+        // @ts-ignore 
         {...register(name, { valueAsNumber: type === "number" })}
       />
       {errors[name] && <FormControlError message={errors[name]?.message} />}

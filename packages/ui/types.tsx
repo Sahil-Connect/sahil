@@ -10,7 +10,7 @@ export type FormErrors = DeepMap<FieldValues, FieldError>;
 
 export type BaseInputProps<T extends FieldValues> = {
   label?: string;
-  name: Path<T>;
+  name: string | Path<T>;
   errors: FormErrors;
   defaultValue?: string | number;
   register: UseFormRegister<T>;

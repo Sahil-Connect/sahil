@@ -1,5 +1,7 @@
 import { Card, Icon } from "ui";
 import { HiOutlineBanknotes } from "react-icons/hi2";
+
+
 export const AccountQuickViewCard = ({ account }) => {
   return (
     <Card>

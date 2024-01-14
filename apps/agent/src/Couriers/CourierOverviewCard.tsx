@@ -29,7 +29,7 @@ type CourierOverviewCardProps = {
   courier: SahilCourier;
 };
 
-export const CourierOverviewCard: FC<CourierOverviewCardProps> = ({
+export const CourierOverviewCard = ({
   courier,
 }) => {
   return (

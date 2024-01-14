@@ -2,6 +2,12 @@ import { useMutation, useQuery } from "@apollo/client";
 import { FETCH_PRODUCTS, FETCH_PRODUCTS_BY_NAME } from "@sahil/lib/graphql";
 import { useRouter } from "next/router";
 
+// graphql types
+import {
+  GetProductsByNameQuery,
+  GetProductsByNameQueryVariables
+} from "@sahil/lib/graphql/generated/graphql";
+
 export const useFetchProducts = ({
   offset = 0,
   limit = 12,
@@ -14,7 +20,8 @@ export const useFetchProducts = ({
 
   const graphqlQuery = name ? FETCH_PRODUCTS_BY_NAME : FETCH_PRODUCTS;
 
-  const { error, data, loading } = useQuery(graphqlQuery, {
+  const { error, data, loading } = useQuery<GetProductsByNameQuery,
+  GetProductsByNameQueryVariables>(graphqlQuery, {
     variables: {
       offset,
       limit,

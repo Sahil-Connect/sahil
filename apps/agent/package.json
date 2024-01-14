@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "format": "",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install"

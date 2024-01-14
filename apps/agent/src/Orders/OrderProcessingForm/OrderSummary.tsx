@@ -12,7 +12,7 @@ import {
   HiPlus,
   HiMinus,
 } from "react-icons/hi2";
-import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
+// import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
 import { usePlaceBusinessOrder } from "@/hooks/orders";
 
 const ProductSummary = ({ product }) => {
@@ -44,11 +44,7 @@ const checkoutSchema = z.object({
 type FormData = z.infer<typeof checkoutSchema>;
 
 export const OrderSummary = () => {
-  const {
-    requesTtoPay,
-    loading: payLoading,
-    error: payError,
-  } = useRequesTtoPay();
+
   const {
     placeOrder,
     loading: orderLoading,
@@ -61,12 +57,14 @@ export const OrderSummary = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(checkoutSchema),
   });
   const orderItems = useOrderItemsStore((state) => state.orderItems);
   const { totalItems, totalCost } = orderItems?.reduce(
     (totals, product) => ({
       totalItems: totals.totalItems + product.quantity,
+      // @ts-ignore
       totalCost: totals.totalCost + product.price * product.quantity,
     }),
     {
@@ -92,21 +90,6 @@ export const OrderSummary = () => {
         },
       });
       console.log("order:", order);
-      const res = await requesTtoPay({
-        variables: {
-          object: {
-            amount: totalCost,
-            payer: {
-              partyId: "0910060031",
-              partyIdType: "MSISDN",
-            },
-            externalId: "6353636",
-            payerMessage: "Hey",
-            payeeNote: "Sahil Order",
-          },
-        },
-      });
-      console.log("res:", res);
     } catch (err) {
       console.log("no:", err);
     }
@@ -121,8 +104,8 @@ export const OrderSummary = () => {
       </div>
       <Card title="Order: ED-15" titleSize="sm">
         <div className="space-y-2">
-          {orderItems.map((product) => (
-            <ProductSummary key={product.id} product={product} />
+          {orderItems.map((product, index) => (
+            <ProductSummary key={index} product={product} />
           ))}
         </div>
       </Card>

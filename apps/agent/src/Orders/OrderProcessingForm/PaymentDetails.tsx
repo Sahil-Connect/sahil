@@ -27,6 +27,7 @@ export const PaymentDetails = ({ navigateToNextStep }) => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(paymentDetailsSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async (data) => {

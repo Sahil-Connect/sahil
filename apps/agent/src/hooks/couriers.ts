@@ -5,8 +5,15 @@ import {
   INSERT_NEW_COURIER,
 } from "@sahil/lib/graphql";
 
+// graphql types
+import {
+  GetCouriersQuery,
+  GetCouriersQueryVariables
+} from "@sahil/lib/graphql/generated/graphql";
+
 export const useFetchCouriers = () => {
-  const { error, data, loading } = useQuery(FETCH_COURIERS);
+  const { error, data, loading } = useQuery<  GetCouriersQuery,
+  GetCouriersQueryVariables>(FETCH_COURIERS);
   return {
     error,
     data: data?.couriers,

@@ -23,7 +23,7 @@ export const OrderClient = ({ businessId }) => {
             href={`/suppliers/${business.id}`}
             className="avatar placeholder h-fit"
           >
-            <Avatar alt={business?.name} src={business?.avatar} />
+            <Avatar alt={business?.name} />
           </Link>
           <button title="More Horizontal">
             <HiEllipsisHorizontal />

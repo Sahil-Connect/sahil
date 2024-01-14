@@ -6,23 +6,8 @@ import {
 } from "react-icons/hi2";
 import { Card } from "ui";
 
-type SahilBusiness = {
-  name: string;
-  id: string;
-  contactName: string;
-  type: string;
-  phoneNumber: string;
-  description: string;
-  contactEmail: string;
-  addresses: Array<{
-    street_address: string;
-  }>;
-};
-
 export const BusinessProfileOverview = ({
   business,
-}: {
-  business: SahilBusiness;
 }) => {
   return (
     <Card height="h-fit">

@@ -21,7 +21,7 @@ import {
   HiOutlineReceiptPercent,
 } from "react-icons/hi2";
 import { usePlaceBusinessOrder } from "@/hooks/orders";
-import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
+// import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
 
 export const OrderItem = ({ price, quantity, title }) => {
   return (
@@ -106,11 +106,6 @@ export default function CheckoutPage() {
   const { orderItems } = useOrderItemsStore((state) => state);
   const { totalItems, totalPrice } = calculateTotal(orderItems);
   const router = useRouter();
-  const {
-    requesTtoPay,
-    loading: payLoading,
-    error: payError,
-  } = useRequesTtoPay();
 
   const onConfirmOrder = async () => {
     try {
@@ -123,21 +118,7 @@ export default function CheckoutPage() {
           },
         },
       });
-      const res = await requesTtoPay({
-        variables: {
-          object: {
-            amount: totalPrice,
-            payer: {
-              partyId: "0910060031",
-              partyIdType: "MSISDN",
-            },
-            externalId: "6353636",
-            payerMessage: "Hey",
-            payeeNote: "Sahil Order",
-          },
-        },
-      });
-      console.log("res:", res);
+
       router.push("/orders");
     } catch (error) {
       console.log(error);

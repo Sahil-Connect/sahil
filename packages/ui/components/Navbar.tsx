@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Icon } from "./Icon";
 import type { IconType } from "react-icons";
 
+
 type NavbarLink = {
   name: string;
   href: string;
@@ -12,7 +13,7 @@ type NavbarLink = {
 
 export type NavbarProps = {
   links: NavbarLink[];
-  logo?: string;
+  logo?: any; // StaticImageData
   header?: string;
 };
 

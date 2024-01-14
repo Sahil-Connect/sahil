@@ -1,5 +1,5 @@
 import { BusinessProfileOverview, BusinessOrderHistory } from "@/Businesses";
-import { useGetAccountBalance, useGetMomoAccountInfo } from "@/hooks/accounts";
+// import { useGetAccountBalance, useGetMomoAccountInfo } from "@/hooks/accounts";
 import { useFetchBusinessByPK } from "@/hooks/businesses";
 import { Card, JoinGrid } from "ui";
 import { useState } from "react";
@@ -50,52 +50,52 @@ const MomoAccountDetails = () => {
 };
 
 const MomoUserInfo = () => {
-  const { data, loading, refetch } = useGetMomoAccountInfo();
+  // const { data, loading, refetch } = useGetMomoAccountInfo();
   const [isRefetching, setIsRefetching] = useState(false);
 
-  const handleRefetch = async () => {
-    if (!isRefetching) {
-      setIsRefetching(true);
-      await refetch().then(() => setIsRefetching(false));
-    }
-  };
+  // const handleRefetch = async () => {
+  //   if (!isRefetching) {
+  //     setIsRefetching(true);
+  //     await refetch().then(() => setIsRefetching(false));
+  //   }
+  // };
   return (
     <Card>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2">
         <div>
-          <p className="text-gray-400 text-sm">Given Name</p>
+          {/* <p className="text-gray-400 text-sm">Given Name</p>
           {loading ? (
             <div className="w-12 h-4 bg-base-200 animate-pulse" />
           ) : (
             <p>{data?.given_name}</p>
-          )}
+          )} */}
         </div>
         <div>
-          <p className="text-gray-400 text-sm">Family Name</p>
+          {/* <p className="text-gray-400 text-sm">Family Name</p>
           {loading ? (
             <div className="w-12 h-4 bg-base-200 animate-pulse" />
           ) : (
             <p>{data?.family_name}</p>
-          )}
+          )} */}
         </div>
         <div>
-          <p className="text-gray-400 text-sm">Gender</p>
+          {/* <p className="text-gray-400 text-sm">Gender</p>
           {loading ? (
             <div className="w-12 h-4 bg-base-200 animate-pulse" />
           ) : (
             <p>{data?.gender}</p>
-          )}
+          )} */}
         </div>
         <div>
-          <p className="text-gray-400 text-sm">Status</p>
+          {/* <p className="text-gray-400 text-sm">Status</p>
           {loading ? (
             <div className="w-12 h-4 bg-base-200 animate-pulse" />
           ) : (
             <p>{data?.status || "Active"}</p>
-          )}
+          )} */}
         </div>
       </div>
-      {data === null && (
+      {/* {data === null && (
         <div className="card-actions flex-col">
           <p>
             {isRefetching
@@ -111,43 +111,43 @@ const MomoUserInfo = () => {
             Reload
           </button>
         </div>
-      )}
+      )} */}
     </Card>
   );
 };
 
 const MomoAccountBalance = () => {
-  const { data, loading, refetch } = useGetAccountBalance();
+  // const { data, loading, refetch } = useGetAccountBalance();
   const [isRefetching, setIsRefetching] = useState(false);
 
-  const handleRefetch = async () => {
-    if (!isRefetching) {
-      setIsRefetching(true);
-      await refetch().then(() => setIsRefetching(false));
-    }
-  };
+  // const handleRefetch = async () => {
+  //   if (!isRefetching) {
+  //     setIsRefetching(true);
+  //     await refetch().then(() => setIsRefetching(false));
+  //   }
+  // };
 
   return (
     <Card>
       <div className="grid grid-cols-2 gap-2">
         <div>
-          <p className="text-gray-400 text-sm">Currency</p>
+          {/* <p className="text-gray-400 text-sm">Currency</p>
           {loading ? (
             <div className="w-12 h-4 bg-base-200 animate-pulse" />
           ) : (
             <p>{data?.currency}</p>
-          )}
+          )} */}
         </div>
         <div>
-          <p className="text-gray-400 text-sm">Balance</p>
+          {/* <p className="text-gray-400 text-sm">Balance</p>
           {loading ? (
             <div className="w-12 h-4 bg-base-200 animate-pulse" />
           ) : (
             <p>{data?.availableBalance}</p>
-          )}
+          )} */}
         </div>
       </div>
-      {data === null && (
+      {/* {data === null && (
         <div className="card-actions flex-col">
           <p>
             {isRefetching
@@ -163,7 +163,7 @@ const MomoAccountBalance = () => {
             Reload
           </button>
         </div>
-      )}
+      )} */}
     </Card>
   );
 };

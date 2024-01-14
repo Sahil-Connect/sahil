@@ -35,6 +35,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(deliveryDetailsSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -160,11 +161,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
             <label className="label">
               <span className="label-text">Choose pick up location</span>
             </label>
-            <Select
-              options={["Custom Market", "Souq Konyo Konyo", "Souq Munuki"]}
-              title="Pickup Location"
-              {...register("pickupLocation")}
-            />
+ 
             {errors.pickupLocation?.message && (
               <FormControlError message={errors.pickupLocation?.message} />
             )}

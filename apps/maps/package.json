@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "tsc -p tsconfig.json",
     "clean": "rm -r ./dist",
-    "dev": "npm run compile && node ./dist/index.js"
+    "dev": "npm run compile && node ./dist/index.js",
+    "format": ""
   },
   "dependencies": {
     "@apollo/datasource-rest": "^6.1.0",

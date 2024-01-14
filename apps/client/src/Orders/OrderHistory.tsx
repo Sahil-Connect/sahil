@@ -33,7 +33,7 @@ export const OrderHistory = () => {
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 4)}
         onPreviousPage={() => setOffset((prev) => prev - 4)}
-        isNextDisabled={offset + 4 >= ordersCount}
+        isNextDisabled={offset + 4 >= ordersCount.count}
         isPrevDisabled={offset === 0}
         size={ordersCount?.count}
         limit={3}
