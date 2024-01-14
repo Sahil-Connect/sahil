@@ -1,40 +1,35 @@
-import { useEffect } from "react";
-import { useFetchProducts } from "@/hooks/products";
-import { Card, List, ListHeader } from "ui";
-import { formatCost } from "@sahil/lib";
-import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
-import Link from "next/link";
-import { formatCurrency } from "@sahil/lib";
-import Image from "next/image";
-import { useRouter } from "next/router";
+import { Card } from 'ui';
+import { useOrderItemsStore } from '@/hooks/useOrderItemsStore';
+import { formatCurrency } from '@sahil/lib';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import {
-  HiArrowSmallLeft,
-  HiArrowSmallRight,
-  HiMinus,
-  HiPlus,
-  HiOutlineFunnel,
   HiOutlineShoppingCart,
-  HiXMark,
-  HiOutlineBanknotes,
-  HiArrowPath,
-  HiSignalSlash,
   HiOutlineReceiptPercent,
-} from "react-icons/hi2";
-import { usePlaceBusinessOrder } from "@/hooks/orders";
-import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
+} from 'react-icons/hi2';
+import { usePlaceBusinessOrder } from '@/hooks/orders';
+import { Key } from 'react';
 
-export const OrderItem = ({ price, quantity, title }) => {
+export const OrderItem = ({
+  price,
+  quantity,
+  title,
+}: {
+  price: number;
+  quantity: number;
+  title: string;
+}) => {
   return (
-    <Card className="bg-white">
-      <div className="flex justify-between items-center">
-        <div className="flex gap-2 items-center">
-          <h2 className="card-title text-sm">{title}</h2>
-          <p className="flex items-center gap-2 text-gray-600">
+    <Card className='bg-white'>
+      <div className='flex justify-between items-center'>
+        <div className='flex gap-2 items-center'>
+          <h2 className='card-title text-sm'>{title}</h2>
+          <p className='flex items-center gap-2 text-gray-600'>
             {formatCurrency(price)}
           </p>
         </div>
-        <div className="flex gap-2">
-          <p className="flex items-center gap-2 text-gray-600">
+        <div className='flex gap-2'>
+          <p className='flex items-center gap-2 text-gray-600'>
             <HiOutlineReceiptPercent /> {quantity}x
           </p>
         </div>
@@ -43,9 +38,12 @@ export const OrderItem = ({ price, quantity, title }) => {
   );
 };
 
-export const OrderItems = ({ items }) => {
+export const OrderItems = ({ items }: { items: any }) => {
   const { totalItems, totalCost } = items?.reduce(
-    (totals, product) => ({
+    (
+      totals: { totalItems: any; totalCost: number },
+      product: { quantity: number; price: number }
+    ) => ({
       totalItems: totals.totalItems + product.quantity,
       totalCost: totals.totalCost + product.price * product.quantity,
     }),
@@ -57,23 +55,32 @@ export const OrderItems = ({ items }) => {
 
   return (
     <>
-      <Card title="Order Items" titleSize="sm" className="bg-gray-100">
-        <ul className="space-y-2">
-          {items?.map((item) => (
-            <OrderItem
-              key={item.id}
-              title={item?.name}
-              quantity={item?.quantity}
-              price={item?.price}
-            />
-          ))}
+      <Card title='Order Items' titleSize='sm' className='bg-gray-100'>
+        <ul className='space-y-2'>
+          {items?.map(
+            (item: {
+              id: Key | null | undefined;
+              name: string;
+              quantity: number;
+              price: number;
+            }) => (
+              <OrderItem
+                key={item.id}
+                title={item?.name}
+                quantity={item?.quantity}
+                price={item?.price}
+              />
+            )
+          )}
         </ul>
       </Card>
     </>
   );
 };
 
-function calculateTotal(arr) {
+function calculateTotal(
+  arr: { productId: string; quantity: number; price: number }[]
+) {
   // Initialize total items and total price
   let totalItems = 0;
   let totalPrice = 0;
@@ -106,81 +113,46 @@ export default function CheckoutPage() {
   const { orderItems } = useOrderItemsStore((state) => state);
   const { totalItems, totalPrice } = calculateTotal(orderItems);
   const router = useRouter();
-  const {
-    requesTtoPay,
-    loading: payLoading,
-    error: payError,
-  } = useRequesTtoPay();
 
-  const onConfirmOrder = async () => {
-    try {
-      const order = await placeOrder({
-        variables: {
-          object: {
-            origin: "Souq Munuki",
-            destination: "Souq Custom",
-            customerId: "e87924e8-69e4-4171-bd89-0c8963e03d08",
-          },
-        },
-      });
-      const res = await requesTtoPay({
-        variables: {
-          object: {
-            amount: totalPrice,
-            payer: {
-              partyId: "0910060031",
-              partyIdType: "MSISDN",
-            },
-            externalId: "6353636",
-            payerMessage: "Hey",
-            payeeNote: "Sahil Order",
-          },
-        },
-      });
-      console.log("res:", res);
-      router.push("/orders");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const onConfirmOrder = async () => {};
 
   return (
     <section>
-      <div className="flex">
-        <div className="basis-4/6">
+      <div className='flex'>
+        <div className='basis-4/6'>
           <OrderItems items={orderItems} />
         </div>
-        <div className="divider divider-horizontal"></div>
-        <div className="grow space-y-2">
-          <Card title="Checkout" titleSize="sm">
-            <div className="flex gap-2 items-center">
+        <div className='divider divider-horizontal'></div>
+        <div className='grow space-y-2'>
+          <Card title='Checkout' titleSize='sm'>
+            <div className='flex gap-2 items-center'>
               <div>
-                <p className="text-gray-500">Items</p>
-                <p className="text-lg">{totalItems} items</p>
+                <p className='text-gray-500'>Items</p>
+                <p className='text-lg'>{totalItems} items</p>
               </div>
               <div>
-                <p className="text-gray-500">Total</p>
-                <p className="text-lg">{formatCurrency(totalPrice)}</p>
+                <p className='text-gray-500'>Total</p>
+                <p className='text-lg'>{formatCurrency(totalPrice)}</p>
               </div>
             </div>
-            <div className="card-actions">
+            <div className='card-actions'>
               <button
-                className="btn btn-sm btn-primary"
+                className='btn btn-sm btn-primary'
                 onClick={onConfirmOrder}
               >
                 <HiOutlineShoppingCart /> Confirm Order
               </button>
             </div>
           </Card>
-          <Card title="Powered by Momo" titleSize="sm">
-            <div className=" flex items-center justify-center">
+          <Card title='Powered by Momo' titleSize='sm'>
+            <div className=' flex items-center justify-center'>
               <Image
                 src={
-                  "https://res.cloudinary.com/dwacr3zpp/image/upload/v1701061672/BrandGuid-mtnmomo.svg"
+                  'https://res.cloudinary.com/dwacr3zpp/image/upload/v1701061672/BrandGuid-mtnmomo.svg'
                 }
-                alt="brand"
-                height={"200"}
-                width={"200"}
+                alt='brand'
+                height={'200'}
+                width={'200'}
               />
             </div>
           </Card>
