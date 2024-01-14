@@ -9,6 +9,7 @@ import {
 } from 'react-icons/hi2';
 import { usePlaceBusinessOrder } from '@/hooks/orders';
 import { Key } from 'react';
+import { Order_Item } from '@sahil/lib/graphql/__generated__/graphql';
 
 export const OrderItem = ({
   price,
@@ -78,9 +79,7 @@ export const OrderItems = ({ items }: { items: any }) => {
   );
 };
 
-function calculateTotal(
-  arr: { productId: string; quantity: number; price: number }[]
-) {
+function calculateTotal(arr: Order_Item[]) {
   // Initialize total items and total price
   let totalItems = 0;
   let totalPrice = 0;
@@ -114,6 +113,7 @@ export default function CheckoutPage() {
   const { totalItems, totalPrice } = calculateTotal(orderItems);
   const router = useRouter();
 
+  console.log(orderItems);
   const onConfirmOrder = async () => {};
 
   return (

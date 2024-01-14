@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useFetchProducts } from "@/hooks/products";
-import { Card, List, ListHeader } from "ui";
-import { formatCost } from "@sahil/lib";
-import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
-import Link from "next/link";
+import { useEffect, useState } from 'react';
+import { useFetchProducts } from '@/hooks/products';
+import { Card, List, ListHeader } from 'ui';
+import { formatCost } from '@sahil/lib';
+import { useOrderItemsStore } from '@/hooks/useOrderItemsStore';
+import Link from 'next/link';
 import {
   HiArrowSmallLeft,
   HiArrowSmallRight,
@@ -15,7 +15,8 @@ import {
   HiOutlineBanknotes,
   HiArrowPath,
   HiSignalSlash,
-} from "react-icons/hi2";
+} from 'react-icons/hi2';
+import { Products } from '@sahil/lib/graphql/__generated__/graphql';
 
 export const ProductsCatalogue = () => {
   const [offset, setOffset] = useState(0);
@@ -38,22 +39,22 @@ export const ProductsCatalogue = () => {
   );
 
   useEffect(() => {
-    setProducts(products);
+    setProducts(products as Products[]);
   }, [products, setProducts]);
 
   if (error) {
     return (
-      <Card title="Unable to load products...">
-        <span className="shadow p-2 rounded-md w-fit text-2xl">
+      <Card title='Unable to load products...'>
+        <span className='shadow p-2 rounded-md w-fit text-2xl'>
           <HiSignalSlash />
         </span>
         <p>
           Products aren't loading due to a technical problem on our side. Please
-          try again. If the issue continues,{" "}
-          <span className="text-primary">contact support.</span>
+          try again. If the issue continues,{' '}
+          <span className='text-primary'>contact support.</span>
         </p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-sm btn-warning">
+        <div className='card-actions justify-end'>
+          <button className='btn btn-sm btn-warning'>
             <HiArrowPath /> try again
           </button>
         </div>
@@ -63,10 +64,10 @@ export const ProductsCatalogue = () => {
 
   if (loading) {
     return (
-      <Card titleSize="sm">
-        <div className="flex items-center justify-center text-center">
+      <Card titleSize='sm'>
+        <div className='flex items-center justify-center text-center'>
           <div>
-            <span className="loading loading-spinner loading-lg"></span>
+            <span className='loading loading-spinner loading-lg'></span>
             <p>Loading Products</p>
           </div>
         </div>
@@ -82,7 +83,7 @@ export const ProductsCatalogue = () => {
     });
   };
   const onRemoveOrderItem = (product: any) => {
-    console.log("remove product to order", product);
+    console.log('remove product to order', product);
   };
 
   return (
@@ -90,14 +91,14 @@ export const ProductsCatalogue = () => {
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 12)}
         onPreviousPage={() => setOffset((prev) => prev - 12)}
-        isNextDisabled={offset + 12 >= productsCount}
+        isNextDisabled={offset + 12 >= productsCount!}
         isPrevDisabled={offset === 0}
         size={productsCount}
         limit={12}
-        sizeLabel="Products"
+        sizeLabel='Products'
       />
       <List
-        data={products}
+        data={products as Products[]}
         error={error}
         loading={loading}
         cols={4}
@@ -114,8 +115,8 @@ export const ProductsCatalogue = () => {
           );
         }}
       />
-      <div className="card-actions">
-        <Link href="/checkout" className="btn btn-sm btn-primary">
+      <div className='card-actions'>
+        <Link href='/checkout' className='btn btn-sm btn-primary'>
           <HiOutlineShoppingCart /> Proceed to checkout
         </Link>
       </div>
@@ -138,55 +139,55 @@ export const ProductSummary = ({
 }: ProductSummaryProps) => {
   return (
     <Card>
-      <div className="flex items-center justify-between">
-        <h3 className="card-title text-sm">{product.name}</h3>
+      <div className='flex items-center justify-between'>
+        <h3 className='card-title text-sm'>{product.name}</h3>
         {product.discount && product.discount !== 0 && (
-          <div className="badge badge-accent">{product.discount}%</div>
+          <div className='badge badge-accent'>{product.discount}%</div>
         )}
       </div>
-      <div className="flex gap-2 items-center">
-        <div className="flex gap-2 items-center">
-          <span className="shadow p-2 rounded-md">
+      <div className='flex gap-2 items-center'>
+        <div className='flex gap-2 items-center'>
+          <span className='shadow p-2 rounded-md'>
             <HiOutlineBanknotes />
           </span>
           {formatCost(product.price)}
         </div>
       </div>
-      <div className="card-actions items-center">
+      <div className='card-actions items-center'>
         {!isInCart ? (
           <button
-            className="btn btn-xs"
+            className='btn btn-xs'
             onClick={() => onAddOrderItem(product)}
-            type="button"
-            title="Add Item"
+            type='button'
+            title='Add Item'
           >
             <HiOutlineShoppingCart /> Add Product
           </button>
         ) : (
-          <div className="flex justify-between w-full">
+          <div className='flex justify-between w-full'>
             <button
-              className="btn btn-xs btn-warning"
+              className='btn btn-xs btn-warning'
               onClick={() => onRemoveOrderItem(product)}
-              type="button"
-              title="Add Item"
+              type='button'
+              title='Add Item'
             >
               <HiXMark /> Remove
             </button>
-            <div className="flex gap-2 items-center">
+            <div className='flex gap-2 items-center'>
               <button
-                className="btn btn-xs"
+                className='btn btn-xs'
                 onClick={() => onAddOrderItem(product)}
-                type="button"
-                title="Add Item"
+                type='button'
+                title='Add Item'
               >
                 <HiMinus />
               </button>
-              <div className="badge badge-neutral">1</div>
+              <div className='badge badge-neutral'>1</div>
               <button
-                className="btn btn-xs"
+                className='btn btn-xs'
                 onClick={() => onAddOrderItem(product)}
-                type="button"
-                title="Add Item"
+                type='button'
+                title='Add Item'
               >
                 <HiPlus />
               </button>
