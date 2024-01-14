@@ -113,8 +113,29 @@ export default function CheckoutPage() {
   const { totalItems, totalPrice } = calculateTotal(orderItems);
   const router = useRouter();
 
-  console.log(orderItems);
-  const onConfirmOrder = async () => {};
+  const onConfirmOrder = async () => {
+    const orderItemsForInsert = orderItems.map((item) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+      price: item.price,
+    }));
+
+    const object = {
+      order_items: { data: orderItemsForInsert },
+      //ToDo: User Auth user id instead of hard-coded value
+      customerId: 'e87924e8-69e4-4171-bd89-0c8963e03d08',
+    };
+    try {
+      const result = await placeOrder({
+        variables: {
+          object,
+        },
+      });
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <section>

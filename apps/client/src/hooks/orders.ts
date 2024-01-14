@@ -1,11 +1,15 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from '@apollo/client';
 import {
   FETCH_ORDERS,
   FETCH_ORDER_BY_PK,
   INSERT_NEW_ORDER,
   FETCH_ORDER_DELIVERIES,
   FETCH_ORDERS_STATS,
-} from "@sahil/lib/graphql";
+} from '@sahil/lib/graphql';
+import {
+  InsertBusinessOrderMutation,
+  InsertBusinessOrderMutationVariables,
+} from '@sahil/lib/graphql/__generated__/graphql';
 
 export const useFetchOrders = () => {
   const { error, data, loading } = useQuery(FETCH_ORDERS);
@@ -27,7 +31,10 @@ export const useFetchOrderByPK = (id: string) => {
 };
 
 export const usePlaceBusinessOrder = () => {
-  const [placeOrder, { data, loading, error }] = useMutation(INSERT_NEW_ORDER);
+  const [placeOrder, { data, loading, error }] = useMutation<
+    InsertBusinessOrderMutation,
+    InsertBusinessOrderMutationVariables
+  >(INSERT_NEW_ORDER);
 
   return { loading, placeOrder, error };
 };

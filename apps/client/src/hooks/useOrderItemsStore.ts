@@ -3,7 +3,7 @@ import { Order_Item, Products } from '@sahil/lib/graphql/__generated__/graphql';
 
 type OrderItemsStore = {
   orderItems: Order_Item[];
-  products: any[];
+  products: Products[];
   addOrderItem: (item: Order_Item) => void;
   removeOrderItem: (item: Order_Item) => void;
   updateOrderItem: (item: Order_Item) => void;
