@@ -43,7 +43,7 @@ jobs:
       #   run: yarn codegen
 
       - name: Build
-        run: yarn build --filter=website
+        run: yarn build --filter=website --filter=api
 
       #- name: Test
       #  run: yarn test
