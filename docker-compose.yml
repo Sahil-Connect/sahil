@@ -37,6 +37,19 @@ services:
       - '3000:3000'
     env_file:
       - .env.development
+  
+  # CLIENT
+  sahil-client:
+    container_name: sahil-client
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.client
+    image: sahil-client
+    restart: always
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.development
 
   #### LOCAL DEV ENVIRONMENTS ####
 
