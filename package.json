@@ -1,12 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "build-website": "turbo run build --filter=website --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
-    "dev-website": "turbo run dev --filter=website",
-    "build-api": "turbo run build --filter=api --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
-    "dev-api": "turbo run dev --filter=api",
-    "build-agent": "turbo run build --filter=agent --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
-    "dev-agent": "turbo run dev --filter=agent",
     "build": "turbo run build --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
