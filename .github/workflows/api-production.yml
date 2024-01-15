@@ -1,0 +1,78 @@
+name: Website Production
+
+on:
+  push:
+    branches: ['main']
+    # check which application has been changed 
+    paths:
+      - 'apps/api/**'
+      - '.github/workflows/api-production.yml'
+
+
+env:
+  REGION: "us-east1"
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+  GCP_PROJECT_NUMBER: ${{ secrets.GCP_PROJECT_NUMBER }}
+  SERVICE: "sahil-api-production"
+
+jobs:
+  build:
+    name: Build - Push - Deploy
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    outputs:
+      output1: ${{ steps.step1.outputs.IMAGE }}
+
+    steps:
+    - name: Clone
+      uses: actions/checkout@v3
+      id: step1
+    - run: |
+        echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-api:production-$GITHUB_SHA" >> $GITHUB_ENV
+
+    # GCP auth & image pushing
+    - name: Authenticate the service account
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: '${{ env.GCP_SA_KEY }}'
+
+    - name: Install gcloud on the job runner
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        service_account_key: '${{ env.GCP_SA_KEY }}'
+        project_id: '${{ env.GCP_PROJECT_ID }}'
+        export_default_credentials: true
+
+    - name: Authorize admin account to push docker image
+      run: gcloud auth configure-docker
+
+    - name: Use gcloud CLI
+      run: 'gcloud info'
+
+    - name: Build a docker image
+      run: |-
+        docker build -f infra/docker/Dockerfile.api -t ${{ env.IMAGE }} .
+
+    - name: Push image to gcr.io
+      run: docker push ${{ env.IMAGE }}
+
+    - name: Deploy to Cloud Run
+      id: deploy
+      uses: google-github-actions/deploy-cloudrun@v0
+      with:
+        service: ${{ env.SERVICE }}
+        region: ${{ env.REGION }}
+        image: ${{ env.IMAGE }}
+        # NOTE: env variables here
+        #  env_vars: |
+        #  NODE_ENV=production
+        #  PORT=3000
+
+    # If required, use the Cloud Run url output in later steps
+    - name: Show Output
+      run: echo ${{ steps.deploy.outputs.url }}
