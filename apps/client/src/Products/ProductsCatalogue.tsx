@@ -115,7 +115,9 @@ export const ProductsCatalogue = () => {
         }}
       />
       <div className="card-actions">
-        <Link href="/checkout" className="btn btn-sm btn-primary"><HiOutlineShoppingCart />  Proceed to checkout</Link>
+        <Link href="/checkout" className="btn btn-sm btn-primary">
+          <HiOutlineShoppingCart /> Proceed to checkout
+        </Link>
       </div>
     </Card>
   );

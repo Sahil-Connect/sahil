@@ -28,7 +28,9 @@ export const OrderOverviewCard = ({ order }) => {
             className="btn btn-ghost btn-sm"
           />
         </div>
-        <div className="badge badge-primary gap-2"><HiCalendarDays /> {order?.status}</div>
+        <div className="badge badge-primary gap-2">
+          <HiCalendarDays /> {order?.status}
+        </div>
         <div className="mt-2 bg-grey-200 rounded-xl flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 p-2 w-full items-center  border border-solid border-[#d2d6db] rounded">

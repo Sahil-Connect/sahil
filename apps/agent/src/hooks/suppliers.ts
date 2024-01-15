@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
-import { useRouter } from 'next/router';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMemo } from "react";
+import { useRouter } from "next/router";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   FETCH_FILTERED_SUPPLIERS,
   FETCH_SUPPLIERS,
@@ -12,7 +12,7 @@ import {
   DELETE_PRODUCT_BY_PK,
   ADD_NEW_PRODUCT,
   FETCH_SUPPLIER_ORDERS,
-} from '@sahil/lib/graphql';
+} from "@sahil/lib/graphql";
 
 export const useFetchSuppliers = (category?: string) => {
   const graphqlQuery = category ? FETCH_FILTERED_SUPPLIERS : FETCH_SUPPLIERS;

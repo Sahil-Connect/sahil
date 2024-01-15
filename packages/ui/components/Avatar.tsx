@@ -5,7 +5,7 @@ type AvatarProps = {
   alt?: string;
   className?: any;
   src?: string;
-}
+};
 export const Avatar = ({ alt, src, className }: AvatarProps) => {
   const merged = twMerge("w-12 rounded-full shadow", className);
   return (

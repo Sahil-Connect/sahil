@@ -18,7 +18,6 @@ Design an algorithm that matches businesses with suitable suppliers based on the
 
 ### Delivery Process
 
-
 ## DevOps
 
 ### Local dev env for hasura

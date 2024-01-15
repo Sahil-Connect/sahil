@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { useFetchSupplierProducts } from '@/hooks/suppliers';
+import { useState } from "react";
+import { useFetchSupplierProducts } from "@/hooks/suppliers";
 import {
   HiOutlineBanknotes,
   HiOutlineCube,
   HiEllipsisHorizontal,
-} from 'react-icons/hi2';
-import EditProductModal from './EditProductModal';
-import { formatCurrency } from '@sahil/lib';
-import { Card, List, ListHeader } from 'ui';
-import DeleteProductModal from './DeleteProductModal';
+} from "react-icons/hi2";
+import EditProductModal from "./EditProductModal";
+import { formatCurrency } from "@sahil/lib";
+import { Card, List, ListHeader } from "ui";
+import DeleteProductModal from "./DeleteProductModal";
 
 type SahilProduct = {
   id: string;
@@ -43,7 +43,7 @@ const SupplierProductList = ({ productsCount }: props) => {
   };
 
   return (
-    <div className='space-y-4'>
+    <div className="space-y-4">
       <List
         data={products}
         error={error}
@@ -60,17 +60,17 @@ export default SupplierProductList;
 
 const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
   return (
-    <Card className='bg-white h-full'>
-      <div className='flex flex-col justify-start'>
-        <div className='flex justify-between items-start'>
-          <h3 className='card-title w-11/12'>{product.name}</h3>
-          <div className='dropdown dropdown-end'>
-            <label tabIndex={0} className='btn btn-sm btn-ghost m-1'>
+    <Card className="bg-white h-full">
+      <div className="flex flex-col justify-start">
+        <div className="flex justify-between items-start">
+          <h3 className="card-title w-11/12">{product.name}</h3>
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-sm btn-ghost m-1">
               <HiEllipsisHorizontal />
             </label>
             <ul
               tabIndex={0}
-              className='dropdown-content z-[1] menu p-2 shadow-xl border border-neutral bg-base-100 rounded-box w-36 space-y-2'
+              className="dropdown-content z-[1] menu p-2 shadow-xl border border-neutral bg-base-100 rounded-box w-36 space-y-2"
             >
               <EditProductModal product={product} />
 
@@ -80,31 +80,29 @@ const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
         </div>
       </div>
 
-      <div className='grow grid items-center'>
-        <p className='text-sm'>{product.description}</p>
+      <div className="grow grid items-center">
+        <p className="text-sm">{product.description}</p>
       </div>
 
-      <div className='flex flex-wrap justify-between items-center gap-2'>
-        <div className='flex items-center gap-1'>
-          <span className='text-lg shadow rounded-md p-2'>
+      <div className="flex flex-wrap justify-between items-center gap-2">
+        <div className="flex items-center gap-1">
+          <span className="text-lg shadow rounded-md p-2">
             <HiOutlineBanknotes />
           </span>
           <p>{formatCurrency(product.price)}</p>
         </div>
-        <div className='flex items-center gap-1'>
-          <span className='text-lg shadow rounded-md p-2'>
+        <div className="flex items-center gap-1">
+          <span className="text-lg shadow rounded-md p-2">
             <HiOutlineCube />
           </span>
           <p>{product.quantity} items</p>
         </div>
       </div>
-      {
-          !product.inStock &&         <div
-          className={`badge font-bold tracking-wider text-red-600 `}
-        >
+      {!product.inStock && (
+        <div className={`badge font-bold tracking-wider text-red-600 `}>
           Out of Stock
         </div>
-        }
+      )}
     </Card>
   );
 };

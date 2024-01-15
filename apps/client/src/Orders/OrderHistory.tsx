@@ -6,9 +6,14 @@ import { List, ListHeader, ListErrorState } from "ui";
 const MSISDN = "0910060031";
 
 export const OrderHistory = () => {
-    const [offset, setOffset] = useState(0);
-  const { data: orders, error, loading, ordersCount } = useFetchBusinessOrders({
-    customerId: 'e87924e8-69e4-4171-bd89-0c8963e03d08',
+  const [offset, setOffset] = useState(0);
+  const {
+    data: orders,
+    error,
+    loading,
+    ordersCount,
+  } = useFetchBusinessOrders({
+    customerId: "e87924e8-69e4-4171-bd89-0c8963e03d08",
     offset,
   });
 
@@ -32,14 +37,12 @@ export const OrderHistory = () => {
         isPrevDisabled={offset === 0}
         size={ordersCount?.count}
         limit={3}
-        sizeLabel='Orders'
+        sizeLabel="Orders"
       />
       <List
         data={orders}
         loading={loading}
-        renderItem={(order) => (
-          <OrderOverview key={order.id} order={order} />
-        )}
+        renderItem={(order) => <OrderOverview key={order.id} order={order} />}
       />
     </section>
   );

@@ -9,7 +9,7 @@ const SignInPage: NextPage = ({ providers }: any) => {
   const router = useRouter();
 
   useEffect(() => {
-    if(session) {
+    if (session) {
       router.push("/auth/new");
     }
   }, [session]);
@@ -17,31 +17,30 @@ const SignInPage: NextPage = ({ providers }: any) => {
   return (
     <div className="p-4">
       <h1>Sahil</h1>
-        {providers &&
-          Object.values(providers).map((provider) => {
-            return (
-              <div
-                // @ts-ignore
-                key={provider?.name}
-                p="2"
-              >
-                <div>
-                  <button
-                    onClick={() => {
-                      signIn(provider?.id);
-                    }}
-                  >
-                    Sign in with{" "}
-                    {
-                      // @ts-ignore
-                      provider?.name
-                    }
-                  </button>
-                </div>
+      {providers &&
+        Object.values(providers).map((provider) => {
+          return (
+            <div
+              // @ts-ignore
+              key={provider?.name}
+              p="2"
+            >
+              <div>
+                <button
+                  onClick={() => {
+                    signIn(provider?.id);
+                  }}
+                >
+                  Sign in with{" "}
+                  {
+                    // @ts-ignore
+                    provider?.name
+                  }
+                </button>
               </div>
-            );
-          })}
-
+            </div>
+          );
+        })}
     </div>
   );
 };

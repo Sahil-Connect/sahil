@@ -1,9 +1,9 @@
-import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useCourierFormStore } from '@/hooks/useCourierFormStore';
-import { useRouter } from 'next/router';
-import { useRegisterCourier } from '@/hooks/couriers';
-import toast, { Toaster } from 'react-hot-toast';
+import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useCourierFormStore } from "@/hooks/useCourierFormStore";
+import { useRouter } from "next/router";
+import { useRegisterCourier } from "@/hooks/couriers";
+import toast, { Toaster } from "react-hot-toast";
 
 export const CourierFormSummary = () => {
   const router = useRouter();
@@ -34,21 +34,21 @@ export const CourierFormSummary = () => {
   };
 
   if (error) {
-    toast.error('Something went wrong');
+    toast.error("Something went wrong");
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className='space-y-2'>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
         <h3>Save Courier Information</h3>
         <button
-          type='submit'
-          className={`btn btn-sm btn-primary ${loading && 'animate-pulse'}`}
+          type="submit"
+          className={`btn btn-sm btn-primary ${loading && "animate-pulse"}`}
         >
           Submit
         </button>
       </form>
-      <Toaster position='top-center' reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 };

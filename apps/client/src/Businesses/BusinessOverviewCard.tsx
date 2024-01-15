@@ -3,7 +3,11 @@ import { formatDateTime } from "@sahil/lib/dates";
 import { generateInitials } from "@sahil/lib/strings";
 import Link from "next/link";
 import { Card } from "ui";
-import { HiOutlineEllipsisHorizontal, HiOutlinePhone, HiOutlineMapPin } from "react-icons/hi2";
+import {
+  HiOutlineEllipsisHorizontal,
+  HiOutlinePhone,
+  HiOutlineMapPin,
+} from "react-icons/hi2";
 
 export type SahilBusiness = {
   name: string;
@@ -12,7 +16,7 @@ export type SahilBusiness = {
   type: string;
   phoneNumber: string;
   addresses: Array<{
-    street_address: string,
+    street_address: string;
   }>;
 };
 
@@ -53,24 +57,21 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
             <p className="capitalize">{business.type}</p>
           </div>
           <div className="space-y-1 font-semibold">
-            <span className="opacity-70 text-sm font-normal">
-              Contact Name
-            </span>
+            <span className="opacity-70 text-sm font-normal">Contact Name</span>
             <p className="capitalize">{business.contactName}</p>
           </div>
         </div>
       </div>
       <div className="mt-3">
-        {business.addresses && business.addresses.map((address, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <span className="shadow rounded-md p-2">
-              <HiOutlineMapPin />
-            </span>
-            <p className="truncate ...">
-              {address.street_address}
-            </p>
-          </div>
-        ))}
+        {business.addresses &&
+          business.addresses.map((address, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <span className="shadow rounded-md p-2">
+                <HiOutlineMapPin />
+              </span>
+              <p className="truncate ...">{address.street_address}</p>
+            </div>
+          ))}
       </div>
       <div className="mt-3">
         <div className="flex items-center gap-2">

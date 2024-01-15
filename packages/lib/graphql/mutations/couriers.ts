@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const INSERT_NEW_COURIER = gql`
   mutation insertNewCourier($object: couriers_insert_input = {}) {

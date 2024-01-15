@@ -5,13 +5,11 @@ export const VehicleInfo = () => {
     <Card title="Honda Vitz" titleSize="sm">
       <div className="flex gap-4">
         <div className="basis-2/5 grow">
-            <ul>
-                <li>
-                    <div>
-                        Number Plate: CESB91
-                    </div>
-                </li>
-            </ul>
+          <ul>
+            <li>
+              <div>Number Plate: CESB91</div>
+            </li>
+          </ul>
         </div>
         <div>
           <Image

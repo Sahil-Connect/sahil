@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { HiXMark } from 'react-icons/hi2';
+import { ReactNode } from "react";
+import { HiXMark } from "react-icons/hi2";
 
 export type ModalProps = {
   id: string;
@@ -8,8 +8,8 @@ export type ModalProps = {
   CTA?: string;
   icon: ReactNode;
   CloseBtnRef: React.RefObject<HTMLButtonElement>;
-  btnStyle?: 'primary' | 'secondary' | 'accent' | 'ghost' | 'error';
-  btnSize?: 'xs' | 'sm' | 'md' | 'lg';
+  btnStyle?: "primary" | "secondary" | "accent" | "ghost" | "error";
+  btnSize?: "xs" | "sm" | "md" | "lg";
   className?: string;
 };
 
@@ -19,8 +19,8 @@ const Modal = ({
   title,
   icon,
   CTA,
-  btnSize = 'md',
-  btnStyle = 'primary',
+  btnSize = "md",
+  btnStyle = "primary",
   CloseBtnRef,
   className,
 }: ModalProps) => {
@@ -39,18 +39,18 @@ const Modal = ({
         {icon}
         {CTA}
       </button>
-      <dialog id={id} className='modal'>
-        <div className='modal-box'>
-          <form method='dialog'>
+      <dialog id={id} className="modal">
+        <div className="modal-box">
+          <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button
               ref={CloseBtnRef}
-              className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             >
               <HiXMark />
             </button>
           </form>
-          <h3 className='font-bold text-lg'>{title}</h3>
+          <h3 className="font-bold text-lg">{title}</h3>
           {children}
         </div>
       </dialog>

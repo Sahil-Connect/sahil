@@ -10,7 +10,7 @@ import {
 
 export const OrderDetails = ({ order }) => {
   return (
-    <Card title="Order Details" titleSize="sm" >
+    <Card title="Order Details" titleSize="sm">
       <div className="space-y-4">
         <div className="flex gap-4 items-center">
           <div className="flex gap-2 items-center">
