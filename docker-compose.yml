@@ -23,7 +23,8 @@ services:
     ports:
       - '8000:8000'
     env_file:
-      - .env
+      - path: ./apps/api/.env
+      #- path: ./apps/api/.env.production
 
   # AGENT
   sahil-agent:
@@ -36,7 +37,8 @@ services:
     ports:
       - '3000:3000'
     env_file:
-      - .env
+      - path: ./apps/agent/.env
+      #- path: ./apps/agent/.env.production
   
   # CLIENT
   sahil-client:
@@ -49,7 +51,8 @@ services:
     ports:
       - '3000:3000'
     env_file:
-      - .env
+      - path: ./apps/client/.env
+      #- path: ./apps/client/.env.production
 
   #### LOCAL DEV ENVIRONMENTS ####
 
