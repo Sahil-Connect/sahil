@@ -19,7 +19,7 @@ import {
   HiOutlineQueueList,
   HiCursorArrowRipple,
 } from "react-icons/hi2";
-import { StepDirection, StepItem } from "ui/components/MultiStepForm"
+import { StepDirection, StepItem } from "ui/components/MultiStepForm";
 
 const headers: Array<StepItem> = [
   {
@@ -72,7 +72,11 @@ export default function NewOrderPage() {
 
   const onStepChange = (path: string, step: StepDirection): void => {
     goToStep(step);
-    router.push(`/${path}/${ step === "prev" ? steps[currentIndex - 1] : steps[currentIndex + 1]}`);
+    router.push(
+      `/${path}/${
+        step === "prev" ? steps[currentIndex - 1] : steps[currentIndex + 1]
+      }`
+    );
   };
 
   const navigateToNextStep = (path: string) => {
@@ -103,10 +107,7 @@ export default function NewOrderPage() {
         </div>
         <div className="divider divider-horizontal"></div>
         <div className="grow space-y-4 py-4 pr-4 basis-3/5">
-          <StepsPaginator
-            headers={headers}
-            onStepChange={onStepChange}
-          />
+          <StepsPaginator headers={headers} onStepChange={onStepChange} />
           {currentStep === "order_details" && (
             <OrderDetails navigateToNextStep={navigateToNextStep} />
           )}

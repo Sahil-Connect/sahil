@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import Modal from 'ui/components/Modal';
-import { HiOutlineTrash } from 'react-icons/hi2';
-import { useDeleteProduct } from '@/hooks/suppliers';
+import React, { useRef } from "react";
+import Modal from "ui/components/Modal";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { useDeleteProduct } from "@/hooks/suppliers";
 
 const DeleteProductModal = ({ id, name }: { id: string; name: string }) => {
   const closeBtn = useRef<HTMLButtonElement>(null);
@@ -18,34 +18,34 @@ const DeleteProductModal = ({ id, name }: { id: string; name: string }) => {
   };
   return (
     <Modal
-      btnSize='sm'
-      btnStyle='error'
+      btnSize="sm"
+      btnStyle="error"
       icon={<HiOutlineTrash />}
-      CTA='Delete'
+      CTA="Delete"
       id={`delete-${id}-modal`}
       CloseBtnRef={closeBtn}
-      title='Delete Product'
+      title="Delete Product"
     >
-      <p className='text-center text-base mt-4'>
+      <p className="text-center text-base mt-4">
         Are you sure you want to delete <b>{name}</b>?
       </p>
-      <div className='flex items-center justify-center gap-4 my-4'>
+      <div className="flex items-center justify-center gap-4 my-4">
         <button
           onClick={handleDelete}
           className={`btn btn-sm normal-case btn-error ${
-            loading && 'animate-pulse'
+            loading && "animate-pulse"
           }`}
         >
           Delete
         </button>
         <button
           onClick={handleCancel}
-          className='btn btn-sm normal-case btn-outline'
+          className="btn btn-sm normal-case btn-outline"
         >
           Cancel
         </button>
       </div>
-      <div className='my-4 flex flex-row justify-end gap-4'></div>
+      <div className="my-4 flex flex-row justify-end gap-4"></div>
     </Modal>
   );
 };

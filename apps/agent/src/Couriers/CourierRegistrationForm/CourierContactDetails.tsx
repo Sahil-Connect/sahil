@@ -1,21 +1,21 @@
-import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useCourierFormStore } from '@/hooks/useCourierFormStore';
-import { Input } from 'ui';
-import { useRouter } from 'next/router';
+import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useCourierFormStore } from "@/hooks/useCourierFormStore";
+import { Input } from "ui";
+import { useRouter } from "next/router";
 
 const courierContactSchema = z.object({
   email: z
     .string()
-    .email({ message: 'Invalid email format' })
-    .nonempty({ message: 'Email is required' })
+    .email({ message: "Invalid email format" })
+    .nonempty({ message: "Email is required" })
     .trim(),
   phoneNumber: z
     .string()
-    .regex(/^\d{10}$/i, { message: 'Invalid phone number format' })
-    .nonempty({ message: 'Phone number is required' })
+    .regex(/^\d{10}$/i, { message: "Invalid phone number format" })
+    .nonempty({ message: "Phone number is required" })
     .trim(),
 });
 
@@ -41,26 +41,26 @@ export const CourierContactDetails = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = courierContactSchema.parse(data);
     updateStepFormData(validatedInput);
-    goToStep('next');
+    goToStep("next");
     router.push(`/couriers/register/vehicle_info`);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='space-y-2'>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <Input
-        name='email'
-        label='Email Address'
-        placeholder='example@domain.com'
+        name="email"
+        label="Email Address"
+        placeholder="example@domain.com"
         register={register}
         errors={errors}
       />
       <Input
-        name='phoneNumber'
-        label='Phone Number'
-        placeholder='09---'
+        name="phoneNumber"
+        label="Phone Number"
+        placeholder="09---"
         register={register}
         errors={errors}
       />
-      <button className='btn btn-sm btn-primary'>Submit</button>
+      <button className="btn btn-sm btn-primary">Submit</button>
     </form>
   );
 };

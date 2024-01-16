@@ -6,7 +6,7 @@ export const AccountQuickViewCard = ({ account }) => {
       <div className="flex gap-2 items-center justify-between">
         <h3 className="card-title text-xm">{account.name}</h3>
         <span className="bg-primary p-2 rounded">
-            <Icon icon={HiOutlineBanknotes} />
+          <Icon icon={HiOutlineBanknotes} />
         </span>
       </div>
     </Card>

@@ -1,1 +1,1 @@
-export const INITIAL_STEP = "business_info";;
+export const INITIAL_STEP = "business_info";

@@ -10,11 +10,10 @@ type ListAsyncResultProps = {
 };
 
 export const ListLoadingState: FC<ListAsyncResultProps> = ({
-    heading = 'Loading Data',
-    message,
-  }) => (
-    <Card title={heading} titleSize='sm'>
-      <span className='loading loading-spinner loading-lg'></span>
-    </Card>
-  );
-  
+  heading = "Loading Data",
+  message,
+}) => (
+  <Card title={heading} titleSize="sm">
+    <span className="loading loading-spinner loading-lg"></span>
+  </Card>
+);

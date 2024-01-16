@@ -1,7 +1,4 @@
-import {
-  HiOutlineTruck,
-  HiXMark,
-} from "react-icons/hi2";
+import { HiOutlineTruck, HiXMark } from "react-icons/hi2";
 import { useFetchSuppliers } from "@/hooks/suppliers";
 import { Card } from "ui";
 

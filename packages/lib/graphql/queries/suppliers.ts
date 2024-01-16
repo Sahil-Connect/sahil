@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const FETCH_SUPPLIERS = gql`
   query getSuppliers($offset: Int = 0, $limit: Int = 10) {
@@ -22,27 +22,30 @@ export const FETCH_SUPPLIERS = gql`
 `;
 
 export const FETCH_SUPPLIER_ORDERS = gql`
-query getSupplierOrders($supplierId: uuid) {
-  order_supplier(where: {supplierId: {_eq: $supplierId}}, distinct_on: supplierId) {
-    id
-    supplierId
-    order {
+  query getSupplierOrders($supplierId: uuid) {
+    order_supplier(
+      where: { supplierId: { _eq: $supplierId } }
+      distinct_on: supplierId
+    ) {
       id
-      created_at
-      destination
-      id
-      orderId
-      customerId
-      origin
-      status
-      business {
-      contactName
-      phoneNumber
-      name
+      supplierId
+      order {
+        id
+        created_at
+        destination
+        id
+        orderId
+        customerId
+        origin
+        status
+        business {
+          contactName
+          phoneNumber
+          name
+        }
+      }
     }
   }
-}
-}
 `;
 
 export const FETCH_FILTERED_SUPPLIERS = gql`

@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
 export default NextAuth({
@@ -32,4 +32,4 @@ export default NextAuth({
 
   // Enable debug messages in the console if you are having problems
   debug: true,
-})
+});

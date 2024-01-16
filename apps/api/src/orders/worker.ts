@@ -2,7 +2,6 @@ import { Worker } from "bullmq";
 import { logger } from "../lib/winston";
 import { connection } from "../lib/ioredis";
 
-
 const worker = new Worker(
   "Order",
   async (job) => {

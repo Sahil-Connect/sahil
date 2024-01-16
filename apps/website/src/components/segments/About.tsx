@@ -1,7 +1,4 @@
-import { 
-  SectionWrapper, 
-  GridContainer, 
-} from '@/components/shared';
+import { SectionWrapper, GridContainer } from "@/components/shared";
 import Image from "next/image";
 import about from "../../../public/about.png";
 
@@ -20,14 +17,23 @@ export const About = () => {
               </h3>
             </div>
             <p className="mb-3 text-gray-600">
-              We are a dynamic platform that bridges the gap between businesses, suppliers, and customers. Our mission is to simplify procurement processes, foster market connections, and streamline delivery services.
+              We are a dynamic platform that bridges the gap between businesses,
+              suppliers, and customers. Our mission is to simplify procurement
+              processes, foster market connections, and streamline delivery
+              services.
             </p>
             <p className="mb-3 text-gray-600">
-              We believe in the power of collaboration and aim to create a thriving ecosystem where businesses can connect with suppliers that match their needs, and customers can find products that meet their preferences.
+              We believe in the power of collaboration and aim to create a
+              thriving ecosystem where businesses can connect with suppliers
+              that match their needs, and customers can find products that meet
+              their preferences.
             </p>
             <p className="mb-3 text-gray-600">
-              Our platform is designed to make transactions smoother, faster, and more efficient. We are committed to providing a seamless experience for all our users, ensuring they can focus on what matters
-              most - growing their business and satisfying their customers.
+              Our platform is designed to make transactions smoother, faster,
+              and more efficient. We are committed to providing a seamless
+              experience for all our users, ensuring they can focus on what
+              matters most - growing their business and satisfying their
+              customers.
             </p>
           </div>
           <div className="relative flex justify-center items-center">
@@ -42,5 +48,5 @@ export const About = () => {
         </div>
       </GridContainer>
     </SectionWrapper>
-  )
-}
+  );
+};

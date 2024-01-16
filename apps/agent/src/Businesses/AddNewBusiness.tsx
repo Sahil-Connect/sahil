@@ -21,14 +21,13 @@ export const InsertNewBusiness = () => {
   } = useForm<Inputs>();
   const { insertClient, loading, error } = useRegisterBusiness();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-
     const validtedInput = businessSchema.parse(data);
-    
+
     insertClient({
       variables: {
         object: {
           name: data.businessName,
-          ...data
+          ...data,
         },
       },
     });

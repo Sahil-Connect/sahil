@@ -7,7 +7,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar header="Admin" links={[]}/>
+        <Navbar header="Admin" links={[]} />
         {children}
       </body>
     </html>

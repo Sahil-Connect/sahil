@@ -1,11 +1,11 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from "@apollo/client";
 import {
   FETCH_ORDERS,
   FETCH_ORDER_BY_PK,
   INSERT_NEW_ORDER,
   FETCH_ORDER_DELIVERIES,
   FETCH_ORDERS_STATS,
-} from '@sahil/lib/graphql';
+} from "@sahil/lib/graphql";
 
 export const useFetchOrders = () => {
   const { error, data, loading } = useQuery(FETCH_ORDERS);

@@ -16,7 +16,7 @@ export const OrderClient = ({ businessId }) => {
 
   return (
     <div className="grow space-y-2">
-      <Card className="grow " titleSize="sm" >
+      <Card className="grow " titleSize="sm">
         <div className="flex justify-between">
           <Link
             href={`/suppliers/${business.id}`}

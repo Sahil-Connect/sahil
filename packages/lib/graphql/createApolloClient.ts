@@ -3,15 +3,15 @@ import {
   InMemoryCache,
   createHttpLink,
   NormalizedCacheObject,
-} from '@apollo/client';
+} from "@apollo/client";
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== "undefined";
 
 type HttpOptions = {
   headers?: {
     Authorization?: string;
-    'x-hasura-admin-secret'?: string;
-    'x-hasura-role'?: string;
+    "x-hasura-admin-secret"?: string;
+    "x-hasura-role"?: string;
   };
   token?: string;
 };
@@ -28,11 +28,11 @@ export const createApolloClient = ({
   const initialState: Record<string, any> = {};
   const link = createHttpLink({
     uri,
-    credentials: 'include',
+    credentials: "include",
     headers: {
       ...httpOptions.headers,
-      'x-hasura-admin-secret':
-        httpOptions.headers?.['x-hasura-admin-secret'] || '',
+      "x-hasura-admin-secret":
+        httpOptions.headers?.["x-hasura-admin-secret"] || "",
     },
   });
 
@@ -43,7 +43,7 @@ export const createApolloClient = ({
     cache: new InMemoryCache().restore(initialState || {}),
     defaultOptions: {
       watchQuery: {
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: "cache-and-network",
       },
     },
   });
