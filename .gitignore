@@ -13,6 +13,7 @@ coverage
 .next/
 out/
 build
+apps/api/src/**/*.js
 
 # misc
 .DS_Store
