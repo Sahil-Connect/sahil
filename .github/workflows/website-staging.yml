@@ -6,6 +6,7 @@ on:
     # check which application has been changed 
     paths:
       - 'apps/website/**'
+      - 'infra/docker/Dockerfile.website'
       - '.github/workflows/website-staging.yml'
 
 
@@ -35,7 +36,7 @@ jobs:
     - run: |
         echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-website:stagging-$GITHUB_SHA" >> $GITHUB_ENV
 
-    # GCP auth & image pushing
+    # GCP auth
     - name: Authenticate the service account
       uses: google-github-actions/auth@v1
       with:
@@ -54,12 +55,17 @@ jobs:
     - name: Use gcloud CLI
       run: 'gcloud info'
 
-    - name: Build a docker image
-      run: |-
-        docker build -f infra/docker/Dockerfile.website -t ${{ env.IMAGE }} .
-
-    - name: Push image to gcr.io
-      run: docker push ${{ env.IMAGE }}
+    # Buils & Push
+    - name: Build & Push
+      uses: docker/build-push-action@v3
+      with:
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        context: .
+        file: infra/docker/Dockerfile.website
+        #labels: ${{ steps.meta.outputs.labels }}
+        push: true
+        tags: ${{ env.IMAGE }}
 
     - name: Deploy to Cloud Run
       id: deploy
@@ -75,7 +81,9 @@ jobs:
 
     # If required, use the Cloud Run url output in later steps
     - name: Show Output
-      run: echo ${{ steps.deploy.outputs.url }}
+      run: | 
+        - echo ${{ steps.deploy.outputs.url }}
+        - echo ${{ steps.step1.outputs.IMAGE }}
 
   # stagging:
   #   needs: build
