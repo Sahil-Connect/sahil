@@ -11,6 +11,8 @@ import {
 import {
   GetBusinessByPkQuery,
   GetBusinessByPkQueryVariables,
+  GetBusinessOrdersQuery,
+  GetBusinessOrdersQueryVariables,
 } from "@sahil/lib/graphql/generated/graphql";
 
 export const useFetchBusinessByPK = (id: string) => {
@@ -51,7 +53,10 @@ export const useFetchBusinessOrders = ({
   limit?: number;
   offset: number;
 }) => {
-  const { error, data, loading } = useQuery(FETCH_BUSINESS_ORDERS, {
+  const { error, data, loading } = useQuery<
+    GetBusinessOrdersQuery,
+    GetBusinessOrdersQueryVariables
+  >(FETCH_BUSINESS_ORDERS, {
     variables: {
       customerId,
       limit,

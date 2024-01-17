@@ -1,3 +1,6 @@
+import { FC } from "react";
+import { Products } from "@sahil/lib/graphql/generated/graphql";
+
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
 import { useOrderFormStore } from "@/hooks/useOrderFormStore";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -12,7 +15,6 @@ import {
   HiPlus,
   HiMinus,
 } from "react-icons/hi2";
-import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
 import { usePlaceBusinessOrder } from "@/hooks/orders";
 
 const ProductSummary = ({ product }) => {
@@ -20,7 +22,7 @@ const ProductSummary = ({ product }) => {
     <>
       <div className="flex justify-between gap-2 items-center">
         <div className="flex gap-2">
-          <p className="textbold">{product.name}</p>
+          <p className="text-bold">{product.name}</p>
           <div className="badge">{formatCost(product.price)}</div>
         </div>
         <div className="flex gap-2 items-center">
@@ -45,11 +47,6 @@ type FormData = z.infer<typeof checkoutSchema>;
 
 export const OrderSummary = () => {
   const {
-    requesTtoPay,
-    loading: payLoading,
-    error: payError,
-  } = useRequesTtoPay();
-  const {
     placeOrder,
     loading: orderLoading,
     error: orderError,
@@ -61,6 +58,7 @@ export const OrderSummary = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-expect-error
     resolver: zodResolver(checkoutSchema),
   });
   const orderItems = useOrderItemsStore((state) => state.orderItems);
@@ -75,10 +73,8 @@ export const OrderSummary = () => {
     }
   );
 
-  console.log(client);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log("woooooo");
     // const validatedInput = .parse(data);
     // navigateToNextStep("");
     try {
@@ -92,21 +88,6 @@ export const OrderSummary = () => {
         },
       });
       console.log("order:", order);
-      const res = await requesTtoPay({
-        variables: {
-          object: {
-            amount: totalCost,
-            payer: {
-              partyId: "0910060031",
-              partyIdType: "MSISDN",
-            },
-            externalId: "6353636",
-            payerMessage: "Hey",
-            payeeNote: "Sahil Order",
-          },
-        },
-      });
-      console.log("res:", res);
     } catch (err) {
       console.log("no:", err);
     }
@@ -121,7 +102,7 @@ export const OrderSummary = () => {
       </div>
       <Card title="Order: ED-15" titleSize="sm">
         <div className="space-y-2">
-          {orderItems.map((product) => (
+          {orderItems.map((product: any) => (
             <ProductSummary key={product.id} product={product} />
           ))}
         </div>

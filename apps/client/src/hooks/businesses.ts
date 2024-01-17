@@ -6,6 +6,26 @@ import {
   FETCH_BUSINESS_ORDERS,
 } from "@sahil/lib/graphql";
 
+// graphql types
+import {
+  GetBusinessByPkQuery,
+  GetBusinessByPkQueryVariables,
+  GetBusinessOrdersQuery,
+  GetBusinessOrdersQueryVariables,
+} from "@sahil/lib/graphql/generated/graphql";
+
+export const useFetchBusinessByPK = (id: string) => {
+  const { error, data, loading } = useQuery<
+    GetBusinessByPkQuery,
+    GetBusinessByPkQueryVariables
+  >(FETCH_BUSINESS_BY_PK, {
+    variables: {
+      id,
+    },
+  });
+  return { error, data: data?.business_by_pk, loading };
+};
+
 export const useFetchBusinesses = () => {
   const { error, data, loading } = useQuery(FETCH_BUSINESSES);
   return {
@@ -14,15 +34,6 @@ export const useFetchBusinesses = () => {
     loading,
     businessCount: data?.business_aggregate?.aggregate,
   };
-};
-
-export const useFetchBusinessByPK = (id: string) => {
-  const { error, data, loading } = useQuery(FETCH_BUSINESS_BY_PK, {
-    variables: {
-      id,
-    },
-  });
-  return { error, data: data?.business_by_pk, loading };
 };
 
 export const useRegisterBusiness = () => {
@@ -41,7 +52,10 @@ export const useFetchBusinessOrders = ({
   limit?: number;
   offset: number;
 }) => {
-  const { error, data, loading } = useQuery(FETCH_BUSINESS_ORDERS, {
+  const { error, data, loading } = useQuery<
+    GetBusinessOrdersQuery,
+    GetBusinessOrdersQueryVariables
+  >(FETCH_BUSINESS_ORDERS, {
     variables: {
       customerId,
       limit,

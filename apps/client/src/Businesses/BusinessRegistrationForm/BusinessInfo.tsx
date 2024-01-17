@@ -24,7 +24,7 @@ export const BusinessInfo = () => {
 
   const router = useRouter();
 
-  const { formData } = useBusinessFormStore((state) => state);
+  const { formData } = useBusinessFormStore((state: any) => state);
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = businessInfoSchema.parse(data);
   };

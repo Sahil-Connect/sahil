@@ -90,15 +90,9 @@ export default function BusinessRegistrationPage() {
             onPrevStep={onPrevStep}
             onNextStep={onNextStep}
           />
-          {currentStep === "business_info" && (
-            <BusinessInfo navigateToNextStep={navigateToNextStep} />
-          )}
-          {currentStep === "address_info" && (
-            <AddressInfo navigateToNextStep={navigateToNextStep} />
-          )}
-          {currentStep === "summary" && (
-            <BusinessInfoSummary navigateToNextStep={navigateToNextStep} />
-          )}
+          {currentStep === "business_info" && <BusinessInfo />}
+          {currentStep === "address_info" && <AddressInfo />}
+          {currentStep === "summary" && <BusinessInfoSummary />}
         </div>
       </div>
     </section>

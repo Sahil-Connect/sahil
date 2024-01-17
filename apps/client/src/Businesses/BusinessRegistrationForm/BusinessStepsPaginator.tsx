@@ -1,4 +1,4 @@
-import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
+// import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 import { JoinGrid } from "ui";
 
@@ -14,12 +14,12 @@ export const BusinessStepsPaginator = ({
   onNextStep,
   onPrevStep,
 }: Props) => {
-  const { steps, currentStep } = useBusinessFormStore((state) => state);
-  const currentIndex = steps.indexOf(currentStep);
+  // const { steps, currentStep } = useBusinessFormStore((state: any) => state);
+  // const currentIndex = steps.indexOf(currentStep);
   return (
     <>
       <div className="flex justify-between items-center">
-        <div className="flex gap-4 items-center">
+        {/* <div className="flex gap-4 items-center">
           <h3 className="text-xl">
             {headers[steps.indexOf(currentStep)].title}{" "}
             <div className="badge badge-accent">
@@ -44,7 +44,7 @@ export const BusinessStepsPaginator = ({
           >
             Next <HiArrowSmallRight />
           </button>
-        </JoinGrid>
+        </JoinGrid> */}
       </div>
     </>
   );

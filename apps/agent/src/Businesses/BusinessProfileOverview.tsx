@@ -1,3 +1,6 @@
+import { FC } from "react";
+import { Business } from "@sahil/lib/graphql/generated/graphql";
+
 import {
   HiOutlinePhone,
   HiOutlineMapPin,
@@ -6,24 +9,11 @@ import {
 } from "react-icons/hi2";
 import { Card } from "ui";
 
-type SahilBusiness = {
-  name: string;
-  id: string;
-  contactName: string;
-  type: string;
-  phoneNumber: string;
-  description: string;
-  contactEmail: string;
-  addresses: Array<{
-    street_address: string;
-  }>;
-};
+type Props = {
+  business: Business 
+}
 
-export const BusinessProfileOverview = ({
-  business,
-}: {
-  business: SahilBusiness;
-}) => {
+export const BusinessProfileOverview: FC<Props> = ({ business }) => {
   return (
     <Card height="h-fit">
       <div className="avatar placeholder">

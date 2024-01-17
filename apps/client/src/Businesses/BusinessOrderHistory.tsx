@@ -61,13 +61,14 @@ export const BusinessOrderHistory = () => {
         data={orders}
         error={error}
         loading={loading}
-        renderItem={(order) => <OrderSummary order={order} key={order.id} />}
+        renderItem={(order: any) => <OrderSummary order={order} key={order.id} />}
       />
     </div>
   );
 };
 
-const OrderSummary = ({ order }) => {
+const OrderSummary = ({ order }: any) => {
+  // @ts-ignore
   const statusStyle = orderStyles[order.status] || "default";
   return (
     <Card className="bg-white h-full">
