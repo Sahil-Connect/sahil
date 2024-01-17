@@ -1,8 +1,17 @@
+import { FC } from "react";
+import { Business } from "@sahil/lib/graphql/__generated__/graphql";
+
 import { Card } from "ui";
 import { HiOutlineBanknotes, HiOutlineReceiptPercent } from "react-icons/hi2";
 import { formatCurrency } from "@sahil/lib";
 
-export const OrderItem = ({ price, quantity, title }) => {
+type OrderItem = {
+  price: any;
+  quantity: any;
+  title: any;
+};
+
+export const OrderItem: FC<OrderItem> = ({ price, quantity, title }) => {
   return (
     <Card className="bg-white">
       <div className="flex justify-between items-center">
@@ -22,9 +31,13 @@ export const OrderItem = ({ price, quantity, title }) => {
   );
 };
 
-export const OrderItems = ({ items }) => {
+type Props = {
+  items: any;
+};
+
+export const OrderItems: FC<Props> = ({ items }) => {
   const { totalItems, totalCost } = items?.reduce(
-    (totals, product) => ({
+    (totals: any, product: any) => ({
       totalItems: totals.totalItems + product.quantity,
       totalCost: totals.totalCost + product.price * product.quantity,
     }),
@@ -37,7 +50,7 @@ export const OrderItems = ({ items }) => {
     <>
       <Card title="Order Items" titleSize="sm" className="bg-gray-100">
         <ul className="space-y-2">
-          {items?.map((item) => (
+          {items?.map((item: any) => (
             <OrderItem
               key={item.id}
               title={item?.product?.name}

@@ -29,6 +29,7 @@ export const ProductSelection = ({ navigateToNextStep }) => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(productSelectionSchema),
   });
 

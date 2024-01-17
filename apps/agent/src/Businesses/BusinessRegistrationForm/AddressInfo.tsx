@@ -1,4 +1,4 @@
-import { Business } from "@sahil/lib/graphql/generated/graphql";
+import { Business } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const AddressInfo = () => {
   return (

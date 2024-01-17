@@ -39,7 +39,7 @@ export const ProductsCatalogue = () => {
   );
 
   useEffect(() => {
-    setProducts(products as Products[]);
+    setProducts(products);
   }, [products, setProducts]);
 
   if (error) {
@@ -91,7 +91,9 @@ export const ProductsCatalogue = () => {
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 12)}
         onPreviousPage={() => setOffset((prev) => prev - 12)}
-        isNextDisabled={offset + 12 >= productsCount!}
+        isNextDisabled={
+          (productsCount && offset + 12 >= productsCount) || false
+        }
         isPrevDisabled={offset === 0}
         size={productsCount}
         limit={12}

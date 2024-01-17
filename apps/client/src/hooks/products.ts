@@ -3,6 +3,14 @@ import { FETCH_PRODUCTS, FETCH_PRODUCTS_BY_NAME } from "@sahil/lib/graphql";
 import { GetProductsQuery } from "@sahil/lib/graphql/__generated__/graphql";
 import { useRouter } from "next/router";
 
+// graphql types
+import {
+  GetProductsByNameQuery,
+  GetProductsByNameQueryVariables,
+  GetProductsQuery,
+  GetProductsQueryVariables,
+} from '@sahil/lib/graphql/__generated__/graphql';
+
 export const useFetchProducts = ({
   offset = 0,
   limit = 12,
@@ -15,7 +23,11 @@ export const useFetchProducts = ({
 
   const graphqlQuery = name ? FETCH_PRODUCTS_BY_NAME : FETCH_PRODUCTS;
 
-  const { error, data, loading } = useQuery<GetProductsQuery>(graphqlQuery, {
+  const { error, data, loading } = useQuery<
+    GetProductsQuery | GetProductsByNameQuery,
+    GetProductsQueryVariables | GetProductsByNameQueryVariables
+  >(graphqlQuery, {
+
     variables: {
       offset,
       limit,

@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { Orders } from "@sahil/lib/graphql/__generated__/graphql";
+
 import { Card, IconButton } from "ui";
 import Link from "next/link";
 import { formatDateTime } from "@sahil/lib/dates";
@@ -10,7 +12,11 @@ import {
   HiCalendarDays,
 } from "react-icons/hi2";
 
-export const OrderOverview = ({ order }) => {
+type Props = {
+  order: Orders;
+};
+
+export const OrderOverview: FC<Props> = ({ order }) => {
   return (
     <>
       <Card className="w-full">
