@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Couriers } from "@sahil/lib/graphql/generated/graphql";
+import { Couriers } from "@sahil/lib/graphql/__generated__/graphql";
 
 import { Avatar, Card } from "ui";
 import Link from "next/link";

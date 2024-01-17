@@ -9,7 +9,7 @@ import {
 import {
   GetCouriersQuery,
   GetCouriersQueryVariables,
-} from "@sahil/lib/graphql/generated/graphql";
+} from "@sahil/lib/graphql/__generated__/graphql";
 
 export const useFetchCouriers = () => {
   const { error, data, loading } = useQuery<

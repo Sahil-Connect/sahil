@@ -1,8 +1,16 @@
+import { FC } from "react";
+import { Orders } from "@sahil/lib/graphql/__generated__/graphql";
+
 import { formatDateTime } from "@sahil/lib/dates";
 import { Card } from "ui";
 import { HiOutlinePrinter } from "react-icons/hi2";
 
-export const OrderPreferences = ({ order }) => {
+type Props = {
+  order: Orders
+}
+
+
+export const OrderPreferences: FC<Props> = ({ order }) => {
   return (
     <section className="bg-gray-100 space-y-2 p-2 rounded-xl shadow">
       <p>Review and Confirm Order</p>

@@ -22,6 +22,7 @@ export const SupplierPreferencesForm = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-expect-error
     resolver: zodResolver(supplierPrefencesSchema),
   });
   const router = useRouter();

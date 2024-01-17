@@ -33,7 +33,7 @@ export const OrderHistory = () => {
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 4)}
         onPreviousPage={() => setOffset((prev) => prev - 4)}
-        isNextDisabled={offset + 4 >= ordersCount}
+        isNextDisabled={ordersCount && offset + 4 >= ordersCount?.count || false}
         isPrevDisabled={offset === 0}
         size={ordersCount?.count}
         limit={3}
@@ -42,7 +42,7 @@ export const OrderHistory = () => {
       <List
         data={orders}
         loading={loading}
-        renderItem={(order) => <OrderOverview key={order.id} order={order} />}
+        renderItem={(order: any) => <OrderOverview key={order.id} order={order} />}
       />
     </section>
   );

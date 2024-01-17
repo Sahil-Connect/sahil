@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Business } from "@sahil/lib/graphql/generated/graphql";
+import { Business } from "@sahil/lib/graphql/__generated__/graphql";
 
 import {
   HiOutlinePhone,

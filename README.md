@@ -40,7 +40,6 @@ docker compose up -d sahil-api-local-dev
 docker compose down sahil-api-local-dev sahil-pgdb
 ```
 
-
 ### Run the apps locally with Docker
 
 ```

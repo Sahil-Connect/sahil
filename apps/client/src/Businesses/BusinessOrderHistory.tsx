@@ -32,6 +32,7 @@ export const BusinessOrderHistory = () => {
     customerId: "e87924e8-69e4-4171-bd89-0c8963e03d08",
     offset,
   });
+
   if (error) {
     return (
       <ListErrorState
@@ -51,7 +52,7 @@ export const BusinessOrderHistory = () => {
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 4)}
         onPreviousPage={() => setOffset((prev) => prev - 4)}
-        isNextDisabled={offset + 4 >= ordersCount}
+        isNextDisabled={ordersCount ? offset + 4 >= ordersCount.count : false}
         isPrevDisabled={offset === 0}
         size={ordersCount?.count}
         limit={3}

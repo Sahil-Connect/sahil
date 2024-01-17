@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Products } from "@sahil/lib/graphql/generated/graphql";
+import { Products } from "@sahil/lib/graphql/__generated__/graphql";
 
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
 import { useOrderFormStore } from "@/hooks/useOrderFormStore";

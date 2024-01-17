@@ -41,7 +41,7 @@ export const SupplierOrderHistory = ({ supplierId }) => {
         data={orders}
         error={error}
         loading={loading}
-        renderItem={(order) => (
+        renderItem={(order: any) => (
           <OrderSummary order={order.order} key={order.id} />
         )}
       />

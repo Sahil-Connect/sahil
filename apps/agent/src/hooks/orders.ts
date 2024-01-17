@@ -11,7 +11,7 @@ import {
 import {
   GetOrdersQuery,
   GetOrdersQueryVariables,
-} from "@sahil/lib/graphql/generated/graphql";
+} from "@sahil/lib/graphql/__generated__/graphql";
 
 export const useFetchOrders = () => {
   const { error, data, loading } = useQuery<

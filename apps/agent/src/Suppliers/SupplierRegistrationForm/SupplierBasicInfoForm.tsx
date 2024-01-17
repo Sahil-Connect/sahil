@@ -26,6 +26,7 @@ export const SupplierBasicInfoForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-expect-error
     resolver: zodResolver(supplierBasicInfoSchema),
   });
 

@@ -1,7 +1,8 @@
 import { FormControl, FormControlError } from "./FormControl";
 import { BaseInputProps } from "../types";
+import type { FieldValues } from "react-hook-form";
 
-type InputProps = BaseInputProps<unknown> & {
+type InputProps = BaseInputProps<FieldValues> & {
   type?: "text" | "email" | "password" | "number" | "date";
   placeholder?: string;
   defaultValue?: string | number;

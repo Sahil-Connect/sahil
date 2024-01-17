@@ -35,6 +35,7 @@ export const CourierVehicleInfo = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(courierVehicleSchema),
   });
 

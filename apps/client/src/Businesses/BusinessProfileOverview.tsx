@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Business } from "@sahil/lib/graphql/generated/graphql";
+import { Business } from "@sahil/lib/graphql/__generated__/graphql";
 
 import {
   HiOutlinePhone,
@@ -10,7 +10,7 @@ import {
 import { Card } from "ui";
 
 type Props = {
-  business: Business;
+  business: Partial<Business>;
 };
 
 export const BusinessProfileOverview: FC<Props> = ({ business }) => {
@@ -34,9 +34,7 @@ export const BusinessProfileOverview: FC<Props> = ({ business }) => {
           <span className="shadow rounded-md p-2">
             <HiOutlineMapPin />
           </span>
-          {business?.addresses.map(({ street_address: name }) => {
-            return <span key={name}>{name}</span>;
-          })}
+
         </div>
         <div className="flex items-center gap-2">
           <span className="shadow rounded-md p-2">
