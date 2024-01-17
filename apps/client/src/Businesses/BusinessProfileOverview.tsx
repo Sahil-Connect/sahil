@@ -34,7 +34,6 @@ export const BusinessProfileOverview: FC<Props> = ({ business }) => {
           <span className="shadow rounded-md p-2">
             <HiOutlineMapPin />
           </span>
-
         </div>
         <div className="flex items-center gap-2">
           <span className="shadow rounded-md p-2">

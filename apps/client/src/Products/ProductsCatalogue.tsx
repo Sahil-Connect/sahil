@@ -91,7 +91,9 @@ export const ProductsCatalogue = () => {
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 12)}
         onPreviousPage={() => setOffset((prev) => prev - 12)}
-        isNextDisabled={productsCount && offset + 12 >= productsCount || false}
+        isNextDisabled={
+          (productsCount && offset + 12 >= productsCount) || false
+        }
         isPrevDisabled={offset === 0}
         size={productsCount}
         limit={12}

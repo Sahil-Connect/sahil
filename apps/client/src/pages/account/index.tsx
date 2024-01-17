@@ -28,9 +28,10 @@ export default function Account() {
     <div className="space-y-4">
       <div className="flex flex-col gap-1 lg:gap-4 lg:flex-row">
         <div className="grow mb-4 lg:mb-0 space-y-2">
-        {
-        // @ts-ignore
-        business && <BusinessProfileOverview business={business} />}
+          {
+            // @ts-ignore
+            business && <BusinessProfileOverview business={business} />
+          }
           <MomoAccountDetails />
         </div>
         <div className="basis-4/5 space-y-2">

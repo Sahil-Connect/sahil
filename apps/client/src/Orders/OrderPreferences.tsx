@@ -6,9 +6,8 @@ import { Card } from "ui";
 import { HiOutlinePrinter } from "react-icons/hi2";
 
 type Props = {
-  order: Orders
-}
-
+  order: Orders;
+};
 
 export const OrderPreferences: FC<Props> = ({ order }) => {
   return (

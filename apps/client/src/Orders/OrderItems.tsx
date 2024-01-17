@@ -5,12 +5,11 @@ import { Card } from "ui";
 import { HiOutlineBanknotes, HiOutlineReceiptPercent } from "react-icons/hi2";
 import { formatCurrency } from "@sahil/lib";
 
-
 type OrderItem = {
   price: any;
   quantity: any;
   title: any;
-}
+};
 
 export const OrderItem: FC<OrderItem> = ({ price, quantity, title }) => {
   return (
@@ -34,7 +33,7 @@ export const OrderItem: FC<OrderItem> = ({ price, quantity, title }) => {
 
 type Props = {
   items: any;
-}
+};
 
 export const OrderItems: FC<Props> = ({ items }) => {
   const { totalItems, totalCost } = items?.reduce(

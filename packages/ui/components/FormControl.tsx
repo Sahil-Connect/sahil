@@ -8,7 +8,7 @@ export type FormControlProps = {
 
 type FormControlErrorProps = {
   message?: string;
-}
+};
 
 export const FormControlError: FC<FormControlErrorProps> = ({ message }) => {
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */);

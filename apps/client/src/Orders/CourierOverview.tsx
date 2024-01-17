@@ -7,8 +7,8 @@ import { Avatar, Card } from "ui";
 import { HiOutlinePhone, HiOutlineStar } from "react-icons/hi2";
 
 type Props = {
-  order: Orders
-}
+  order: Orders;
+};
 
 export const CourierOverview: FC<Props> = ({ order }) => {
   const {

@@ -42,8 +42,7 @@ const FilterSuppliersModal = () => {
         onClick={() => {
           // @ts-expect-error
           return document.getElementById("filter_suppliers_modal")?.showModal();
-          }
-        }
+        }}
       >
         {category ? (
           <>

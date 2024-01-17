@@ -12,8 +12,8 @@ import {
 } from "react-icons/hi2";
 
 type Props = {
-  order: Orders
-}
+  order: Orders;
+};
 
 export const OrderDetails: FC<Props> = ({ order }) => {
   return (

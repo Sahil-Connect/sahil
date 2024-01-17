@@ -27,7 +27,7 @@ type OrderItem = {
   price: any;
   quantity: any;
   title: any;
-}
+};
 
 export const OrderItem = ({ price, quantity, title }: OrderItem) => {
   return (
@@ -51,8 +51,7 @@ export const OrderItem = ({ price, quantity, title }: OrderItem) => {
 
 type Props = {
   items: any;
-}
-
+};
 
 export const OrderItems: FC<Props> = ({ items }) => {
   const { totalItems, totalCost } = items?.reduce(
@@ -117,7 +116,6 @@ export default function CheckoutPage() {
   const { orderItems } = useOrderItemsStore((state) => state);
   const { totalItems, totalPrice } = calculateTotal(orderItems);
   const router = useRouter();
-
 
   const onConfirmOrder = async () => {
     try {

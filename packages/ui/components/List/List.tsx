@@ -68,9 +68,10 @@ export const List = <T extends unknown>({
       className={`grid grid-cols-auto-250 2xl:grid-cols-4 gap-2`}
       ref={parent}
     >
-      {data && data.map((item: any, index: number) => (
-        <Fragment key={index}>{renderItem(item)}</Fragment>
-      ))}
+      {data &&
+        data.map((item: any, index: number) => (
+          <Fragment key={index}>{renderItem(item)}</Fragment>
+        ))}
     </div>
   );
 };

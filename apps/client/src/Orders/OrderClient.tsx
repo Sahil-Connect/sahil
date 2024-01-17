@@ -14,7 +14,7 @@ import Link from "next/link";
 
 type Props = {
   businessId: string;
-}
+};
 
 export const OrderClient: FC<Props> = ({ businessId }) => {
   const { error, data: business, loading } = useFetchBusinessByPK(businessId);
