@@ -60,6 +60,7 @@ services:
   sahil-hasura-local-dev:
     container_name: sahil-hasura-engine
     image: hasura/graphql-engine:v2.36.0
+    user: 1001:1001
     ports:
       - '8080:8080'
     restart: always
