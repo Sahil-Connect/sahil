@@ -9,7 +9,7 @@ import { processOrder } from "./operations/processOrder";
 
 const ordersRouter = Router();
 
-const orderObject = z.object({
+const orderSchema = z.object({
   customerId: z.string(),
   order_items: z.object({
     data: z
@@ -26,13 +26,13 @@ ordersRouter.use(logRequest);
 
 ordersRouter.post(
   "/",
-  validate(orderObject),
+  validate(orderSchema),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { object } = req.body.input;
       await pushIntoOrders(object);
       return res.status(200).json({
-        isValid: true,
+        order: object,
       });
     } catch (error) {
       next(error);

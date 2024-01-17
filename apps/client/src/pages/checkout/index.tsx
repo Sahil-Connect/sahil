@@ -12,7 +12,7 @@ import {
   useOrderValidSubscription,
   usePlaceBusinessOrder,
 } from "@/hooks/orders";
-import { Key, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import { Order_Item } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const OrderItem = ({
@@ -110,8 +110,8 @@ function calculateTotal(arr: Order_Item[]) {
 export default function CheckoutPage() {
   const {
     initOrder,
-    loading: orderLoading,
-    error: orderError,
+    loading: initLoading,
+    error: initError,
   } = useInitBusinessOrder();
   const { orderItems } = useOrderItemsStore((state) => state);
   const { totalItems, totalPrice } = calculateTotal(orderItems);
@@ -165,7 +165,9 @@ export default function CheckoutPage() {
             </div>
             <div className="card-actions">
               <button
-                className="btn btn-sm btn-primary"
+                className={`btn btn-sm btn-primary ${
+                  initLoading && "animate-pulse"
+                }`}
                 onClick={onConfirmOrder}
               >
                 <HiOutlineShoppingCart /> Confirm Order
@@ -196,22 +198,59 @@ const ProcessOrderRequest = ({
 }: {
   actionId: string | undefined;
 }) => {
+  const {
+    placeOrder,
+    loading: orderLoading,
+    error: orderError,
+  } = usePlaceBusinessOrder();
   const { data, loading, error } = useOrderValidSubscription(actionId!);
+  const [placeOrderResult, setPlaceOrderResult] = useState<any>();
 
-  if (error) {
-    console.log(error);
-    return <p>An error occurred while placing order</p>;
+  useEffect(() => {
+    const addOrderToDB = async () => {
+      if (data && data.insertBusinessOrder && data.insertBusinessOrder.output) {
+        try {
+          const order = removeTypename(data.insertBusinessOrder.output.order);
+          console.log("Order to be placed:", order);
+          const result = await placeOrder({
+            variables: {
+              object: order,
+            },
+          });
+          setPlaceOrderResult(result);
+        } catch (err) {
+          console.error("Error placing order:", err);
+        }
+      }
+    };
+
+    addOrderToDB();
+  }, [data, placeOrder]);
+
+  if (error) return <p>An error occurred while placing order</p>;
+  if (loading) return <p>Processing order...</p>;
+
+  if (placeOrderResult) {
+    return <p>Order successfully placed</p>;
   }
 
-  if (loading) {
-    return <p>Processing order...</p>;
+  return <></>;
+};
+
+const removeTypename = (value: any): any => {
+  if (value === null || value === undefined || typeof value !== "object") {
+    return value;
   }
+  if (Array.isArray(value)) {
+    return value.map((v) => removeTypename(v));
+  }
+  type GenericObject = { [key: string]: any };
 
-  console.log(data);
-
-  return (
-    <>
-      <p>Order Placed successfully!</p>
-    </>
-  );
+  const newValue: GenericObject = {};
+  for (const key in value) {
+    if (key !== "__typename") {
+      newValue[key] = removeTypename(value[key]);
+    }
+  }
+  return newValue;
 };

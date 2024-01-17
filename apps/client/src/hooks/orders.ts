@@ -39,7 +39,7 @@ export const usePlaceBusinessOrder = () => {
     InsertBusinessOrderMutationVariables
   >(INSERT_NEW_ORDER);
 
-  return { loading, placeOrder, error };
+  return { data, loading, placeOrder, error };
 };
 
 export const useFetchOrderDeliveriesByPK = (id: string) => {
@@ -71,5 +71,5 @@ export const useOrderValidSubscription = (actionId: string) => {
     skip: !actionId,
   });
 
-  return { data: data?.insertBusinessOrder.output, loading, error };
+  return { data, loading, error };
 };
