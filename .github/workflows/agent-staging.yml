@@ -1,21 +1,21 @@
-name: API Production
+name: Agent Stagging
 
 on:
   push:
-    branches: ['main']
+    branches: ['develop']
     # check which application has been changed 
     paths:
-      - 'apps/api/**'
-      - 'infra/docker/Dockerfile.api'
-      - '.github/workflows/api-production.yml'
+      - 'apps/agent/**'
+      - 'infra/docker/Dockerfile.agent'
+      - '.github/workflows/agent-staging.yml'
 
 
 env:
-  REGION: "us-east1"
+  REGION: "us-central1"
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
   GCP_PROJECT_NUMBER: ${{ secrets.GCP_PROJECT_NUMBER }}
-  SERVICE: "sahil-api-production"
+  SERVICE: "sahil-agent-stagging"
 
 jobs:
   build:
@@ -34,7 +34,7 @@ jobs:
       uses: actions/checkout@v3
       id: step1
     - run: |
-        echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-api:production-$GITHUB_SHA" >> $GITHUB_ENV
+        echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-agent:stagging-$GITHUB_SHA" >> $GITHUB_ENV
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -58,14 +58,13 @@ jobs:
     - name: Use gcloud CLI
       run: 'gcloud info'
 
-    # Buils & Push
     - name: Build & Push
       uses: docker/build-push-action@v3
       with:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         context: .
-        file: infra/docker/Dockerfile.api
+        file: infra/docker/Dockerfile.agent
         #labels: ${{ steps.meta.outputs.labels }}
         push: true
         tags: ${{ env.IMAGE }}
