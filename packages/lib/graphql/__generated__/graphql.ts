@@ -1202,7 +1202,7 @@ export enum InsertBusinessOrderOrdersUpdateColumn {
 
 export type InsertBusinessOrderOutput = {
   __typename?: "InsertBusinessOrderOutput";
-  isValid?: Maybe<Scalars["Boolean"]["output"]>;
+  order?: Maybe<OrderPayload>;
 };
 
 export type InsertBusinessOrderProductsAggregateBoolExp = {
@@ -1950,37 +1950,6 @@ export type InsertBusinessOrderUuidComparisonExp = {
   _nin?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
 };
 
-export type CreateAccessTokenResponse = {
-  __typename?: "CreateAccessTokenResponse";
-  expires_in?: Maybe<Scalars["Int"]["output"]>;
-  token?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type DirectionLeg = {
-  __typename?: "DirectionLeg";
-  distance?: Maybe<LegDistance>;
-  duration?: Maybe<LegDuration>;
-};
-
-export type DirectionRoute = {
-  __typename?: "DirectionRoute";
-  legs?: Maybe<Array<Maybe<DirectionLeg>>>;
-  name?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type Directions = {
-  __typename?: "Directions";
-  endLocation?: Maybe<GeoCoords>;
-  routes?: Maybe<DirectionRoute>;
-  startLocation?: Maybe<GeoCoords>;
-};
-
-export type GeoCoords = {
-  __typename?: "GeoCoords";
-  lat?: Maybe<Scalars["Float"]["output"]>;
-  lng?: Maybe<Scalars["Float"]["output"]>;
-};
-
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars["Int"]["input"]>;
@@ -2013,87 +1982,22 @@ export type LocationByCoords = {
   types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
 };
 
-export type OrdersActionInput = {
-  created_at: Scalars["timestamptz"]["input"];
-  customerId?: InputMaybe<Scalars["uuid"]["input"]>;
-  destination?: InputMaybe<Scalars["String"]["input"]>;
-  id: Scalars["uuid"]["input"];
-  orderId?: InputMaybe<Scalars["String"]["input"]>;
-  origin?: InputMaybe<Scalars["String"]["input"]>;
-  processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
-
-
-export type LegDuration = {
-  __typename?: "LegDuration";
-  text?: Maybe<Scalars["String"]["output"]>;
-  value?: Maybe<Scalars["String"]["output"]>;
+export type OrderItemData = {
+  __typename?: "OrderItemData";
+  price?: Maybe<Scalars["Int"]["output"]>;
+  productId?: Maybe<Scalars["String"]["output"]>;
+  quantity?: Maybe<Scalars["Int"]["output"]>;
 };
 
-export type LocationByCoords = {
-  __typename?: "LocationByCoords";
-  location?: Maybe<GeoCoords>;
-  placeId?: Maybe<Scalars["String"]["output"]>;
-  types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+export type OrderItems = {
+  __typename?: "OrderItems";
+  data?: Maybe<Array<Maybe<OrderItemData>>>;
 };
 
-export type PayerInput = {
-  partyId: Scalars["String"]["input"];
-  partyIdType: Scalars["String"]["input"];
-};
-
-export type PaymentStatusResponse = {
-  __typename?: "PaymentStatusResponse";
-  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  referenceId?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type Places = {
-  __typename?: "Places";
-  address?: Maybe<Scalars["String"]["output"]>;
-  lat?: Maybe<Scalars["Float"]["output"]>;
-  lng?: Maybe<Scalars["Float"]["output"]>;
-  location?: Maybe<Scalars["String"]["output"]>;
-  name?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type PreApprovalStatusResponse = {
-  __typename?: "PreApprovalStatusResponse";
-  expirationDateTime?: Maybe<Scalars["String"]["output"]>;
-  payer?: Maybe<Scalars["String"]["output"]>;
-  payerCurrency?: Maybe<Scalars["String"]["output"]>;
-  payerMessage?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type RequestToPayInput = {
-  amount: Scalars["Float"]["input"];
-  currency?: InputMaybe<Scalars["String"]["input"]>;
-  externalId: Scalars["String"]["input"];
-  payeeNote?: InputMaybe<Scalars["String"]["input"]>;
-  payer: PayerInput;
-  payerMessage?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RequestToPayResponse = {
-  __typename?: "RequestToPayResponse";
-  message?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type RequestToPayTransactionStatusResponse = {
-  __typename?: "RequestToPayTransactionStatusResponse";
-  amount?: Maybe<Scalars["String"]["output"]>;
-  currency?: Maybe<Scalars["String"]["output"]>;
-  externalId?: Maybe<Scalars["String"]["output"]>;
-  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
-  payeeNote?: Maybe<Scalars["String"]["output"]>;
-  payer?: Maybe<Scalars["String"]["output"]>;
-  payerMessage?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
+export type OrderPayload = {
+  __typename?: "OrderPayload";
+  customerId?: Maybe<Scalars["String"]["output"]>;
+  order_items?: Maybe<OrderItems>;
 };
 
 export type PayerInput = {
@@ -13823,6 +13727,15 @@ export type InsertBusinessOrderMutation = {
   insert_orders_one?: { __typename?: "orders"; id: any } | null;
 };
 
+export type InsertBusinessOrderActionMutationVariables = Exact<{
+  object?: InputMaybe<InsertBusinessOrderOrdersInsertInput>;
+}>;
+
+export type InsertBusinessOrderActionMutation = {
+  __typename?: "mutation_root";
+  insertBusinessOrder: any;
+};
+
 export type RegisterSupplierMutationVariables = Exact<{
   object: Suppliers_Insert_Input;
 }>;
@@ -14345,6 +14258,33 @@ export type GetUsersQuery = {
   }>;
 };
 
+export type GetOrderValidationSubscriptionVariables = Exact<{
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+}>;
+
+export type GetOrderValidationSubscription = {
+  __typename?: "subscription_root";
+  insertBusinessOrder?: {
+    __typename?: "insertBusinessOrder";
+    output?: {
+      __typename?: "InsertBusinessOrderOutput";
+      order?: {
+        __typename?: "OrderPayload";
+        customerId?: string | null;
+        order_items?: {
+          __typename?: "OrderItems";
+          data?: Array<{
+            __typename?: "OrderItemData";
+            price?: number | null;
+            productId?: string | null;
+            quantity?: number | null;
+          } | null> | null;
+        } | null;
+      } | null;
+    } | null;
+  } | null;
+};
+
 export const RegisterClientDocument = {
   kind: "Document",
   definitions: [
@@ -14561,6 +14501,55 @@ export const InsertBusinessOrderDocument = {
 } as unknown as DocumentNode<
   InsertBusinessOrderMutation,
   InsertBusinessOrderMutationVariables
+>;
+export const InsertBusinessOrderActionDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "insertBusinessOrderAction" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "object" },
+          },
+          type: {
+            kind: "NamedType",
+            name: {
+              kind: "Name",
+              value: "InsertBusinessOrderOrdersInsertInput",
+            },
+          },
+          defaultValue: { kind: "ObjectValue", fields: [] },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "insertBusinessOrder" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "object" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "object" },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  InsertBusinessOrderActionMutation,
+  InsertBusinessOrderActionMutationVariables
 >;
 export const RegisterSupplierDocument = {
   kind: "Document",
@@ -16933,3 +16922,109 @@ export const GetUsersDocument = {
     },
   ],
 } as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+export const GetOrderValidationDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "subscription",
+      name: { kind: "Name", value: "getOrderValidation" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          defaultValue: { kind: "StringValue", value: "", block: false },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "insertBusinessOrder" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "output" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "order" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "customerId" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "order_items" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "data" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "price",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "productId",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "quantity",
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetOrderValidationSubscription,
+  GetOrderValidationSubscriptionVariables
+>;

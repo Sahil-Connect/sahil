@@ -39,7 +39,7 @@ export const ProductsCatalogue = () => {
   );
 
   useEffect(() => {
-    setProducts(products);
+    setProducts(products as Products[]);
   }, [products, setProducts]);
 
   if (error) {
