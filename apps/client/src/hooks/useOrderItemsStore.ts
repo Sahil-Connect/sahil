@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { Order_Item, Products } from '@sahil/lib/graphql/__generated__/graphql';
+import { create } from "zustand";
+import { Order_Item, Products } from "@sahil/lib/graphql/__generated__/graphql";
 
 type OrderItemsStore = {
   orderItems: Order_Item[];

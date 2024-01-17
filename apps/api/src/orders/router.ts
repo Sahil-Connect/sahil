@@ -1,58 +1,49 @@
-import { NextFunction, Response, Router, Request } from 'express';
-import { pushIntoOrders } from '../enqueue';
-import { object, z } from 'zod';
-import { logger } from '../lib/winston';
-import { logRequest } from '../middleware/requestLogger';
-import { validate } from '../middleware/zodValidate';
-import { initOrder } from './operations/initOrder';
-import { processOrder } from './operations/processOrder';
+import { NextFunction, Response, Router, Request } from "express";
+import { pushIntoOrders } from "../enqueue";
+import { z } from "zod";
+import { logger } from "../lib/winston";
+import { logRequest } from "../middleware/requestLogger";
+import { validate } from "../middleware/zodValidate";
+import { initOrder } from "./operations/initOrder";
+import { processOrder } from "./operations/processOrder";
 
 const ordersRouter = Router();
 
-const orderSchema = z.object({
-  id: z.string(),
+const orderObject = z.object({
   customerId: z.string(),
-  status: z.string().optional(),
-  origin: z.string().optional(),
-  destination: z.string().optional(),
-  processedBy: z.string().optional(),
-  fulfillment_type: z.string().optional(),
+  order_items: z.object({
+    data: z
+      .object({
+        productId: z.string(),
+        price: z.number(),
+        quantity: z.number(),
+      })
+      .array(),
+  }),
 });
 
 ordersRouter.use(logRequest);
 
-type OrdersActionType = {
-  created_at: Date;
-  customerId: string;
-  destination: string;
-  id: string;
-  orderId: string;
-  origin: string;
-  processedBy: string;
-};
-
 ordersRouter.post(
-  '/',
-  validate(orderSchema),
-  async (req: Request, res: Response<OrdersActionType>, next: NextFunction) => {
+  "/",
+  validate(orderObject),
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log(req);
-      // @ts-ignore
-      // const order = await initOrder(req.locals);
-      // await pushIntoOrders(req.body);
-      // res.send({
-      //   ...order,
-      // });
+      const { object } = req.body.input;
+      await pushIntoOrders(object);
+      return res.status(200).json({
+        isValid: true,
+      });
     } catch (error) {
       next(error);
     }
   }
 );
 
-ordersRouter.post('/process', async (req, res, next) => {
+ordersRouter.post("/process", async (req, res, next) => {
   try {
     // const order = processOrder(req.body);
-    res.send({ status: 'success' });
+    res.send({ status: "success" });
   } catch (error) {
     next(error);
   }

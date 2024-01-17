@@ -24,6 +24,7 @@ export const validate =
 
       next();
     } catch (error) {
+      console.error(error);
       // @ts-ignore
       return res.status(400).send(error.errors);
     }
