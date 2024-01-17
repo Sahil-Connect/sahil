@@ -28,7 +28,10 @@ export default function BusinessPage() {
       </div>
       <div className="flex flex-col gap-4 lg:flex-row">
         <div className="grow mb-4 lg:mb-0">
-          <BusinessProfileOverview business={business} />
+          {
+            // @ts-ignore
+            <BusinessProfileOverview business={business} />
+          }
         </div>
         <div className="basis-4/5 space-y-2">
           <BusinessOrderHistory />

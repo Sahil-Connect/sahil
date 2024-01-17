@@ -25,6 +25,7 @@ type OrdersActionType = {
   processedBy: string;
 };
 
+// place an order
 ordersRouter.post(
   "/",
   validate(orderSchema),
@@ -32,6 +33,8 @@ ordersRouter.post(
     try {
       // @ts-ignore
       const order = await initOrder(req.locals);
+
+      // push into Queue
       await pushIntoOrders(req.body);
       res.send({
         ...order,

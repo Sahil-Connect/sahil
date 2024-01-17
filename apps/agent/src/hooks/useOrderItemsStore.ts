@@ -3,6 +3,7 @@ import { create } from "zustand";
 type OrderItem = {
   productId: string;
   quantity: number;
+  price: number;
 };
 
 type OrderItemsStore = {

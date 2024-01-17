@@ -2,8 +2,8 @@ version: '3'
 
 services:
   # Website
-  sahil-website-test:
-    container_name: sahil-website-test
+  sahil-website:
+    container_name: sahil-website
     build:
       context: .
       dockerfile: ./infra/docker/Dockerfile.website
@@ -15,19 +15,133 @@ services:
       - '3000:3000'
 
   # API
-  sahilapi:
+  sahil-api:
     container_name: sahil-api
     build:
       context: .
       dockerfile: ./infra/docker/Dockerfile.api
     image: sahil-api
     restart: always
-    depends_on: [database]
     ports:
-      - '3001:3001'
+      - '8000:8000'
+    env_file:
+      - path: ./apps/api/.env
+      #- path: ./apps/api/.env.production
 
-  database:
-    container_name: database
-    image: postgres
+  # AGENT
+  sahil-agent:
+    container_name: sahil-agent
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.agent
+    image: sahil-agent
+    restart: always
+    ports:
+      - '3000:3000'
+    env_file:
+      - path: ./apps/agent/.env
+      #- path: ./apps/agent/.env.production
+  
+  # CLIENT
+  sahil-client:
+    container_name: sahil-client
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.client
+    image: sahil-client
+    restart: always
+    ports:
+      - '3000:3000'
+    env_file:
+      - path: ./apps/client/.env
+      #- path: ./apps/client/.env.production
+
+  #### LOCAL DEV ENVIRONMENTS ####
+
+  # HASURA ENGINE
+  sahil-hasura-local-dev:
+    container_name: sahil-hasura-engine
+    image: hasura/graphql-engine:v2.36.0
+    user: 1001:1001
+    ports:
+      - '8080:8080'
+    restart: always
+    environment:
+      ## postgres database to store Hasura metadata
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@sahil-pgdb:5432/${POSTGRES_DB}
+      ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
+      PG_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@sahil-pgdb:5432/${POSTGRES_DB}
+      ## enable the console served by server
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      ## enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
+      # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
+      ## uncomment next line to set an admin secret
+      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_METADATA_DEFAULTS: '{"backend_configs":{"dataconnector":{"athena":{"uri":"http://data-connector-agent:8081/api/v1/athena"},"mariadb":{"uri":"http://data-connector-agent:8081/api/v1/mariadb"},"mysql8":{"uri":"http://data-connector-agent:8081/api/v1/mysql"},"oracle":{"uri":"http://data-connector-agent:8081/api/v1/oracle"},"snowflake":{"uri":"http://data-connector-agent:8081/api/v1/snowflake"}}}}'
+    depends_on:
+      hasura-data-connector:
+        condition: service_healthy
+      sahil-pgdb:
+        condition: service_healthy
+
+  # Hasura Data Connectors      
+  hasura-data-connector:
+    image: hasura/graphql-data-connector:v2.36.0
+    container_name: hasura-data-connector
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      QUARKUS_LOG_LEVEL: ERROR # FATAL, ERROR, WARN, INFO, DEBUG, TRACE
+      ## https://quarkus.io/guides/opentelemetry#configuration-reference
+      QUARKUS_OPENTELEMETRY_ENABLED: "false"
+      ## QUARKUS_OPENTELEMETRY_TRACER_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/api/v1/athena/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+
+  # API
+  sahil-api-local-dev:
+    container_name: sahil-redis-postgres
+    image: redis:6.0-alpine
+    restart: always
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    ports: 
+      - '6379:6379'
+    volumes:
+      - sahil_redisdata:/data
+    depends_on:
+        sahil-pgdb:
+          condition: service_healthy
+
+  # POSTGRESQL    
+  sahil-pgdb:
+    image: postgres:15
+    container_name: sahil-pgdb
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - '5432:5432'
+    volumes:
+    - sahil_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 10s  
+
+# VOLUMES
+volumes:
+  sahil_pgdata:
+  sahil_redisdata:

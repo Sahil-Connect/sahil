@@ -32,6 +32,7 @@ export const BusinessOrderHistory = () => {
     customerId: "e87924e8-69e4-4171-bd89-0c8963e03d08",
     offset,
   });
+
   if (error) {
     return (
       <ListErrorState
@@ -51,7 +52,7 @@ export const BusinessOrderHistory = () => {
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 4)}
         onPreviousPage={() => setOffset((prev) => prev - 4)}
-        isNextDisabled={offset + 4 >= ordersCount}
+        isNextDisabled={ordersCount ? offset + 4 >= ordersCount.count : false}
         isPrevDisabled={offset === 0}
         size={ordersCount?.count}
         limit={3}
@@ -61,13 +62,16 @@ export const BusinessOrderHistory = () => {
         data={orders}
         error={error}
         loading={loading}
-        renderItem={(order) => <OrderSummary order={order} key={order.id} />}
+        renderItem={(order: any) => (
+          <OrderSummary order={order} key={order.id} />
+        )}
       />
     </div>
   );
 };
 
-const OrderSummary = ({ order }) => {
+const OrderSummary = ({ order }: any) => {
+  // @ts-ignore
   const statusStyle = orderStyles[order.status] || "default";
   return (
     <Card className="bg-white h-full">

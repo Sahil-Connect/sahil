@@ -12,7 +12,7 @@ type NavbarLink = {
 
 export type NavbarProps = {
   links: NavbarLink[];
-  logo?: string;
+  logo?: any;
   header?: string;
 };
 

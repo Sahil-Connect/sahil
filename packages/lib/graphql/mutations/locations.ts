@@ -1,6 +1,4 @@
-// import {
-//     gql,
-// } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 // export const INSERT_BUSINESS_ADDRESS = gql`
 // mutation insertBusinessAddress($object: addresses_insert_input!) {

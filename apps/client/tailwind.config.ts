@@ -5,6 +5,7 @@ const baseConfig: Config = require("@sahil/configs/tailwind/tailwind.config");
 const extendedConfig: Config = {
   ...baseConfig,
   content: [
+    // @ts-expect-error
     ...baseConfig.content,
     "./src/Addresses/**/**.{js,ts,jsx,tsx,mdx}",
     "./src/Maps/**/*.{js,ts,tsx,tsx,mdx}",
@@ -22,6 +23,7 @@ const extendedConfig: Config = {
       ...baseConfig.theme?.extend,
     },
   },
+  // @ts-expect-error
   plugins: [...baseConfig.plugins, require("daisyui")],
   daisyui: {
     themes: [

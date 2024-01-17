@@ -24,6 +24,7 @@ export const SupplierBusinessInfoForm = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-expect-error
     resolver: zodResolver(supplierContactInfoSchema),
   });
   const router = useRouter();
