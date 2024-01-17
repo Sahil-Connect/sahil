@@ -3,6 +3,7 @@ import { sendPushNotification } from "../lib/webPush";
 
 const router = Router();
 
+// SMS, Email, Push
 router.post("/", async (req: Request, res: Response) => {
   try {
     const subscription = req.body.subscription;

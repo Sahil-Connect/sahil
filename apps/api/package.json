@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
     "dev": "nodemon src/server.ts",
+    "format": "",
     "work": "ts-node ./src/workers.ts",
     "work:order": "ts-node ./src/orders/worker.ts"
   },

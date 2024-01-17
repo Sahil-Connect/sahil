@@ -35,6 +35,29 @@ export type Scalars = {
   uuid: { input: any; output: any };
 };
 
+export type AccountBalanceResponse = {
+  __typename?: "AccountBalanceResponse";
+  availableBalance?: Maybe<Scalars["String"]["output"]>;
+  currency?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type Address = {
+  __typename?: "Address";
+  location?: Maybe<GeoCoords>;
+  placeId?: Maybe<Scalars["String"]["output"]>;
+  types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+};
+
+export type BasicUserInfoResponse = {
+  __typename?: "BasicUserInfoResponse";
+  birthdate?: Maybe<Scalars["String"]["output"]>;
+  family_name?: Maybe<Scalars["String"]["output"]>;
+  gender?: Maybe<Scalars["String"]["output"]>;
+  given_name?: Maybe<Scalars["String"]["output"]>;
+  locale?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
   _eq?: InputMaybe<Scalars["Boolean"]["input"]>;
@@ -46,6 +69,1885 @@ export type Boolean_Comparison_Exp = {
   _lte?: InputMaybe<Scalars["Boolean"]["input"]>;
   _neq?: InputMaybe<Scalars["Boolean"]["input"]>;
   _nin?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+};
+
+export type CreateAccessTokenResponse = {
+  __typename?: "CreateAccessTokenResponse";
+  expires_in?: Maybe<Scalars["Int"]["output"]>;
+  token?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type DirectionLeg = {
+  __typename?: "DirectionLeg";
+  distance?: Maybe<LegDistance>;
+  duration?: Maybe<LegDuration>;
+};
+
+export type DirectionRoute = {
+  __typename?: "DirectionRoute";
+  legs?: Maybe<Array<Maybe<DirectionLeg>>>;
+  name?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type Directions = {
+  __typename?: "Directions";
+  endLocation?: Maybe<GeoCoords>;
+  routes?: Maybe<DirectionRoute>;
+  startLocation?: Maybe<GeoCoords>;
+};
+
+export type GeoCoords = {
+  __typename?: "GeoCoords";
+  lat?: Maybe<Scalars["Float"]["output"]>;
+  lng?: Maybe<Scalars["Float"]["output"]>;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExp = {
+  avg?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpAvg>;
+  corr?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpCorr>;
+  count?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpCount>;
+  covar_samp?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpCovarSamp>;
+  max?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpMax>;
+  min?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpMin>;
+  stddev_samp?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpStddevSamp>;
+  sum?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpSum>;
+  var_samp?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpVarSamp>;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpAvg = {
+  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpAvgArgumentsColumns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderFloat8ComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpCorr = {
+  arguments: InsertBusinessOrderAddressesAggregateBoolExpCorrArguments;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderFloat8ComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpCorrArguments = {
+  X: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns;
+  Y: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderAddressesSelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpCovarSamp = {
+  arguments: InsertBusinessOrderAddressesAggregateBoolExpCovarSampArguments;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderFloat8ComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpCovarSampArguments = {
+  X: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns;
+  Y: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpMax = {
+  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpMaxArgumentsColumns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderFloat8ComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpMin = {
+  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpMinArgumentsColumns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderFloat8ComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpStddevSamp = {
+  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpStddevSampArgumentsColumns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderFloat8ComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpSum = {
+  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpSumArgumentsColumns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderFloat8ComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesAggregateBoolExpVarSamp = {
+  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpVarSampArgumentsColumns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  predicate: InsertBusinessOrderFloat8ComparisonExp;
+};
+
+export type InsertBusinessOrderAddressesArrRelInsertInput = {
+  data: Array<InsertBusinessOrderAddressesInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderAddressesOnConflict>;
+};
+
+export type InsertBusinessOrderAddressesBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderAddressesBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderAddressesBoolExp>>;
+  business?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
+  business_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  city?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  latitude?: InputMaybe<InsertBusinessOrderFloat8ComparisonExp>;
+  longitude?: InputMaybe<InsertBusinessOrderFloat8ComparisonExp>;
+  street_address?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  updated_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+};
+
+export enum InsertBusinessOrderAddressesConstraint {
+  /** unique or primary key constraint on columns "id" */
+  AddressesPkey = "addresses_pkey",
+}
+
+export type InsertBusinessOrderAddressesInsertInput = {
+  business?: InputMaybe<InsertBusinessOrderBusinessObjRelInsertInput>;
+  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  city?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  latitude?: InputMaybe<Scalars["float8"]["input"]>;
+  longitude?: InputMaybe<Scalars["float8"]["input"]>;
+  street_address?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+export type InsertBusinessOrderAddressesOnConflict = {
+  constraint: InsertBusinessOrderAddressesConstraint;
+  update_columns: Array<InsertBusinessOrderAddressesUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+};
+
+export enum InsertBusinessOrderAddressesSelectColumn {
+  /** column name */
+  BusinessId = "business_id",
+  /** column name */
+  City = "city",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+  /** column name */
+  StreetAddress = "street_address",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpAvgArgumentsColumns {
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+}
+
+export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns {
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+}
+
+export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns {
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+}
+
+export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpMaxArgumentsColumns {
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+}
+
+export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpMinArgumentsColumns {
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+}
+
+export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpStddevSampArgumentsColumns {
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+}
+
+export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpSumArgumentsColumns {
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+}
+
+export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpVarSampArgumentsColumns {
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+}
+
+export enum InsertBusinessOrderAddressesUpdateColumn {
+  /** column name */
+  BusinessId = "business_id",
+  /** column name */
+  City = "city",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Latitude = "latitude",
+  /** column name */
+  Longitude = "longitude",
+  /** column name */
+  StreetAddress = "street_address",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export type InsertBusinessOrderAgentBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderAgentBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderAgentBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderAgentBoolExp>>;
+  active?: InputMaybe<InsertBusinessOrderBooleanComparisonExp>;
+  agent_type?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  on_duty?: InputMaybe<InsertBusinessOrderBooleanComparisonExp>;
+};
+
+export enum InsertBusinessOrderAgentConstraint {
+  /** unique or primary key constraint on columns "id" */
+  AgentPkey = "agent_pkey",
+}
+
+export type InsertBusinessOrderAgentInsertInput = {
+  active?: InputMaybe<Scalars["Boolean"]["input"]>;
+  agent_type?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  on_duty?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type InsertBusinessOrderAgentObjRelInsertInput = {
+  data: InsertBusinessOrderAgentInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderAgentOnConflict>;
+};
+
+export type InsertBusinessOrderAgentOnConflict = {
+  constraint: InsertBusinessOrderAgentConstraint;
+  update_columns: Array<InsertBusinessOrderAgentUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderAgentBoolExp>;
+};
+
+export enum InsertBusinessOrderAgentUpdateColumn {
+  /** column name */
+  Active = "active",
+  /** column name */
+  AgentType = "agent_type",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  OnDuty = "on_duty",
+}
+
+export type InsertBusinessOrderBooleanComparisonExp = {
+  _eq?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _gt?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _gte?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _in?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _lt?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _lte?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _nin?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+};
+
+export type InsertBusinessOrderBusinessAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderBusinessAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderBusinessAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderBusinessSelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderBusinessArrRelInsertInput = {
+  data: Array<InsertBusinessOrderBusinessInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderBusinessOnConflict>;
+};
+
+export type InsertBusinessOrderBusinessBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderBusinessBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderBusinessBoolExp>>;
+  addresses?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
+  addresses_aggregate?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExp>;
+  agent?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
+  business_type?: InputMaybe<InsertBusinessOrderBusinessTypeBoolExp>;
+  contactEmail?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  contactName?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  description?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  orders?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
+  orders_aggregate?: InputMaybe<InsertBusinessOrderOrdersAggregateBoolExp>;
+  owner?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
+  owner_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  phoneNumber?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  registeration_channel_type?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeBoolExp>;
+  registered_by?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  registration_channel?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeEnumComparisonExp>;
+  type?: InputMaybe<InsertBusinessOrderBusinessTypeEnumComparisonExp>;
+  updated_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+};
+
+export enum InsertBusinessOrderBusinessConstraint {
+  /** unique or primary key constraint on columns "id" */
+  BusinessPkey = "business_pkey",
+}
+
+export type InsertBusinessOrderBusinessInsertInput = {
+  addresses?: InputMaybe<InsertBusinessOrderAddressesArrRelInsertInput>;
+  agent?: InputMaybe<InsertBusinessOrderUsersObjRelInsertInput>;
+  business_type?: InputMaybe<InsertBusinessOrderBusinessTypeObjRelInsertInput>;
+  contactEmail?: InputMaybe<Scalars["String"]["input"]>;
+  contactName?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  orders?: InputMaybe<InsertBusinessOrderOrdersArrRelInsertInput>;
+  owner?: InputMaybe<InsertBusinessOrderUsersObjRelInsertInput>;
+  owner_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  registeration_channel_type?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeObjRelInsertInput>;
+  registered_by?: InputMaybe<Scalars["uuid"]["input"]>;
+  registration_channel?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeEnum>;
+  type?: InputMaybe<InsertBusinessOrderBusinessTypeEnum>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+export type InsertBusinessOrderBusinessObjRelInsertInput = {
+  data: InsertBusinessOrderBusinessInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderBusinessOnConflict>;
+};
+
+export type InsertBusinessOrderBusinessOnConflict = {
+  constraint: InsertBusinessOrderBusinessConstraint;
+  update_columns: Array<InsertBusinessOrderBusinessUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
+};
+
+export enum InsertBusinessOrderBusinessSelectColumn {
+  /** column name */
+  ContactEmail = "contactEmail",
+  /** column name */
+  ContactName = "contactName",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  OwnerId = "owner_id",
+  /** column name */
+  PhoneNumber = "phoneNumber",
+  /** column name */
+  RegisteredBy = "registered_by",
+  /** column name */
+  RegistrationChannel = "registration_channel",
+  /** column name */
+  Type = "type",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export type InsertBusinessOrderBusinessTypeBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderBusinessTypeBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderBusinessTypeBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderBusinessTypeBoolExp>>;
+  businesses?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
+  businesses_aggregate?: InputMaybe<InsertBusinessOrderBusinessAggregateBoolExp>;
+  type?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+};
+
+export enum InsertBusinessOrderBusinessTypeConstraint {
+  /** unique or primary key constraint on columns "type" */
+  BusinessTypePkey = "business_type_pkey",
+}
+
+export enum InsertBusinessOrderBusinessTypeEnum {
+  Bar = "bar",
+  Hotel = "hotel",
+  Restaurant = "restaurant",
+}
+
+export type InsertBusinessOrderBusinessTypeEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderBusinessTypeEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderBusinessTypeEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderBusinessTypeEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderBusinessTypeEnum>>;
+};
+
+export type InsertBusinessOrderBusinessTypeInsertInput = {
+  businesses?: InputMaybe<InsertBusinessOrderBusinessArrRelInsertInput>;
+  type?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type InsertBusinessOrderBusinessTypeObjRelInsertInput = {
+  data: InsertBusinessOrderBusinessTypeInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderBusinessTypeOnConflict>;
+};
+
+export type InsertBusinessOrderBusinessTypeOnConflict = {
+  constraint: InsertBusinessOrderBusinessTypeConstraint;
+  update_columns: Array<InsertBusinessOrderBusinessTypeUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderBusinessTypeBoolExp>;
+};
+
+export enum InsertBusinessOrderBusinessTypeUpdateColumn {
+  /** column name */
+  Type = "type",
+}
+
+export enum InsertBusinessOrderBusinessUpdateColumn {
+  /** column name */
+  ContactEmail = "contactEmail",
+  /** column name */
+  ContactName = "contactName",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  OwnerId = "owner_id",
+  /** column name */
+  PhoneNumber = "phoneNumber",
+  /** column name */
+  RegisteredBy = "registered_by",
+  /** column name */
+  RegistrationChannel = "registration_channel",
+  /** column name */
+  Type = "type",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export type InsertBusinessOrderCourierRidesAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderCourierRidesAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderCourierRidesAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderCourierRidesSelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderCourierRidesArrRelInsertInput = {
+  data: Array<InsertBusinessOrderCourierRidesInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderCourierRidesOnConflict>;
+};
+
+export type InsertBusinessOrderCourierRidesBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderCourierRidesBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderCourierRidesBoolExp>>;
+  color?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  courier?: InputMaybe<InsertBusinessOrderCouriersBoolExp>;
+  courier_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  license_plate_number?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  model?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  ride_status?: InputMaybe<InsertBusinessOrderRideStatusBoolExp>;
+  ride_type?: InputMaybe<InsertBusinessOrderRideTypeBoolExp>;
+  status?: InputMaybe<InsertBusinessOrderRideStatusEnumComparisonExp>;
+  type?: InputMaybe<InsertBusinessOrderRideTypeEnumComparisonExp>;
+  updated_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+};
+
+export enum InsertBusinessOrderCourierRidesConstraint {
+  /** unique or primary key constraint on columns "id" */
+  CourierRidesPkey = "courier_rides_pkey",
+}
+
+export type InsertBusinessOrderCourierRidesInsertInput = {
+  color?: InputMaybe<Scalars["String"]["input"]>;
+  courier?: InputMaybe<InsertBusinessOrderCouriersObjRelInsertInput>;
+  courier_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  license_plate_number?: InputMaybe<Scalars["String"]["input"]>;
+  model?: InputMaybe<Scalars["String"]["input"]>;
+  ride_status?: InputMaybe<InsertBusinessOrderRideStatusObjRelInsertInput>;
+  ride_type?: InputMaybe<InsertBusinessOrderRideTypeObjRelInsertInput>;
+  status?: InputMaybe<InsertBusinessOrderRideStatusEnum>;
+  type?: InputMaybe<InsertBusinessOrderRideTypeEnum>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+export type InsertBusinessOrderCourierRidesOnConflict = {
+  constraint: InsertBusinessOrderCourierRidesConstraint;
+  update_columns: Array<InsertBusinessOrderCourierRidesUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
+};
+
+export enum InsertBusinessOrderCourierRidesSelectColumn {
+  /** column name */
+  Color = "color",
+  /** column name */
+  CourierId = "courier_id",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  LicensePlateNumber = "license_plate_number",
+  /** column name */
+  Model = "model",
+  /** column name */
+  Status = "status",
+  /** column name */
+  Type = "type",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export enum InsertBusinessOrderCourierRidesUpdateColumn {
+  /** column name */
+  Color = "color",
+  /** column name */
+  CourierId = "courier_id",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  LicensePlateNumber = "license_plate_number",
+  /** column name */
+  Model = "model",
+  /** column name */
+  Status = "status",
+  /** column name */
+  Type = "type",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export type InsertBusinessOrderCouriersBoolExp = {
+  DOB?: InputMaybe<InsertBusinessOrderDateComparisonExp>;
+  _and?: InputMaybe<Array<InsertBusinessOrderCouriersBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderCouriersBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderCouriersBoolExp>>;
+  assigned?: InputMaybe<InsertBusinessOrderBooleanComparisonExp>;
+  avatar?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  deliveries?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
+  deliveries_aggregate?: InputMaybe<InsertBusinessOrderDeliveryAggregateBoolExp>;
+  email?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  gender?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  phoneNumber?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  rides?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
+  rides_aggregate?: InputMaybe<InsertBusinessOrderCourierRidesAggregateBoolExp>;
+};
+
+export enum InsertBusinessOrderCouriersConstraint {
+  /** unique or primary key constraint on columns "id" */
+  CouriersPkey = "couriers_pkey",
+}
+
+export type InsertBusinessOrderCouriersInsertInput = {
+  DOB?: InputMaybe<Scalars["date"]["input"]>;
+  assigned?: InputMaybe<Scalars["Boolean"]["input"]>;
+  avatar?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  deliveries?: InputMaybe<InsertBusinessOrderDeliveryArrRelInsertInput>;
+  email?: InputMaybe<Scalars["String"]["input"]>;
+  gender?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  rides?: InputMaybe<InsertBusinessOrderCourierRidesArrRelInsertInput>;
+};
+
+export type InsertBusinessOrderCouriersObjRelInsertInput = {
+  data: InsertBusinessOrderCouriersInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderCouriersOnConflict>;
+};
+
+export type InsertBusinessOrderCouriersOnConflict = {
+  constraint: InsertBusinessOrderCouriersConstraint;
+  update_columns: Array<InsertBusinessOrderCouriersUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderCouriersBoolExp>;
+};
+
+export enum InsertBusinessOrderCouriersUpdateColumn {
+  /** column name */
+  Dob = "DOB",
+  /** column name */
+  Assigned = "assigned",
+  /** column name */
+  Avatar = "avatar",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Email = "email",
+  /** column name */
+  Gender = "gender",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  PhoneNumber = "phoneNumber",
+}
+
+export type InsertBusinessOrderDateComparisonExp = {
+  _eq?: InputMaybe<Scalars["date"]["input"]>;
+  _gt?: InputMaybe<Scalars["date"]["input"]>;
+  _gte?: InputMaybe<Scalars["date"]["input"]>;
+  _in?: InputMaybe<Array<Scalars["date"]["input"]>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _lt?: InputMaybe<Scalars["date"]["input"]>;
+  _lte?: InputMaybe<Scalars["date"]["input"]>;
+  _neq?: InputMaybe<Scalars["date"]["input"]>;
+  _nin?: InputMaybe<Array<Scalars["date"]["input"]>>;
+};
+
+export type InsertBusinessOrderDeliveryAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderDeliveryAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderDeliveryAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderDeliverySelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderDeliveryArrRelInsertInput = {
+  data: Array<InsertBusinessOrderDeliveryInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderDeliveryOnConflict>;
+};
+
+export type InsertBusinessOrderDeliveryBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderDeliveryBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderDeliveryBoolExp>>;
+  courier?: InputMaybe<InsertBusinessOrderCouriersBoolExp>;
+  courierId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  order?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
+  orderId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  status?: InputMaybe<InsertBusinessOrderDeliveryStatusEnumComparisonExp>;
+};
+
+export enum InsertBusinessOrderDeliveryConstraint {
+  /** unique or primary key constraint on columns "id" */
+  DeliveryPkey = "delivery_pkey",
+}
+
+export type InsertBusinessOrderDeliveryInsertInput = {
+  courier?: InputMaybe<InsertBusinessOrderCouriersObjRelInsertInput>;
+  courierId?: InputMaybe<Scalars["uuid"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order?: InputMaybe<InsertBusinessOrderOrdersObjRelInsertInput>;
+  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  status?: InputMaybe<InsertBusinessOrderDeliveryStatusEnum>;
+};
+
+export type InsertBusinessOrderDeliveryOnConflict = {
+  constraint: InsertBusinessOrderDeliveryConstraint;
+  update_columns: Array<InsertBusinessOrderDeliveryUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
+};
+
+export enum InsertBusinessOrderDeliverySelectColumn {
+  /** column name */
+  CourierId = "courierId",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "orderId",
+  /** column name */
+  Status = "status",
+}
+
+export enum InsertBusinessOrderDeliveryStatusEnum {
+  Active = "active",
+  Pending = "pending",
+}
+
+export type InsertBusinessOrderDeliveryStatusEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderDeliveryStatusEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderDeliveryStatusEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderDeliveryStatusEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderDeliveryStatusEnum>>;
+};
+
+export enum InsertBusinessOrderDeliveryUpdateColumn {
+  /** column name */
+  CourierId = "courierId",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "orderId",
+  /** column name */
+  Status = "status",
+}
+
+export type InsertBusinessOrderFloat8ComparisonExp = {
+  _eq?: InputMaybe<Scalars["float8"]["input"]>;
+  _gt?: InputMaybe<Scalars["float8"]["input"]>;
+  _gte?: InputMaybe<Scalars["float8"]["input"]>;
+  _in?: InputMaybe<Array<Scalars["float8"]["input"]>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _lt?: InputMaybe<Scalars["float8"]["input"]>;
+  _lte?: InputMaybe<Scalars["float8"]["input"]>;
+  _neq?: InputMaybe<Scalars["float8"]["input"]>;
+  _nin?: InputMaybe<Array<Scalars["float8"]["input"]>>;
+};
+
+export type InsertBusinessOrderIntComparisonExp = {
+  _eq?: InputMaybe<Scalars["Int"]["input"]>;
+  _gt?: InputMaybe<Scalars["Int"]["input"]>;
+  _gte?: InputMaybe<Scalars["Int"]["input"]>;
+  _in?: InputMaybe<Array<Scalars["Int"]["input"]>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _lt?: InputMaybe<Scalars["Int"]["input"]>;
+  _lte?: InputMaybe<Scalars["Int"]["input"]>;
+  _neq?: InputMaybe<Scalars["Int"]["input"]>;
+  _nin?: InputMaybe<Array<Scalars["Int"]["input"]>>;
+};
+
+export enum InsertBusinessOrderOrderFulfillmentTypeEnum {
+  Full = "full",
+  Partial = "partial",
+}
+
+export type InsertBusinessOrderOrderFulfillmentTypeEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderOrderFulfillmentTypeEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderOrderFulfillmentTypeEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderOrderFulfillmentTypeEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderOrderFulfillmentTypeEnum>>;
+};
+
+export type InsertBusinessOrderOrderItemAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderOrderItemAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderOrderItemAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderOrderItemSelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderOrderItemArrRelInsertInput = {
+  data: Array<InsertBusinessOrderOrderItemInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderOrderItemOnConflict>;
+};
+
+export type InsertBusinessOrderOrderItemBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderOrderItemBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderOrderItemBoolExp>>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  order?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
+  orderId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  price?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
+  product?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
+  productId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  quantity?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
+};
+
+export enum InsertBusinessOrderOrderItemConstraint {
+  /** unique or primary key constraint on columns "id" */
+  OrderItemsPkey = "order_items_pkey",
+}
+
+export type InsertBusinessOrderOrderItemInsertInput = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order?: InputMaybe<InsertBusinessOrderOrdersObjRelInsertInput>;
+  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  price?: InputMaybe<Scalars["Int"]["input"]>;
+  product?: InputMaybe<InsertBusinessOrderProductsObjRelInsertInput>;
+  productId?: InputMaybe<Scalars["uuid"]["input"]>;
+  quantity?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type InsertBusinessOrderOrderItemOnConflict = {
+  constraint: InsertBusinessOrderOrderItemConstraint;
+  update_columns: Array<InsertBusinessOrderOrderItemUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
+};
+
+export enum InsertBusinessOrderOrderItemSelectColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "orderId",
+  /** column name */
+  Price = "price",
+  /** column name */
+  ProductId = "productId",
+  /** column name */
+  Quantity = "quantity",
+}
+
+export enum InsertBusinessOrderOrderItemUpdateColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "orderId",
+  /** column name */
+  Price = "price",
+  /** column name */
+  ProductId = "productId",
+  /** column name */
+  Quantity = "quantity",
+}
+
+export type InsertBusinessOrderOrderStatusBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderOrderStatusBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderOrderStatusBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderOrderStatusBoolExp>>;
+  orders?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
+  orders_aggregate?: InputMaybe<InsertBusinessOrderOrdersAggregateBoolExp>;
+  status?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+};
+
+export enum InsertBusinessOrderOrderStatusConstraint {
+  /** unique or primary key constraint on columns "status" */
+  OrderStatusPkey = "order_status_pkey",
+}
+
+export enum InsertBusinessOrderOrderStatusEnum {
+  Canceled = "CANCELED",
+  Confirmed = "CONFIRMED",
+  Delivered = "DELIVERED",
+  Enroute = "ENROUTE",
+  Fulfilled = "FULFILLED",
+  Pending = "PENDING",
+}
+
+export type InsertBusinessOrderOrderStatusEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderOrderStatusEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderOrderStatusEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderOrderStatusEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderOrderStatusEnum>>;
+};
+
+export type InsertBusinessOrderOrderStatusInsertInput = {
+  orders?: InputMaybe<InsertBusinessOrderOrdersArrRelInsertInput>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type InsertBusinessOrderOrderStatusObjRelInsertInput = {
+  data: InsertBusinessOrderOrderStatusInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderOrderStatusOnConflict>;
+};
+
+export type InsertBusinessOrderOrderStatusOnConflict = {
+  constraint: InsertBusinessOrderOrderStatusConstraint;
+  update_columns: Array<InsertBusinessOrderOrderStatusUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderOrderStatusBoolExp>;
+};
+
+export enum InsertBusinessOrderOrderStatusUpdateColumn {
+  /** column name */
+  Status = "status",
+}
+
+export type InsertBusinessOrderOrderSupplierAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderOrderSupplierAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderOrderSupplierAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderOrderSupplierSelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderOrderSupplierArrRelInsertInput = {
+  data: Array<InsertBusinessOrderOrderSupplierInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderOrderSupplierOnConflict>;
+};
+
+export type InsertBusinessOrderOrderSupplierBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderOrderSupplierBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderOrderSupplierBoolExp>>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  order?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
+  order_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  supplier?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
+  supplierId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+};
+
+export enum InsertBusinessOrderOrderSupplierConstraint {
+  /** unique or primary key constraint on columns "id" */
+  OrderSupplierPkey = "order_supplier_pkey",
+}
+
+export type InsertBusinessOrderOrderSupplierInsertInput = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order?: InputMaybe<InsertBusinessOrderOrdersObjRelInsertInput>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  supplier?: InputMaybe<InsertBusinessOrderSuppliersObjRelInsertInput>;
+  supplierId?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+export type InsertBusinessOrderOrderSupplierOnConflict = {
+  constraint: InsertBusinessOrderOrderSupplierConstraint;
+  update_columns: Array<InsertBusinessOrderOrderSupplierUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
+};
+
+export enum InsertBusinessOrderOrderSupplierSelectColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "order_id",
+  /** column name */
+  SupplierId = "supplierId",
+}
+
+export enum InsertBusinessOrderOrderSupplierUpdateColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "order_id",
+  /** column name */
+  SupplierId = "supplierId",
+}
+
+export type InsertBusinessOrderOrdersAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderOrdersAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderOrdersAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderOrdersSelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderOrdersArrRelInsertInput = {
+  data: Array<InsertBusinessOrderOrdersInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderOrdersOnConflict>;
+};
+
+export type InsertBusinessOrderOrdersBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderOrdersBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderOrdersBoolExp>>;
+  agent?: InputMaybe<InsertBusinessOrderAgentBoolExp>;
+  business?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  customerId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  deliveries?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
+  deliveries_aggregate?: InputMaybe<InsertBusinessOrderDeliveryAggregateBoolExp>;
+  destination?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  fulfillment_type?: InputMaybe<InsertBusinessOrderOrderFulfillmentTypeEnumComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  orderId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  order_items?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
+  order_items_aggregate?: InputMaybe<InsertBusinessOrderOrderItemAggregateBoolExp>;
+  order_status?: InputMaybe<InsertBusinessOrderOrderStatusBoolExp>;
+  order_suppliers?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
+  order_suppliers_aggregate?: InputMaybe<InsertBusinessOrderOrderSupplierAggregateBoolExp>;
+  origin?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  processedBy?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  status?: InputMaybe<InsertBusinessOrderOrderStatusEnumComparisonExp>;
+};
+
+export enum InsertBusinessOrderOrdersConstraint {
+  /** unique or primary key constraint on columns "id" */
+  OrdersPkey = "orders_pkey",
+}
+
+export type InsertBusinessOrderOrdersInsertInput = {
+  agent?: InputMaybe<InsertBusinessOrderAgentObjRelInsertInput>;
+  business?: InputMaybe<InsertBusinessOrderBusinessObjRelInsertInput>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  customerId?: InputMaybe<Scalars["uuid"]["input"]>;
+  deliveries?: InputMaybe<InsertBusinessOrderDeliveryArrRelInsertInput>;
+  destination?: InputMaybe<Scalars["String"]["input"]>;
+  fulfillment_type?: InputMaybe<InsertBusinessOrderOrderFulfillmentTypeEnum>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_items?: InputMaybe<InsertBusinessOrderOrderItemArrRelInsertInput>;
+  order_status?: InputMaybe<InsertBusinessOrderOrderStatusObjRelInsertInput>;
+  order_suppliers?: InputMaybe<InsertBusinessOrderOrderSupplierArrRelInsertInput>;
+  origin?: InputMaybe<Scalars["String"]["input"]>;
+  processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
+  status?: InputMaybe<InsertBusinessOrderOrderStatusEnum>;
+};
+
+export type InsertBusinessOrderOrdersObjRelInsertInput = {
+  data: InsertBusinessOrderOrdersInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderOrdersOnConflict>;
+};
+
+export type InsertBusinessOrderOrdersOnConflict = {
+  constraint: InsertBusinessOrderOrdersConstraint;
+  update_columns: Array<InsertBusinessOrderOrdersUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
+};
+
+export enum InsertBusinessOrderOrdersSelectColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  CustomerId = "customerId",
+  /** column name */
+  Destination = "destination",
+  /** column name */
+  FulfillmentType = "fulfillment_type",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "orderId",
+  /** column name */
+  Origin = "origin",
+  /** column name */
+  ProcessedBy = "processedBy",
+  /** column name */
+  Status = "status",
+}
+
+export enum InsertBusinessOrderOrdersUpdateColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  CustomerId = "customerId",
+  /** column name */
+  Destination = "destination",
+  /** column name */
+  FulfillmentType = "fulfillment_type",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "orderId",
+  /** column name */
+  Origin = "origin",
+  /** column name */
+  ProcessedBy = "processedBy",
+  /** column name */
+  Status = "status",
+}
+
+export type InsertBusinessOrderOutput = {
+  __typename?: "InsertBusinessOrderOutput";
+  isValid?: Maybe<Scalars["Boolean"]["output"]>;
+};
+
+export type InsertBusinessOrderProductsAggregateBoolExp = {
+  bool_and?: InputMaybe<InsertBusinessOrderProductsAggregateBoolExpBoolAnd>;
+  bool_or?: InputMaybe<InsertBusinessOrderProductsAggregateBoolExpBoolOr>;
+  count?: InputMaybe<InsertBusinessOrderProductsAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderProductsAggregateBoolExpBoolAnd = {
+  arguments: InsertBusinessOrderProductsSelectColumnProductsAggregateBoolExpBoolAndArgumentsColumns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
+  predicate: InsertBusinessOrderBooleanComparisonExp;
+};
+
+export type InsertBusinessOrderProductsAggregateBoolExpBoolOr = {
+  arguments: InsertBusinessOrderProductsSelectColumnProductsAggregateBoolExpBoolOrArgumentsColumns;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
+  predicate: InsertBusinessOrderBooleanComparisonExp;
+};
+
+export type InsertBusinessOrderProductsAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderProductsSelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderProductsArrRelInsertInput = {
+  data: Array<InsertBusinessOrderProductsInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderProductsOnConflict>;
+};
+
+export type InsertBusinessOrderProductsBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderProductsBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderProductsBoolExp>>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  description?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  discount?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  inStock?: InputMaybe<InsertBusinessOrderBooleanComparisonExp>;
+  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  order_items?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
+  order_items_aggregate?: InputMaybe<InsertBusinessOrderOrderItemAggregateBoolExp>;
+  price?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
+  quantity?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
+  supplier?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
+  supplier_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+};
+
+export enum InsertBusinessOrderProductsConstraint {
+  /** unique or primary key constraint on columns "id" */
+  ProductsPkey = "products_pkey",
+}
+
+export type InsertBusinessOrderProductsInsertInput = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  discount?: InputMaybe<Scalars["Int"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  inStock?: InputMaybe<Scalars["Boolean"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  order_items?: InputMaybe<InsertBusinessOrderOrderItemArrRelInsertInput>;
+  price?: InputMaybe<Scalars["Int"]["input"]>;
+  quantity?: InputMaybe<Scalars["Int"]["input"]>;
+  supplier?: InputMaybe<InsertBusinessOrderSuppliersObjRelInsertInput>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+export type InsertBusinessOrderProductsObjRelInsertInput = {
+  data: InsertBusinessOrderProductsInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderProductsOnConflict>;
+};
+
+export type InsertBusinessOrderProductsOnConflict = {
+  constraint: InsertBusinessOrderProductsConstraint;
+  update_columns: Array<InsertBusinessOrderProductsUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
+};
+
+export enum InsertBusinessOrderProductsSelectColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Discount = "discount",
+  /** column name */
+  Id = "id",
+  /** column name */
+  InStock = "inStock",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Price = "price",
+  /** column name */
+  Quantity = "quantity",
+  /** column name */
+  SupplierId = "supplier_id",
+}
+
+export enum InsertBusinessOrderProductsSelectColumnProductsAggregateBoolExpBoolAndArgumentsColumns {
+  /** column name */
+  InStock = "inStock",
+}
+
+export enum InsertBusinessOrderProductsSelectColumnProductsAggregateBoolExpBoolOrArgumentsColumns {
+  /** column name */
+  InStock = "inStock",
+}
+
+export enum InsertBusinessOrderProductsUpdateColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Discount = "discount",
+  /** column name */
+  Id = "id",
+  /** column name */
+  InStock = "inStock",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Price = "price",
+  /** column name */
+  Quantity = "quantity",
+  /** column name */
+  SupplierId = "supplier_id",
+}
+
+export type InsertBusinessOrderRegisterationChannelTypeBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderRegisterationChannelTypeBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderRegisterationChannelTypeBoolExp>>;
+  businesses?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
+  businesses_aggregate?: InputMaybe<InsertBusinessOrderBusinessAggregateBoolExp>;
+  channel?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+};
+
+export enum InsertBusinessOrderRegisterationChannelTypeConstraint {
+  /** unique or primary key constraint on columns "channel" */
+  RegisterationChannelPkey = "registeration_channel_pkey",
+}
+
+export enum InsertBusinessOrderRegisterationChannelTypeEnum {
+  Agent = "AGENT",
+  App = "APP",
+  Ussd = "USSD",
+}
+
+export type InsertBusinessOrderRegisterationChannelTypeEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderRegisterationChannelTypeEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderRegisterationChannelTypeEnum>>;
+};
+
+export type InsertBusinessOrderRegisterationChannelTypeInsertInput = {
+  businesses?: InputMaybe<InsertBusinessOrderBusinessArrRelInsertInput>;
+  channel?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type InsertBusinessOrderRegisterationChannelTypeObjRelInsertInput = {
+  data: InsertBusinessOrderRegisterationChannelTypeInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeOnConflict>;
+};
+
+export type InsertBusinessOrderRegisterationChannelTypeOnConflict = {
+  constraint: InsertBusinessOrderRegisterationChannelTypeConstraint;
+  update_columns: Array<InsertBusinessOrderRegisterationChannelTypeUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeBoolExp>;
+};
+
+export enum InsertBusinessOrderRegisterationChannelTypeUpdateColumn {
+  /** column name */
+  Channel = "channel",
+}
+
+export type InsertBusinessOrderRideStatusBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderRideStatusBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderRideStatusBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderRideStatusBoolExp>>;
+  courier_rides?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
+  courier_rides_aggregate?: InputMaybe<InsertBusinessOrderCourierRidesAggregateBoolExp>;
+  status?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+};
+
+export enum InsertBusinessOrderRideStatusConstraint {
+  /** unique or primary key constraint on columns "status" */
+  RideStatusPkey = "ride_status_pkey",
+}
+
+export enum InsertBusinessOrderRideStatusEnum {
+  Active = "Active",
+  Inactive = "Inactive",
+  Maintenance = "Maintenance",
+}
+
+export type InsertBusinessOrderRideStatusEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderRideStatusEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderRideStatusEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderRideStatusEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderRideStatusEnum>>;
+};
+
+export type InsertBusinessOrderRideStatusInsertInput = {
+  courier_rides?: InputMaybe<InsertBusinessOrderCourierRidesArrRelInsertInput>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type InsertBusinessOrderRideStatusObjRelInsertInput = {
+  data: InsertBusinessOrderRideStatusInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderRideStatusOnConflict>;
+};
+
+export type InsertBusinessOrderRideStatusOnConflict = {
+  constraint: InsertBusinessOrderRideStatusConstraint;
+  update_columns: Array<InsertBusinessOrderRideStatusUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderRideStatusBoolExp>;
+};
+
+export enum InsertBusinessOrderRideStatusUpdateColumn {
+  /** column name */
+  Status = "status",
+}
+
+export type InsertBusinessOrderRideTypeBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderRideTypeBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderRideTypeBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderRideTypeBoolExp>>;
+  courier_rides?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
+  courier_rides_aggregate?: InputMaybe<InsertBusinessOrderCourierRidesAggregateBoolExp>;
+  type?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+};
+
+export enum InsertBusinessOrderRideTypeConstraint {
+  /** unique or primary key constraint on columns "type" */
+  RideTypePkey = "ride_type_pkey",
+}
+
+export enum InsertBusinessOrderRideTypeEnum {
+  Bike = "Bike",
+  Car = "Car",
+}
+
+export type InsertBusinessOrderRideTypeEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderRideTypeEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderRideTypeEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderRideTypeEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderRideTypeEnum>>;
+};
+
+export type InsertBusinessOrderRideTypeInsertInput = {
+  courier_rides?: InputMaybe<InsertBusinessOrderCourierRidesArrRelInsertInput>;
+  type?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type InsertBusinessOrderRideTypeObjRelInsertInput = {
+  data: InsertBusinessOrderRideTypeInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderRideTypeOnConflict>;
+};
+
+export type InsertBusinessOrderRideTypeOnConflict = {
+  constraint: InsertBusinessOrderRideTypeConstraint;
+  update_columns: Array<InsertBusinessOrderRideTypeUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderRideTypeBoolExp>;
+};
+
+export enum InsertBusinessOrderRideTypeUpdateColumn {
+  /** column name */
+  Type = "type",
+}
+
+export type InsertBusinessOrderStringComparisonExp = {
+  _eq?: InputMaybe<Scalars["String"]["input"]>;
+  _gt?: InputMaybe<Scalars["String"]["input"]>;
+  _gte?: InputMaybe<Scalars["String"]["input"]>;
+  _ilike?: InputMaybe<Scalars["String"]["input"]>;
+  _in?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  _iregex?: InputMaybe<Scalars["String"]["input"]>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _like?: InputMaybe<Scalars["String"]["input"]>;
+  _lt?: InputMaybe<Scalars["String"]["input"]>;
+  _lte?: InputMaybe<Scalars["String"]["input"]>;
+  _neq?: InputMaybe<Scalars["String"]["input"]>;
+  _nilike?: InputMaybe<Scalars["String"]["input"]>;
+  _nin?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  _niregex?: InputMaybe<Scalars["String"]["input"]>;
+  _nlike?: InputMaybe<Scalars["String"]["input"]>;
+  _nregex?: InputMaybe<Scalars["String"]["input"]>;
+  _nsimilar?: InputMaybe<Scalars["String"]["input"]>;
+  _regex?: InputMaybe<Scalars["String"]["input"]>;
+  _similar?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type InsertBusinessOrderSupplierCategoriesEnumBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderSupplierCategoriesEnumBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderSupplierCategoriesEnumBoolExp>>;
+  description?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  suppliers_categories?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
+  suppliers_categories_aggregate?: InputMaybe<InsertBusinessOrderSuppliersCategoriesAggregateBoolExp>;
+};
+
+export enum InsertBusinessOrderSupplierCategoriesEnumConstraint {
+  /** unique or primary key constraint on columns "name" */
+  SupplierCategoriesEnumPkey = "supplier_categories_enum_pkey",
+}
+
+export enum InsertBusinessOrderSupplierCategoriesEnumEnum {
+  /** Tools, seeds, and equipment for farmers, supporting agricultural productivity and local food production. */
+  AgriculturalSupplies = "agricultural_supplies",
+  /** Cosmetics, skincare products, grooming essentials, and personal care items, supporting local beauty entrepreneurs and promoting self-care. */
+  BeautyAndCare = "beauty_and_care",
+  /** Apparel, fabrics, and textiles, empowering local tailors and designers, fostering the textile industry */
+  ClothingAndTextiles = "clothing_and_textiles",
+  /** Essential materials like cement, steel, and bricks for construction projects, fostering infrastructure development. */
+  ConstructionMaterials = "construction_materials",
+  /** Books, educational tools, and e-learning resources, promoting education and literacy in the community. */
+  EducationalMaterials = "educational_materials",
+  /** Electronic devices, wiring, and appliances, promoting technological access and local electronic businesses */
+  ElectronicsAppliances = "electronics_appliances",
+  /** Solar panels, wind turbines, and energy-efficient appliances, promoting sustainable energy use and reducing the carbon footprint. */
+  EnergySolutions = "energy_solutions",
+  /** Fresh produce, packaged foods, beverages, and culinary supplies, supporting local agriculture and culinary enterprises. */
+  FoodAndBeverages = "food_and_beverages",
+  /** Medical supplies, safety equipment, and personal protective gear, ensuring the well-being of workers and communities. */
+  HealthAndSafety = "health_and_safety",
+  /** Furniture, home appliances, decor items, and household essentials, improving living standards and supporting local artisans. */
+  HomeAndLiving = "home_and_living",
+  /** Stationery, office materials, and supplies, supporting administrative functions of businesses and organizations. */
+  OfficeSupplies = "office_supplies",
+  /** Vehicles, spare parts, and transportation services, enhancing mobility and logistics for businesses and individuals. */
+  TransportationSolutions = "transportation_solutions",
+  /** Recycling equipment, waste bins, and eco-friendly products, encouraging responsible waste management practices. */
+  WasteAndRecycling = "waste_and_recycling",
+  /** Water filters, sanitation kits, and plumbing supplies, ensuring access to clean water and promoting hygiene. */
+  WaterAndSanitation = "water_and_sanitation",
+}
+
+export type InsertBusinessOrderSupplierCategoriesEnumEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderSupplierCategoriesEnumEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderSupplierCategoriesEnumEnum>>;
+};
+
+export type InsertBusinessOrderSupplierCategoriesEnumInsertInput = {
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  suppliers_categories?: InputMaybe<InsertBusinessOrderSuppliersCategoriesArrRelInsertInput>;
+};
+
+export type InsertBusinessOrderSupplierCategoriesEnumObjRelInsertInput = {
+  data: InsertBusinessOrderSupplierCategoriesEnumInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumOnConflict>;
+};
+
+export type InsertBusinessOrderSupplierCategoriesEnumOnConflict = {
+  constraint: InsertBusinessOrderSupplierCategoriesEnumConstraint;
+  update_columns: Array<InsertBusinessOrderSupplierCategoriesEnumUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumBoolExp>;
+};
+
+export enum InsertBusinessOrderSupplierCategoriesEnumUpdateColumn {
+  /** column name */
+  Description = "description",
+  /** column name */
+  Name = "name",
+}
+
+export type InsertBusinessOrderSupplierServiceZoneAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderSupplierServiceZoneAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderSupplierServiceZoneAggregateBoolExpCount = {
+  arguments?: InputMaybe<
+    Array<InsertBusinessOrderSupplierServiceZoneSelectColumn>
+  >;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderSupplierServiceZoneBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderSupplierServiceZoneArrRelInsertInput = {
+  data: Array<InsertBusinessOrderSupplierServiceZoneInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderSupplierServiceZoneOnConflict>;
+};
+
+export type InsertBusinessOrderSupplierServiceZoneBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderSupplierServiceZoneBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderSupplierServiceZoneBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderSupplierServiceZoneBoolExp>>;
+  coverage_area_radius?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  location_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  supplier_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+};
+
+export enum InsertBusinessOrderSupplierServiceZoneConstraint {
+  /** unique or primary key constraint on columns "id" */
+  SupplierServiceZonePkey = "supplier_service_zone_pkey",
+}
+
+export type InsertBusinessOrderSupplierServiceZoneInsertInput = {
+  coverage_area_radius?: InputMaybe<Scalars["Int"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  location_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+export type InsertBusinessOrderSupplierServiceZoneOnConflict = {
+  constraint: InsertBusinessOrderSupplierServiceZoneConstraint;
+  update_columns: Array<InsertBusinessOrderSupplierServiceZoneUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderSupplierServiceZoneBoolExp>;
+};
+
+export enum InsertBusinessOrderSupplierServiceZoneSelectColumn {
+  /** column name */
+  CoverageAreaRadius = "coverage_area_radius",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  LocationId = "location_id",
+  /** column name */
+  SupplierId = "supplier_id",
+}
+
+export enum InsertBusinessOrderSupplierServiceZoneUpdateColumn {
+  /** column name */
+  CoverageAreaRadius = "coverage_area_radius",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  LocationId = "location_id",
+  /** column name */
+  SupplierId = "supplier_id",
+}
+
+export type InsertBusinessOrderSuppliersBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderSuppliersBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderSuppliersBoolExp>>;
+  categories?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
+  categories_aggregate?: InputMaybe<InsertBusinessOrderSuppliersCategoriesAggregateBoolExp>;
+  contactEmail?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  contactName?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  description?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  order_suppliers?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
+  order_suppliers_aggregate?: InputMaybe<InsertBusinessOrderOrderSupplierAggregateBoolExp>;
+  phoneNumber?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  products?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
+  products_aggregate?: InputMaybe<InsertBusinessOrderProductsAggregateBoolExp>;
+  service_zones?: InputMaybe<InsertBusinessOrderSupplierServiceZoneBoolExp>;
+  service_zones_aggregate?: InputMaybe<InsertBusinessOrderSupplierServiceZoneAggregateBoolExp>;
+  streetAddress?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  user_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  zone?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+};
+
+export type InsertBusinessOrderSuppliersCategoriesAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderSuppliersCategoriesAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderSuppliersCategoriesAggregateBoolExpCount = {
+  arguments?: InputMaybe<
+    Array<InsertBusinessOrderSuppliersCategoriesSelectColumn>
+  >;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderSuppliersCategoriesArrRelInsertInput = {
+  data: Array<InsertBusinessOrderSuppliersCategoriesInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderSuppliersCategoriesOnConflict>;
+};
+
+export type InsertBusinessOrderSuppliersCategoriesBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderSuppliersCategoriesBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderSuppliersCategoriesBoolExp>>;
+  category_name?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumEnumComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  supplier?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
+  supplier_categories_enum?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumBoolExp>;
+  supplier_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+};
+
+export enum InsertBusinessOrderSuppliersCategoriesConstraint {
+  /** unique or primary key constraint on columns "id" */
+  SuppliersCategoriesPkey = "suppliers_categories_pkey",
+}
+
+export type InsertBusinessOrderSuppliersCategoriesInsertInput = {
+  category_name?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumEnum>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  supplier?: InputMaybe<InsertBusinessOrderSuppliersObjRelInsertInput>;
+  supplier_categories_enum?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumObjRelInsertInput>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+export type InsertBusinessOrderSuppliersCategoriesOnConflict = {
+  constraint: InsertBusinessOrderSuppliersCategoriesConstraint;
+  update_columns: Array<InsertBusinessOrderSuppliersCategoriesUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
+};
+
+export enum InsertBusinessOrderSuppliersCategoriesSelectColumn {
+  /** column name */
+  CategoryName = "category_name",
+  /** column name */
+  Id = "id",
+  /** column name */
+  SupplierId = "supplier_id",
+}
+
+export enum InsertBusinessOrderSuppliersCategoriesUpdateColumn {
+  /** column name */
+  CategoryName = "category_name",
+  /** column name */
+  Id = "id",
+  /** column name */
+  SupplierId = "supplier_id",
+}
+
+export enum InsertBusinessOrderSuppliersConstraint {
+  /** unique or primary key constraint on columns "id" */
+  SuppliersPkey = "suppliers_pkey",
+}
+
+export type InsertBusinessOrderSuppliersInsertInput = {
+  categories?: InputMaybe<InsertBusinessOrderSuppliersCategoriesArrRelInsertInput>;
+  contactEmail?: InputMaybe<Scalars["String"]["input"]>;
+  contactName?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  order_suppliers?: InputMaybe<InsertBusinessOrderOrderSupplierArrRelInsertInput>;
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  products?: InputMaybe<InsertBusinessOrderProductsArrRelInsertInput>;
+  service_zones?: InputMaybe<InsertBusinessOrderSupplierServiceZoneArrRelInsertInput>;
+  streetAddress?: InputMaybe<Scalars["String"]["input"]>;
+  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  zone?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type InsertBusinessOrderSuppliersObjRelInsertInput = {
+  data: InsertBusinessOrderSuppliersInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderSuppliersOnConflict>;
+};
+
+export type InsertBusinessOrderSuppliersOnConflict = {
+  constraint: InsertBusinessOrderSuppliersConstraint;
+  update_columns: Array<InsertBusinessOrderSuppliersUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
+};
+
+export enum InsertBusinessOrderSuppliersUpdateColumn {
+  /** column name */
+  ContactEmail = "contactEmail",
+  /** column name */
+  ContactName = "contactName",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  PhoneNumber = "phoneNumber",
+  /** column name */
+  StreetAddress = "streetAddress",
+  /** column name */
+  UserId = "user_id",
+  /** column name */
+  Zone = "zone",
+}
+
+export type InsertBusinessOrderTimestamptzComparisonExp = {
+  _eq?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  _gt?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  _gte?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  _in?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _lt?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  _lte?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  _neq?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  _nin?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
+};
+
+export type InsertBusinessOrderUserRoleBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderUserRoleBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderUserRoleBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderUserRoleBoolExp>>;
+  role?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  users?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
+  users_aggregate?: InputMaybe<InsertBusinessOrderUsersAggregateBoolExp>;
+};
+
+export enum InsertBusinessOrderUserRoleConstraint {
+  /** unique or primary key constraint on columns "role" */
+  UserRolePkey = "user_role_pkey",
+}
+
+export enum InsertBusinessOrderUserRoleEnum {
+  Admin = "admin",
+  Agent = "agent",
+  Customer = "customer",
+  Supplier = "supplier",
+}
+
+export type InsertBusinessOrderUserRoleEnumComparisonExp = {
+  _eq?: InputMaybe<InsertBusinessOrderUserRoleEnum>;
+  _in?: InputMaybe<Array<InsertBusinessOrderUserRoleEnum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<InsertBusinessOrderUserRoleEnum>;
+  _nin?: InputMaybe<Array<InsertBusinessOrderUserRoleEnum>>;
+};
+
+export type InsertBusinessOrderUserRoleInsertInput = {
+  role?: InputMaybe<Scalars["String"]["input"]>;
+  users?: InputMaybe<InsertBusinessOrderUsersArrRelInsertInput>;
+};
+
+export type InsertBusinessOrderUserRoleObjRelInsertInput = {
+  data: InsertBusinessOrderUserRoleInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderUserRoleOnConflict>;
+};
+
+export type InsertBusinessOrderUserRoleOnConflict = {
+  constraint: InsertBusinessOrderUserRoleConstraint;
+  update_columns: Array<InsertBusinessOrderUserRoleUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderUserRoleBoolExp>;
+};
+
+export enum InsertBusinessOrderUserRoleUpdateColumn {
+  /** column name */
+  Role = "role",
+}
+
+export type InsertBusinessOrderUsersAggregateBoolExp = {
+  count?: InputMaybe<InsertBusinessOrderUsersAggregateBoolExpCount>;
+};
+
+export type InsertBusinessOrderUsersAggregateBoolExpCount = {
+  arguments?: InputMaybe<Array<InsertBusinessOrderUsersSelectColumn>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
+  predicate: InsertBusinessOrderIntComparisonExp;
+};
+
+export type InsertBusinessOrderUsersArrRelInsertInput = {
+  data: Array<InsertBusinessOrderUsersInsertInput>;
+  on_conflict?: InputMaybe<InsertBusinessOrderUsersOnConflict>;
+};
+
+export type InsertBusinessOrderUsersBoolExp = {
+  _and?: InputMaybe<Array<InsertBusinessOrderUsersBoolExp>>;
+  _not?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
+  _or?: InputMaybe<Array<InsertBusinessOrderUsersBoolExp>>;
+  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
+  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
+  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
+  role?: InputMaybe<InsertBusinessOrderUserRoleEnumComparisonExp>;
+  user_role?: InputMaybe<InsertBusinessOrderUserRoleBoolExp>;
+};
+
+export enum InsertBusinessOrderUsersConstraint {
+  /** unique or primary key constraint on columns "id" */
+  UsersPkey = "users_pkey",
+}
+
+export type InsertBusinessOrderUsersInsertInput = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  role?: InputMaybe<InsertBusinessOrderUserRoleEnum>;
+  user_role?: InputMaybe<InsertBusinessOrderUserRoleObjRelInsertInput>;
+};
+
+export type InsertBusinessOrderUsersObjRelInsertInput = {
+  data: InsertBusinessOrderUsersInsertInput;
+  on_conflict?: InputMaybe<InsertBusinessOrderUsersOnConflict>;
+};
+
+export type InsertBusinessOrderUsersOnConflict = {
+  constraint: InsertBusinessOrderUsersConstraint;
+  update_columns: Array<InsertBusinessOrderUsersUpdateColumn>;
+  where?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
+};
+
+export enum InsertBusinessOrderUsersSelectColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Role = "role",
+}
+
+export enum InsertBusinessOrderUsersUpdateColumn {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Role = "role",
+}
+
+export type InsertBusinessOrderUuidComparisonExp = {
+  _eq?: InputMaybe<Scalars["uuid"]["input"]>;
+  _gt?: InputMaybe<Scalars["uuid"]["input"]>;
+  _gte?: InputMaybe<Scalars["uuid"]["input"]>;
+  _in?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _lt?: InputMaybe<Scalars["uuid"]["input"]>;
+  _lte?: InputMaybe<Scalars["uuid"]["input"]>;
+  _neq?: InputMaybe<Scalars["uuid"]["input"]>;
+  _nin?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -61,25 +1963,83 @@ export type Int_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars["Int"]["input"]>>;
 };
 
-export type OrdersActionInput = {
-  created_at: Scalars["timestamptz"]["input"];
-  customerId?: InputMaybe<Scalars["uuid"]["input"]>;
-  destination?: InputMaybe<Scalars["String"]["input"]>;
-  id: Scalars["uuid"]["input"];
-  orderId?: InputMaybe<Scalars["String"]["input"]>;
-  origin?: InputMaybe<Scalars["String"]["input"]>;
-  processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
+export type LegDistance = {
+  __typename?: "LegDistance";
+  text?: Maybe<Scalars["String"]["output"]>;
+  value?: Maybe<Scalars["String"]["output"]>;
 };
 
-export type OrdersActionType = {
-  __typename?: "OrdersActionType";
-  created_at: Scalars["timestamptz"]["output"];
-  customerId?: Maybe<Scalars["uuid"]["output"]>;
-  destination?: Maybe<Scalars["String"]["output"]>;
-  id: Scalars["uuid"]["output"];
-  orderId?: Maybe<Scalars["String"]["output"]>;
-  origin?: Maybe<Scalars["String"]["output"]>;
-  processedBy?: Maybe<Scalars["uuid"]["output"]>;
+export type LegDuration = {
+  __typename?: "LegDuration";
+  text?: Maybe<Scalars["String"]["output"]>;
+  value?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type LocationByCoords = {
+  __typename?: "LocationByCoords";
+  location?: Maybe<GeoCoords>;
+  placeId?: Maybe<Scalars["String"]["output"]>;
+  types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+};
+
+export type PayerInput = {
+  partyId: Scalars["String"]["input"];
+  partyIdType: Scalars["String"]["input"];
+};
+
+export type PaymentStatusResponse = {
+  __typename?: "PaymentStatusResponse";
+  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
+  reason?: Maybe<Scalars["String"]["output"]>;
+  referenceId?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type Places = {
+  __typename?: "Places";
+  address?: Maybe<Scalars["String"]["output"]>;
+  lat?: Maybe<Scalars["Float"]["output"]>;
+  lng?: Maybe<Scalars["Float"]["output"]>;
+  location?: Maybe<Scalars["String"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type PreApprovalStatusResponse = {
+  __typename?: "PreApprovalStatusResponse";
+  expirationDateTime?: Maybe<Scalars["String"]["output"]>;
+  payer?: Maybe<Scalars["String"]["output"]>;
+  payerCurrency?: Maybe<Scalars["String"]["output"]>;
+  payerMessage?: Maybe<Scalars["String"]["output"]>;
+  reason?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type RequestToPayInput = {
+  amount: Scalars["Float"]["input"];
+  currency?: InputMaybe<Scalars["String"]["input"]>;
+  externalId: Scalars["String"]["input"];
+  payeeNote?: InputMaybe<Scalars["String"]["input"]>;
+  payer: PayerInput;
+  payerMessage?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type RequestToPayResponse = {
+  __typename?: "RequestToPayResponse";
+  message?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type RequestToPayTransactionStatusResponse = {
+  __typename?: "RequestToPayTransactionStatusResponse";
+  amount?: Maybe<Scalars["String"]["output"]>;
+  currency?: Maybe<Scalars["String"]["output"]>;
+  externalId?: Maybe<Scalars["String"]["output"]>;
+  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
+  payeeNote?: Maybe<Scalars["String"]["output"]>;
+  payer?: Maybe<Scalars["String"]["output"]>;
+  payerMessage?: Maybe<Scalars["String"]["output"]>;
+  reason?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -113,6 +2073,34 @@ export type String_Comparison_Exp = {
   _regex?: InputMaybe<Scalars["String"]["input"]>;
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type UserInfoWithConsentResponse = {
+  __typename?: "UserInfoWithConsentResponse";
+  active?: Maybe<Scalars["Boolean"]["output"]>;
+  address?: Maybe<Scalars["String"]["output"]>;
+  birthdate?: Maybe<Scalars["String"]["output"]>;
+  city_of_birth?: Maybe<Scalars["String"]["output"]>;
+  country_of_birth?: Maybe<Scalars["String"]["output"]>;
+  credit_score?: Maybe<Scalars["String"]["output"]>;
+  email?: Maybe<Scalars["String"]["output"]>;
+  email_verified?: Maybe<Scalars["Boolean"]["output"]>;
+  employer_name?: Maybe<Scalars["String"]["output"]>;
+  family_name?: Maybe<Scalars["String"]["output"]>;
+  gender?: Maybe<Scalars["String"]["output"]>;
+  given_name?: Maybe<Scalars["String"]["output"]>;
+  identification_type?: Maybe<Scalars["String"]["output"]>;
+  identification_value?: Maybe<Scalars["String"]["output"]>;
+  locale?: Maybe<Scalars["String"]["output"]>;
+  middle_name?: Maybe<Scalars["String"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  occupation?: Maybe<Scalars["String"]["output"]>;
+  phone_number?: Maybe<Scalars["String"]["output"]>;
+  phone_number_verified?: Maybe<Scalars["Boolean"]["output"]>;
+  region_of_birth?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+  sub?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** columns and relationships of "addresses" */
@@ -3409,9 +5397,9 @@ export type Geometry_Columns_Variance_Fields = {
   srid?: Maybe<Scalars["Float"]["output"]>;
 };
 
-/** fields of action: "initOrder" */
-export type InitOrder = {
-  __typename?: "initOrder";
+/** fields of action: "insertBusinessOrder" */
+export type InsertBusinessOrder = {
+  __typename?: "insertBusinessOrder";
   /** the time at which this action was created */
   created_at: Scalars["timestamptz"]["output"];
   /** errors related to the invocation */
@@ -3419,7 +5407,7 @@ export type InitOrder = {
   /** the unique id of an action */
   id: Scalars["uuid"]["output"];
   /** the output fields of this action */
-  output?: Maybe<OrdersActionType>;
+  output?: Maybe<InsertBusinessOrderOutput>;
 };
 
 /** columns and relationships of "locations" */
@@ -3570,6 +5558,7 @@ export type Locations_Updates = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: "mutation_root";
+  createAccessToken?: Maybe<CreateAccessTokenResponse>;
   /** delete data from the table: "addresses" */
   delete_addresses?: Maybe<Addresses_Mutation_Response>;
   /** delete single row from the table: "addresses" */
@@ -3700,8 +5689,8 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
-  /** Validate and Process Orders */
-  initOrder: Scalars["uuid"]["output"];
+  /** Place order action */
+  insertBusinessOrder: Scalars["uuid"]["output"];
   /** insert data into the table: "addresses" */
   insert_addresses?: Maybe<Addresses_Mutation_Response>;
   /** insert a single row into the table: "addresses" */
@@ -3834,6 +5823,7 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  requestToPay?: Maybe<RequestToPayResponse>;
   /** update data of the table: "addresses" */
   update_addresses?: Maybe<Addresses_Mutation_Response>;
   /** update single row of the table: "addresses" */
@@ -4392,8 +6382,8 @@ export type Mutation_RootDelete_Users_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootInitOrderArgs = {
-  order?: InputMaybe<OrdersActionInput>;
+export type Mutation_RootInsertBusinessOrderArgs = {
+  object: InsertBusinessOrderOrdersInsertInput;
 };
 
 /** mutation root */
@@ -4791,6 +6781,11 @@ export type Mutation_RootInsert_Users_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootRequestToPayArgs = {
+  object?: InputMaybe<RequestToPayInput>;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_AddressesArgs = {
   _inc?: InputMaybe<Addresses_Inc_Input>;
   _set?: InputMaybe<Addresses_Set_Input>;
@@ -5061,12 +7056,14 @@ export type Mutation_RootUpdate_Order_Fulfillment_Type_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Order_ItemArgs = {
+  _inc?: InputMaybe<Order_Item_Inc_Input>;
   _set?: InputMaybe<Order_Item_Set_Input>;
   where: Order_Item_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Order_Item_By_PkArgs = {
+  _inc?: InputMaybe<Order_Item_Inc_Input>;
   _set?: InputMaybe<Order_Item_Set_Input>;
   pk_columns: Order_Item_Pk_Columns_Input;
 };
@@ -5526,9 +7523,11 @@ export type Order_Item = {
   /** An object relationship */
   order?: Maybe<Orders>;
   orderId?: Maybe<Scalars["uuid"]["output"]>;
+  price: Scalars["Int"]["output"];
   /** An object relationship */
-  product?: Maybe<Products>;
-  productId?: Maybe<Scalars["uuid"]["output"]>;
+  product: Products;
+  productId: Scalars["uuid"]["output"];
+  quantity: Scalars["Int"]["output"];
 };
 
 /** aggregated selection of "order_item" */
@@ -5552,9 +7551,17 @@ export type Order_Item_Aggregate_Bool_Exp_Count = {
 /** aggregate fields of "order_item" */
 export type Order_Item_Aggregate_Fields = {
   __typename?: "order_item_aggregate_fields";
+  avg?: Maybe<Order_Item_Avg_Fields>;
   count: Scalars["Int"]["output"];
   max?: Maybe<Order_Item_Max_Fields>;
   min?: Maybe<Order_Item_Min_Fields>;
+  stddev?: Maybe<Order_Item_Stddev_Fields>;
+  stddev_pop?: Maybe<Order_Item_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Order_Item_Stddev_Samp_Fields>;
+  sum?: Maybe<Order_Item_Sum_Fields>;
+  var_pop?: Maybe<Order_Item_Var_Pop_Fields>;
+  var_samp?: Maybe<Order_Item_Var_Samp_Fields>;
+  variance?: Maybe<Order_Item_Variance_Fields>;
 };
 
 /** aggregate fields of "order_item" */
@@ -5565,9 +7572,17 @@ export type Order_Item_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "order_item" */
 export type Order_Item_Aggregate_Order_By = {
+  avg?: InputMaybe<Order_Item_Avg_Order_By>;
   count?: InputMaybe<Order_By>;
   max?: InputMaybe<Order_Item_Max_Order_By>;
   min?: InputMaybe<Order_Item_Min_Order_By>;
+  stddev?: InputMaybe<Order_Item_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Order_Item_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Order_Item_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Order_Item_Sum_Order_By>;
+  var_pop?: InputMaybe<Order_Item_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Order_Item_Var_Samp_Order_By>;
+  variance?: InputMaybe<Order_Item_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "order_item" */
@@ -5575,6 +7590,19 @@ export type Order_Item_Arr_Rel_Insert_Input = {
   data: Array<Order_Item_Insert_Input>;
   /** upsert condition */
   on_conflict?: InputMaybe<Order_Item_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Order_Item_Avg_Fields = {
+  __typename?: "order_item_avg_fields";
+  price?: Maybe<Scalars["Float"]["output"]>;
+  quantity?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by avg() on columns of table "order_item" */
+export type Order_Item_Avg_Order_By = {
+  price?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "order_item". All fields are combined with a logical 'AND'. */
@@ -5586,8 +7614,10 @@ export type Order_Item_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   order?: InputMaybe<Orders_Bool_Exp>;
   orderId?: InputMaybe<Uuid_Comparison_Exp>;
+  price?: InputMaybe<Int_Comparison_Exp>;
   product?: InputMaybe<Products_Bool_Exp>;
   productId?: InputMaybe<Uuid_Comparison_Exp>;
+  quantity?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "order_item" */
@@ -5596,14 +7626,22 @@ export enum Order_Item_Constraint {
   OrderItemsPkey = "order_items_pkey",
 }
 
+/** input type for incrementing numeric columns in table "order_item" */
+export type Order_Item_Inc_Input = {
+  price?: InputMaybe<Scalars["Int"]["input"]>;
+  quantity?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
 /** input type for inserting data into table "order_item" */
 export type Order_Item_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   order?: InputMaybe<Orders_Obj_Rel_Insert_Input>;
   orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  price?: InputMaybe<Scalars["Int"]["input"]>;
   product?: InputMaybe<Products_Obj_Rel_Insert_Input>;
   productId?: InputMaybe<Scalars["uuid"]["input"]>;
+  quantity?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 /** aggregate max on columns */
@@ -5612,7 +7650,9 @@ export type Order_Item_Max_Fields = {
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
   orderId?: Maybe<Scalars["uuid"]["output"]>;
+  price?: Maybe<Scalars["Int"]["output"]>;
   productId?: Maybe<Scalars["uuid"]["output"]>;
+  quantity?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** order by max() on columns of table "order_item" */
@@ -5620,7 +7660,9 @@ export type Order_Item_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   orderId?: InputMaybe<Order_By>;
+  price?: InputMaybe<Order_By>;
   productId?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -5629,7 +7671,9 @@ export type Order_Item_Min_Fields = {
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
   orderId?: Maybe<Scalars["uuid"]["output"]>;
+  price?: Maybe<Scalars["Int"]["output"]>;
   productId?: Maybe<Scalars["uuid"]["output"]>;
+  quantity?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** order by min() on columns of table "order_item" */
@@ -5637,7 +7681,9 @@ export type Order_Item_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   orderId?: InputMaybe<Order_By>;
+  price?: InputMaybe<Order_By>;
   productId?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "order_item" */
@@ -5662,8 +7708,10 @@ export type Order_Item_Order_By = {
   id?: InputMaybe<Order_By>;
   order?: InputMaybe<Orders_Order_By>;
   orderId?: InputMaybe<Order_By>;
+  price?: InputMaybe<Order_By>;
   product?: InputMaybe<Products_Order_By>;
   productId?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: order_item */
@@ -5680,7 +7728,11 @@ export enum Order_Item_Select_Column {
   /** column name */
   OrderId = "orderId",
   /** column name */
+  Price = "price",
+  /** column name */
   ProductId = "productId",
+  /** column name */
+  Quantity = "quantity",
 }
 
 /** input type for updating data in table "order_item" */
@@ -5688,7 +7740,48 @@ export type Order_Item_Set_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  price?: InputMaybe<Scalars["Int"]["input"]>;
   productId?: InputMaybe<Scalars["uuid"]["input"]>;
+  quantity?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+/** aggregate stddev on columns */
+export type Order_Item_Stddev_Fields = {
+  __typename?: "order_item_stddev_fields";
+  price?: Maybe<Scalars["Float"]["output"]>;
+  quantity?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev() on columns of table "order_item" */
+export type Order_Item_Stddev_Order_By = {
+  price?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Order_Item_Stddev_Pop_Fields = {
+  __typename?: "order_item_stddev_pop_fields";
+  price?: Maybe<Scalars["Float"]["output"]>;
+  quantity?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev_pop() on columns of table "order_item" */
+export type Order_Item_Stddev_Pop_Order_By = {
+  price?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Order_Item_Stddev_Samp_Fields = {
+  __typename?: "order_item_stddev_samp_fields";
+  price?: Maybe<Scalars["Float"]["output"]>;
+  quantity?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev_samp() on columns of table "order_item" */
+export type Order_Item_Stddev_Samp_Order_By = {
+  price?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "order_item" */
@@ -5704,7 +7797,22 @@ export type Order_Item_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  price?: InputMaybe<Scalars["Int"]["input"]>;
   productId?: InputMaybe<Scalars["uuid"]["input"]>;
+  quantity?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+/** aggregate sum on columns */
+export type Order_Item_Sum_Fields = {
+  __typename?: "order_item_sum_fields";
+  price?: Maybe<Scalars["Int"]["output"]>;
+  quantity?: Maybe<Scalars["Int"]["output"]>;
+};
+
+/** order by sum() on columns of table "order_item" */
+export type Order_Item_Sum_Order_By = {
+  price?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "order_item" */
@@ -5716,14 +7824,59 @@ export enum Order_Item_Update_Column {
   /** column name */
   OrderId = "orderId",
   /** column name */
+  Price = "price",
+  /** column name */
   ProductId = "productId",
+  /** column name */
+  Quantity = "quantity",
 }
 
 export type Order_Item_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Order_Item_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Order_Item_Set_Input>;
   /** filter the rows which have to be updated */
   where: Order_Item_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Order_Item_Var_Pop_Fields = {
+  __typename?: "order_item_var_pop_fields";
+  price?: Maybe<Scalars["Float"]["output"]>;
+  quantity?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by var_pop() on columns of table "order_item" */
+export type Order_Item_Var_Pop_Order_By = {
+  price?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Order_Item_Var_Samp_Fields = {
+  __typename?: "order_item_var_samp_fields";
+  price?: Maybe<Scalars["Float"]["output"]>;
+  quantity?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by var_samp() on columns of table "order_item" */
+export type Order_Item_Var_Samp_Order_By = {
+  price?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Order_Item_Variance_Fields = {
+  __typename?: "order_item_variance_fields";
+  price?: Maybe<Scalars["Float"]["output"]>;
+  quantity?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by variance() on columns of table "order_item" */
+export type Order_Item_Variance_Order_By = {
+  price?: InputMaybe<Order_By>;
+  quantity?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "order_preference" */
@@ -6267,7 +8420,7 @@ export type Orders = {
   destination?: Maybe<Scalars["String"]["output"]>;
   fulfillment_type?: Maybe<Order_Fulfillment_Type_Enum>;
   id: Scalars["uuid"]["output"];
-  orderId?: Maybe<Scalars["String"]["output"]>;
+  orderId?: Maybe<Scalars["uuid"]["output"]>;
   /** An array relationship */
   order_items: Array<Order_Item>;
   /** An aggregate relationship */
@@ -6397,7 +8550,7 @@ export type Orders_Bool_Exp = {
   destination?: InputMaybe<String_Comparison_Exp>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
-  orderId?: InputMaybe<String_Comparison_Exp>;
+  orderId?: InputMaybe<Uuid_Comparison_Exp>;
   order_items?: InputMaybe<Order_Item_Bool_Exp>;
   order_items_aggregate?: InputMaybe<Order_Item_Aggregate_Bool_Exp>;
   order_status?: InputMaybe<Order_Status_Bool_Exp>;
@@ -6424,7 +8577,7 @@ export type Orders_Insert_Input = {
   destination?: InputMaybe<Scalars["String"]["input"]>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
-  orderId?: InputMaybe<Scalars["String"]["input"]>;
+  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
   order_items?: InputMaybe<Order_Item_Arr_Rel_Insert_Input>;
   order_status?: InputMaybe<Order_Status_Obj_Rel_Insert_Input>;
   order_suppliers?: InputMaybe<Order_Supplier_Arr_Rel_Insert_Input>;
@@ -6440,7 +8593,7 @@ export type Orders_Max_Fields = {
   customerId?: Maybe<Scalars["uuid"]["output"]>;
   destination?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
-  orderId?: Maybe<Scalars["String"]["output"]>;
+  orderId?: Maybe<Scalars["uuid"]["output"]>;
   origin?: Maybe<Scalars["String"]["output"]>;
   processedBy?: Maybe<Scalars["uuid"]["output"]>;
 };
@@ -6463,7 +8616,7 @@ export type Orders_Min_Fields = {
   customerId?: Maybe<Scalars["uuid"]["output"]>;
   destination?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
-  orderId?: Maybe<Scalars["String"]["output"]>;
+  orderId?: Maybe<Scalars["uuid"]["output"]>;
   origin?: Maybe<Scalars["String"]["output"]>;
   processedBy?: Maybe<Scalars["uuid"]["output"]>;
 };
@@ -6555,7 +8708,7 @@ export type Orders_Set_Input = {
   destination?: InputMaybe<Scalars["String"]["input"]>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
-  orderId?: InputMaybe<Scalars["String"]["input"]>;
+  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
   origin?: InputMaybe<Scalars["String"]["input"]>;
   processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
   status?: InputMaybe<Order_Status_Enum>;
@@ -6576,7 +8729,7 @@ export type Orders_Stream_Cursor_Value_Input = {
   destination?: InputMaybe<Scalars["String"]["input"]>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
-  orderId?: InputMaybe<Scalars["String"]["input"]>;
+  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
   origin?: InputMaybe<Scalars["String"]["input"]>;
   processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
   status?: InputMaybe<Order_Status_Enum>;
@@ -7088,6 +9241,8 @@ export type Products_Variance_Order_By = {
 
 export type Query_Root = {
   __typename?: "query_root";
+  accountBalance?: Maybe<AccountBalanceResponse>;
+  address?: Maybe<Address>;
   /** An array relationship */
   addresses: Array<Addresses>;
   /** An aggregate relationship */
@@ -7106,6 +9261,7 @@ export type Query_Root = {
   agent_type_aggregate: Agent_Type_Aggregate;
   /** fetch data from the table: "agent_type" using primary key columns */
   agent_type_by_pk?: Maybe<Agent_Type>;
+  basicUserInfo?: Maybe<BasicUserInfoResponse>;
   /** fetch data from the table: "business" */
   business: Array<Business>;
   /** fetch aggregated fields from the table: "business" */
@@ -7130,6 +9286,7 @@ export type Query_Root = {
   contact_details_aggregate: Contact_Details_Aggregate;
   /** fetch data from the table: "contact_details" using primary key columns */
   contact_details_by_pk?: Maybe<Contact_Details>;
+  coords?: Maybe<LocationByCoords>;
   /** An array relationship */
   courier_rides: Array<Courier_Rides>;
   /** An aggregate relationship */
@@ -7166,6 +9323,7 @@ export type Query_Root = {
   delivery_status_aggregate: Delivery_Status_Aggregate;
   /** fetch data from the table: "delivery_status" using primary key columns */
   delivery_status_by_pk?: Maybe<Delivery_Status>;
+  directions?: Maybe<Directions>;
   /** fetch data from the table: "geography_columns" */
   geography_columns: Array<Geography_Columns>;
   /** fetch aggregated fields from the table: "geography_columns" */
@@ -7174,8 +9332,8 @@ export type Query_Root = {
   geometry_columns: Array<Geometry_Columns>;
   /** fetch aggregated fields from the table: "geometry_columns" */
   geometry_columns_aggregate: Geometry_Columns_Aggregate;
-  /** Validate and Process Orders */
-  initOrder?: Maybe<InitOrder>;
+  /** Place order action */
+  insertBusinessOrder?: Maybe<InsertBusinessOrder>;
   /** fetch data from the table: "locations" */
   locations: Array<Locations>;
   /** fetch aggregated fields from the table: "locations" */
@@ -7218,6 +9376,9 @@ export type Query_Root = {
   orders_aggregate: Orders_Aggregate;
   /** fetch data from the table: "orders" using primary key columns */
   orders_by_pk?: Maybe<Orders>;
+  paymentStatus?: Maybe<PaymentStatusResponse>;
+  places?: Maybe<Array<Maybe<Places>>>;
+  preApprovalStatus?: Maybe<PreApprovalStatusResponse>;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
@@ -7236,6 +9397,7 @@ export type Query_Root = {
   reports_aggregate: Reports_Aggregate;
   /** fetch data from the table: "reports" using primary key columns */
   reports_by_pk?: Maybe<Reports>;
+  requestToPayTransactionStatus?: Maybe<RequestToPayTransactionStatusResponse>;
   /** fetch data from the table: "ride_status" */
   ride_status: Array<Ride_Status>;
   /** fetch aggregated fields from the table: "ride_status" */
@@ -7278,6 +9440,7 @@ export type Query_Root = {
   suppliers_categories_aggregate: Suppliers_Categories_Aggregate;
   /** fetch data from the table: "suppliers_categories" using primary key columns */
   suppliers_categories_by_pk?: Maybe<Suppliers_Categories>;
+  userInfoWithConsent?: Maybe<UserInfoWithConsentResponse>;
   /** fetch data from the table: "user_role" */
   user_role: Array<User_Role>;
   /** fetch aggregated fields from the table: "user_role" */
@@ -7290,6 +9453,11 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+export type Query_RootAddressArgs = {
+  lat: Scalars["Float"]["input"];
+  lng: Scalars["Float"]["input"];
 };
 
 export type Query_RootAddressesArgs = {
@@ -7350,6 +9518,10 @@ export type Query_RootAgent_Type_AggregateArgs = {
 
 export type Query_RootAgent_Type_By_PkArgs = {
   type: Scalars["String"]["input"];
+};
+
+export type Query_RootBasicUserInfoArgs = {
+  accountHolderMSISDN: Scalars["String"]["input"];
 };
 
 export type Query_RootBusinessArgs = {
@@ -7430,6 +9602,10 @@ export type Query_RootContact_Details_AggregateArgs = {
 
 export type Query_RootContact_Details_By_PkArgs = {
   id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootCoordsArgs = {
+  address: Scalars["String"]["input"];
 };
 
 export type Query_RootCourier_RidesArgs = {
@@ -7552,6 +9728,11 @@ export type Query_RootDelivery_Status_By_PkArgs = {
   status: Scalars["String"]["input"];
 };
 
+export type Query_RootDirectionsArgs = {
+  destination: Scalars["String"]["input"];
+  origin: Scalars["String"]["input"];
+};
+
 export type Query_RootGeography_ColumnsArgs = {
   distinct_on?: InputMaybe<Array<Geography_Columns_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -7584,7 +9765,7 @@ export type Query_RootGeometry_Columns_AggregateArgs = {
   where?: InputMaybe<Geometry_Columns_Bool_Exp>;
 };
 
-export type Query_RootInitOrderArgs = {
+export type Query_RootInsertBusinessOrderArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -7728,6 +9909,19 @@ export type Query_RootOrders_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
+export type Query_RootPaymentStatusArgs = {
+  referenceId: Scalars["String"]["input"];
+};
+
+export type Query_RootPlacesArgs = {
+  lat: Scalars["Float"]["input"];
+  lng: Scalars["Float"]["input"];
+};
+
+export type Query_RootPreApprovalStatusArgs = {
+  referenceId: Scalars["String"]["input"];
+};
+
 export type Query_RootProductsArgs = {
   distinct_on?: InputMaybe<Array<Products_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -7786,6 +9980,10 @@ export type Query_RootReports_AggregateArgs = {
 
 export type Query_RootReports_By_PkArgs = {
   id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootRequestToPayTransactionStatusArgs = {
+  referenceId: Scalars["String"]["input"];
 };
 
 export type Query_RootRide_StatusArgs = {
@@ -8966,8 +11164,8 @@ export type Subscription_Root = {
   geometry_columns_aggregate: Geometry_Columns_Aggregate;
   /** fetch data from the table in a streaming manner: "geometry_columns" */
   geometry_columns_stream: Array<Geometry_Columns>;
-  /** Validate and Process Orders */
-  initOrder?: Maybe<InitOrder>;
+  /** Place order action */
+  insertBusinessOrder?: Maybe<InsertBusinessOrder>;
   /** fetch data from the table: "locations" */
   locations: Array<Locations>;
   /** fetch aggregated fields from the table: "locations" */
@@ -9504,7 +11702,7 @@ export type Subscription_RootGeometry_Columns_StreamArgs = {
   where?: InputMaybe<Geometry_Columns_Bool_Exp>;
 };
 
-export type Subscription_RootInitOrderArgs = {
+export type Subscription_RootInsertBusinessOrderArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -11636,7 +13834,7 @@ export type GetBusinessOrdersQuery = {
     id: any;
     created_at: any;
     destination?: string | null;
-    orderId?: string | null;
+    orderId?: any | null;
     customerId?: any | null;
     origin?: string | null;
     status?: Order_Status_Enum | null;
@@ -11733,7 +13931,7 @@ export type GetOrdersQuery = {
     id: any;
     created_at: any;
     destination?: string | null;
-    orderId?: string | null;
+    orderId?: any | null;
     customerId?: any | null;
     origin?: string | null;
     status?: Order_Status_Enum | null;
@@ -11764,20 +13962,20 @@ export type GetorderByPkQuery = {
     id: any;
     created_at: any;
     destination?: string | null;
-    orderId?: string | null;
+    orderId?: any | null;
     customerId?: any | null;
     origin?: string | null;
     status?: Order_Status_Enum | null;
     order_items: Array<{
       __typename?: "order_item";
       id: any;
-      product?: {
+      product: {
         __typename?: "products";
         id: any;
         name?: string | null;
         quantity: number;
         price?: number | null;
-      } | null;
+      };
     }>;
     agent?: { __typename?: "agent"; name: string } | null;
     order_items_aggregate: {
@@ -11913,7 +14111,7 @@ export type GetSupplierOrdersQuery = {
       id: any;
       created_at: any;
       destination?: string | null;
-      orderId?: string | null;
+      orderId?: any | null;
       customerId?: any | null;
       origin?: string | null;
       status?: Order_Status_Enum | null;

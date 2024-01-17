@@ -5,7 +5,7 @@ import type { ApolloError } from "@apollo/client";
 import { ListEmptyState } from "./ListEmptyState";
 
 type ListProps<T> = {
-  data: T[];
+  data?: T[];
   error?: ApolloError;
   loading?: boolean;
   renderItem: (item: T) => JSX.Element;
@@ -68,9 +68,10 @@ export const List = <T extends unknown>({
       className={`grid grid-cols-auto-250 2xl:grid-cols-4 gap-2`}
       ref={parent}
     >
-      {data.map((item, index) => (
-        <Fragment key={index}>{renderItem(item)}</Fragment>
-      ))}
+      {data &&
+        data.map((item: any, index: number) => (
+          <Fragment key={index}>{renderItem(item)}</Fragment>
+        ))}
     </div>
   );
 };

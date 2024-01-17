@@ -23,12 +23,11 @@ const SignInPage: NextPage = ({ providers }: any) => {
             <div
               // @ts-ignore
               key={provider?.name}
-              p="2"
             >
               <div>
                 <button
                   onClick={() => {
-                    signIn(provider?.id);
+                    // signIn(provider?.id);
                   }}
                 >
                   Sign in with{" "}

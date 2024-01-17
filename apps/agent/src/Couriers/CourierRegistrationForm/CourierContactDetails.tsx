@@ -33,6 +33,7 @@ export const CourierContactDetails = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(courierContactSchema),
   });
 

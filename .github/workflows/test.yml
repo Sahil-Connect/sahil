@@ -33,8 +33,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile --ignore-engines
 
-      #- name: Format 
-      # run: yarn format
+      - name: Format 
+        run: yarn format
 
       #- name: Linting 
       # run: yarn lint
@@ -43,7 +43,7 @@ jobs:
       #   run: yarn codegen
 
       - name: Build
-        run: yarn build --filter=website
+        run: yarn build --filter=website --filter=api --filter=agent
 
       #- name: Test
       #  run: yarn test

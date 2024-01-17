@@ -26,7 +26,7 @@ export const ListCouriers = () => {
       <List
         data={couriers}
         loading={loading}
-        renderItem={(courier) => (
+        renderItem={(courier: any) => (
           <CourierOverviewCard key={courier.id} courier={courier} />
         )}
       />

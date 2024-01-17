@@ -51,9 +51,11 @@ export const BusinessOrderHistory = () => {
       <ListHeader
         onNextPage={() => setOffset((prev) => prev + 4)}
         onPreviousPage={() => setOffset((prev) => prev - 4)}
-        isNextDisabled={offset + 4 >= ordersCount}
+        isNextDisabled={
+          (ordersCount && offset + 4 >= ordersCount.count) || false
+        }
         isPrevDisabled={offset === 0}
-        size={ordersCount?.count}
+        size={ordersCount && ordersCount?.count}
         limit={3}
         sizeLabel="Orders"
       />

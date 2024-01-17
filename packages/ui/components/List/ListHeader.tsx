@@ -30,7 +30,7 @@ export const ListHeader = ({
         </div>
       </div>
       <div>
-        {size > limit && (
+        {size && limit && size > limit && (
           <JoinGrid>
             <button
               className="join-item btn btn-sm"

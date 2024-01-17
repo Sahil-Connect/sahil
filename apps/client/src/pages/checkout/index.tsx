@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FC } from "react";
 import { useFetchProducts } from "@/hooks/products";
 import { Card, List, ListHeader } from "ui";
 import { formatCost } from "@sahil/lib";
@@ -21,9 +21,15 @@ import {
   HiOutlineReceiptPercent,
 } from "react-icons/hi2";
 import { usePlaceBusinessOrder } from "@/hooks/orders";
-import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
+// import { useRequesTtoPay } from "@sahil/lib/hooks/payments";
 
-export const OrderItem = ({ price, quantity, title }) => {
+type OrderItem = {
+  price: any;
+  quantity: any;
+  title: any;
+};
+
+export const OrderItem = ({ price, quantity, title }: OrderItem) => {
   return (
     <Card className="bg-white">
       <div className="flex justify-between items-center">
@@ -43,9 +49,13 @@ export const OrderItem = ({ price, quantity, title }) => {
   );
 };
 
-export const OrderItems = ({ items }) => {
+type Props = {
+  items: any;
+};
+
+export const OrderItems: FC<Props> = ({ items }) => {
   const { totalItems, totalCost } = items?.reduce(
-    (totals, product) => ({
+    (totals: any, product: any) => ({
       totalItems: totals.totalItems + product.quantity,
       totalCost: totals.totalCost + product.price * product.quantity,
     }),
@@ -59,7 +69,7 @@ export const OrderItems = ({ items }) => {
     <>
       <Card title="Order Items" titleSize="sm" className="bg-gray-100">
         <ul className="space-y-2">
-          {items?.map((item) => (
+          {items?.map((item: any) => (
             <OrderItem
               key={item.id}
               title={item?.name}
@@ -73,7 +83,7 @@ export const OrderItems = ({ items }) => {
   );
 };
 
-function calculateTotal(arr) {
+function calculateTotal(arr: any) {
   // Initialize total items and total price
   let totalItems = 0;
   let totalPrice = 0;
@@ -106,11 +116,6 @@ export default function CheckoutPage() {
   const { orderItems } = useOrderItemsStore((state) => state);
   const { totalItems, totalPrice } = calculateTotal(orderItems);
   const router = useRouter();
-  const {
-    requesTtoPay,
-    loading: payLoading,
-    error: payError,
-  } = useRequesTtoPay();
 
   const onConfirmOrder = async () => {
     try {
@@ -123,21 +128,6 @@ export default function CheckoutPage() {
           },
         },
       });
-      const res = await requesTtoPay({
-        variables: {
-          object: {
-            amount: totalPrice,
-            payer: {
-              partyId: "0910060031",
-              partyIdType: "MSISDN",
-            },
-            externalId: "6353636",
-            payerMessage: "Hey",
-            payeeNote: "Sahil Order",
-          },
-        },
-      });
-      console.log("res:", res);
       router.push("/orders");
     } catch (error) {
       console.log(error);

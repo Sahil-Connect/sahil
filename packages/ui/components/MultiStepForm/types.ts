@@ -12,7 +12,7 @@ export type SahilBusinessPartner = Record<string, any>;
 
 export type StepItem = {
   title: string;
-  step: StepDirection;
+  step: any;
   icon?: IconType;
   completed?: boolean;
 };
