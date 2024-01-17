@@ -17,8 +17,8 @@ export type CourierRide = {
 };
 
 type Props = {
-  courier: Couriers
-}
+  courier: Couriers;
+};
 
 export const CourierOverviewCard: FC<Props> = ({ courier }) => {
   return (

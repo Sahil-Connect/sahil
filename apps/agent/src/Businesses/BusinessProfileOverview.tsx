@@ -10,8 +10,8 @@ import {
 import { Card } from "ui";
 
 type Props = {
-  business: Business 
-}
+  business: Business;
+};
 
 export const BusinessProfileOverview: FC<Props> = ({ business }) => {
   return (

@@ -61,7 +61,9 @@ export const BusinessOrderHistory = () => {
         data={orders}
         error={error}
         loading={loading}
-        renderItem={(order: any) => <OrderSummary order={order} key={order.id} />}
+        renderItem={(order: any) => (
+          <OrderSummary order={order} key={order.id} />
+        )}
       />
     </div>
   );

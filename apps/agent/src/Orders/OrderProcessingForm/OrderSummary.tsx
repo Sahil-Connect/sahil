@@ -73,7 +73,6 @@ export const OrderSummary = () => {
     }
   );
 
-
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     // const validatedInput = .parse(data);
     // navigateToNextStep("");
