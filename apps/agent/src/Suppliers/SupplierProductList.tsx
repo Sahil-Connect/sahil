@@ -4,10 +4,12 @@ import {
   HiOutlineBanknotes,
   HiOutlineCube,
   HiEllipsisHorizontal,
+  HiArrowSmallLeft,
+  HiArrowSmallRight,
 } from "react-icons/hi2";
 import EditProductModal from "./EditProductModal";
 import { formatCurrency } from "@sahil/lib";
-import { Card, List, ListHeader } from "ui";
+import { Card, JoinGrid, List } from "ui";
 import DeleteProductModal from "./DeleteProductModal";
 
 type SahilProduct = {
@@ -42,8 +44,45 @@ const SupplierProductList = ({ productsCount }: props) => {
     });
   };
 
+  const sortOptions = [
+    "Name ASC",
+    "Name DESC",
+    "Quantity ASC",
+    "Quantity DESC",
+    "Price ASC",
+    "Price DESC",
+  ];
+
   return (
     <div className="space-y-4">
+      <div className="flex justify-end items-center gap-4">
+        <select className="select select-bordered select-sm max-w-xs">
+          <option disabled selected>
+            Sort Products
+          </option>
+          {sortOptions.map((option) => (
+            <option key={option}>{option}</option>
+          ))}
+        </select>
+        <JoinGrid>
+          <button
+            className="join-item btn btn-sm"
+            title="Left"
+            onClick={handlePrev}
+            disabled={page <= 0}
+          >
+            <HiArrowSmallLeft />
+          </button>
+          <button
+            className="join-item btn btn-sm"
+            title="Right"
+            onClick={handleNext}
+            disabled={productsCount <= (page + 1) * 4}
+          >
+            <HiArrowSmallRight />
+          </button>
+        </JoinGrid>
+      </div>
       <List
         data={products}
         error={error}
