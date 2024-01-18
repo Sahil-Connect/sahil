@@ -4,12 +4,10 @@ import {
   HiOutlineBanknotes,
   HiOutlineCube,
   HiEllipsisHorizontal,
-  HiArrowSmallLeft,
-  HiArrowSmallRight,
 } from "react-icons/hi2";
 import EditProductModal from "./EditProductModal";
 import { formatCurrency } from "@sahil/lib";
-import { Card, JoinGrid, List } from "ui";
+import { Card, List, ListHeader, ListPagination, ListSort } from "ui";
 import DeleteProductModal from "./DeleteProductModal";
 
 type SahilProduct = {
@@ -55,34 +53,22 @@ const SupplierProductList = ({ productsCount }: props) => {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end items-center gap-4">
-        <select className="select select-bordered select-sm max-w-xs">
-          <option disabled selected>
-            Sort Products
-          </option>
-          {sortOptions.map((option) => (
-            <option key={option}>{option}</option>
-          ))}
-        </select>
-        <JoinGrid>
-          <button
-            className="join-item btn btn-sm"
-            title="Left"
-            onClick={handlePrev}
-            disabled={page <= 0}
-          >
-            <HiArrowSmallLeft />
-          </button>
-          <button
-            className="join-item btn btn-sm"
-            title="Right"
-            onClick={handleNext}
-            disabled={productsCount <= (page + 1) * 4}
-          >
-            <HiArrowSmallRight />
-          </button>
-        </JoinGrid>
-      </div>
+      <ListHeader>
+        <div className="flex gap-4">
+          <ListSort
+            options={sortOptions}
+            defaultValue="Sort Products"
+            renderItem={(option) => <option>{option}</option>}
+          />
+          <ListPagination
+            onPreviousPage={handlePrev}
+            onNextPage={handleNext}
+            isPrevDisabled={page <= 0}
+            isNextDisabled={productsCount <= (page + 1) * 4}
+          />
+        </div>
+      </ListHeader>
+
       <List
         data={products}
         error={error}

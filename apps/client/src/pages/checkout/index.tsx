@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useFetchProducts } from "@/hooks/products";
-import { Card, List, ListHeader } from "ui";
+import { Card } from "ui";
 import { formatCost } from "@sahil/lib";
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
 import Link from "next/link";

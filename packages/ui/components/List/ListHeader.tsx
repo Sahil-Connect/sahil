@@ -1,56 +1,89 @@
+import { Fragment } from "react";
 import { JoinGrid } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
-export type ListHeaderProps = {
-  onPreviousPage?: () => void;
-  onNextPage?: () => void;
-  isNextDisabled?: boolean;
-  isPrevDisabled?: boolean;
-  size?: number;
-  limit?: number;
-  sizeLabel?: string;
+type ListHeaderProps = {
   title?: string;
+  size?: number;
+  sizeLabel?: string;
+  children: React.ReactNode;
 };
-export const ListHeader = ({
-  onNextPage,
-  onPreviousPage,
-  isNextDisabled = false,
-  isPrevDisabled = false,
-  size,
-  limit,
-  sizeLabel,
+
+export const ListHeader: React.FC<ListHeaderProps> = ({
   title,
-}: ListHeaderProps) => {
+  size,
+  sizeLabel,
+  children,
+}) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex gap-2 items-center">
-        <h3 className="text-lg">{title}</h3>
-        <div className="badge badge-accent">
-          {size} {sizeLabel}
-        </div>
-      </div>
-      <div>
-        {size && limit && size > limit && (
-          <JoinGrid>
-            <button
-              className="join-item btn btn-sm"
-              title="Left"
-              onClick={onPreviousPage}
-              disabled={isPrevDisabled}
-            >
-              <HiArrowSmallLeft />
-            </button>
-            <button
-              className="join-item btn btn-sm"
-              title="Right"
-              onClick={onNextPage}
-              disabled={isNextDisabled}
-            >
-              <HiArrowSmallRight />
-            </button>
-          </JoinGrid>
+        {title && <h3 className="text-lg">{title}</h3>}
+        {(size || sizeLabel) && (
+          <div className="badge badge-accent">
+            {size} {sizeLabel}
+          </div>
         )}
       </div>
+      {children}
     </div>
+  );
+};
+
+type ListPaginationProps = {
+  onPreviousPage: () => void;
+  onNextPage: () => void;
+  isNextDisabled?: boolean;
+  isPrevDisabled?: boolean;
+};
+
+export const ListPagination: React.FC<ListPaginationProps> = ({
+  onPreviousPage,
+  onNextPage,
+  isNextDisabled = false,
+  isPrevDisabled = false,
+}) => {
+  return (
+    <JoinGrid>
+      <button
+        className="join-item btn btn-sm"
+        title="Left"
+        onClick={onPreviousPage}
+        disabled={isPrevDisabled}
+      >
+        <HiArrowSmallLeft />
+      </button>
+      <button
+        className="join-item btn btn-sm"
+        title="Right"
+        onClick={onNextPage}
+        disabled={isNextDisabled}
+      >
+        <HiArrowSmallRight />
+      </button>
+    </JoinGrid>
+  );
+};
+
+type ListSortProps<T> = {
+  options: T[];
+  defaultValue?: string;
+  renderItem: (item: T) => JSX.Element;
+};
+
+export const ListSort = <T,>({
+  options,
+  defaultValue,
+  renderItem,
+}: ListSortProps<T>) => {
+  return (
+    <select className="select select-bordered select-sm max-w-xs">
+      <option disabled selected>
+        {defaultValue || "Sort"}
+      </option>
+      {options.map((item: any, index: number) => (
+        <Fragment key={index}>{renderItem(item)}</Fragment>
+      ))}
+    </select>
   );
 };

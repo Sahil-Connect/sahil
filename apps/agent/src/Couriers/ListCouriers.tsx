@@ -1,6 +1,6 @@
 import { useFetchCouriers } from "@/hooks/couriers";
 import { CourierOverviewCard } from "./CourierOverviewCard";
-import { List, ListHeader, ListErrorState } from "ui";
+import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 
 export const ListCouriers = () => {
   const { data: couriers, error, loading, couriersCount } = useFetchCouriers();
@@ -22,7 +22,9 @@ export const ListCouriers = () => {
         size={couriersCount?.count}
         sizeLabel="Couriers"
         title="Couriers"
-      />
+      >
+        <></>
+      </ListHeader>
       <List
         data={couriers}
         loading={loading}

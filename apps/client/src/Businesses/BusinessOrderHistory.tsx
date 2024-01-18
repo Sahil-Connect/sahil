@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { useFetchBusinessOrders } from "@/hooks/businesses";
 import { formatDateTime } from "@sahil/lib/dates";
-import { Card, JoinGrid, List, ListHeader, ListErrorState } from "ui";
+import {
+  Card,
+  JoinGrid,
+  List,
+  ListHeader,
+  ListErrorState,
+  ListPagination,
+} from "ui";
 import {
   HiOutlineCalendarDays,
   HiOutlineMapPin,
@@ -49,15 +56,14 @@ export const BusinessOrderHistory = () => {
         <h3 className="text-xl">Latest Orders</h3>
         <button className="btn btn-sm btn-primary">New Order</button>
       </div>
-      <ListHeader
-        onNextPage={() => setOffset((prev) => prev + 4)}
-        onPreviousPage={() => setOffset((prev) => prev - 4)}
-        isNextDisabled={ordersCount ? offset + 4 >= ordersCount.count : false}
-        isPrevDisabled={offset === 0}
-        size={ordersCount?.count}
-        limit={3}
-        sizeLabel="Orders"
-      />
+      <ListHeader size={ordersCount?.count} sizeLabel="Orders">
+        <ListPagination
+          onNextPage={() => setOffset((prev) => prev + 4)}
+          onPreviousPage={() => setOffset((prev) => prev - 4)}
+          isNextDisabled={ordersCount ? offset + 4 >= ordersCount.count : false}
+          isPrevDisabled={offset === 0}
+        />
+      </ListHeader>
       <List
         data={orders}
         error={error}
