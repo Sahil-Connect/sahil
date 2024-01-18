@@ -27,7 +27,12 @@ type props = {
 
 const SupplierProductList = ({ productsCount }: props) => {
   const [page, setPage] = useState(0);
-  const { data: products, loading, error } = useFetchSupplierProducts(page);
+  const [sort, setSort] = useState({ property: "name", order: "asc" });
+  const {
+    data: products,
+    loading,
+    error,
+  } = useFetchSupplierProducts({ page, sortOption: sort });
 
   const handleNext = () => {
     setPage((prev) => prev + 1);
@@ -43,13 +48,26 @@ const SupplierProductList = ({ productsCount }: props) => {
   };
 
   const sortOptions = [
-    "Name ASC",
-    "Name DESC",
-    "Quantity ASC",
-    "Quantity DESC",
-    "Price ASC",
-    "Price DESC",
+    { property: "name", label: "Name (ASC)", order: "asc" },
+    { property: "name", label: "Name (DESC)", order: "desc" },
+    { property: "quantity", label: "Quantity (ASC)", order: "asc" },
+    { property: "quantity", label: "Quantity (DESC)", order: "desc" },
+    { property: "price", label: "Price (ASC)", order: "asc" },
+    { property: "price", label: "Price (DESC)", order: "desc" },
   ];
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = sortOptions.find(
+      (option) => option.label === event.target.value
+    );
+    if (selectedOption) {
+      setSort({
+        property: selectedOption.property,
+        order: selectedOption.order,
+      });
+      console.log(selectedOption);
+    }
+  };
 
   return (
     <div className="space-y-4">
@@ -58,7 +76,10 @@ const SupplierProductList = ({ productsCount }: props) => {
           <ListSort
             options={sortOptions}
             defaultValue="Sort Products"
-            renderItem={(option) => <option>{option}</option>}
+            onChange={handleSortChange}
+            renderItem={(option) => (
+              <option value={option.label}>{option.label}</option>
+            )}
           />
           <ListPagination
             onPreviousPage={handlePrev}

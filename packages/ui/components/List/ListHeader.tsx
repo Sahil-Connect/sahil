@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { ChangeEventHandler, Fragment } from "react";
 import { JoinGrid } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
@@ -68,17 +68,22 @@ export const ListPagination: React.FC<ListPaginationProps> = ({
 type ListSortProps<T> = {
   options: T[];
   defaultValue?: string;
+  onChange: ChangeEventHandler<HTMLSelectElement>;
   renderItem: (item: T) => JSX.Element;
 };
 
 export const ListSort = <T,>({
   options,
   defaultValue,
+  onChange,
   renderItem,
 }: ListSortProps<T>) => {
   return (
-    <select className="select select-bordered select-sm max-w-xs">
-      <option disabled selected>
+    <select
+      onChange={onChange}
+      className="select select-bordered select-sm max-w-xs"
+    >
+      <option disabled value="">
         {defaultValue || "Sort"}
       </option>
       {options.map((item: any, index: number) => (
