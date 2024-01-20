@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 export const CourierFormSummary = () => {
   const router = useRouter();
-  const formData = useCourierFormStore((state) => state.formData);
+  const formData = useCourierFormStore()((state) => state.formData);
 
   const { insertCourier, loading, error } = useRegisterCourier();
 

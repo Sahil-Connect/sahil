@@ -13,7 +13,7 @@ export const PreviewSupplierInfo = () => {
     formState: { errors },
   } = useForm<FormData>();
   const router = useRouter();
-  const formData = useSupplierFormStore((state) => state.formData);
+  const formData = useSupplierFormStore()((state) => state.formData);
 
   const { error, insertSupplier, loading, supplier } = useRegisterSupplier();
 

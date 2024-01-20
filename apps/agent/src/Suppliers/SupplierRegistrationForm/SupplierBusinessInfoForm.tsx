@@ -15,7 +15,7 @@ const supplierContactInfoSchema = z.object({
 type FormData = z.infer<typeof supplierContactInfoSchema>;
 
 export const SupplierBusinessInfoForm = () => {
-  const { currentStep, goToStep, updateStepFormData } = useSupplierFormStore(
+  const { currentStep, goToStep, updateStepFormData } = useSupplierFormStore()(
     (state) => state
   );
   const {
@@ -24,7 +24,7 @@ export const SupplierBusinessInfoForm = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-expect-error
+    // @ts-ignore
     resolver: zodResolver(supplierContactInfoSchema),
   });
   const router = useRouter();

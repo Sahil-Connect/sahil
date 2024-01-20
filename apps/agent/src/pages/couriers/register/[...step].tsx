@@ -48,7 +48,7 @@ const headers = [
 
 export default function CourierRegistrationPage() {
   const { steps, currentStep, goToStep, updateStepByIndex } =
-    useCourierFormStore((state) => state);
+    useCourierFormStore()((state) => state);
   const router = useRouter();
   const params = useParams();
   const currentIndex = steps.indexOf(currentStep);

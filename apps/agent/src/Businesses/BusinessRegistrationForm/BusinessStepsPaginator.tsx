@@ -14,7 +14,7 @@ export const BusinessStepsPaginator = ({
   onNextStep,
   onPrevStep,
 }: Props) => {
-  const { steps, currentStep } = useBusinessFormStore((state) => state);
+  const { steps, currentStep } = useBusinessFormStore()((state) => state);
   const currentIndex = steps.indexOf(currentStep);
   return (
     <>

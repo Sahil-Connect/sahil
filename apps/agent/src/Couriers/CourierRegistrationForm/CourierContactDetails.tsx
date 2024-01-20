@@ -22,6 +22,7 @@ const courierContactSchema = z.object({
 type FormData = z.infer<typeof courierContactSchema>;
 
 export const CourierContactDetails = () => {
+  // @ts-ignore
   const { goToStep, updateStepFormData } = useCourierFormStore((state) => ({
     formData: state.formData,
     goToStep: state.goToStep,

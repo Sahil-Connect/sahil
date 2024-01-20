@@ -40,7 +40,7 @@ const FilterSuppliersModal = () => {
       <button
         className="btn btn-sm normal-case"
         onClick={() => {
-          // @ts-expect-error
+          // @ts-ignore
           return document.getElementById("filter_suppliers_modal")?.showModal();
         }}
       >

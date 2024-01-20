@@ -13,7 +13,7 @@ const supplierBasicInfoSchema = z.object({
 type FormData = z.infer<typeof supplierBasicInfoSchema>;
 
 export const SupplierBasicInfoForm = () => {
-  const { formData, goToStep, updateStepFormData } = useSupplierFormStore(
+  const { formData, goToStep, updateStepFormData } = useSupplierFormStore()(
     (state) => ({
       formData: state.formData,
       goToStep: state.goToStep,
@@ -26,7 +26,7 @@ export const SupplierBasicInfoForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-expect-error
+    // @ts-ignore
     resolver: zodResolver(supplierBasicInfoSchema),
   });
 

@@ -38,7 +38,7 @@ export const ProductsCatalogue = () => {
           <HiSignalSlash />
         </span>
         <p>
-          Products aren't loading due to a technical problem on our side. Please
+          Products are not loading due to a technical problem on our side. Please
           try again. If the issue continues,{" "}
           <span className="text-primary">contact support.</span>
         </p>

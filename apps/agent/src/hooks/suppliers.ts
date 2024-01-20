@@ -61,7 +61,7 @@ export const useFetchSupplierProducts = (page: number = 0, id?: string) => {
   // Memoize the result based on the page and ids
   return useMemo(() => {
     return { error, data: data?.products, loading };
-  }, [page, id, product, supplierId, error, data, loading]);
+  }, [error, data, loading]);
 };
 
 export const useRegisterSupplier = () => {

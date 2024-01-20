@@ -5,7 +5,7 @@ const baseConfig: Config = require("@sahil/configs/tailwind/tailwind.config");
 const extendedConfig: Config = {
   ...baseConfig,
   content: [
-    // @ts-expect-error
+    // @ts-ignore
     ...baseConfig.content,
     "./src/Suppliers/**/**.{js,ts,jsx,tsx,mdx}",
     "./src/Businesses/**/*.{js,ts,tsx,tsx,mdx}",

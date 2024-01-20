@@ -9,4 +9,4 @@ const steps = [
   "summary",
 ] as const;
 
-export const useBusinessFormStore = useCreateFormStore(INITIAL_STEP, steps);
+export const useBusinessFormStore = () => useCreateFormStore(INITIAL_STEP, steps);

@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useEffect } from "react";
 import type { NextPage } from "next";
 import { getProviders, signIn, useSession } from "next-auth/react";
@@ -12,7 +11,7 @@ const SignInPage: NextPage = ({ providers }: any) => {
     if (session) {
       router.push("/auth/new");
     }
-  }, [session]);
+  }, [router, session]);
 
   return (
     <div className="p-4">
