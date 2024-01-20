@@ -8,4 +8,5 @@ const steps = [
   "preview",
 ] as const;
 
-export const useSupplierFormStore = useCreateFormStore(INITIAL_STEP, steps);
+export const useSupplierFormStore = () =>
+  useCreateFormStore(INITIAL_STEP, steps);

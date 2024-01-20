@@ -24,7 +24,7 @@ const courierVehicleSchema = z.object({
 type FormData = z.infer<typeof courierVehicleSchema>;
 
 export const CourierVehicleInfo = () => {
-  const { goToStep, updateStepFormData } = useCourierFormStore((state) => ({
+  const { goToStep, updateStepFormData } = useCourierFormStore()((state) => ({
     formData: state.formData,
     goToStep: state.goToStep,
     updateStepFormData: state.updateStepFormData,

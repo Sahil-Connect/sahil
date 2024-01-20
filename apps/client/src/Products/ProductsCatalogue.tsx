@@ -31,10 +31,10 @@ export const ProductsCatalogue = () => {
     orderItems,
     setProducts,
     products: availableProducts,
-  } = useOrderItemsStore((state) => state);
+  } = useOrderItemsStore((state: any) => state);
 
   const orderItemsMap = new Map(
-    orderItems.map((item) => [item.productId, item])
+    orderItems.map((item: any) => [item.productId, item])
   );
 
   useEffect(() => {
@@ -49,8 +49,8 @@ export const ProductsCatalogue = () => {
           <HiSignalSlash />
         </span>
         <p>
-          Products aren't loading due to a technical problem on our side. Please
-          try again. If the issue continues,{" "}
+          Products are not loading due to a technical problem on our side.
+          Please try again. If the issue continues,{" "}
           <span className="text-primary">contact support.</span>
         </p>
         <div className="card-actions justify-end">
@@ -104,7 +104,7 @@ export const ProductsCatalogue = () => {
         error={error}
         loading={loading}
         cols={4}
-        renderItem={(product) => {
+        renderItem={(product: any) => {
           const isInCart = orderItemsMap.has(product.id);
           return (
             <ProductSummary

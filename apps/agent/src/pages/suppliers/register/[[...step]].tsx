@@ -15,7 +15,7 @@ import { Card, IconButton } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 const StepsPaginator = () => {
-  const { steps, goToStep, currentStep } = useSupplierFormStore(
+  const { steps, goToStep, currentStep } = useSupplierFormStore()(
     (state) => state
   );
   const router = useRouter();
@@ -82,7 +82,7 @@ const headers = [
 ];
 
 export default function SupplierRegistrationPage() {
-  const { steps, currentStep, updateStepByIndex } = useSupplierFormStore(
+  const { steps, currentStep, updateStepByIndex } = useSupplierFormStore()(
     (state) => state
   );
   const router = useRouter();

@@ -12,7 +12,7 @@ const supplierPrefencesSchema = z.object({
 type FormData = z.infer<typeof supplierPrefencesSchema>;
 
 export const SupplierPreferencesForm = () => {
-  const { goToStep, updateStepFormData } = useSupplierFormStore((state) => ({
+  const { goToStep, updateStepFormData } = useSupplierFormStore()((state) => ({
     goToStep: state.goToStep,
     updateStepFormData: state.updateStepFormData,
   }));
@@ -22,7 +22,7 @@ export const SupplierPreferencesForm = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-expect-error
+    // @ts-ignore
     resolver: zodResolver(supplierPrefencesSchema),
   });
   const router = useRouter();

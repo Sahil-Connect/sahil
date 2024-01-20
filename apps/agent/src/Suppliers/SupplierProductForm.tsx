@@ -37,7 +37,7 @@ const SupplierProductForm = ({
     setValue,
     formState: { errors },
   } = useForm<ProductFormData>({
-    // @ts-expect-error
+    // @ts-ignore
     resolver: zodResolver(supplierProductSchema),
   });
 

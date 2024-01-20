@@ -25,7 +25,7 @@ export const BusinessInfo = () => {
 
   const router = useRouter();
 
-  const { formData } = useBusinessFormStore((state) => state);
+  //const { formData } = useBusinessFormStore((state) => state);
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = businessInfoSchema.parse(data);
   };
@@ -36,7 +36,7 @@ export const BusinessInfo = () => {
           <input
             type="text"
             className="input input-sm input-bordered w-full bg-gray-100"
-            placeholder="Keji's Foods"
+            placeholder="Keji Foods"
           />
         </FormControl>
         <div className="btn btn-sm btn-primary w-fit">

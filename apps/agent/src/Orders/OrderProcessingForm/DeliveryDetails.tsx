@@ -35,7 +35,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-expect-error
+    // @ts-ignore
     resolver: zodResolver(deliveryDetailsSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async (data) => {

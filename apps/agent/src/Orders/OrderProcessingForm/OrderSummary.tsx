@@ -58,7 +58,7 @@ export const OrderSummary = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-expect-error
+    // @ts-ignore
     resolver: zodResolver(checkoutSchema),
   });
   const orderItems = useOrderItemsStore((state) => state.orderItems);

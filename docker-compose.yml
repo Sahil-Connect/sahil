@@ -11,6 +11,8 @@ services:
     restart: always
     ports:
       - '3000:3000'
+    environment:
+      - name=value
 
   # API
   sahil-api:
@@ -22,8 +24,8 @@ services:
     restart: always
     ports:
       - '8000:8000'
-    env_file:
-      - path: ./apps/api/.env
+    # env_file:
+    #   - path: ./apps/api/.env
       #- path: ./apps/api/.env.production
 
   # AGENT
@@ -35,9 +37,9 @@ services:
     image: sahil-agent
     restart: always
     ports:
-      - '3000:3000'
-    env_file:
-      - path: ./apps/agent/.env
+      - '3001:3001'
+    #env_file:
+      # - path: .env
       #- path: ./apps/agent/.env.production
   
   # CLIENT
@@ -49,10 +51,13 @@ services:
     image: sahil-client
     restart: always
     ports:
-      - '3000:3000'
-    env_file:
-      - path: ./apps/client/.env
-      #- path: ./apps/client/.env.production
+      - '3003:3003'
+    # env_file:
+    #   - path: .env
+    #   #- path: ./apps/client/.env.production
+    environment:
+      - HASURA_GRAPHQL_ENDPOINT=${HASURA_GRAPHQL_ENDPOINT}
+      - HASURA_GRAPHQL_ADMIN_SECRET=${HASURA_GRAPHQL_ADMIN_SECRET}
 
   #### LOCAL DEV ENVIRONMENTS ####
 

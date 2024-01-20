@@ -4,7 +4,8 @@ import { JoinGrid } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 export const CourierFormStepPaginator = () => {
-  const { steps, goToStep, currentStep } = useCourierFormStore(
+  // @ts-ignore
+  const { steps, goToStep, currentStep } = useCourierFormStore()(
     (state) => state
   );
   const router = useRouter();
