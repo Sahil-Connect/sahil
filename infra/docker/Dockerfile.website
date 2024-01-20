@@ -28,13 +28,18 @@ COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
 # Remote caching
-# ARG TURBO_TEAM
-# ENV TURBO_TEAM=$TURBO_TEAM
+ARG CACHE_SERVER_URL
+ARG TURBO_TEAM
+ARG TURBO_TOKEN
+ENV CACHE_SERVER_URL=$CACHE_SERVER_URL
+ENV TURBO_TEAM=$TURBO_TEAM
+ENV TURBO_TOKEN=$TURBO_TOKEN
 
-# ARG TURBO_TOKEN
-# ENV TURBO_TOKEN=$TURBO_TOKEN
+#RUN echo ${TURBO_TEAM}
 
-RUN yarn turbo build --filter=website...
+#RUN yarn turbo run build --filter=website --api=${CACHE_SERVER_URL} --team=${TURBO_TEAM} --token=${TURBO_TOKEN}
+RUN yarn turbo run build --filter=website --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'
+
 
 FROM base AS runner
 WORKDIR /app

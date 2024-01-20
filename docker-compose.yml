@@ -7,7 +7,9 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/Dockerfile.website
-    image: sahil-website
+    image: sahil-website-test
+    env_file:
+      - .env
     restart: always
     ports:
       - '3000:3000'
