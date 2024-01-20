@@ -30,7 +30,8 @@ ordersRouter.post(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { object } = req.body.input;
-      await pushIntoOrders(object);
+      const validatedInput = validate(object);
+      await pushIntoOrders(validatedInput);
       return res.status(200).json({
         order: object,
       });
