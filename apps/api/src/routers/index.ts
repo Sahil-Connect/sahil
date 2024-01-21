@@ -6,6 +6,6 @@ import home from "./home";
 const router = express.Router();
 
 router.use("/api", api);
-router.use("/", home)
+router.use("/", home);
 
 export default router;
