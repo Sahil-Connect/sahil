@@ -15,6 +15,11 @@ export const businessSchema = z.object({
   //   contactName: z.string(),
   //   preferredContactMethod: z.string(),
   //   preferredDeliveryMethod: z.string()
+  //   price: z
+  //   .string()
+  //   .min(1, { message: "required" })
+  //   .transform((value) => +value)
+  //   .refine((value) => !isNaN(value), { message: "Must be a number"})
 });
 
 export type BusinessAttributes = z.infer<typeof businessSchema>;
