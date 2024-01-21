@@ -100,11 +100,12 @@ export const FETCH_SUPPLIER_PRODUCTS = gql`
   query getSupplierProducts(
     $id: uuid!
     $offset: Int = 0
-    $order_by: [products_order_by!] = {}
+    $limit: Int = 4
+    $order_by: [products_order_by!] = { name: asc }
   ) {
     products(
       where: { supplier_id: { _eq: $id } }
-      limit: 4
+      limit: $limit
       offset: $offset
       order_by: $order_by
     ) {
@@ -124,11 +125,13 @@ export const FETCH_SUPPLIER_PRODUCT_BY_NAME = gql`
     $offset: Int = 0
     $name: String = ""
     $limit: Int = 4
+    $order_by: [products_order_by!] = { name: asc }
   ) {
     products(
       where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }
       limit: $limit
       offset: $offset
+      order_by: $order_by
     ) {
       id
       name

@@ -28,7 +28,9 @@ export const ListSuppliers = () => {
         size={suppliersCount?.count}
         sizeLabel="Suppliers"
         title="Suppliers"
-      />
+      >
+        <></>
+      </ListHeader>
       <List
         data={suppliers}
         error={error}

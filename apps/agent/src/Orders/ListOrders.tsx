@@ -1,5 +1,5 @@
 import { useFetchOrders } from "@/hooks/orders";
-import { List, ListHeader, ListErrorState } from "ui";
+import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 import { OrderOverviewCard } from "./OrderOverviewCard";
 
 export const ListOrders = () => {
@@ -16,7 +16,9 @@ export const ListOrders = () => {
 
   return (
     <section className="space-y-4">
-      <ListHeader size={ordersCount?.count} sizeLabel="Orders" title="Orders" />
+      <ListHeader size={ordersCount?.count} sizeLabel="Orders" title="Orders">
+        <></>
+      </ListHeader>
       <List
         data={orders}
         loading={loading}
