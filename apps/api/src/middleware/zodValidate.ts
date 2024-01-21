@@ -1,4 +1,5 @@
 import { NextFunction, Response, Router, Request } from "express";
+import { logger } from "../lib/winston";
 
 const extractInputFromHasuraAction = (body: any): any | null => {
   if ("action" in body && "input" in body) {

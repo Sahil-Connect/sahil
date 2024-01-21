@@ -21,6 +21,8 @@ const documents = {
     types.InsertNewCourierDocument,
   "\n  mutation insertBusinessOrder($object: orders_insert_input!) {\n    insert_orders_one(object: $object) {\n      id\n    }\n  }\n":
     types.InsertBusinessOrderDocument,
+  "\n  mutation insertBusinessOrderAction(\n    $object: InsertBusinessOrderOrdersInsertInput = {}\n  ) {\n    insertBusinessOrder(object: $object)\n  }\n":
+    types.InsertBusinessOrderActionDocument,
   "\n  mutation registerSupplier($object: suppliers_insert_input!) {\n    insert_suppliers_one(object: $object) {\n      id\n      name\n    }\n  }\n":
     types.RegisterSupplierDocument,
   '\n  mutation updateProductByPk(\n    $id: uuid = ""\n    $inStock: Boolean\n    $name: String\n    $price: Int\n    $quantity: Int\n    $description: String\n  ) {\n    update_products_by_pk(\n      pk_columns: { id: $id }\n      _set: {\n        inStock: $inStock\n        name: $name\n        price: $price\n        quantity: $quantity\n        description: $description\n      }\n    ) {\n      id\n      inStock\n      name\n      price\n      quantity\n      description\n    }\n  }\n':
@@ -69,6 +71,8 @@ const documents = {
     types.GetSupplierProductByNameDocument,
   "\n  query getUsers {\n    users {\n      id\n      created_at\n      role\n      name\n    }\n  }\n":
     types.GetUsersDocument,
+  '\n  subscription getOrderValidation($id: uuid = "") {\n    insertBusinessOrder(id: $id) {\n      output {\n        order {\n          customerId\n          order_items {\n            data {\n              price\n              productId\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n':
+    types.GetOrderValidationDocument,
 };
 
 /**
@@ -109,6 +113,12 @@ export function gql(
 export function gql(
   source: "\n  mutation insertBusinessOrder($object: orders_insert_input!) {\n    insert_orders_one(object: $object) {\n      id\n    }\n  }\n"
 ): (typeof documents)["\n  mutation insertBusinessOrder($object: orders_insert_input!) {\n    insert_orders_one(object: $object) {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  mutation insertBusinessOrderAction(\n    $object: InsertBusinessOrderOrdersInsertInput = {}\n  ) {\n    insertBusinessOrder(object: $object)\n  }\n"
+): (typeof documents)["\n  mutation insertBusinessOrderAction(\n    $object: InsertBusinessOrderOrdersInsertInput = {}\n  ) {\n    insertBusinessOrder(object: $object)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -253,6 +263,12 @@ export function gql(
 export function gql(
   source: "\n  query getUsers {\n    users {\n      id\n      created_at\n      role\n      name\n    }\n  }\n"
 ): (typeof documents)["\n  query getUsers {\n    users {\n      id\n      created_at\n      role\n      name\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  subscription getOrderValidation($id: uuid = "") {\n    insertBusinessOrder(id: $id) {\n      output {\n        order {\n          customerId\n          order_items {\n            data {\n              price\n              productId\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n'
+): (typeof documents)['\n  subscription getOrderValidation($id: uuid = "") {\n    insertBusinessOrder(id: $id) {\n      output {\n        order {\n          customerId\n          order_items {\n            data {\n              price\n              productId\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n'];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

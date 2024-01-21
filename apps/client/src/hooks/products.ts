@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import {
   GetProductsByNameQuery,
   GetProductsByNameQueryVariables,
+  GetProductsQuery,
+  GetProductsQueryVariables,
 } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const useFetchProducts = ({
@@ -21,8 +23,8 @@ export const useFetchProducts = ({
   const graphqlQuery = name ? FETCH_PRODUCTS_BY_NAME : FETCH_PRODUCTS;
 
   const { error, data, loading } = useQuery<
-    GetProductsByNameQuery,
-    GetProductsByNameQueryVariables
+    GetProductsQuery | GetProductsByNameQuery,
+    GetProductsQueryVariables | GetProductsByNameQueryVariables
   >(graphqlQuery, {
     variables: {
       offset,

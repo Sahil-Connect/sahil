@@ -7,3 +7,11 @@ export const INSERT_NEW_ORDER = gql`
     }
   }
 `;
+
+export const INIT_ORDER_ACTION = gql`
+  mutation insertBusinessOrderAction(
+    $object: InsertBusinessOrderOrdersInsertInput = {}
+  ) {
+    insertBusinessOrder(object: $object)
+  }
+`;

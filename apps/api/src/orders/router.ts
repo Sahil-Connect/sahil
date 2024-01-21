@@ -1,6 +1,6 @@
 import { NextFunction, Response, Router, Request } from "express";
 import { pushIntoOrders } from "../enqueue";
-import { object, z } from "zod";
+import { z } from "zod";
 import { logger } from "../lib/winston";
 import { logRequest } from "../middleware/requestLogger";
 import { validate } from "../middleware/zodValidate";
@@ -11,29 +11,16 @@ const ordersRouter = Router();
 
 ordersRouter.use(logRequest);
 
-type OrdersActionType = {
-  created_at: Date;
-  customerId: string;
-  destination: string;
-  id: string;
-  orderId: string;
-  origin: string;
-  processedBy: string;
-};
-
-// place an order
 ordersRouter.post(
   "/",
   validate(orderSchema),
-  async (req: Request, res: Response<OrdersActionType>, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
-      // @ts-ignore
-      const order = await initOrder(req.locals);
-
-      // push into Queue
-      await pushIntoOrders(req.body);
-      res.send({
-        ...order,
+      const { object } = req.body.input;
+      const validatedInput = validate(object);
+      await pushIntoOrders(validatedInput);
+      return res.status(200).json({
+        order: object,
       });
     } catch (error) {
       next(error);

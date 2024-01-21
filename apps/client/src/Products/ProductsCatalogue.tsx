@@ -16,6 +16,7 @@ import {
   HiArrowPath,
   HiSignalSlash,
 } from "react-icons/hi2";
+import { Products } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const ProductsCatalogue = () => {
   const [offset, setOffset] = useState(0);
@@ -38,8 +39,7 @@ export const ProductsCatalogue = () => {
   );
 
   useEffect(() => {
-    // @ts-ignore
-    setProducts(products);
+    setProducts(products as Products[]);
   }, [products, setProducts]);
 
   if (error) {
@@ -99,7 +99,7 @@ export const ProductsCatalogue = () => {
         />
       </ListHeader>
       <List
-        data={products}
+        data={products as Products[]}
         error={error}
         loading={loading}
         cols={4}
