@@ -48,12 +48,12 @@ const SupplierProductList = ({ productsCount }: props) => {
   };
 
   const sortOptions = [
-    { property: "name", label: "Name (ASC)", order: "asc" },
-    { property: "name", label: "Name (DESC)", order: "desc" },
-    { property: "quantity", label: "Quantity (ASC)", order: "asc" },
-    { property: "quantity", label: "Quantity (DESC)", order: "desc" },
-    { property: "price", label: "Price (ASC)", order: "asc" },
-    { property: "price", label: "Price (DESC)", order: "desc" },
+    { property: "name", label: "Name (Low)", order: "asc" },
+    { property: "name", label: "Name (High)", order: "desc" },
+    { property: "quantity", label: "Quantity (Low)", order: "asc" },
+    { property: "quantity", label: "Quantity (High)", order: "desc" },
+    { property: "price", label: "Price (Low)", order: "asc" },
+    { property: "price", label: "Price (High)", order: "desc" },
   ];
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
