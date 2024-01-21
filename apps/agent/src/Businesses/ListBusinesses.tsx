@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BusinessOverviewCard } from "./BusinessOverviewCard";
 import { useFetchBusinesses } from "@/hooks/businesses";
-import { List, ListHeader, ListErrorState } from "ui";
+import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 
 export type SahilBusiness = {
   name: string;
@@ -48,12 +48,15 @@ export const ListBusinesses = () => {
   return (
     <section className="space-y-4">
       <ListHeader
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
         size={businessCount?.count}
         sizeLabel="Businesses"
         title="Businesses"
-      />
+      >
+        <ListPagination
+          onNextPage={onNextPage}
+          onPreviousPage={onPreviousPage}
+        />
+      </ListHeader>
       <List
         data={businesses}
         loading={loading}

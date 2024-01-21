@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFetchProducts } from "@/hooks/products";
-import { Card, List, ListHeader } from "ui";
+import { Card, List, ListHeader, ListPagination } from "ui";
 import { formatCost } from "@sahil/lib";
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
 import Link from "next/link";
@@ -88,17 +88,16 @@ export const ProductsCatalogue = () => {
 
   return (
     <Card>
-      <ListHeader
-        onNextPage={() => setOffset((prev) => prev + 12)}
-        onPreviousPage={() => setOffset((prev) => prev - 12)}
-        isNextDisabled={
-          (productsCount && offset + 12 >= productsCount) || false
-        }
-        isPrevDisabled={offset === 0}
-        size={productsCount}
-        limit={12}
-        sizeLabel="Products"
-      />
+      <ListHeader size={productsCount} sizeLabel="Products">
+        <ListPagination
+          onNextPage={() => setOffset((prev) => prev + 12)}
+          onPreviousPage={() => setOffset((prev) => prev - 12)}
+          isNextDisabled={
+            (productsCount && offset + 12 >= productsCount) || false
+          }
+          isPrevDisabled={offset === 0}
+        />
+      </ListHeader>
       <List
         data={products as Products[]}
         error={error}
