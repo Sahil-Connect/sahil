@@ -1,9 +1,10 @@
 import { Worker } from "bullmq";
 import { logger } from "../lib/winston";
 import { connection } from "../lib/ioredis";
+import { Queues } from "../queue";
 
 const worker = new Worker(
-  "Order",
+  Queues.Order,
   async (job) => {
     logger.info("Processing Job", {
       world: "hello 0",

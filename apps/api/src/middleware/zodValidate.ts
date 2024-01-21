@@ -1,5 +1,5 @@
-import { NextFunction, Response, Router, Request } from "express";
-import { z, ZodError } from "zod";
+import { NextFunction, Response, Request } from "express";
+import { z } from "zod";
 
 const extractInputFromHasuraAction = (body: any): any | null => {
   if ("action" in body && "input" in body) {

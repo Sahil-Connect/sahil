@@ -1,5 +1,4 @@
 import { NextFunction, Response, Router, Request } from "express";
-import { logger } from "../lib/winston";
 import { logRequest } from "../middleware/requestLogger";
 import { validate } from "../middleware/zodValidate";
 import {
@@ -7,6 +6,7 @@ import {
   businessSchema,
   BusinessAttributes,
 } from "./operations/registerBusiness";
+import { pushIntoClient } from "../enqueue";
 
 const businessRouter = Router();
 
@@ -22,7 +22,7 @@ businessRouter.post(
   ) => {
     try {
       const business = await registerBusiness(req.body);
-      // console.log("business", business);
+      pushIntoClient(business);
       res.status(201).json({
         ...business,
       });
