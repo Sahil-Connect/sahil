@@ -8,6 +8,7 @@ import {
   BusinessInfoSummary,
   BusinessFormSteps,
   BusinessStepsPaginator,
+  BusinessPreferencesInfo,
 } from "@/Businesses/BusinessRegistrationForm";
 import {
   HiOutlineCheckCircle,
@@ -92,6 +93,7 @@ export default function BusinessRegistrationPage() {
           />
           {currentStep === "business_info" && <BusinessInfo />}
           {currentStep === "address_info" && <AddressInfo />}
+          {currentStep === "preferences" && <BusinessPreferencesInfo />}
           {currentStep === "summary" && <BusinessInfoSummary />}
         </div>
       </div>

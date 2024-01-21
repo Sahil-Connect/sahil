@@ -2976,6 +2976,8 @@ export type Business = {
   owner?: Maybe<Users>;
   owner_id?: Maybe<Scalars["uuid"]["output"]>;
   phoneNumber?: Maybe<Scalars["String"]["output"]>;
+  preferredContactMethod?: Maybe<Scalars["String"]["output"]>;
+  preferredDeliveryMethod?: Maybe<Scalars["String"]["output"]>;
   /** An object relationship */
   registeration_channel_type?: Maybe<Registeration_Channel_Type>;
   registered_by?: Maybe<Scalars["uuid"]["output"]>;
@@ -3086,6 +3088,8 @@ export type Business_Bool_Exp = {
   owner?: InputMaybe<Users_Bool_Exp>;
   owner_id?: InputMaybe<Uuid_Comparison_Exp>;
   phoneNumber?: InputMaybe<String_Comparison_Exp>;
+  preferredContactMethod?: InputMaybe<String_Comparison_Exp>;
+  preferredDeliveryMethod?: InputMaybe<String_Comparison_Exp>;
   registeration_channel_type?: InputMaybe<Registeration_Channel_Type_Bool_Exp>;
   registered_by?: InputMaybe<Uuid_Comparison_Exp>;
   registration_channel?: InputMaybe<Registeration_Channel_Type_Enum_Comparison_Exp>;
@@ -3114,6 +3118,8 @@ export type Business_Insert_Input = {
   owner?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   owner_id?: InputMaybe<Scalars["uuid"]["input"]>;
   phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  preferredContactMethod?: InputMaybe<Scalars["String"]["input"]>;
+  preferredDeliveryMethod?: InputMaybe<Scalars["String"]["input"]>;
   registeration_channel_type?: InputMaybe<Registeration_Channel_Type_Obj_Rel_Insert_Input>;
   registered_by?: InputMaybe<Scalars["uuid"]["input"]>;
   registration_channel?: InputMaybe<Registeration_Channel_Type_Enum>;
@@ -3132,6 +3138,8 @@ export type Business_Max_Fields = {
   name?: Maybe<Scalars["String"]["output"]>;
   owner_id?: Maybe<Scalars["uuid"]["output"]>;
   phoneNumber?: Maybe<Scalars["String"]["output"]>;
+  preferredContactMethod?: Maybe<Scalars["String"]["output"]>;
+  preferredDeliveryMethod?: Maybe<Scalars["String"]["output"]>;
   registered_by?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
 };
@@ -3146,6 +3154,8 @@ export type Business_Max_Order_By = {
   name?: InputMaybe<Order_By>;
   owner_id?: InputMaybe<Order_By>;
   phoneNumber?: InputMaybe<Order_By>;
+  preferredContactMethod?: InputMaybe<Order_By>;
+  preferredDeliveryMethod?: InputMaybe<Order_By>;
   registered_by?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -3161,6 +3171,8 @@ export type Business_Min_Fields = {
   name?: Maybe<Scalars["String"]["output"]>;
   owner_id?: Maybe<Scalars["uuid"]["output"]>;
   phoneNumber?: Maybe<Scalars["String"]["output"]>;
+  preferredContactMethod?: Maybe<Scalars["String"]["output"]>;
+  preferredDeliveryMethod?: Maybe<Scalars["String"]["output"]>;
   registered_by?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
 };
@@ -3175,6 +3187,8 @@ export type Business_Min_Order_By = {
   name?: InputMaybe<Order_By>;
   owner_id?: InputMaybe<Order_By>;
   phoneNumber?: InputMaybe<Order_By>;
+  preferredContactMethod?: InputMaybe<Order_By>;
+  preferredDeliveryMethod?: InputMaybe<Order_By>;
   registered_by?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -3217,6 +3231,8 @@ export type Business_Order_By = {
   owner?: InputMaybe<Users_Order_By>;
   owner_id?: InputMaybe<Order_By>;
   phoneNumber?: InputMaybe<Order_By>;
+  preferredContactMethod?: InputMaybe<Order_By>;
+  preferredDeliveryMethod?: InputMaybe<Order_By>;
   registeration_channel_type?: InputMaybe<Registeration_Channel_Type_Order_By>;
   registered_by?: InputMaybe<Order_By>;
   registration_channel?: InputMaybe<Order_By>;
@@ -3369,6 +3385,10 @@ export enum Business_Select_Column {
   /** column name */
   PhoneNumber = "phoneNumber",
   /** column name */
+  PreferredContactMethod = "preferredContactMethod",
+  /** column name */
+  PreferredDeliveryMethod = "preferredDeliveryMethod",
+  /** column name */
   RegisteredBy = "registered_by",
   /** column name */
   RegistrationChannel = "registration_channel",
@@ -3388,6 +3408,8 @@ export type Business_Set_Input = {
   name?: InputMaybe<Scalars["String"]["input"]>;
   owner_id?: InputMaybe<Scalars["uuid"]["input"]>;
   phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  preferredContactMethod?: InputMaybe<Scalars["String"]["input"]>;
+  preferredDeliveryMethod?: InputMaybe<Scalars["String"]["input"]>;
   registered_by?: InputMaybe<Scalars["uuid"]["input"]>;
   registration_channel?: InputMaybe<Registeration_Channel_Type_Enum>;
   type?: InputMaybe<Business_Type_Enum>;
@@ -3412,6 +3434,8 @@ export type Business_Stream_Cursor_Value_Input = {
   name?: InputMaybe<Scalars["String"]["input"]>;
   owner_id?: InputMaybe<Scalars["uuid"]["input"]>;
   phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+  preferredContactMethod?: InputMaybe<Scalars["String"]["input"]>;
+  preferredDeliveryMethod?: InputMaybe<Scalars["String"]["input"]>;
   registered_by?: InputMaybe<Scalars["uuid"]["input"]>;
   registration_channel?: InputMaybe<Registeration_Channel_Type_Enum>;
   type?: InputMaybe<Business_Type_Enum>;
@@ -3605,6 +3629,10 @@ export enum Business_Update_Column {
   OwnerId = "owner_id",
   /** column name */
   PhoneNumber = "phoneNumber",
+  /** column name */
+  PreferredContactMethod = "preferredContactMethod",
+  /** column name */
+  PreferredDeliveryMethod = "preferredDeliveryMethod",
   /** column name */
   RegisteredBy = "registered_by",
   /** column name */
@@ -13689,6 +13717,8 @@ export type RegisterClientMutation = {
     __typename?: "business";
     id: any;
     name?: string | null;
+    description?: string | null;
+    type?: Business_Type_Enum | null;
   } | null;
 };
 
@@ -13813,9 +13843,9 @@ export type RegisterUserMutation = {
   } | null;
 };
 
-export type GetClientsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetBusinessesQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetClientsQuery = {
+export type GetBusinessesQuery = {
   __typename?: "query_root";
   business: Array<{
     __typename?: "business";
@@ -14209,6 +14239,7 @@ export type GetSupplierByPkQuery = {
 export type GetSupplierProductsQueryVariables = Exact<{
   id: Scalars["uuid"]["input"];
   offset?: InputMaybe<Scalars["Int"]["input"]>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Products_Order_By> | Products_Order_By>;
 }>;
 
@@ -14230,6 +14261,7 @@ export type GetSupplierProductByNameQueryVariables = Exact<{
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Products_Order_By> | Products_Order_By>;
 }>;
 
 export type GetSupplierProductByNameQuery = {
@@ -14329,6 +14361,8 @@ export const RegisterClientDocument = {
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "id" } },
                 { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                { kind: "Field", name: { kind: "Name", value: "type" } },
               ],
             },
           },
@@ -14913,13 +14947,13 @@ export const RegisterUserDocument = {
   RegisterUserMutation,
   RegisterUserMutationVariables
 >;
-export const GetClientsDocument = {
+export const GetBusinessesDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "getClients" },
+      name: { kind: "Name", value: "getBusinesses" },
       selectionSet: {
         kind: "SelectionSet",
         selections: [
@@ -15013,7 +15047,7 @@ export const GetClientsDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetClientsQuery, GetClientsQueryVariables>;
+} as unknown as DocumentNode<GetBusinessesQuery, GetBusinessesQueryVariables>;
 export const GetBusinessOrdersDocument = {
   kind: "Document",
   definitions: [
@@ -16676,6 +16710,15 @@ export const GetSupplierProductsDocument = {
           kind: "VariableDefinition",
           variable: {
             kind: "Variable",
+            name: { kind: "Name", value: "limit" },
+          },
+          type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+          defaultValue: { kind: "IntValue", value: "4" },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
             name: { kind: "Name", value: "order_by" },
           },
           type: {
@@ -16688,7 +16731,16 @@ export const GetSupplierProductsDocument = {
               },
             },
           },
-          defaultValue: { kind: "ObjectValue", fields: [] },
+          defaultValue: {
+            kind: "ObjectValue",
+            fields: [
+              {
+                kind: "ObjectField",
+                name: { kind: "Name", value: "name" },
+                value: { kind: "EnumValue", value: "asc" },
+              },
+            ],
+          },
         },
       ],
       selectionSet: {
@@ -16727,7 +16779,10 @@ export const GetSupplierProductsDocument = {
               {
                 kind: "Argument",
                 name: { kind: "Name", value: "limit" },
-                value: { kind: "IntValue", value: "4" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "limit" },
+                },
               },
               {
                 kind: "Argument",
@@ -16806,6 +16861,33 @@ export const GetSupplierProductByNameDocument = {
           type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
           defaultValue: { kind: "IntValue", value: "4" },
         },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "order_by" },
+          },
+          type: {
+            kind: "ListType",
+            type: {
+              kind: "NonNullType",
+              type: {
+                kind: "NamedType",
+                name: { kind: "Name", value: "products_order_by" },
+              },
+            },
+          },
+          defaultValue: {
+            kind: "ObjectValue",
+            fields: [
+              {
+                kind: "ObjectField",
+                name: { kind: "Name", value: "name" },
+                value: { kind: "EnumValue", value: "asc" },
+              },
+            ],
+          },
+        },
       ],
       selectionSet: {
         kind: "SelectionSet",
@@ -16871,6 +16953,14 @@ export const GetSupplierProductByNameDocument = {
                 value: {
                   kind: "Variable",
                   name: { kind: "Name", value: "offset" },
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "order_by" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "order_by" },
                 },
               },
             ],

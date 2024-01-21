@@ -28,7 +28,7 @@ const extendedConfig: Config = {
           ...require("daisyui/src/theming/themes")["[data-theme=lemonade]"],
           primary: "#067a46",
           secondary: "#07ba3d",
-          accent: "#40efcf",
+          accent: "#FFDB58",
           neutral: "#2d2f39",
           "base-100": "#ffffff",
           info: "#76d1e5",

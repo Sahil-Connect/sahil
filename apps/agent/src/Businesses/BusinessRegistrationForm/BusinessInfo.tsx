@@ -37,6 +37,15 @@ export const BusinessInfo = () => {
             type="text"
             className="input input-sm input-bordered w-full bg-gray-100"
             placeholder="Keji's Foods"
+            {...register("name")}
+          />
+        </FormControl>
+        <FormControl label="Name of your business">
+          <input
+            type="text"
+            className="input input-sm input-bordered w-full bg-gray-100"
+            placeholder="Keji's Foods"
+            {...register("name")}
           />
         </FormControl>
         <div className="btn btn-sm btn-primary w-fit">

@@ -4,23 +4,37 @@ import { z } from "zod";
 import { logger } from "../lib/winston";
 import { logRequest } from "../middleware/requestLogger";
 import { validate } from "../middleware/zodValidate";
-import { initOrder, orderSchema } from "./operations/initOrder";
+import {
+  initOrder,
+  orderSchema,
+  OrderAttributes,
+} from "./operations/initOrder";
 import { processOrder } from "./operations/processOrder";
 
 const ordersRouter = Router();
 
 ordersRouter.use(logRequest);
 
+type OrdersActionType = {
+  created_at: Date;
+  customerId: string;
+  destination: string;
+  id: string;
+  orderId: string;
+  origin: string;
+  processedBy: string;
+};
+
 ordersRouter.post(
   "/",
-  validate(orderSchema),
-  async (req: Request, res: Response, next: NextFunction) => {
+  validate<OrderAttributes>(orderSchema),
+  async (req: Request, res: Response<OrdersActionType>, next: NextFunction) => {
     try {
-      const { object } = req.body.input;
-      const validatedInput = validate(object);
-      await pushIntoOrders(validatedInput);
-      return res.status(200).json({
-        order: object,
+      const order = await initOrder(req.body);
+      // push into Queue
+      await pushIntoOrders(req.body);
+      res.status(201).send({
+        ...order,
       });
     } catch (error) {
       next(error);
