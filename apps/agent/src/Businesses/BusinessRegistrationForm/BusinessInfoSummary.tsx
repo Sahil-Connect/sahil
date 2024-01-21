@@ -1,3 +1,5 @@
+// import { useRegisterBusiness, useBusinessValidated } from "@/hooks/businesses";
+
 export const BusinessInfoSummary = () => {
   return (
     <div>

@@ -13,7 +13,7 @@ const extractInputFromHasuraAction = (body: any): any | null => {
   return null;
 };
 
-export function validate<T>(schema: z.ZodType<T>) {
+export function validate<T extends z.ZodTypeAny>(schema: T) {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
       const input = extractInputFromHasuraAction(req.body);

@@ -25,7 +25,7 @@ type OrdersActionType = {
 
 ordersRouter.post(
   "/",
-  validate<OrderAttributes>(orderSchema),
+  validate(orderSchema),
   async (req: Request, res: Response<OrdersActionType>, next: NextFunction) => {
     try {
       const order = await initOrder(req.body);

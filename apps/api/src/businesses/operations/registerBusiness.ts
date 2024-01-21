@@ -8,7 +8,7 @@ type ContactMethod = "email" | "call" | "sms" | "whatsapp";
 type DeliveryMethod = "pick-up-location" | "direct-delivery";
 
 export const businessSchema = z.object({
-  name: z.string(),
+  name: z.string().trim(),
   //   type: z.string(),
   //   description: z.string(),
   //   contactEmail: z.string(),

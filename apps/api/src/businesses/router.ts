@@ -14,7 +14,7 @@ businessRouter.use(logRequest);
 
 businessRouter.post(
   "/",
-  validate<BusinessAttributes>(businessSchema),
+  validate(businessSchema),
   async (
     req: Request,
     res: Response<BusinessAttributes>,
