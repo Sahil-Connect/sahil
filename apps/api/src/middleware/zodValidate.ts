@@ -23,8 +23,7 @@ export const validate =
       };
 
       next();
-    } catch (error) {
-      // @ts-ignore
-      return res.status(400).send(error.errors);
+    } catch (error: any) {
+      return res.status(400).json(error.errors);
     }
   };

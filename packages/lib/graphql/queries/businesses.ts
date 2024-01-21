@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BUSINESSES = gql`
-  query getClients {
+  query getBusinesses {
     business {
       created_at
       id

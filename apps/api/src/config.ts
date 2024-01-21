@@ -16,5 +16,10 @@ export const fromEmailAddress =
   process.env.FROM_EMAIL_ADDRESS || "emmanuelgatwech@gmail.com";
 export const host = process.env.HOST || "localhost:3000";
 
-export const WebPushPublicVapidKey = process.env.WEB_PUSH_PUBLIC_VAPID_KEY;
-export const WebPushPrivateVapidKey = process.env.WEB_PUSH_PRIVATE_VAPID_KEY;
+export const WebPushPublicVapidKey =
+  process.env.WEB_PUSH_PUBLIC_VAPID_KEY || "";
+export const WebPushPrivateVapidKey =
+  process.env.WEB_PUSH_PRIVATE_VAPID_KEY || "";
+
+export const hasuraEndpoint = process.env.HASURA_GRAPHQL_ENDPOINT || "";
+export const hasuraAdminSecret = process.env.HASURA_GRAPHQL_ADMIN_SECRET || "";

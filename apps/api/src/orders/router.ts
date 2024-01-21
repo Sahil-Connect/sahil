@@ -4,14 +4,10 @@ import { object, z } from "zod";
 import { logger } from "../lib/winston";
 import { logRequest } from "../middleware/requestLogger";
 import { validate } from "../middleware/zodValidate";
-import { initOrder } from "./operations/initOrder";
+import { initOrder, orderSchema } from "./operations/initOrder";
 import { processOrder } from "./operations/processOrder";
 
 const ordersRouter = Router();
-
-const orderSchema = z.object({
-  orderId: z.string(),
-});
 
 ordersRouter.use(logRequest);
 

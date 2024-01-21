@@ -2,5 +2,9 @@
   "name": "@sahil/lib",
   "version": "1.0.0",
   "main": "./index.ts",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0"
+  }
 }

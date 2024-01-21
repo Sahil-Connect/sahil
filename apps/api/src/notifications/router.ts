@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { sendPushNotification } from "../lib/webPush";
+import { sendPushNotification } from "../lib/web-push";
 
 const router = Router();
 

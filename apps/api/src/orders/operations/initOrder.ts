@@ -1,12 +1,16 @@
-type OrderAttributes = {
-  created_at: Date;
-  customerId: string;
-  destination: string;
-  id: string;
-  orderId: string;
-  origin: string;
-  processedBy: string;
-};
+import { z } from "zod";
+
+export const orderSchema = z.object({
+  orderId: z.string(),
+  created_at: z.date(),
+  customerId: z.string(),
+  destination: z.string(),
+  id: z.string(),
+  origin: z.string(),
+  processedBy: z.string(),
+});
+
+export type OrderAttributes = z.infer<typeof orderSchema>;
 
 export const initOrder = (
   attributes: OrderAttributes
