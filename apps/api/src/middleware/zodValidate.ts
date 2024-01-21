@@ -1,4 +1,5 @@
 import { NextFunction, Response, Router, Request } from "express";
+import { logger } from "../lib/winston";
 
 const extractInputFromHasuraAction = (body: any): any | null => {
   if ("action" in body && "input" in body) {
@@ -24,6 +25,7 @@ export const validate =
 
       next();
     } catch (error) {
+      logger.error(error);
       // @ts-ignore
       return res.status(400).send(error.errors);
     }

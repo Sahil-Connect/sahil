@@ -5,6 +5,7 @@ import { ApolloProvider } from "@apollo/client";
 import { createApolloClient } from "@sahil/lib/graphql";
 
 const graphqlUri = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT;
+const ws = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_WS;
 
 const httpOptions = {
   headers: {
@@ -16,6 +17,7 @@ const httpOptions = {
 const client = createApolloClient({
   uri: graphqlUri as string,
   httpOptions,
+  ws: ws as string,
 });
 
 export default function App({ Component, pageProps }: AppProps) {
