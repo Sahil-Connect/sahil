@@ -10,13 +10,20 @@ const businessAddressSchema = z.object({
 
 type FormData = z.infer<typeof businessAddressSchema>;
 
-export const AddressInfo = () => {
+export const BusinessAddressInfo = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = businessAddressSchema.parse(data);
   };
   return (
-    <Card>
+    <Card title="Address Information">
       <FormControl label="Street Address">
+        <input
+          type="text"
+          className="input input-sm input-bordered w-full bg-gray-100"
+          placeholder="Keji's Foods"
+        />
+      </FormControl>
+      <FormControl label="Building">
         <input
           type="text"
           className="input input-sm input-bordered w-full bg-gray-100"

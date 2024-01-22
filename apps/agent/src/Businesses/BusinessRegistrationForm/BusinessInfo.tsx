@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
-import { Card, FormControl } from "ui";
+import { Card, Input, FormControl } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 const businessInfoSchema = z.object({
@@ -36,15 +36,15 @@ export const BusinessInfo = () => {
           <input
             type="text"
             className="input input-sm input-bordered w-full bg-gray-100"
-            placeholder="Keji's Foods"
+            placeholder="Keji Foods"
             {...register("name")}
           />
         </FormControl>
-        <FormControl label="Name of your business">
+        <FormControl label="Type of Business">
           <input
             type="text"
             className="input input-sm input-bordered w-full bg-gray-100"
-            placeholder="Keji's Foods"
+            placeholder="Restaurant, Hotel, etc..."
             {...register("name")}
           />
         </FormControl>

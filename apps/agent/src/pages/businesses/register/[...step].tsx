@@ -3,7 +3,7 @@ import { z } from "zod";
 import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import {
-  AddressInfo,
+  BusinessAddressInfo,
   BusinessInfo,
   BusinessInfoSummary,
   BusinessFormSteps,
@@ -92,7 +92,7 @@ export default function BusinessRegistrationPage() {
             onNextStep={onNextStep}
           />
           {currentStep === "business_info" && <BusinessInfo />}
-          {currentStep === "address_info" && <AddressInfo />}
+          {currentStep === "address_info" && <BusinessAddressInfo />}
           {currentStep === "preferences" && <BusinessPreferencesInfo />}
           {currentStep === "summary" && <BusinessInfoSummary />}
         </div>
