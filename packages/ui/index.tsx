@@ -19,6 +19,7 @@ export * from "./components/Select";
 export * from "./components/Steps";
 export * from "./components/Modal";
 export * from "./components/Radio";
+export * from "./components/Spinner";
 export * from "./components/Tabs";
 export * from "./components/Toggle";
 export * from "./components/Wrapper";

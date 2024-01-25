@@ -27,7 +27,7 @@ type Props = {
 export const BusinessOverviewCard: FC<Props> = ({ business }) => {
   return (
     <Card className="w-full">
-      <div className="flex justify-between text-4xl">
+      <div className="flex justify-between">
         <Link
           href={`/businesses/${business.id}`}
           className="avatar placeholder h-fit"
@@ -48,16 +48,16 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
           {business.name}
         </Link>
       </div>
-      <div className="mt-2 flex flex-col p-4 gap-4 border border-solid border-[#d2d6db] rounded">
+      <div className="mt-2 flex flex-col bg-gray-50 p-4 gap-4 shadow-sm rounded-lg">
         <div className="flex justify-between items-center">
           <div className="space-y-1 font-semibold">
-            <span className="opacity-70 text-sm font-normal">
+            <span className="text-gray-500 text-sm font-normal">
               Business Type
             </span>
             <p className="capitalize">{business.type}</p>
           </div>
           <div className="space-y-1 font-semibold">
-            <span className="opacity-70 text-sm font-normal">Contact Name</span>
+            <span className="text-gray-500 text-sm font-normal">Contact Name</span>
             <p className="capitalize">{business.contactName}</p>
           </div>
         </div>
@@ -66,7 +66,7 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
         {business.addresses &&
           business.addresses.map((address, index) => (
             <div key={index} className="flex items-center gap-2">
-              <span className="shadow rounded-md p-2">
+              <span className="shadow rounded-md p-2 text-primary">
                 <HiOutlineMapPin />
               </span>
               <p className="truncate ...">{address.street_address}</p>
@@ -75,7 +75,7 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
       </div>
       <div className="mt-3">
         <div className="flex items-center gap-2">
-          <span className="shadow rounded-md p-2">
+          <span className="shadow rounded-md p-2 text-primary">
             <HiOutlinePhone />
           </span>
           <p>{business.phoneNumber}</p>

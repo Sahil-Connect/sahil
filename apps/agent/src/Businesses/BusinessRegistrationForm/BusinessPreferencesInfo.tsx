@@ -1,11 +1,16 @@
+import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Input, Radio, Select } from "ui";
+import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
+
 import {
   HiOutlineCreditCard,
   HiOutlineBanknotes,
   HiArrowSmallRight,
+  HiOutlineBuildingOffice,
+  HiOutlineMapPin,
 } from "react-icons/hi2";
 
 const businessPreferencesSchema = z.object({
@@ -16,6 +21,10 @@ const businessPreferencesSchema = z.object({
 type FormData = z.infer<typeof businessPreferencesSchema>;
 
 export const BusinessPreferencesInfo = () => {
+  const { formData, goToStep, updateStepFormData } = useBusinessFormStore(
+    (state) => state
+  );
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -25,10 +34,15 @@ export const BusinessPreferencesInfo = () => {
     resolver: zodResolver(businessPreferencesSchema),
   });
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {};
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const validatedInput = businessPreferencesSchema.parse(data);
+    updateStepFormData(validatedInput);
+    goToStep("next");
+    router.push(`/businesses/register/summary`);
+  };
   return (
-    <form>
-      <Card title="Business Preferences">
+    <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+      <Card title="Business Preferences" titleSize="sm">
         <Input
           name="contactName"
           label="Contact Name"
@@ -52,6 +66,12 @@ export const BusinessPreferencesInfo = () => {
             errors={errors}
           />
         </div>
+      </Card>
+
+      <Card title="Preferred Delivery Method" titleSize="sm">
+        <p className="text-gray-500">
+          How do you prefer to receive notifications?
+        </p>
         <div className="flex gap-8">
           <Radio
             label="Cash on Delivery"
@@ -68,11 +88,34 @@ export const BusinessPreferencesInfo = () => {
             errors={errors}
           />
         </div>
-        <div className="btn btn-sm btn-primary w-fit">
-          <input type="submit" value="Continue" />
-          <HiArrowSmallRight />
+      </Card>
+
+      <Card title="Preferred Delivery Method" titleSize="sm">
+        <p className="text-gray-500">
+          How do you prefer to receive notifications?
+        </p>
+        <div className="flex gap-8">
+          <Radio
+            label="Direct Delivery"
+            icon={HiOutlineBuildingOffice}
+            name="preferredPaymentMethod"
+            register={register}
+            errors={errors}
+          />
+          <Radio
+            label="Pick-Up Locations"
+            icon={HiOutlineMapPin}
+            name="preferredPaymentMethod"
+            register={register}
+            errors={errors}
+          />
         </div>
       </Card>
+
+      <div className="btn btn-sm btn-primary w-fit">
+        <input type="submit" value="Continue" />
+        <HiArrowSmallRight />
+      </div>
     </form>
   );
 };

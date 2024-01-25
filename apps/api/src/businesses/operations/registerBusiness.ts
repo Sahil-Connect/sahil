@@ -12,7 +12,7 @@ export const businessSchema = z.object({
   //   type: z.string(),
   //   description: z.string(),
   //   contactEmail: z.string(),
-  //   contactName: z.string(),
+  contactName: z.string(),
   //   preferredContactMethod: z.string(),
   //   preferredDeliveryMethod: z.string()
   //   price: z
@@ -31,5 +31,5 @@ export const registerBusiness = async (
     object: business,
   });
   // @ts-ignore
-  return data?.insert_business_one;
+  return Promise.resolve(data?.insert_business_one);
 };
