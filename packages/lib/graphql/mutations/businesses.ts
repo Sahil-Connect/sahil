@@ -1,11 +1,10 @@
 import { gql } from "@apollo/client";
 
 export const INSERT_NEW_BUSINESS = gql`
-  mutation registerBusiness($object: business_insert_input) {
+  mutation registerBusiness($object: business_insert_input!) {
     insert_business_one(object: $object) {
       id
       name
-      contactName
     }
   }
 `;

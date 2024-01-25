@@ -6,6 +6,7 @@ import {
   HiOutlineUser,
   HiOutlineClipboardDocumentList,
   HiOutlineDocumentCheck,
+  HiOutlineDevicePhoneMobile,
 } from "react-icons/hi2";
 import { Card, Icon } from "ui";
 
@@ -74,6 +75,11 @@ export const SupplierProfileOverview = ({
               <HiOutlinePhone />
             </span>
             <p>{supplier?.phoneNumber}</p>
+          </div>
+          <div>
+            <button className="btn btn-sm w-full btn-secondary">
+              <HiOutlineDevicePhoneMobile /> Chat on WhatsApp
+            </button>
           </div>
         </div>
       </Card>

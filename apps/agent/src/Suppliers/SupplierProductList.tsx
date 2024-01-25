@@ -107,6 +107,12 @@ export default SupplierProductList;
 const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
   return (
     <Card className="bg-white h-full">
+      <figure>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/6389/6389206.png"
+          alt="Shoes"
+        />
+      </figure>
       <div className="flex flex-col justify-start">
         <div className="flex justify-between items-start">
           <h3 className="card-title w-11/12">{product.name}</h3>
