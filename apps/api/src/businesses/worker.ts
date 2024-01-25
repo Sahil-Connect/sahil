@@ -4,8 +4,9 @@ import { connection } from "../lib/ioredis";
 import { Queues } from "../queue";
 
 const worker = new Worker(
-  Queues.Order,
+  Queues.Client,
   async (job) => {
+    console.log("job", job);
     logger.info("Processing Job", {
       world: "hello 0",
     });

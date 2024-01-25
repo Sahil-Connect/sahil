@@ -1,5 +1,5 @@
-import { NextFunction, Response, Router, Request } from "express";
-import { logger } from "../lib/winston";
+import { NextFunction, Response, Request } from "express";
+import { z } from "zod";
 
 const extractInputFromHasuraAction = (body: any): any | null => {
   if ("action" in body && "input" in body) {
@@ -13,20 +13,14 @@ const extractInputFromHasuraAction = (body: any): any | null => {
   return null;
 };
 
-export const validate =
-  (schema: any) => (req: Request, res: Response, next: NextFunction) => {
+export function validate<T extends z.ZodTypeAny>(schema: T) {
+  return (req: Request, res: Response, next: NextFunction) => {
     try {
       const input = extractInputFromHasuraAction(req.body);
-      const validatedInput = schema.parse(input);
-      // @ts-ignore
-      req.locals = {
-        hello: "world",
-      };
-
+      req.body = schema.parse(input);
       next();
-    } catch (error) {
-      logger.error(error);
-      // @ts-ignore
-      return res.status(400).send(error.errors);
+    } catch (error: any) {
+      return res.status(400).json(error.errors);
     }
   };
+}

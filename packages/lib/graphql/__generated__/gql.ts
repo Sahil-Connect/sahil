@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  "\n  mutation registerClient($object: business_insert_input!) {\n    insert_business_one(object: $object) {\n      id\n      name\n    }\n  }\n":
+  "\n  mutation registerClient($object: business_insert_input!) {\n    insert_business_one(object: $object) {\n      id\n      name\n      description\n      type\n    }\n  }\n":
     types.RegisterClientDocument,
   "\n  mutation insertBusinessAddress($object: addresses_insert_input!) {\n    insert_addresses_one(object: $object) {\n      business_id\n      city\n    }\n  }\n":
     types.InsertBusinessAddressDocument,
@@ -33,8 +33,8 @@ const documents = {
     types.AddNewProductDocument,
   "\n  mutation registerUser($object: users_insert_input!) {\n    insert_users_one(object: $object) {\n      id\n      name\n    }\n  }\n":
     types.RegisterUserDocument,
-  "\n  query getClients {\n    business {\n      created_at\n      id\n      updated_at\n      name\n      contactName\n      type\n      phoneNumber\n      description\n      contactEmail\n      addresses {\n        city\n        created_at\n        id\n        latitude\n        longitude\n        updated_at\n        street_address\n      }\n    }\n    business_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
-    types.GetClientsDocument,
+  "\n  query getBusinesses {\n    business {\n      created_at\n      id\n      updated_at\n      name\n      contactName\n      type\n      phoneNumber\n      description\n      contactEmail\n      addresses {\n        city\n        created_at\n        id\n        latitude\n        longitude\n        updated_at\n        street_address\n      }\n    }\n    business_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
+    types.GetBusinessesDocument,
   "\n  query getBusinessOrders(\n    $customerId: uuid\n    $limit: Int = 4\n    $offset: Int = 0\n  ) {\n    orders(\n      where: {\n        _or: [\n          { customerId: { _eq: $customerId } }\n          { customerId: { _is_null: true } }\n        ]\n        customerId: { _eq: $customerId }\n      }\n      limit: $limit\n      offset: $offset\n    ) {\n      id\n      created_at\n      destination\n      id\n      orderId\n      customerId\n      origin\n      status\n      business {\n        contactName\n        phoneNumber\n        name\n      }\n    }\n    orders_aggregate(where: { customerId: { _eq: $customerId } }) {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
     types.GetBusinessOrdersDocument,
   "\n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      id\n      name\n      contactName\n      phoneNumber\n      description\n      contactEmail\n      type\n      agent {\n        name\n        id\n      }\n      addresses {\n        city\n        street_address\n      }\n    }\n  }\n":
@@ -65,9 +65,9 @@ const documents = {
     types.GetFilteredSuppliersDocument,
   "\n  query getSupplierByPK($id: uuid!) {\n    suppliers_by_pk(id: $id) {\n      created_at\n      id\n      name\n      description\n      phoneNumber\n      contactName\n      contactEmail\n      streetAddress\n      zone\n      categories {\n        category_name\n      }\n      products_aggregate {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n":
     types.GetSupplierByPkDocument,
-  "\n  query getSupplierProducts(\n    $id: uuid!\n    $offset: Int = 0\n    $order_by: [products_order_by!] = {}\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id } }\n      limit: 4\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n":
+  "\n  query getSupplierProducts(\n    $id: uuid!\n    $offset: Int = 0\n    $limit: Int = 4\n    $order_by: [products_order_by!] = { name: asc }\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id } }\n      limit: $limit\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n":
     types.GetSupplierProductsDocument,
-  '\n  query getSupplierProductByName(\n    $id: uuid!\n    $offset: Int = 0\n    $name: String = ""\n    $limit: Int = 4\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }\n      limit: $limit\n      offset: $offset\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n':
+  '\n  query getSupplierProductByName(\n    $id: uuid!\n    $offset: Int = 0\n    $name: String = ""\n    $limit: Int = 4\n    $order_by: [products_order_by!] = { name: asc }\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }\n      limit: $limit\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n':
     types.GetSupplierProductByNameDocument,
   "\n  query getUsers {\n    users {\n      id\n      created_at\n      role\n      name\n    }\n  }\n":
     types.GetUsersDocument,
@@ -93,8 +93,8 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  mutation registerClient($object: business_insert_input!) {\n    insert_business_one(object: $object) {\n      id\n      name\n    }\n  }\n"
-): (typeof documents)["\n  mutation registerClient($object: business_insert_input!) {\n    insert_business_one(object: $object) {\n      id\n      name\n    }\n  }\n"];
+  source: "\n  mutation registerClient($object: business_insert_input!) {\n    insert_business_one(object: $object) {\n      id\n      name\n      description\n      type\n    }\n  }\n"
+): (typeof documents)["\n  mutation registerClient($object: business_insert_input!) {\n    insert_business_one(object: $object) {\n      id\n      name\n      description\n      type\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -153,8 +153,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  query getClients {\n    business {\n      created_at\n      id\n      updated_at\n      name\n      contactName\n      type\n      phoneNumber\n      description\n      contactEmail\n      addresses {\n        city\n        created_at\n        id\n        latitude\n        longitude\n        updated_at\n        street_address\n      }\n    }\n    business_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"
-): (typeof documents)["\n  query getClients {\n    business {\n      created_at\n      id\n      updated_at\n      name\n      contactName\n      type\n      phoneNumber\n      description\n      contactEmail\n      addresses {\n        city\n        created_at\n        id\n        latitude\n        longitude\n        updated_at\n        street_address\n      }\n    }\n    business_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"];
+  source: "\n  query getBusinesses {\n    business {\n      created_at\n      id\n      updated_at\n      name\n      contactName\n      type\n      phoneNumber\n      description\n      contactEmail\n      addresses {\n        city\n        created_at\n        id\n        latitude\n        longitude\n        updated_at\n        street_address\n      }\n    }\n    business_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"
+): (typeof documents)["\n  query getBusinesses {\n    business {\n      created_at\n      id\n      updated_at\n      name\n      contactName\n      type\n      phoneNumber\n      description\n      contactEmail\n      addresses {\n        city\n        created_at\n        id\n        latitude\n        longitude\n        updated_at\n        street_address\n      }\n    }\n    business_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -249,14 +249,14 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  query getSupplierProducts(\n    $id: uuid!\n    $offset: Int = 0\n    $order_by: [products_order_by!] = {}\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id } }\n      limit: 4\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n"
-): (typeof documents)["\n  query getSupplierProducts(\n    $id: uuid!\n    $offset: Int = 0\n    $order_by: [products_order_by!] = {}\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id } }\n      limit: 4\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n"];
+  source: "\n  query getSupplierProducts(\n    $id: uuid!\n    $offset: Int = 0\n    $limit: Int = 4\n    $order_by: [products_order_by!] = { name: asc }\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id } }\n      limit: $limit\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n"
+): (typeof documents)["\n  query getSupplierProducts(\n    $id: uuid!\n    $offset: Int = 0\n    $limit: Int = 4\n    $order_by: [products_order_by!] = { name: asc }\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id } }\n      limit: $limit\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  query getSupplierProductByName(\n    $id: uuid!\n    $offset: Int = 0\n    $name: String = ""\n    $limit: Int = 4\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }\n      limit: $limit\n      offset: $offset\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n'
-): (typeof documents)['\n  query getSupplierProductByName(\n    $id: uuid!\n    $offset: Int = 0\n    $name: String = ""\n    $limit: Int = 4\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }\n      limit: $limit\n      offset: $offset\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n'];
+  source: '\n  query getSupplierProductByName(\n    $id: uuid!\n    $offset: Int = 0\n    $name: String = ""\n    $limit: Int = 4\n    $order_by: [products_order_by!] = { name: asc }\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }\n      limit: $limit\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n'
+): (typeof documents)['\n  query getSupplierProductByName(\n    $id: uuid!\n    $offset: Int = 0\n    $name: String = ""\n    $limit: Int = 4\n    $order_by: [products_order_by!] = { name: asc }\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }\n      limit: $limit\n      offset: $offset\n      order_by: $order_by\n    ) {\n      id\n      name\n      description\n      inStock\n      quantity\n      price\n    }\n  }\n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

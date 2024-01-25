@@ -1,39 +1,38 @@
 import { NextFunction, Response, Router, Request } from "express";
 import { pushIntoOrders } from "../enqueue";
-import { z } from "zod";
-import { logger } from "../lib/winston";
 import { logRequest } from "../middleware/requestLogger";
 import { validate } from "../middleware/zodValidate";
-import { initOrder } from "./operations/initOrder";
+import {
+  initOrder,
+  orderSchema,
+  OrderAttributes,
+} from "./operations/initOrder";
 import { processOrder } from "./operations/processOrder";
 
 const ordersRouter = Router();
 
-const orderSchema = z.object({
-  customerId: z.string(),
-  order_items: z.object({
-    data: z
-      .object({
-        productId: z.string(),
-        price: z.number(),
-        quantity: z.number(),
-      })
-      .array(),
-  }),
-});
-
 ordersRouter.use(logRequest);
+
+type OrdersActionType = {
+  created_at: Date;
+  customerId: string;
+  destination: string;
+  id: string;
+  orderId: string;
+  origin: string;
+  processedBy: string;
+};
 
 ordersRouter.post(
   "/",
   validate(orderSchema),
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response<OrdersActionType>, next: NextFunction) => {
     try {
-      const { object } = req.body.input;
-      const validatedInput = validate(object);
-      await pushIntoOrders(validatedInput);
-      return res.status(200).json({
-        order: object,
+      const order = await initOrder(req.body);
+      // push into Queue
+      await pushIntoOrders(req.body);
+      res.status(201).send({
+        ...order,
       });
     } catch (error) {
       next(error);

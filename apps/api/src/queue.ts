@@ -2,6 +2,7 @@ import { Queue } from "bullmq";
 import { connection } from "./lib/ioredis";
 
 export enum Queues {
+  Client = "Client",
   Event = "Event",
   Mail = "Mail",
   Notification = "Notification",

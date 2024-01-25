@@ -1,10 +1,12 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery, useSubscription } from "@apollo/client";
 import {
   FETCH_BUSINESSES,
   FETCH_BUSINESS_BY_PK,
   INSERT_NEW_BUSINESS,
   FETCH_BUSINESS_ORDERS,
 } from "@sahil/lib/graphql";
+
+import { BUSINESS_VALIDATED } from "@sahil/lib/graphql/subscriptions/businesses";
 
 // graphql types
 import {
@@ -68,4 +70,14 @@ export const useFetchBusinessOrders = ({
     loading,
     ordersCount: data?.orders_aggregate?.aggregate,
   };
+};
+
+export const useBusinessValidated = (actionId: string) => {
+  const { data, loading, error } = useSubscription(BUSINESS_VALIDATED, {
+    variables: {
+      id: actionId,
+    },
+    skip: !actionId,
+  });
+  return { data, error, loading };
 };
