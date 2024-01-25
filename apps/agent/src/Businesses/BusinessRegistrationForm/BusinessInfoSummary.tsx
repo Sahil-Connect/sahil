@@ -95,20 +95,21 @@ export const BusinessInfoSummary = () => {
               </span>
             </div>
           </FormControl>
-          { formData.preferredPaymentMethod &&           <FormControl label="Preferred Payment Method">
-            <div className="flex gap-4">
-              <input
-                type="text"
-                placeholder={formData.preferredPaymentMethod as string}
-                className="input input-sm input-bordered w-full max-w-lg"
-                readOnly={true}
-              />
-              <span className="p-2 rounded-md bg-success text-white">
-                <HiOutlineCheckCircle />
-              </span>
-            </div>
-          </FormControl> }
-
+          {formData.preferredPaymentMethod && (
+            <FormControl label="Preferred Payment Method">
+              <div className="flex gap-4">
+                <input
+                  type="text"
+                  placeholder={formData.preferredPaymentMethod as string}
+                  className="input input-sm input-bordered w-full max-w-lg"
+                  readOnly={true}
+                />
+                <span className="p-2 rounded-md bg-success text-white">
+                  <HiOutlineCheckCircle />
+                </span>
+              </div>
+            </FormControl>
+          )}
         </Card>
         <div className="btn btn-sm btn-primary w-fit">
           <input type="submit" value="Continue" onClick={onSubmit} />

@@ -57,7 +57,9 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
             <p className="capitalize">{business.type}</p>
           </div>
           <div className="space-y-1 font-semibold">
-            <span className="text-gray-500 text-sm font-normal">Contact Name</span>
+            <span className="text-gray-500 text-sm font-normal">
+              Contact Name
+            </span>
             <p className="capitalize">{business.contactName}</p>
           </div>
         </div>

@@ -44,7 +44,12 @@ export const useRegisterBusiness = () => {
   const [registerBusinessAction, { data, loading, error }] = useMutation(
     REGISTER_BUSINESS_ACTION
   );
-  return { data: data?.registerBusinessAction, loading, registerBusinessAction, error };
+  return {
+    data: data?.registerBusinessAction,
+    loading,
+    registerBusinessAction,
+    error,
+  };
 };
 
 export const useRegisterBusinessSubscription = (id: string) => {
