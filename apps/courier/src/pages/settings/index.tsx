@@ -2,8 +2,8 @@ import { CourierProfileOverview } from "@sahil/features/Couriers/components/Cour
 
 const courier = {
   name: "Emmanuel",
-  avatar: "https://avatars.githubusercontent.com/u/21015204?v=4"
-}
+  avatar: "https://avatars.githubusercontent.com/u/21015204?v=4",
+};
 
 export default function Settings() {
   return (
