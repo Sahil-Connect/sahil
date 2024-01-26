@@ -1,13 +1,13 @@
 import { CourierProfileOverview } from "@sahil/features/Couriers/components/CourierProfileOverview";
 
 import { useRouter } from "next/router";
-import { useFetchCourierByPK } from "@/hooks/couriers";
+import { useFetchCourierByPK } from "@sahil/lib/hooks/couriers";
 import {
   CourierStats,
   LatestDeliveries,
   ZoneInformation,
   VehicleInfo,
-} from "@/Couriers";
+} from "@sahil/features/Couriers";
 export default function CourierPage() {
   const router = useRouter();
   const { courierId } = router.query;

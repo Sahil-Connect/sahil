@@ -2,7 +2,7 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCourierFormStore } from "@/hooks/useCourierFormStore";
+import { useCourierFormStore } from "@sahil/lib/hooks/useCourierFormStore";
 import { Input } from "ui";
 import { useRouter } from "next/router";
 

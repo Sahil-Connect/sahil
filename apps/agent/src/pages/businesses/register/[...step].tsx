@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { z } from "zod";
-import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useBusinessFormStore } from "@sahil/lib/hooks/useBusinessFormStore";
+import { useRouter } from "next/navigation";
 import {
   BusinessAddressInfo,
   BusinessInfo,
@@ -9,7 +9,7 @@ import {
   BusinessFormSteps,
   BusinessStepsPaginator,
   BusinessPreferencesInfo,
-} from "@/Businesses/BusinessRegistrationForm";
+} from "@sahil/features/businesses/BusinessRegistrationForm";
 import {
   HiOutlineCheckCircle,
   HiOutlineQueueList,

@@ -1,4 +1,4 @@
-import { useFetchLatestDeliveries } from "@/hooks/couriers";
+import { useFetchLatestDeliveries } from "@sahil/lib/hooks/couriers";
 import { DeliveryOverviewCard } from "./DeliveryOverviewCard";
 import { JoinGrid } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
@@ -12,7 +12,6 @@ export const LatestDeliveries = ({ courierId }) => {
   if (error) {
     return <p>Failed to load deliveries</p>;
   }
-
   if (loading) {
     return <p>Loading deliveries</p>;
   }

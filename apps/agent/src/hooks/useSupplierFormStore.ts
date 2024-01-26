@@ -1,4 +1,4 @@
-import { INITIAL_STEP } from "../Suppliers/constants";
+import { INITIAL_STEP } from "@sahil/features/Suppliers/constants";
 import { useCreateFormStore } from "@sahil/lib";
 
 const steps = [

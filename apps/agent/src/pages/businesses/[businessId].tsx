@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useFetchBusinessByPK } from "@/hooks/businesses";
-import { BusinessOrderHistory, BusinessProfileOverview } from "@/Businesses";
+import { useFetchBusinessByPK } from "@sahil/lib/hooks/businesses";
+import {
+  BusinessOrderHistory,
+  BusinessProfileOverview,
+} from "@sahil/features/businesses";
 
 export default function BusinessPage() {
   const router = useRouter();
@@ -34,7 +37,7 @@ export default function BusinessPage() {
           }
         </div>
         <div className="basis-4/5 space-y-2">
-          <BusinessOrderHistory />
+          <BusinessOrderHistory business={business} />
         </div>
       </div>
     </div>

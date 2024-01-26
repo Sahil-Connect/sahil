@@ -6,18 +6,13 @@ import {
   CourierFormStepPaginator,
   CourierVehicleInfo,
   CourierFormSteps,
-} from "@/Couriers/CourierRegistrationForm";
+} from "@sahil/features/Couriers/CourierRegistrationForm";
 import { useParams, useRouter } from "next/navigation";
-import { INITIAL_STEP } from "@/Couriers/constants";
-import { useCourierFormStore } from "@/hooks/useCourierFormStore";
-import { CourierFormSummary } from "@/Couriers/CourierRegistrationForm/CourierFormSummary";
-import {
-  HiOutlineCheckCircle,
-  HiOutlineQueueList,
-  HiOutlineMapPin,
-  HiOutlineHeart,
-} from "react-icons/hi2";
-import { Card, IconButton } from "ui";
+import { INITIAL_STEP } from "@sahil/features/Couriers/constants";
+import { useCourierFormStore } from "@sahil/lib/hooks/useCourierFormStore";
+import { CourierFormSummary } from "@sahil/features/Couriers/CourierRegistrationForm/CourierFormSummary";
+import { HiOutlineCheckCircle } from "react-icons/hi2";
+import { Card } from "ui";
 
 const headers = [
   {
