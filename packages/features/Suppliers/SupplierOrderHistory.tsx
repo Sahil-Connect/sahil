@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { formatDateTime } from "@sahil/lib/dates";
 import { Card, List } from "ui";
-import { useFetchSupplierOrders } from "@/hooks/suppliers";
+import { useFetchSupplierOrders } from "@sahil/lib/hooks/suppliers";
 import {
   HiOutlineCalendarDays,
   HiOutlineMapPin,

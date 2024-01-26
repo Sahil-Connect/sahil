@@ -1,5 +1,5 @@
-import { ListSuppliers } from "@/Suppliers";
-import FilterSuppliersModal from "@/Suppliers/FilterSuppliersModal";
+import { ListSuppliers } from "@sahil/features/Suppliers";
+import FilterSuppliersModal from "@sahil/features/Suppliers/FilterSuppliersModal";
 import { useRouter } from "next/router";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 

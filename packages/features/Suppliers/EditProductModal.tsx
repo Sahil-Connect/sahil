@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useEditProduct } from "@/hooks/suppliers";
+import { useEditProduct } from "@sahil/lib/hooks/suppliers";
 import SupplierProductForm, {
   ProductFormData,
   supplierProductSchema,

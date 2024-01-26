@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
-import { useRegisterSupplier } from "@/hooks/suppliers";
+import { useRegisterSupplier } from "@sahil/lib/hooks/suppliers";
 import toast, { Toaster } from "react-hot-toast";
-import { useSupplierFormStore } from "../../hooks/useSupplierFormStore";
+import { useSupplierFormStore } from "@sahil/lib/hooks/useSupplierFormStore";
 
 export const PreviewSupplierInfo = () => {
   const {

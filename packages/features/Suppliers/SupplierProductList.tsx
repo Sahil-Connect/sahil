@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetchSupplierProducts } from "@/hooks/suppliers";
+import { useFetchSupplierProducts } from "@sahil/lib/hooks/suppliers";
 import {
   HiOutlineBanknotes,
   HiOutlineCube,

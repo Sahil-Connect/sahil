@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSupplierFormStore } from "../../hooks/useSupplierFormStore";
+import { useSupplierFormStore } from "@sahil/lib/hooks/useSupplierFormStore";
 import { useRouter } from "next/router";
 
 const supplierPrefencesSchema = z.object({
@@ -22,7 +22,6 @@ export const SupplierPreferencesForm = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-expect-error
     resolver: zodResolver(supplierPrefencesSchema),
   });
   const router = useRouter();

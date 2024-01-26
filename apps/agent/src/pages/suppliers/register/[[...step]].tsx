@@ -6,12 +6,12 @@ import {
   SupplierBusinessInfoForm,
   SupplierPreferencesForm,
   SupplierFormSteps,
-} from "@/Suppliers/SupplierRegistrationForm";
-import { useSupplierFormStore } from "@/hooks/useSupplierFormStore";
+} from "@sahil/features/Suppliers/SupplierRegistrationForm";
+import { useSupplierFormStore } from "@sahil/lib/hooks/useSupplierFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { INITIAL_STEP } from "@/Suppliers/constants";
+import { INITIAL_STEP } from "@sahil/features/Suppliers/constants";
 import { JoinGrid } from "ui";
-import { Card, IconButton } from "ui";
+import { Card } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 const StepsPaginator = () => {

@@ -1,5 +1,5 @@
 import { SupplierOverviewCard } from "./SupplierOverviewCard";
-import { useFetchSuppliers } from "@/hooks/suppliers";
+import { useFetchSuppliers } from "@sahil/lib/hooks/suppliers";
 import { List, ListHeader } from "ui";
 
 export type SahilSupplier = {

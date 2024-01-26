@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Modal from "ui/components/Modal";
 import { HiOutlineTrash } from "react-icons/hi2";
-import { useDeleteProduct } from "@/hooks/suppliers";
+import { useDeleteProduct } from "@sahil/lib/hooks/suppliers";
 
 const DeleteProductModal = ({ id, name }: { id: string; name: string }) => {
   const closeBtn = useRef<HTMLButtonElement>(null);

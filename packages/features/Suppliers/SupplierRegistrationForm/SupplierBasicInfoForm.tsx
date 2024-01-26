@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSupplierFormStore } from "../../hooks/useSupplierFormStore";
+import { useSupplierFormStore } from "@sahil/lib/hooks/useSupplierFormStore";
 import { useRouter } from "next/router";
 
 const supplierBasicInfoSchema = z.object({
@@ -26,7 +26,6 @@ export const SupplierBasicInfoForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-expect-error
     resolver: zodResolver(supplierBasicInfoSchema),
   });
 
