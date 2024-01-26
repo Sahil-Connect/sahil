@@ -1,9 +1,6 @@
 import { Card } from "ui";
 import Link from "next/link";
-import {
-  HiOutlineBanknotes,
-  HiArrowSmallRight,
-} from "react-icons/hi2";
+import { HiOutlineBanknotes, HiArrowSmallRight } from "react-icons/hi2";
 
 const orders = [
   {

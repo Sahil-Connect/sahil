@@ -3,7 +3,6 @@ import { pushIntoOrders } from "../enqueue";
 import { logRequest } from "../middleware/requestLogger";
 import { validate } from "../middleware/zodValidate";
 
-
 import {
   initOrder,
   orderSchema,
@@ -25,7 +24,6 @@ ordersRouter.post(
       await pushIntoOrders(req.body);
       res.status(201).send({
         ...order,
-
       });
     } catch (error) {
       next(error);

@@ -5,7 +5,10 @@ import { v4 as uuidv4 } from "uuid";
 
 export const orderSchema = z
   .object({
-    created_at: z.date().refine((value) => value > new Date()).optional(),
+    created_at: z
+      .date()
+      .refine((value) => value > new Date())
+      .optional(),
     customerId: z.any(),
     destination: z.string(),
     origin: z.string(),
@@ -25,7 +28,7 @@ export const initOrder = async (
 ): Promise<OrderAttributes> => {
   const data = await client.request(INSERT_NEW_ORDER, {
     object: {
-      ...order
+      ...order,
     },
   });
   // @ts-ignore

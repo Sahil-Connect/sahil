@@ -19,7 +19,6 @@ type FormData = z.infer<typeof userSchema>;
 const OnboardingPage: NextPage = ({ providers }: any) => {
   const { registerUser } = useRegisterUserAction();
 
-
   const {
     register,
     handleSubmit,

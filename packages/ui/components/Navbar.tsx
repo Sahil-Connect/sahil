@@ -21,7 +21,12 @@ export type NavbarProps = {
   onSignOut: () => void;
 };
 
-export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil", onSignOut }) => {
+export const Navbar: FC<NavbarProps> = ({
+  links,
+  logo,
+  header = "Sahil",
+  onSignOut,
+}) => {
   return (
     <header className="navbar bg-primary text-white shadow-sm">
       <div className="navbar-start">

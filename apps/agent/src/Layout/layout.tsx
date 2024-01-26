@@ -44,7 +44,12 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
   return (
     <>
-      <Navbar links={links} logo={logo} header="Sahil Agent" onSignOut={onSignOut} />
+      <Navbar
+        links={links}
+        logo={logo}
+        header="Sahil Agent"
+        onSignOut={onSignOut}
+      />
       <main className="min-h-screen p-2 bg-gray-50">{children}</main>
     </>
   );

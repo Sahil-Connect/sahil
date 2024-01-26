@@ -29,23 +29,23 @@ export default function OrdersPage() {
   return (
     <section className="space-y-4">
       <Card>
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-xl">Orders</h1>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-xl">Orders</h1>
+          </div>
+          <div className="flex gap-2">
+            <button className="btn btn-sm">
+              <HiOutlineDocumentMagnifyingGlass />
+              track Order
+            </button>
+            <button
+              className="btn btn-sm btn-primary"
+              onClick={() => router.push("/orders/new/order_details")}
+            >
+              <HiPlus /> New Order
+            </button>
+          </div>
         </div>
-        <div className="flex gap-2">
-          <button className="btn btn-sm">
-            <HiOutlineDocumentMagnifyingGlass />
-            track Order
-          </button>
-          <button
-            className="btn btn-sm btn-primary"
-            onClick={() => router.push("/orders/new/order_details")}
-          >
-            <HiPlus /> New Order
-          </button>
-        </div>
-      </div>
       </Card>
       <h3 className="text-lg">Overview</h3>
       <Stats stats={stats} />
