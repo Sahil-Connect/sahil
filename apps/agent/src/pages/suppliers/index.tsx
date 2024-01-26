@@ -3,7 +3,7 @@ import FilterSuppliersModal from "@sahil/features/Suppliers/FilterSuppliersModal
 import { useRouter } from "next/router";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 
-import { Stats, Stat } from "ui";
+import { Card, Stats, Stat } from "ui";
 
 const stats: Stat[] = [
   {
@@ -31,21 +31,23 @@ export default function Suppliers() {
   return (
     <>
       <section className="space-y-4">
-        <div className="flex justify-between items-start flex-wrap gap-4">
-          <div>
-            <h1 className="text-3xl">Partner Suppliers</h1>
+        <Card>
+          <div className="flex justify-between items-start flex-wrap gap-4">
+            <div>
+              <h1 className="text-xl">Sahil - Suppliers</h1>
+            </div>
+            <div className="w-full lg:w-fit flex justify-end gap-4">
+              <FilterSuppliersModal />
+              <button
+                className="btn btn-sm btn-primary normal-case"
+                onClick={() => router.push("/suppliers/register/business_info")}
+              >
+                <HiOutlinePlusCircle className="text-lg" />
+                Register Supplier
+              </button>
+            </div>
           </div>
-          <div className="w-full lg:w-fit flex justify-end gap-4">
-            <FilterSuppliersModal />
-            <button
-              className="btn btn-sm btn-primary normal-case"
-              onClick={() => router.push("/suppliers/register/business_info")}
-            >
-              <HiOutlinePlusCircle className="text-lg" />
-              Register Supplier
-            </button>
-          </div>
-        </div>
+        </Card>
         <Stats stats={stats} />
         <ListSuppliers />
       </section>
