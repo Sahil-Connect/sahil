@@ -1,4 +1,4 @@
-import { useFetchCouriers } from "@/hooks/couriers";
+import { useFetchCouriers } from "@sahil/lib/hooks/couriers";
 import { CourierOverviewCard } from "./CourierOverviewCard";
 import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 
@@ -15,7 +15,6 @@ export const ListCouriers = () => {
     );
   }
 
-  console.log(couriersCount);
   return (
     <section className="space-y-4">
       <ListHeader

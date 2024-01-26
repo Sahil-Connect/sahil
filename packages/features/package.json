@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@sahil/lib": "*",
-    "@sahil/configs": "*"
+    "@sahil/configs": "*",
+    "ui": "*"
   }
 }

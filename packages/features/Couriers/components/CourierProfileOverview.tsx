@@ -1,5 +1,6 @@
-import { Avatar, Card } from "ui";
-export const CourierProfileOveriew = ({ courier }) => {
+import { Avatar } from "ui";
+
+export const CourierProfileOverview = ({ courier }) => {
   return (
     <div>
       <Avatar src={courier.avatar} alt={courier.name} />

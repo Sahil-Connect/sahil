@@ -1,4 +1,4 @@
-import { ListCouriers } from "@/Couriers";
+import { ListCouriers } from "@sahil/features/Couriers/ListCouriers";
 import { HiOutlinePlus, HiOutlineMap } from "react-icons/hi2";
 import Link from "next/link";
 import { Stats, Stat } from "ui";
