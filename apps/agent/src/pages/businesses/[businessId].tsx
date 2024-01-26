@@ -37,7 +37,10 @@ export default function BusinessPage() {
           }
         </div>
         <div className="basis-4/5 space-y-2">
-          <BusinessOrderHistory business={business} />
+          {
+            // @ts-ignore
+            <BusinessOrderHistory business={business} />
+          }
         </div>
       </div>
     </div>
