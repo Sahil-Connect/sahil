@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { z } from "zod";
-import { useOrderFormStore } from "@/hooks/useOrderFormStore";
+import { useOrderFormStore } from "@sahil/lib/hooks/useOrderFormStore";
 import {
   DeliveryDetails,
   OrderDetails,
@@ -9,7 +9,7 @@ import {
   PaymentDetails,
   ProductSelection,
   StepsPaginator,
-} from "@/Orders/OrderProcessingForm";
+} from "@sahil/features/Orders/OrderProcessingForm";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import {
   HiOutlineShoppingCart,

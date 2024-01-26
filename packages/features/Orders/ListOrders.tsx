@@ -1,4 +1,4 @@
-import { useFetchOrders } from "@/hooks/orders";
+import { useFetchOrders } from "@sahil/lib/hooks/orders";
 import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 import { OrderOverviewCard } from "./OrderOverviewCard";
 

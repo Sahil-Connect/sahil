@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useFetchProducts } from "@/hooks/products";
-import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
+import { useFetchProducts } from "@sahil/lib/hooks/products";
+import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
 import { Card, JoinGrid } from "ui";
 import { formatCost } from "@sahil/lib";
 import {

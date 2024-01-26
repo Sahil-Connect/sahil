@@ -1,4 +1,4 @@
-import { useFetchBusinessByPK } from "@/hooks/businesses";
+import { useFetchBusinessByPK } from "@sahil/lib/hooks/businesses";
 import { Avatar, Card, Icon } from "ui";
 import {
   HiOutlinePhone,

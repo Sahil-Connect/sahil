@@ -1,5 +1,5 @@
 import { Card } from "ui";
-import { HiOutlineBanknotes, HiOutlineReceiptPercent } from "react-icons/hi2";
+import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { formatCurrency } from "@sahil/lib";
 
 export const OrderItem = ({ price, quantity, title }) => {

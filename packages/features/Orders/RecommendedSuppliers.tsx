@@ -1,5 +1,5 @@
 import { HiOutlineTruck, HiXMark } from "react-icons/hi2";
-import { useFetchSuppliers } from "@/hooks/suppliers";
+import { useFetchSuppliers } from "@sahil/lib/hooks/suppliers";
 import { Card } from "ui";
 
 export const RecommendedSuppliers = () => {

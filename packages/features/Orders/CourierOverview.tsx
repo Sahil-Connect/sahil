@@ -1,5 +1,5 @@
-import { useFetchCourierByPK } from "@/hooks/couriers";
-import { useFetchOrderDeliveriesByPK } from "@/hooks/orders";
+import { useFetchCourierByPK } from "@sahil/lib/hooks/couriers";
+import { useFetchOrderDeliveriesByPK } from "@sahil/lib/hooks/orders";
 import { Avatar, Card } from "ui";
 import { HiOutlinePhone, HiOutlineStar } from "react-icons/hi2";
 

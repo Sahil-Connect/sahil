@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { HiPlus, HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
-import { ListOrders } from "@/Orders/ListOrders";
+import { ListOrders } from "@sahil/features/Orders/ListOrders";
 import { Card, Stats, Stat } from "ui";
 
 const stats: Stat[] = [

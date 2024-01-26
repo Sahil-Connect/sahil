@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Products } from "@sahil/lib/graphql/__generated__/graphql";
 
-import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
-import { useOrderFormStore } from "@/hooks/useOrderFormStore";
+import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
+import { useOrderFormStore } from "@sahil/lib/hooks/useOrderFormStore";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Card } from "ui";
 import { formatCost } from "@sahil/lib";
@@ -15,7 +15,7 @@ import {
   HiPlus,
   HiMinus,
 } from "react-icons/hi2";
-import { usePlaceBusinessOrder } from "@/hooks/orders";
+import { usePlaceBusinessOrder } from "@sahil/lib/hooks/orders";
 
 const ProductSummary = ({ product }) => {
   return (
@@ -58,7 +58,6 @@ export const OrderSummary = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-expect-error
     resolver: zodResolver(checkoutSchema),
   });
   const orderItems = useOrderItemsStore((state) => state.orderItems);

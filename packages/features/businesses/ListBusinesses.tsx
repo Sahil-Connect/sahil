@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BusinessOverviewCard } from "./BusinessOverviewCard";
-import { useFetchBusinesses } from "@/hooks/businesses";
+import { useFetchBusinesses } from "@sahil/lib/hooks/businesses";
 import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 
 export type SahilBusiness = {
