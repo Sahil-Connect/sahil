@@ -1,5 +1,7 @@
 import React, { ReactChild } from "react";
 import logo from "../../public/logo.png";
+import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
 import { Navbar } from "ui";
 type LayoutProps = {
   children: ReactChild | ReactChild[];
@@ -35,9 +37,14 @@ const links = [
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {
+  const router = useRouter();
+  const onSignOut = async () => {
+    await signOut();
+    router.push("/auth/signin");
+  };
   return (
     <>
-      <Navbar links={links} logo={logo} header="Sahil Agent" />
+      <Navbar links={links} logo={logo} header="Sahil Agent" onSignOut={onSignOut} />
       <main className="min-h-screen p-2 bg-gray-50">{children}</main>
     </>
   );

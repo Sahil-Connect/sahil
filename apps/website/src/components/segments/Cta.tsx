@@ -29,7 +29,7 @@ export const Cta = () => {
               to grow your business.
             </p>
             <div className="mb-4 flex items-start">
-              <Link href={"/"} className="btn btn-base-100 font-medium">
+              <Link href={"/"} className="btn btn-bg-base-100 font-medium">
                 Get Started
               </Link>
             </div>

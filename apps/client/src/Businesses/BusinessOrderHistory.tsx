@@ -80,7 +80,7 @@ const OrderSummary = ({ order }: any) => {
   // @ts-ignore
   const statusStyle = orderStyles[order.status] || "default";
   return (
-    <Card className="bg-white h-full">
+    <Card className="bg-base-100 h-full">
       <div>
         <Link href={`/orders/${order.id}`}>
           <h3 className="card-title">

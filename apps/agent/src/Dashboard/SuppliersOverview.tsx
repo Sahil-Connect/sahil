@@ -1,5 +1,6 @@
 import { Avatar, Card, IconButton } from "ui";
 import { HiOutlinePlusCircle, HiArrowSmallRight } from "react-icons/hi2";
+import Link from "next/link";
 
 const suppliers = [
   {
@@ -21,12 +22,11 @@ export const SuppliersOverview = () => {
       <div className="flex items-center justify-between">
         <div className="flex gap-2 items-center">
           <h3 className="text-lg">Suppliers</h3>
-          <IconButton icon={HiOutlinePlusCircle} title="Add" />
           <div className="badge badge-accent">9 suppliers</div>
         </div>
-        <button className="btn btn-xs">
+        <Link href="/suppliers" className="btn btn-xs btn-outline">
           View All <HiArrowSmallRight />
-        </button>
+        </Link>
       </div>
       <div className="flex gap-2">
         {suppliers.map((supplier) => (

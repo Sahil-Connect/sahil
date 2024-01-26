@@ -106,7 +106,7 @@ export default SupplierProductList;
 
 const ProductOverviewCard = ({ product }: { product: SahilProduct }) => {
   return (
-    <Card className="bg-white h-full">
+    <Card className="bg-base-100 h-full">
       <figure>
         <img
           src="https://cdn-icons-png.flaticon.com/512/6389/6389206.png"

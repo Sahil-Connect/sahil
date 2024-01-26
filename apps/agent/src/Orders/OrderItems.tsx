@@ -4,7 +4,7 @@ import { formatCurrency } from "@sahil/lib";
 
 export const OrderItem = ({ price, quantity, title }) => {
   return (
-    <Card className="bg-white">
+    <Card className="bg-base-100">
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <h2 className="card-title text-sm">{title}</h2>

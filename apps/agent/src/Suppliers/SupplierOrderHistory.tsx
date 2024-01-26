@@ -51,7 +51,7 @@ export const SupplierOrderHistory = ({ supplierId }) => {
 const OrderSummary = ({ order }) => {
   const statusStyle = orderStyles[order.status];
   return (
-    <Card className="bg-white h-full grow max-w-lg">
+    <Card className="bg-base-100 h-full grow max-w-lg">
       <div>
         <Link href={`/orders/${order.id}`}>
           <h3 className="card-title text-sm">

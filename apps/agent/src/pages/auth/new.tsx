@@ -19,10 +19,6 @@ type FormData = z.infer<typeof userSchema>;
 const OnboardingPage: NextPage = ({ providers }: any) => {
   const { registerUser } = useRegisterUserAction();
 
-  const onSignOut = async () => {
-    await signOut();
-    router.push("/auth/signin");
-  };
 
   const {
     register,
@@ -48,9 +44,7 @@ const OnboardingPage: NextPage = ({ providers }: any) => {
     // router.push(`/);
   };
 
-  const router = useRouter();
   const { data: session } = useSession();
-  console.log(session);
   return (
     <div className="p-4">
       <h1 className="text-2xl">Welcome to Sahil</h1>
@@ -77,9 +71,6 @@ const OnboardingPage: NextPage = ({ providers }: any) => {
           <HiArrowSmallRight />
         </div>
       </form>
-      <button className="btn btn-sm btn-primary w-fit" onClick={onSignOut}>
-        Logout
-      </button>
     </div>
   );
 };
