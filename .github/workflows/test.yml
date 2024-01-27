@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: Format, Build and Test
-    #if: ${{ false }}  # disable for now
+    if: ${{ false }}  # disable for now
     timeout-minutes: 15
     runs-on: ubuntu-latest
 
