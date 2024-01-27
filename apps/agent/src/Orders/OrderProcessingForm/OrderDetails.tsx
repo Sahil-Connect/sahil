@@ -24,6 +24,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(orderDetailsSchema),
   });
 
@@ -34,7 +35,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
     const client = businesses.find((business) => business.id === data.clientId);
     updateStepFormData(validatedInput);
     setCurrentClient(client);
-    navigateToNextStep("product_selection")
+    navigateToNextStep("product_selection");
   };
 
   const onExit = () => {
@@ -49,45 +50,45 @@ export const OrderDetails = ({ navigateToNextStep }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <Card title="Client Information" titleSize="sm">
-          <div className="form-control">
-            <div className="label">
-              <span className="label-text">Client</span>
-            </div>
-            <select
-              {...register("clientId")}
-              className="select select-bordered select-sm w-full max-w-xs bg-gray-100"
+        <div className="form-control">
+          <div className="label">
+            <span className="label-text">Client</span>
+          </div>
+          <select
+            {...register("clientId")}
+            className="select select-bordered select-sm w-full max-w-xs bg-gray-100"
+          >
+            {businesses &&
+              businesses.map((business) => (
+                <option value={business.id} key={business.id}>
+                  {business.name}
+                </option>
+              ))}
+          </select>
+        </div>
+        <FormControl label="Notes (optional)">
+          <input
+            type="textarea"
+            placeholder="Notes"
+            className="textarea textarea-bordered w-full bg-gray-100"
+            {...register("notes")}
+          />
+        </FormControl>
+        <div className="card-actions">
+          <div className="flex gap-2">
+            <button
+              className="btn btn-sm"
+              onClick={() => onExit()}
+              type="button"
             >
-              {businesses &&
-                businesses.map((business) => (
-                  <option value={business.id} key={business.id}>
-                    {business.name}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <FormControl label="Notes (optional)">
-            <input
-              type="textarea"
-              placeholder="Notes"
-              className="textarea textarea-bordered w-full bg-gray-100"
-              {...register("notes")}
-            />
-          </FormControl>
-          <div className="card-actions">
-            <div className="flex gap-2">
-              <button
-                className="btn btn-sm"
-                onClick={() => onExit()}
-                type="button"
-              >
-                <HiXMark /> Cancel
-              </button>
-              <div className="btn btn-sm btn-primary">
-                <input type="submit" value="continue" />
-                <HiArrowSmallRight />
-              </div>
+              <HiXMark /> Cancel
+            </button>
+            <div className="btn btn-sm btn-primary">
+              <input type="submit" value="continue" />
+              <HiArrowSmallRight />
             </div>
           </div>
+        </div>
       </Card>
     </form>
   );

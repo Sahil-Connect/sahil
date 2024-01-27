@@ -11,8 +11,8 @@ export type FormDataState = Record<string, any>;
 export type SahilBusinessPartner = Record<string, any>;
 
 export type StepItem = {
-    title: string;
-    step: StepDirection;
-    icon?: IconType;
-    completed?: boolean;
-}
+  title: string;
+  step: any;
+  icon?: IconType;
+  completed?: boolean;
+};

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "@/hooks/useOrderFormStore";
-import { Card } from "ui";
+import { Card, Radio } from "ui";
 import {
   HiXMark,
   HiOutlineCreditCard,
@@ -18,13 +18,16 @@ const paymentDetailsSchema = z.object({
 type FormData = z.infer<typeof paymentDetailsSchema>;
 
 export const PaymentDetails = ({ navigateToNextStep }) => {
-  const updateStepFormData = useOrderFormStore(state => state.updateStepFormData);
+  const updateStepFormData = useOrderFormStore(
+    (state) => state.updateStepFormData
+  );
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(paymentDetailsSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async (data) => {

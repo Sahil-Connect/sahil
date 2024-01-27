@@ -12,11 +12,11 @@ type NavbarLink = {
 
 export type NavbarProps = {
   links: NavbarLink[];
-  logo?: string;
+  logo?: any;
   header?: string;
 };
 
-export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil"}) => {
+export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil" }) => {
   return (
     <header className="navbar bg-primary text-white shadow-sm">
       <div className="navbar-start">
@@ -96,6 +96,37 @@ export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil"}) => {
                 </li>
               );
             })}
+          </ul>
+        </div>
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              <img
+                alt="Tailwind CSS Navbar component"
+                src="https://avatars.githubusercontent.com/u/21015204?v=4"
+              />
+            </div>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a className="justify-between">
+                Profile
+                <span className="badge">New</span>
+              </a>
+            </li>
+            <li>
+              <a>Settings</a>
+            </li>
+            <li>
+              <a>Logout</a>
+            </li>
           </ul>
         </div>
       </nav>

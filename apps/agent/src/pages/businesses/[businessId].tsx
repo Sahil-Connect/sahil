@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useFetchBusinessByPK } from '@/hooks/businesses';
-import { BusinessOrderHistory, BusinessProfileOverview } from '@/Businesses';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useFetchBusinessByPK } from "@/hooks/businesses";
+import { BusinessOrderHistory, BusinessProfileOverview } from "@/Businesses";
 
 export default function BusinessPage() {
   const router = useRouter();
@@ -17,20 +17,23 @@ export default function BusinessPage() {
   }
 
   return (
-    <div className='space-y-4'>
-      <div className='flex justify-between'>
+    <div className="space-y-4">
+      <div className="flex justify-between">
         <div>
-          <button className='btn btn-sm btn-outline'>Back</button>
+          <button className="btn btn-sm btn-outline">Back</button>
         </div>
         <div>
-          <button className='btn btn-sm btn-primary'>New Order</button>
+          <button className="btn btn-sm btn-primary">New Order</button>
         </div>
       </div>
-      <div className='flex flex-col gap-4 lg:flex-row'>
-        <div className='grow mb-4 lg:mb-0'>
-          <BusinessProfileOverview business={business} />
+      <div className="flex flex-col gap-4 lg:flex-row">
+        <div className="grow mb-4 lg:mb-0">
+          {
+            // @ts-ignore
+            <BusinessProfileOverview business={business} />
+          }
         </div>
-        <div className='basis-4/5 space-y-2'>
+        <div className="basis-4/5 space-y-2">
           <BusinessOrderHistory />
         </div>
       </div>

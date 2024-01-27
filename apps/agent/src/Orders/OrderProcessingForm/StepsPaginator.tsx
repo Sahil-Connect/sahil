@@ -22,17 +22,17 @@ export const StepsPaginator = ({ headers, onStepChange }: Props) => {
         </div>
         <JoinGrid>
           <button
-        className={`join-item btn btn-sm btn-ghost ${
-          currentIndex <= 0 ? "btn-disabled" : null
-        }`}
+            className={`join-item btn btn-sm btn-ghost ${
+              currentIndex <= 0 ? "btn-disabled" : null
+            }`}
             onClick={() => onStepChange("orders/new", "prev")}
           >
             <HiArrowSmallLeft /> Previous
           </button>
           <button
-        className={`join-item btn btn-sm btn-secondary ${
-          currentIndex === steps.length - 1 ? "btn-disabled" : null
-        }`}
+            className={`join-item btn btn-sm btn-secondary ${
+              currentIndex === steps.length - 1 ? "btn-disabled" : null
+            }`}
             onClick={() => onStepChange("orders/new", "next")}
           >
             Next <HiArrowSmallRight />

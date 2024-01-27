@@ -1,12 +1,21 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from "@apollo/client";
 import {
   FETCH_COURIERS,
   FETCH_COURIER_BY_PK,
   INSERT_NEW_COURIER,
-} from '@sahil/lib/graphql';
+} from "@sahil/lib/graphql";
+
+// graphql types
+import {
+  GetCouriersQuery,
+  GetCouriersQueryVariables,
+} from "@sahil/lib/graphql/__generated__/graphql";
 
 export const useFetchCouriers = () => {
-  const { error, data, loading } = useQuery(FETCH_COURIERS);
+  const { error, data, loading } = useQuery<
+    GetCouriersQuery,
+    GetCouriersQueryVariables
+  >(FETCH_COURIERS);
   return {
     error,
     data: data?.couriers,

@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { Couriers } from "@sahil/lib/graphql/__generated__/graphql";
+
 import { Avatar, Card } from "ui";
 import Link from "next/link";
 
@@ -14,24 +16,11 @@ export type CourierRide = {
   year: string;
 };
 
-export type SahilCourier = {
-  id: string;
-  avatar?: string;
-  name: string;
-  gender?: string;
-  DOB: Date;
-  email: string;
-  phoneNumber: number;
-  rides: CourierRide[];
+type Props = {
+  courier: Couriers;
 };
 
-type CourierOverviewCardProps = {
-  courier: SahilCourier;
-};
-
-export const CourierOverviewCard: FC<CourierOverviewCardProps> = ({
-  courier,
-}) => {
+export const CourierOverviewCard: FC<Props> = ({ courier }) => {
   return (
     <Card className="w-full">
       <Avatar src={courier.avatar} alt={courier.name} />

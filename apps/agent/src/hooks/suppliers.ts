@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
-import { useRouter } from 'next/router';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMemo } from "react";
+import { useRouter } from "next/router";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   FETCH_FILTERED_SUPPLIERS,
   FETCH_SUPPLIERS,
@@ -12,7 +12,7 @@ import {
   DELETE_PRODUCT_BY_PK,
   ADD_NEW_PRODUCT,
   FETCH_SUPPLIER_ORDERS,
-} from '@sahil/lib/graphql';
+} from "@sahil/lib/graphql";
 
 export const useFetchSuppliers = (category?: string) => {
   const graphqlQuery = category ? FETCH_FILTERED_SUPPLIERS : FETCH_SUPPLIERS;
@@ -41,7 +41,15 @@ export const useFetchSupplierByPK = (id?: string) => {
   return { error, data: data?.suppliers_by_pk, loading };
 };
 
-export const useFetchSupplierProducts = (page: number = 0, id?: string) => {
+export const useFetchSupplierProducts = ({
+  page = 0,
+  id,
+  sortOption,
+}: {
+  page: number;
+  id?: string;
+  sortOption?: { property: string; order: string };
+}) => {
   const router = useRouter();
   const { supplierId } = router.query;
   const { product } = router.query;
@@ -50,12 +58,20 @@ export const useFetchSupplierProducts = (page: number = 0, id?: string) => {
     ? FETCH_SUPPLIER_PRODUCT_BY_NAME
     : FETCH_SUPPLIER_PRODUCTS;
 
+  let variables: any = {
+    id: id || supplierId,
+    offset: page * 4,
+    name: `%${product}%`,
+  };
+
+  if (sortOption) {
+    // Add 'order_by' to variables only if 'sortOption' is provided.
+    // This ensures the GraphQL query uses its default sorting behavior when 'sortOption' is not specified.
+    variables.order_by = { [sortOption.property]: sortOption.order };
+  }
+
   const { error, data, loading } = useQuery(graphqlQuery, {
-    variables: {
-      id: id || supplierId,
-      offset: page * 4,
-      name: `%${product}%`,
-    },
+    variables,
   });
 
   // Memoize the result based on the page and ids

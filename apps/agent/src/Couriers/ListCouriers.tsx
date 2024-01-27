@@ -1,6 +1,6 @@
-import { useFetchCouriers } from '@/hooks/couriers';
-import { CourierOverviewCard } from './CourierOverviewCard';
-import { List, ListHeader, ListErrorState } from 'ui';
+import { useFetchCouriers } from "@/hooks/couriers";
+import { CourierOverviewCard } from "./CourierOverviewCard";
+import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 
 export const ListCouriers = () => {
   const { data: couriers, error, loading, couriersCount } = useFetchCouriers();
@@ -8,7 +8,7 @@ export const ListCouriers = () => {
   if (error) {
     return (
       <ListErrorState
-        heading='Unable to load products...'
+        heading="Unable to load products..."
         message="Products aren't loading due to a technical problem on our side. Please
       try again."
       />
@@ -17,16 +17,18 @@ export const ListCouriers = () => {
 
   console.log(couriersCount);
   return (
-    <section className='space-y-4'>
+    <section className="space-y-4">
       <ListHeader
         size={couriersCount?.count}
-        sizeLabel='Couriers'
-        title='Couriers'
-      />
+        sizeLabel="Couriers"
+        title="Couriers"
+      >
+        <></>
+      </ListHeader>
       <List
         data={couriers}
         loading={loading}
-        renderItem={(courier) => (
+        renderItem={(courier: any) => (
           <CourierOverviewCard key={courier.id} courier={courier} />
         )}
       />

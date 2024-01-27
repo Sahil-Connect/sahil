@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const FETCH_SUPPLIERS = gql`
   query getSuppliers($offset: Int = 0, $limit: Int = 10) {
@@ -22,27 +22,30 @@ export const FETCH_SUPPLIERS = gql`
 `;
 
 export const FETCH_SUPPLIER_ORDERS = gql`
-query getSupplierOrders($supplierId: uuid) {
-  order_supplier(where: {supplierId: {_eq: $supplierId}}, distinct_on: supplierId) {
-    id
-    supplierId
-    order {
+  query getSupplierOrders($supplierId: uuid) {
+    order_supplier(
+      where: { supplierId: { _eq: $supplierId } }
+      distinct_on: supplierId
+    ) {
       id
-      created_at
-      destination
-      id
-      orderId
-      customerId
-      origin
-      status
-      business {
-      contactName
-      phoneNumber
-      name
+      supplierId
+      order {
+        id
+        created_at
+        destination
+        id
+        orderId
+        customerId
+        origin
+        status
+        business {
+          contactName
+          phoneNumber
+          name
+        }
+      }
     }
   }
-}
-}
 `;
 
 export const FETCH_FILTERED_SUPPLIERS = gql`
@@ -97,11 +100,12 @@ export const FETCH_SUPPLIER_PRODUCTS = gql`
   query getSupplierProducts(
     $id: uuid!
     $offset: Int = 0
-    $order_by: [products_order_by!] = {}
+    $limit: Int = 4
+    $order_by: [products_order_by!] = { name: asc }
   ) {
     products(
       where: { supplier_id: { _eq: $id } }
-      limit: 4
+      limit: $limit
       offset: $offset
       order_by: $order_by
     ) {
@@ -121,11 +125,13 @@ export const FETCH_SUPPLIER_PRODUCT_BY_NAME = gql`
     $offset: Int = 0
     $name: String = ""
     $limit: Int = 4
+    $order_by: [products_order_by!] = { name: asc }
   ) {
     products(
       where: { supplier_id: { _eq: $id }, name: { _ilike: $name } }
       limit: $limit
       offset: $offset
+      order_by: $order_by
     ) {
       id
       name

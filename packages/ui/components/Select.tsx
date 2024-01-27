@@ -1,13 +1,14 @@
-import { FormControl, FormControlError } from './FormControl';
-import { BaseInputProps } from '../types';
+import { FormControl, FormControlError } from "./FormControl";
+import { BaseInputProps } from "../types";
+import type { FieldValues } from "react-hook-form";
 
-type SelectProps = BaseInputProps<unknown> & {
+type SelectProps = BaseInputProps<FieldValues> & {
   options: any[];
 };
 
 export const Select = ({
   options,
-  label = 'Select Input',
+  label = "Select Input",
   name,
   register,
   errors,
@@ -15,7 +16,7 @@ export const Select = ({
   return (
     <FormControl label={label}>
       <select
-        className='select select-sm select-bordered w-full max-w-lg'
+        className="select select-sm select-bordered w-full max-w-lg"
         title={label}
         {...register(name)}
       >
@@ -23,7 +24,7 @@ export const Select = ({
           <option key={index}>{option}</option>
         ))}
       </select>
-      {errors[name] && <FormControlError message={errors[name]?.message} /> }
+      {errors[name] && <FormControlError message={errors[name]?.message} />}
     </FormControl>
   );
 };

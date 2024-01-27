@@ -8,6 +8,7 @@ import {
   HiOutlineDocumentCheck,
 } from "react-icons/hi2";
 import Link from "next/link";
+
 export const OrderClient = ({ businessId }) => {
   const { error, data: business, loading } = useFetchBusinessByPK(businessId);
 
@@ -16,13 +17,13 @@ export const OrderClient = ({ businessId }) => {
 
   return (
     <div className="grow space-y-2">
-      <Card className="grow " titleSize="sm" >
+      <Card className="grow " titleSize="sm">
         <div className="flex justify-between">
           <Link
             href={`/suppliers/${business.id}`}
             className="avatar placeholder h-fit"
           >
-            <Avatar alt={business?.name} src={business?.avatar} />
+            <Avatar alt={business?.name as string} />
           </Link>
           <button title="More Horizontal">
             <HiEllipsisHorizontal />

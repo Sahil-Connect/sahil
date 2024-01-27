@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
+// import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
 import { Card, FormControl } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
@@ -24,10 +24,9 @@ export const BusinessInfo = () => {
 
   const router = useRouter();
 
-  const { formData } = useBusinessFormStore((state) => state);
+  // const { formData } = useBusinessFormStore((state: any) => state);
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = businessInfoSchema.parse(data);
-    
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">

@@ -14,7 +14,8 @@
     "next": "14.0.1",
     "ui": "*",
     "@sahil/lib": "*",
-    "@sahil/configs": "*"
+    "@sahil/configs": "*",
+    "@sahil/features": "*"
   },
   "devDependencies": {
     "typescript": "^5",

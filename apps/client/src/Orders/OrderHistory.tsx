@@ -1,14 +1,19 @@
 import { OrderOverview } from "./OrderOverview";
 import { useFetchBusinessOrders } from "@/hooks/businesses";
 import { useState } from "react";
-import { List, ListHeader, ListErrorState } from "ui";
+import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 
 const MSISDN = "0910060031";
 
 export const OrderHistory = () => {
-    const [offset, setOffset] = useState(0);
-  const { data: orders, error, loading, ordersCount } = useFetchBusinessOrders({
-    customerId: 'e87924e8-69e4-4171-bd89-0c8963e03d08',
+  const [offset, setOffset] = useState(0);
+  const {
+    data: orders,
+    error,
+    loading,
+    ordersCount,
+  } = useFetchBusinessOrders({
+    customerId: "e87924e8-69e4-4171-bd89-0c8963e03d08",
     offset,
   });
 
@@ -25,19 +30,20 @@ export const OrderHistory = () => {
   console.log(orders);
   return (
     <section className="space-y-4">
-      <ListHeader
-        onNextPage={() => setOffset((prev) => prev + 4)}
-        onPreviousPage={() => setOffset((prev) => prev - 4)}
-        isNextDisabled={offset + 4 >= ordersCount}
-        isPrevDisabled={offset === 0}
-        size={ordersCount?.count}
-        limit={3}
-        sizeLabel='Orders'
-      />
+      <ListHeader size={ordersCount?.count} sizeLabel="Orders">
+        <ListPagination
+          onNextPage={() => setOffset((prev) => prev + 4)}
+          onPreviousPage={() => setOffset((prev) => prev - 4)}
+          isNextDisabled={
+            (ordersCount && offset + 4 >= ordersCount?.count) || false
+          }
+          isPrevDisabled={offset === 0}
+        />
+      </ListHeader>
       <List
         data={orders}
         loading={loading}
-        renderItem={(order) => (
+        renderItem={(order: any) => (
           <OrderOverview key={order.id} order={order} />
         )}
       />

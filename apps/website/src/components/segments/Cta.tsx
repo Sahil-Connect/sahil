@@ -1,16 +1,13 @@
-import { 
-  SectionWrapper, 
-  GridContainer 
-} from '@/components/shared';
-import Link from 'next/link'
-import ctaYellow from '../../../public/cta-yellow.svg'
-import Image from 'next/image'
+import { SectionWrapper, GridContainer } from "@/components/shared";
+import Link from "next/link";
+import ctaYellow from "../../../public/cta-yellow.svg";
+import Image from "next/image";
 
 export const Cta = () => {
   return (
     <SectionWrapper>
       <GridContainer>
-      <div className="flex flex-col items-start gap-y-10 bg-secondary rounded-lg py-8 px-6 md:py-12 md:px-10 md:items-center lg:py-14 lg:px-12 lg:gap-x-28 lg:flex-row">
+        <div className="flex flex-col items-start gap-y-10 bg-secondary rounded-lg py-8 px-6 md:py-12 md:px-10 md:items-center lg:py-14 lg:px-12 lg:gap-x-28 lg:flex-row">
           <div className="w-full max-w-full lg:max-w-[55%]">
             <div className="mb-8 md:mb-11">
               <p className="text-green-100 text-sm mb-4">
@@ -32,7 +29,7 @@ export const Cta = () => {
               to grow your business.
             </p>
             <div className="mb-4 flex items-start">
-              <Link href={'/'} className='btn btn-base-100 font-medium'>
+              <Link href={"/"} className="btn btn-base-100 font-medium">
                 Get Started
               </Link>
             </div>
@@ -40,12 +37,12 @@ export const Cta = () => {
           <div className="w-full max-w-full hidden lg:block">
             <Image
               src={ctaYellow}
-              alt={'cta-image'}
-              className='align-middle justify-self-center object-cover'
+              alt={"cta-image"}
+              className="align-middle justify-self-center object-cover"
             />
           </div>
         </div>
       </GridContainer>
     </SectionWrapper>
-  )
-}
+  );
+};

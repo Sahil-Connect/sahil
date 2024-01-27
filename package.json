@@ -1,22 +1,45 @@
 {
   "private": true,
   "scripts": {
+    "build-website": "turbo run build --filter=website --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
+    "dev-website": "turbo run dev --filter=website",
+    "build-api": "turbo run build --filter=api --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
+    "dev-api": "turbo run dev --filter=api",
+    "build-agent": "turbo run build --filter=agent --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
+    "dev-agent": "turbo run dev --filter=agent",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "codegen": "dotenv -e .env -- graphql-codegen --config codegen.ts",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-resolvers": "^4.0.1",
+    "@parcel/watcher": "^2.3.0",
     "@turbo/gen": "^1.9.7",
+    "add": "^2.0.6",
+    "dotenv-cli": "^7.3.0",
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
+    "husky": "^8.0.3",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "ts-node": "^10.9.2",
+    "turbo": "latest",
+    "typescript": "^5.3.3",
+    "yarn": "^1.22.21"
   },
   "name": "sahil",
   "packageManager": "yarn@1.22.19",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "graphql": "^16.8.1"
+  }
 }

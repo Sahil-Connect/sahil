@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFetchProducts } from "@/hooks/products";
-import { Card, List, ListHeader } from "ui";
+import { Card, List, ListHeader, ListPagination } from "ui";
 import { formatCost } from "@sahil/lib";
 import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
 import Link from "next/link";
@@ -16,6 +16,7 @@ import {
   HiArrowPath,
   HiSignalSlash,
 } from "react-icons/hi2";
+import { Products } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const ProductsCatalogue = () => {
   const [offset, setOffset] = useState(0);
@@ -38,7 +39,7 @@ export const ProductsCatalogue = () => {
   );
 
   useEffect(() => {
-    setProducts(products);
+    setProducts(products as Products[]);
   }, [products, setProducts]);
 
   if (error) {
@@ -87,17 +88,18 @@ export const ProductsCatalogue = () => {
 
   return (
     <Card>
-      <ListHeader
-        onNextPage={() => setOffset((prev) => prev + 12)}
-        onPreviousPage={() => setOffset((prev) => prev - 12)}
-        isNextDisabled={offset + 12 >= productsCount}
-        isPrevDisabled={offset === 0}
-        size={productsCount}
-        limit={12}
-        sizeLabel="Products"
-      />
+      <ListHeader size={productsCount} sizeLabel="Products">
+        <ListPagination
+          onNextPage={() => setOffset((prev) => prev + 12)}
+          onPreviousPage={() => setOffset((prev) => prev - 12)}
+          isNextDisabled={
+            (productsCount && offset + 12 >= productsCount) || false
+          }
+          isPrevDisabled={offset === 0}
+        />
+      </ListHeader>
       <List
-        data={products}
+        data={products as Products[]}
         error={error}
         loading={loading}
         cols={4}
@@ -115,7 +117,9 @@ export const ProductsCatalogue = () => {
         }}
       />
       <div className="card-actions">
-        <Link href="/checkout" className="btn btn-sm btn-primary"><HiOutlineShoppingCart />  Proceed to checkout</Link>
+        <Link href="/checkout" className="btn btn-sm btn-primary">
+          <HiOutlineShoppingCart /> Proceed to checkout
+        </Link>
       </div>
     </Card>
   );

@@ -22,11 +22,9 @@ const stats: Stat[] = [
     desc: "Nov 1st - Dec 1st",
     trend: "positive",
     percentage: 15,
-  }
+  },
 ];
 
 export const CourierStats = () => {
-  return (
-    <Stats stats={stats} />
-  );
+  return <Stats stats={stats} />;
 };

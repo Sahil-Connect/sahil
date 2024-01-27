@@ -3,11 +3,12 @@ import { z } from "zod";
 import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import {
-  AddressInfo,
+  BusinessAddressInfo,
   BusinessInfo,
   BusinessInfoSummary,
   BusinessFormSteps,
   BusinessStepsPaginator,
+  BusinessPreferencesInfo,
 } from "@/Businesses/BusinessRegistrationForm";
 import {
   HiOutlineCheckCircle,
@@ -66,13 +67,9 @@ export default function BusinessRegistrationPage() {
     router.push(`/businesses/register/${steps[currentIndex + 1]}`);
   };
 
-  const navigateToNextStep = (path: string) => {
-    goToStep("next");
-    router.push(`/businesses/register/${path}`);
-  };
   return (
     <section className="min-h-screen space-y-4">
-      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-gray-100">
+      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-white">
         <h1 className="text-2xl">Register New Business</h1>
       </div>
       <div className="flex">
@@ -90,15 +87,10 @@ export default function BusinessRegistrationPage() {
             onPrevStep={onPrevStep}
             onNextStep={onNextStep}
           />
-          {currentStep === "business_info" && (
-            <BusinessInfo navigateToNextStep={navigateToNextStep} />
-          )}
-          {currentStep === "address_info" && (
-            <AddressInfo navigateToNextStep={navigateToNextStep} />
-          )}
-          {currentStep === "summary" && (
-            <BusinessInfoSummary navigateToNextStep={navigateToNextStep} />
-          )}
+          {currentStep === "business_info" && <BusinessInfo />}
+          {currentStep === "address_info" && <BusinessAddressInfo />}
+          {currentStep === "preferences" && <BusinessPreferencesInfo />}
+          {currentStep === "summary" && <BusinessInfoSummary />}
         </div>
       </div>
     </section>

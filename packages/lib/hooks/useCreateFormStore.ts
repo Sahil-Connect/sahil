@@ -1,6 +1,6 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-type StepDirection = 'prev' | 'next';
+type StepDirection = "prev" | "next";
 
 type FormState = Record<string, any>;
 
@@ -23,27 +23,30 @@ export const useCreateFormStore = <T extends string>(
     currentStep: initialStep,
     formData: {},
     steps,
-    goToStep: (direction: StepDirection) => set((state: FormState) => {
-      const currentIndex = steps.indexOf(state.currentStep);
-      const nextStep =
-        direction === 'next'
-          ? steps[currentIndex + 1]
-          : steps[currentIndex - 1];
-      return nextStep ? { ...state, currentStep: nextStep } : state;
-    }),
-    updateStepByIndex: (stepIndex: number) => set((state) => {
-      const currentStep = steps[stepIndex]; // what if stepIndex is out of bounds? 
-      // also, stepIndex refers to the step we wanna go to but we wanna get the current step and our state should be the single source of truth.
-      // what's gonna happen if stepIndex === 2 but state.currentStep === 1?
-      // whom do you believe? State or user input?
-      return currentStep ? { ...state, currentStep } : state;
-    }),
-    updateStepFormData: (formData: Record<string, any>) => set((state) => ({
-      ...state,
-      formData: {
-        ...state.formData,
-        ...formData,
-      },
-    })),
+    goToStep: (direction: StepDirection) =>
+      set((state: FormState) => {
+        const currentIndex = steps.indexOf(state.currentStep);
+        const nextStep =
+          direction === "next"
+            ? steps[currentIndex + 1]
+            : steps[currentIndex - 1];
+        return nextStep ? { ...state, currentStep: nextStep } : state;
+      }),
+    updateStepByIndex: (stepIndex: number) =>
+      set((state) => {
+        const currentStep = steps[stepIndex]; // what if stepIndex is out of bounds?
+        // also, stepIndex refers to the step we wanna go to but we wanna get the current step and our state should be the single source of truth.
+        // what's gonna happen if stepIndex === 2 but state.currentStep === 1?
+        // whom do you believe? State or user input?
+        return currentStep ? { ...state, currentStep } : state;
+      }),
+    updateStepFormData: (formData: Record<string, any>) =>
+      set((state) => ({
+        ...state,
+        formData: {
+          ...state.formData,
+          ...formData,
+        },
+      })),
   }));
 };

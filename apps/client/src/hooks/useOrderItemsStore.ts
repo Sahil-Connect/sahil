@@ -1,17 +1,13 @@
-import { create } from 'zustand';
-
-type OrderItem = {
-  productId: string;
-  quantity: number;
-};
+import { create } from "zustand";
+import { Order_Item, Products } from "@sahil/lib/graphql/__generated__/graphql";
 
 type OrderItemsStore = {
-  orderItems: OrderItem[];
-  products: any[];
-  addOrderItem: (item: OrderItem) => void;
-  removeOrderItem: (item: OrderItem) => void;
-  updateOrderItem: (item: OrderItem) => void;
-  setProducts: (products: any[]) => void;
+  orderItems: Order_Item[];
+  products: Products[];
+  addOrderItem: (item: Order_Item) => void;
+  removeOrderItem: (item: Order_Item) => void;
+  updateOrderItem: (item: Order_Item) => void;
+  setProducts: (products: Products[]) => void;
 };
 
 const INITIAL_STATE = {

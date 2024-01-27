@@ -1,12 +1,12 @@
-import React, { useRef } from 'react';
-import { useEditProduct } from '@/hooks/suppliers';
+import React, { useRef } from "react";
+import { useEditProduct } from "@/hooks/suppliers";
 import SupplierProductForm, {
   ProductFormData,
   supplierProductSchema,
-} from './SupplierProductForm';
-import Modal from 'ui/components/Modal';
-import { HiOutlinePencilSquare } from 'react-icons/hi2';
-import { SubmitHandler } from 'react-hook-form';
+} from "./SupplierProductForm";
+import Modal from "ui/components/Modal";
+import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { SubmitHandler } from "react-hook-form";
 
 const EditProductModal = ({ product }: { product: ProductFormData }) => {
   const { updateProduct, loading } = useEditProduct();
@@ -34,20 +34,20 @@ const EditProductModal = ({ product }: { product: ProductFormData }) => {
 
   return (
     <Modal
-      btnSize='sm'
-      btnStyle='primary'
+      btnSize="sm"
+      btnStyle="primary"
       icon={<HiOutlinePencilSquare />}
-      CTA='Edit'
+      CTA="Edit"
       id={`edit-${product.id}-modal`}
       CloseBtnRef={closeBtn}
-      title='Edit Product'
+      title="Edit Product"
     >
       <SupplierProductForm
         loading={loading}
         initial={product}
         onSubmit={onSubmit}
       />
-      <div className='my-4 flex flex-row justify-end gap-4'></div>
+      <div className="my-4 flex flex-row justify-end gap-4"></div>
     </Modal>
   );
 };

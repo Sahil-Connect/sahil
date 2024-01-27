@@ -9,8 +9,16 @@ export type CardProps = {
   height?: string;
 };
 
-export const Card = ({ children, className, title, titleSize = "md" }: CardProps) => {
-  const merged = twMerge("card card-compact card-bordered bg-base-100", className);
+export const Card = ({
+  children,
+  className,
+  title,
+  titleSize = "md",
+}: CardProps) => {
+  const merged = twMerge(
+    "card card-compact card-bordered bg-base-100",
+    className
+  );
   return (
     <div className={merged}>
       <div className="card-body flex-col">

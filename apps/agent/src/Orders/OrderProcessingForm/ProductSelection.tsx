@@ -6,7 +6,11 @@ import { useOrderFormStore } from "@/hooks/useOrderFormStore";
 import { ProductsCatalogue } from "../ProductsCatalogue";
 import { RecommendedSuppliers } from "../RecommendedSuppliers";
 
-import { HiArrowSmallRight, HiMiniMagnifyingGlass, HiXMark } from "react-icons/hi2";
+import {
+  HiArrowSmallRight,
+  HiMiniMagnifyingGlass,
+  HiXMark,
+} from "react-icons/hi2";
 
 const productSelectionSchema = z.object({
   // clientId: z.string(),
@@ -15,7 +19,9 @@ const productSelectionSchema = z.object({
 type FormData = z.infer<typeof productSelectionSchema>;
 
 export const ProductSelection = ({ navigateToNextStep }) => {
-  const { client, formData, goToStep, updateStepFormData } = useOrderFormStore((state) => state);
+  const { client, formData, goToStep, updateStepFormData } = useOrderFormStore(
+    (state) => state
+  );
 
   const {
     register,
@@ -23,6 +29,7 @@ export const ProductSelection = ({ navigateToNextStep }) => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
+    // @ts-ignore
     resolver: zodResolver(productSelectionSchema),
   });
 
@@ -38,7 +45,7 @@ export const ProductSelection = ({ navigateToNextStep }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-      <ProductsCatalogue />
+        <ProductsCatalogue />
         <div className="flex gap-2">
           <div className="btn btn-sm btn-primary">
             <input type="submit" value="continue" />

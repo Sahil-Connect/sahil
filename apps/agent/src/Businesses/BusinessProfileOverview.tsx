@@ -1,29 +1,19 @@
+import { FC } from "react";
+import { Business } from "@sahil/lib/graphql/__generated__/graphql";
+
 import {
   HiOutlinePhone,
   HiOutlineMapPin,
   HiOutlineEnvelope,
   HiOutlineUser,
-} from 'react-icons/hi2';
+} from "react-icons/hi2";
 import { Card } from "ui";
 
-type SahilBusiness = {
-  name: string;
-  id: string;
-  contactName: string;
-  type: string;
-  phoneNumber: string;
-  description: string;
-  contactEmail: string;
-  addresses: Array<{
-    street_address: string,
-  }>;
+type Props = {
+  business: Business;
 };
 
-export const BusinessProfileOverview = ({
-  business,
-}: {
-  business: SahilBusiness;
-}) => {
+export const BusinessProfileOverview: FC<Props> = ({ business }) => {
   return (
     <Card height="h-fit">
       <div className="avatar placeholder">
@@ -33,31 +23,29 @@ export const BusinessProfileOverview = ({
       </div>
       <h3 className="card-title">{business?.name}</h3>
       <p>{business?.description}</p>
-      <div className='space-y-2'>
-        <div className='flex items-center gap-2'>
-          <span className='shadow rounded-md p-2'>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <span className="shadow rounded-md p-2">
             <HiOutlineUser />
           </span>
           <p>{business?.contactName}</p>
         </div>
-        <div className='flex items-center gap-2'>
-          <span className='shadow rounded-md p-2'>
+        <div className="flex items-center gap-2">
+          <span className="shadow rounded-md p-2">
             <HiOutlineMapPin />
           </span>
           {business?.addresses.map(({ street_address: name }) => {
-            return (
-              <span key={name}>{name}</span>
-            );
+            return <span key={name}>{name}</span>;
           })}
         </div>
-        <div className='flex items-center gap-2'>
-          <span className='shadow rounded-md p-2'>
+        <div className="flex items-center gap-2">
+          <span className="shadow rounded-md p-2">
             <HiOutlineEnvelope />
           </span>
           <p>{business?.contactEmail}</p>
         </div>
-        <div className='flex items-center gap-2'>
-          <span className='shadow rounded-md p-2'>
+        <div className="flex items-center gap-2">
+          <span className="shadow rounded-md p-2">
             <HiOutlinePhone />
           </span>
           <p>{business?.phoneNumber}</p>
@@ -69,8 +57,8 @@ export const BusinessProfileOverview = ({
 
 const generateInitials = (name: string) => {
   return name
-    ?.split(' ')
+    ?.split(" ")
     .slice(0, 3)
     .map((word) => word.charAt(0).toUpperCase())
-    .join('');
+    .join("");
 };
