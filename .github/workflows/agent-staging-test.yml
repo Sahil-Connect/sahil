@@ -1,8 +1,8 @@
 name: Agent Stagging Test
 
 on:
-  push:
-    branches: ['SAH-49-CICD']
+  pull_request:
+    types: [opened, synchronize]
     # check which application has been changed 
     paths:
       - 'apps/agent/**'
