@@ -37,7 +37,7 @@ services:
     image: sahil-agent
     restart: always
     ports:
-      - '3000:3000'
+      - '3001:3001'
     env_file:
       - path: ./apps/agent/.env
       #- path: ./apps/agent/.env.production
@@ -51,7 +51,7 @@ services:
     image: sahil-client
     restart: always
     ports:
-      - '3000:3000'
+      - '3002:3002'
     env_file:
       - path: ./apps/client/.env
       #- path: ./apps/client/.env.production
