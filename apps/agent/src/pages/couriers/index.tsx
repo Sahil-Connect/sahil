@@ -29,7 +29,7 @@ export default function CouriersPage() {
     <section className="space-y-4">
       <Card>
         <div className="flex items-center justify-between">
-          <h1 className="text-xl">Sahil - Couriers</h1>
+          <h1 className="text-xl">Couriers</h1>
           <div className="flex gap-2">
             <Link href="/couriers/track" className="btn btn-sm">
               <HiOutlineMap /> Track Courier
@@ -44,6 +44,7 @@ export default function CouriersPage() {
           </div>
         </div>
       </Card>
+      <h3 className="text-md">Overview</h3>
       <Stats stats={stats} />
       <ListCouriers />
     </section>

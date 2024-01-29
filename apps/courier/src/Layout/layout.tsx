@@ -23,11 +23,6 @@ const links = [
     href: "/requests",
     icon: HiOutlineQueueList,
   },
-  {
-    name: "profile",
-    href: "/profile",
-    icon: HiOutlineQueueList,
-  },
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {

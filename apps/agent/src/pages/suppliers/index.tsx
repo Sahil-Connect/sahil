@@ -34,10 +34,9 @@ export default function Suppliers() {
         <Card>
           <div className="flex justify-between items-start flex-wrap gap-4">
             <div>
-              <h1 className="text-xl">Sahil - Suppliers</h1>
+              <h1 className="text-xl">Suppliers</h1>
             </div>
             <div className="w-full lg:w-fit flex justify-end gap-4">
-              <FilterSuppliersModal />
               <button
                 className="btn btn-sm btn-primary normal-case"
                 onClick={() => router.push("/suppliers/register/business_info")}
@@ -48,6 +47,7 @@ export default function Suppliers() {
             </div>
           </div>
         </Card>
+        <h3 className="text-md">Overview</h3>
         <Stats stats={stats} />
         <ListSuppliers />
       </section>

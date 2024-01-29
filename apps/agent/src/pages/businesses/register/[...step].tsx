@@ -7,7 +7,6 @@ import {
   BusinessInfo,
   BusinessInfoSummary,
   BusinessFormSteps,
-  BusinessStepsPaginator,
   BusinessPreferencesInfo,
 } from "@sahil/features/businesses/BusinessRegistrationForm";
 import {
@@ -16,6 +15,7 @@ import {
   HiOutlineMapPin,
   HiOutlineHeart,
 } from "react-icons/hi2";
+import { StepsPaginator } from "ui";
 
 const headers = [
   {
@@ -82,10 +82,10 @@ export default function BusinessRegistrationPage() {
         </div>
         <div className="divider divider-horizontal"></div>
         <div className="grow space-y-4 py-4 pr-4 basis-3/5">
-          <BusinessStepsPaginator
+          <StepsPaginator
             headers={headers}
-            onPrevStep={onPrevStep}
-            onNextStep={onNextStep}
+            currentStep={currentStep}
+            steps={steps}
           />
           {currentStep === "business_info" && <BusinessInfo />}
           {currentStep === "address_info" && <BusinessAddressInfo />}

@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { client } from "../../lib/graphql-request";
 import { INSERT_NEW_ORDER } from "@sahil/lib/graphql";
-import { v4 as uuidv4 } from "uuid";
 
 export const orderSchema = z
   .object({
@@ -23,14 +22,11 @@ export const orderSchema = z
 
 export type OrderAttributes = z.infer<typeof orderSchema>;
 
-export const initOrder = async (
-  order: OrderAttributes
-): Promise<OrderAttributes> => {
+export const initOrder = async (order: OrderAttributes): Promise<unknown> => {
   const data = await client.request(INSERT_NEW_ORDER, {
     object: {
       ...order,
     },
   });
-  // @ts-ignore
   return Promise.resolve(data);
 };

@@ -1,7 +1,28 @@
 import { ListBusinesses } from "@sahil/features/Businesses/ListBusinesses";
 import { useRouter } from "next/router";
-import { Card } from "ui";
+import { Card, Stats, Stat } from "ui";
 import { HiPlus, HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
+
+const stats: Stat[] = [
+  {
+    title: "Reports",
+    value: 9,
+    desc: "Oct 1st - Nov 1st",
+    trend: "negative",
+  },
+  {
+    title: "Registered Businesses",
+    value: 40,
+    desc: "Oct 1st - Nov 1st",
+    trend: "negative",
+  },
+  {
+    title: "Processed Orders",
+    value: 201,
+    desc: "Oct 1st - Nov 1st",
+    trend: "positive",
+  },
+];
 
 export default function Business() {
   const router = useRouter();
@@ -26,9 +47,9 @@ export default function Business() {
           </div>
         </div>
       </Card>
-      <div>
-        <ListBusinesses />
-      </div>
+      <h3 className="text-md">Overview</h3>
+      <Stats stats={stats} />
+      <ListBusinesses />
     </section>
   );
 }

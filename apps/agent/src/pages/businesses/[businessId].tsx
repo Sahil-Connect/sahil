@@ -21,14 +21,6 @@ export default function BusinessPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between">
-        <div>
-          <button className="btn btn-sm btn-outline">Back</button>
-        </div>
-        <div>
-          <button className="btn btn-sm btn-primary">New Order</button>
-        </div>
-      </div>
       <div className="flex flex-col gap-4 lg:flex-row">
         <div className="grow mb-4 lg:mb-0">
           {

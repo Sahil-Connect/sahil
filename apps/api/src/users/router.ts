@@ -11,12 +11,15 @@ userRouter.get(
   }
 );
 
-userRouter.post("/", (req: Request, res: Response, next: NextFunction) => {
-  const user = registerUser(req.body);
-  res.status(201).json({
-    user,
-  });
-});
+userRouter.post(
+  "/",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await registerUser(req.body);
+    res.status(201).json({
+      user,
+    });
+  }
+);
 
 userRouter.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.status(200).json({

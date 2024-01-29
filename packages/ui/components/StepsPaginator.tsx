@@ -1,11 +1,12 @@
-import { useOrderFormStore } from "@sahil/lib/hooks/useOrderFormStore";
+import { FC } from "react";
 
 type Props = {
+  currentStep: string;
   headers: any[];
+  steps: readonly string[];
 };
 
-export const StepsPaginator = ({ headers }: Props) => {
-  const { steps, currentStep } = useOrderFormStore((state) => state);
+export const StepsPaginator: FC<Props> = ({ currentStep, headers, steps }) => {
   return (
     <>
       <div className="flex justify-between items-center">
@@ -15,7 +16,7 @@ export const StepsPaginator = ({ headers }: Props) => {
           </h3>
         </div>
         <div>
-          <div className="badge badge-accent badge-xl">
+          <div className="badge">
             {steps.indexOf(currentStep) + 1} out of {steps.length}
           </div>
         </div>

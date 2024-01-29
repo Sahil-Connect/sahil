@@ -38,12 +38,12 @@ export const Step: FC<StepProps> = ({
 
 export const Steps: FC<StepsProps> = ({
   currentStep,
-  direction,
+  direction = "vertical",
   steps,
   onUpdateStepByIndex,
 }) => {
   return (
-    <ul className={`steps steps-${direction} w-full`}>
+    <ul className={`steps steps-vertical w-full`}>
       {steps &&
         steps.map(({ completed, icon, step, title }, index) => (
           <Step

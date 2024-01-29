@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { useFetchProducts } from "@/hooks/products";
+import { useFetchProducts } from "@sahil/lib/hooks/products";
 import { Card } from "ui";
 import { formatCost } from "@sahil/lib";
-import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
+import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
 import { formatCurrency } from "@sahil/lib";
 import Image from "next/image";
 import { useRouter } from "next/router";

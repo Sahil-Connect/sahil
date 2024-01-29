@@ -24,7 +24,7 @@ type Props = {
   supplier: SahilSupplier;
 };
 
-export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
+export const SupplierOverviewCard = ({ supplier }) => {
   return (
     <Card>
       <div className="flex justify-between text-4xl">
@@ -32,9 +32,11 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
           href={`/suppliers/${supplier.id}`}
           className="avatar placeholder h-fit"
         >
-          <div className="bg-neutral-focus text-base text-neutral-content rounded-full w-12">
-            <span>{generateInitials(supplier.name)}</span>
-          </div>
+          {supplier.name && (
+            <div className="bg-neutral-focus text-base text-neutral-content rounded-full w-12">
+              <span>{generateInitials(supplier?.name)}</span>
+            </div>
+          )}
         </Link>
         <button title="More Horizontal">
           <HiEllipsisHorizontal />

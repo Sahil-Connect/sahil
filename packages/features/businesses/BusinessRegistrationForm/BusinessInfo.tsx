@@ -22,7 +22,6 @@ export const BusinessInfo = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-ignore
     resolver: zodResolver(businessInfoSchema),
   });
 

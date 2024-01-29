@@ -13,6 +13,7 @@ const extendedConfig: Config = {
     "./src/Orders/**/*.{js,ts,tsx,tsx,mdx}",
     "./src/Dashboard/**/*.{js,ts,tsx,tsx,mdx}",
     "./src/Layout/*.{js,ts,tsx,tsx,mdx}",
+    "./src/**/*.{js,ts,tsx,tsx,mdx}",
   ],
   theme: {
     ...baseConfig.theme,

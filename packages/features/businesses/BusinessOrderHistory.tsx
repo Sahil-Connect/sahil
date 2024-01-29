@@ -53,7 +53,9 @@ export const BusinessOrderHistory = () => {
     <div className="bg-gray-100 space-y-2 grow p-4 rounded-xl">
       <div className="flex justify-between items-center">
         <h3 className="text-xl">Latest Orders</h3>
-        <button className="btn btn-sm">View All</button>
+        <Link href="/businesses/orders" className="btn btn-sm">
+          View All
+        </Link>
       </div>
       <ListHeader size={ordersCount && ordersCount?.count} sizeLabel="Orders">
         <ListPagination

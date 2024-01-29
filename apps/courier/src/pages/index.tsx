@@ -1,17 +1,19 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { useFetchCouriers } from "@/hooks/account";
+import { useFetchCouriers } from "@sahil/lib/hooks/couriers";
+import { LatestDeliveries } from "@sahil/features/Couriers/LatestDeliveries";
+import { IncomingDeliveryRequest } from "@sahil/features/Couriers/IncomingDeliveryRequest";
 
-const inter = Inter({ subsets: ["latin"] });
+const request = {
+  id: 1,
+  name: "BBQ Pizza",
+};
 
 export default function Home() {
   const { data, error, loading } = useFetchCouriers();
-  console.log(data);
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <p>Hello, World</p>
-    </main>
+    <section>
+      <IncomingDeliveryRequest request={request} />
+    </section>
   );
 }
