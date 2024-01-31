@@ -1,4 +1,4 @@
-import { OrderHistory } from "@/Orders/OrderHistory";
+// import { OrderHistory } from "@sahil/features/Orders/ListOrders";
 
 export default function Orders() {
   return (
@@ -8,7 +8,6 @@ export default function Orders() {
           Orders Page
         </h1>
       </div>
-      <OrderHistory />
     </section>
   );
 }

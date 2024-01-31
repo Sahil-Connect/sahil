@@ -3,6 +3,10 @@ import { FC } from "react";
 import Link from "next/link";
 import { Icon } from "./Icon";
 import type { IconType } from "react-icons";
+import {
+  HiOutlineAdjustmentsHorizontal,
+  HiOutlineArrowRightOnRectangle,
+} from "react-icons/hi2";
 
 type NavbarLink = {
   name: string;
@@ -14,9 +18,15 @@ export type NavbarProps = {
   links: NavbarLink[];
   logo?: any;
   header?: string;
+  onSignOut: () => void;
 };
 
-export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil" }) => {
+export const Navbar: FC<NavbarProps> = ({
+  links,
+  logo,
+  header = "Sahil",
+  onSignOut,
+}) => {
   return (
     <header className="navbar bg-primary text-white shadow-sm">
       <div className="navbar-start">
@@ -41,70 +51,20 @@ export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil" }) => {
             <li key={name}>
               <Link
                 href={href}
-                className="text-base font-semibold transition-[0.4s] hover:text-green-dark"
+                className="font-semibold transition-[0.4s] hover:text-green-dark"
               >
                 {icon && <Icon icon={icon} />} {name}
               </Link>
             </li>
           ))}
         </ul>
-        <div className="dropdown dropdown-end">
-          <ul
-            tabIndex={0}
-            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            {links.map(({ name, href }) => {
-              return (
-                <li key={name}>
-                  <Link href={href} className="text-base font-semibold">
-                    {name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end text-gray-600">
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <div className="w-10 rounded-full">
+            <div className="w-10 rounded-full ring ring-primary ring-offset-bg-base-100 ring-offset-2">
               <img
                 alt="Tailwind CSS Navbar component"
                 src="https://avatars.githubusercontent.com/u/21015204?v=4"
@@ -113,19 +73,26 @@ export const Navbar: FC<NavbarProps> = ({ links, logo, header = "Sahil" }) => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
           >
+            {links.map(({ name, href, icon }) => {
+              return (
+                <li key={name}>
+                  <Link href={href} className="font-semibold">
+                    <Icon icon={icon} /> {name}
+                  </Link>
+                </li>
+              );
+            })}
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
+              <Link href="/settings">
+                <Icon icon={HiOutlineAdjustmentsHorizontal} /> Settings
+              </Link>
             </li>
             <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
+              <button onClick={onSignOut}>
+                <Icon icon={HiOutlineArrowRightOnRectangle} /> Logout
+              </button>
             </li>
           </ul>
         </div>

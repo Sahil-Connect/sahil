@@ -1,18 +1,17 @@
 import { useRouter } from "next/router";
-import { useFetchSupplierByPK } from "@/hooks/suppliers";
+import { useFetchSupplierByPK } from "@sahil/lib/hooks/suppliers";
 import {
   SupplierOrderHistory,
   SupplierProducts,
   ServiceZones,
   SupplierProfileOverview,
-} from "@/Suppliers";
+} from "@sahil/features/Suppliers";
 
 export default function SupplierPage() {
   const router = useRouter();
   const { supplierId } = router.query;
   const { data: supplier, error, loading } = useFetchSupplierByPK();
   if (error) {
-    console.log(error);
     return <p>Failed</p>;
   }
   return (

@@ -6,18 +6,13 @@ import {
   CourierFormStepPaginator,
   CourierVehicleInfo,
   CourierFormSteps,
-} from "@/Couriers/CourierRegistrationForm";
+} from "@sahil/features/Couriers/CourierRegistrationForm";
 import { useParams, useRouter } from "next/navigation";
-import { INITIAL_STEP } from "@/Couriers/constants";
-import { useCourierFormStore } from "@/hooks/useCourierFormStore";
-import { CourierFormSummary } from "@/Couriers/CourierRegistrationForm/CourierFormSummary";
-import {
-  HiOutlineCheckCircle,
-  HiOutlineQueueList,
-  HiOutlineMapPin,
-  HiOutlineHeart,
-} from "react-icons/hi2";
-import { Card, IconButton } from "ui";
+import { INITIAL_STEP } from "@sahil/features/Couriers/constants";
+import { useCourierFormStore } from "@sahil/lib/hooks/useCourierFormStore";
+import { CourierFormSummary } from "@sahil/features/Couriers/CourierRegistrationForm/CourierFormSummary";
+import { HiOutlineCheckCircle } from "react-icons/hi2";
+import { Card, StepsPaginator } from "ui";
 
 const headers = [
   {
@@ -91,14 +86,11 @@ export default function CourierRegistrationPage() {
             </div>
             <div className="divider divider-horizontal"></div>
             <div className="grow space-y-4">
-              <div className="flex justify-between items-center w-full">
-                <div>
-                  <h3 className="text-xl text-neutral-content">
-                    Step {steps.indexOf(currentStep) + 1} out of {steps.length}
-                  </h3>
-                </div>
-                <CourierFormStepPaginator />
-              </div>
+              <StepsPaginator
+                headers={headers}
+                currentStep={currentStep}
+                steps={steps}
+              />
               <div className="divider"></div>
               <Card>
                 <div className="card-body">

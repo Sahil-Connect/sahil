@@ -1,15 +1,17 @@
 import { z } from "zod";
 import { client } from "../../lib/graphql-request";
+import { INSERT_NEW_ORDER } from "@sahil/lib/graphql";
 
 export const orderSchema = z
   .object({
-    orderId: z.string(),
-    created_at: z.date().refine((value) => value > new Date()),
-    customerId: z.string(),
+    created_at: z
+      .date()
+      .refine((value) => value > new Date())
+      .optional(),
+    customerId: z.any(),
     destination: z.string(),
-    id: z.string(),
     origin: z.string(),
-    processedBy: z.string(),
+    processedBy: z.string().optional(),
   })
   .refine(
     ({ destination, origin }) => {
@@ -20,22 +22,11 @@ export const orderSchema = z
 
 export type OrderAttributes = z.infer<typeof orderSchema>;
 
-export const initOrder = (
-  attributes: OrderAttributes
-): Promise<OrderAttributes> => {
-  return new Promise<OrderAttributes>((resolve) => {
-    // check if client is registered
-    // check for clients that can process this order
-    // update order status based on this information
-    // alert the notifications service
-    resolve({
-      created_at: new Date(),
-      customerId: "string",
-      destination: "string",
-      id: "string",
-      orderId: "string",
-      origin: "string",
-      processedBy: "string",
-    });
+export const initOrder = async (order: OrderAttributes): Promise<unknown> => {
+  const data = await client.request(INSERT_NEW_ORDER, {
+    object: {
+      ...order,
+    },
   });
+  return Promise.resolve(data);
 };

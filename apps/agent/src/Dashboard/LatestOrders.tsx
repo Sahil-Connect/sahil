@@ -1,9 +1,6 @@
-import { Card, IconButton } from "ui";
-import {
-  HiOutlineBanknotes,
-  HiOutlinePlusCircle,
-  HiArrowSmallRight,
-} from "react-icons/hi2";
+import { Card } from "ui";
+import Link from "next/link";
+import { HiOutlineBanknotes, HiArrowSmallRight } from "react-icons/hi2";
 
 const orders = [
   {
@@ -30,12 +27,11 @@ export const LatestOrders = () => {
       <div className="flex items-center justify-between">
         <div className="flex gap-2 items-center">
           <h3 className="text-lg">Latest Orders</h3>
-          <IconButton icon={HiOutlinePlusCircle} title="Add" />
           <div className="badge badge-accent">3 Orders</div>
         </div>
-        <button className="btn btn-xs">
+        <Link href="/orders" className="btn btn-xs btn-outline">
           View All <HiArrowSmallRight />{" "}
-        </button>
+        </Link>
       </div>
       <div className="flex gap-2">
         {orders.map((order) => (

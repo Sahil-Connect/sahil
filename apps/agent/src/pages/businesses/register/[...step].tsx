@@ -1,21 +1,21 @@
 import Head from "next/head";
 import { z } from "zod";
-import { useBusinessFormStore } from "@/hooks/useBusinessFormStore";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useBusinessFormStore } from "@sahil/lib/hooks/useBusinessFormStore";
+import { useRouter } from "next/navigation";
 import {
   BusinessAddressInfo,
   BusinessInfo,
   BusinessInfoSummary,
   BusinessFormSteps,
-  BusinessStepsPaginator,
   BusinessPreferencesInfo,
-} from "@/Businesses/BusinessRegistrationForm";
+} from "@sahil/features/businesses/BusinessRegistrationForm";
 import {
   HiOutlineCheckCircle,
   HiOutlineQueueList,
   HiOutlineMapPin,
   HiOutlineHeart,
 } from "react-icons/hi2";
+import { StepsPaginator } from "ui";
 
 const headers = [
   {
@@ -47,6 +47,7 @@ const headers = [
 export default function BusinessRegistrationPage() {
   const { currentStep, goToStep, steps, updateStepByIndex } =
     useBusinessFormStore((state) => state);
+
   const currentIndex = steps.indexOf(currentStep);
   const router = useRouter();
 
@@ -69,7 +70,7 @@ export default function BusinessRegistrationPage() {
 
   return (
     <section className="min-h-screen space-y-4">
-      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-white">
+      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-base-100">
         <h1 className="text-2xl">Register New Business</h1>
       </div>
       <div className="flex">
@@ -82,10 +83,10 @@ export default function BusinessRegistrationPage() {
         </div>
         <div className="divider divider-horizontal"></div>
         <div className="grow space-y-4 py-4 pr-4 basis-3/5">
-          <BusinessStepsPaginator
+          <StepsPaginator
             headers={headers}
-            onPrevStep={onPrevStep}
-            onNextStep={onNextStep}
+            currentStep={currentStep}
+            steps={steps}
           />
           {currentStep === "business_info" && <BusinessInfo />}
           {currentStep === "address_info" && <BusinessAddressInfo />}

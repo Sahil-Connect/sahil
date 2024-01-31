@@ -6,6 +6,7 @@ import { Queues } from "../queue";
 const worker = new Worker(
   Queues.Order,
   async (job) => {
+    console.log("yerrrrr", job.data);
     logger.info("Processing Job", {
       world: "hello 0",
     });

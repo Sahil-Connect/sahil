@@ -3,11 +3,9 @@ import {
   OrderItems,
   OrderOverview,
   OrderPreferences,
-  OrderProgress,
-  OrderStatusSteps,
   OrderClient,
   OrderDetails,
-} from "@/Orders";
+} from "@sahil/features/Orders";
 import { Tabs } from "ui";
 
 import { useFetchOrderByPK } from "@/hooks/orders";
