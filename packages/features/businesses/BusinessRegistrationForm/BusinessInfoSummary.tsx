@@ -11,7 +11,7 @@ import { useBusinessFormStore } from "@sahil/lib/hooks/useBusinessFormStore";
 
 export const BusinessInfoSummary = () => {
   const [actionId, setActionId] = useState<string>("");
-  const { formData } = useBusinessFormStore((state) => state);
+  const { formData } = useBusinessFormStore();
   const router = useRouter();
 
   const { data, loading: subscriptionLoading } =

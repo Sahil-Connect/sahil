@@ -27,11 +27,10 @@ export const BusinessInfo = () => {
 
   const router = useRouter();
 
-  const { goToStep, updateStepFormData } = useBusinessFormStore(
-    (state) => state
-  );
+  const { goToStep, updateStepFormData } = useBusinessFormStore();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    console.log("clicked", updateStepFormData);
     const validatedInput = businessInfoSchema.parse(data);
     updateStepFormData(validatedInput);
     goToStep("next");

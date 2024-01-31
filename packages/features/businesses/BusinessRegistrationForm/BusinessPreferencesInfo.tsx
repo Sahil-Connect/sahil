@@ -20,9 +20,7 @@ const businessPreferencesSchema = z.object({
 type FormData = z.infer<typeof businessPreferencesSchema>;
 
 export const BusinessPreferencesInfo = () => {
-  const { formData, goToStep, updateStepFormData } = useBusinessFormStore(
-    (state) => state
-  );
+  const { formData, goToStep, updateStepFormData } = useBusinessFormStore();
   const router = useRouter();
   const {
     register,

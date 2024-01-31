@@ -12,9 +12,7 @@ const businessAddressSchema = z.object({
 type FormData = z.infer<typeof businessAddressSchema>;
 
 export const BusinessAddressInfo = () => {
-  const { formData, goToStep, updateStepFormData } = useBusinessFormStore(
-    (state) => state
-  );
+  const { formData, goToStep, updateStepFormData } = useBusinessFormStore();
 
   const {
     register,

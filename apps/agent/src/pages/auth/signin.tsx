@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import type { NextPage } from "next";
 import { getProviders, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Card, Input } from "ui";
+import { Card } from "ui";
 
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();
@@ -13,12 +13,11 @@ const SignInPage: NextPage = ({ providers }: any) => {
     if (session) {
       router.push("/auth/new");
     }
-  }, [session]);
+  }, [router, session]);
 
   return (
     <div className="p-4 space-y-2">
       <h1 className="text-2xl">Welcome to Sahil</h1>
-
       <Card>
         <div className="flex gap-4">
           <input

@@ -1,4 +1,4 @@
-import { ListBusinesses } from "@sahil/features/Businesses/ListBusinesses";
+// import { ListBusinesses } from "@sahil/features/Businesses/ListBusinesses";
 import { useRouter } from "next/router";
 import { Card, Stats, Stat } from "ui";
 import { HiPlus, HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
@@ -49,7 +49,7 @@ export default function Business() {
       </Card>
       <h3 className="text-md">Overview</h3>
       <Stats stats={stats} />
-      <ListBusinesses />
+      {/* <ListBusinesses /> */}
     </section>
   );
 }

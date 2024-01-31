@@ -26,6 +26,7 @@ type OrderFormStore = {
   formData: FormDataState;
   orderItems: OrderItem[];
   setOrderItems: (items: OrderItem[]) => void;
+
   setCurrentClient: (client: SahilBusinessPartner) => void;
 };
 
@@ -35,6 +36,7 @@ export const useOrderFormStore = create<OrderFormStore>((set) => ({
   formData: {},
   steps,
   goToStep: (direction: StepDirection) => {
+    // overload operator?
     set((state) => {
       const currentIndex = steps.indexOf(state.currentStep);
       if (currentIndex !== -1 && currentIndex <= steps.length - 1) {

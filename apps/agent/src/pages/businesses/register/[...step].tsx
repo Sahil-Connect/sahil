@@ -47,6 +47,7 @@ const headers = [
 export default function BusinessRegistrationPage() {
   const { currentStep, goToStep, steps, updateStepByIndex } =
     useBusinessFormStore((state) => state);
+
   const currentIndex = steps.indexOf(currentStep);
   const router = useRouter();
 

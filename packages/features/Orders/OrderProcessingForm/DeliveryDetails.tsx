@@ -38,9 +38,7 @@ export const DeliveryDetails = ({ navigateToNextStep }) => {
     resolver: zodResolver(deliveryDetailsSchema),
   });
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log("woooooo");
     const validatedInput = deliveryDetailsSchema.parse(data);
-
     updateStepFormData(validatedInput);
     navigateToNextStep("payment_details");
   };
