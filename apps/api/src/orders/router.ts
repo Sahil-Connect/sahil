@@ -23,7 +23,7 @@ ordersRouter.post(
       // push into Queue
       await pushIntoOrders(req.body);
       res.status(201).send({
-        ...order,
+        order,
       });
     } catch (error) {
       next(error);
