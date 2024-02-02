@@ -34,7 +34,7 @@ const extendedConfig: Config = {
           secondary: "#056835",
           accent: "#40efcf",
           neutral: "#2d2f39",
-          "base-100": "#ffffff",
+          "bg-base-100": "#ffffff",
           info: "#76d1e5",
           success: "#22a05b",
           warning: "#f0bc2d",

@@ -51,13 +51,13 @@ export const OrderOverview: FC<Props> = ({ order }) => {
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <span className="shadow bg-white rounded-md p-2">
+                <span className="shadow bg-base-100 rounded-md p-2">
                   <HiCalendarDays />
                 </span>
                 <p>{formatDateTime(order?.created_at)}</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="shadow bg-white rounded-md p-2">
+                <span className="shadow bg-base-100 rounded-md p-2">
                   <HiOutlinePhone />
                 </span>
                 <p>{order?.business?.phoneNumber}</p>

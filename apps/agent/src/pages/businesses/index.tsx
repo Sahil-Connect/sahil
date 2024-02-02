@@ -1,37 +1,55 @@
-import { ListBusinesses } from "@/Businesses/ListBusinesses";
+// import { ListBusinesses } from "@sahil/features/Businesses/ListBusinesses";
 import { useRouter } from "next/router";
+import { Card, Stats, Stat } from "ui";
+import { HiPlus, HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
+
+const stats: Stat[] = [
+  {
+    title: "Reports",
+    value: 9,
+    desc: "Oct 1st - Nov 1st",
+    trend: "negative",
+  },
+  {
+    title: "Registered Businesses",
+    value: 40,
+    desc: "Oct 1st - Nov 1st",
+    trend: "negative",
+  },
+  {
+    title: "Processed Orders",
+    value: 201,
+    desc: "Oct 1st - Nov 1st",
+    trend: "positive",
+  },
+];
 
 export default function Business() {
   const router = useRouter();
   return (
     <section className="space-y-4">
-      <div className="flex justify-between items-start flex-wrap gap-4">
-        <div>
-          <h1 className="text-2xl md:text-3xl">Partner Businesses</h1>
-        </div>
-        <div>
-          <button
-            className="btn btn-sm btn-primary normal-case"
-            onClick={() => router.push("/businesses/register/basic_info")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="21"
-              height="21"
-              viewBox="0 0 24 24"
+      <Card>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-xl">Businesses</h1>
+          </div>
+          <div className="flex gap-2">
+            <button className="btn btn-sm">
+              <HiOutlineDocumentMagnifyingGlass />
+              track Order
+            </button>
+            <button
+              className="btn btn-sm btn-primary normal-case"
+              onClick={() => router.push("/businesses/register/basic_info")}
             >
-              <path
-                fill="currentColor"
-                d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2z"
-              />
-            </svg>
-            Register Business
-          </button>
+              <HiPlus /> Register Business
+            </button>
+          </div>
         </div>
-      </div>
-      <div>
-        <ListBusinesses />
-      </div>
+      </Card>
+      <h3 className="text-md">Overview</h3>
+      <Stats stats={stats} />
+      {/* <ListBusinesses /> */}
     </section>
   );
 }

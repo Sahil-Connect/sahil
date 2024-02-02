@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { z } from "zod";
-import { useOrderFormStore } from "@/hooks/useOrderFormStore";
+import { useOrderFormStore } from "@sahil/lib/hooks/useOrderFormStore";
 import {
   DeliveryDetails,
   OrderDetails,
@@ -8,8 +8,7 @@ import {
   OrderSummary,
   PaymentDetails,
   ProductSelection,
-  StepsPaginator,
-} from "@/Orders/OrderProcessingForm";
+} from "@sahil/features/Orders/OrderProcessingForm";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import {
   HiOutlineShoppingCart,
@@ -20,6 +19,7 @@ import {
   HiCursorArrowRipple,
 } from "react-icons/hi2";
 import { StepDirection, StepItem } from "ui/components/MultiStepForm";
+import { StepsPaginator } from "ui";
 
 const headers: Array<StepItem> = [
   {
@@ -107,7 +107,11 @@ export default function NewOrderPage() {
         </div>
         <div className="divider divider-horizontal"></div>
         <div className="grow space-y-4 py-4 pr-4 basis-3/5">
-          <StepsPaginator headers={headers} onStepChange={onStepChange} />
+          <StepsPaginator
+            headers={headers}
+            currentStep={currentStep}
+            steps={steps}
+          />
           {currentStep === "order_details" && (
             <OrderDetails navigateToNextStep={navigateToNextStep} />
           )}

@@ -13,11 +13,9 @@ type FormStore<T> = {
   formData: Record<string, number | string>;
 };
 
-// code review comments
-
 export const useCreateFormStore = <T extends string>(
-  initialStep: T, // why is this is a generic?
-  steps: readonly T[] // can be a string!
+  initialStep: T,
+  steps: readonly T[]
 ) => {
   return create<FormStore<T>>((set) => ({
     currentStep: initialStep,
@@ -34,10 +32,7 @@ export const useCreateFormStore = <T extends string>(
       }),
     updateStepByIndex: (stepIndex: number) =>
       set((state) => {
-        const currentStep = steps[stepIndex]; // what if stepIndex is out of bounds?
-        // also, stepIndex refers to the step we wanna go to but we wanna get the current step and our state should be the single source of truth.
-        // what's gonna happen if stepIndex === 2 but state.currentStep === 1?
-        // whom do you believe? State or user input?
+        const currentStep = steps[stepIndex];
         return currentStep ? { ...state, currentStep } : state;
       }),
     updateStepFormData: (formData: Record<string, any>) =>

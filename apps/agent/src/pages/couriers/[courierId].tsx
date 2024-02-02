@@ -1,12 +1,13 @@
+import { CourierProfileOverview } from "@sahil/features/Couriers/components/CourierProfileOverview";
+
 import { useRouter } from "next/router";
-import { useFetchCourierByPK } from "@/hooks/couriers";
+import { useFetchCourierByPK } from "@sahil/lib/hooks/couriers";
 import {
   CourierStats,
-  CourierProfileOveriew,
   LatestDeliveries,
   ZoneInformation,
   VehicleInfo,
-} from "@/Couriers";
+} from "@sahil/features/Couriers";
 export default function CourierPage() {
   const router = useRouter();
   const { courierId } = router.query;
@@ -26,7 +27,7 @@ export default function CourierPage() {
     <>
       <section className="flex">
         <div className="basis-1/4">
-          <CourierProfileOveriew courier={courier} />
+          <CourierProfileOverview courier={courier} />
         </div>
         <div className="divider divider-horizontal"></div>
         <div className="space-y-4 grow">

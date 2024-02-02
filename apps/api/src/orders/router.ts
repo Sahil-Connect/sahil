@@ -2,6 +2,7 @@ import { NextFunction, Response, Router, Request } from "express";
 import { pushIntoOrders } from "../enqueue";
 import { logRequest } from "../middleware/requestLogger";
 import { validate } from "../middleware/zodValidate";
+
 import {
   initOrder,
   orderSchema,
@@ -13,26 +14,16 @@ const ordersRouter = Router();
 
 ordersRouter.use(logRequest);
 
-type OrdersActionType = {
-  created_at: Date;
-  customerId: string;
-  destination: string;
-  id: string;
-  orderId: string;
-  origin: string;
-  processedBy: string;
-};
-
 ordersRouter.post(
   "/",
   validate(orderSchema),
-  async (req: Request, res: Response<OrdersActionType>, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
       const order = await initOrder(req.body);
       // push into Queue
       await pushIntoOrders(req.body);
       res.status(201).send({
-        ...order,
+        order,
       });
     } catch (error) {
       next(error);

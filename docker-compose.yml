@@ -24,9 +24,13 @@ services:
     restart: always
     ports:
       - '8000:8000'
-    env_file:
-      - path: ./apps/api/.env
-      #- path: ./apps/api/.env.production
+    # env_file:
+    #   - path: ./apps/api/.env
+    #   #- path: ./apps/api/.env.production
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
 
   # AGENT
   sahil-agent:
@@ -40,7 +44,6 @@ services:
       - '3001:3001'
     env_file:
       - path: ./apps/agent/.env
-      #- path: ./apps/agent/.env.production
   
   # CLIENT
   sahil-client:
@@ -54,7 +57,6 @@ services:
       - '3002:3002'
     env_file:
       - path: ./apps/client/.env
-      #- path: ./apps/client/.env.production
 
   #### LOCAL DEV ENVIRONMENTS ####
 

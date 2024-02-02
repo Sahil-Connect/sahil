@@ -6,8 +6,8 @@ export const useGetUsers = () => {
   return { error, data: data?.users, loading };
 };
 
-export const useInsertUser = () => {
-  const [insertUser, { data, loading, error }] = useMutation(INSERT_NEW_USER);
+export const useRegisterUserAction = () => {
+  const [registerUser, { data, loading, error }] = useMutation(INSERT_NEW_USER);
 
-  return { error, data: data?.users, loading };
+  return { error, data: data?.users, loading, registerUser };
 };
