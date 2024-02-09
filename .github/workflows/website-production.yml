@@ -1,21 +1,21 @@
-name: Website Stagging
+name: Website Production
 
 on:
   push:
-    branches: ['develop']
+    branches: ['main']
     # check which application has been changed 
     paths:
       - 'apps/website/**'
       - 'infra/docker/Dockerfile.website'
-      - '.github/workflows/website-staging.yml'
+      - '.github/workflows/website-production.yml'
 
 
 env:
-  REGION: "us-central1"
+  REGION: "us-east1"
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
   GCP_PROJECT_NUMBER: ${{ secrets.GCP_PROJECT_NUMBER }}
-  SERVICE: "sahil-website-stagging"
+  SERVICE: "sahil-website-production"
 
 jobs:
   build:
@@ -34,7 +34,10 @@ jobs:
       uses: actions/checkout@v3
       id: step1
     - run: |
-        echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-website:stagging-$GITHUB_SHA" >> $GITHUB_ENV
+        echo "IMAGE=gcr.io/${{ env.GCP_PROJECT_ID }}/sahil-website:production-$GITHUB_SHA" >> $GITHUB_ENV
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
 
     # GCP auth
     - name: Authenticate the service account
@@ -84,24 +87,3 @@ jobs:
       run: | 
         - echo ${{ steps.deploy.outputs.url }}
         - echo ${{ steps.step1.outputs.IMAGE }}
-
-  # stagging:
-  #   needs: build
-  #   name: Deploy to stagging env
-  #   runs-on: ubuntu-latest
-      
-  # - name: Terraform Plan and Apply
-  #   working-directory: infra/terraform/cloudrun
-  #   run: |
-  #     terraform init
-  #     terraform plan \
-  #       -out=tfplan \
-  #       -var="project_id=${{ env.GCP_PROJECT_ID }}" \
-  #       -var="project_number=${{env.GCP_PROJECT_NUMBER}}" \
-  #       -var="service_account=${{env.GCP_PROJECT_NUMBER}}-compute@developer.gserviceaccount.com" \
-  #       -var="region=us-central1" \
-  #       -var="service_name=sahil-test" \
-  #       -var="image_url=${{ env.IMAGE }}" \
-  #       -var="concurrency=80" \
-  #       -var="timeout=300" \
-  #     terraform apply tfplan

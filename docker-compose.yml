@@ -7,12 +7,12 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/Dockerfile.website
-    image: sahil-website-test
-    env_file:
-      - .env
+    image: sahil-website
     restart: always
     ports:
       - '3000:3000'
+    env_file:
+      - path: ./apps/website/.env
 
   # API
   sahil-api:
@@ -41,11 +41,9 @@ services:
     image: sahil-agent
     restart: always
     ports:
-      - '3000:3000'
-    # environment:
-    #   - POSTGRES_USER=${POSTGRES_USER}
-    #   - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    #   - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - '3001:3001'
+    env_file:
+      - path: ./apps/agent/.env
   
   # CLIENT
   sahil-client:
@@ -57,13 +55,8 @@ services:
     restart: always
     ports:
       - '3002:3002'
-    # env_file:
-    #   - path: .env
-      #- path: ./apps/client/.env.production
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+    env_file:
+      - path: ./apps/client/.env
 
   #### LOCAL DEV ENVIRONMENTS ####
 
