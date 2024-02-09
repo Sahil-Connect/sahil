@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useFetchBusinessByPK } from "@sahil/lib/hooks/businesses";
 import { Avatar, Card, Icon } from "ui";
 import {
@@ -9,7 +10,11 @@ import {
 } from "react-icons/hi2";
 import Link from "next/link";
 
-export const OrderClient = ({ businessId }) => {
+type Props = {
+  businessId: string;
+};
+
+export const OrderClient: FC<Props> = ({ businessId }) => {
   const { error, data: business, loading } = useFetchBusinessByPK(businessId);
 
   if (error) return <p>error</p>;
@@ -20,7 +25,7 @@ export const OrderClient = ({ businessId }) => {
       <Card className="grow " titleSize="sm">
         <div className="flex justify-between">
           <Link
-            href={`/suppliers/${business.id}`}
+            href={`/suppliers/${business?.id}`}
             className="avatar placeholder h-fit"
           >
             <Avatar alt={business?.name as string} />
@@ -36,13 +41,13 @@ export const OrderClient = ({ businessId }) => {
               <span className="text-gray-600 text-sm font-normal">
                 Business Type
               </span>
-              <p className="capitalize">{business.type}</p>
+              <p className="capitalize">{business?.type}</p>
             </div>
             <div className="space-y-1 font-semibold">
               <span className="text-gray-600 text-sm font-normal">
                 Contact Name
               </span>
-              <p className="capitalize">{business.contactName}</p>
+              <p className="capitalize">{business?.contactName}</p>
             </div>
           </div>
         </div>
@@ -51,7 +56,7 @@ export const OrderClient = ({ businessId }) => {
             <span className="p-2 shadow rounded-lg w-fit">
               <HiOutlinePhone />
             </span>
-            <p>{business.phoneNumber}</p>
+            <p>{business?.phoneNumber}</p>
           </div>
           <div className="flex gap-2 items-center">
             <span className="p-2 shadow rounded-lg w-fit">

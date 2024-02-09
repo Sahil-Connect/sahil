@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 type AvatarProps = {
   alt?: string;
   className?: any;
-  src?: string;
+  src?: string | null;
 };
 export const Avatar = ({ alt, src, className }: AvatarProps) => {
   const merged = twMerge("w-12 rounded-full shadow", className);

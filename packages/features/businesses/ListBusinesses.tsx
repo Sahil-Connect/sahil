@@ -3,17 +3,6 @@ import { BusinessOverviewCard } from "./BusinessOverviewCard";
 import { useFetchBusinesses } from "@sahil/lib/hooks/businesses";
 import { List, ListHeader, ListErrorState, ListPagination } from "ui";
 
-export type SahilBusiness = {
-  name: string;
-  id: string;
-  contactName: string;
-  type: string;
-  phoneNumber: string;
-  addresses: Array<{
-    street_address: string;
-  }>;
-};
-
 export const ListBusinesses = () => {
   const [page, setPage] = useState(0);
   const {
@@ -60,7 +49,8 @@ export const ListBusinesses = () => {
       <List
         data={businesses}
         loading={loading}
-        renderItem={(business: SahilBusiness) => (
+        renderItem={(business) => (
+          // @ts-ignore
           <BusinessOverviewCard key={business.id} business={business} />
         )}
       />

@@ -1,5 +1,5 @@
 import { parseISO, format } from "date-fns";
-import { createDate, TimeSpan,isWithinExpirationDate } from "oslo";
+import { createDate, TimeSpan, isWithinExpirationDate } from "oslo";
 
 export const formatDateTime = (
   dateISO: any,
@@ -9,14 +9,13 @@ export const formatDateTime = (
   return format(parsedDate, formatPattern);
 };
 
-export const checkExpiration = (date) => {
+export const checkExpiration = (date: Date): boolean => {
   return isWithinExpirationDate(date);
-}
+};
 
-export const createNewDate = () => {
-  const tomorrow = createDate(new TimeSpan(1, "d"));
-  return tomorrow;
-}
+export const createNewDate = (timespan: string) => {
+  return createDate(new TimeSpan(1, "d"));
+};
 
 const weekDays = [
   "Sunday",

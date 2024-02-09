@@ -11,7 +11,7 @@ import {
 type NavbarLink = {
   name: string;
   href: string;
-  icon?: IconType;
+  icon: IconType;
 };
 
 export type NavbarProps = {

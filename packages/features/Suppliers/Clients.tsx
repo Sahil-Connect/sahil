@@ -1,3 +1,4 @@
+import { FC } from "react";
 const clients = [
   {
     id: 1,
@@ -9,7 +10,11 @@ const clients = [
   },
 ];
 
-const ClientOverviewCard = ({ client }) => {
+type ClientProps = {
+  client: any;
+};
+
+const ClientOverviewCard: FC<ClientProps> = ({ client }) => {
   return (
     <div className="card card-compact shadow">
       <div className="card-body">

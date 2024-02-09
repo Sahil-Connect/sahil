@@ -14,13 +14,18 @@ import {
   FETCH_SUPPLIER_ORDERS,
 } from "@sahil/lib/graphql";
 
+// graphql types
+import {
+  GetSuppliersQuery,
+  GetSuppliersQueryVariables,
+} from "@sahil/lib/graphql/__generated__/graphql";
+
 export const useFetchSuppliers = (category?: string) => {
-  const graphqlQuery = category ? FETCH_FILTERED_SUPPLIERS : FETCH_SUPPLIERS;
-  const { error, data, loading } = useQuery(graphqlQuery, {
-    variables: {
-      category_name: category!,
-    },
-  });
+  const graphqlQuery = FETCH_SUPPLIERS;
+  const { error, data, loading } = useQuery<
+    GetSuppliersQuery,
+    GetSuppliersQueryVariables
+  >(graphqlQuery);
 
   return {
     error,

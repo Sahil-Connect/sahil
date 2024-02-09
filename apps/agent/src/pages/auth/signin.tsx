@@ -1,9 +1,8 @@
-// @ts-ignore
 import { useEffect } from "react";
 import type { NextPage } from "next";
-import { getProviders, signIn, useSession } from "next-auth/react";
+import { getProviders, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Card } from "ui";
+import { LoginCard } from "@sahil/features/auth/LoginCard";
 
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();
@@ -17,48 +16,15 @@ const SignInPage: NextPage = ({ providers }: any) => {
 
   return (
     <div className="p-4 space-y-2">
-      <h1 className="text-2xl">Welcome to Sahil</h1>
-      <Card>
-        <div className="flex gap-4">
-          <input
-            type="text"
-            placeholder="Enter your email"
-            className="input input-sm input-bordered w-full max-w-xs"
-          />
-          <input
-            type="password"
-            placeholder="Enter your email"
-            className="input input-sm input-bordered w-full max-w-xs"
-          />
-          <button className="btn btn-sm btn-primary">Sign In</button>
+      <div className="flex items-center justify-center">
+        <div className="space-y-4">
+          <h1 className="text-center text-2xl">Welcome Back</h1>
+          <LoginCard providers={providers} />
+          <div>
+            <p className="text-center">Don&apos;t have an account?</p>
+          </div>
         </div>
-        <div className="divider">Or</div>
-        {providers &&
-          Object.values(providers).map((provider) => {
-            return (
-              <div
-                // @ts-ignore
-                key={provider?.name}
-              >
-                <div>
-                  <button
-                    className="btn btn-sm"
-                    onClick={() => {
-                      // @ts-ignore
-                      signIn(provider?.id);
-                    }}
-                  >
-                    Sign in with{" "}
-                    {
-                      // @ts-ignore
-                      provider?.name
-                    }
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-      </Card>
+      </div>
     </div>
   );
 };

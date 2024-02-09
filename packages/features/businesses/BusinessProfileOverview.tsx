@@ -16,11 +16,14 @@ type Props = {
 export const BusinessProfileOverview: FC<Props> = ({ business }) => {
   return (
     <Card height="h-fit">
-      <div className="avatar placeholder">
-        <div className="bg-neutral-focus text-neutral-content rounded-full w-20">
-          <span>{generateInitials(business?.name)}</span>
+      {business?.name && (
+        <div className="avatar placeholder">
+          <div className="bg-neutral-focus text-neutral-content rounded-full w-20">
+            <span>{generateInitials(business?.name)}</span>
+          </div>
         </div>
-      </div>
+      )}
+
       <h3 className="card-title">{business?.name}</h3>
       <p>{business?.description}</p>
       <div className="space-y-2">

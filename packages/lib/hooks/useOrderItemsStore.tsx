@@ -84,7 +84,7 @@ export const useOrderItemsStore = create<OrderItemsStore>((set) => ({
     }),
   products: [],
   setProducts: (products: any) => {
-    const mappedProducts = products?.map((product) => ({
+    const mappedProducts = products?.map((product: any) => ({
       ...product,
       isInCart: false,
     }));
