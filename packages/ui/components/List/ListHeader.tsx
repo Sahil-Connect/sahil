@@ -4,7 +4,7 @@ import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
 type ListHeaderProps = {
   title?: string;
-  size?: number;
+  size?: number | null;
   sizeLabel?: string;
   children: React.ReactNode;
 };
@@ -82,6 +82,7 @@ export const ListSort = <T,>({
     <select
       onChange={onChange}
       className="select select-bordered select-sm max-w-xs"
+      title="select"
     >
       <option disabled value="">
         {defaultValue || "Sort"}

@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
@@ -12,6 +13,7 @@ import {
   HiOutlineBuildingOffice,
   HiOutlineMapPin,
 } from "react-icons/hi2";
+import { StepDirection } from "ui/components/MultiStepForm";
 
 const deliveryDetailsSchema = z.object({
   contactName: z.string().optional(),
@@ -25,7 +27,13 @@ const deliveryDetailsSchema = z.object({
 
 type FormData = z.infer<typeof deliveryDetailsSchema>;
 
-export const DeliveryDetails = ({ navigateToNextStep }) => {
+type DeliveryDetailsProps = {
+  navigateToNextStep: (step: string) => void;
+};
+
+export const DeliveryDetails: FC<DeliveryDetailsProps> = ({
+  navigateToNextStep,
+}) => {
   const updateStepFormData = useOrderFormStore(
     (state) => state.updateStepFormData
   );

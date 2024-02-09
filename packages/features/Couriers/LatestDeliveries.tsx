@@ -1,9 +1,14 @@
+import { FC } from "react";
 import { useFetchLatestDeliveries } from "@sahil/lib/hooks/couriers";
 import { DeliveryOverviewCard } from "./DeliveryOverviewCard";
 import { JoinGrid } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 
-export const LatestDeliveries = ({ courierId }) => {
+type Props = {
+  courierId: string;
+};
+
+export const LatestDeliveries: FC<Props> = ({ courierId }) => {
   const {
     data: deliveries,
     error,
@@ -37,9 +42,10 @@ export const LatestDeliveries = ({ courierId }) => {
         </div>
       </div>
       <div className="flex flex-wrap gap-2">
-        {deliveries.map((delivery) => (
-          <DeliveryOverviewCard key={delivery.id} delivery={delivery} />
-        ))}
+        {deliveries &&
+          deliveries.map((delivery) => (
+            <DeliveryOverviewCard key={delivery.id} delivery={delivery} />
+          ))}
       </div>
     </section>
   );

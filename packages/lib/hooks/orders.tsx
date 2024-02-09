@@ -35,7 +35,7 @@ export const useFetchOrderByPK = (id: string) => {
   return { error, data: data?.orders_by_pk, loading };
 };
 
-export const useFetchOrderDeliveriesByPK = (id) => {
+export const useFetchOrderDeliveriesByPK = (id: string) => {
   const { error, data, loading } = useQuery(FETCH_ORDER_DELIVERIES, {
     variables: {
       orderId: id,

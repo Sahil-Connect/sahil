@@ -2,14 +2,7 @@ import Link from "next/link";
 import { useFetchBusinessOrders } from "@sahil/lib/hooks/businesses";
 import { useRouter } from "next/router";
 import { formatDateTime } from "@sahil/lib/dates";
-import {
-  Card,
-  JoinGrid,
-  List,
-  ListHeader,
-  ListErrorState,
-  ListPagination,
-} from "ui";
+import { Card, List, ListHeader, ListErrorState, ListPagination } from "ui";
 import {
   HiOutlineCalendarDays,
   HiOutlineMapPin,
@@ -77,7 +70,8 @@ export const BusinessOrderHistory = () => {
   );
 };
 
-const OrderSummary = ({ order }) => {
+const OrderSummary = ({ order }: any) => {
+  // @ts-ignore
   const statusStyle = orderStyles[order.status] || "default";
   return (
     <Card className="bg-base-100 h-full">

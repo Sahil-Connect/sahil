@@ -17,7 +17,11 @@ import {
 } from "react-icons/hi2";
 import { usePlaceBusinessOrder } from "@sahil/lib/hooks/orders";
 
-const ProductSummary = ({ product }) => {
+type Props = {
+  product: Products;
+};
+
+const ProductSummary: FC<Props> = ({ product }) => {
   return (
     <>
       <div className="flex justify-between gap-2 items-center">

@@ -11,14 +11,14 @@ import {
 type NavbarLink = {
   name: string;
   href: string;
-  icon?: IconType;
+  icon: IconType;
 };
 
 export type NavbarProps = {
   links: NavbarLink[];
   logo?: any;
   header?: string;
-  onSignOut: () => void;
+  onSignOut?: () => void;
 };
 
 export const Navbar: FC<NavbarProps> = ({

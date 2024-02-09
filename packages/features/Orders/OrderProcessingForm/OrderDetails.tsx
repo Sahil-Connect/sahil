@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
@@ -14,7 +15,11 @@ const orderDetailsSchema = z.object({
 
 type FormData = z.infer<typeof orderDetailsSchema>;
 
-export const OrderDetails = ({ navigateToNextStep }) => {
+type OrderDetailsProps = {
+  navigateToNextStep: (step: string) => void;
+};
+
+export const OrderDetails: FC<OrderDetailsProps> = ({ navigateToNextStep }) => {
   const { goToStep, updateStepFormData, formData, setCurrentClient } =
     useOrderFormStore((state) => state);
 
@@ -32,9 +37,12 @@ export const OrderDetails = ({ navigateToNextStep }) => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = orderDetailsSchema.parse(data);
-    const client = businesses.find((business) => business.id === data.clientId);
-    updateStepFormData(validatedInput);
+    const client = businesses?.find(
+      (business) => business.id === data.clientId
+    );
+    // @ts-ignore
     setCurrentClient(client);
+    updateStepFormData(validatedInput);
     navigateToNextStep("product_selection");
   };
 
@@ -42,11 +50,7 @@ export const OrderDetails = ({ navigateToNextStep }) => {
     router.push("/orders");
   };
 
-  const {
-    data: businesses,
-    loading: businessLoading,
-    error: businessesError,
-  } = useFetchBusinesses();
+  const { data: businesses, loading, error } = useFetchBusinesses();
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <Card title="Client Information" titleSize="sm">

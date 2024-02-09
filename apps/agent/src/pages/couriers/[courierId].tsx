@@ -32,7 +32,7 @@ export default function CourierPage() {
         <div className="divider divider-horizontal"></div>
         <div className="space-y-4 grow">
           <CourierStats />
-          <LatestDeliveries courierId={courierId} />
+          <LatestDeliveries courierId={courierId as string} />
           <VehicleInfo />
           <ZoneInformation />
         </div>

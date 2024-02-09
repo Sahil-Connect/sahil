@@ -2,18 +2,6 @@ import { SupplierOverviewCard } from "./SupplierOverviewCard";
 import { useFetchSuppliers } from "@sahil/lib/hooks/suppliers";
 import { List, ListHeader } from "ui";
 
-export type SahilSupplier = {
-  id: string;
-  name: string;
-  phoneNumber: string;
-  streetAddress: string;
-  contactName: string;
-  zone: string;
-  categories: Array<{
-    category_name: string;
-  }>;
-};
-
 export const ListSuppliers = () => {
   const {
     data: suppliers,
@@ -36,7 +24,8 @@ export const ListSuppliers = () => {
         error={error}
         loading={loading}
         cols={4}
-        renderItem={(supplier: SahilSupplier) => (
+        renderItem={(supplier) => (
+          // @ts-ignore
           <SupplierOverviewCard key={supplier.id} supplier={supplier} />
         )}
       />

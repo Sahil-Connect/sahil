@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
@@ -18,7 +19,13 @@ const productSelectionSchema = z.object({
 
 type FormData = z.infer<typeof productSelectionSchema>;
 
-export const ProductSelection = ({ navigateToNextStep }) => {
+type ProductSelectionProps = {
+  navigateToNextStep: (step: string) => void;
+};
+
+export const ProductSelection: FC<ProductSelectionProps> = ({
+  navigateToNextStep,
+}) => {
   const { client, formData, goToStep, updateStepFormData } = useOrderFormStore(
     (state) => state
   );

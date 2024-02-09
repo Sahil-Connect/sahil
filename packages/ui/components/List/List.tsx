@@ -5,7 +5,7 @@ import type { ApolloError } from "@apollo/client";
 import { ListEmptyState } from "./ListEmptyState";
 
 type ListProps<T> = {
-  data?: T[];
+  data?: T[] | null;
   error?: ApolloError;
   loading?: boolean;
   renderItem: (item: T) => JSX.Element;

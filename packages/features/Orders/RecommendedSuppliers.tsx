@@ -1,6 +1,8 @@
+import { FC } from "react";
 import { HiOutlineTruck, HiXMark } from "react-icons/hi2";
 import { useFetchSuppliers } from "@sahil/lib/hooks/suppliers";
 import { Card } from "ui";
+import { Suppliers } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const RecommendedSuppliers = () => {
   const { data: suppliers, error, loading } = useFetchSuppliers();
@@ -24,13 +26,15 @@ export const RecommendedSuppliers = () => {
           <div className="flex gap-2 items-center">
             <h3 className="text-xl">
               Recommended Suppliers{" "}
-              <span className="text-sm">{suppliers.length} suppliers</span>
+              <span className="text-sm">{suppliers?.length} suppliers</span>
             </h3>
           </div>
           <div className="flex flex-wrap gap-2">
-            {suppliers.map((supplier) => (
-              <SupplierSummary key={supplier.id} supplier={supplier} />
-            ))}
+            {suppliers &&
+              suppliers.map((supplier) => (
+                // @ts-ignore
+                <SupplierSummary key={supplier.id} supplier={supplier} />
+              ))}
           </div>
         </div>
       </div>
@@ -38,10 +42,14 @@ export const RecommendedSuppliers = () => {
   );
 };
 
-export const SupplierSummary = ({ supplier }) => {
+type SupplierSummaryProps = {
+  supplier?: Suppliers;
+};
+
+export const SupplierSummary: FC<SupplierSummaryProps> = ({ supplier }) => {
   return (
     <div className="badge badge-md badge-outline gap-2">
-      <HiOutlineTruck /> {supplier.name}
+      <HiOutlineTruck /> {supplier?.name}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { FC } from "react";
 import Link from "next/link";
 import { formatDateTime } from "@sahil/lib/dates";
 import { Card, List } from "ui";
@@ -8,6 +9,7 @@ import {
   HiOutlineFlag,
   HiOutlineRocketLaunch,
 } from "react-icons/hi2";
+import { Orders } from "@sahil/lib/graphql/__generated__/graphql";
 
 enum OrderStatus {
   Cancelled = "Cancelled",
@@ -23,7 +25,13 @@ const orderStyles: Record<OrderStatus, string> = {
   [OrderStatus.Enroute]: "accent",
 };
 
-export const SupplierOrderHistory = ({ supplierId }) => {
+type SupplierOrderHistoryProps = {
+  supplierId: string;
+};
+
+export const SupplierOrderHistory: FC<SupplierOrderHistoryProps> = ({
+  supplierId,
+}) => {
   const {
     data: orders,
     error,
@@ -48,7 +56,12 @@ export const SupplierOrderHistory = ({ supplierId }) => {
   );
 };
 
-const OrderSummary = ({ order }) => {
+type OrderSummaryProps = {
+  order: Orders;
+};
+
+const OrderSummary: FC<OrderSummaryProps> = ({ order }) => {
+  // @ts-ignore
   const statusStyle = orderStyles[order.status];
   return (
     <Card className="bg-base-100 h-full grow max-w-lg">
