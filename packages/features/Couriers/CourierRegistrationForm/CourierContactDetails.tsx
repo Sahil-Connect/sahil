@@ -7,16 +7,8 @@ import { Input } from "ui";
 import { useRouter } from "next/router";
 
 const courierContactSchema = z.object({
-  email: z
-    .string()
-    .email({ message: "Invalid email format" })
-    .nonempty({ message: "Email is required" })
-    .trim(),
-  phoneNumber: z
-    .string()
-    .regex(/^\d{10}$/i, { message: "Invalid phone number format" })
-    .nonempty({ message: "Phone number is required" })
-    .trim(),
+  email: z.string().email({ message: "Invalid email format" }).trim(),
+  phoneNumber: z.string().trim(),
 });
 
 type FormData = z.infer<typeof courierContactSchema>;

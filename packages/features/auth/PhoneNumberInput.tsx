@@ -18,7 +18,6 @@ export const PhoneNumberInput = () => {
           <select
             className="select select-sm select-bordered w-full max-w-lg"
             title="country"
-            placeholder="country"
           >
             <option>RW</option>
             <option>SSD</option>

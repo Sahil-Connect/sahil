@@ -26,7 +26,7 @@ export default function SupplierPage() {
           <SupplierProducts
             productsCount={supplier?.products_aggregate.aggregate.count}
           />
-          <SupplierOrderHistory supplierId={supplierId} />
+          <SupplierOrderHistory supplierId={supplierId as string} />
         </div>
       </div>
     </div>

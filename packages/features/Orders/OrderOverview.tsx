@@ -1,9 +1,15 @@
+import { FC } from "react";
+import { Orders } from "@sahil/lib/graphql/__generated__/graphql";
 import {
   HiOutlinePrinter,
   HiOutlineArrowPathRoundedSquare,
 } from "react-icons/hi2";
 
-export const OrderOverview = ({ order }) => {
+type Props = {
+  order: Orders;
+};
+
+export const OrderOverview: FC<Props> = ({ order }) => {
   return (
     <>
       <div className="flex justify-between items-center">

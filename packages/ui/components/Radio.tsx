@@ -1,6 +1,21 @@
+import { FC } from "react";
 import { Icon } from "./Icon";
 
-export const Radio = ({ label, icon, name, register, errors }) => {
+type RadioProps = {
+  label: string;
+  icon: any;
+  name: string;
+  register: any;
+  errors: any;
+};
+
+export const Radio: FC<RadioProps> = ({
+  label,
+  icon,
+  name,
+  register,
+  errors,
+}) => {
   return (
     <div className="form-control">
       <label className="label cursor-pointer">

@@ -117,6 +117,7 @@ export default function CheckoutPage() {
     error: initError,
   } = useInitBusinessOrder();
   const { orderItems } = useOrderItemsStore((state) => state);
+  // @ts-ignore
   const { totalItems, totalPrice } = calculateTotal(orderItems);
   const [actionId, setActionId] = useState<string>();
   const router = useRouter();

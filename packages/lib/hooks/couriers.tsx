@@ -34,7 +34,10 @@ export const useFetchCourierByPK = (id: string) => {
 };
 
 export const useFetchLatestDeliveries = (courierId: string) => {
-  const { error, data, loading } = useQuery(FETCH_COURIERS);
+  const { error, data, loading } = useQuery<
+    GetCouriersQuery,
+    GetCouriersQueryVariables
+  >(FETCH_COURIERS);
   return { error, data: data?.couriers, loading };
 };
 

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { Business } from "../graphql/__generated__/graphql";
 export const INITIAL_STEP = "order_details";
 export const steps = [
   "order_details",
@@ -14,10 +15,8 @@ import {
   StepDirection,
 } from "ui/components/MultiStepForm";
 
-export type SahilBusinessPartner = Record<string, any>;
-
 type OrderFormStore = {
-  client: SahilBusinessPartner;
+  client: Partial<Business> | undefined;
   currentStep: (typeof steps)[number];
   steps: typeof steps;
   goToStep: (direction: StepDirection) => void;
@@ -27,7 +26,7 @@ type OrderFormStore = {
   orderItems: OrderItem[];
   setOrderItems: (items: OrderItem[]) => void;
 
-  setCurrentClient: (client: SahilBusinessPartner) => void;
+  setCurrentClient: (client: Business) => void;
 };
 
 export const useOrderFormStore = create<OrderFormStore>((set) => ({

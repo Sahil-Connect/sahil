@@ -28,7 +28,7 @@ const links = [
 
 export const Navbar = () => {
   return (
-    <header className="border-b border-b-gray-300 w-full h-16 lg:h-20 bg-zinc-50">
+    <header className="w-full h-16 lg:h-20 bg-zinc-50">
       <GridContainer className="px-2">
         <nav className="navbar p-0 lg:h-20">
           <div className="navbar-start">
@@ -81,7 +81,7 @@ export const Navbar = () => {
               sahil
             </Link>
           </div>
-          <div className="navbar-center hidden lg:flex">
+          <div className="navbar-center hidden lg:flex border border-gray-50 rounded-full shadow">
             <ul className="menu menu-horizontal px-1 lg:gap-x-6">
               {links.map(({ name, href }) => {
                 return (

@@ -42,8 +42,8 @@ Sahil facilitates the establishment of a robust supply chain by enabling busines
 1. Product Availability and User Specifications: The app uses the user's order details, including the quantity and type of items, to search for suppliers that match the requested products.
 2. Priority for Suppliers with Full Order Fulfillment: The algorithm gives priority to suppliers who can fulfill the entire order, ensuring maximum efficiency in the supply chain.
 3. Two-step Matching Process:
-    - First Priority: Suppliers who can fulfill the entire order are given the highest priority.
-    - Second Priority: If no single supplier can fulfill the entire order, the algorithm considers suppliers who can provide partial quantities.
+   - First Priority: Suppliers who can fulfill the entire order are given the highest priority.
+   - Second Priority: If no single supplier can fulfill the entire order, the algorithm considers suppliers who can provide partial quantities.
 
 ### Implementation Details
 

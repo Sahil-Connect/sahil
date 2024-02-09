@@ -5,8 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "@/Layout/layout";
 import { createApolloClient } from "@sahil/lib/graphql";
 
-const graphqlUri = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT;
-const ws = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_WS;
+const graphqlUri = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT as string;
+const ws = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_WS as string;
 
 const httpOptions = {
   headers: {
@@ -18,7 +18,7 @@ const httpOptions = {
 const client = createApolloClient({
   uri: graphqlUri,
   httpOptions,
-  ws: ws as string,
+  ws: ws,
 });
 
 export default function App({

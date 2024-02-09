@@ -1,14 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@sahil/lib', 'ui', '@sahil/configs', "@sahil/features"],
-  output: "standalone",
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  transpilePackages: ['@sahil/lib', 'ui', '@sahil/configs', "@sahil/features", "tsconfig", "eslint-config-custom"],
   images: {
     remotePatterns: [
       {

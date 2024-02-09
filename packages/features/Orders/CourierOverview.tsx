@@ -1,13 +1,18 @@
-import { useFetchCourierByPK } from "@sahil/lib/hooks/couriers";
+import { FC } from "react";
+import { Orders } from "@sahil/lib/graphql/__generated__/graphql";
 import { useFetchOrderDeliveriesByPK } from "@sahil/lib/hooks/orders";
 import { Avatar, Card } from "ui";
 import { HiOutlinePhone, HiOutlineStar } from "react-icons/hi2";
 
-export const CourierOverview = ({ order }) => {
+type Props = {
+  order: Orders;
+};
+
+export const CourierOverview: FC<Props> = ({ order }) => {
   const {
-    error: deliveryerror,
+    error,
     data: delivery,
-    loading: deliveryloading,
+    loading,
   } = useFetchOrderDeliveriesByPK(order.id);
 
   return (

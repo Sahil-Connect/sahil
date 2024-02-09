@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { useCourierFormStore } from "@sahil/lib/hooks/useCourierFormStore";
 import { JoinGrid } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
+import { StepDirection } from "ui/components/MultiStepForm";
 
 export const CourierFormStepPaginator = () => {
   const { steps, goToStep, currentStep } = useCourierFormStore(
@@ -10,7 +11,7 @@ export const CourierFormStepPaginator = () => {
   const router = useRouter();
   const currentIndex = steps.indexOf(currentStep);
 
-  const onStepChange = (direction) => {
+  const onStepChange = (direction: StepDirection) => {
     goToStep(direction);
     router.push(
       `/couriers/register/${

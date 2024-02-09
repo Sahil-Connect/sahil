@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
@@ -17,7 +18,13 @@ const paymentDetailsSchema = z.object({
 
 type FormData = z.infer<typeof paymentDetailsSchema>;
 
-export const PaymentDetails = ({ navigateToNextStep }) => {
+type PaymentDetailsProps = {
+  navigateToNextStep: (step: string) => void;
+};
+
+export const PaymentDetails: FC<PaymentDetailsProps> = ({
+  navigateToNextStep,
+}) => {
   const updateStepFormData = useOrderFormStore(
     (state) => state.updateStepFormData
   );

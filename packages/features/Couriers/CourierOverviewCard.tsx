@@ -23,7 +23,7 @@ type Props = {
 export const CourierOverviewCard: FC<Props> = ({ courier }) => {
   return (
     <Card className="w-full">
-      <Avatar src={courier.avatar} alt={courier.name} />
+      {courier?.avatar && <Avatar src={courier?.avatar} alt={courier.name} />}
       <Link href={`/couriers/${courier.id}`}>
         <h3 className="card-title text-lg font-semibold">{courier.name}</h3>
       </Link>

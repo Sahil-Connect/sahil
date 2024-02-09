@@ -7,24 +7,15 @@ import {
 } from "react-icons/hi2";
 import { formatCategoryName, generateInitials } from "@sahil/lib/strings";
 import { Card } from "ui";
+import { Suppliers } from "@sahil/lib/graphql/__generated__/graphql";
 
-export type SahilSupplier = {
-  id: string;
-  name: string;
-  phoneNumber: string;
-  streetAddress: string;
-  contactName: string;
-  zone: string;
-  categories: Array<{
-    category_name: string;
-  }>;
-};
+type Supplier = Suppliers & {};
 
 type Props = {
-  supplier: SahilSupplier;
+  supplier: Supplier;
 };
 
-export const SupplierOverviewCard = ({ supplier }) => {
+export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   return (
     <Card>
       <div className="flex justify-between text-4xl">

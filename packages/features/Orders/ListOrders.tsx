@@ -24,6 +24,7 @@ export const ListOrders = () => {
         loading={loading}
         cols={4}
         renderItem={(order) => (
+          // @ts-ignore
           <OrderOverviewCard key={order.id} order={order} />
         )}
       />

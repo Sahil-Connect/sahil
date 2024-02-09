@@ -12,6 +12,9 @@ import { BUSINESS_VALIDATED } from "@sahil/lib/graphql/subscriptions/businesses"
 
 // graphql types
 import {
+  GetBusinessesQuery,
+  GetBusinessesQueryVariables,
+  GetBusinessesDocument,
   GetBusinessByPkQuery,
   GetBusinessByPkQueryVariables,
   GetBusinessOrdersQuery,
@@ -31,7 +34,10 @@ export const useFetchBusinessByPK = (id: string) => {
 };
 
 export const useFetchBusinesses = () => {
-  const { error, data, loading } = useQuery(FETCH_BUSINESSES);
+  const { error, data, loading } = useQuery<
+    GetBusinessesQuery,
+    GetBusinessesQueryVariables
+  >(FETCH_BUSINESSES);
   return {
     error,
     data: data?.business,

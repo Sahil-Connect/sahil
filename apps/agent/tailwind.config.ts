@@ -21,6 +21,7 @@ const extendedConfig: Config = {
       ...baseConfig.theme?.extend,
     },
   },
+  // @ts-expect-error
   plugins: [...baseConfig.plugins, require("daisyui")],
   daisyui: {
     themes: [
