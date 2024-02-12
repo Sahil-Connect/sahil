@@ -7,12 +7,15 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/Dockerfile.website
-    image: sahil-website-test
-    env_file:
-      - .env
+    image: sahil-website
     restart: always
+    #volumes:
+    #  - sahil_websitedata:/app/apps/website
+    #  - /app/node_modules
     ports:
-      - '3000:3000'
+      - 3001:3000
+    env_file:
+      - path: ./apps/website/.env
 
   # API
   sahil-api:
@@ -22,15 +25,14 @@ services:
       dockerfile: ./infra/docker/Dockerfile.api
     image: sahil-api
     restart: always
+    # volumes:
+    #   - sahil_apidata:/app
+    #   - /app/node_modules
     ports:
-      - '8000:8000'
-    # env_file:
-    #   - path: ./apps/api/.env
-    #   #- path: ./apps/api/.env.production
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - 8000:8000
+    env_file:
+      - path: ./apps/api/.env
+    # - path: ./apps/api/.env.production
 
   # AGENT
   sahil-agent:
@@ -40,8 +42,14 @@ services:
       dockerfile: ./infra/docker/Dockerfile.agent
     image: sahil-agent
     restart: always
+    # volumes:
+    #   - sahil_agentdata:/app
+    #   - /app/node_modules
     ports:
-      - '3000:3000'
+      - 3002:3000
+    env_file:
+      - path: ./apps/agent/.env
+    # - path: ./apps/client/.env.production
     # environment:
     #   - POSTGRES_USER=${POSTGRES_USER}
     #   - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -55,15 +63,18 @@ services:
       dockerfile: ./infra/docker/Dockerfile.client
     image: sahil-client
     restart: always
+    # volumes:
+    #   - sahil_clientdata:/app
+    #   - /app/node_modules
     ports:
-      - '3002:3002'
-    # env_file:
-    #   - path: .env
-      #- path: ./apps/client/.env.production
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - 3003:3000
+    env_file:
+      - path: ./apps/client/.env
+    # - path: ./apps/client/.env.production
+    # environment:
+    # - POSTGRES_USER=${POSTGRES_USER}
+    #  - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    #  - POSTGRES_DATABASE=${POSTGRES_DATABASE}
 
   #### LOCAL DEV ENVIRONMENTS ####
 
