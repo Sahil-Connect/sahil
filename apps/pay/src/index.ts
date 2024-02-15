@@ -135,7 +135,7 @@ type Mutation {
 
 class MomoAuthAPI extends RESTDataSource {
   override baseURL = "https://sandbox.momodeveloper.mtn.com/";
-  private token: string;
+  private token!: string;
 
   constructor(options: {
     token?: string;
@@ -147,7 +147,7 @@ class MomoAuthAPI extends RESTDataSource {
 
   override willSendRequest(_path: string, request: AugmentedRequest) {
     request.headers["Authorisation"] = `Basic ${this.token}`;
-    request.headers["Ocp-Apim-Subscription-Key"] = subscriptionKey;
+    request.headers["Ocp-Apim-Subscription-Key"] = subscriptionKey!;
   }
 
   async createAcccessToken() {
@@ -159,7 +159,7 @@ class MomoAPI extends RESTDataSource {
   override baseURL = "https://sandbox.momodeveloper.mtn.com/";
   private token: string;
 
-  constructor(options) {
+  constructor(options: any) {
     super(options);
     const { token, cache, key } = options;
     this.token = token;
@@ -167,11 +167,11 @@ class MomoAPI extends RESTDataSource {
 
   override willSendRequest(_path: string, request: AugmentedRequest) {
     request.headers["Authorization"] = `Bearer ${this.token}`;
-    request.headers["Ocp-Apim-Subscription-Key"] = subscriptionKey;
+    request.headers["Ocp-Apim-Subscription-Key"] = subscriptionKey!;
     request.headers["X-Target-Environment"] = "sandbox";
   }
 
-  async requestToPay(body) {
+  async requestToPay(body: any) {
     try {
       const resp = await this.post(`collection/v1_0/requesttopay`, {
         body: { ...body?.object },
@@ -294,8 +294,7 @@ const server = new ApolloServer({
 
 await server.start();
 
-async function validateAccessToken(req, res, next) {
-  console.log("yerrr");
+async function validateAccessToken(req: any, res: any, next: any) {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {
@@ -316,9 +315,7 @@ async function validateAccessToken(req, res, next) {
       }
     );
     req.headers.access_token = response.data.access_token;
-    //console.log(response.headers);
   }
-  // req.locals.access_tokn = "yerrrrr";
 
   // No token in the request, generate a new access token
   // const newToken = dataSources.momoAPI.createAcccessToken();
