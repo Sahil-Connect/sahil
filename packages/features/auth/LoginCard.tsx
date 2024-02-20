@@ -14,6 +14,7 @@ const authSchema = z.object({
 type FormData = z.infer<typeof authSchema>;
 
 export const LoginCard = ({ providers = [] }) => {
+  console.log(providers);
   const {
     register,
     handleSubmit,

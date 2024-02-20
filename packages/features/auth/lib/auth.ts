@@ -1,17 +1,42 @@
-import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import FacebookProvider from "next-auth/providers/facebook";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GitHub from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import { generateJWT, generateJWTClaim, decodeJWT } from "./generateJWT";
 import jwt from "jsonwebtoken";
+import { HasuraAdapter } from "next-auth-hasura-adapter";
 
 const providers = [
-  FacebookProvider({
-    clientId: process.env.NEXT_PUBLIC_GITHUB_ID || "",
-    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET || "",
+  // // @ts-ignore
+  // CredentialsProvider({
+  //   async authorize(credentials) {
+  //     console.log("we here!!");
+  //     console.log(credentials);
+  //     const authResponse = await fetch("http://localhost:8000/api/auth", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(credentials),
+  //     });
+
+  //     console.log(authResponse)
+
+  //     // if (!authResponse.ok) {
+  //     //   return null
+  //     // }
+
+  //     const user = await authResponse.json()
+
+  //     return user;
+  //   },
+  // }),
+  GitHub({
+    clientId: process.env.NEXT_PUBLIC_GITHUB_ID!,
+    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET!,
   }),
   GoogleProvider({
-    clientId: process.env.NEXT_PUBLIC_GITHUB_ID || "",
-    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET || "",
+    clientId: process.env.NEXT_PUBLIC_GITHUB_ID!,
+    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET!,
   }),
 ];
 
@@ -20,25 +45,15 @@ const jwtConfig = (options: any) => {
     // A secret to use for key generation (you should set this explicitly)
     secret: process.env.SECRET,
     encode: async ({ secret, token, maxAge }: any) => {
-      const claims = {
-        sub: token?.sub.toString(),
-        name: token?.name,
-        email: token?.email,
-        iat: Date.now() / 1000,
-        exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
-        "https://hasura.io/jwt/claims": {
-          "x-hasura-allowed-roles": ["user"],
-          "x-hasura-default-role": "user",
-          "x-hasura-role": "user",
-          "x-hasura-user-id": token.id,
-        },
-      };
+      const claims = generateJWTClaim(token);
 
-      const encodedToken = jwt.sign(claims, secret, { algorithm: "HS256" });
+      const encodedToken = generateJWT(claims, { 
+        secret
+      });
       return encodedToken;
     },
     decode: async ({ secret, token, maxAge }: any) => {
-      const decodedToken = jwt.verify(token, secret, { algorithms: ["HS256"] });
+      const decodedToken = decodeJWT(token, { secret })
       return decodedToken;
     },
   };
@@ -57,6 +72,10 @@ const authPagesConfig = () => {
 const initNextAuth = () => {
   return {
     providers,
+    adapter: HasuraAdapter({
+      endpoint: process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT!,
+      adminSecret: process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET!,
+    }),
     secret: process.env.SECRET,
     // jwt: jwtConfig,
     pages: authPagesConfig(),
@@ -75,11 +94,20 @@ const initNextAuth = () => {
       },
       // @ts-ignore
       async jwt({ token, user, profile, account, isNewUser }) {
+        console.log(generateJWTClaim);
         const isAuthenticated = user ? true : false;
         if (isAuthenticated) {
           token.id = user.id;
         }
-        return Promise.resolve(token);
+        return Promise.resolve({
+          ...token,
+          "https://hasura.io/jwt/claims": {
+            "x-hasura-allowed-roles": ["user"],
+            "x-hasura-default-role": "user",
+            "x-hasura-role": "user",
+            "x-hasura-user-id": token.id,
+          }
+        });
       },
       // @ts-ignore
       async signIn({ user, account, profile, email, credentials }) {

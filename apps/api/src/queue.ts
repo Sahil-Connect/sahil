@@ -1,7 +1,9 @@
 import { Queue } from "bullmq";
 import { connection } from "./lib/ioredis";
+import { redisHost, redisPort } from "./config";
 
 export enum Queues {
+  Auth = "Auth",
   Client = "Client",
   Event = "Event",
   Mail = "Mail",
@@ -11,8 +13,8 @@ export enum Queues {
 
 const queueConfig = {
   connection: {
-    host: "http://127.0.0.1",
-    port: 6379,
+    host: redisHost,
+    port: redisPort,
   },
 };
 
