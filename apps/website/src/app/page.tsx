@@ -4,6 +4,7 @@ import {
   About,
   Benefits,
   RegistrationRole,
+  Partners,
   Cta,
   Faqs,
 } from "../components/segments";
@@ -16,6 +17,7 @@ export default function Page() {
       <About />
       <Benefits />
       <RegistrationRole />
+      {/* <Partners /> */}
       <Cta />
       <Faqs />
     </main>

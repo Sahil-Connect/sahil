@@ -1,7 +1,10 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["ui", "@sahil/configs"],
-  output: "standalone"
+  output: "standalone",
+  images: {
+    domains: ['storage.googleapis.com']
+  }
 }
 
 module.exports = nextConfig
