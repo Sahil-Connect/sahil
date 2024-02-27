@@ -1,42 +1,40 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import GitHub from "next-auth/providers/github";
+import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 import { generateJWT, generateJWTClaim, decodeJWT } from "./generateJWT";
-import jwt from "jsonwebtoken";
-import { HasuraAdapter } from "next-auth-hasura-adapter";
 
 const providers = [
-  // // @ts-ignore
-  // CredentialsProvider({
-  //   async authorize(credentials) {
-  //     console.log("we here!!");
-  //     console.log(credentials);
-  //     const authResponse = await fetch("http://localhost:8000/api/auth", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(credentials),
-  //     });
+  // @ts-ignore
+  CredentialsProvider({
+    async authorize(credentials) {
+      console.log("we here!!");
+      console.log(credentials);
+      const authResponse = await fetch("http://localhost:8000/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      });
 
-  //     console.log(authResponse)
+      console.log(authResponse);
 
-  //     // if (!authResponse.ok) {
-  //     //   return null
-  //     // }
+      // if (!authResponse.ok) {
+      //   return null
+      // }
 
-  //     const user = await authResponse.json()
+      const user = await authResponse.json();
 
-  //     return user;
-  //   },
-  // }),
-  GitHub({
-    clientId: process.env.NEXT_PUBLIC_GITHUB_ID!,
-    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET!,
+      return user;
+    },
+  }),
+  FacebookProvider({
+    clientId: process.env.NEXT_PUBLIC_GITHUB_ID || "",
+    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET || "",
   }),
   GoogleProvider({
-    clientId: process.env.NEXT_PUBLIC_GOOGLE_ID!,
-    clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET!,
+    clientId: process.env.NEXT_PUBLIC_GITHUB_ID || "",
+    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET || "",
   }),
 ];
 
@@ -72,44 +70,29 @@ const authPagesConfig = () => {
 const initNextAuth = () => {
   return {
     providers,
-    adapter: HasuraAdapter({
-      endpoint: process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT!,
-      adminSecret: process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET!,
-    }),
     secret: process.env.SECRET,
-    jwt: jwtConfig,
+    // jwt: jwtConfig,
     pages: authPagesConfig(),
     callbacks: {
       // @ts-ignore
       async session({ session, token }) {
-        if (token) {
-          // @ts-ignore
-          const encodedToken = jwt.sign(token, process.env.SECRET, {
-            algorithm: "HS256",
-          });
-          // @ts-ignore
-          session.token = encodedToken;
-          // @ts-ignore
-          session.id = token.id;
-        }
+        // @ts-ignore
+        const encodedToken = jwt.sign(token, process.env.SECRET, {
+          algorithm: "HS256",
+        });
+        // @ts-ignore
+        session.token = encodedToken;
+        // @ts-ignore
+        session.id = token.id;
         return session;
       },
       // @ts-ignore
       async jwt({ token, user, profile, account, isNewUser }) {
-        console.log(generateJWTClaim);
         const isAuthenticated = user ? true : false;
         if (isAuthenticated) {
           token.id = user.id;
         }
-        return Promise.resolve({
-          ...token,
-          "https://hasura.io/jwt/claims": {
-            "x-hasura-allowed-roles": ["user"],
-            "x-hasura-default-role": "user",
-            "x-hasura-role": "user",
-            "x-hasura-user-id": token.id,
-          },
-        });
+        return Promise.resolve(token);
       },
       // @ts-ignore
       async signIn({ user, account, profile, email, credentials }) {

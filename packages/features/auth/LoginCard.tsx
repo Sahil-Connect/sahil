@@ -7,13 +7,14 @@ import { AuthProviders } from "./AuthProviders";
 import { signIn } from "next-auth/react";
 
 const authSchema = z.object({
-  email: z.string(),
+  email: z.string().email(),
   password: z.string(),
 });
 
 type FormData = z.infer<typeof authSchema>;
 
 export const LoginCard = ({ providers = [] }) => {
+  console.log(providers);
   const {
     register,
     handleSubmit,

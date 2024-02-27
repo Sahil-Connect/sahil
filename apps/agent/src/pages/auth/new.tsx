@@ -44,6 +44,8 @@ const OnboardingPage: NextPage = ({ providers }: any) => {
   };
 
   const { data: session } = useSession();
+
+  console.log(session);
   return (
     <div className="p-4">
       <h1 className="text-2xl">Welcome to Sahil</h1>

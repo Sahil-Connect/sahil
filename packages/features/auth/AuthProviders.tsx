@@ -2,6 +2,7 @@ import { FC } from "react";
 import { HiOutlineGiftTop } from "react-icons/hi2";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { signIn } from "next-auth/react";
 
 interface Provider {
   id: string;
@@ -21,7 +22,8 @@ enum Providers {
   GitHub = "Github",
 }
 
-export const AuthProviders: FC<Props> = ({ providers, signIn }) => {
+export const AuthProviders: FC<Props> = ({ providers }) => {
+  console.log(providers);
   return (
     <div>
       <div className="space-y-2">
@@ -33,7 +35,7 @@ export const AuthProviders: FC<Props> = ({ providers, signIn }) => {
                   <button
                     className="btn w-full"
                     onClick={() => {
-                      // signIn(provider?.id);
+                      signIn(provider?.id);
                     }}
                   >
                     {provider.name === "Google" ? <FaGoogle /> : <FaFacebook />}
