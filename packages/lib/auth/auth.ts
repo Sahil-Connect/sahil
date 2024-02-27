@@ -17,13 +17,13 @@ const providers = [
         body: JSON.stringify(credentials),
       });
 
-      console.log(authResponse)
+      console.log(authResponse);
 
       // if (!authResponse.ok) {
       //   return null
       // }
 
-      const user = await authResponse.json()
+      const user = await authResponse.json();
 
       return user;
     },
@@ -45,13 +45,13 @@ const jwtConfig = (options: any) => {
     encode: async ({ secret, token, maxAge }: any) => {
       const claims = generateJWTClaim(token);
 
-      const encodedToken = generateJWT(claims, { 
-        secret
+      const encodedToken = generateJWT(claims, {
+        secret,
       });
       return encodedToken;
     },
     decode: async ({ secret, token, maxAge }: any) => {
-      const decodedToken = decodeJWT(token, { secret })
+      const decodedToken = decodeJWT(token, { secret });
       return decodedToken;
     },
   };

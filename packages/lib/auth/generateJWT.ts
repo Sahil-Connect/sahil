@@ -5,7 +5,7 @@ import { TimeSpan } from "oslo";
 
 export const generateJWTClaim = (token = {}, user = {}) => {
   const claims = {
-// @ts-ignore
+    // @ts-ignore
     sub: token?.sub.toString(),
     // @ts-ignore
     name: token?.name,
@@ -39,5 +39,5 @@ export const generateJWT = async (payload, { secret }) => {
 // @ts-ignore
 export const decodeJWT = (token, { secret }) => {
   // @ts-ignore
-    return jwt.verify(token, secret, { algorithms: ["HS256"] });
-}
+  return jwt.verify(token, secret, { algorithms: ["HS256"] });
+};

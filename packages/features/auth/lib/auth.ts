@@ -35,8 +35,8 @@ const providers = [
     clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET!,
   }),
   GoogleProvider({
-    clientId: process.env.NEXT_PUBLIC_GITHUB_ID!,
-    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET!,
+    clientId: process.env.NEXT_PUBLIC_GOOGLE_ID!,
+    clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET!,
   }),
 ];
 
@@ -47,13 +47,13 @@ const jwtConfig = (options: any) => {
     encode: async ({ secret, token, maxAge }: any) => {
       const claims = generateJWTClaim(token);
 
-      const encodedToken = generateJWT(claims, { 
-        secret
+      const encodedToken = generateJWT(claims, {
+        secret,
       });
       return encodedToken;
     },
     decode: async ({ secret, token, maxAge }: any) => {
-      const decodedToken = decodeJWT(token, { secret })
+      const decodedToken = decodeJWT(token, { secret });
       return decodedToken;
     },
   };
@@ -77,19 +77,21 @@ const initNextAuth = () => {
       adminSecret: process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET!,
     }),
     secret: process.env.SECRET,
-    // jwt: jwtConfig,
+    jwt: jwtConfig,
     pages: authPagesConfig(),
     callbacks: {
       // @ts-ignore
       async session({ session, token }) {
-        // @ts-ignore
-        const encodedToken = jwt.sign(token, process.env.SECRET, {
-          algorithm: "HS256",
-        });
-        // @ts-ignore
-        session.token = encodedToken;
-        // @ts-ignore
-        session.id = token.id;
+        if (token) {
+          // @ts-ignore
+          const encodedToken = jwt.sign(token, process.env.SECRET, {
+            algorithm: "HS256",
+          });
+          // @ts-ignore
+          session.token = encodedToken;
+          // @ts-ignore
+          session.id = token.id;
+        }
         return session;
       },
       // @ts-ignore
@@ -106,7 +108,7 @@ const initNextAuth = () => {
             "x-hasura-default-role": "user",
             "x-hasura-role": "user",
             "x-hasura-user-id": token.id,
-          }
+          },
         });
       },
       // @ts-ignore

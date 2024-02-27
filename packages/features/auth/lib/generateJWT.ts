@@ -31,5 +31,5 @@ export const generateJWT = async (payload, { secret }) => {
 };
 
 export const decodeJWT = (token, { secret }) => {
-    return jwt.verify(token, secret, { algorithms: ["HS256"] });
-}
+  return jwt.verify(token, secret, { algorithms: ["HS256"] });
+};

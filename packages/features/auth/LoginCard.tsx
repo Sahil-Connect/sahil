@@ -7,7 +7,7 @@ import { AuthProviders } from "./AuthProviders";
 import { signIn } from "next-auth/react";
 
 const authSchema = z.object({
-  email: z.string(),
+  email: z.string().email(),
   password: z.string(),
 });
 
