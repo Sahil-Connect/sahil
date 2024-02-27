@@ -1,8 +1,9 @@
 import { HMAC } from "oslo/crypto";
 import { createJWT, validateJWT, parseJWT } from "oslo/jwt";
 import { TimeSpan } from "oslo";
+import jwt from "jsonwebtoken";
 
-export const generateJWTClaim = (token) => {
+export const generateJWTClaim = (token: any) => {
   const claims = {
     sub: token?.sub.toString(),
     name: token?.name,
@@ -21,8 +22,23 @@ export const generateJWTClaim = (token) => {
 
 // const secret = await new HMAC("SHA-256").generateKey();
 
-export const generateJWT = async (payload, { secret }) => {
-  const jwt = await createJWT("HS256", secret, payload, {
+export const generateJWT = async (
+  payload:
+    | Record<any, any>
+    | {
+        headers?: Record<any, any> | undefined;
+        expiresIn?: TimeSpan | undefined;
+        issuer?: string | undefined;
+        subject?: string | undefined;
+        audiences?: string[] | undefined;
+        notBefore?: Date | undefined;
+        includeIssuedTimestamp?: boolean | undefined;
+        jwtId?: string | undefined;
+      }
+    | undefined,
+  { secret }: { secret: any }
+) => {
+  const jwt = await createJWT("HS256", secret, payload!, {
     expiresIn: new TimeSpan(30, "d"),
     includeIssuedTimestamp: true,
     ...payload,
@@ -30,6 +46,6 @@ export const generateJWT = async (payload, { secret }) => {
   return jwt;
 };
 
-export const decodeJWT = (token, { secret }) => {
+export const decodeJWT = (token: any, { secret }: { secret: any }) => {
   return jwt.verify(token, secret, { algorithms: ["HS256"] });
 };
