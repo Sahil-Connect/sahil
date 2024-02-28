@@ -1,9 +1,9 @@
-import GitHub from 'next-auth/providers/github';
-import GoogleProvider from 'next-auth/providers/google';
-import { generateJWT, decodeJWT } from './generateJWT';
-import { HasuraAdapter } from 'next-auth-hasura-adapter';
-import { AuthOptions } from 'next-auth';
-import { JWT } from 'next-auth/jwt';
+import GitHub from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+import { generateJWT, decodeJWT } from "./generateJWT";
+import { HasuraAdapter } from "next-auth-hasura-adapter";
+import { AuthOptions } from "next-auth";
+import { JWT } from "next-auth/jwt";
 
 const providers = [
   GitHub({
@@ -37,11 +37,11 @@ const jwtConfig = () => {
 
 const authPagesConfig = () => {
   return {
-    signIn: '/auth/signin', // Displays signin buttons
-    signOut: '/auth/signout', // Displays form with sign out button
-    error: '/auth/error', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/verify-request', // Used for check email page
-    newUser: '/auth/new', // If set, new users will be directed here on first sign in
+    signIn: "/auth/signin", // Displays signin buttons
+    signOut: "/auth/signout", // Displays form with sign out button
+    error: "/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: "/auth/verify-request", // Used for check email page
+    newUser: "/auth/new", // If set, new users will be directed here on first sign in
   };
 };
 
@@ -56,12 +56,12 @@ const initNextAuth = (): AuthOptions => {
     jwt: jwtConfig(),
     pages: authPagesConfig(),
     session: {
-      strategy: 'jwt',
+      strategy: "jwt",
     },
     callbacks: {
       async session({ session, token }) {
-        console.log('token from callback', token);
-        console.log('token from callback', token);
+        console.log("token from callback", token);
+        console.log("token from callback", token);
         if (session?.user) {
           session.user.id = token.sub!;
         }
@@ -70,11 +70,11 @@ const initNextAuth = (): AuthOptions => {
       async jwt({ token }) {
         return {
           ...token,
-          'https://hasura.io/jwt/claims': {
-            'x-hasura-allowed-roles': ['user'],
-            'x-hasura-default-role': 'user',
-            'x-hasura-role': 'user',
-            'x-hasura-user-id': token.sub!,
+          "https://hasura.io/jwt/claims": {
+            "x-hasura-allowed-roles": ["user"],
+            "x-hasura-default-role": "user",
+            "x-hasura-role": "user",
+            "x-hasura-user-id": token.sub!,
           },
         };
       },

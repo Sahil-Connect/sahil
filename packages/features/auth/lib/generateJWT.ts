@@ -1,8 +1,8 @@
-import { HMAC } from 'oslo/crypto';
-import { createJWT, validateJWT, parseJWT } from 'oslo/jwt';
-import { TimeSpan } from 'oslo';
-import jwt from 'jsonwebtoken';
-import { JWT } from 'next-auth/jwt';
+import { HMAC } from "oslo/crypto";
+import { createJWT, validateJWT, parseJWT } from "oslo/jwt";
+import { TimeSpan } from "oslo";
+import jwt from "jsonwebtoken";
+import { JWT } from "next-auth/jwt";
 
 export const generateJWTClaim = (token: JWT) => {
   const claims = {
@@ -11,11 +11,11 @@ export const generateJWTClaim = (token: JWT) => {
     email: token?.email,
     iat: Date.now() / 1000,
     exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
-    'https://hasura.io/jwt/claims': {
-      'x-hasura-allowed-roles': ['user'],
-      'x-hasura-default-role': 'user',
-      'x-hasura-role': 'user',
-      'x-hasura-user-id': token.id,
+    "https://hasura.io/jwt/claims": {
+      "x-hasura-allowed-roles": ["user"],
+      "x-hasura-default-role": "user",
+      "x-hasura-role": "user",
+      "x-hasura-user-id": token.id,
     },
   };
   return claims;
@@ -39,12 +39,12 @@ export const generateJWT = async (
     | undefined,
   { secret }: { secret: any }
 ) => {
-  const encodedToken = jwt.sign(payload!, secret, { algorithm: 'HS256' });
+  const encodedToken = jwt.sign(payload!, secret, { algorithm: "HS256" });
   return encodedToken;
 };
 
 export const decodeJWT = (token: any, { secret }: { secret: any }) => {
-  const decodedToken = jwt.verify(token, secret, { algorithms: ['HS256'] });
+  const decodedToken = jwt.verify(token, secret, { algorithms: ["HS256"] });
   return decodedToken as JWT;
 };
 
