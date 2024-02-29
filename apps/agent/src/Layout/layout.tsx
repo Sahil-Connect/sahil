@@ -1,10 +1,10 @@
-import React, { ReactChild } from "react";
+import React, { ReactNode } from "react";
 import logo from "../../public/logo.png";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { Navbar } from "ui";
 type LayoutProps = {
-  children: ReactChild | ReactChild[];
+  children: ReactNode;
 };
 import {
   HiOutlineBriefcase,
@@ -52,7 +52,9 @@ export default function Layout({ children, ...props }: LayoutProps) {
         header="Sahil Agent"
         onSignOut={onSignOut}
       />
-      <main className="min-h-screen p-4 bg-gray-50">{children}</main>
+      <main className="min-h-[calc(100vh-4.5rem)] p-4 bg-gray-50">
+        {children}
+      </main>
     </>
   );
 }

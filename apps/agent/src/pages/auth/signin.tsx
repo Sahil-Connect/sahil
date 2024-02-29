@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { getProviders, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { LoginCard } from "@sahil/features/auth/LoginCard";
+import logo from "../../../public/logo.png";
 
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();
@@ -15,17 +16,9 @@ const SignInPage: NextPage = ({ providers }: any) => {
   }, [router, session]);
 
   return (
-    <div className="p-4 space-y-2">
-      <div className="flex items-center justify-center">
-        <div className="space-y-4">
-          <h1 className="text-center text-2xl">Welcome Back</h1>
-          <LoginCard providers={providers} />
-          <div>
-            <p className="text-center">Don&apos;t have an account?</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <LoginCard providers={providers} logo={logo} />
+    </>
   );
 };
 

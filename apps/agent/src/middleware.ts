@@ -9,14 +9,14 @@ const accessRules = [
 ];
 
 export async function middleware(req: NextRequest) {
-  const hasAccess = await routeGuard(req, accessRules);
+  // const hasAccess = await routeGuard(req, accessRules);
 
-  if (!hasAccess) {
-    // Redirect to login or unauthorized page
-    const url = req.nextUrl.clone();
-    url.pathname = "/auth/signin";
-    return NextResponse.redirect(url);
-  }
+  // if (!hasAccess) {
+  //   // Redirect to login or unauthorized page
+  //   const url = req.nextUrl.clone();
+  //   url.pathname = "/auth/signin";
+  //   return NextResponse.redirect(url);
+  // }
 
   return NextResponse.next();
 }
