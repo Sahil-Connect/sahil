@@ -1,7 +1,7 @@
-import { getProviders } from 'next-auth/react';
-import AuthCard from '@sahil/features/auth/AuthCard';
-import RegisterForm from '@sahil/features/auth/forms/RegisterForm';
-import logo from '../../../public/logo.png';
+import { getProviders } from "next-auth/react";
+import AuthCard from "@sahil/features/auth/AuthCard";
+import RegisterForm from "@sahil/features/auth/forms/RegisterForm";
+import logo from "../../../public/logo.png";
 
 const SignUpPage = ({ providers }: any) => {
   return (
@@ -10,11 +10,11 @@ const SignUpPage = ({ providers }: any) => {
         providers={providers}
         logo={logo}
         form={<RegisterForm />}
-        title='Create an account'
+        title="Create an account"
         sub={{
           text: "Don't have an account?",
-          href: '/auth/signin',
-          cta: 'Sign In',
+          href: "/auth/signin",
+          cta: "Sign In",
         }}
       />
     </>

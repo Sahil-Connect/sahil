@@ -1,7 +1,7 @@
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
-import { Card } from 'ui';
-import { AuthProviders } from './AuthProviders';
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
+import { Card } from "ui";
+import { AuthProviders } from "./AuthProviders";
 
 type Props = {
   providers: any;
@@ -17,34 +17,34 @@ type Props = {
 
 const AuthCard = ({
   providers = [],
-  logo = '',
+  logo = "",
   form,
   title,
   sub: { text, href, cta },
 }: Props) => {
   return (
-    <section className='flex items-center justify-center h-[calc(100vh-7rem)]'>
-      <Card className='w-96 md:w-2/3 max-w-lg'>
-        <div className='mx-auto space-y-2 mb-8'>
+    <section className="flex items-center justify-center h-[calc(100vh-7rem)]">
+      <Card className="w-96 md:w-2/3 max-w-lg">
+        <div className="mx-auto space-y-2 mb-8">
           <Image
             src={logo}
-            alt='Sahil'
-            loading='eager'
-            className='w-24 object-contain mx-auto'
+            alt="Sahil"
+            loading="eager"
+            className="w-24 object-contain mx-auto"
           />
-          <h2 className='card-title text-md font-bold'>{title}</h2>
+          <h2 className="card-title text-md font-bold">{title}</h2>
         </div>
         {form}
-        <div className='card-actions'>
+        <div className="card-actions">
           {providers && (
-            <div className='w-full'>
-              <div className='divider w-1/3 mx-auto'></div>
+            <div className="w-full">
+              <div className="divider w-1/3 mx-auto"></div>
               <AuthProviders providers={providers} />
             </div>
           )}
-          <p className='text-center'>
-            {text}{' '}
-            <Link href={href} className='link-primary font-bold'>
+          <p className="text-center">
+            {text}{" "}
+            <Link href={href} className="link-primary font-bold">
               {cta}
             </Link>
           </p>
