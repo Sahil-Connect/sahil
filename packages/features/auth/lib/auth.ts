@@ -60,8 +60,6 @@ const initNextAuth = (): AuthOptions => {
     },
     callbacks: {
       async session({ session, token }) {
-        console.log("token from callback", token);
-        console.log("token from callback", token);
         if (session?.user) {
           session.user.id = token.sub!;
         }

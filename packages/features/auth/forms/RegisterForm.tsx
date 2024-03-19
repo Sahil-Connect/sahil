@@ -50,6 +50,16 @@ const RegisterForm = () => {
         register={register}
         errors={errors}
       />
+      <p className="text-center">
+        By signing up on this app, you&apos;re also agreeing to <br /> our{" "}
+        <a href="#" className="link font-semibold">
+          Terms of Service
+        </a>{" "}
+        and{" "}
+        <a href="#" className="link font-semibold">
+          Privacy Policy
+        </a>
+      </p>
       <button className="btn btn-primary w-full capitalize mt-2" type="submit">
         Sign Up
       </button>
