@@ -4,12 +4,12 @@ import type { GeocodeResult } from "@googlemaps/google-maps-services-js";
 export class GoogleGeocodingAPI {
   private client;
   private _key;
-
+// @ts-ignore
   constructor({ key }) {
     this.client = new Client({});
     this._key = key;
   }
-
+// @ts-ignore
   async geocode({ address }): Promise<
     Pick<GeocodeResult, "types"> & {
       location: Record<string, string>;
@@ -23,6 +23,7 @@ export class GoogleGeocodingAPI {
       },
     });
     return {
+      // @ts-ignore
       location: { ...data.results[0]?.geometry?.location },
       placeId: data.results[0]?.place_id,
       types: data.results[0]?.types,
@@ -33,6 +34,7 @@ export class GoogleGeocodingAPI {
     const { data } = await this.client.geocode({
       params: {
         key: this._key,
+        // @ts-ignore
         latlng: `${lat},${lng}`,
       },
     });

@@ -3,6 +3,7 @@ export class GoogleDirectionsAPI {
   private client;
   private _key;
 
+  // @ts-ignore
   constructor({ key }) {
     this.client = new Client({});
     this._key = key;

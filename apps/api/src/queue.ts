@@ -3,7 +3,7 @@ import { connection } from "./lib/ioredis";
 import { redisHost, redisPort } from "./config";
 
 export enum Queues {
-  Auth = "Auth",
+  Auth = "Auth", 
   Client = "Client",
   Event = "Event",
   Mail = "Mail",

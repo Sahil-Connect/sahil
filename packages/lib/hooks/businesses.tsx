@@ -4,7 +4,6 @@ import {
   FETCH_BUSINESSES,
   FETCH_BUSINESS_BY_PK,
   FETCH_BUSINESS_ORDERS,
-  INSERT_NEW_BUSINESS,
   REGISTER_BUSINESS_ACTION,
 } from "@sahil/lib/graphql";
 
@@ -14,7 +13,6 @@ import { BUSINESS_VALIDATED } from "@sahil/lib/graphql/subscriptions/businesses"
 import {
   GetBusinessesQuery,
   GetBusinessesQueryVariables,
-  GetBusinessesDocument,
   GetBusinessByPkQuery,
   GetBusinessByPkQueryVariables,
   GetBusinessOrdersQuery,
