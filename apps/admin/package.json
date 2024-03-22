@@ -3,24 +3,27 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3001",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@sahil/configs": "*",
+    "@sahil/features": "*",
+    "@sahil/lib": "*",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "*",
-    "@sahil/lib": "*",
-    "@sahil/features": "*",
-    "@sahil/configs": "*"
+    "ui": "*"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
+    "autoprefixer": "^10.4.19",
     "eslint-config-custom": "*",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.1",
     "tsconfig": "*",
     "typescript": "^4.5.3"
   }

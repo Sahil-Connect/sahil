@@ -51,6 +51,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
         logo={logo}
         header="Sahil Agent"
         onSignOut={onSignOut}
+        user={session?.user}
       />
       <main className="min-h-[calc(100vh-4.5rem)] p-4 bg-gray-50">
         {children}
