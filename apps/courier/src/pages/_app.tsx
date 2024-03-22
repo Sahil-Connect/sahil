@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
 import { createApolloClient } from "@sahil/lib/graphql";
 import Layout from "@/Layout/layout";
+import { SessionProvider } from "next-auth/react";
 
 const graphqlUri = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT || "";
 const ws = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_WS;
@@ -25,10 +26,12 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <ApolloProvider client={client}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <SessionProvider session={session}>
+      <ApolloProvider client={client}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
+    </SessionProvider>
   );
 }

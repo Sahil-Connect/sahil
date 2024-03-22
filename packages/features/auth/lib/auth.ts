@@ -1,4 +1,3 @@
-import GitHub from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { generateJWT, decodeJWT } from "./generateJWT";
 import { HasuraAdapter } from "next-auth-hasura-adapter";
@@ -6,10 +5,6 @@ import { AuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 
 const providers = [
-  // GitHub({
-  //   clientId: process.env.NEXT_PUBLIC_GITHUB_ID!,
-  //   clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET!,
-  // }),
   GoogleProvider({
     clientId: process.env.NEXT_PUBLIC_GOOGLE_ID!,
     clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET!,

@@ -1,13 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { routeGuard } from "@sahil/features/auth/lib/routeGuard";
-
-const accessRules = [
-  { path: "/", roles: ["user"] },
-  { path: "/businesses", roles: ["user"] },
-  { path: "/couriers", roles: ["user", "admin"] },
-  // Add more rules as needed for app1
-];
+import { agentAccessRules } from "@sahil/lib/auth/middleware";
 
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
@@ -17,7 +11,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const { isAuthenticated, isAuthorized } = await routeGuard(req, accessRules);
+  const { isAuthenticated, isAuthorized } = await routeGuard(req, agentAccessRules);
 
   if (!isAuthenticated) {
     url.pathname = "/auth/signin";
