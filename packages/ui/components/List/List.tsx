@@ -65,7 +65,7 @@ export const List = <T extends unknown>({
   }
   return (
     <div
-      className={`grid grid-cols-auto-250 2xl:grid-cols-4 gap-2`}
+      className={`grid xl:grid-cols-4 2xl:grid-cols-4 gap-2`}
       ref={parent}
     >
       {data &&

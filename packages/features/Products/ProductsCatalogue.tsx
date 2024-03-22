@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
-import { useFetchProducts } from "@/hooks/products";
+import { useFetchProducts } from "@sahil/lib/hooks/products";
 import { Card, List, ListHeader, ListPagination } from "ui";
-import { formatCost } from "@sahil/lib";
-import { useOrderItemsStore } from "@/hooks/useOrderItemsStore";
+import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
 import Link from "next/link";
 import {
-  HiArrowSmallLeft,
-  HiArrowSmallRight,
-  HiMinus,
-  HiPlus,
-  HiOutlineFunnel,
   HiOutlineShoppingCart,
-  HiXMark,
-  HiOutlineBanknotes,
   HiArrowPath,
   HiSignalSlash,
 } from "react-icons/hi2";
 import { Products } from "@sahil/lib/graphql/__generated__/graphql";
+import { ProductSummary } from "./ProductOverviewCard";
 
 export const ProductsCatalogue = () => {
   const [offset, setOffset] = useState(0);
@@ -49,7 +42,7 @@ export const ProductsCatalogue = () => {
           <HiSignalSlash />
         </span>
         <p>
-          Products aren't loading due to a technical problem on our side. Please
+          Products are not loading due to a technical problem on our side. Please
           try again. If the issue continues,{" "}
           <span className="text-primary">contact support.</span>
         </p>
@@ -87,13 +80,13 @@ export const ProductsCatalogue = () => {
   };
 
   return (
-    <Card>
-      <ListHeader size={productsCount} sizeLabel="Products">
+    <section className="space-y-4">
+      <ListHeader size={productsCount.count} sizeLabel="Products">
         <ListPagination
           onNextPage={() => setOffset((prev) => prev + 12)}
           onPreviousPage={() => setOffset((prev) => prev - 12)}
           isNextDisabled={
-            (productsCount && offset + 12 >= productsCount) || false
+            (productsCount && offset + 12 >= productsCount.count) || false
           }
           isPrevDisabled={offset === 0}
         />
@@ -105,6 +98,10 @@ export const ProductsCatalogue = () => {
         cols={4}
         renderItem={(product) => {
           const isInCart = orderItemsMap.has(product.id);
+          if(product.id === "e6f57fa5-33f7-4b4b-b482-e39723704d74") {
+            console.log(product);
+          }
+          
           return (
             <ProductSummary
               key={product.id}
@@ -121,81 +118,6 @@ export const ProductsCatalogue = () => {
           <HiOutlineShoppingCart /> Proceed to checkout
         </Link>
       </div>
-    </Card>
-  );
-};
-
-type ProductSummaryProps = {
-  onAddOrderItem: (item: any) => void;
-  product: any;
-  onRemoveOrderItem: (item: any) => void;
-  isInCart?: boolean;
-};
-
-export const ProductSummary = ({
-  onAddOrderItem,
-  product,
-  onRemoveOrderItem,
-  isInCart,
-}: ProductSummaryProps) => {
-  return (
-    <Card>
-      <div className="flex items-center justify-between">
-        <h3 className="card-title text-sm">{product.name}</h3>
-        {product.discount && product.discount !== 0 && (
-          <div className="badge badge-accent">{product.discount}%</div>
-        )}
-      </div>
-      <div className="flex gap-2 items-center">
-        <div className="flex gap-2 items-center">
-          <span className="shadow p-2 rounded-md">
-            <HiOutlineBanknotes />
-          </span>
-          {formatCost(product.price)}
-        </div>
-      </div>
-      <div className="card-actions items-center">
-        {!isInCart ? (
-          <button
-            className="btn btn-xs"
-            onClick={() => onAddOrderItem(product)}
-            type="button"
-            title="Add Item"
-          >
-            <HiOutlineShoppingCart /> Add Product
-          </button>
-        ) : (
-          <div className="flex justify-between w-full">
-            <button
-              className="btn btn-xs btn-warning"
-              onClick={() => onRemoveOrderItem(product)}
-              type="button"
-              title="Add Item"
-            >
-              <HiXMark /> Remove
-            </button>
-            <div className="flex gap-2 items-center">
-              <button
-                className="btn btn-xs"
-                onClick={() => onAddOrderItem(product)}
-                type="button"
-                title="Add Item"
-              >
-                <HiMinus />
-              </button>
-              <div className="badge badge-neutral">1</div>
-              <button
-                className="btn btn-xs"
-                onClick={() => onAddOrderItem(product)}
-                type="button"
-                title="Add Item"
-              >
-                <HiPlus />
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </Card>
+    </section>
   );
 };

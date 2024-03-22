@@ -6,12 +6,12 @@ export const FETCH_PRODUCTS = gql`
       limit: $limit
       order_by: { created_at: desc }
       offset: $offset
-      where: { inStock: { _eq: true } }
     ) {
       discount
       id
       name
       price
+      mainImage
     }
     products_aggregate {
       aggregate {
