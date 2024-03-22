@@ -4,11 +4,11 @@ import { getProviders, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import LoginForm from "@sahil/features/auth/forms/LoginForm";
 import AuthCard from "@sahil/features/auth/AuthCard";
-import logo from "../../../public/logo.png";
 
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();
   const router = useRouter();
+  console.log(session);
 
   useEffect(() => {
     if (session) {
@@ -20,7 +20,6 @@ const SignInPage: NextPage = ({ providers }: any) => {
     <>
       <AuthCard
         providers={providers}
-        logo={logo}
         form={<LoginForm />}
         title="Sign in to your account"
         sub={{

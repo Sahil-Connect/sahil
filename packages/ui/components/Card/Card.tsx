@@ -6,6 +6,7 @@ export type CardProps = {
   className?: string;
   title?: string;
   titleSize?: string;
+  titleCentered?: boolean;
   height?: string;
 };
 
@@ -14,6 +15,7 @@ export const Card = ({
   className,
   title,
   titleSize = "md",
+  titleCentered = false,
 }: CardProps) => {
   const merged = twMerge(
     "card card-compact card-bordered bg-base-100",
@@ -22,7 +24,15 @@ export const Card = ({
   return (
     <div className={merged}>
       <div className="card-body flex-col">
-        {title && <h2 className={`card-title text-${titleSize}`}>{title}</h2>}
+        {title && (
+          <h2
+            className={`card-title text-${titleSize} ${
+              titleCentered ? "justify-center" : ""
+            }`}
+          >
+            {title}
+          </h2>
+        )}
         {children}
       </div>
     </div>

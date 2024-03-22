@@ -9,6 +9,11 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'https://lh3.googleusercontent.com',
+        port: '',
+      },
     ],
   },
 };
