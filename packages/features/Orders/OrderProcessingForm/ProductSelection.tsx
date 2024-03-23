@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "@sahil/lib/hooks/useOrderFormStore";
-import { ProductsCatalogue } from "../ProductsCatalogue";
+import { CustomProductsCatalogue } from "../CustomProductsCatalogue";
 import { RecommendedSuppliers } from "../RecommendedSuppliers";
 
 import {
@@ -50,17 +50,15 @@ export const ProductSelection: FC<ProductSelectionProps> = ({
     navigateToNextStep("delivery_details");
   };
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-        <ProductsCatalogue />
-        <div className="flex gap-2">
-          <div className="btn btn-sm btn-primary">
-            <input type="submit" value="continue" />
-            <HiArrowSmallRight />
-          </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+      <CustomProductsCatalogue />
+      <div className="flex gap-2">
+        <div className="btn btn-sm btn-primary">
+          <input type="submit" value="continue" />
+          <HiArrowSmallRight />
         </div>
-      </form>
-    </>
+      </div>
+    </form>
   );
 };
 
