@@ -12,6 +12,7 @@ export const FETCH_PRODUCTS = gql`
       name
       price
       mainImage
+      description
     }
     products_aggregate {
       aggregate {

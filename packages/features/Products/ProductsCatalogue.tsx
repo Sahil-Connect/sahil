@@ -98,10 +98,6 @@ export const ProductsCatalogue = () => {
         cols={4}
         renderItem={(product) => {
           const isInCart = orderItemsMap.has(product.id);
-          if(product.id === "e6f57fa5-33f7-4b4b-b482-e39723704d74") {
-            console.log(product);
-          }
-          
           return (
             <ProductSummary
               key={product.id}

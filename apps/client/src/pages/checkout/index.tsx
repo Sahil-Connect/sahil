@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useFetchProducts } from "@sahil/lib/hooks/products";
-import { Card } from "ui";
+import { Card, QuantityInput } from "ui";
 import { formatCost } from "@sahil/lib";
 import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
 import { formatCurrency } from "@sahil/lib";
@@ -22,31 +22,36 @@ export const OrderItem = ({
   price,
   quantity,
   title,
+  mainImage
 }: {
   price: number;
   quantity: number;
   title: string;
+  mainImage?: string;
 }) => {
   return (
-    <Card className="bg-base-100">
+    <div className="card card-side card-compact shadow bg-base-100">
+      <figure><Image src={mainImage} alt="Movie" height="65" width="65" /></figure>
+      <div className="card-body">
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <h2 className="card-title text-sm">{title}</h2>
-          <p className="flex items-center gap-2 text-gray-600">
+  
+        </div>
+        <div className="card-actions justify-end">
+        <QuantityInput />
+      </div>
+      </div>
+      <p className="flex items-center gap-2 font-bold">
             {formatCurrency(price)}
           </p>
-        </div>
-        <div className="flex gap-2">
-          <p className="flex items-center gap-2 text-gray-600">
-            <HiOutlineReceiptPercent /> {quantity}x
-          </p>
-        </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
 export const OrderItems = ({ items }: { items: any }) => {
+  console.log(items);
   const { totalItems, totalCost } = items?.reduce(
     (
       totals: { totalItems: any; totalCost: number },
@@ -71,12 +76,14 @@ export const OrderItems = ({ items }: { items: any }) => {
               name: string;
               quantity: number;
               price: number;
+              mainImage?: string
             }) => (
               <OrderItem
                 key={item.id}
                 title={item?.name}
                 quantity={item?.quantity}
                 price={item?.price}
+                mainImage={item?.mainImage}
               />
             )
           )}
