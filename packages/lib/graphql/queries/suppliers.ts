@@ -115,6 +115,7 @@ export const FETCH_SUPPLIER_PRODUCTS = gql`
       inStock
       quantity
       price
+      mainImage
     }
   }
 `;
