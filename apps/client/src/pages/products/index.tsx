@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { ProductsCatalogue } from "@/Products/ProductsCatalogue";
-import { HiMagnifyingGlass } from "react-icons/hi2";
+import { ProductsCatalogue } from "@sahil/features/Products/ProductsCatalogue";
+import { HiMagnifyingGlass, HiOutlineShoppingCart } from "react-icons/hi2";
 
 export default function Products() {
   const [name, setName] = useState("");
@@ -33,7 +33,17 @@ export default function Products() {
     <section className="space-y-2">
       <div className="flex justify-between items-center">
         <h3 className="text-2xl">Available Products</h3>
-        <form onSubmit={handleSearch} className="form-control relative">
+        <div className="flex gap-2 items-center">
+          <div className="indicator">
+            <span className="indicator-item badge badge-accent">5</span>
+            <button className="btn btn-sm" title="Shopping Cart" type="button">
+              <HiOutlineShoppingCart />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+      <form onSubmit={handleSearch} className="form-control relative">
           <div className="input-group ">
             <input
               type="text"

@@ -21,7 +21,6 @@ export default function SupplierPage() {
           <SupplierProfileOverview supplier={supplier} />
           <ServiceZones />
         </div>
-        <div className="divider divider-horizontal"></div>
         <div className="basis-5/6 space-y-4">
           <SupplierProducts
             productsCount={supplier?.products_aggregate.aggregate.count}

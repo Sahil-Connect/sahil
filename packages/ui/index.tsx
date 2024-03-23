@@ -14,6 +14,7 @@ export * from "./components/List/List";
 export * from "./components/List/ListHeader";
 export * from "./components/Navbar";
 export * from "./components/ProfileOverviewCard";
+export * from "./components/QuantityInput";
 export * from "./components/Modal";
 export * from "./components/Radio";
 export * from "./components/Select";

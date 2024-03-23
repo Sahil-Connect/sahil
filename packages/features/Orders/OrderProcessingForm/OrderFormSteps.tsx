@@ -22,7 +22,7 @@ export const OrderFormSteps = ({
 }: Props) => {
   return (
     <Steps
-      direction="vertical"
+      direction="horizontal"
       steps={headers}
       onUpdateStepByIndex={onUpdateStepByIndex}
       currentStep={currentStep}
