@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { useFetchProducts } from "@sahil/lib/hooks/products";
-import { Card, List, ListHeader, ListPagination, QuantityInput } from "ui";
+import {
+  Card,
+  Drawer,
+  List,
+  ListHeader,
+  ListPagination,
+  Table,
+  QuantityInput,
+} from "ui";
 import { formatCurrency, calculateDiscountedPrice } from "@sahil/lib";
 import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
 import Link from "next/link";
@@ -86,18 +94,9 @@ export const ProductSummary = ({
           ) : (
             <QuantityInput />
           )}
-          <button
-            className="btn btn-sm btn-ghost w-full"
-            onClick={() => {
-              if(onAddOrderItem) {
-                onAddOrderItem(product);
-              }
-            }}
-            type="button"
-            title="Add Item"
-          >
-            Compare
-          </button>
+          <Drawer CTA="Compare">
+            <Table />
+          </Drawer>
         </div>
       </div>
     </div>
