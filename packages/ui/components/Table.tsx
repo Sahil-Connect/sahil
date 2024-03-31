@@ -46,15 +46,13 @@ export const TableControls = () => {
   );
 };
 
-export const TableRow = ({ row }) => {
+export type TableRowProps = {
+  row: Record<string, any>;
+}
+
+export const TableRow = ({ row }: TableRowProps) => {
   return (
     <tr>
-      <th>
-        <label>
-          <input type="checkbox" className="checkbox" />
-        </label>
-      </th>
-
       <td>
         <div className="flex items-center gap-3">
           <div>
@@ -78,11 +76,6 @@ export const TableHead = () => {
   return (
     <thead>
       <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
         <th>
           Name
         </th>

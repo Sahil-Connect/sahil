@@ -48,7 +48,6 @@ export default function OrdersPage() {
         </div>
       </Card>
       <h3 className="text-md">Overview</h3>
-      <Stats stats={stats} />
       <ListOrders />
     </section>
   );

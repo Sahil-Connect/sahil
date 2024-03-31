@@ -48,7 +48,6 @@ export default function Suppliers() {
           </div>
         </Card>
         <h3 className="text-md">Overview</h3>
-        <Stats stats={stats} />
         <ListSuppliers />
       </section>
     </>

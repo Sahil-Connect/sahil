@@ -45,7 +45,6 @@ export default function CouriersPage() {
         </div>
       </Card>
       <h3 className="text-md">Overview</h3>
-      <Stats stats={stats} />
       <ListCouriers />
     </section>
   );
