@@ -23,5 +23,6 @@ export * from "./components/Stats";
 export * from "./components/Steps";
 export * from "./components/StepsPaginator";
 export * from "./components/Tabs";
+export * from "./components/Table";
 export * from "./components/Toggle";
 export * from "./components/Wrapper";
