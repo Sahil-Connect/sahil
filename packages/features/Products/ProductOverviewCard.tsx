@@ -15,9 +15,9 @@ import {
 import { Products } from "@sahil/lib/graphql/__generated__/graphql";
 
 type ProductSummaryProps = {
-  onAddOrderItem: (item: any) => void;
+  onAddOrderItem?: (item: any) => void;
   product: any;
-  onRemoveOrderItem: (item: any) => void;
+  onRemoveOrderItem?: (item: any) => void;
   isInCart?: boolean;
 };
 

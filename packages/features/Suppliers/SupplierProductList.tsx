@@ -11,16 +11,7 @@ import { Card, List, ListHeader, ListPagination, ListSort } from "ui";
 import DeleteProductModal from "./DeleteProductModal";
 import { ProductSummary } from "../Products/ProductOverviewCard";
 
-type SahilProduct = {
-  id: string;
-  name: string;
-  description: string;
-  inStock: boolean;
-  price: number;
-  quantity: number;
-  discount: number;
-  supplier_id: string;
-};
+import { Products } from "@sahil/lib/graphql/__generated__/graphql";
 
 type props = {
   productsCount: number;
@@ -94,7 +85,7 @@ const SupplierProductList = ({ productsCount }: props) => {
         data={products}
         error={error}
         loading={loading}
-        renderItem={(product: SahilProduct) => (
+        renderItem={(product: Products) => (
           <ProductSummary key={product.id} product={product} />
         )}
       />
