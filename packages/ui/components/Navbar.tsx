@@ -6,6 +6,7 @@ import type { IconType } from "react-icons";
 import {
   HiOutlineAdjustmentsHorizontal,
   HiOutlineArrowRightOnRectangle,
+  HiOutlinePlus
 } from "react-icons/hi2";
 
 type NavbarLink = {
@@ -19,6 +20,7 @@ export type NavbarProps = {
   logo?: any;
   header?: string;
   onSignOut?: () => void;
+  user?: any;
 };
 
 export const Navbar: FC<NavbarProps> = ({
@@ -26,10 +28,12 @@ export const Navbar: FC<NavbarProps> = ({
   logo,
   header = "Sahil",
   onSignOut,
+  user = {},
 }) => {
+  console.log(user?.image);
   return (
-    <header className="navbar bg-primary text-white shadow-sm">
-      <div className="navbar-start">
+    <header className="navbar shadow border-b">
+      <div className="navbar-start gap-8">
         <Link
           href="/"
           className="font-semibold flex items-center text-base lg:text-lg"
@@ -44,31 +48,32 @@ export const Navbar: FC<NavbarProps> = ({
           )}
           {header}
         </Link>
+        <nav>
+          <ul className="menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-2">
+            {links.map(({ name, href, icon }) => (
+              <li key={name}>
+                <Link
+                  href={href}
+                  className="transition-[0.4s] hover:text-green-dark"
+                >
+                  {icon && <Icon icon={icon} />} {name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <nav className="navbar-end">
-        <ul className="menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-4">
-          {links.map(({ name, href, icon }) => (
-            <li key={name}>
-              <Link
-                href={href}
-                className="font-semibold transition-[0.4s] hover:text-green-dark"
-              >
-                {icon && <Icon icon={icon} />} {name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+
+      <div className="navbar-end gap-4">
+        <button className="btn btn-sm btn-primary">New Order <HiOutlinePlus /> </button>
         <div className="dropdown dropdown-end text-gray-600">
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <div className="w-10 rounded-full ring ring-primary ring-offset-bg-base-100 ring-offset-2">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://avatars.githubusercontent.com/u/21015204?v=4"
-              />
+            <div className="w-10 rounded-full">
+              <img alt={user?.name} src={user?.image} />
             </div>
           </div>
           <ul
@@ -78,7 +83,7 @@ export const Navbar: FC<NavbarProps> = ({
             {links.map(({ name, href, icon }) => {
               return (
                 <li key={name}>
-                  <Link href={href} className="font-semibold">
+                  <Link href={href}>
                     <Icon icon={icon} /> {name}
                   </Link>
                 </li>
@@ -96,7 +101,7 @@ export const Navbar: FC<NavbarProps> = ({
             </li>
           </ul>
         </div>
-      </nav>
+      </div>
     </header>
   );
 };

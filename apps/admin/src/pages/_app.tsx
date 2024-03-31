@@ -1,11 +1,11 @@
-import "@/styles/globals.css";
+import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import Layout from "../Layout/layout";
 import { ApolloProvider } from "@apollo/client";
 import { createApolloClient } from "@sahil/lib/graphql";
-import Layout from "@/Layout/layout";
 import { SessionProvider } from "next-auth/react";
 
-const graphqlUri = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT || "";
+const graphqlUri = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT;
 const ws = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_WS;
 
 const httpOptions = {
@@ -16,7 +16,7 @@ const httpOptions = {
 };
 
 const client = createApolloClient({
-  uri: graphqlUri,
+  uri: graphqlUri as string,
   httpOptions,
   ws: ws as string,
 });
