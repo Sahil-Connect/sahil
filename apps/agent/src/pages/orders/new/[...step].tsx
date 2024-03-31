@@ -86,27 +86,15 @@ export default function NewOrderPage() {
 
   return (
     <section className="space-y-4">
-      <div className="flex gap-2 justify-between items-center py-4 px-8 bg-gray-100">
-        <h1 className="text-2xl">Order Processing Form</h1>
-        <div className="flex gap-2 items-center">
-          <div className="indicator">
-            <span className="indicator-item badge badge-accent">5</span>
-            <button className="btn btn-sm" title="Shopping Cart" type="button">
-              <HiOutlineShoppingCart />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="flex">
-        <div className="basis-1/5 pl-4">
+      <div className="space-y-4">
+        <div className="basis-1/5 bg-base-100 p-4 border">
           <OrderFormSteps
             currentStep={currentStep}
             onUpdateStepByIndex={onUpdateStepByIndex}
             headers={headers}
           />
         </div>
-        <div className="divider divider-horizontal"></div>
-        <div className="grow space-y-4 py-4 pr-4 basis-3/5">
+        <div className="grow space-y-4">
           <StepsPaginator
             headers={headers}
             currentStep={currentStep}

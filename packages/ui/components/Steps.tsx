@@ -26,11 +26,11 @@ export const Step: FC<StepProps> = ({
   return (
     <li className={`step ${classes}`} onClick={() => onClick(step)}>
       <div
-        className={`flex px-2 py-1 rounded w-full gap-2 items-center ${
-          currentStep === step ? "bg-primary-content text-primary-focus" : null
+        className={`flex px-2 py-1 rounded gap-2 items-center ${
+          currentStep === step ? "text-primary-focus" : null
         } hover:bg-gray-100 cursor-pointer`}
       >
-        {icon && <Icon icon={icon} />} {title}
+        {title}
       </div>
     </li>
   );
@@ -43,7 +43,7 @@ export const Steps: FC<StepsProps> = ({
   onUpdateStepByIndex,
 }) => {
   return (
-    <ul className={`steps steps-vertical w-full`}>
+    <ul className={`steps steps-${direction} w-full`}>
       {steps &&
         steps.map(({ completed, icon, step, title }, index) => (
           <Step

@@ -1,3 +1,5 @@
+import { ProductsCatalogue } from "@sahil/features/Products/ProductsCatalogue";
+
 export default function SupplierProductsPage() {
   return (
     <main className="min-h-screen p-8">
@@ -9,9 +11,9 @@ export default function SupplierProductsPage() {
               Users can register through agents, an app, or USSD codes and set
               delivery preferences.
             </p>
-            <p></p>
           </div>
         </div>
+        <ProductsCatalogue />
       </div>
     </main>
   );
