@@ -53,7 +53,9 @@ export const ProductSummary = ({
               <p className="font-bold">{formatCurrency(product.price)}</p>
             ) : (
               <p>
-                <span className="font-bold mr-2">{formatCurrency(valueAfterDiscount)}</span>
+                <span className="font-bold mr-2">
+                  {formatCurrency(valueAfterDiscount)}
+                </span>
                 <span className="line-through text-gray-500 text-xs">
                   {formatCurrency(product.price)}
                 </span>
@@ -71,7 +73,11 @@ export const ProductSummary = ({
           {!isInCart ? (
             <button
               className="btn btn-sm btn-primary w-full"
-              onClick={() => onAddOrderItem(product)}
+              onClick={() => {
+                if (onAddOrderItem) {
+                  onAddOrderItem(product);
+                }
+              }}
               type="button"
               title="Add Item"
             >
@@ -82,7 +88,11 @@ export const ProductSummary = ({
           )}
           <button
             className="btn btn-sm btn-ghost w-full"
-            onClick={() => onAddOrderItem(product)}
+            onClick={() => {
+              if(onAddOrderItem) {
+                onAddOrderItem(product);
+              }
+            }}
             type="button"
             title="Add Item"
           >
