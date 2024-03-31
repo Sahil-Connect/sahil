@@ -47,7 +47,6 @@ export default function Business() {
           </div>
         </div>
       </Card>
-      <h3 className="text-md">Overview</h3>
       <ListBusinesses />
     </section>
   );
