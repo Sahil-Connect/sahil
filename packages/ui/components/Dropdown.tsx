@@ -3,9 +3,7 @@ import { HiArrowDown } from "react-icons/hi2";
 import { Icon } from "./Icon";
 import type { IconType } from "react-icons";
 
-import {
-  HiOutlineArrowSmallDown,
-} from "react-icons/hi2";
+import { HiOutlineArrowSmallDown } from "react-icons/hi2";
 
 type DropdownOption = {
   id?: string;
@@ -29,9 +27,13 @@ export const Dropdown: FC<DropdownProps> = ({ options, CTA }) => {
         tabIndex={0}
         className="dropdown-content z-[1] menu p-2 border bg-base-100 rounded-box mt-4 space-y-2"
       >
-        {options?.map((option: DropdownOption) =>        <li key={option?.id}>
-          <button className="btn btn-sm btn-ghost"><Icon icon={option.icon} /> {option.label}</button>
-        </li>)}
+        {options?.map((option: DropdownOption) => (
+          <li key={option?.id}>
+            <button className="btn btn-sm btn-ghost">
+              <Icon icon={option.icon} /> {option.label}
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   );

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Dropdown } from "../Dropdown";
+import Link from "next/link";
 
 import {
   HiOutlineShoppingCart,
@@ -7,7 +8,7 @@ import {
   HiOutlineTruck,
   HiOutlineBuildingOffice,
   HiOutlineCube,
-  HiOutlineXMark
+  HiOutlineXMark,
 } from "react-icons/hi2";
 
 export type TableRowProps = {
@@ -17,19 +18,19 @@ export type TableRowProps = {
 const options = [
   {
     id: 1,
-    label: "Enroute",
+    label: "Available",
     icon: HiOutlineTruck,
   },
   {
     id: 2,
-    label: "Delivered",
+    label: "Out of Stock",
     icon: HiOutlineCube,
   },
   {
     id: 3,
-    label: "Cancelled",
+    label: "Sale",
     icon: HiOutlineXMark,
-  }
+  },
 ];
 
 export const TableRow = ({ row }: TableRowProps) => {
@@ -50,22 +51,21 @@ export const TableRow = ({ row }: TableRowProps) => {
               />
             </div>
           </div>
-          <div>
-            <div className="font-bold">Hart Hagerty</div>
-            <div className="text-sm opacity-50">United States</div>
+          <div className="space-y-2">
+            <div className="font-bold">
+              <Link href={`/inventory/${row.id}`}>{row.name}</Link>
+            </div>
+            <div className="flex gap-2">
+              <span className="badge badge-outline badge-sm">Groceries</span>
+              <span className="badge badge-outline badge-sm">Groceries</span>
+            </div>
           </div>
         </div>
       </td>
-      <td>
-        Zemlak, Daniel and Leannon
-        <br />
-        <span className="badge badge-ghost badge-sm">
-          Desktop Support Technician
-        </span>
-      </td>
-      <td>Purple</td>
+      <td>15,000 SSP</td>
+      <td>15 available</td>
       <th>
-        <Dropdown CTA="Order Status" options={options} />
+        <Dropdown CTA="Available" options={options} />
       </th>
     </tr>
   );

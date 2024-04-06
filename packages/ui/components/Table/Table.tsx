@@ -77,7 +77,7 @@ export const Table = () => {
             </th>
             <th>Name</th>
             <th>Job</th>
-            <th>Favorite Color</th>
+            <th>Quantity</th>
             <th></th>
           </tr>
         </thead>

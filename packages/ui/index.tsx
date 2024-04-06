@@ -20,6 +20,7 @@ export * from "./components/Modal";
 export * from "./components/Radio";
 export * from "./components/Select";
 export * from "./components/SidebarWrapper";
+export * from "./components/SplitButton";
 export * from "./components/Spinner";
 export * from "./components/Stats";
 export * from "./components/Steps";
