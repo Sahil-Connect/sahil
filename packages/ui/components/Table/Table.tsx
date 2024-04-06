@@ -1,4 +1,7 @@
 import { HiOutlineClock, HiOutlineArrowLongDown } from "react-icons/hi2";
+import { TableFooter } from "./TableFooter";
+import { TableRow } from "./TableRow";
+import { TableHead } from "./TableHead";
 
 const orders = [
   {
@@ -46,52 +49,6 @@ export const TableControls = () => {
   );
 };
 
-export type TableRowProps = {
-  row: Record<string, any>;
-}
-
-export const TableRow = ({ row }: TableRowProps) => {
-  return (
-    <tr>
-      <td>
-        <div className="flex items-center gap-3">
-          <div>
-            <div className="font-bold">{row.name}</div>
-            <div className="text-sm opacity-50">{row.address}</div>
-          </div>
-        </div>
-      </td>
-      <td>{row.source}</td>
-      <td>{row.createdAt}</td>
-      <th>
-        <button className="btn btn-info btn-sm">
-          <HiOutlineClock /> {row.status}
-        </button>
-      </th>
-    </tr>
-  );
-};
-
-export const TableHead = () => {
-  return (
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Source
-        </th>
-        <th className="flex items-center gap-2">
-          Date
-        </th>
-        <th className="flex items-center gap-2">
-          Status
-        </th>
-      </tr>
-    </thead>
-  );
-};
 
 export const TablePagination = () => {
   return (
@@ -104,32 +61,41 @@ export const TablePagination = () => {
   );
 };
 
-export const TableFooter = () => {
-  return (
-    <tfoot>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </tfoot>
-  );
-};
+
 
 export const Table = () => {
   return (
     <div className="overflow-x-auto">
       <table className="table">
-        <TableHead />
+        {/* head */}
+        <thead>
+          <tr>
+            <th>
+              <label>
+                <input type="checkbox" className="checkbox" />
+              </label>
+            </th>
+            <th>Name</th>
+            <th>Job</th>
+            <th>Favorite Color</th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>
-          {orders.map((order) => (
-            <TableRow key={order.id} row={order} />
-          ))}
+          {/* row 1 */}
+          {orders.map(order => <TableRow key={order.id} row={order} /> )}
         </tbody>
+        {/* foot */}
+        <tfoot>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Job</th>
+            <th>Favorite Color</th>
+            <th></th>
+          </tr>
+        </tfoot>
       </table>
-      <TablePagination />
     </div>
   );
 };

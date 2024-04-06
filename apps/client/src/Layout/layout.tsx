@@ -7,17 +7,18 @@ type LayoutProps = {
   children: ReactChild | ReactChild[];
 };
 import {
-  HiOutlineBriefcase,
+  HiOutlineShoppingCart,
   HiOutlineUserCircle,
   HiOutlineTruck,
   HiOutlineBuildingOffice,
+  HiOutlineCube
 } from "react-icons/hi2";
 
 const links = [
   {
     name: "Products",
     href: "/products",
-    icon: HiOutlineBriefcase,
+    icon: HiOutlineShoppingCart,
   },
   {
     name: "Orders",
@@ -29,6 +30,11 @@ const links = [
     href: "/account",
     icon: HiOutlineUserCircle,
   },
+  {
+    name: "Inventory",
+    href: "/inventory",
+    icon: HiOutlineCube,
+  }
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {

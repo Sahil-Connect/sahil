@@ -7,7 +7,25 @@ import {
   HiOutlineBriefcase,
 } from "react-icons/hi2";
 import Link from "next/link";
-import { Avatar, Card } from "ui";
+import { Avatar, Card, Dropdown } from "ui";
+
+const dropdownOptions = [
+  {
+    id: "business",
+    label: "Business",
+    icon: HiOutlineBriefcase,
+  },
+  {
+    id: "courier",
+    label: "Courier",
+    icon: HiOutlineTruck,
+  },
+  {
+    id: "supplier",
+    label: "Supplier",
+    icon: HiOutlineBuildingOffice,
+  },
+];
 
 export const AgentToolBar = () => {
   return (
