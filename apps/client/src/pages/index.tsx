@@ -10,7 +10,7 @@ const containerStyle = {
 
 const currentLocation = { lat: 4.841655610396733, lng: 31.614388667253447 };
 
-const googleMapsApiKey = process.env.NEXT_PUBLIC_API_KEY as string;
+const googleMapsApiKey = process.env.NEXT_PUBLIC_MAPS_API_KEY as string;
 function MyComponent() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",

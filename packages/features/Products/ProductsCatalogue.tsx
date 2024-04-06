@@ -13,12 +13,13 @@ import { ProductSummary } from "./ProductOverviewCard";
 
 export const ProductsCatalogue = () => {
   const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(10);
   const {
     data: products,
     error,
     loading,
     productsCount,
-  } = useFetchProducts({ offset });
+  } = useFetchProducts({ limit, offset });
 
   const {
     addOrderItem,
@@ -83,10 +84,10 @@ export const ProductsCatalogue = () => {
     <section className="space-y-4">
       <ListHeader size={productsCount.count} sizeLabel="Products">
         <ListPagination
-          onNextPage={() => setOffset((prev) => prev + 12)}
-          onPreviousPage={() => setOffset((prev) => prev - 12)}
+          onNextPage={() => setOffset((prev) => prev + 10)}
+          onPreviousPage={() => setOffset((prev) => prev - 10)}
           isNextDisabled={
-            (productsCount && offset + 12 >= productsCount.count) || false
+            (productsCount && offset + 10 >= productsCount.count) || false
           }
           isPrevDisabled={offset === 0}
         />

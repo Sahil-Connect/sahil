@@ -15,15 +15,20 @@ export const Drawer: FC<DrawerProps> = ({ children, CTA }) => {
         >
           {CTA}
         </label>
-      </div>
+
+              {/** conflict with steps component requires higher z-index */}
       <div className="drawer-side z-10">
         <label
           htmlFor="my-drawer-4"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
+        <div className="bg-base-100 h-full p-8">
         {children}
+        </div>
       </div>
+      </div>
+
     </div>
   );
 };
