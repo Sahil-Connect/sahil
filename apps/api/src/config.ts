@@ -23,3 +23,9 @@ export const WebPushPrivateVapidKey =
 
 export const hasuraEndpoint = process.env.HASURA_GRAPHQL_ENDPOINT || "";
 export const hasuraAdminSecret = process.env.HASURA_GRAPHQL_ADMIN_SECRET || "";
+
+export const databaseHost = process.env?.DATABASE_HOST ?? "localhost";
+export const databaseUser = process.env?.DATABASE_USER ?? "postgres";
+export const databasePort = process.env?.DATABASE_PORT ?? "5432";
+export const database = process.env?.DATABASE_NAME ?? "postgres";
+export const databasePassword = process?.env?.DATABASE_PASSWORD ?? "password";
