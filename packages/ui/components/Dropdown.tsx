@@ -25,7 +25,7 @@ export const Dropdown: FC<DropdownProps> = ({ options, CTA }) => {
       </label>
       <ul
         tabIndex={0}
-        className="dropdown-content z-[1] menu p-2 border bg-base-100 rounded-box mt-4 space-y-2"
+        className="dropdown-content z-[1] menu p-2 border bg-base-100 rounded-box w-56 mt-4 space-y-2"
       >
         {options?.map((option: DropdownOption) => (
           <li key={option?.id}>

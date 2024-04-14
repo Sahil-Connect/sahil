@@ -1,4 +1,4 @@
-import { HiOutlineClock, HiOutlineArrowLongDown } from "react-icons/hi2";
+import { HiOutlineClock, HiOutlineArrowDown } from "react-icons/hi2";
 import { TableFooter } from "./TableFooter";
 import { TableRow } from "./TableRow";
 import { TableHead } from "./TableHead";
@@ -65,18 +65,18 @@ export const TablePagination = () => {
 
 export const Table = () => {
   return (
-    <div className="overflow-x-auto">
-      <table className="table">
+    <div className=" bg-base-100 rounded-xl shadow-sm">
+      <table className="table table-bordered">
         {/* head */}
-        <thead>
+        <thead className="border-b">
           <tr>
             <th>
               <label>
                 <input type="checkbox" className="checkbox" />
               </label>
             </th>
-            <th>Name</th>
-            <th>Job</th>
+            <th className="flex gap-2 items-center">Product <HiOutlineArrowDown /></th>
+            <th>Price</th>
             <th>Quantity</th>
             <th></th>
           </tr>

@@ -7,11 +7,11 @@ export default function InventoryPage() {
 
     const onOptionClick = () => {}
   return (
-    <div>
+    <div className="space-y-2">
       <Card>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <div>
-            <h3>Inventory</h3>
+            <h3 className="text-xl">Inventory</h3>
           </div>
           <div>
             <SplitButton 

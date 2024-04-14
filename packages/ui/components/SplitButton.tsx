@@ -6,7 +6,7 @@ import { HiOutlineArrowDown } from "react-icons/hi2";
 export const SplitButton = () => {
   return (
     <JoinGrid>
-      <button className="join-item btn btn-sm btn-primary">First Button</button>
+      <button className="join-item btn btn-sm btn-primary"><HiOutlineArrowDown /> First Button</button>
       <button
         className="join-item btn btn-sm btn-square btn-primary"
         title="Dropdown"
