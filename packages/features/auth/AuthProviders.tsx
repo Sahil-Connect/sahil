@@ -33,13 +33,13 @@ export const AuthProviders: FC<Props> = ({ providers }) => {
               <div key={provider?.name}>
                 <div>
                   <button
-                    className="btn w-full"
+                    className="btn w-full capitalize"
                     onClick={() => {
                       signIn(provider?.id);
                     }}
                   >
                     {provider.name === "Google" ? <FaGoogle /> : <FaFacebook />}
-                    Sign in with {provider?.name}
+                    Continue with {provider?.name}
                   </button>
                 </div>
               </div>

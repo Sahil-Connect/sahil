@@ -2,14 +2,15 @@ import { HMAC } from "oslo/crypto";
 import { createJWT, validateJWT, parseJWT } from "oslo/jwt";
 import { TimeSpan } from "oslo";
 import jwt from "jsonwebtoken";
+import { JWT } from "next-auth/jwt";
 
-export const generateJWTClaim = (token: any) => {
+export const generateJWTClaim = (token: JWT) => {
   const claims = {
-    sub: token?.sub.toString(),
+    sub: token?.sub?.toString(),
     name: token?.name,
     email: token?.email,
     iat: Date.now() / 1000,
-    exp: new TimeSpan(30, "d"),
+    exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
     "https://hasura.io/jwt/claims": {
       "x-hasura-allowed-roles": ["user"],
       "x-hasura-default-role": "user",
@@ -38,14 +39,20 @@ export const generateJWT = async (
     | undefined,
   { secret }: { secret: any }
 ) => {
-  const jwt = await createJWT("HS256", secret, payload!, {
-    expiresIn: new TimeSpan(30, "d"),
-    includeIssuedTimestamp: true,
-    ...payload,
-  });
-  return jwt;
+  const encodedToken = jwt.sign(payload!, secret, { algorithm: "HS256" });
+  return encodedToken;
 };
 
 export const decodeJWT = (token: any, { secret }: { secret: any }) => {
-  return jwt.verify(token, secret, { algorithms: ["HS256"] });
+  const decodedToken = jwt.verify(token, secret, { algorithms: ["HS256"] });
+  return decodedToken as JWT;
+};
+
+const stringToArrayBuffer = (str: string) => {
+  var buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
+  var bufView = new Uint16Array(buf);
+  for (var i = 0, strLen = str.length; i < strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
 };

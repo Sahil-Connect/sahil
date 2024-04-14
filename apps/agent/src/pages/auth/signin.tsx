@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import type { NextPage } from "next";
 import { getProviders, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { LoginCard } from "@sahil/features/auth/LoginCard";
+import LoginForm from "@sahil/features/auth/forms/LoginForm";
+import AuthCard from "@sahil/features/auth/AuthCard";
+import logo from "../../../public/logo.png";
 
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();
@@ -15,17 +17,19 @@ const SignInPage: NextPage = ({ providers }: any) => {
   }, [router, session]);
 
   return (
-    <div className="p-4 space-y-2">
-      <div className="flex items-center justify-center">
-        <div className="space-y-4">
-          <h1 className="text-center text-2xl">Welcome Back</h1>
-          <LoginCard providers={providers} />
-          <div>
-            <p className="text-center">Don&apos;t have an account?</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <AuthCard
+        providers={providers}
+        logo={logo}
+        form={<LoginForm />}
+        title="Sign in to your account"
+        sub={{
+          text: "Don't have an account?",
+          href: "/auth/signup",
+          cta: "Sign Up",
+        }}
+      />
+    </>
   );
 };
 

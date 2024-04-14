@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import type { NextPage } from "next";
 import { Card, Input } from "ui";
 import { HiArrowSmallRight } from "react-icons/hi2";
-import { useRegisterUserAction } from "@/hooks/users";
+import { useRegisterUserAction } from "@sahil/lib/hooks/users";
 import { getProviders, signIn, useSession, signOut } from "next-auth/react";
 
 const userSchema = z.object({

@@ -7,13 +7,7 @@ const extendedConfig: Config = {
   content: [
     // @ts-expect-error
     ...baseConfig.content,
-    "./src/Addresses/**/**.{js,ts,jsx,tsx,mdx}",
-    "./src/Agents/**/*.{js,ts,tsx,tsx,mdx}",
-    "./src/Centers/**/*.{js,ts,tsx,tsx,mdx}",
-    "./src/Couriers/**/*.{js,ts,tsx,tsx,mdx}",
-    "./src/Zones/**/*.{js,ts,tsx,tsx,mdx}",
-    "./src/Businesses/**/*.{js,ts,tsx,tsx,mdx}",
-    "./src/Suppliers/**/*.{js,ts,tsx,tsx,mdx}",
+    "./src/**/**/**.{js,ts,jsx,tsx,mdx}",
     "./src/Layout/*.{js,ts,tsx,tsx,mdx}",
   ],
   theme: {
