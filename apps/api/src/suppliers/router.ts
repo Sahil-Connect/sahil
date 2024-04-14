@@ -9,7 +9,8 @@ suppliersRouter.get(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const suppliers = await listRecommendedSuppliers();
+      console.log("check!");
+      const { suppliers } = await listRecommendedSuppliers();
       res.status(201).json({
         suppliers,
       });
