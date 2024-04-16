@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useCourierFormStore } from "@sahil/lib/hooks/useCourierFormStore";
+import { useCourierFormStore } from "@sahil/lib/hooks/formStores/useCourierFormStore";
 import { useRouter } from "next/router";
 import { useRegisterCourier } from "@sahil/lib/hooks/couriers";
 import toast, { Toaster } from "react-hot-toast";

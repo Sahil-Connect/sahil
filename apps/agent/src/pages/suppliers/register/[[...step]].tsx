@@ -7,7 +7,7 @@ import {
   SupplierPreferencesForm,
   SupplierFormSteps,
 } from "@sahil/features/Suppliers/SupplierRegistrationForm";
-import { useSupplierFormStore } from "@sahil/lib/hooks/useSupplierFormStore";
+import { useSupplierFormStore } from "@sahil/lib/hooks/formStores/useSupplierFormStore";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { INITIAL_STEP } from "@sahil/features/Suppliers/constants";
 import { Card, StepsPaginator } from "ui";

@@ -7,7 +7,7 @@ import {
   useRegisterBusiness,
   useRegisterBusinessSubscription,
 } from "@sahil/lib/hooks/businesses";
-import { useBusinessFormStore } from "@sahil/lib/hooks/useBusinessFormStore";
+import { useBusinessFormStore } from "@sahil/lib/hooks/formStores/useBusinessFormStore";
 
 export const BusinessInfoSummary = () => {
   const [actionId, setActionId] = useState<string>("");
