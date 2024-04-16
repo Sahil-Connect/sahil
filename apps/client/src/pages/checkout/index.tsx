@@ -22,7 +22,7 @@ export const OrderItem = ({
   price,
   quantity,
   title,
-  mainImage
+  mainImage,
 }: {
   price: number;
   quantity: number;
@@ -31,20 +31,21 @@ export const OrderItem = ({
 }) => {
   return (
     <div className="card card-side card-compact shadow bg-base-100">
-      <figure><Image src={mainImage} alt="Movie" height="65" width="65" /></figure>
+      <figure>
+        <Image src={mainImage} alt="Movie" height="65" width="65" />
+      </figure>
       <div className="card-body">
-      <div className="flex justify-between items-center">
-        <div className="flex gap-2 items-center">
-          <h2 className="card-title text-sm">{title}</h2>
-  
+        <div className="flex justify-between items-center">
+          <div className="flex gap-2 items-center">
+            <h2 className="card-title text-sm">{title}</h2>
+          </div>
+          <div className="card-actions justify-end">
+            <QuantityInput />
+          </div>
         </div>
-        <div className="card-actions justify-end">
-        <QuantityInput />
-      </div>
-      </div>
-      <p className="flex items-center gap-2 font-bold">
-            {formatCurrency(price)}
-          </p>
+        <p className="flex items-center gap-2 font-bold">
+          {formatCurrency(price)}
+        </p>
       </div>
     </div>
   );
@@ -76,7 +77,7 @@ export const OrderItems = ({ items }: { items: any }) => {
               name: string;
               quantity: number;
               price: number;
-              mainImage?: string
+              mainImage?: string;
             }) => (
               <OrderItem
                 key={item.id}

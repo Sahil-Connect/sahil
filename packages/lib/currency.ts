@@ -9,12 +9,15 @@ export const formatCurrency = (number: number) => {
   return `${formattedNumber} SSP`;
 };
 
-export const  calculateDiscountedPrice = (originalPrice: number, discountPercentage: number) =>{
+export const calculateDiscountedPrice = (
+  originalPrice: number,
+  discountPercentage: number
+) => {
   // Convert discount percentage to a decimal
   const discountDecimal = discountPercentage / 100;
-  
+
   // Calculate discounted price
-  const discountedPrice = originalPrice - (originalPrice * discountDecimal);
-  
+  const discountedPrice = originalPrice - originalPrice * discountDecimal;
+
   return discountedPrice;
-}
+};

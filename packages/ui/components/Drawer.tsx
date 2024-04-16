@@ -1,34 +1,32 @@
 import { FC } from "react";
+
 export type DrawerProps = {
+  id: string;
   children: any;
   CTA: string;
 };
-export const Drawer: FC<DrawerProps> = ({ children, CTA }) => {
+
+export const Drawer: FC<DrawerProps> = ({ id, children, CTA }) => {
   return (
-    <div className="drawer drawer-end bg-rose-100 bg-opacity-10">
-      <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+    <div className="drawer drawer-end">
+      <input id={id} type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Page content here */}
-        <label
-          htmlFor="my-drawer-4"
-          className="drawer-button btn-sm btn btn-ghost w-full"
-        >
+        <label htmlFor={id} className="drawer-button btn btn-ghost w-full">
           {CTA}
         </label>
-
-              {/** conflict with steps component requires higher z-index */}
+      </div>
       <div className="drawer-side z-10">
         <label
-          htmlFor="my-drawer-4"
+          htmlFor={id}
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="bg-base-100 h-full p-8">
-        {children}
+        <div className="menu p-4 w-1/2 min-h-full bg-base-200 text-base-content">
+          {/* Sidebar content here */}
+          {children}
         </div>
       </div>
-      </div>
-
     </div>
   );
 };

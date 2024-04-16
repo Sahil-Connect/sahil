@@ -48,7 +48,7 @@ export const TableControls = () => {
 
 export type TableRowProps = {
   row: Record<string, any>;
-}
+};
 
 export const TableRow = ({ row }: TableRowProps) => {
   return (
@@ -76,18 +76,10 @@ export const TableHead = () => {
   return (
     <thead>
       <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Source
-        </th>
-        <th className="flex items-center gap-2">
-          Date
-        </th>
-        <th className="flex items-center gap-2">
-          Status
-        </th>
+        <th>Name</th>
+        <th>Source</th>
+        <th>Date</th>
+        <th>Status</th>
       </tr>
     </thead>
   );

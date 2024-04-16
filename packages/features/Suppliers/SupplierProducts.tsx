@@ -4,7 +4,6 @@ import SupplierProductList from "./SupplierProductList";
 import AddNewProductModal from "./AddNewProductModal";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 
-
 type props = {
   productsCount: number;
 };

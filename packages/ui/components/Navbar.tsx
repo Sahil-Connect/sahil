@@ -6,7 +6,7 @@ import type { IconType } from "react-icons";
 import {
   HiOutlineAdjustmentsHorizontal,
   HiOutlineArrowRightOnRectangle,
-  HiOutlinePlus
+  HiOutlinePlus,
 } from "react-icons/hi2";
 
 type NavbarLink = {
@@ -65,7 +65,12 @@ export const Navbar: FC<NavbarProps> = ({
       </div>
 
       <div className="navbar-end gap-4">
-        <Link href="/orders/new/order_details" className="btn btn-sm btn-primary">New Order <HiOutlinePlus /> </Link>
+        <Link
+          href="/orders/new/order_details"
+          className="btn btn-sm btn-primary"
+        >
+          New Order <HiOutlinePlus />{" "}
+        </Link>
         <div className="dropdown dropdown-end text-gray-600">
           <div
             tabIndex={0}

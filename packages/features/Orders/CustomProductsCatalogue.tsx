@@ -112,10 +112,7 @@ export const CustomProductsCatalogue = () => {
             <button className="btn btn-sm ghost">
               <HiOutlineFunnel /> Filter
             </button>
-            <select
-              className="select select-sm w-full max-w-xs"
-              title="sort"
-            >
+            <select className="select select-sm w-full max-w-xs" title="sort">
               <option disabled>Sort by</option>
               <option>Lowest - Highest</option>
               <option>Highest - Lowest</option>

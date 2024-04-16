@@ -11,7 +11,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const { isAuthenticated, isAuthorized } = await routeGuard(req, agentAccessRules);
+  const { isAuthenticated, isAuthorized } = await routeGuard(
+    req,
+    agentAccessRules
+  );
 
   if (!isAuthenticated) {
     url.pathname = "/auth/signin";
