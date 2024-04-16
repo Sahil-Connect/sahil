@@ -30,7 +30,6 @@ export const Navbar: FC<NavbarProps> = ({
   onSignOut,
   user = {},
 }) => {
-  console.log(user?.image);
   return (
     <header className="navbar shadow border-b">
       <div className="navbar-start gap-8">

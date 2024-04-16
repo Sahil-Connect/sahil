@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useFetchProducts } from "@sahil/lib/hooks/products";
 import { Card, QuantityInput } from "ui";
 import { formatCost } from "@sahil/lib";
-import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
+import { useOrderItemsStore } from "@sahil/lib/hooks/formStores/useOrderItemsStore";
 import { formatCurrency } from "@sahil/lib";
 import Image from "next/image";
 import { useRouter } from "next/router";

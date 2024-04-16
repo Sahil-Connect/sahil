@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { z } from "zod";
-import { useOrderFormStore } from "@sahil/lib/hooks/useOrderFormStore";
+import { useOrderFormStore } from "@sahil/lib/hooks/formStores/useOrderFormStore";
 import {
   DeliveryDetails,
   OrderDetails,
