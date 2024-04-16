@@ -65,12 +65,12 @@ const candidates = [
 export const listRecommendedSuppliers = async () => {
   const combinations = await generateCombinations(candidates, 20);
   // Print the combinations
-  console.log("Combinations of suppliers that add up to 20kgs:");
+  console.log("Combinations of suppliers that add up to 20kgs:", combinations);
 
 
   const pairs = sumOrderItems(candidates, 20);
 
-  console.log("pairs", pairs);
+  // console.log("pairs", pairs);
 
   const rankedSuppliers = rankedSuppliersBasedOnScore(pairs);
 

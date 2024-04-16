@@ -2601,6 +2601,13 @@
     "@types/through" "*"
     rxjs "^6.4.0"
 
+"@types/js-combinatorics@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/js-combinatorics/-/js-combinatorics-1.2.0.tgz#81c753702bf9c826297abe85d179f803dc51ada1"
+  integrity sha512-c8JDKRYrLjJUD77htINkEXTZ4bq5MaJNTRYnFLMoeXviSWQkdHYZ3wUfT2YGuB+pizDmQTsaXCMQOntMdS9kvQ==
+  dependencies:
+    js-combinatorics "*"
+
 "@types/js-yaml@^4.0.0":
   version "4.0.9"
   resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.9.tgz#cd82382c4f902fed9691a2ed79ec68c5898af4c2"
@@ -6403,7 +6410,7 @@ jose@^5.0.0:
   resolved "https://registry.yarnpkg.com/jose/-/jose-5.2.0.tgz#d0ffd7f7e31253f633eefb190a930cd14a916995"
   integrity sha512-oW3PCnvyrcm1HMvGTzqjxxfnEs9EoFOFWi2HsEGhlFVOXxTE3K9GKWVMFoFw06yPUqwpvEWic1BmtUZBI/tIjw==
 
-js-combinatorics@^2.1.2:
+js-combinatorics@*, js-combinatorics@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/js-combinatorics/-/js-combinatorics-2.1.2.tgz#1434bce70c6e3b46f01c6b214626e95ff7905f81"
   integrity sha512-/1AY2bYwxajoaKjPzvgQ80U7lcucU71ubzFPVgZGmzbDGn3R18ZQUZfD69+4Idg4JfNcq6trwD6I+dRfVnr/tg==
