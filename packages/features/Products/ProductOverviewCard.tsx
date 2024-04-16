@@ -1,18 +1,6 @@
-import { useEffect, useState } from "react";
-import { useFetchProducts } from "@sahil/lib/hooks/products";
-import { Card, List, ListHeader, ListPagination, QuantityInput } from "ui";
+import { Drawer, Table, QuantityInput } from "ui";
 import { formatCurrency, calculateDiscountedPrice } from "@sahil/lib";
-import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
-import Link from "next/link";
-import {
-  HiMinus,
-  HiPlus,
-  HiOutlineArrowRight,
-  HiOutlineShoppingCart,
-  HiXMark,
-  HiOutlineSparkles,
-} from "react-icons/hi2";
-import { Products } from "@sahil/lib/graphql/__generated__/graphql";
+import { HiOutlineShoppingCart, HiOutlineSparkles } from "react-icons/hi2";
 
 type ProductSummaryProps = {
   onAddOrderItem?: (item: any) => void;
@@ -86,18 +74,9 @@ export const ProductSummary = ({
           ) : (
             <QuantityInput />
           )}
-          <button
-            className="btn btn-sm btn-ghost w-full"
-            onClick={() => {
-              if(onAddOrderItem) {
-                onAddOrderItem(product);
-              }
-            }}
-            type="button"
-            title="Add Item"
-          >
-            Compare
-          </button>
+          <Drawer id={product.id} CTA="Compare">
+            <Table />
+          </Drawer>
         </div>
       </div>
     </div>

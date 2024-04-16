@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Business } from "../graphql/__generated__/graphql";
+import { Business } from "../../graphql/__generated__/graphql";
 export const INITIAL_STEP = "order_details";
 export const steps = [
   "order_details",

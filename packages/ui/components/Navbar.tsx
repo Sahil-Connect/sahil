@@ -6,7 +6,7 @@ import type { IconType } from "react-icons";
 import {
   HiOutlineAdjustmentsHorizontal,
   HiOutlineArrowRightOnRectangle,
-  HiOutlinePlus
+  HiOutlinePlus,
 } from "react-icons/hi2";
 
 type NavbarLink = {
@@ -30,7 +30,6 @@ export const Navbar: FC<NavbarProps> = ({
   onSignOut,
   user = {},
 }) => {
-  console.log(user?.image);
   return (
     <header className="navbar shadow border-b">
       <div className="navbar-start gap-8">
@@ -65,7 +64,12 @@ export const Navbar: FC<NavbarProps> = ({
       </div>
 
       <div className="navbar-end gap-4">
-        <button className="btn btn-sm btn-primary">New Order <HiOutlinePlus /> </button>
+        <Link
+          href="/orders/new/order_details"
+          className="btn btn-sm btn-primary"
+        >
+          New Order <HiOutlinePlus />{" "}
+        </Link>
         <div className="dropdown dropdown-end text-gray-600">
           <div
             tabIndex={0}

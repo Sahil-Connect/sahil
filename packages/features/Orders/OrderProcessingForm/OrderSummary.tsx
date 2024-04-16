@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Products } from "@sahil/lib/graphql/__generated__/graphql";
 
-import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
-import { useOrderFormStore } from "@sahil/lib/hooks/useOrderFormStore";
+import { useOrderItemsStore } from "@sahil/lib/hooks/formStores/useOrderItemsStore";
+import { useOrderFormStore } from "@sahil/lib/hooks/formStores/useOrderFormStore";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Card } from "ui";
 import { formatCost } from "@sahil/lib";

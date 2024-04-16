@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFetchProducts } from "@sahil/lib/hooks/products";
-import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
+import { useOrderItemsStore } from "@sahil/lib/hooks/formStores/useOrderItemsStore";
 import { Card, JoinGrid } from "ui";
 import { formatCost } from "@sahil/lib";
 import { ProductSummary } from "../Products/ProductOverviewCard";
@@ -112,10 +112,7 @@ export const CustomProductsCatalogue = () => {
             <button className="btn btn-sm ghost">
               <HiOutlineFunnel /> Filter
             </button>
-            <select
-              className="select select-sm w-full max-w-xs"
-              title="sort"
-            >
+            <select className="select select-sm w-full max-w-xs" title="sort">
               <option disabled>Sort by</option>
               <option>Lowest - Highest</option>
               <option>Highest - Lowest</option>

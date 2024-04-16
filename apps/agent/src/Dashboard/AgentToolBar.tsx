@@ -24,12 +24,6 @@ export const AgentToolBar = () => {
           </div>
         </div>
         <div className="flex gap-2">
-          <Link
-            href="/orders/new/order_details"
-            className="btn btn-sm btn-outline"
-          >
-            <HiPlus /> New Order
-          </Link>
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-sm btn-primary">
               <HiOutlineUsers /> Register User

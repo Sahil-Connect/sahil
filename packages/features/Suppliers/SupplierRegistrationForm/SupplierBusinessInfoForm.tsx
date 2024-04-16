@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSupplierFormStore } from "@sahil/lib/hooks/useSupplierFormStore";
+import { useSupplierFormStore } from "@sahil/lib/hooks/formStores/useSupplierFormStore";
 import { useRouter } from "next/router";
 
 const supplierContactInfoSchema = z.object({

@@ -1,6 +1,3 @@
 export const EditProductModal = () => {
-    return (
-        <>
-        </>
-    )
-}
+  return <></>;
+};

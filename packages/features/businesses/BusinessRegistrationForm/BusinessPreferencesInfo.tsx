@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Input, Radio, Select } from "ui";
-import { useBusinessFormStore } from "@sahil/lib/hooks/useBusinessFormStore";
+import { useBusinessFormStore } from "@sahil/lib/hooks/formStores/useBusinessFormStore";
 import {
   HiOutlineCreditCard,
   HiOutlineBanknotes,
