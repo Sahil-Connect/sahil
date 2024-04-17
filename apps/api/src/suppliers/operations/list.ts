@@ -2,7 +2,7 @@ import { db } from "../../lib/kysley/databse";
 import {
   findBestCombination,
   generateCombinations,
-} from "../../matcher/supplerCombinations";
+} from "../../matcher/supplierCombinations";
 
 import { rankedSuppliersBasedOnScore } from "../../matcher/sumOrderItems";
 
