@@ -61,7 +61,6 @@ const candidates = [
 ];
 
 
-
 export const listRecommendedSuppliers = async () => {
   const combinations = await generateCombinations(candidates, 20);
   // Print the combinations

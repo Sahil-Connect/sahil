@@ -1,5 +1,7 @@
 import { Combination }  from 'js-combinatorics';
 
+// we could rank the combinations based on the sum of their quantities
+// modulus the number of qunatity to get the combination size
 export const calculateCombinationSize = (candidates: { name: string, quantity: number }[], targetQuantity: number) : number => {
     let remainingQuantity = targetQuantity;
     let combinationSize = 0;

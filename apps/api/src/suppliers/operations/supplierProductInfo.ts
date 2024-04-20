@@ -5,12 +5,14 @@ import { db } from "../../lib/kysley/databse";
 export const supplierProductInfo = async (supplierId: string, product: any) => {
   // Construct the query
   const query = db
-    .selectFrom("products")
+    .selectFrom("products");
     // .where("products.supplier_id", "=", supplierId)
     // .andWhere("products.category", "=", product.category)
     // .andWhere("products.label", "=", product.label)
 
   // Execute the query
   const result = await query.execute();
+
+
   return result; 
 };
