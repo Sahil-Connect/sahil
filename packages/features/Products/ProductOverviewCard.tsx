@@ -1,6 +1,7 @@
-import { Drawer, Table, QuantityInput, Card } from "ui";
+import { Drawer, QuantityInput, Card } from "ui";
 import { formatCurrency, calculateDiscountedPrice } from "@sahil/lib";
 import { HiOutlineShoppingCart, HiOutlineSparkles } from "react-icons/hi2";
+import CompareSuppliersTable from "ui/components/table/CompareSuppliersTable";
 
 type ProductSummaryProps = {
   onAddOrderItem?: (item: any) => void;
@@ -123,7 +124,7 @@ const ProductCompareDrawer = ({ product }: ProductCompareDrawerProps) => {
     },
   ];
   return (
-    <Drawer id={product.id} CTA="Compare" className="justify-between">
+    <Drawer id={product.id} CTA="Compare" className="justify-between space-y-4">
       <div className="space-y-1">
         <h3 className="font-bold text-xl">Compare Product</h3>
         <p className="opacity-80">
@@ -163,7 +164,60 @@ const ProductCompareDrawer = ({ product }: ProductCompareDrawerProps) => {
         </div>
       </Card>
 
-      {/* <Table /> */}
+      <CompareSuppliersTable suppliers={suppliers} />
     </Drawer>
   );
 };
+
+const suppliers = [
+  {
+    id: 1,
+    name: "Radisson Blu",
+    price: 100000,
+    sale: 15,
+    delivery: 5,
+    score: 98,
+    address: "Kigali Heights",
+    source: "Direct",
+  },
+  {
+    id: 2,
+    name: "Norrsken House",
+    price: 450000,
+    sale: 5,
+    delivery: 1,
+    score: 95,
+    address: "Kigali Heights",
+    source: "Agent Assisted",
+  },
+  {
+    id: 3,
+    name: "Amigos",
+    price: 1000000,
+    sale: 25,
+    delivery: 6,
+    score: 90,
+    address: "Kigali Heights",
+    source: "Direct",
+  },
+  {
+    id: 4,
+    name: "KFC",
+    price: 720000,
+    sale: 5,
+    delivery: 1,
+    score: 85,
+    address: "Kigali Heights",
+    source: "Direct",
+  },
+  {
+    id: 5,
+    name: "Dominos",
+    price: 86000,
+    sale: 30,
+    delivery: 1,
+    score: 75,
+    address: "Kigali Heights",
+    source: "Direct",
+  },
+];
