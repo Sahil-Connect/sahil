@@ -27,8 +27,8 @@ export const ProductSummary = ({
         <div className="flex items-center justify-between">
           <h3 className="card-title text-sm">{product.name}</h3>
           <div className="badge badge-success items-center">
-            <HiOutlineSparkles />
             98
+            <HiOutlineSparkles />
           </div>
         </div>
         <p>{product.description}</p>
@@ -117,8 +117,8 @@ const ProductCompareDrawer = ({ product }: ProductCompareDrawerProps) => {
       label: "Sahil Score",
       value: (
         <div className="badge badge-success items-center">
-          <HiOutlineSparkles />
           98
+          <HiOutlineSparkles />
         </div>
       ),
     },

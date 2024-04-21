@@ -36,12 +36,15 @@ export const Table = <T extends unknown>({
         isNextDisabled={isNextDisabled}
         isPrevDisabled={isPrevDisabled}
       />
-      <div className="overflow-x-auto">
+      <div className="overflow-auto rounded-2xl shadow">
         <table className="table">
           <TableHead columns={columns} />
           <tbody>
             {data.map((row, rowIndex) => (
-              <TableRow key={rowIndex}>
+              <TableRow
+                key={rowIndex}
+                className={` ${rowIndex % 2 ? "bg-base-200 " : ""}`}
+              >
                 {columns.map((column) => (
                   <TableCell
                     key={column.accessKey as string}
@@ -66,18 +69,26 @@ export const TableHead = <T extends unknown>({
   columns,
 }: TableHeadProps<Column<T>>) => {
   return (
-    <thead className="bg-base-200">
+    <thead className="bg-primary/90 text-primary-content">
       <TableRow>
         {columns.map((column, index) => (
-          <th key={index}>{column.header}</th>
+          <th key={index} className="font-bold">
+            {column.header}
+          </th>
         ))}
       </TableRow>
     </thead>
   );
 };
 
-export const TableRow = ({ children }: { children: ReactNode }) => {
-  return <tr>{children}</tr>;
+export const TableRow = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
+  return <tr className={` ${className}`}>{children}</tr>;
 };
 
 type TableCellProps<T> = {
@@ -90,7 +101,9 @@ export const TableCell = <T extends unknown>({
   column,
 }: TableCellProps<T>) => {
   return (
-    <td>{column.cell ? column.cell(row) : String(row[column.accessKey])}</td>
+    <td className="min-w-[5rem]">
+      {column.cell ? column.cell(row) : String(row[column.accessKey])}
+    </td>
   );
 };
 

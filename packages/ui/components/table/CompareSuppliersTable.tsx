@@ -1,5 +1,5 @@
 import { formatCurrency, calculateDiscountedPrice } from "@sahil/lib";
-import { Column, Table, TableCell, TableHead, TableRow } from "./Table";
+import { Column, Table } from "./Table";
 import { HiOutlineSparkles } from "react-icons/hi2";
 
 type Props = {
@@ -11,6 +11,14 @@ const CompareSuppliersTable = ({ suppliers }: Props) => {
     {
       header: "Supplier",
       accessKey: "name",
+      cell(row) {
+        return (
+          <div className="flex flex-col space-y-1">
+            <span className="font-bold">{row.name}</span>
+            <span className="text-sm opacity-80">{row.address}</span>
+          </div>
+        );
+      },
     },
     {
       header: "Price",
@@ -40,7 +48,6 @@ const CompareSuppliersTable = ({ suppliers }: Props) => {
       header: "Sale",
       accessKey: "sale",
       cell(row) {
-        console.log(row);
         return <p>{row.sale}%</p>;
       },
     },
@@ -50,8 +57,8 @@ const CompareSuppliersTable = ({ suppliers }: Props) => {
       cell(row) {
         return (
           <div className="badge badge-success items-center">
-            <HiOutlineSparkles />
             98
+            <HiOutlineSparkles />
           </div>
         );
       },
@@ -59,8 +66,19 @@ const CompareSuppliersTable = ({ suppliers }: Props) => {
     {
       header: "Delivery",
       accessKey: "delivery",
+    },
+    {
+      header: "",
+      accessKey: "",
       cell(row) {
-        return <p>{row.delivery}</p>;
+        return (
+          <button
+            onClick={() => console.log(row.id)}
+            className="btn btn-sm text-primary normal-case btn-ghost"
+          >
+            Add to Cart
+          </button>
+        );
       },
     },
   ];
