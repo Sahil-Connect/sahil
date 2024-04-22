@@ -23,14 +23,13 @@ export const ProductsCatalogue = () => {
 
   const {
     addOrderItem,
+    removeOrderItem,
+
     orderItems,
     setProducts,
-    products: availableProducts,
   } = useOrderItemsStore((state) => state);
 
-  const orderItemsMap = new Map(
-    orderItems.map((item) => [item.productId, item])
-  );
+  const orderItemsMap = new Map(orderItems.map((item) => [item.id, item]));
 
   useEffect(() => {
     setProducts(products as Products[]);
@@ -70,14 +69,11 @@ export const ProductsCatalogue = () => {
   }
 
   const onAddOrderItem = (product: any) => {
-    addOrderItem({
-      ...product,
-      productId: product.id,
-      quantity: 1,
-    });
+    addOrderItem(product);
   };
+
   const onRemoveOrderItem = (product: any) => {
-    console.log("remove product to order", product);
+    removeOrderItem(product);
   };
 
   return (
@@ -103,9 +99,9 @@ export const ProductsCatalogue = () => {
             <ProductSummary
               key={product.id}
               product={product}
+              isInCart={isInCart}
               onAddOrderItem={onAddOrderItem}
               onRemoveOrderItem={onRemoveOrderItem}
-              isInCart={isInCart}
             />
           );
         }}

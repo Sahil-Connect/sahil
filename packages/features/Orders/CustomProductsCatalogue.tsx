@@ -25,9 +25,7 @@ export const CustomProductsCatalogue = () => {
   const { addOrderItem, orderItems, setProducts, products } =
     useOrderItemsStore((state) => state);
 
-  const orderItemsMap = new Map(
-    orderItems.map((item) => [item.productId, item])
-  );
+  const orderItemsMap = new Map(orderItems.map((item) => [item.id, item]));
 
   useEffect(() => {
     setProducts(data);
