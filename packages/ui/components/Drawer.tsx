@@ -1,13 +1,15 @@
 import { FC, useState } from "react";
 import useLockBodyScroll from "@sahil/lib/hooks/utilities/useLockBodyScroll";
+import { HiMiniXMark } from "react-icons/hi2";
 
 export type DrawerProps = {
   id: string;
   children: any;
   CTA: string;
+  className?: string;
 };
 
-export const Drawer: FC<DrawerProps> = ({ id, children, CTA }) => {
+export const Drawer: FC<DrawerProps> = ({ id, children, CTA, className }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useLockBodyScroll(isOpen);
@@ -36,9 +38,20 @@ export const Drawer: FC<DrawerProps> = ({ id, children, CTA }) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="menu p-4 w-1/2 min-h-full bg-base-200 text-base-content">
+        <div
+          className={`relative menu flex-nowrap p-4 w-2/3 xl:w-1/2 h-full min-h-full overflow-y-auto bg-base-100 text-base-content ${className}`}
+        >
           {/* Sidebar content here */}
           {children}
+
+          <label
+            htmlFor={id}
+            aria-label="close sidebar"
+            title="Close Sidebar"
+            className="absolute top-0 right-4 text-2xl cursor-pointer"
+          >
+            <HiMiniXMark />
+          </label>
         </div>
       </div>
     </div>
