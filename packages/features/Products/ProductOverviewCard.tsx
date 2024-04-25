@@ -1,28 +1,57 @@
+import { useState } from "react";
 import { Drawer, QuantityInput, Card } from "ui";
 import { formatCurrency, calculateDiscountedPrice } from "@sahil/lib";
 import { HiOutlineShoppingCart, HiOutlineSparkles } from "react-icons/hi2";
 import CompareSuppliersTable from "ui/components/table/CompareSuppliersTable";
+import { useOrderItemsStore } from "@sahil/lib/hooks/formStores/useOrderItemsStore";
 
 type ProductSummaryProps = {
-  onAddOrderItem?: (item: any) => void;
   product: any;
-  onRemoveOrderItem?: (item: any) => void;
   isInCart?: boolean;
+  onAddOrderItem?: (item: any) => void;
+  onRemoveOrderItem?: (item: any) => void;
 };
 
 const placeholder = "https://cdn-icons-png.flaticon.com/512/6389/6389206.png";
 
 export const ProductSummary = ({
-  onAddOrderItem,
   product,
-  onRemoveOrderItem,
   isInCart,
+  onAddOrderItem,
+  onRemoveOrderItem,
 }: ProductSummaryProps) => {
+  const [isAdding, setIsAdding] = useState(false);
+  const quantity = useOrderItemsStore(
+    (state) =>
+      state.orderItems.filter((item) => product.id === item.id)[0]?.quantity
+  );
+
+  const handleAddToCart = (newQuantity: number) => {
+    if (onAddOrderItem) {
+      onAddOrderItem({ ...product, quantity: newQuantity });
+    }
+    setIsAdding(false);
+  };
+
+  const handleRemoveFromCart = () => {
+    if (onRemoveOrderItem) {
+      onRemoveOrderItem({ ...product });
+    }
+  };
+
   return (
-    <div className="card card-bordered card-compact shadow h-96">
+    <div className="card card-bordered card-compact shadow h-96 relative">
       <figure>
         <img src={product.mainImage || placeholder} alt={product.name} />
       </figure>
+      {isInCart && (
+        <div className="absolute top-2 right-2 badge badge-primary">
+          <span className="mr-2">
+            <HiOutlineShoppingCart />
+          </span>
+          {product.name} - {quantity}x in cart
+        </div>
+      )}
       <div className="card-body">
         <div className="flex items-center justify-between">
           <h3 className="card-title text-sm">{product.name}</h3>
@@ -42,23 +71,42 @@ export const ProductSummary = ({
         </div>
         <div className="divider divider-vertical"> </div>
         <div className="card-actions items-center">
-          {!isInCart ? (
+          {isAdding ? (
+            <QuantityInput
+              quantity={quantity}
+              onConfirm={handleAddToCart}
+              onCancel={() => setIsAdding(false)}
+            />
+          ) : isInCart ? (
+            <div className="w-full grid grid-cols-2 gap-2">
+              <button
+                className="grow btn btn-sm btn-outline"
+                onClick={handleRemoveFromCart}
+                type="button"
+                title="Remove Item"
+              >
+                Remove Item
+              </button>
+              <button
+                className="grow btn btn-sm btn-primary"
+                onClick={() => setIsAdding(true)}
+                type="button"
+                title="Edit Quantity"
+              >
+                Edit Quantity
+              </button>
+            </div>
+          ) : (
             <button
               className="btn btn-sm btn-primary w-full"
-              onClick={() => {
-                if (onAddOrderItem) {
-                  onAddOrderItem(product);
-                }
-              }}
+              onClick={() => setIsAdding(true)}
               type="button"
               title="Add Item"
             >
               <HiOutlineShoppingCart /> Add To Cart
             </button>
-          ) : (
-            <QuantityInput />
           )}
-          <ProductCompareDrawer product={product} />
+          {!isAdding && <ProductCompareDrawer product={product} />}
         </div>
       </div>
     </div>

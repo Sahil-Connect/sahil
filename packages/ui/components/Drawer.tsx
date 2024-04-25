@@ -28,7 +28,10 @@ export const Drawer: FC<DrawerProps> = ({ id, children, CTA, className }) => {
       />
       <div className="drawer-content">
         {/* Page content here */}
-        <label htmlFor={id} className="drawer-button btn btn-ghost w-full">
+        <label
+          htmlFor={id}
+          className="drawer-button btn btn-sm btn-ghost w-full"
+        >
           {CTA}
         </label>
       </div>

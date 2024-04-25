@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 type OrderItem = {
-  productId: string;
+  id: string;
   quantity: number;
   price: number;
 };
@@ -25,62 +25,38 @@ export const useOrderItemsStore = create<OrderItemsStore>((set) => ({
   orderItems: [],
   addOrderItem: (item) =>
     set((state) => {
-      const existingItem = state.orderItems.find(
-        (i) => i.productId === item.productId
-      );
-      const productIndex = state.products.findIndex(
-        (product) => product.id === item.productId
-      );
+      const existingItem = state.orderItems.find((i) => i.id === item.id);
       const updatedProducts = state.products.map((product) =>
-        product.id === item.productId ? { ...product, isInCart: true } : product
+        product.id === item.id ? { ...product, isInCart: true } : product
       );
-      if (existingItem) {
-        // If the item already exists, update its quantity
-        const updatedItems = state.orderItems.map((i) => {
-          if (i.productId === item.productId) {
-            return { ...i, quantity: i.quantity + item.quantity };
-          }
-          return i;
-        });
-        return {
-          ...state,
-          orderItems: updatedItems,
-          products: updatedProducts,
-        };
-      } else {
-        // If the item is not in the orderItems, add it
-        return {
-          ...state,
-          orderItems: [...state.orderItems, item],
-          products: updatedProducts,
-        };
-      }
+
+      // If the item already exists, update its quantity, otherwise add it
+      const updatedItems = existingItem
+        ? state.orderItems.map((i) =>
+            i.id === item.id ? { ...i, quantity: item.quantity } : i
+          )
+        : [...state.orderItems, item];
+
+      return {
+        ...state,
+        orderItems: updatedItems,
+        products: updatedProducts,
+      };
     }),
   removeOrderItem: (item) =>
     set((state) => {
-      const updatedItems = state.orderItems.filter(
-        (i) => i.productId !== item.productId
-      );
+      const updatedItems = state.orderItems.filter((i) => i.id !== item.id);
       return { orderItems: updatedItems };
     }),
   updateOrderItem: (item) =>
     set((state) => {
-      const existingItem = state.orderItems.find(
-        (i) => i.productId === item.productId
+      const updatedItems = state.orderItems.map((i) =>
+        i.id === item.id ? { ...i, quantity: item.quantity } : i
       );
-      if (existingItem) {
-        // If the item already exists, update its quantity
-        const updatedItems = state.orderItems.map((i) => {
-          if (i.productId === item.productId) {
-            return { ...i, quantity: item.quantity };
-          }
-          return i;
-        });
-        return { orderItems: updatedItems };
-      } else {
-        // If the item is not in the orderItems, do nothing
-        return state;
-      }
+      return {
+        ...state,
+        orderItems: updatedItems,
+      };
     }),
   products: [],
   setProducts: (products: any) => {
