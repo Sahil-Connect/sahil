@@ -1,13 +1,12 @@
 type TabItem = {
   icon?: React.ReactNode;
   label: string;
-  param: string;
-  component: React.ReactNode;
+  value: string;
 };
 
 type TabsProps = {
   items: TabItem[];
-  onTabClick: (param: string) => void;
+  onTabClick: (value: string) => void;
   currentTab: string;
 };
 
@@ -18,9 +17,9 @@ export const Tabs = ({ items, onTabClick, currentTab }: TabsProps) => {
         <a
           key={index}
           className={`tab gap-2 ${
-            tab.param === currentTab ? "tab-active" : ""
+            tab.value === currentTab ? "tab-active" : ""
           }`}
-          onClick={() => onTabClick(tab.param)}
+          onClick={() => onTabClick(tab.value)}
         >
           {tab.icon} {tab.label}
         </a>
