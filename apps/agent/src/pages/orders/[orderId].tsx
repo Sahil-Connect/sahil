@@ -11,6 +11,33 @@ import { Tabs } from "ui";
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
 
+import {
+  HiOutlineAdjustmentsVertical,
+  HiOutlineExclamationCircle,
+  HiOutlineBeaker,
+} from "react-icons/hi2";
+
+export const OrderTabs = [
+  {
+    label: "Oder Info",
+    param: "info",
+    icon: <HiOutlineExclamationCircle />,
+    component: <></>,
+  },
+  {
+    label: "Order Preferences",
+    param: "preferences",
+    icon: <HiOutlineAdjustmentsVertical />,
+    component: <></>,
+  },
+  {
+    label: "Order Progress",
+    param: "progress",
+    icon: <HiOutlineBeaker />,
+    component: <></>,
+  },
+];
+
 export default function OrderPage() {
   const router = useRouter();
   const { orderId } = router.query;
@@ -26,7 +53,7 @@ export default function OrderPage() {
         <div className="divider divider-horizontal"></div>
         <div className="basis-4/6 space-y-2">
           <OrderOverview order={order} />
-          <Tabs />
+          <Tabs items={OrderTabs} onTabClick={() => {}} currentTab={""} />
           {true ? (
             <>
               <OrderDetails order={order} />
