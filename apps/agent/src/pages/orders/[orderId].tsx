@@ -5,6 +5,7 @@ import {
   OrderPreferences,
   OrderClient,
   OrderDetails,
+  OrderProgress,
 } from "@sahil/features/Orders";
 import { Tabs } from "ui";
 
@@ -23,19 +24,16 @@ export const OrderTabs = [
     label: "Oder Info",
     value: "info",
     icon: <HiOutlineExclamationCircle />,
-    component: <></>,
   },
   {
     label: "Order Preferences",
     value: "preferences",
     icon: <HiOutlineAdjustmentsVertical />,
-    component: <></>,
   },
   {
     label: "Order Progress",
     value: "progress",
     icon: <HiOutlineBeaker />,
-    component: <></>,
   },
 ];
 
@@ -90,7 +88,7 @@ const OrderTabController = ({ currentTab, order }: OrderTabControllerProps) => {
     case "preferences":
       return <OrderPreferences order={order} />;
     case "progress":
-      return <div>Order Progress</div>;
+      return <OrderProgress />;
     default:
       return <OrderDetails order={order} />;
   }
