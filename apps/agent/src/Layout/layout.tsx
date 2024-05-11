@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import logo from "../../public/logo.png";
+import logo from "../../public/logo.svg";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { Navbar } from "ui";
