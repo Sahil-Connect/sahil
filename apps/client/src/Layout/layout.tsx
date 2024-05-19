@@ -2,7 +2,7 @@ import React, { ReactChild } from "react";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { Navbar } from "ui";
-import logo from "../../public/logo.png";
+import logo from "../../public/logo-alt.svg";
 type LayoutProps = {
   children: ReactChild | ReactChild[];
 };

@@ -1,7 +1,7 @@
 import { getProviders } from "next-auth/react";
 import AuthCard from "@sahil/features/auth/AuthCard";
 import RegisterForm from "@sahil/features/auth/forms/RegisterForm";
-import logo from "../../../public/logo.png";
+import logo from "../../../public/logo.svg";
 
 const SignUpPage = ({ providers }: any) => {
   return (
