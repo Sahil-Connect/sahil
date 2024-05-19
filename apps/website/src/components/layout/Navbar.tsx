@@ -70,15 +70,13 @@ export const Navbar = () => {
             </div>
             <Link
               href="/"
-              className="flex items-center font-jakarta gap-x-2 text-zinc-900 font-bold text-xl"
             >
               <Image
                 src={logo}
                 alt={"Sahil"}
                 loading="eager"
-                className="w-10 max-w-full object-contain"
+                className="w-20 max-w-full object-contain"
               />
-              sahil
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex border border-gray-50 rounded-full shadow">
