@@ -62,7 +62,7 @@ export const Navbar: FC<NavbarProps> = ({
           </ul>
         </nav>
       </div>
-      <Right user={user} links={links} />
+      <Right user={user} links={links} onSignOut={onSignOut} />
     </header>
   );
 };
