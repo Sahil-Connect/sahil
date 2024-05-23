@@ -39,6 +39,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
     await signOut();
     router.push("/auth/signin");
   };
+
   return (
     <>
       <Navbar

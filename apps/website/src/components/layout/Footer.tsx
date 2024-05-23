@@ -22,9 +22,7 @@ export const Footer = () => {
       <GridContainer className="grid gap-y-8">
         <div className="grid gap-y-8 justify-between pb-12 border-b border-b-solid border-b-gray-200 md:grid-cols-[repeat(2,1fr)] lg:grid-cols-[repeat(4,max-content)]">
           <div>
-            <Link
-              href="/"
-            >
+            <Link href="/">
               <Image
                 src={logo}
                 alt={"Sahil logo"}
