@@ -13,7 +13,7 @@ const authPaths = {
   signOut: "/auth/signout",
   error: "/auth/error",
   verifyRequest: "/auth/verify-request",
-  newUser: "/auth/new",
+  newUser: "/auth/new/user_details",
 };
 
 const secret = process.env.SECRET;
@@ -30,24 +30,31 @@ const fetchToken = async (req: NextRequest) => {
 export const routeGuard = async (
   req: NextRequest,
   accessRules: AccessRule[]
-): Promise<{ isAuthorized: boolean; isAuthenticated: boolean }> => {
+): Promise<{
+  isAuthorized: boolean;
+  isAuthenticated: boolean;
+  hasCompletedOnboarding: boolean;
+}> => {
   const { pathname } = new URL(req.url, `http://${req.headers.get("host")}`);
 
-  if (Object.values(authPaths).includes(pathname)) {
-    return { isAuthenticated: true, isAuthorized: true };
-  }
-
-  const matchingRule = accessRules.find((rule) => pathname.includes(rule.path));
-  if (!matchingRule) return { isAuthenticated: true, isAuthorized: true };
-
   const rawToken = await fetchToken(req);
-  if (!rawToken) return { isAuthenticated: false, isAuthorized: false };
+  if (!rawToken)
+    return {
+      isAuthenticated: false,
+      isAuthorized: false,
+      hasCompletedOnboarding: false,
+    };
 
   const protocol = req.headers.get("x-forwarded-proto") || "http";
   const host = req.headers.get("host");
+
   if (!host) {
     console.error("Host header is undefined");
-    return { isAuthenticated: false, isAuthorized: false };
+    return {
+      isAuthenticated: false,
+      isAuthorized: false,
+      hasCompletedOnboarding: false,
+    };
   }
 
   const apiUrl = `${protocol}://${host}/api/auth/token`;
@@ -62,8 +69,30 @@ export const routeGuard = async (
 
   const userRole: string =
     payload?.["https://hasura.io/jwt/claims"]?.["x-hasura-role"];
+
+  // Extract the hasCompletedOnboarding field from the payload
+  const hasCompletedOnboarding: boolean =
+    payload?.hasCompletedOnboarding || false;
+
+  if (Object.values(authPaths).includes(pathname)) {
+    return {
+      isAuthenticated: true,
+      isAuthorized: true,
+      hasCompletedOnboarding,
+    };
+  }
+
+  const matchingRule = accessRules.find((rule) => pathname.includes(rule.path));
+  if (!matchingRule)
+    return {
+      isAuthenticated: true,
+      isAuthorized: true,
+      hasCompletedOnboarding,
+    };
+
   const isAuthorized = matchingRule.roles.includes(userRole);
-  return { isAuthenticated: !!userRole, isAuthorized };
+
+  return { isAuthenticated: !!userRole, isAuthorized, hasCompletedOnboarding };
 };
 
 export const getIdTokenClaims = async (req: NextRequest | NextApiRequest) => {

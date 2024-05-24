@@ -1,13 +1,10 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/router";
 import { z } from "zod";
+import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
-import type { NextPage } from "next";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Card, Input } from "ui";
 import { HiArrowSmallRight } from "react-icons/hi2";
-import { useRegisterUserAction } from "@sahil/lib/hooks/users";
-import { getProviders, signIn, useSession, signOut } from "next-auth/react";
+import { useOnBoardingFormStore } from "@sahil/lib/hooks/formStores/useOnBoardingFormStore";
 
 const userSchema = z.object({
   name: z.string().min(2, { message: "Must be more than 2 characters" }),
@@ -16,8 +13,14 @@ const userSchema = z.object({
 
 type FormData = z.infer<typeof userSchema>;
 
-const OnboardingPage: NextPage = ({ providers }: any) => {
-  const { registerUser } = useRegisterUserAction();
+type UserInformationProps = {
+  navigateToNextStep: (step: string) => void;
+};
+
+export const UserDetails = ({ navigateToNextStep }: UserInformationProps) => {
+  const { goToStep, updateStepFormData, formData } = useOnBoardingFormStore(
+    (state) => state
+  );
 
   const {
     register,
@@ -29,22 +32,14 @@ const OnboardingPage: NextPage = ({ providers }: any) => {
     resolver: zodResolver(userSchema),
   });
 
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = userSchema.parse(data);
-    const result = await registerUser({
-      variables: {
-        object: {
-          name: "Emmanuel Gatwech",
-          role: "admin",
-        },
-      },
-    });
-    console.log(result);
-    // router.push(`/);
+
+    updateStepFormData(validatedInput);
+    navigateToNextStep("role_details");
   };
-
-  const { data: session } = useSession();
-
   return (
     <div className="p-4">
       <h1 className="text-2xl">Welcome to Sahil</h1>
@@ -74,5 +69,3 @@ const OnboardingPage: NextPage = ({ providers }: any) => {
     </div>
   );
 };
-
-export default OnboardingPage;

@@ -9,4 +9,5 @@ const steps = [
   "preview",
 ] as const;
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
 export const useSupplierFormStore = useCreateFormStore(INITIAL_STEP, steps);

@@ -10,11 +10,7 @@ export const agentAccessRules = [
 ];
 
 export const clientAccessRules = [
-  { path: "/", roles: ["user", "business", "supplier"] },
-  { path: "/products", roles: ["user"] },
-  { path: "/orders", roles: ["user"] },
-  { path: "/account", roles: ["user"] },
-  { path: "/settings", roles: ["user"] },
+  { path: "/", roles: ["user"] },
   // Add more rules as needed for client
 ];
 
@@ -26,19 +22,28 @@ export async function middleware(
   const url = req.nextUrl.clone();
 
   // Skip routeGuard for these paths
-  if (url.pathname === "/auth/signin" || url.pathname === "/unauthorized") {
+  if (
+    url.pathname === "/auth/signin" ||
+    url.pathname === "/unauthorized" ||
+    url.pathname === "/auth/new/user_details"
+  ) {
     return NextResponse.next();
   }
 
-  const { isAuthenticated, isAuthorized } = await routeGuard(req, accessRules);
+  const { isAuthenticated, isAuthorized, hasCompletedOnboarding } =
+    await routeGuard(req, accessRules);
+
+  console.log(isAuthenticated, isAuthorized, hasCompletedOnboarding);
 
   if (!isAuthenticated) {
     url.pathname = "/auth/signin";
+  } else if (!hasCompletedOnboarding) {
+    url.pathname = "/auth/new/user_details";
   } else if (!isAuthorized) {
     url.pathname = "/unauthorized";
   }
 
-  if (!isAuthenticated || !isAuthorized) {
+  if (!isAuthenticated || !hasCompletedOnboarding || !isAuthorized) {
     return NextResponse.redirect(url);
   }
 

@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import {
   agentAccessRules,
   middleware as authMiddleware,
-} from "@sahil/lib/auth/middleware";
+} from "@sahil/features/auth/lib/middleware";
 
 export async function middleware(req: NextRequest) {
   return authMiddleware(req, agentAccessRules);

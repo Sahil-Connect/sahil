@@ -9,4 +9,5 @@ const steps = [
   "summary",
 ] as const;
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
 export const useBusinessFormStore = useCreateFormStore(INITIAL_STEP, steps);

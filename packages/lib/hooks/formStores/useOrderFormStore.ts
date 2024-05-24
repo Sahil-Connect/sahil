@@ -19,6 +19,7 @@ type OrderFormStore = {
   setCurrentClient: (client: Business) => void;
 };
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
 export const useOrderFormStore = useCreateFormStore<OrderFormStore>(
   INITIAL_STEP,
   steps,

@@ -10,3 +10,12 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+export const GET_ADDITIONAL_AUTH_USER_INFO = gql`
+  query getAdditionalAuthUserInfo($id: uuid = "") {
+    users_by_pk(id: $id) {
+      hasCompletedOnboarding
+      role
+    }
+  }
+`;
