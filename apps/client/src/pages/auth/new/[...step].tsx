@@ -1,5 +1,3 @@
-import type { NextPage } from "next";
-import { useRegisterUserAction } from "@sahil/lib/hooks/users";
 import { useSession } from "next-auth/react";
 import {
   useOnBoardingFormStore,
@@ -8,15 +6,18 @@ import {
 import { useRouter } from "next/router";
 import {
   OnboardingFormStep,
+  RoleDetails,
   UserDetails,
 } from "@sahil/features/auth/forms/onboarding";
 import { StepsPaginator } from "ui";
 
 const OnboardingPage = ({ providers }: any) => {
+  const router = useRouter();
   const { currentStep, goToStep, steps, updateStepByIndex } =
     useOnBoardingFormStore((state) => state);
   const currentIndex = steps.indexOf(currentStep);
-  const router = useRouter();
+
+  const { data } = useSession();
 
   const onUpdateStepByIndex = (step: (typeof steps)[number]) => {
     const stepIndex = steps.indexOf(step);
@@ -29,6 +30,7 @@ const OnboardingPage = ({ providers }: any) => {
 
   const navigateToNextStep = (path: string) => {
     goToStep("next");
+    ON_BOARDING_FORM_HEADERS[currentIndex].completed = true;
     router.push(`/auth/new/${path}`);
   };
 
@@ -49,12 +51,15 @@ const OnboardingPage = ({ providers }: any) => {
             steps={steps}
           />
           {currentStep === "user_details" && (
-            <UserDetails navigateToNextStep={navigateToNextStep} />
+            <UserDetails
+              navigateToNextStep={navigateToNextStep}
+              user={data?.user}
+            />
           )}
-          {/* {currentStep === "product_selection" && (
-          <ProductSelection navigateToNextStep={navigateToNextStep} />
-        )}
-        {currentStep === "delivery_details" && (
+          {currentStep === "role_details" && (
+            <RoleDetails navigateToNextStep={navigateToNextStep} />
+          )}
+          {/* {currentStep === "delivery_details" && (
           <DeliveryDetails navigateToNextStep={navigateToNextStep} />
         )}
         {currentStep === "payment_details" && (

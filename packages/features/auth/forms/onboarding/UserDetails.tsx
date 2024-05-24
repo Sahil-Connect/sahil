@@ -1,38 +1,48 @@
 import { z } from "zod";
-import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Card, Input } from "ui";
-import { HiArrowSmallRight } from "react-icons/hi2";
 import { useOnBoardingFormStore } from "@sahil/lib/hooks/formStores/useOnBoardingFormStore";
+import { HiArrowSmallRight } from "react-icons/hi2";
+import { Card, Input, Select } from "ui";
+
+const roles = ["business", "supplier"];
 
 const userSchema = z.object({
   name: z.string().min(2, { message: "Must be more than 2 characters" }),
-  email: z.string().min(2, { message: "Must be more than 2 characters" }),
+  email: z.string().email("Invalid email."),
+  role: z
+    .string()
+    .min(1, "Role is required")
+    .refine((value) => roles.includes(value)),
 });
 
 type FormData = z.infer<typeof userSchema>;
 
-type UserInformationProps = {
+type UserDetailsProps = {
   navigateToNextStep: (step: string) => void;
+  user:
+    | {
+        name?: string | null | undefined;
+        email?: string | null | undefined;
+        image?: string | null | undefined;
+      }
+    | undefined;
 };
 
-export const UserDetails = ({ navigateToNextStep }: UserInformationProps) => {
-  const { goToStep, updateStepFormData, formData } = useOnBoardingFormStore(
+export const UserDetails = ({ navigateToNextStep, user }: UserDetailsProps) => {
+  const { updateStepFormData, formData } = useOnBoardingFormStore(
     (state) => state
   );
 
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
-    // @ts-ignore
     resolver: zodResolver(userSchema),
   });
-
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = userSchema.parse(data);
@@ -40,32 +50,49 @@ export const UserDetails = ({ navigateToNextStep }: UserInformationProps) => {
     updateStepFormData(validatedInput);
     navigateToNextStep("role_details");
   };
+
+  useEffect(() => {
+    if (user) {
+      const defaultValues = {
+        name: user.name as string,
+        email: user.email as string,
+      };
+      reset({ ...formData, ...defaultValues });
+    }
+  }, [formData, reset, user]);
+
   return (
-    <div className="p-4">
-      <h1 className="text-2xl">Welcome to Sahil</h1>
-      <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
-        <Card>
-          <Input
-            name="name"
-            label="Your name"
-            placeholder="Keji Lumuro"
-            register={register}
-            errors={errors}
-          />
-          <Input
-            name="email"
-            type="email"
-            label="Your Email"
-            placeholder="keji@sahil.app"
-            register={register}
-            errors={errors}
-          />
-        </Card>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+      <Card>
+        <Input
+          name="name"
+          label="Your name"
+          placeholder="Keji Lumuro"
+          register={register}
+          errors={errors}
+          disabled={user ? true : false}
+        />
+        <Input
+          name="email"
+          type="email"
+          label="Your Email"
+          placeholder="user@example.app"
+          register={register}
+          errors={errors}
+          disabled={user ? true : false}
+        />
+        <Select
+          name="role"
+          label="Select a Role"
+          errors={errors}
+          register={register}
+          options={roles}
+        />
         <div className="btn btn-sm btn-primary w-fit">
           <input type="submit" value="Continue" />
           <HiArrowSmallRight />
         </div>
-      </form>
-    </div>
+      </Card>
+    </form>
   );
 };

@@ -1,5 +1,5 @@
 import { Steps } from "ui";
-import { StepDirection, StepItem } from "ui/components/MultiStepForm";
+import { StepItem } from "ui/components/MultiStepForm";
 import { ON_BOARDING_STEPS } from "@sahil/lib/hooks/formStores/useOnBoardingFormStore";
 
 type Props = {
