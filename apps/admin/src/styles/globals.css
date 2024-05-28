@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-    font-family: 'Inter', sans-serif;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
