@@ -5,6 +5,8 @@ import {
   OrderPreferences,
   OrderClient,
   OrderDetails,
+  OrderProgress,
+  OrderPaymentInformation,
 } from "@sahil/features/Orders";
 import { Tabs } from "ui";
 
@@ -18,12 +20,8 @@ export default function OrderPage() {
   if (error) return <p>error</p>;
   if (loading) return <p>loading</p>;
   return (
-    <section>
-      <div className="flex">
-        <div className="grow space-y-2">
-          <OrderClient businessId={order?.customerId} />
-        </div>
-        <div className="divider divider-horizontal"></div>
+    <section className="space-y-4">
+      <div className="flex gap-4">
         <div className="basis-4/6 space-y-2">
           <OrderOverview order={order} />
           <Tabs />
@@ -31,11 +29,22 @@ export default function OrderPage() {
             <>
               <OrderDetails order={order} />
               <OrderItems items={order?.order_items} />
-              <CourierOverview order={order} />
             </>
           ) : (
             <OrderPreferences order={order} />
           )}
+        </div>
+        <div className="grow space-y-2">
+          <OrderProgress />
+          <CourierOverview order={order} />
+        </div>
+      </div>
+      <div className="flex gap-4">
+        <div className="flex-1">
+          <OrderClient businessId={order?.customerId} />
+        </div>
+        <div className="flex-1">
+          <OrderPaymentInformation />
         </div>
       </div>
     </section>

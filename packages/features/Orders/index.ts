@@ -6,3 +6,4 @@ export * from "./OrderPreferences";
 export * from "./OrderProgress";
 export * from "./OrderClient";
 export * from "./OrderDetails";
+export * from "./OrderPaymentInformation";
