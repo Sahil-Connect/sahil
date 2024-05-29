@@ -34,6 +34,7 @@ export const UserDetails = ({ navigateToNextStep, user }: UserDetailsProps) => {
   const { updateStepFormData, formData } = useOnBoardingFormStore(
     (state) => state
   );
+  const role = formData.role as "supplier" | "business";
 
   const {
     register,
@@ -47,7 +48,14 @@ export const UserDetails = ({ navigateToNextStep, user }: UserDetailsProps) => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = userSchema.parse(data);
 
-    updateStepFormData(validatedInput);
+    // Reset role objects
+    const allRoles = ["business", "supplier"];
+    const newFormData: any = { ...validatedInput };
+    allRoles.forEach((r) => {
+      newFormData[r] = null;
+    });
+
+    updateStepFormData(newFormData);
     navigateToNextStep("role_details");
   };
 

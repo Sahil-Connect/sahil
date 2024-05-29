@@ -22,7 +22,7 @@ export const ON_BOARDING_FORM_HEADERS: Array<StepItem> = [
   },
   {
     title: "Preferences",
-    step: "preference",
+    step: "preferences",
     icon: HiOutlineAdjustmentsHorizontal,
     completed: false,
   },
@@ -39,7 +39,7 @@ export const INITIAL_STEP = "user_details";
 export const ON_BOARDING_STEPS = [
   "user_details",
   "role_details",
-  "preference",
+  "preferences",
   "summary",
 ] as const;
 

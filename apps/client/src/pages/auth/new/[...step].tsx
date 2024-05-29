@@ -6,6 +6,7 @@ import {
 import { useRouter } from "next/router";
 import {
   OnboardingFormStep,
+  Preferences,
   RoleDetails,
   UserDetails,
 } from "@sahil/features/auth/forms/onboarding";
@@ -59,13 +60,10 @@ const OnboardingPage = ({ providers }: any) => {
           {currentStep === "role_details" && (
             <RoleDetails navigateToNextStep={navigateToNextStep} />
           )}
-          {/* {currentStep === "delivery_details" && (
-          <DeliveryDetails navigateToNextStep={navigateToNextStep} />
-        )}
-        {currentStep === "payment_details" && (
-          <PaymentDetails navigateToNextStep={navigateToNextStep} />
-        )}
-        {currentStep === "summary" && <OrderSummary />} */}
+          {currentStep === "preferences" && (
+            <Preferences navigateToNextStep={navigateToNextStep} />
+          )}
+          {/* {currentStep === "summary" && <OrderSummary />} */}
         </div>
       </div>
     </section>

@@ -90,3 +90,11 @@ export const FETCH_BUSINESS_BY_PK = gql`
     }
   }
 `;
+
+export const FETCH_BUSINESS_TYPES = gql`
+  query getBusinessTypes @cached {
+    business_type {
+      type
+    }
+  }
+`;

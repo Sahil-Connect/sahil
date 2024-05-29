@@ -4,6 +4,7 @@ import {
   FETCH_BUSINESSES,
   FETCH_BUSINESS_BY_PK,
   FETCH_BUSINESS_ORDERS,
+  FETCH_BUSINESS_TYPES,
   INSERT_NEW_BUSINESS,
   REGISTER_BUSINESS_ACTION,
 } from "@sahil/lib/graphql";
@@ -90,4 +91,9 @@ export const useFetchBusinessOrders = ({
     loading,
     ordersCount: data?.orders_aggregate?.aggregate,
   };
+};
+
+export const useFetchBusinessTypes = () => {
+  const { error, data, loading } = useQuery(FETCH_BUSINESS_TYPES);
+  return { error, loading, data: data?.business_type };
 };

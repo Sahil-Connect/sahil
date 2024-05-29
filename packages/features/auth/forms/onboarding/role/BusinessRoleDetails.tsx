@@ -1,12 +1,16 @@
+import { useFetchBusinessTypes } from "@sahil/lib/hooks/businesses";
 import { Input, Select, TextArea } from "ui";
 
 type Props = {
   register: any;
   errors: any;
-  businessTypes: string[];
 };
 
-const BusinessRoleDetails = ({ register, errors, businessTypes }: Props) => {
+const BusinessRoleDetails = ({ register, errors }: Props) => {
+  const { data } = useFetchBusinessTypes();
+
+  const types = (data as any[])?.map(({ type }) => type) || [];
+
   return (
     <>
       <div className="flex items-center flex-wrap">
@@ -20,7 +24,7 @@ const BusinessRoleDetails = ({ register, errors, businessTypes }: Props) => {
         <Select
           name="business.type"
           label="Business Type"
-          options={businessTypes}
+          options={types}
           register={register}
           errors={errors}
         />

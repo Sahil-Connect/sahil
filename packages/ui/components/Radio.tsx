@@ -1,36 +1,75 @@
 import { FC } from "react";
 import { Icon } from "./Icon";
+import { BaseInputProps } from "../types";
+import { FormControl, FormControlError } from "./FormControl";
 
-type RadioProps = {
+type Option = {
+  value: string;
   label: string;
-  icon: any;
-  name: string;
-  register: any;
-  errors: any;
+  icon?: any;
 };
 
-export const Radio: FC<RadioProps> = ({
+type RadioGroupProps = BaseInputProps<any> & {
+  options: Option[];
+};
+
+export const RadioGroup: FC<RadioGroupProps> = ({
   label,
-  icon,
   name,
   register,
   errors,
+  options,
 }) => {
+  //handle nested errors
+  const errorPath = name.split(".");
+  let errorMessage;
+
+  if (errorPath.length > 1) {
+    errorMessage = errorPath.reduce(
+      (obj, key) => obj && obj[key],
+      errors
+    )?.message;
+  } else {
+    errorMessage = errors[name]?.message;
+  }
+
   return (
-    <div className="form-control">
-      <label className="label cursor-pointer">
-        <input
-          type="radio"
-          className="radio radio-sm checked:bg-secondary"
-          {...register(name)}
-        />
-        <div className="flex ml-4 items-center gap-2">
-          <span className="shadow p-2 rounded-md">
-            <Icon icon={icon} />
-          </span>
-          <span className="label-text">{label}</span>
-        </div>
-      </label>
-    </div>
+    <FormControl label={label!}>
+      <div className="flex flex-wrap gap-2">
+        {options.map((option, index) => (
+          <Radio key={index} register={register} name={name} option={option} />
+        ))}
+      </div>
+      {errorMessage && <FormControlError message={errorMessage} />}
+    </FormControl>
+  );
+};
+
+type RadioProps = {
+  option: Option;
+  name: string;
+  register: BaseInputProps<any>["register"];
+};
+
+const Radio = ({
+  name,
+  register,
+  option: { value, label, icon },
+}: RadioProps) => {
+  return (
+    <label className="label cursor-pointer">
+      <input
+        type="radio"
+        value={value}
+        className="radio radio-sm checked:bg-secondary"
+        {...register(name)}
+      />
+      <div className="flex ml-4 items-center gap-2">
+        <span className="shadow p-2 rounded-md">
+          <Icon icon={icon!} />
+        </span>
+        <span className="label-text">{label}</span>
+      </div>
+    </label>
   );
 };
