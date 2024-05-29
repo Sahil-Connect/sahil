@@ -61,3 +61,21 @@ export const ADD_NEW_PRODUCT = gql`
     }
   }
 `;
+
+export const ONBOARD_NEW_SUPPLIER = gql`
+  mutation OnboardNewSupplier(
+    $userId: uuid!
+    $role: user_role_enum
+    $object: suppliers_insert_input = {}
+  ) {
+    update_users_by_pk(
+      pk_columns: { id: $userId }
+      _set: { hasCompletedOnboarding: true, role: $role }
+    ) {
+      role
+    }
+    insert_suppliers_one(object: $object) {
+      id
+    }
+  }
+`;

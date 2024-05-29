@@ -13,6 +13,7 @@ import {
   ADD_NEW_PRODUCT,
   FETCH_SUPPLIER_ORDERS,
   FETCH_SUPPLIER_CATEGORIES,
+  ONBOARD_NEW_SUPPLIER,
 } from "@sahil/lib/graphql";
 
 // graphql types
@@ -156,4 +157,10 @@ export const useFetchSupplierCategories = () => {
   const { error, data, loading } = useQuery(FETCH_SUPPLIER_CATEGORIES);
 
   return { error, data: data?.supplier_categories_enum, loading };
+};
+
+export const useOnboardSupplier = () => {
+  const [onboardSupplier, { data, loading, error }] =
+    useMutation(ONBOARD_NEW_SUPPLIER);
+  return { onboardSupplier, data, loading, error };
 };

@@ -59,7 +59,7 @@ const BusinessPreference = ({ register, errors, methods }: Props) => {
       <RadioGroup
         options={contactOptions}
         label="Preferred Contact Method"
-        name="business.contactMethod"
+        name="business.preferredContactMethod"
         register={register}
         errors={errors}
       />
@@ -67,7 +67,7 @@ const BusinessPreference = ({ register, errors, methods }: Props) => {
       <RadioGroup
         options={deliveryOptions}
         label="Preferred Delivery Method"
-        name="business.deliveryMethod"
+        name="business.preferredDeliveryMethod"
         register={register}
         errors={errors}
       />
@@ -75,7 +75,7 @@ const BusinessPreference = ({ register, errors, methods }: Props) => {
       <RadioGroup
         options={paymentOptions}
         label="Preferred Payment Method"
-        name="business.paymentMethod"
+        name="business.preferredPaymentMethod"
         register={register}
         errors={errors}
       />

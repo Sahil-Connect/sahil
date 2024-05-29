@@ -10,7 +10,7 @@ export const agentAccessRules = [
 ];
 
 export const clientAccessRules = [
-  { path: "/", roles: ["user"] },
+  { path: "/", roles: ["supplier", "business"] },
   // Add more rules as needed for client
 ];
 

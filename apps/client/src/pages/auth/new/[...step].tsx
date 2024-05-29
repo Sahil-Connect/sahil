@@ -13,13 +13,13 @@ import {
 } from "@sahil/features/auth/forms/onboarding";
 import { StepsPaginator } from "ui";
 
-const OnboardingPage = ({ providers }: any) => {
+const OnboardingPage = () => {
   const router = useRouter();
   const { currentStep, goToStep, steps, updateStepByIndex } =
     useOnBoardingFormStore((state) => state);
   const currentIndex = steps.indexOf(currentStep);
 
-  const { data } = useSession();
+  const { data, update } = useSession();
 
   const onUpdateStepByIndex = (step: (typeof steps)[number]) => {
     const stepIndex = steps.indexOf(step);
@@ -64,7 +64,9 @@ const OnboardingPage = ({ providers }: any) => {
           {currentStep === "preferences" && (
             <Preferences navigateToNextStep={navigateToNextStep} />
           )}
-          {currentStep === "summary" && <Summary />}
+          {currentStep === "summary" && (
+            <Summary user={data?.user} update={update} />
+          )}
         </div>
       </div>
     </section>

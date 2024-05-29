@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useOnBoardingFormStore } from "@sahil/lib/hooks/formStores/useOnBoardingFormStore";
@@ -10,21 +12,38 @@ import {
 } from "./constants";
 import { Card } from "ui";
 import { HiArrowSmallRight } from "react-icons/hi2";
+import { useOnboardBusiness } from "@sahil/lib/hooks/businesses";
+import { useOnboardSupplier } from "@sahil/lib/hooks/suppliers";
 
-export const Summary = () => {
+type Props = {
+  user: any;
+  update: any;
+};
+
+export const Summary = ({ user, update }: Props) => {
+  const router = useRouter();
   const { formData } = useOnBoardingFormStore((state) => state);
+  const {
+    onboardBusiness,
+    loading: businessLoading,
+    error: businessError,
+  } = useOnboardBusiness();
+  const {
+    onboardSupplier,
+    data: supplierResult,
+    loading: supplierLoading,
+    error: supplierError,
+  } = useOnboardSupplier();
 
   const role = formData.role as "supplier" | "business";
-
   // Create schema in two steps to avoid TS error with
   // computed properties (role) on combined schema.
   const baseSchema = z.object({
     ...USER_DETAILS_SCHEMA.shape,
-    preference: PREFERENCE_SCHEMA.shape[role],
   });
-
   const combinedSchema = baseSchema.extend({
     [role]: ROLE_DETAILS_SCHEMA.shape[role],
+    preference: PREFERENCE_SCHEMA.shape[role],
   });
 
   type FormData = z.infer<typeof combinedSchema>;
@@ -38,9 +57,61 @@ export const Summary = () => {
   });
 
   const onSubmit: SubmitHandler<FormData> = async () => {
-    const result = combinedSchema.parse(formData);
-    console.log(result);
+    const validatedInput = combinedSchema.parse(formData);
+
+    if (!businessLoading && !supplierLoading) {
+      const { business, supplier, preference } = validatedInput;
+
+      switch (role) {
+        case "business":
+          const businessObject = {
+            ...preference,
+            ...business,
+            owner_id: user?.id,
+            registration_channel: "APP",
+          };
+          await onboardBusiness({
+            variables: {
+              userId: user?.id,
+              role,
+              object: businessObject,
+            },
+          });
+          break;
+        case "supplier":
+          const categories = (
+            preference as { categories: string[] }
+          )?.categories.map((category) => {
+            return {
+              category_name: category,
+            };
+          });
+          const supplierObject = {
+            ...supplier,
+            user_id: user?.id,
+            categories: {
+              data: categories,
+            },
+          };
+          await onboardSupplier({
+            variables: {
+              userId: user?.id,
+              role,
+              object: supplierObject,
+            },
+          });
+          break;
+
+        default:
+          break;
+      }
+
+      await update();
+      router.push(`/`);
+    }
   };
+
+  console.log(supplierResult, supplierError);
 
   const renderForm = () => {
     const preference: any = formData.preference;
@@ -81,13 +152,13 @@ export const Summary = () => {
             <div>
               <h3 className="text-lg font-bold">Preferences</h3>
               <p>
-                <b>Contact Method:</b> {preference?.contactMethod}
+                <b>Contact Method:</b> {preference?.preferredContactMethod}
               </p>
               <p>
-                <b>Delivery Method:</b> {preference?.deliveryMethod}
+                <b>Delivery Method:</b> {preference?.preferredDeliveryMethod}
               </p>
               <p>
-                <b>Payment Method:</b> {preference?.paymentMethod}
+                <b>Payment Method:</b> {preference?.preferredPaymentMethod}
               </p>
               {errors.preference && (
                 <p className="text-base font-bold text-error">
@@ -184,7 +255,19 @@ export const Summary = () => {
 
         {renderForm()}
 
-        <div className="btn btn-sm btn-primary w-fit mt-2">
+        {(businessError || supplierError) && (
+          <div className="my-4">
+            <p className="text-base font-bold text-error">
+              An error occurred while creating your account. Please try again.
+            </p>
+          </div>
+        )}
+
+        <div
+          className={`btn btn-sm btn-primary w-fit mt-2 ${
+            businessLoading || supplierLoading ? "animate-pulse" : ""
+          }`}
+        >
           <input type="submit" value="Continue" />
           <HiArrowSmallRight />
         </div>

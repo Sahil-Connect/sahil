@@ -65,19 +65,19 @@ export const ROLE_DETAILS_SCHEMA = z.object({
 
 // PREFERENCE SCHEMAS
 export const BUSINESS_PREFERENCE = z.object({
-  contactMethod: z
+  preferredContactMethod: z
     .string()
     .refine(
       (value) => CONTACT_METHODS.includes(value),
       "Invalid contact method"
     ),
-  deliveryMethod: z
+  preferredDeliveryMethod: z
     .string()
     .refine(
       (value) => DELIVERY_METHODS.includes(value),
       "Invalid delivery method"
     ),
-  paymentMethod: z
+  preferredPaymentMethod: z
     .string()
     .refine(
       (value) => PAYMENT_METHODS.includes(value),
