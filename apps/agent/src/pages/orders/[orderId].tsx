@@ -9,7 +9,6 @@ import {
   OrderPaymentInformation,
 } from "@sahil/features/Orders";
 import { Tabs } from "ui";
-
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
 
@@ -36,7 +35,6 @@ export default function OrderPage() {
         </div>
         <div className="grow space-y-2">
           <OrderProgress />
-          <CourierOverview order={order} />
         </div>
       </div>
       <div className="flex gap-4">
@@ -45,6 +43,9 @@ export default function OrderPage() {
         </div>
         <div className="flex-1">
           <OrderPaymentInformation />
+        </div>
+        <div className="flex-1">
+          <CourierOverview order={order} />
         </div>
       </div>
     </section>

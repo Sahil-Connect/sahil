@@ -15,7 +15,7 @@ export const Tabs = () => {
           <HiOutlineAdjustmentsVertical /> Order Preferences
         </a>
         <a className="tab  gap-2">
-          <HiOutlineBeaker /> Order Progress
+          <HiOutlineBeaker /> Order Actions
         </a>
       </div>
     </div>
