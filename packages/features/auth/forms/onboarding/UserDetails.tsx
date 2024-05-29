@@ -4,20 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useOnBoardingFormStore } from "@sahil/lib/hooks/formStores/useOnBoardingFormStore";
 import { HiArrowSmallRight } from "react-icons/hi2";
+import { USER_DETAILS_SCHEMA, USER_ROLES } from "./constants";
 import { Card, Input, Select } from "ui";
 
-const roles = ["business", "supplier"];
-
-const userSchema = z.object({
-  name: z.string().min(2, { message: "Must be more than 2 characters" }),
-  email: z.string().email("Invalid email."),
-  role: z
-    .string()
-    .min(1, "Role is required")
-    .refine((value) => roles.includes(value)),
-});
-
-type FormData = z.infer<typeof userSchema>;
+type FormData = z.infer<typeof USER_DETAILS_SCHEMA>;
 
 type UserDetailsProps = {
   navigateToNextStep: (step: string) => void;
@@ -42,17 +32,17 @@ export const UserDetails = ({ navigateToNextStep, user }: UserDetailsProps) => {
     reset,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(USER_DETAILS_SCHEMA),
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const validatedInput = userSchema.parse(data);
+    const validatedInput = USER_DETAILS_SCHEMA.parse(data);
 
     // Reset role objects
     const allRoles = ["business", "supplier"];
-    const newFormData: any = { ...validatedInput };
+    const newFormData: any = { ...validatedInput, preference: {} };
     allRoles.forEach((r) => {
-      newFormData[r] = null;
+      newFormData[r] = {};
     });
 
     updateStepFormData(newFormData);
@@ -94,7 +84,7 @@ export const UserDetails = ({ navigateToNextStep, user }: UserDetailsProps) => {
           label="Select a Role"
           errors={errors}
           register={register}
-          options={roles}
+          options={USER_ROLES}
         />
         <div className="btn btn-sm btn-primary w-fit">
           <input type="submit" value="Continue" />

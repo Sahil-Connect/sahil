@@ -8,6 +8,7 @@ import {
   OnboardingFormStep,
   Preferences,
   RoleDetails,
+  Summary,
   UserDetails,
 } from "@sahil/features/auth/forms/onboarding";
 import { StepsPaginator } from "ui";
@@ -63,7 +64,7 @@ const OnboardingPage = ({ providers }: any) => {
           {currentStep === "preferences" && (
             <Preferences navigateToNextStep={navigateToNextStep} />
           )}
-          {/* {currentStep === "summary" && <OrderSummary />} */}
+          {currentStep === "summary" && <Summary />}
         </div>
       </div>
     </section>

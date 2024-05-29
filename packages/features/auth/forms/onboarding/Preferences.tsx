@@ -5,45 +5,13 @@ import BusinessPreference from "./preference/BusinessPreference";
 import SupplierPreference from "./preference/SupplierPreference";
 import { useOnBoardingFormStore } from "@sahil/lib/hooks/formStores/useOnBoardingFormStore";
 import { HiArrowSmallRight } from "react-icons/hi2";
+import {
+  CONTACT_METHODS,
+  DELIVERY_METHODS,
+  PAYMENT_METHODS,
+  PREFERENCE_SCHEMA,
+} from "./constants";
 import { Card } from "ui";
-
-const contactMethods = ["email", "phone"];
-const deliveryMethods = ["pick-up", "delivery"];
-const paymentMethods = ["cash", "credit"];
-
-const business = z
-  .object({
-    contactMethod: z
-      .string()
-      .refine(
-        (value) => contactMethods.includes(value),
-        "Invalid contact method"
-      ),
-    deliveryMethod: z
-      .string()
-      .refine(
-        (value) => deliveryMethods.includes(value),
-        "Invalid delivery method"
-      ),
-    paymentMethod: z
-      .string()
-      .refine(
-        (value) => paymentMethods.includes(value),
-        "Invalid payment method"
-      ),
-  })
-  .optional();
-
-const supplier = z
-  .object({
-    categories: z.array(z.string()).max(3, "Maximum of 3 categories!"),
-  })
-  .optional();
-
-const preferenceSchemas = z.object({
-  business,
-  supplier,
-});
 
 type PreferencesProps = {
   navigateToNextStep: (step: string) => void;
@@ -54,7 +22,7 @@ export const Preferences = ({ navigateToNextStep }: PreferencesProps) => {
     (state) => state
   );
   const role = formData.role as "supplier" | "business";
-  const schema = z.object({ [role]: preferenceSchemas.shape[role] });
+  const schema = z.object({ [role]: PREFERENCE_SCHEMA.shape[role] });
   type FormData = z.infer<typeof schema>;
 
   const {
@@ -69,15 +37,10 @@ export const Preferences = ({ navigateToNextStep }: PreferencesProps) => {
     const validatedInput = schema.parse(data);
 
     updateStepFormData({
-      [role]: {
-        ...(formData[role] as Object),
-        preference: validatedInput[role],
-      },
+      preference: validatedInput[role],
     });
     navigateToNextStep("summary");
   };
-
-  console.log(formData, errors);
 
   const renderForm = () => {
     switch (role) {
@@ -87,9 +50,9 @@ export const Preferences = ({ navigateToNextStep }: PreferencesProps) => {
             register={register}
             errors={errors}
             methods={{
-              contact: contactMethods,
-              delivery: deliveryMethods,
-              payment: paymentMethods,
+              contact: CONTACT_METHODS,
+              delivery: DELIVERY_METHODS,
+              payment: PAYMENT_METHODS,
             }}
           />
         );
@@ -101,7 +64,7 @@ export const Preferences = ({ navigateToNextStep }: PreferencesProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Card className="space-y-4">
         {renderForm()}
 

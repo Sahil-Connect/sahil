@@ -5,54 +5,8 @@ import { useOnBoardingFormStore } from "@sahil/lib/hooks/formStores/useOnBoardin
 import BusinessRoleDetails from "./role/BusinessRoleDetails";
 import { SupplierRoleDetails } from "./role/SupplierRoleDetails";
 import { Card } from "ui";
+import { ROLE_DETAILS_SCHEMA } from "./constants";
 import { HiArrowSmallRight } from "react-icons/hi2";
-
-const business = z.object({
-  name: z.string().min(2, { message: "Must be more than 2 characters" }),
-  type: z.string(),
-  contactName: z.string().min(2, { message: "Must be more than 2 characters" }),
-  description: z
-    .string()
-    .min(10, { message: "Must be more than 10 characters" }),
-  contactEmail: z.string().email("Invalid email"),
-  phoneNumber: z.string().refine(
-    (phone) => {
-      const internationalFormat = /^\+\d{1,3}\d{6,14}$/;
-
-      return internationalFormat.test(phone);
-    },
-    {
-      message: "Use international format for phone number",
-    }
-  ),
-});
-
-const supplier = z.object({
-  name: z.string().min(2, { message: "Must be more than 2 characters" }),
-  streetAddress: z
-    .string()
-    .min(10, { message: "Must be more than 10 characters" }),
-  contactEmail: z.string().email("Invalid email"),
-  contactName: z.string().min(2, { message: "Must be more than 2 characters" }),
-  description: z
-    .string()
-    .min(10, { message: "Must be more than 10 characters" }),
-  phoneNumber: z.string().refine(
-    (phone) => {
-      const internationalFormat = /^\+\d{1,3}\d{6,14}$/;
-
-      return internationalFormat.test(phone);
-    },
-    {
-      message: "Use international format for phone number",
-    }
-  ),
-});
-
-const roleSchemas = z.object({
-  business,
-  supplier,
-});
 
 type RoleDetailsProps = {
   navigateToNextStep: (step: string) => void;
@@ -63,7 +17,7 @@ export const RoleDetails = ({ navigateToNextStep }: RoleDetailsProps) => {
     (state) => state
   );
   const role = formData.role as "supplier" | "business";
-  const schema = z.object({ [role]: roleSchemas.shape[role] });
+  const schema = z.object({ [role]: ROLE_DETAILS_SCHEMA.shape[role] });
   type FormData = z.infer<typeof schema>;
 
   const {
@@ -80,8 +34,6 @@ export const RoleDetails = ({ navigateToNextStep }: RoleDetailsProps) => {
     updateStepFormData(validatedInput);
     navigateToNextStep("preferences");
   };
-
-  console.log(formData, errors);
 
   const renderForm = () => {
     switch (role) {
