@@ -7,9 +7,9 @@ type Props = {
 };
 
 const BusinessRoleDetails = ({ register, errors }: Props) => {
-  const { data } = useFetchBusinessTypes();
+  const { data, loading } = useFetchBusinessTypes();
 
-  const types = (data as any[])?.map(({ type }) => type) || [];
+  const types = (data as any[])?.map(({ type }) => type);
 
   return (
     <>
@@ -21,13 +21,20 @@ const BusinessRoleDetails = ({ register, errors }: Props) => {
           register={register}
           errors={errors}
         />
-        <Select
-          name="business.type"
-          label="Business Type"
-          options={types}
-          register={register}
-          errors={errors}
-        />
+        {loading ? (
+          <div className="w-full  max-w-lg mt-4">
+            <label>Business Type</label>
+            <div className="h-10 bg-slate-600 rounded animate-pulse"></div>
+          </div>
+        ) : (
+          <Select
+            name="business.type"
+            label="Business Type"
+            options={types}
+            register={register}
+            errors={errors}
+          />
+        )}
       </div>
       <TextArea
         name="business.description"

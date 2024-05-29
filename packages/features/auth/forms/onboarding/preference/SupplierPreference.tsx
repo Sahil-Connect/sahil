@@ -8,25 +8,31 @@ type Props = {
 };
 
 const SupplierPreference = ({ register, errors }: Props) => {
-  const { data } = useFetchSupplierCategories();
+  const { data, loading } = useFetchSupplierCategories();
 
-  const options =
-    (data as any[])?.map(({ name }) => {
-      return {
-        label: formatCategoryName(name),
-        value: name,
-      };
-    }) || [];
+  const options = (data as any[])?.map(({ name }) => {
+    return {
+      label: formatCategoryName(name),
+      value: name,
+    };
+  });
 
   return (
     <>
-      <CheckBoxGroup
-        label="Supplier Categories"
-        name="supplier.categories"
-        options={options}
-        register={register}
-        errors={errors}
-      />
+      {loading ? (
+        <div className="w-full  max-w-lg mt-4">
+          <label>Supplier Categories</label>
+          <div className="h-20 bg-slate-600 rounded animate-pulse mt-2"></div>
+        </div>
+      ) : (
+        <CheckBoxGroup
+          label="Supplier Categories"
+          name="supplier.categories"
+          options={options}
+          register={register}
+          errors={errors}
+        />
+      )}
     </>
   );
 };

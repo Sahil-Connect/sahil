@@ -45,13 +45,15 @@ const LoginForm = () => {
       />
 
       <div className="flex justify-between items-center">
-        <CheckBoxGroup
-          name="rememberMe"
-          options={[{ value: "", label: "Remember Me" }]}
-          register={register}
-          errors={errors}
-        />
-        <a href="#" className="text-sm link">
+        <div className="flex-initial">
+          <CheckBoxGroup
+            name="rememberMe"
+            options={[{ value: "", label: "Remember Me" }]}
+            register={register}
+            errors={errors}
+          />
+        </div>
+        <a href="#" className="text-sm link flex-initial pt-4">
           Forgot Password?
         </a>
       </div>

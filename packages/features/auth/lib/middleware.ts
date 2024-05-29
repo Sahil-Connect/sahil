@@ -1,18 +1,20 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { routeGuard } from "@sahil/features/auth/lib/routeGuard";
+import { ON_BOARDING_STEPS } from "@sahil/lib/hooks/formStores/useOnBoardingFormStore";
 
-export const agentAccessRules = [
-  { path: "/", roles: ["user"] },
-  { path: "/businesses", roles: ["user"] },
-  { path: "/couriers", roles: ["user", "admin"] },
-  // Add more rules as needed for agent
+export const skippedRoutes = [
+  "/auth/signin",
+  "/auth/error",
+  "/auth/verify-request",
+  "/unauthorized",
+  "/auth/new/user_details",
+  // Add more routes as needed
 ];
 
-export const clientAccessRules = [
-  { path: "/", roles: ["supplier", "business"] },
-  // Add more rules as needed for client
-];
+export const onboardingRoutes = ON_BOARDING_STEPS.map(
+  (route) => `/auth/new/${route}`
+);
 
 export async function middleware(
   req: NextRequest,
@@ -22,11 +24,7 @@ export async function middleware(
   const url = req.nextUrl.clone();
 
   // Skip routeGuard for these paths
-  if (
-    url.pathname === "/auth/signin" ||
-    url.pathname === "/unauthorized" ||
-    url.pathname === "/auth/new/user_details"
-  ) {
+  if (skippedRoutes.includes(url.pathname)) {
     return NextResponse.next();
   }
 
@@ -35,15 +33,26 @@ export async function middleware(
 
   console.log(isAuthenticated, isAuthorized, hasCompletedOnboarding);
 
+  const isOnboardingRoute = onboardingRoutes.includes(url.pathname);
+  const shouldRedirectFromOnboarding =
+    hasCompletedOnboarding && isOnboardingRoute;
+
   if (!isAuthenticated) {
     url.pathname = "/auth/signin";
+  } else if (shouldRedirectFromOnboarding) {
+    url.pathname = "/";
   } else if (!hasCompletedOnboarding) {
     url.pathname = "/auth/new/user_details";
   } else if (!isAuthorized) {
     url.pathname = "/unauthorized";
   }
 
-  if (!isAuthenticated || !hasCompletedOnboarding || !isAuthorized) {
+  if (
+    shouldRedirectFromOnboarding ||
+    !isAuthenticated ||
+    !hasCompletedOnboarding ||
+    !isAuthorized
+  ) {
     return NextResponse.redirect(url);
   }
 

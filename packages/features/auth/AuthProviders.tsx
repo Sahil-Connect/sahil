@@ -33,7 +33,7 @@ export const AuthProviders: FC<Props> = ({ providers }) => {
                   <button
                     className="btn w-full capitalize"
                     onClick={() => {
-                      signIn(provider?.id);
+                      signIn(provider?.id, { callbackUrl: "/" });
                     }}
                   >
                     {provider.name === "Google" ? <FaGoogle /> : <FaFacebook />}

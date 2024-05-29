@@ -2,19 +2,12 @@ import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
 import type { NextApiRequest } from "next";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { skippedRoutes } from "./middleware";
 
 interface AccessRule {
   path: string;
   roles: string[];
 }
-
-const authPaths = {
-  signIn: "/auth/signin",
-  signOut: "/auth/signout",
-  error: "/auth/error",
-  verifyRequest: "/auth/verify-request",
-  newUser: "/auth/new/user_details",
-};
 
 const secret = process.env.SECRET;
 
@@ -35,7 +28,7 @@ export const routeGuard = async (
   isAuthenticated: boolean;
   hasCompletedOnboarding: boolean;
 }> => {
-  const { pathname } = new URL(req.url, `http://${req.headers.get("host")}`);
+  const url = req.nextUrl.clone();
 
   const rawToken = await fetchToken(req);
   if (!rawToken)
@@ -74,7 +67,7 @@ export const routeGuard = async (
   const hasCompletedOnboarding: boolean =
     payload?.hasCompletedOnboarding || false;
 
-  if (Object.values(authPaths).includes(pathname)) {
+  if (skippedRoutes.includes(url.pathname)) {
     return {
       isAuthenticated: true,
       isAuthorized: true,
@@ -82,7 +75,9 @@ export const routeGuard = async (
     };
   }
 
-  const matchingRule = accessRules.find((rule) => pathname.includes(rule.path));
+  const matchingRule = accessRules.find((rule) =>
+    url.pathname.includes(rule.path)
+  );
   if (!matchingRule)
     return {
       isAuthenticated: true,
