@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Card, Input, Radio, Select } from "ui";
+import { Card, Input, RadioGroup, Select } from "ui";
 import { useBusinessFormStore } from "@sahil/lib/hooks/formStores/useBusinessFormStore";
 import {
   HiOutlineCreditCard,
@@ -37,6 +37,32 @@ export const BusinessPreferencesInfo = () => {
     goToStep("next");
     router.push(`/businesses/register/summary`);
   };
+
+  const paymentOptions = [
+    {
+      label: "Cash on Delivery",
+      value: "cash",
+      icon: HiOutlineBanknotes,
+    },
+    {
+      label: "Momo Pay",
+      value: "momo",
+      icon: HiOutlineCreditCard,
+    },
+  ];
+
+  const deliveryOptions = [
+    {
+      label: "Direct Delivery",
+      value: "delivery",
+      icon: HiOutlineBuildingOffice,
+    },
+    {
+      label: "Pick-Up Locations",
+      value: "pick-up",
+      icon: HiOutlineMapPin,
+    },
+  ];
   return (
     <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <Card title="Business Preferences" titleSize="sm">
@@ -65,49 +91,21 @@ export const BusinessPreferencesInfo = () => {
         </div>
       </Card>
 
-      <Card title="Preferred Delivery Method" titleSize="sm">
-        <p className="text-gray-500">
-          How do you prefer to receive notifications?
-        </p>
-        <div className="flex gap-8">
-          <Radio
-            label="Cash on Delivery"
-            icon={HiOutlineBanknotes}
-            name="preferredPaymentMethod"
-            register={register}
-            errors={errors}
-          />
-          <Radio
-            label="Momo Pay"
-            icon={HiOutlineCreditCard}
-            name="preferredPaymentMethod"
-            register={register}
-            errors={errors}
-          />
-        </div>
-      </Card>
+      <RadioGroup
+        label="Preferred Payment Method"
+        options={paymentOptions}
+        name="preferredPaymentMethod"
+        register={register}
+        errors={errors}
+      />
 
-      <Card title="Preferred Delivery Method" titleSize="sm">
-        <p className="text-gray-500">
-          How do you prefer to receive notifications?
-        </p>
-        <div className="flex gap-8">
-          <Radio
-            label="Direct Delivery"
-            icon={HiOutlineBuildingOffice}
-            name="preferredPaymentMethod"
-            register={register}
-            errors={errors}
-          />
-          <Radio
-            label="Pick-Up Locations"
-            icon={HiOutlineMapPin}
-            name="preferredPaymentMethod"
-            register={register}
-            errors={errors}
-          />
-        </div>
-      </Card>
+      <RadioGroup
+        label="Preferred Delivery Method"
+        options={deliveryOptions}
+        name="preferredPaymentMethod"
+        register={register}
+        errors={errors}
+      />
 
       <div className="btn btn-sm btn-primary w-fit">
         <input type="submit" value="Continue" />

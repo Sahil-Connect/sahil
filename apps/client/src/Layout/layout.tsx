@@ -36,9 +36,10 @@ export default function Layout({ children, ...props }: LayoutProps) {
   const { data: session } = useSession();
 
   const onSignOut = async () => {
-    await signOut();
+    await signOut({ redirect: false, callbackUrl: "/signin" });
     router.push("/auth/signin");
   };
+
   return (
     <>
       <Navbar

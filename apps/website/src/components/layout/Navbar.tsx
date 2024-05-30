@@ -68,9 +68,7 @@ export const Navbar = () => {
                 })}
               </ul>
             </div>
-            <Link
-              href="/"
-            >
+            <Link href="/">
               <Image
                 src={logo}
                 alt={"Sahil"}

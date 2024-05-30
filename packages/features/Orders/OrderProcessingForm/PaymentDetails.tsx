@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "@sahil/lib/hooks/formStores/useOrderFormStore";
-import { Card, Radio } from "ui";
+import { Card } from "ui";
 import {
   HiXMark,
   HiOutlineCreditCard,

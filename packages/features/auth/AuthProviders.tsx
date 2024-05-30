@@ -1,6 +1,4 @@
 import { FC } from "react";
-import { HiOutlineGiftTop } from "react-icons/hi2";
-import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 
@@ -35,7 +33,7 @@ export const AuthProviders: FC<Props> = ({ providers }) => {
                   <button
                     className="btn w-full capitalize"
                     onClick={() => {
-                      signIn(provider?.id);
+                      signIn(provider?.id, { callbackUrl: "/" });
                     }}
                   >
                     {provider.name === "Google" ? <FaGoogle /> : <FaFacebook />}

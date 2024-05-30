@@ -3,6 +3,8 @@ import { generateJWT, decodeJWT } from "./generateJWT";
 import { HasuraAdapter } from "next-auth-hasura-adapter";
 import { AuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
+import { request } from "graphql-request";
+import { GET_ADDITIONAL_AUTH_USER_INFO } from "@sahil/lib/graphql";
 
 const providers = [
   GoogleProvider({
@@ -36,7 +38,7 @@ const authPagesConfig = () => {
     signOut: "/auth/signout", // Displays form with sign out button
     error: "/auth/error", // Error code passed in query string as ?error=
     verifyRequest: "/auth/verify-request", // Used for check email page
-    newUser: "/auth/new", // If set, new users will be directed here on first sign in
+    newUser: "/auth/new/user_details", // If set, new users will be directed here on first sign in
   };
 };
 
@@ -61,12 +63,27 @@ const initNextAuth = (): AuthOptions => {
         return session;
       },
       async jwt({ token }) {
+        const { users_by_pk } = await request<any>(
+          process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT!,
+          GET_ADDITIONAL_AUTH_USER_INFO,
+          {
+            id: token.sub,
+          },
+          {
+            "x-hasura-admin-secret":
+              process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET!,
+          }
+        );
+
+        const { hasCompletedOnboarding, role } = users_by_pk;
+
         return {
           ...token,
+          hasCompletedOnboarding,
           "https://hasura.io/jwt/claims": {
             "x-hasura-allowed-roles": ["user"],
             "x-hasura-default-role": "user",
-            "x-hasura-role": "user",
+            "x-hasura-role": role ?? "user",
             "x-hasura-user-id": token.sub!,
           },
         };
