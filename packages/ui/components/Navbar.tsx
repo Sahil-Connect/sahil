@@ -28,14 +28,14 @@ export const Navbar: FC<NavbarProps> = ({
   logo,
   header = "Sahil",
   onSignOut,
-  user = {},
+  user,
 }) => {
   return (
     <header className="navbar shadow border-b">
       <div className="navbar-start gap-8">
         <Link
           href="/"
-          className="font-semibold flex items-center text-base lg:text-lg"
+          className="font-semibold flex items-center lg:text-lg flex-nowrap"
         >
           {logo && (
             <Image
@@ -48,7 +48,7 @@ export const Navbar: FC<NavbarProps> = ({
           {header}
         </Link>
         <nav>
-          <ul className="menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-2">
+          <ul className="menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-2 flex-nowrap">
             {links.map(({ name, href, icon }) => (
               <li key={name}>
                 <Link
@@ -62,52 +62,72 @@ export const Navbar: FC<NavbarProps> = ({
           </ul>
         </nav>
       </div>
-
-      <div className="navbar-end gap-4">
-        <Link
-          href="/orders/new/order_details"
-          className="btn btn-sm btn-primary"
-        >
-          New Order <HiOutlinePlus />{" "}
-        </Link>
-        <div className="dropdown dropdown-end text-gray-600">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img alt={user?.name} src={user?.image} />
-            </div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
-          >
-            {links.map(({ name, href, icon }) => {
-              return (
-                <li key={name}>
-                  <Link href={href}>
-                    <Icon icon={icon} /> {name}
-                  </Link>
-                </li>
-              );
-            })}
-            <li>
-              <Link href="/settings">
-                <Icon icon={HiOutlineAdjustmentsHorizontal} /> Settings
-              </Link>
-            </li>
-            <li>
-              <button onClick={onSignOut}>
-                <Icon icon={HiOutlineArrowRightOnRectangle} /> Logout
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <Right user={user} links={links} onSignOut={onSignOut} />
     </header>
   );
 };
 
 export default Navbar;
+
+const Right = ({
+  user,
+  links,
+  onSignOut,
+}: {
+  user: any;
+  links: NavbarLink[];
+  onSignOut?: () => void;
+}) => {
+  if (!user) {
+    return (
+      <div className="navbar-end">
+        <Link href="/auth/signin" className="btn btn-primary">
+          Sign In
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="navbar-end gap-4">
+      <Link href="/orders/new/order_details" className="btn btn-sm btn-primary">
+        New Order <HiOutlinePlus />{" "}
+      </Link>
+      <div className="dropdown dropdown-end text-gray-600">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
+        >
+          <div className="w-10 rounded-full">
+            <img alt={user.name} src={user.image} />
+          </div>
+        </div>
+        <ul
+          tabIndex={0}
+          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
+        >
+          {links.map(({ name, href, icon }) => {
+            return (
+              <li key={name}>
+                <Link href={href}>
+                  <Icon icon={icon} /> {name}
+                </Link>
+              </li>
+            );
+          })}
+          <li>
+            <Link href="/settings">
+              <Icon icon={HiOutlineAdjustmentsHorizontal} /> Settings
+            </Link>
+          </li>
+          <li>
+            <button onClick={onSignOut}>
+              <Icon icon={HiOutlineArrowRightOnRectangle} /> Logout
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};

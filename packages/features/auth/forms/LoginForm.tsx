@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { CheckBox, Input } from "ui";
+import { CheckBoxGroup, Input } from "ui";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -45,13 +45,15 @@ const LoginForm = () => {
       />
 
       <div className="flex justify-between items-center">
-        <CheckBox
-          name="rememberMe"
-          label="Remember me"
-          register={register}
-          errors={errors}
-        />
-        <a href="#" className="text-sm link">
+        <div className="flex-initial">
+          <CheckBoxGroup
+            name="rememberMe"
+            options={[{ value: "", label: "Remember Me" }]}
+            register={register}
+            errors={errors}
+          />
+        </div>
+        <a href="#" className="text-sm link flex-initial pt-4">
           Forgot Password?
         </a>
       </div>

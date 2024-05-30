@@ -143,3 +143,11 @@ export const FETCH_SUPPLIER_PRODUCT_BY_NAME = gql`
     }
   }
 `;
+
+export const FETCH_SUPPLIER_CATEGORIES = gql`
+  query getSupplierCategories @cached {
+    supplier_categories_enum {
+      name
+    }
+  }
+`;
