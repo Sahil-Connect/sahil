@@ -38,7 +38,7 @@ const authPagesConfig = () => {
     signOut: "/auth/signout", // Displays form with sign out button
     error: "/auth/error", // Error code passed in query string as ?error=
     verifyRequest: "/auth/verify-request", // Used for check email page
-    newUser: "/auth/new/user_details", // If set, new users will be directed here on first sign in
+    newUser: "/auth/onboarding/user_details", // If set, new users will be directed here on first sign in
   };
 };
 

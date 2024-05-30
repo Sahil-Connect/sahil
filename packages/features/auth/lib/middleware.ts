@@ -8,12 +8,11 @@ export const skippedRoutes = [
   "/auth/error",
   "/auth/verify-request",
   "/unauthorized",
-  "/auth/new/user_details",
   // Add more routes as needed
 ];
 
 export const onboardingRoutes = ON_BOARDING_STEPS.map(
-  (route) => `/auth/new/${route}`
+  (route) => `/auth/onboarding/${route}`
 );
 
 export async function middleware(
@@ -31,8 +30,6 @@ export async function middleware(
   const { isAuthenticated, isAuthorized, hasCompletedOnboarding } =
     await routeGuard(req, accessRules);
 
-  console.log(isAuthenticated, isAuthorized, hasCompletedOnboarding);
-
   const isOnboardingRoute = onboardingRoutes.includes(url.pathname);
   const shouldRedirectFromOnboarding =
     hasCompletedOnboarding && isOnboardingRoute;
@@ -41,8 +38,9 @@ export async function middleware(
     url.pathname = "/auth/signin";
   } else if (shouldRedirectFromOnboarding) {
     url.pathname = "/";
+    url.search = "";
   } else if (!hasCompletedOnboarding) {
-    url.pathname = "/auth/new/user_details";
+    url.pathname = "/auth/onboarding/user_details";
   } else if (!isAuthorized) {
     url.pathname = "/unauthorized";
   }

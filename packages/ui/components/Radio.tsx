@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { Icon } from "./Icon";
+import type { IconType } from "react-icons";
 import { BaseInputProps } from "../types";
 import { FormControl, FormControlError } from "./FormControl";
 
 type Option = {
   value: string;
   label: string;
-  icon?: any;
+  icon?: IconType;
 };
 
 type RadioGroupProps = BaseInputProps<any> & {

@@ -27,13 +27,13 @@ const OnboardingPage = () => {
       return;
     }
     updateStepByIndex(stepIndex);
-    router.push(`/auth/new/${steps[stepIndex]}`);
+    router.push(`/auth/onboarding/${steps[stepIndex]}`);
   };
 
   const navigateToNextStep = (path: string) => {
     goToStep("next");
     ON_BOARDING_FORM_HEADERS[currentIndex].completed = true;
-    router.push(`/auth/new/${path}`);
+    router.push(`/auth/onboarding/${path}`);
   };
 
   return (
