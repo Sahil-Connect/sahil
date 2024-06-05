@@ -27,7 +27,7 @@ export const Step: FC<StepProps> = ({
     <li className={`step ${classes}`} onClick={() => onClick(step)}>
       <div
         className={`flex px-2 py-1 rounded gap-2 items-center ${
-          currentStep === step ? "text-primary-focus" : null
+          currentStep === step ? "text-primary" : null
         } hover:bg-gray-100 cursor-pointer`}
       >
         {title}
