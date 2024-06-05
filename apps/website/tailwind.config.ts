@@ -28,7 +28,7 @@ const config: Config = {
     themes: [
       {
         lemonade: {
-          ...require("daisyui/src/theming/themes")["[data-theme=lemonade]"],
+          ...require("daisyui/src/theming/themes")["[lemonade]"],
           primary: "#067a46",
           secondary: "#056835",
           accent: "#40efcf",
