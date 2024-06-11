@@ -76,13 +76,14 @@ const initNextAuth = (): AuthOptions => {
         );
 
         const { hasCompletedOnboarding, role } = users_by_pk;
+        const allowedRoles = role ? [role, "user"] : ["user"];
 
         return {
           ...token,
           hasCompletedOnboarding,
           "https://hasura.io/jwt/claims": {
-            "x-hasura-allowed-roles": ["user"],
-            "x-hasura-default-role": "user",
+            "x-hasura-allowed-roles": allowedRoles,
+            "x-hasura-default-role": allowedRoles[0],
             "x-hasura-role": role ?? "user",
             "x-hasura-user-id": token.sub!,
           },
