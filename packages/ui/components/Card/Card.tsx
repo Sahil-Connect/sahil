@@ -17,10 +17,7 @@ export const Card = ({
   titleSize = "md",
   titleCentered = false,
 }: CardProps) => {
-  const merged = twMerge(
-    "card card-compact card-bordered bg-base-100",
-    className
-  );
+  const merged = twMerge("card card-compact card-bordered", className);
   return (
     <div className={merged}>
       <div className="card-body flex-col">

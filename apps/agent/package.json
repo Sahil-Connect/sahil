@@ -19,7 +19,7 @@
     "@types/jsonwebtoken": "^9.0.5",
     "apollo-link-ws": "^1.0.20",
     "autoprefixer": "10.4.15",
-    "daisyui": "3.5.1",
+    "daisyui": "^4.12.2",
     "date-fns": "^2.30.0",
     "eslint": "8.47.0",
     "eslint-config-custom": "*",

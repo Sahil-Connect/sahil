@@ -32,7 +32,7 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
           href={`/businesses/${business.id}`}
           className="avatar placeholder h-fit"
         >
-          <div className="bg-neutral-focus text-base text-neutral-content rounded-full w-12">
+          <div className="bg-neutral text-base text-neutral-content rounded-full w-12">
             <span>{generateInitials(business.name)}</span>
           </div>
         </Link>
