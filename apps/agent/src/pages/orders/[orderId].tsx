@@ -7,16 +7,16 @@ import {
   OrderDetails,
   OrderProgress,
 } from "@sahil/features/Orders";
-import { Tabs } from "ui";
+import { Card, Tabs } from "ui";
 
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
-import { useSyncQueryWithStore } from "@sahil/lib/hooks/utilities/useQueryStore";
+import { useSyncQueryWithStore, INITIAL_TAB, tabs } from "@sahil/lib/hooks/utilities/useQueryStore";
 
 import {
   HiOutlineAdjustmentsVertical,
   HiOutlineExclamationCircle,
-  HiOutlineBeaker,
+  HiArrowsRightLeft,
 } from "react-icons/hi2";
 
 export const OrderTabs = [
@@ -26,14 +26,14 @@ export const OrderTabs = [
     icon: <HiOutlineExclamationCircle />,
   },
   {
+    label: "Order Progress",
+    value: "progress",
+    icon: <HiArrowsRightLeft />,
+  },
+  {
     label: "Order Preferences",
     value: "preferences",
     icon: <HiOutlineAdjustmentsVertical />,
-  },
-  {
-    label: "Order Progress",
-    value: "progress",
-    icon: <HiOutlineBeaker />,
   },
 ];
 
@@ -42,11 +42,12 @@ export default function OrderPage() {
   const { orderId } = router.query;
   const { data: order, error, loading } = useFetchOrderByPK(orderId as string);
 
-  const defaultValues = { tab: "info" };
-  const { query, handleChange } = useSyncQueryWithStore(defaultValues);
+  const { currentTab, handleChange } = useSyncQueryWithStore();
 
-  const handleTabClick = (value: string) => {
-    handleChange("tab", value);
+  console.log("currentTab", currentTab);
+
+  const handleTabClick = (value: (typeof tabs)[number]) => {
+    handleChange(value);
   };
 
   if (error) return <p>error</p>;
@@ -54,42 +55,32 @@ export default function OrderPage() {
 
   return (
     <section>
-      <div className="flex flex-col lg:flex-row">
-        <div className="grow space-y-2">
-          <OrderClient businessId={order?.customerId} />
-        </div>
-        <div className="divider divider-horizontal"></div>
+      <div className="flex flex-col lg:flex-row gap-4">
         <div className="basis-4/6 space-y-2">
           <OrderOverview order={order} />
           <Tabs
             items={OrderTabs}
             onTabClick={handleTabClick}
-            currentTab={query["tab"]}
+            currentTab={currentTab}
           />
-
-          <OrderTabController currentTab={query["tab"]} order={order} />
-          <OrderItems items={order?.order_items} />
-          <CourierOverview order={order} />
+          <div>
+            {currentTab === "info" && (
+              <Card>
+                <div className="space-y-4">
+                  <OrderDetails order={order} />
+                  <OrderItems items={order?.order_items} />
+                  <CourierOverview order={order} />
+                </div>
+              </Card>
+            )}
+            {currentTab === "preferences" && <OrderPreferences order={order} />}
+            {currentTab === "progress" && <OrderProgress />}
+          </div>
+        </div>
+        <div className="grow space-y-2">
+          <OrderClient businessId={order?.customerId} />
         </div>
       </div>
     </section>
   );
 }
-
-type OrderTabControllerProps = {
-  currentTab: string;
-  order: any;
-};
-
-const OrderTabController = ({ currentTab, order }: OrderTabControllerProps) => {
-  switch (currentTab) {
-    case "info":
-      return <OrderDetails order={order} />;
-    case "preferences":
-      return <OrderPreferences order={order} />;
-    case "progress":
-      return <OrderProgress />;
-    default:
-      return <OrderDetails order={order} />;
-  }
-};

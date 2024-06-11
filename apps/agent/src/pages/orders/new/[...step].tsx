@@ -9,9 +9,8 @@ import {
   PaymentDetails,
   ProductSelection,
 } from "@sahil/features/Orders/OrderProcessingForm";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
-  HiOutlineShoppingCart,
   HiOutlineBanknotes,
   HiOutlineTruck,
   HiOutlineCheckCircle,
@@ -68,15 +67,6 @@ export default function NewOrderPage() {
     }
     updateStepByIndex(stepIndex);
     router.push(`/orders/new/${steps[stepIndex]}`);
-  };
-
-  const onStepChange = (path: string, step: StepDirection): void => {
-    goToStep(step);
-    router.push(
-      `/${path}/${
-        step === "prev" ? steps[currentIndex - 1] : steps[currentIndex + 1]
-      }`
-    );
   };
 
   const navigateToNextStep = (path: string) => {

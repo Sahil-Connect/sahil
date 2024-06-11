@@ -16,7 +16,7 @@ type Props = {
 
 export const OrderDetails: FC<Props> = ({ order }) => {
   return (
-    <Card title="Order Details" titleSize="sm">
+   
       <div className="space-y-4">
         <div className="flex gap-4 items-center">
           <div className="flex gap-2 items-center">
@@ -71,6 +71,6 @@ export const OrderDetails: FC<Props> = ({ order }) => {
           </div>
         </div>
       </div>
-    </Card>
+  
   );
 };
