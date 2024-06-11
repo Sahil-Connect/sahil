@@ -7,6 +7,7 @@ export const skippedRoutes = [
   "/auth/signin",
   "/auth/error",
   "/auth/verify-request",
+  "/auth/onboarding/user_details",
   "/unauthorized",
   // Add more routes as needed
 ];
@@ -22,17 +23,17 @@ export async function middleware(
 ) {
   const url = req.nextUrl.clone();
 
-  // Skip routeGuard for these paths
-  if (skippedRoutes.includes(url.pathname)) {
-    return NextResponse.next();
-  }
-
   const { isAuthenticated, isAuthorized, hasCompletedOnboarding } =
     await routeGuard(req, accessRules);
 
   const isOnboardingRoute = onboardingRoutes.includes(url.pathname);
   const shouldRedirectFromOnboarding =
     hasCompletedOnboarding && isOnboardingRoute;
+
+  // Skip routeGuard for these paths
+  if (skippedRoutes.includes(url.pathname) && !shouldRedirectFromOnboarding) {
+    return NextResponse.next();
+  }
 
   if (!isAuthenticated) {
     url.pathname = "/auth/signin";
