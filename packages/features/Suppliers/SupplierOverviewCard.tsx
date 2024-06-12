@@ -24,7 +24,7 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
           className="avatar placeholder h-fit"
         >
           {supplier.name && (
-            <div className="bg-neutral-focus text-base text-neutral-content rounded-full w-12">
+            <div className="bg-neutral text-base text-neutral-content rounded-full w-12">
               <span>{generateInitials(supplier?.name)}</span>
             </div>
           )}

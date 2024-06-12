@@ -1,4 +1,4 @@
-import { FormControl, FormControlError } from "./FormControl";
+import { FormControl, FormControlError } from "./components/FormControl";
 import {
   DeepMap,
   FieldError,
@@ -22,6 +22,19 @@ export const Select = <T extends FieldValues>({
   register,
   errors,
 }: SelectProps<T>) => {
+  //handle nested errors
+  const errorPath = name.split(".");
+  let errorMessage;
+
+  if (errorPath.length > 1) {
+    errorMessage = errorPath.reduce(
+      (obj, key) => obj && obj[key],
+      errors
+    )?.message;
+  } else {
+    errorMessage = errors[name]?.message;
+  }
+
   return (
     <FormControl label={label}>
       <select
@@ -33,7 +46,7 @@ export const Select = <T extends FieldValues>({
           <option key={index}>{option}</option>
         ))}
       </select>
-      {errors[name] && <FormControlError message={errors[name]?.message} />}
+      {errorMessage && <FormControlError message={errorMessage} />}
     </FormControl>
   );
 };

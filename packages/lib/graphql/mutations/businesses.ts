@@ -25,3 +25,21 @@ export const INSERT_BUSINESS_ADDRESS = gql`
     }
   }
 `;
+
+export const ONBOARD_NEW_BUSINESS = gql`
+  mutation OnboardNewBusiness(
+    $userId: uuid!
+    $role: user_role_enum
+    $object: business_insert_input = {}
+  ) {
+    update_users_by_pk(
+      pk_columns: { id: $userId }
+      _set: { hasCompletedOnboarding: true, role: $role }
+    ) {
+      role
+    }
+    insert_business_one(object: $object) {
+      id
+    }
+  }
+`;

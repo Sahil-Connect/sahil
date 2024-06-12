@@ -1,34 +1,29 @@
-import React, { ReactChild } from "react";
+import React, { ReactNode } from "react";
+import logo from "../../public/logo-alt.svg";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { Navbar } from "ui";
 type LayoutProps = {
-  children: ReactChild | ReactChild[];
+  children: ReactNode;
 };
-import {
-  HiOutlineBriefcase,
-  HiOutlineUserCircle,
-  HiOutlineTruck,
-  HiOutlineBuildingOffice,
-} from "react-icons/hi2";
+import { HiOutlineUserGroup, HiOutlineGlobeAlt } from "react-icons/hi2";
 
 const links = [
   {
-    name: "Products",
-    href: "/products",
-    icon: HiOutlineBriefcase,
+    name: "Users",
+    href: "/users",
+    icon: HiOutlineUserGroup,
   },
   {
-    name: "Orders",
-    href: "/orders",
-    icon: HiOutlineTruck,
+    name: "Zones",
+    href: "/zones",
+    icon: HiOutlineGlobeAlt,
   },
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(session);
 
   const onSignOut = async () => {
     await signOut();
@@ -36,10 +31,14 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
   return (
     <>
-      <Navbar links={links} header="Sahil Client" onSignOut={onSignOut} />
-      <main className="min-h-[calc(100vh-4.5rem)] p-4 bg-gray-50">
-        {children}
-      </main>
+      <Navbar
+        links={links}
+        logo={logo}
+        header="Sahil Admin"
+        onSignOut={onSignOut}
+        user={session?.user}
+      />
+      <main className="p-4 bg-gray-50">{children}</main>
     </>
   );
 }

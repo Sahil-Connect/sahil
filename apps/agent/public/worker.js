@@ -5,7 +5,7 @@ self.addEventListener('push', (e) => {
 
   const title = data.title || 'Notifications From Sahil - Agent';
   const body = data.body || 'Your order is being processed!';
-  const icon = data.icon || '/logo.png';
+  const icon = data.icon || '/logo.svg';
   const url = data.url || '/';
 
   const options = {

@@ -1,32 +1,9 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { routeGuard } from "@sahil/features/auth/lib/routeGuard";
-import { agentAccessRules } from "@sahil/lib/auth/middleware";
+import { NextRequest } from "next/server";
+import { middleware as authMiddleware } from "@sahil/features/auth/lib/middleware";
+import { AGENT_ACCESS_RULES } from "@sahil/features/auth/lib/accessRules";
 
 export async function middleware(req: NextRequest) {
-  const url = req.nextUrl.clone();
-
-  // Skip routeGuard for these paths
-  if (url.pathname === "/auth/signin" || url.pathname === "/unauthorized") {
-    return NextResponse.next();
-  }
-
-  const { isAuthenticated, isAuthorized } = await routeGuard(
-    req,
-    agentAccessRules
-  );
-
-  if (!isAuthenticated) {
-    url.pathname = "/auth/signin";
-  } else if (!isAuthorized) {
-    url.pathname = "/unauthorized";
-  }
-
-  if (!isAuthenticated || !isAuthorized) {
-    return NextResponse.redirect(url);
-  }
-
-  return NextResponse.next();
+  return authMiddleware(req, AGENT_ACCESS_RULES);
 }
 
 export const config = {

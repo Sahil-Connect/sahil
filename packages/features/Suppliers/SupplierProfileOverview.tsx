@@ -34,7 +34,7 @@ export const SupplierProfileOverview = ({
     <div className="space-y-2">
       <Card height="h-fit">
         <div className="avatar placeholder">
-          <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
+          <div className="bg-neutral text-neutral-content rounded-full w-12">
             <span>{generateInitials("Supplier Name")}</span>
           </div>
         </div>

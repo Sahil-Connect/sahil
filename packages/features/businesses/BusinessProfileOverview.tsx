@@ -18,7 +18,7 @@ export const BusinessProfileOverview: FC<Props> = ({ business }) => {
     <Card height="h-fit">
       {business?.name && (
         <div className="avatar placeholder">
-          <div className="bg-neutral-focus text-neutral-content rounded-full w-20">
+          <div className="bg-neutral text-neutral-content rounded-full w-20">
             <span>{generateInitials(business?.name)}</span>
           </div>
         </div>
