@@ -8,11 +8,16 @@ import Link from "next/link";
 
 export const USER_ROLES = ["Admin", "Agent", "Client", "Courier"];
 
-const supplierBasicInfoSchema = z.object({
+const userInfoSchema = z.object({
   name: z.string().min(2, { message: "required" }).trim(),
+  email: z.string().email().min(2, { message: "required" }).trim(),
+  role: z
+    .string()
+    .min(1, "Role is required")
+    .refine((value) => USER_ROLES.includes(value)),
 });
 
-type FormData = z.infer<typeof supplierBasicInfoSchema>;
+type FormData = z.infer<typeof userInfoSchema>;
 
 export const CreateUser = () => {
   const {
@@ -20,11 +25,11 @@ export const CreateUser = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(supplierBasicInfoSchema),
+    resolver: zodResolver(userInfoSchema),
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const validatedInput = supplierBasicInfoSchema.parse(data);
+    const validatedInput = userInfoSchema.parse(data);
   };
   return (
     <Card title="Create User">

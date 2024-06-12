@@ -7,10 +7,10 @@ export const UsersToolbar = () => {
     <Card>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl">UsersToolbar</h1>
+          <h1 className="text-xl">Manage Users</h1>
         </div>
         <div>
-          <Link className="btn btn-sm btn-primary" href="/users/new">Add User <HiPlus /></Link>
+          <Link className="btn btn-sm btn-primary" href="/users/new">New User <HiPlus /></Link>
         </div>
       </div>
     </Card>
