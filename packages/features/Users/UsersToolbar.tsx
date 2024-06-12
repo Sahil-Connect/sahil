@@ -1,5 +1,6 @@
 import { Card } from "ui";
 import { HiPlus } from "react-icons/hi2";
+import Link from "next/link";
 
 export const UsersToolbar = () => {
   return (
@@ -9,7 +10,7 @@ export const UsersToolbar = () => {
           <h1 className="text-xl">UsersToolbar</h1>
         </div>
         <div>
-          <button className="btn btn-sm btn-primary">Add User <HiPlus /></button>
+          <Link className="btn btn-sm btn-primary" href="/users/new">Add User <HiPlus /></Link>
         </div>
       </div>
     </Card>
