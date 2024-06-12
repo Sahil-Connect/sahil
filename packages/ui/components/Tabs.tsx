@@ -11,7 +11,7 @@ type TabItem = {
 type TabsProps = {
   items: TabItem[];
   onTabClick: (value: TabValue) => void;
-  currentTab: (typeof tabs)[number];
+  currentTab: TabValue;
 };
 
 export const Tabs = ({ items, onTabClick, currentTab }: TabsProps) => {

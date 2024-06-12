@@ -2,22 +2,24 @@ import { create } from "zustand";
 import { useRouter } from "next/router";
 import { useEffect, useCallback, useMemo } from "react";
 
+export type TabValue = "info" | "preferences" | "progress";
 export const tabs = ["info", "preferences", "progress"] as const;
 export const INITIAL_TAB = "info";
 
 type State = {
-  tab: (typeof tabs)[number];
+  tab: TabValue;
 };
 
 type StoreProps = {
   query: State;
   setCurrentTab: (newQuery: typeof INITIAL_TAB) => void;
-  currentTab: (typeof tabs)[number];
+  currentTab: TabValue;
 };
 
 const defaultValues = { tab: INITIAL_TAB };
 
 const useQueryStore = create<StoreProps>((set) => ({
+  // @ts-ignore
   query: defaultValues,
   setCurrentTab: (tab: (typeof tabs)[number]) => set({ currentTab: tab }),
   currentTab: INITIAL_TAB,
@@ -68,7 +70,7 @@ export const useSyncQueryWithStore = () => {
   //   updateURL();
   // }, [query, updateURL]);
 
-  const handleChange = (value: typeof INITIAL_TAB) => {
+  const handleChange = (value: TabValue) => {
     setCurrentTab(value);
   };
 

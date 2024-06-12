@@ -9,6 +9,9 @@ import {
 } from "@sahil/features/Orders";
 import { Card, Tabs, Timeline } from "ui";
 
+export type TabValue = "info" | "preferences" | "progress";
+
+
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
 import { useSyncQueryWithStore, INITIAL_TAB, tabs } from "@sahil/lib/hooks/utilities/useQueryStore";
@@ -44,9 +47,7 @@ export default function OrderPage() {
 
   const { currentTab, handleChange } = useSyncQueryWithStore();
 
-  console.log("currentTab", currentTab);
-
-  const handleTabClick = (value: (typeof tabs)[number]) => {
+  const handleTabClick = (value: TabValue) => {
     handleChange(value);
   };
 
@@ -58,7 +59,9 @@ export default function OrderPage() {
       <div className="flex flex-col lg:flex-row gap-4">
         <div className="basis-4/6 space-y-2">
           <OrderOverview order={order} />
+          
           <Tabs
+          /* @ts-ignore */
             items={OrderTabs}
             onTabClick={handleTabClick}
             currentTab={currentTab}
