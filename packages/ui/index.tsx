@@ -26,6 +26,7 @@ export * from "./components/Steps";
 export * from "./components/StepsPaginator";
 export * from "./components/Tabs";
 export * from "./components/Toggle";
+export * from "./components/Timeline";
 export * from "./components/Wrapper";
 export * from "./components/CheckBox";
 export * from "./components/table/Table";

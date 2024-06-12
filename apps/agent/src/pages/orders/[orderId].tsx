@@ -7,7 +7,7 @@ import {
   OrderDetails,
   OrderProgress,
 } from "@sahil/features/Orders";
-import { Card, Tabs } from "ui";
+import { Card, Tabs, Timeline } from "ui";
 
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
@@ -78,7 +78,7 @@ export default function OrderPage() {
           </div>
         </div>
         <div className="grow space-y-2">
-          <OrderClient businessId={order?.customerId} />
+          <Timeline />
         </div>
       </div>
     </section>

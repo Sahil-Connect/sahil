@@ -1,15 +1,16 @@
+export type TabValue = "info" | "preferences" | "progress";
 export const tabs = ["info", "preferences", "progress"] as const;
 export const INITIAL_TAB = "info";
 
 type TabItem = {
   icon?: React.ReactNode;
   label: string;
-  value: (typeof tabs)[number];
+  value: TabValue;
 };
 
 type TabsProps = {
   items: TabItem[];
-  onTabClick: (value: typeof INITIAL_TAB) => void;
+  onTabClick: (value: TabValue) => void;
   currentTab: (typeof tabs)[number];
 };
 
