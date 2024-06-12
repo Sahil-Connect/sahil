@@ -5,8 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Avatar, Card, Input, Select } from "ui";
 import { Users } from "@sahil/lib/graphql/__generated__/graphql";
 import Link from "next/link";
+import { useRegisterUserAction } from "@sahil/lib/hooks/users";
 
-export const USER_ROLES = ["Admin", "Agent", "Client", "Courier"];
+export const USER_ROLES = ["admin", "agent", "client", "courier"];
 
 const userInfoSchema = z.object({
   name: z.string().min(2, { message: "required" }).trim(),
@@ -20,6 +21,10 @@ const userInfoSchema = z.object({
 type FormData = z.infer<typeof userInfoSchema>;
 
 export const CreateUser = () => {
+    const { registerUser, data, loading, error } = useRegisterUserAction();
+
+
+
   const {
     register,
     handleSubmit,
@@ -30,7 +35,21 @@ export const CreateUser = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = userInfoSchema.parse(data);
+    console.log(validatedInput);
+    const result = await registerUser({
+        variables: {
+            object: {
+                name: validatedInput.name,
+                role: validatedInput.role,
+            }
+        }
+    });
+    console.log(result);
+    console.log(data);
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
   return (
     <Card title="Create User">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
