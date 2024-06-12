@@ -11,23 +11,21 @@ type State = {
 };
 
 type StoreProps = {
-  query: State;
-  setCurrentTab: (newQuery: typeof INITIAL_TAB) => void;
+  // query: State;
+  setCurrentTab: (value: TabValue) => void;
   currentTab: TabValue;
 };
 
 const defaultValues = { tab: INITIAL_TAB };
 
 const useQueryStore = create<StoreProps>((set) => ({
-  // @ts-ignore
-  query: defaultValues,
-  setCurrentTab: (tab: (typeof tabs)[number]) => set({ currentTab: tab }),
+  setCurrentTab: (tab: TabValue) => set({ currentTab: tab }),
   currentTab: INITIAL_TAB,
 }));
 
 export const useSyncQueryWithStore = () => {
   const router = useRouter();
-  const { currentTab, query, setCurrentTab }= useQueryStore((state) => state);
+  const { currentTab, setCurrentTab }= useQueryStore((state) => state);
 
   // const initialState = useMemo(() => {
   //   // wait for isReady to access dynamic route variables
@@ -75,7 +73,6 @@ export const useSyncQueryWithStore = () => {
   };
 
   return {
-    query,
     handleChange,
     currentTab
   };

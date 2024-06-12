@@ -22,7 +22,13 @@ import {
   HiArrowsRightLeft,
 } from "react-icons/hi2";
 
-export const OrderTabs = [
+type TabItem = {
+  icon?: React.ReactNode;
+  label: string;
+  value: TabValue;
+};
+
+export const OrderTabs: TabItem[] = [
   {
     label: "Oder Info",
     value: "info",
@@ -59,9 +65,7 @@ export default function OrderPage() {
       <div className="flex flex-col lg:flex-row gap-4">
         <div className="basis-4/6 space-y-2">
           <OrderOverview order={order} />
-          
           <Tabs
-          /* @ts-ignore */
             items={OrderTabs}
             onTabClick={handleTabClick}
             currentTab={currentTab}
