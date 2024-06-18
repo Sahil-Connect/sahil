@@ -30,3 +30,5 @@ export * from "./components/Wrapper";
 export * from "./components/CheckBox";
 export * from "./components/table/Table";
 export * from "./components/table/CompareSuppliersTable";
+export * from "./components/StatusPage";
+export * from "./components/CustomContainer";
