@@ -8,7 +8,7 @@ import AuthCard from "@sahil/features/auth/AuthCard";
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();
   const router = useRouter();
-  // console.log(session);
+  console.log(session);
 
   useEffect(() => {
     if (session) {

@@ -12,7 +12,7 @@ const SignInPage: NextPage = ({ providers }: any) => {
 
   useEffect(() => {
     if (session) {
-      router.push("/auth/new");
+      router.push("/");
     }
   }, [router, session]);
 
