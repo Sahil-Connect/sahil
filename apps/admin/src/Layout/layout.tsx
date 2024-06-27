@@ -6,19 +6,34 @@ import { Navbar } from "ui";
 type LayoutProps = {
   children: ReactNode;
 };
-import { HiOutlineUserGroup, HiOutlineGlobeAlt } from "react-icons/hi2";
+import { HiOutlineUsers,  HiOutlineQueueList, HiOutlineMap, HiOutlineIdentification, HiOutlineBuildingOffice2 } from "react-icons/hi2";
 
 const links = [
   {
     name: "Users",
     href: "/users",
-    icon: HiOutlineUserGroup,
+    icon: HiOutlineUsers,
   },
   {
     name: "Zones",
     href: "/zones",
-    icon: HiOutlineGlobeAlt,
+    icon: HiOutlineMap,
   },
+  {
+    name: "Agents",
+    href: "/agents",
+    icon: HiOutlineIdentification,
+  },
+  {
+    name: "Orders",
+    href: "/orders",
+    icon:  HiOutlineQueueList,
+  },
+  {
+    name: "Clients",
+    href: "/clients",
+    icon: HiOutlineBuildingOffice2,
+  }
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {
@@ -34,7 +49,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
       <Navbar
         links={links}
         logo={logo}
-        header="Sahil Admin"
+        header="Admin"
         onSignOut={onSignOut}
         user={session?.user}
       />
