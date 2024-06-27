@@ -1,3 +1,8 @@
+export const ADMIN_ACCESS_RULES = [
+  // { path: "/", roles: ["admin"] },
+  // Add more rules as needed for agent
+];
+
 export const AGENT_ACCESS_RULES = [
   // { path: "/", roles: ["user"] },
   // { path: "/businesses", roles: ["user"] },
