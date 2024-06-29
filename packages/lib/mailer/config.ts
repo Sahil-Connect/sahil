@@ -8,17 +8,21 @@ const {
   EMAIL_SERVER_PORT,
   EMAIL_SERVER_USER,
   EMAIL_SERVER_PASSWORD,
+  EMAIL_SERVER,
 } = process.env;
 if (
   !EMAIL_SERVER_HOST ||
   !EMAIL_SERVER_PORT ||
   !EMAIL_SERVER_USER ||
-  !EMAIL_SERVER_PASSWORD
+  !EMAIL_SERVER_PASSWORD ||
+  !EMAIL_SERVER
 ) {
   throw new Error(
     "Missing required environment variables for email configuration"
   );
 }
+
+export const emailServer = EMAIL_SERVER;
 
 export const smtpOptions: SMTPConnection.Options = {
   host: EMAIL_SERVER_HOST,

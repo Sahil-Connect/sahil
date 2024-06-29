@@ -1,13 +1,11 @@
-import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Avatar, Card, Input, Select } from "ui";
-import { Users } from "@sahil/lib/graphql/__generated__/graphql";
-import Link from "next/link";
+import { Card, Input, Select } from "ui";
 import { useRegisterUserAction } from "@sahil/lib/hooks/users";
+import { signIn } from "next-auth/react";
 
-export const USER_ROLES = ["admin", "agent", "client", "courier"];
+export const USER_ROLES = ["admin", "agent", "business", "supplier", "courier"];
 
 const userInfoSchema = z.object({
   name: z.string().min(2, { message: "required" }).trim(),
@@ -34,16 +32,21 @@ export const CreateUser = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = userInfoSchema.parse(data);
     console.log(validatedInput);
-    const result = await registerUser({
-      variables: {
-        object: {
-          name: validatedInput.name,
-          role: validatedInput.role,
-        },
-      },
+    const results = await signIn("email", {
+      ...validatedInput,
+      redirect: false,
     });
-    console.log(result);
-    console.log(data);
+    console.log("Client sign in result:", results);
+
+    // const result = await registerUser({
+    //   variables: {
+    //     object: {
+    //       name: validatedInput.name,
+    //       role: validatedInput.role,
+    //     },
+    //   },
+    // });
+    // console.log(result);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -74,7 +77,9 @@ export const CreateUser = () => {
         />
 
         <div className="card-actions justify-end">
-          <button className="btn btn-sm btn-ghost">Cancel</button>
+          <button type="button" className="btn btn-sm btn-ghost">
+            Cancel
+          </button>
           <button className="btn btn-sm btn-primary">Save</button>
         </div>
       </form>

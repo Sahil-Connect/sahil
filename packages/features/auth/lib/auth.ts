@@ -6,7 +6,7 @@ import { AuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { request } from "graphql-request";
 import { GET_ADDITIONAL_AUTH_USER_INFO } from "@sahil/lib/graphql";
-import { smtpOptions } from "@sahil/lib/mailer";
+import { emailServer } from "@sahil/lib/mailer";
 import { sendVerificationRequest } from "./email";
 
 const providers = [
@@ -15,7 +15,7 @@ const providers = [
     clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET!,
   }),
   EmailProvider({
-    server: smtpOptions,
+    server: emailServer,
     from: process.env.EMAIL_FROM,
     sendVerificationRequest,
   }),
@@ -45,7 +45,7 @@ const authPagesConfig = () => {
     signIn: "/auth/signin", // Displays signin buttons
     signOut: "/auth/signout", // Displays form with sign out button
     error: "/auth/error", // Error code passed in query string as ?error=
-    verifyRequest: "/auth/verify-request", // Used for check email page
+    verifyRequest: "/auth/verify", // Used for check email page
     newUser: "/auth/onboarding/user_details", // If set, new users will be directed here on first sign in
   };
 };

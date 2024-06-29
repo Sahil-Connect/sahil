@@ -15,3 +15,7 @@ export const generateInitials = (name: string) => {
     .map((word) => word.charAt(0).toUpperCase())
     .join("");
 };
+
+export const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
