@@ -1,15 +1,23 @@
 import GoogleProvider from "next-auth/providers/google";
+import EmailProvider from "next-auth/providers/email";
 import { generateJWT, decodeJWT } from "./generateJWT";
 import { HasuraAdapter } from "next-auth-hasura-adapter";
 import { AuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { request } from "graphql-request";
 import { GET_ADDITIONAL_AUTH_USER_INFO } from "@sahil/lib/graphql";
+import { smtpOptions } from "@sahil/lib/mailer";
+import { sendVerificationRequest } from "./email";
 
 const providers = [
   GoogleProvider({
     clientId: process.env.NEXT_PUBLIC_GOOGLE_ID!,
     clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET!,
+  }),
+  EmailProvider({
+    server: smtpOptions,
+    from: process.env.EMAIL_FROM,
+    sendVerificationRequest,
   }),
 ];
 
