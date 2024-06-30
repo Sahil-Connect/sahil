@@ -4,6 +4,19 @@ import { ApolloProvider } from "@apollo/client";
 import { createApolloClient } from "@sahil/lib/graphql";
 import Layout from "@/Layout/layout";
 import { SessionProvider } from "next-auth/react";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 const graphqlUri = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT || "";
 const ws = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_WS;
@@ -28,9 +41,13 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <ApolloProvider client={client}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <div
+          className={`${inter.variable} ${jakarta.variable} font-inter antialiased text-zinc-900 min-h-full leading-normal`}
+        >
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </div>
       </ApolloProvider>
     </SessionProvider>
   );
