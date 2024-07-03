@@ -3,6 +3,7 @@ import { SendVerificationRequestParams } from "next-auth/providers/email";
 import { GET_LATEST_USER_INVITE } from "@sahil/lib/graphql";
 import { sendEmail } from "@sahil/lib/mailer";
 import { capitalizeFirstLetters } from "@sahil/lib";
+import { URLS } from "@sahil/configs/env";
 
 interface UserProps {
   name: string;
@@ -55,8 +56,23 @@ const fetchInvite = async (email: string): Promise<any | null> => {
 
 const generateCustomUrl = (url: string, role: string): string => {
   const [, params] = url.split("?");
+  const env = process.env.NODE_ENV || "development";
 
-  return `http://localhost:3000/api/auth/callback/email?${params}`;
+  const { development, production } = URLS;
+
+  if (env === "development") {
+    return `${development}/api/auth/callback/email?${params}`;
+  }
+
+  const roleUrls: Record<string, string> = {
+    admin: `${production.admin}/auth/callback/email?${params}`,
+    agent: `${production.agent}/auth/callback/email?${params}`,
+    courier: `${production.courier}/auth/callback/email?${params}`,
+    business: `${production.client}/auth/callback/email?${params}`,
+    supplier: `${production.client}/auth/callback/email?${params}`,
+  };
+
+  return roleUrls[role];
 };
 
 const sendVerificationEmail = async (
