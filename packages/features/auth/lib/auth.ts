@@ -8,6 +8,12 @@ import { request } from "graphql-request";
 import { GET_ADDITIONAL_AUTH_USER_INFO } from "@sahil/lib/graphql";
 import { emailServer } from "@sahil/lib/mailer";
 import { sendVerificationRequest } from "./invite";
+import { GetAdditionalAuthUserInfoQuery } from "@sahil/lib/graphql/__generated__/graphql";
+
+const HASURA_ENDPOINT = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT!;
+const X_HASURA_ADMIN_SECRET = {
+  "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET!,
+};
 
 const providers = [
   GoogleProvider({
@@ -50,6 +56,18 @@ const authPagesConfig = () => {
   };
 };
 
+const getAdditionalAuthUserInfo = async (userId: string) => {
+  const { users_by_pk } = await request<GetAdditionalAuthUserInfoQuery>(
+    HASURA_ENDPOINT,
+    GET_ADDITIONAL_AUTH_USER_INFO,
+    {
+      id: userId,
+    },
+    X_HASURA_ADMIN_SECRET
+  );
+  return users_by_pk!;
+};
+
 const initNextAuth = (): AuthOptions => {
   return {
     providers,
@@ -71,19 +89,9 @@ const initNextAuth = (): AuthOptions => {
         return session;
       },
       async jwt({ token }) {
-        const { users_by_pk } = await request<any>(
-          process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ENDPOINT!,
-          GET_ADDITIONAL_AUTH_USER_INFO,
-          {
-            id: token.sub,
-          },
-          {
-            "x-hasura-admin-secret":
-              process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET!,
-          }
-        );
+        const user = await getAdditionalAuthUserInfo(token.sub!);
 
-        const { hasCompletedOnboarding, role } = users_by_pk;
+        const { hasCompletedOnboarding, role } = user;
         const allowedRoles = role ? [role, "user"] : ["user"];
 
         return {

@@ -4,6 +4,12 @@ import {
   INSERT_NEW_INVITE,
   INSERT_NEW_USER,
 } from "@sahil/lib/graphql";
+import {
+  GetUserInvitesQuery,
+  GetUserInvitesQueryVariables,
+  InsertNewInviteMutation,
+  InsertNewInviteMutationVariables,
+} from "../graphql/__generated__/graphql";
 
 export const useRegisterUserAction = () => {
   const [registerUser, { data, loading, error }] = useMutation(INSERT_NEW_USER);
@@ -12,13 +18,18 @@ export const useRegisterUserAction = () => {
 };
 
 export const useAddUserInvite = () => {
-  const [addUserInvite, { data, loading, error }] =
-    useMutation(INSERT_NEW_INVITE);
+  const [addUserInvite, { data, loading, error }] = useMutation<
+    InsertNewInviteMutation,
+    InsertNewInviteMutationVariables
+  >(INSERT_NEW_INVITE);
 
   return { error, data: data?.insert_user_invites_one, loading, addUserInvite };
 };
 
 export const useFetchUserInvites = () => {
-  const { error, data, loading } = useQuery(GET_LATEST_USER_INVITE);
+  const { error, data, loading } = useQuery<
+    GetUserInvitesQuery,
+    GetUserInvitesQueryVariables
+  >(GET_LATEST_USER_INVITE);
   return { error, data: data?.user_invites, loading };
 };
