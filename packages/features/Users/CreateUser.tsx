@@ -1,18 +1,27 @@
-import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Card, Input, Select } from "ui";
-import { useRegisterUserAction } from "@sahil/lib/hooks/users";
 import { signIn } from "next-auth/react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  useAddUserInvite,
+  useRegisterUserAction,
+} from "@sahil/lib/hooks/users";
+import { Card, Input, Select } from "ui";
 
 export const USER_ROLES = ["admin", "agent", "business", "supplier", "courier"];
 
 const userInfoSchema = z.object({
   name: z.string().min(2, { message: "required" }).trim(),
-  email: z.string().email().min(2, { message: "required" }).trim(),
+  email: z
+    .string()
+    .email()
+    .min(2, { message: "required" })
+    .trim()
+    .toLowerCase(),
   role: z
     .string()
     .min(1, "Role is required")
+    .toLowerCase()
     .refine((value) => USER_ROLES.includes(value)),
 });
 
@@ -20,6 +29,12 @@ type FormData = z.infer<typeof userInfoSchema>;
 
 export const CreateUser = () => {
   const { registerUser, data, loading, error } = useRegisterUserAction();
+  const {
+    addUserInvite,
+    data: invites,
+    loading: inviteLoading,
+    error: inviteError,
+  } = useAddUserInvite();
 
   const {
     register,
@@ -31,11 +46,20 @@ export const CreateUser = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = userInfoSchema.parse(data);
-    console.log(validatedInput);
+
+    const invite = await addUserInvite({
+      variables: {
+        object: validatedInput,
+      },
+    });
+
+    console.log("Invite:", invite);
+
     const results = await signIn("email", {
       ...validatedInput,
       redirect: false,
     });
+
     console.log("Client sign in result:", results);
 
     // const result = await registerUser({

@@ -19,3 +19,17 @@ export const GET_ADDITIONAL_AUTH_USER_INFO = gql`
     }
   }
 `;
+
+export const GET_LATEST_USER_INVITE = gql`
+  query getUserInvites($email: String = "") {
+    user_invites(
+      where: { email: { _eq: $email } }
+      limit: 1
+      order_by: { created_at: desc }
+    ) {
+      id
+      name
+      role
+    }
+  }
+`;

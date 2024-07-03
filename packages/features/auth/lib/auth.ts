@@ -7,7 +7,7 @@ import { JWT } from "next-auth/jwt";
 import { request } from "graphql-request";
 import { GET_ADDITIONAL_AUTH_USER_INFO } from "@sahil/lib/graphql";
 import { emailServer } from "@sahil/lib/mailer";
-import { sendVerificationRequest } from "./email";
+import { sendVerificationRequest } from "./invite";
 
 const providers = [
   GoogleProvider({
