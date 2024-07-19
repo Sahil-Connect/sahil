@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 const progress = [
   {
     id: 1,
@@ -21,7 +23,12 @@ const progress = [
   },
 ];
 
-export const TimelineItem = ({ item }) => {
+
+type TimelineItemProps = {
+  item: any;
+};
+
+export const TimelineItem: FC<TimelineItemProps> = ({ item }) => {
   return (
     <li>
       <div className="timeline-start">1984</div>
@@ -48,7 +55,7 @@ export const Timeline = () => {
   return (
     <ul className="timeline timeline-vertical">
       {progress.map((item) => (
-        <TimelineItem item={item} />
+        <TimelineItem key={item.id} item={item} />
       ))}
     </ul>
   );
