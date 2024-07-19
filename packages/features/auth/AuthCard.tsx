@@ -31,6 +31,8 @@ const AuthCard = ({
               src={logo}
               alt="Sahil"
               loading="eager"
+              width={100}
+              height={100}
               className="w-24 object-contain mx-auto"
             />
           )}

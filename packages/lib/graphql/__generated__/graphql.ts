@@ -16697,7 +16697,7 @@ export type User_Invites = {
   created_at: Scalars["timestamptz"]["output"];
   email: Scalars["String"]["output"];
   id: Scalars["uuid"]["output"];
-  name: Scalars["String"]["output"];
+  name?: Maybe<Scalars["String"]["output"]>;
   role: User_Role_Enum;
 };
 
@@ -18175,6 +18175,20 @@ export type GetUsersQuery = {
   }>;
 };
 
+export type GetUserByEmailQueryVariables = Exact<{
+  email: Scalars["String"]["input"];
+}>;
+
+export type GetUserByEmailQuery = {
+  __typename?: "query_root";
+  users: Array<{
+    __typename?: "users";
+    name?: string | null;
+    email?: string | null;
+    role?: User_Role_Enum | null;
+  }>;
+};
+
 export type GetAdditionalAuthUserInfoQueryVariables = Exact<{
   id?: InputMaybe<Scalars["uuid"]["input"]>;
 }>;
@@ -18197,7 +18211,7 @@ export type GetUserInvitesQuery = {
   user_invites: Array<{
     __typename?: "user_invites";
     id: any;
-    name: string;
+    name?: string | null;
     role: User_Role_Enum;
   }>;
 };
@@ -21326,6 +21340,77 @@ export const GetUsersDocument = {
     },
   ],
 } as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+export const GetUserByEmailDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "getUserByEmail" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "email" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "users" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "email" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "email" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                { kind: "Field", name: { kind: "Name", value: "role" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetUserByEmailQuery, GetUserByEmailQueryVariables>;
 export const GetAdditionalAuthUserInfoDocument = {
   kind: "Document",
   definitions: [

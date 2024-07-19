@@ -7,6 +7,10 @@ import {
   useRegisterUserAction,
 } from "@sahil/lib/hooks/users";
 import { Card, Input, Select } from "ui";
+import {
+  InputMaybe,
+  User_Role_Enum,
+} from "@sahil/lib/graphql/__generated__/graphql";
 
 export const USER_ROLES = ["admin", "agent", "business", "supplier", "courier"];
 
@@ -46,21 +50,29 @@ export const CreateUser = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = userInfoSchema.parse(data);
+    try {
+      const object = {
+        ...validatedInput,
+        role: validatedInput.role as InputMaybe<User_Role_Enum>,
+      };
 
-    const invite = await addUserInvite({
-      variables: {
-        object: validatedInput,
-      },
-    });
+      const invite = await addUserInvite({
+        variables: {
+          object,
+        },
+      });
 
-    console.log("Invite:", invite);
+      console.log("Invite:", invite);
 
-    const results = await signIn("email", {
-      ...validatedInput,
-      redirect: false,
-    });
+      const results = await signIn("email", {
+        ...validatedInput,
+        redirect: false,
+      });
 
-    console.log("Client sign in result:", results);
+      console.log("Email sign in result:", results);
+    } catch (error) {
+      console.error("Email sign in failed:", error);
+    }
 
     // const result = await registerUser({
     //   variables: {

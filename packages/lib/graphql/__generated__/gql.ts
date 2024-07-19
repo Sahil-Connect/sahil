@@ -83,6 +83,8 @@ const documents = {
     types.GetSupplierCategoriesDocument,
   "\n  query getUsers {\n    users {\n      id\n      created_at\n      role\n      name\n    }\n  }\n":
     types.GetUsersDocument,
+  "\n  query getUserByEmail($email: String!) {\n    users(where: { email: { _eq: $email } }) {\n      name\n      email\n      role\n    }\n  }\n":
+    types.GetUserByEmailDocument,
   '\n  query getAdditionalAuthUserInfo($id: uuid = "") {\n    users_by_pk(id: $id) {\n      hasCompletedOnboarding\n      role\n    }\n  }\n':
     types.GetAdditionalAuthUserInfoDocument,
   '\n  query getUserInvites($email: String = "") {\n    user_invites(\n      where: { email: { _eq: $email } }\n      limit: 1\n      order_by: { created_at: desc }\n    ) {\n      id\n      name\n      role\n    }\n  }\n':
@@ -317,6 +319,12 @@ export function gql(
 export function gql(
   source: "\n  query getUsers {\n    users {\n      id\n      created_at\n      role\n      name\n    }\n  }\n"
 ): (typeof documents)["\n  query getUsers {\n    users {\n      id\n      created_at\n      role\n      name\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query getUserByEmail($email: String!) {\n    users(where: { email: { _eq: $email } }) {\n      name\n      email\n      role\n    }\n  }\n"
+): (typeof documents)["\n  query getUserByEmail($email: String!) {\n    users(where: { email: { _eq: $email } }) {\n      name\n      email\n      role\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

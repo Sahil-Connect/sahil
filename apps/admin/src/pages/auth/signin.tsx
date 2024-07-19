@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
-import { getProviders, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { getProviders, useSession } from "next-auth/react";
+import logo from "../../../public/logo-alt.svg";
 import LoginForm from "@sahil/features/auth/forms/LoginForm";
 import AuthCard from "@sahil/features/auth/AuthCard";
 
@@ -19,6 +20,7 @@ const SignInPage: NextPage = ({ providers }: any) => {
   return (
     <>
       <AuthCard
+        logo={logo}
         providers={providers}
         form={<LoginForm />}
         title="Sign in to your account"

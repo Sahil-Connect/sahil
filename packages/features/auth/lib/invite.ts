@@ -1,9 +1,10 @@
 import { request } from "graphql-request";
 import { SendVerificationRequestParams } from "next-auth/providers/email";
-import { GET_LATEST_USER_INVITE } from "@sahil/lib/graphql";
+import { GET_LATEST_USER_INVITE, GET_USER_BY_EMAIL } from "@sahil/lib/graphql";
 import { sendEmail } from "@sahil/lib/mailer";
 import { capitalizeFirstLetters } from "@sahil/lib";
 import { URLS } from "@sahil/configs/env";
+import { GetUsersQuery } from "@sahil/lib/graphql/__generated__/graphql";
 
 interface UserProps {
   name: string;
@@ -25,18 +26,46 @@ export const sendVerificationRequest = async (
     provider: { from },
   } = params;
 
-  const invite = await fetchInvite(email);
-  if (!invite) {
-    console.error(`Invite not found for email: ${email}`);
-    return;
+  try {
+    let user = await fetchUser(email);
+    let invite = null;
+
+    if (!user) {
+      invite = await fetchInvite(email);
+    }
+
+    const role = user ? user.role : invite?.role;
+    const customUrl = generateCustomUrl(url, role);
+
+    const userProps: UserProps = {
+      name: user ? user.name : invite?.name || "",
+      email,
+      role: role || "",
+    };
+
+    console.log("Custom URL:", customUrl);
+    console.log("User Props:", userProps);
+
+    await sendVerificationEmail(userProps, from, customUrl);
+  } catch (error) {
+    console.error("Error sending verification email:", error);
+    throw error;
   }
+};
 
-  const { name, role } = invite;
-  const customUrl = generateCustomUrl(url, role);
-  const userProps: UserProps = { name, email, role };
-
-  console.log("Custom URL:", customUrl);
-  await sendVerificationEmail(userProps, from, customUrl);
+const fetchUser = async (email: string): Promise<any | null> => {
+  try {
+    const { users } = await request<GetUsersQuery>(
+      HASURA_ENDPOINT,
+      GET_USER_BY_EMAIL,
+      { email },
+      HASURA_ADMIN_SECRET
+    );
+    return users[0];
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    return null;
+  }
 };
 
 const fetchInvite = async (email: string): Promise<any | null> => {
@@ -70,9 +99,12 @@ const generateCustomUrl = (url: string, role: string): string => {
     courier: `${production.courier}/auth/callback/email?${params}`,
     business: `${production.client}/auth/callback/email?${params}`,
     supplier: `${production.client}/auth/callback/email?${params}`,
+    user: `${production.client}/auth/callback/email?${params}`,
   };
 
-  return roleUrls[role];
+  // Ensure role defaults to 'user' if not provided or invalid
+  const validRole = roleUrls[role] ? role : "user";
+  return roleUrls[validRole];
 };
 
 const sendVerificationEmail = async (

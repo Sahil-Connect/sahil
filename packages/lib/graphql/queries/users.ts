@@ -11,6 +11,16 @@ export const GET_USERS = gql`
   }
 `;
 
+export const GET_USER_BY_EMAIL = gql`
+  query getUserByEmail($email: String!) {
+    users(where: { email: { _eq: $email } }) {
+      name
+      email
+      role
+    }
+  }
+`;
+
 export const GET_ADDITIONAL_AUTH_USER_INFO = gql`
   query getAdditionalAuthUserInfo($id: uuid = "") {
     users_by_pk(id: $id) {
