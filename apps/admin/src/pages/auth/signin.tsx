@@ -24,11 +24,6 @@ const SignInPage: NextPage = ({ providers }: any) => {
         providers={providers}
         form={<LoginForm />}
         title="Sign in to your account"
-        sub={{
-          text: "Don't have an account?",
-          href: "/auth/signup",
-          cta: "Sign Up",
-        }}
       />
     </>
   );

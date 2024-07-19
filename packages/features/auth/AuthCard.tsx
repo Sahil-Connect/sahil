@@ -1,5 +1,4 @@
 import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
 import { Card } from "ui";
 import { AuthProviders } from "./AuthProviders";
 
@@ -8,23 +7,12 @@ type Props = {
   logo?: string | StaticImageData;
   form: React.ReactNode;
   title: string;
-  sub: {
-    text: string;
-    href: string;
-    cta: string;
-  };
 };
 
-const AuthCard = ({
-  providers = [],
-  logo = "",
-  form,
-  title,
-  sub: { text, href, cta },
-}: Props) => {
+const AuthCard = ({ providers = [], logo = "", form, title }: Props) => {
   return (
     <section className="flex items-center justify-center h-[calc(100vh-7rem)]">
-      <Card className="w-96 md:w-2/3 max-w-lg">
+      <Card className="w-96 md:w-2/3 max-w-lg pb-4">
         <div className="mx-auto space-y-2 mb-8">
           {logo && (
             <Image
@@ -46,12 +34,6 @@ const AuthCard = ({
               <AuthProviders providers={providers} />
             </div>
           )}
-          <p className="text-center">
-            {text}{" "}
-            <Link href={href} className="link-primary font-bold">
-              {cta}
-            </Link>
-          </p>
         </div>
       </Card>
     </section>
