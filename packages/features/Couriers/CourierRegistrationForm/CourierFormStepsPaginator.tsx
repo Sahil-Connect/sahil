@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { useCourierFormStore } from "@sahil/lib/hooks/useCourierFormStore";
+import { useCourierFormStore } from "@sahil/lib/hooks/formStores/useCourierFormStore";
 import { JoinGrid } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
 import { StepDirection } from "ui/components/MultiStepForm";

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../../public/logo.png";
+import logo from "../../../public/logo.svg";
 import { GridContainer } from "../shared";
 
 const links = [
@@ -68,17 +68,13 @@ export const Navbar = () => {
                 })}
               </ul>
             </div>
-            <Link
-              href="/"
-              className="flex items-center font-jakarta gap-x-2 text-zinc-900 font-bold text-xl"
-            >
+            <Link href="/">
               <Image
                 src={logo}
                 alt={"Sahil"}
                 loading="eager"
-                className="w-10 max-w-full object-contain"
+                className="w-20 max-w-full object-contain"
               />
-              sahil
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex border border-gray-50 rounded-full shadow">

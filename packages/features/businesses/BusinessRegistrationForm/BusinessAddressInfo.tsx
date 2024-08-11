@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, FormControl, Input } from "ui";
 import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
-import { useBusinessFormStore } from "@sahil/lib/hooks/useBusinessFormStore";
+import { useBusinessFormStore } from "@sahil/lib/hooks/formStores/useBusinessFormStore";
 const businessAddressSchema = z.object({
   streetName: z.string().min(2, { message: "Must be more than 2 characters" }),
 });

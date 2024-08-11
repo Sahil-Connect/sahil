@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { FETCH_PRODUCTS } from "@sahil/lib/graphql";
 
 export const useFetchProducts = ({
-  limit = 12,
+  limit = 10,
   offset = 0,
 }: {
   limit?: number;

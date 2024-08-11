@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../../public/logo.png";
+import logo from "../../../public/logo.svg";
 import { GridContainer } from "../shared";
 
 const quickLinks = [
@@ -22,16 +22,12 @@ export const Footer = () => {
       <GridContainer className="grid gap-y-8">
         <div className="grid gap-y-8 justify-between pb-12 border-b border-b-solid border-b-gray-200 md:grid-cols-[repeat(2,1fr)] lg:grid-cols-[repeat(4,max-content)]">
           <div>
-            <Link
-              href="/"
-              className="flex items-center font-jakarta gap-x-2 text-zinc-900 font-bold text-xl mb-2"
-            >
+            <Link href="/">
               <Image
                 src={logo}
                 alt={"Sahil logo"}
-                className="w-10 max-w-full object-contain"
+                className="w-20 max-w-full object-contain"
               />
-              sahil
             </Link>
             <p className="max-w-[50ch] mb-3">Empowering businesses.</p>
             <h3 className="text-lg">Follow us on:</h3>

@@ -4,7 +4,7 @@ import { getProviders, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import LoginForm from "@sahil/features/auth/forms/LoginForm";
 import AuthCard from "@sahil/features/auth/AuthCard";
-import logo from "../../../public/logo.png";
+import logo from "../../../public/logo.svg";
 
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();

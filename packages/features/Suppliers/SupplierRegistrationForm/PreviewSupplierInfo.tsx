@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useRegisterSupplier } from "@sahil/lib/hooks/suppliers";
 import toast, { Toaster } from "react-hot-toast";
-import { useSupplierFormStore } from "@sahil/lib/hooks/useSupplierFormStore";
+import { useSupplierFormStore } from "@sahil/lib/hooks/formStores/useSupplierFormStore";
 
 export const PreviewSupplierInfo = () => {
   const {

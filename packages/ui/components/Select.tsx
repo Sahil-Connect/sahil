@@ -1,6 +1,5 @@
 import { FormControl, FormControlError } from "./FormControl";
 import { BaseInputProps } from "../types";
-import type { FieldValues } from "react-hook-form";
 
 type SelectProps = BaseInputProps<any> & {
   options: any[];

@@ -26,14 +26,14 @@ const AuthCard = ({
     <section className="flex items-center justify-center h-[calc(100vh-7rem)]">
       <Card className="w-96 md:w-2/3 max-w-lg">
         <div className="mx-auto space-y-2 mb-8">
-          {
-            logo &&           <Image
-            src={logo}
-            alt="Sahil"
-            loading="eager"
-            className="w-24 object-contain mx-auto"
-          />
-          }
+          {logo && (
+            <Image
+              src={logo}
+              alt="Sahil"
+              loading="eager"
+              className="w-24 object-contain mx-auto"
+            />
+          )}
           <h2 className="card-title text-md font-bold">{title}</h2>
         </div>
         {form}

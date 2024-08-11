@@ -2,11 +2,7 @@ import { gql } from "@apollo/client";
 
 export const FETCH_PRODUCTS = gql`
   query getProducts($offset: Int = 0, $limit: Int = 12) {
-    products(
-      limit: $limit
-      order_by: { created_at: desc }
-      offset: $offset
-    ) {
+    products(limit: $limit, order_by: { created_at: desc }, offset: $offset) {
       discount
       id
       name

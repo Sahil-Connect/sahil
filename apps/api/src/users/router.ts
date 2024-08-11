@@ -1,6 +1,8 @@
 import { NextFunction, Response, Router, Request } from "express";
-const userRouter = Router();
 import { registerUser } from "./operations/register";
+import { listUsers } from "./operations/listUsers";
+
+const userRouter = Router();
 
 userRouter.get(
   "/:userId",
@@ -21,9 +23,10 @@ userRouter.post(
   }
 );
 
-userRouter.get("/", (req: Request, res: Response, next: NextFunction) => {
+userRouter.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  const users = await listUsers();
   res.status(200).json({
-    hi: "Message",
+    users,
   });
 });
 
