@@ -1,26 +1,25 @@
 import {
-  HiPlus,
   HiOutlineBuildingOffice,
   HiOutlineUsers,
   HiOutlineTruck,
-  HiOutlineBugAnt,
   HiOutlineBriefcase,
 } from "react-icons/hi2";
 import Link from "next/link";
 import { Avatar, Card } from "ui";
+import { useSession } from "next-auth/react";
 
 export const AgentToolBar = () => {
+  const { data } = useSession();
+  const user = data?.user;
+
   return (
     <Card>
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <Avatar
-            alt="Hello"
-            src="https://avatars.githubusercontent.com/u/21015204?v=4"
-          />
+          <Avatar alt="Hello" src={user?.image} />
           <div>
             <p>Welcome back</p>
-            <h1 className="text-2xl">Keji Lumori</h1>
+            <h1 className="text-2xl">{user?.name}</h1>
           </div>
         </div>
         <div className="flex gap-2">

@@ -1,4 +1,4 @@
-import { Card, JoinGrid } from "ui";
+import { Card, JoinGrid, Timeline } from "ui";
 import { HiCheck, HiXMark, HiOutlineInformationCircle } from "react-icons/hi2";
 
 const progress = [

@@ -1,23 +1,33 @@
-import {
-  HiOutlineAdjustmentsVertical,
-  HiOutlineExclamationCircle,
-  HiOutlineBeaker,
-} from "react-icons/hi2";
+export type TabValue = "info" | "preferences" | "progress";
+export const tabs = ["info", "preferences", "progress"] as const;
+export const INITIAL_TAB = "info";
 
-export const Tabs = () => {
+type TabItem = {
+  icon?: React.ReactNode;
+  label: string;
+  value: TabValue;
+};
+
+type TabsProps = {
+  items: TabItem[];
+  onTabClick: (value: TabValue) => void;
+  currentTab: TabValue;
+};
+
+export const Tabs = ({ items, onTabClick, currentTab }: TabsProps) => {
   return (
-    <div>
-      <div className="tabs tabs-boxed">
-        <a className="tab tab-active gap-2">
-          <HiOutlineExclamationCircle /> Order Info
+    <div className="tabs tabs-boxed">
+      {items.map((tab, index) => (
+        <a
+          key={index}
+          className={`tab gap-2 ${
+            tab.value === currentTab ? "tab-active" : ""
+          }`}
+          onClick={() => onTabClick(tab.value)}
+        >
+          {tab.icon} {tab.label}
         </a>
-        <a className="tab  gap-2">
-          <HiOutlineAdjustmentsVertical /> Order Preferences
-        </a>
-        <a className="tab  gap-2">
-          <HiOutlineBeaker /> Order Progress
-        </a>
-      </div>
+      ))}
     </div>
   );
 };
