@@ -1,4 +1,5 @@
-import { HiCalendarDays } from "react-icons/hi2";
+import { formatTime } from "@sahil/lib/dates";
+import { HiCalendarDays, HiOutlineClock } from "react-icons/hi2";
 import { Work_Schedules } from "@sahil/lib/graphql/__generated__/graphql";
 
 type Props = {
@@ -8,9 +9,9 @@ type Props = {
 export const Schedule = ({ schedule }: Props) => {
   const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  const { days } = schedule;
+  const { days, shifts } = schedule;
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 max-w-lg">
       <div className="flex items-center gap-2">
         <span className="shadow rounded-md p-2">
           <HiCalendarDays />
@@ -30,6 +31,22 @@ export const Schedule = ({ schedule }: Props) => {
           </span>
         ))}
       </div>
+
+      {shifts && shifts.length > 0 && (
+        <div className="mt-4">
+          <div className="flex flex-wrap items-center gap-2">
+            {shifts.map((shift) => (
+              <div
+                key={shift.id}
+                className="flex items-center gap-1 bg-gray-100 p-2 rounded-md"
+              >
+                <HiOutlineClock />
+                {formatTime(shift.start_time)} - {formatTime(shift.end_time)}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

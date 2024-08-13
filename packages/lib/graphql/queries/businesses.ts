@@ -88,8 +88,10 @@ export const FETCH_BUSINESS_BY_PK = gql`
         street_address
       }
       schedule {
+        id
         days
         shifts {
+          id
           start_time
           end_time
         }

@@ -42,3 +42,17 @@ export const weekdayToWeekIndex = (
     return weekday >= 0 && weekday >= 6 ? (weekday as WeekDayIndex) : 0;
   return (weekDays.indexOf(weekday as WeekDays) as WeekDayIndex) || 0;
 };
+
+export const formatTime = (
+  time: string,
+  options?: Intl.DateTimeFormatOptions
+) => {
+  const [hours, minutes] = time.split(":");
+  const date = new Date(2000, 0, 1, parseInt(hours), parseInt(minutes));
+  return date.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+    hourCycle: "h24",
+    ...options,
+  });
+};
