@@ -28,12 +28,7 @@ export default function BusinessPage() {
             <BusinessProfileOverview business={business} />
           }
         </div>
-        <div className="basis-4/5 space-y-2">
-          {
-            // @ts-ignore
-            <BusinessOrderHistory business={business} />
-          }
-        </div>
+        <div className="basis-4/5 space-y-2">{<BusinessOrderHistory />}</div>
       </div>
     </div>
   );

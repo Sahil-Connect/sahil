@@ -43,7 +43,7 @@ const documents = {
     types.GetBusinessesDocument,
   "\n  query getBusinessOrders(\n    $customerId: uuid\n    $limit: Int = 4\n    $offset: Int = 0\n  ) {\n    orders(\n      where: {\n        _or: [\n          { customerId: { _eq: $customerId } }\n          { customerId: { _is_null: true } }\n        ]\n        customerId: { _eq: $customerId }\n      }\n      limit: $limit\n      offset: $offset\n    ) {\n      id\n      created_at\n      destination\n      id\n      orderId\n      customerId\n      origin\n      status\n      business {\n        contactName\n        phoneNumber\n        name\n      }\n    }\n    orders_aggregate(where: { customerId: { _eq: $customerId } }) {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
     types.GetBusinessOrdersDocument,
-  "\n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      id\n      name\n      contactName\n      phoneNumber\n      description\n      contactEmail\n      type\n      agent {\n        name\n        id\n      }\n      addresses {\n        city\n        street_address\n      }\n    }\n  }\n":
+  "\n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      id\n      name\n      contactName\n      phoneNumber\n      description\n      contactEmail\n      type\n      agent {\n        name\n        id\n      }\n      addresses {\n        city\n        street_address\n      }\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n":
     types.GetBusinessByPkDocument,
   "\n  query getBusinessTypes @cached {\n    business_type {\n      type\n    }\n  }\n":
     types.GetBusinessTypesDocument,
@@ -197,8 +197,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      id\n      name\n      contactName\n      phoneNumber\n      description\n      contactEmail\n      type\n      agent {\n        name\n        id\n      }\n      addresses {\n        city\n        street_address\n      }\n    }\n  }\n"
-): (typeof documents)["\n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      id\n      name\n      contactName\n      phoneNumber\n      description\n      contactEmail\n      type\n      agent {\n        name\n        id\n      }\n      addresses {\n        city\n        street_address\n      }\n    }\n  }\n"];
+  source: "\n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      id\n      name\n      contactName\n      phoneNumber\n      description\n      contactEmail\n      type\n      agent {\n        name\n        id\n      }\n      addresses {\n        city\n        street_address\n      }\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"
+): (typeof documents)["\n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      id\n      name\n      contactName\n      phoneNumber\n      description\n      contactEmail\n      type\n      agent {\n        name\n        id\n      }\n      addresses {\n        city\n        street_address\n      }\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

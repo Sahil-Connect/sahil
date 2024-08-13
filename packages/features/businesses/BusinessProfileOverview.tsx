@@ -6,14 +6,16 @@ import {
   HiOutlineMapPin,
   HiOutlineEnvelope,
   HiOutlineUser,
+  HiCalendarDays,
 } from "react-icons/hi2";
-import { Card } from "ui";
+import { Card, Schedule } from "ui";
 
 type Props = {
   business: Business;
 };
 
 export const BusinessProfileOverview: FC<Props> = ({ business }) => {
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return (
     <Card height="h-fit">
       {business?.name && (
@@ -26,6 +28,7 @@ export const BusinessProfileOverview: FC<Props> = ({ business }) => {
 
       <h3 className="card-title">{business?.name}</h3>
       <p>{business?.description}</p>
+
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <span className="shadow rounded-md p-2">
@@ -54,6 +57,8 @@ export const BusinessProfileOverview: FC<Props> = ({ business }) => {
           <p>{business?.phoneNumber}</p>
         </div>
       </div>
+
+      {business?.schedule && <Schedule schedule={business.schedule} />}
     </Card>
   );
 };

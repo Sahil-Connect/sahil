@@ -34,7 +34,6 @@ export type Scalars = {
   name: { input: any; output: any };
   time: { input: any; output: any };
   timestamptz: { input: any; output: any };
-  timetz: { input: any; output: any };
   uuid: { input: any; output: any };
 };
 
@@ -16961,19 +16960,6 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
 };
 
-/** Boolean expression to compare columns of type "timetz". All fields are combined with logical 'AND'. */
-export type Timetz_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars["timetz"]["input"]>;
-  _gt?: InputMaybe<Scalars["timetz"]["input"]>;
-  _gte?: InputMaybe<Scalars["timetz"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["timetz"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["timetz"]["input"]>;
-  _lte?: InputMaybe<Scalars["timetz"]["input"]>;
-  _neq?: InputMaybe<Scalars["timetz"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["timetz"]["input"]>>;
-};
-
 /** columns and relationships of "user_invites" */
 export type User_Invites = {
   __typename?: "user_invites";
@@ -17814,14 +17800,15 @@ export type Verification_Tokens_Updates = {
 /** columns and relationships of "work_schedules" */
 export type Work_Schedules = {
   __typename?: "work_schedules";
+  business_id?: Maybe<Scalars["uuid"]["output"]>;
   created_at: Scalars["timestamptz"]["output"];
   days: Array<Scalars["Boolean"]["output"]>;
-  entity_id: Scalars["uuid"]["output"];
   id: Scalars["uuid"]["output"];
   /** An array relationship */
   shifts: Array<Work_Shifts>;
   /** An aggregate relationship */
   shifts_aggregate: Work_Shifts_Aggregate;
+  supplier_id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at: Scalars["timestamptz"]["output"];
 };
 
@@ -17869,50 +17856,56 @@ export type Work_Schedules_Bool_Exp = {
   _and?: InputMaybe<Array<Work_Schedules_Bool_Exp>>;
   _not?: InputMaybe<Work_Schedules_Bool_Exp>;
   _or?: InputMaybe<Array<Work_Schedules_Bool_Exp>>;
+  business_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   days?: InputMaybe<Boolean_Array_Comparison_Exp>;
-  entity_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   shifts?: InputMaybe<Work_Shifts_Bool_Exp>;
   shifts_aggregate?: InputMaybe<Work_Shifts_Aggregate_Bool_Exp>;
+  supplier_id?: InputMaybe<Uuid_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "work_schedules" */
 export enum Work_Schedules_Constraint {
-  /** unique or primary key constraint on columns "entity_id" */
-  WorkSchedulesEntityIdKey = "work_schedules_entity_id_key",
+  /** unique or primary key constraint on columns "business_id" */
+  WorkSchedulesBusinessIdKey = "work_schedules_business_id_key",
   /** unique or primary key constraint on columns "id" */
   WorkSchedulesPkey = "work_schedules_pkey",
+  /** unique or primary key constraint on columns "supplier_id" */
+  WorkSchedulesSupplierIdKey = "work_schedules_supplier_id_key",
 }
 
 /** input type for inserting data into table "work_schedules" */
 export type Work_Schedules_Insert_Input = {
+  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   days?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
-  entity_id?: InputMaybe<Scalars["uuid"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   shifts?: InputMaybe<Work_Shifts_Arr_Rel_Insert_Input>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
 };
 
 /** aggregate max on columns */
 export type Work_Schedules_Max_Fields = {
   __typename?: "work_schedules_max_fields";
+  business_id?: Maybe<Scalars["uuid"]["output"]>;
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
   days?: Maybe<Array<Scalars["Boolean"]["output"]>>;
-  entity_id?: Maybe<Scalars["uuid"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
+  supplier_id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
 };
 
 /** aggregate min on columns */
 export type Work_Schedules_Min_Fields = {
   __typename?: "work_schedules_min_fields";
+  business_id?: Maybe<Scalars["uuid"]["output"]>;
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
   days?: Maybe<Array<Scalars["Boolean"]["output"]>>;
-  entity_id?: Maybe<Scalars["uuid"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
+  supplier_id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
 };
 
@@ -17941,11 +17934,12 @@ export type Work_Schedules_On_Conflict = {
 
 /** Ordering options when selecting data from "work_schedules". */
 export type Work_Schedules_Order_By = {
+  business_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   days?: InputMaybe<Order_By>;
-  entity_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   shifts_aggregate?: InputMaybe<Work_Shifts_Aggregate_Order_By>;
+  supplier_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -17957,23 +17951,26 @@ export type Work_Schedules_Pk_Columns_Input = {
 /** select columns of table "work_schedules" */
 export enum Work_Schedules_Select_Column {
   /** column name */
+  BusinessId = "business_id",
+  /** column name */
   CreatedAt = "created_at",
   /** column name */
   Days = "days",
   /** column name */
-  EntityId = "entity_id",
-  /** column name */
   Id = "id",
+  /** column name */
+  SupplierId = "supplier_id",
   /** column name */
   UpdatedAt = "updated_at",
 }
 
 /** input type for updating data in table "work_schedules" */
 export type Work_Schedules_Set_Input = {
+  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   days?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
-  entity_id?: InputMaybe<Scalars["uuid"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
 };
 
@@ -17987,23 +17984,26 @@ export type Work_Schedules_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Work_Schedules_Stream_Cursor_Value_Input = {
+  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   days?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
-  entity_id?: InputMaybe<Scalars["uuid"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
 };
 
 /** update columns of table "work_schedules" */
 export enum Work_Schedules_Update_Column {
   /** column name */
+  BusinessId = "business_id",
+  /** column name */
   CreatedAt = "created_at",
   /** column name */
   Days = "days",
   /** column name */
-  EntityId = "entity_id",
-  /** column name */
   Id = "id",
+  /** column name */
+  SupplierId = "supplier_id",
   /** column name */
   UpdatedAt = "updated_at",
 }
@@ -18019,7 +18019,7 @@ export type Work_Schedules_Updates = {
 export type Work_Shifts = {
   __typename?: "work_shifts";
   created_at: Scalars["timestamptz"]["output"];
-  end_time: Scalars["timetz"]["output"];
+  end_time: Scalars["time"]["output"];
   id: Scalars["uuid"]["output"];
   schedule_id: Scalars["uuid"]["output"];
   start_time: Scalars["time"]["output"];
@@ -18078,7 +18078,7 @@ export type Work_Shifts_Bool_Exp = {
   _not?: InputMaybe<Work_Shifts_Bool_Exp>;
   _or?: InputMaybe<Array<Work_Shifts_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  end_time?: InputMaybe<Timetz_Comparison_Exp>;
+  end_time?: InputMaybe<Time_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   schedule_id?: InputMaybe<Uuid_Comparison_Exp>;
   start_time?: InputMaybe<Time_Comparison_Exp>;
@@ -18094,7 +18094,7 @@ export enum Work_Shifts_Constraint {
 /** input type for inserting data into table "work_shifts" */
 export type Work_Shifts_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  end_time?: InputMaybe<Scalars["timetz"]["input"]>;
+  end_time?: InputMaybe<Scalars["time"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   schedule_id?: InputMaybe<Scalars["uuid"]["input"]>;
   start_time?: InputMaybe<Scalars["time"]["input"]>;
@@ -18105,7 +18105,6 @@ export type Work_Shifts_Insert_Input = {
 export type Work_Shifts_Max_Fields = {
   __typename?: "work_shifts_max_fields";
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  end_time?: Maybe<Scalars["timetz"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
   schedule_id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
@@ -18114,7 +18113,6 @@ export type Work_Shifts_Max_Fields = {
 /** order by max() on columns of table "work_shifts" */
 export type Work_Shifts_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
-  end_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   schedule_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -18124,7 +18122,6 @@ export type Work_Shifts_Max_Order_By = {
 export type Work_Shifts_Min_Fields = {
   __typename?: "work_shifts_min_fields";
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
-  end_time?: Maybe<Scalars["timetz"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
   schedule_id?: Maybe<Scalars["uuid"]["output"]>;
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
@@ -18133,7 +18130,6 @@ export type Work_Shifts_Min_Fields = {
 /** order by min() on columns of table "work_shifts" */
 export type Work_Shifts_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
-  end_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   schedule_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -18189,7 +18185,7 @@ export enum Work_Shifts_Select_Column {
 /** input type for updating data in table "work_shifts" */
 export type Work_Shifts_Set_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  end_time?: InputMaybe<Scalars["timetz"]["input"]>;
+  end_time?: InputMaybe<Scalars["time"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   schedule_id?: InputMaybe<Scalars["uuid"]["input"]>;
   start_time?: InputMaybe<Scalars["time"]["input"]>;
@@ -18207,7 +18203,7 @@ export type Work_Shifts_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Work_Shifts_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  end_time?: InputMaybe<Scalars["timetz"]["input"]>;
+  end_time?: InputMaybe<Scalars["time"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   schedule_id?: InputMaybe<Scalars["uuid"]["input"]>;
   start_time?: InputMaybe<Scalars["time"]["input"]>;
@@ -18495,6 +18491,15 @@ export type GetBusinessByPkQuery = {
       city?: string | null;
       street_address?: string | null;
     }>;
+    schedule?: {
+      __typename?: "work_schedules";
+      days: Array<boolean>;
+      shifts: Array<{
+        __typename?: "work_shifts";
+        start_time: any;
+        end_time: any;
+      }>;
+    } | null;
   } | null;
 };
 
@@ -20264,6 +20269,33 @@ export const GetBusinessByPkDocument = {
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "street_address" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "schedule" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "days" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "shifts" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "start_time" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "end_time" },
+                            },
+                          ],
+                        },
                       },
                     ],
                   },

@@ -11,10 +11,13 @@ import { Card, Tabs, Timeline } from "ui";
 
 export type TabValue = "info" | "preferences" | "progress";
 
-
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
-import { useSyncQueryWithStore, INITIAL_TAB, tabs } from "@sahil/lib/hooks/utilities/useQueryStore";
+import {
+  useSyncQueryWithStore,
+  INITIAL_TAB,
+  tabs,
+} from "@sahil/lib/hooks/utilities/useQueryStore";
 
 import {
   HiOutlineAdjustmentsVertical,

@@ -23,7 +23,6 @@ const progress = [
   },
 ];
 
-
 type TimelineItemProps = {
   item: any;
 };

@@ -43,9 +43,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
         onSignOut={onSignOut}
         user={session?.user}
       />
-      <main className="p-4 bg-gray-50">
-        {children}
-      </main>
+      <main className="p-4 bg-gray-50">{children}</main>
     </>
   );
 }

@@ -87,6 +87,13 @@ export const FETCH_BUSINESS_BY_PK = gql`
         city
         street_address
       }
+      schedule {
+        days
+        shifts {
+          start_time
+          end_time
+        }
+      }
     }
   }
 `;

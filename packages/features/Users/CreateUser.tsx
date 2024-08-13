@@ -21,9 +21,7 @@ const userInfoSchema = z.object({
 type FormData = z.infer<typeof userInfoSchema>;
 
 export const CreateUser = () => {
-    const { registerUser, data, loading, error } = useRegisterUserAction();
-
-
+  const { registerUser, data, loading, error } = useRegisterUserAction();
 
   const {
     register,
@@ -37,12 +35,12 @@ export const CreateUser = () => {
     const validatedInput = userInfoSchema.parse(data);
     console.log(validatedInput);
     const result = await registerUser({
-        variables: {
-            object: {
-                name: validatedInput.name,
-                role: validatedInput.role,
-            }
-        }
+      variables: {
+        object: {
+          name: validatedInput.name,
+          role: validatedInput.role,
+        },
+      },
     });
     console.log(result);
     console.log(data);

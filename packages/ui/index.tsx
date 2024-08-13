@@ -33,3 +33,4 @@ export * from "./components/table/Table";
 export * from "./components/table/CompareSuppliersTable";
 export * from "./components/StatusPage";
 export * from "./components/CustomContainer";
+export * from "./components/Schedule";
