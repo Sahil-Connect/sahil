@@ -1,3 +1,4 @@
+import { Suppliers } from "@sahil/lib/graphql/__generated__/graphql";
 import { formatCategoryName } from "@sahil/lib/strings";
 import {
   HiOutlinePhone,
@@ -8,27 +9,12 @@ import {
   HiOutlineDocumentCheck,
   HiOutlineDevicePhoneMobile,
 } from "react-icons/hi2";
-import { Card, Icon } from "ui";
-
-type SahilSupplier = {
-  id: string;
-  name: string;
-  phoneNumber: string;
-  streetAddress: string;
-  contactName: string;
-  zone: string;
-  contactEmail: string;
-  description: string;
-  created_at: Date;
-  categories: Array<{
-    category_name: string;
-  }>;
-};
+import { Card, Icon, Schedule } from "ui";
 
 export const SupplierProfileOverview = ({
   supplier,
 }: {
-  supplier: SahilSupplier;
+  supplier: Suppliers;
 }) => {
   return (
     <div className="space-y-2">
@@ -76,6 +62,9 @@ export const SupplierProfileOverview = ({
             </span>
             <p>{supplier?.phoneNumber}</p>
           </div>
+
+          {supplier?.schedule && <Schedule schedule={supplier.schedule} />}
+
           <div>
             <button className="btn btn-sm w-full btn-secondary">
               <HiOutlineDevicePhoneMobile /> Chat on WhatsApp

@@ -18493,9 +18493,11 @@ export type GetBusinessByPkQuery = {
     }>;
     schedule?: {
       __typename?: "work_schedules";
+      id: any;
       days: Array<boolean>;
       shifts: Array<{
         __typename?: "work_shifts";
+        id: any;
         start_time: any;
         end_time: any;
       }>;
@@ -18810,6 +18812,17 @@ export type GetSupplierByPkQuery = {
         count: number;
       } | null;
     };
+    schedule?: {
+      __typename?: "work_schedules";
+      id: any;
+      days: Array<boolean>;
+      shifts: Array<{
+        __typename?: "work_shifts";
+        id: any;
+        start_time: any;
+        end_time: any;
+      }>;
+    } | null;
   } | null;
 };
 
@@ -20279,6 +20292,7 @@ export const GetBusinessByPkDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
                       { kind: "Field", name: { kind: "Name", value: "days" } },
                       {
                         kind: "Field",
@@ -20286,6 +20300,10 @@ export const GetBusinessByPkDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "id" },
+                            },
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "start_time" },
@@ -21611,6 +21629,38 @@ export const GetSupplierByPkDocument = {
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "count" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "schedule" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "days" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "shifts" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "id" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "start_time" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "end_time" },
                             },
                           ],
                         },

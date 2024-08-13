@@ -18,6 +18,8 @@ import {
 
 // graphql types
 import {
+  GetSupplierByPkQuery,
+  GetSupplierByPkQueryVariables,
   GetSuppliersQuery,
   GetSuppliersQueryVariables,
 } from "@sahil/lib/graphql/__generated__/graphql";
@@ -40,7 +42,10 @@ export const useFetchSuppliers = (category?: string) => {
 export const useFetchSupplierByPK = (id?: string) => {
   const router = useRouter();
   const { supplierId } = router.query;
-  const { error, data, loading } = useQuery(FETCH_SUPPLIER_BY_PK, {
+  const { error, data, loading } = useQuery<
+    GetSupplierByPkQuery,
+    GetSupplierByPkQueryVariables
+  >(FETCH_SUPPLIER_BY_PK, {
     variables: {
       id: id || supplierId,
     },
