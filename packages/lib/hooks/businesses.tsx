@@ -21,6 +21,8 @@ import {
   GetBusinessByPkQueryVariables,
   GetBusinessOrdersQuery,
   GetBusinessOrdersQueryVariables,
+  OnboardNewBusinessMutation,
+  OnboardNewBusinessMutationVariables,
 } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const useFetchBusinessByPK = (id: string) => {
@@ -100,7 +102,9 @@ export const useFetchBusinessTypes = () => {
 };
 
 export const useOnboardBusiness = () => {
-  const [onboardBusiness, { data, loading, error }] =
-    useMutation(ONBOARD_NEW_BUSINESS);
+  const [onboardBusiness, { data, loading, error }] = useMutation<
+    OnboardNewBusinessMutation,
+    OnboardNewBusinessMutationVariables
+  >(INSERT_NEW_BUSINESS);
   return { onboardBusiness, data, loading, error };
 };

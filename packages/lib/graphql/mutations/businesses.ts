@@ -40,6 +40,13 @@ export const ONBOARD_NEW_BUSINESS = gql`
     }
     insert_business_one(object: $object) {
       id
+      schedule {
+        days
+        shifts {
+          start_time
+          end_time
+        }
+      }
     }
   }
 `;

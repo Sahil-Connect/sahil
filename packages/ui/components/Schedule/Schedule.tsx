@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { formatTime } from "@sahil/lib/dates";
 import { HiCalendarDays, HiOutlineClock } from "react-icons/hi2";
 import { Work_Schedules } from "@sahil/lib/graphql/__generated__/graphql";

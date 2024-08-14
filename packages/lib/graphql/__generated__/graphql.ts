@@ -8378,6 +8378,10 @@ export type Mutation_Root = {
   delete_work_shifts?: Maybe<Work_Shifts_Mutation_Response>;
   /** delete single row from the table: "work_shifts" */
   delete_work_shifts_by_pk?: Maybe<Work_Shifts>;
+  /** delete data from the table: "zones" */
+  delete_zones?: Maybe<Zones_Mutation_Response>;
+  /** delete single row from the table: "zones" */
+  delete_zones_by_pk?: Maybe<Zones>;
   /** Place order action */
   insertBusinessOrder: Scalars["uuid"]["output"];
   /** insert data into the table: "accounts" */
@@ -8536,6 +8540,10 @@ export type Mutation_Root = {
   insert_work_shifts?: Maybe<Work_Shifts_Mutation_Response>;
   /** insert a single row into the table: "work_shifts" */
   insert_work_shifts_one?: Maybe<Work_Shifts>;
+  /** insert data into the table: "zones" */
+  insert_zones?: Maybe<Zones_Mutation_Response>;
+  /** insert a single row into the table: "zones" */
+  insert_zones_one?: Maybe<Zones>;
   /** An action to register a new business */
   registerBusinessAction: Scalars["uuid"]["output"];
   /** An action to register a new user */
@@ -8813,6 +8821,12 @@ export type Mutation_Root = {
   update_work_shifts_by_pk?: Maybe<Work_Shifts>;
   /** update multiples rows of table: "work_shifts" */
   update_work_shifts_many?: Maybe<Array<Maybe<Work_Shifts_Mutation_Response>>>;
+  /** update data of the table: "zones" */
+  update_zones?: Maybe<Zones_Mutation_Response>;
+  /** update single row of the table: "zones" */
+  update_zones_by_pk?: Maybe<Zones>;
+  /** update multiples rows of table: "zones" */
+  update_zones_many?: Maybe<Array<Maybe<Zones_Mutation_Response>>>;
 };
 
 /** mutation root */
@@ -9197,6 +9211,16 @@ export type Mutation_RootDelete_Work_ShiftsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Work_Shifts_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_ZonesArgs = {
+  where: Zones_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Zones_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -9669,6 +9693,18 @@ export type Mutation_RootInsert_Work_ShiftsArgs = {
 export type Mutation_RootInsert_Work_Shifts_OneArgs = {
   object: Work_Shifts_Insert_Input;
   on_conflict?: InputMaybe<Work_Shifts_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_ZonesArgs = {
+  objects: Array<Zones_Insert_Input>;
+  on_conflict?: InputMaybe<Zones_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Zones_OneArgs = {
+  object: Zones_Insert_Input;
+  on_conflict?: InputMaybe<Zones_On_Conflict>;
 };
 
 /** mutation root */
@@ -10354,6 +10390,23 @@ export type Mutation_RootUpdate_Work_Shifts_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Work_Shifts_ManyArgs = {
   updates: Array<Work_Shifts_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_ZonesArgs = {
+  _set?: InputMaybe<Zones_Set_Input>;
+  where: Zones_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Zones_By_PkArgs = {
+  _set?: InputMaybe<Zones_Set_Input>;
+  pk_columns: Zones_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Zones_ManyArgs = {
+  updates: Array<Zones_Updates>;
 };
 
 /** Boolean expression to compare columns of type "name". All fields are combined with logical 'AND'. */
@@ -12550,6 +12603,12 @@ export type Query_Root = {
   work_shifts_aggregate: Work_Shifts_Aggregate;
   /** fetch data from the table: "work_shifts" using primary key columns */
   work_shifts_by_pk?: Maybe<Work_Shifts>;
+  /** fetch data from the table: "zones" */
+  zones: Array<Zones>;
+  /** fetch aggregated fields from the table: "zones" */
+  zones_aggregate: Zones_Aggregate;
+  /** fetch data from the table: "zones" using primary key columns */
+  zones_by_pk?: Maybe<Zones>;
 };
 
 export type Query_RootAccountsArgs = {
@@ -13388,6 +13447,26 @@ export type Query_RootWork_Shifts_AggregateArgs = {
 };
 
 export type Query_RootWork_Shifts_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootZonesArgs = {
+  distinct_on?: InputMaybe<Array<Zones_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Zones_Order_By>>;
+  where?: InputMaybe<Zones_Bool_Exp>;
+};
+
+export type Query_RootZones_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Zones_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Zones_Order_By>>;
+  where?: InputMaybe<Zones_Bool_Exp>;
+};
+
+export type Query_RootZones_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -14824,6 +14903,14 @@ export type Subscription_Root = {
   work_shifts_by_pk?: Maybe<Work_Shifts>;
   /** fetch data from the table in a streaming manner: "work_shifts" */
   work_shifts_stream: Array<Work_Shifts>;
+  /** fetch data from the table: "zones" */
+  zones: Array<Zones>;
+  /** fetch aggregated fields from the table: "zones" */
+  zones_aggregate: Zones_Aggregate;
+  /** fetch data from the table: "zones" using primary key columns */
+  zones_by_pk?: Maybe<Zones>;
+  /** fetch data from the table in a streaming manner: "zones" */
+  zones_stream: Array<Zones>;
 };
 
 export type Subscription_RootAccountsArgs = {
@@ -15868,6 +15955,32 @@ export type Subscription_RootWork_Shifts_StreamArgs = {
   batch_size: Scalars["Int"]["input"];
   cursor: Array<InputMaybe<Work_Shifts_Stream_Cursor_Input>>;
   where?: InputMaybe<Work_Shifts_Bool_Exp>;
+};
+
+export type Subscription_RootZonesArgs = {
+  distinct_on?: InputMaybe<Array<Zones_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Zones_Order_By>>;
+  where?: InputMaybe<Zones_Bool_Exp>;
+};
+
+export type Subscription_RootZones_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Zones_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Zones_Order_By>>;
+  where?: InputMaybe<Zones_Bool_Exp>;
+};
+
+export type Subscription_RootZones_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Subscription_RootZones_StreamArgs = {
+  batch_size: Scalars["Int"]["input"];
+  cursor: Array<InputMaybe<Zones_Stream_Cursor_Input>>;
+  where?: InputMaybe<Zones_Bool_Exp>;
 };
 
 /** columns and relationships of "supplier_categories_enum" */
@@ -18233,6 +18346,163 @@ export type Work_Shifts_Updates = {
   where: Work_Shifts_Bool_Exp;
 };
 
+/** columns and relationships of "zones" */
+export type Zones = {
+  __typename?: "zones";
+  created_at: Scalars["timestamptz"]["output"];
+  id: Scalars["uuid"]["output"];
+  name?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** aggregated selection of "zones" */
+export type Zones_Aggregate = {
+  __typename?: "zones_aggregate";
+  aggregate?: Maybe<Zones_Aggregate_Fields>;
+  nodes: Array<Zones>;
+};
+
+/** aggregate fields of "zones" */
+export type Zones_Aggregate_Fields = {
+  __typename?: "zones_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Zones_Max_Fields>;
+  min?: Maybe<Zones_Min_Fields>;
+};
+
+/** aggregate fields of "zones" */
+export type Zones_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Zones_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** Boolean expression to filter rows from the table "zones". All fields are combined with a logical 'AND'. */
+export type Zones_Bool_Exp = {
+  _and?: InputMaybe<Array<Zones_Bool_Exp>>;
+  _not?: InputMaybe<Zones_Bool_Exp>;
+  _or?: InputMaybe<Array<Zones_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "zones" */
+export enum Zones_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ZonesPkey = "zones_pkey",
+}
+
+/** input type for inserting data into table "zones" */
+export type Zones_Insert_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** aggregate max on columns */
+export type Zones_Max_Fields = {
+  __typename?: "zones_max_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** aggregate min on columns */
+export type Zones_Min_Fields = {
+  __typename?: "zones_min_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** response of any mutation on the table "zones" */
+export type Zones_Mutation_Response = {
+  __typename?: "zones_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Zones>;
+};
+
+/** on_conflict condition type for table "zones" */
+export type Zones_On_Conflict = {
+  constraint: Zones_Constraint;
+  update_columns?: Array<Zones_Update_Column>;
+  where?: InputMaybe<Zones_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "zones". */
+export type Zones_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: zones */
+export type Zones_Pk_Columns_Input = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** select columns of table "zones" */
+export enum Zones_Select_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+/** input type for updating data in table "zones" */
+export type Zones_Set_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** Streaming cursor of the table "zones" */
+export type Zones_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Zones_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Zones_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** update columns of table "zones" */
+export enum Zones_Update_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export type Zones_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Zones_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Zones_Bool_Exp;
+};
+
 export type RegisterBusinessMutationVariables = Exact<{
   object: Business_Insert_Input;
 }>;
@@ -18280,7 +18550,19 @@ export type OnboardNewBusinessMutation = {
     __typename?: "users";
     role?: User_Role_Enum | null;
   } | null;
-  insert_business_one?: { __typename?: "business"; id: any } | null;
+  insert_business_one?: {
+    __typename?: "business";
+    id: any;
+    schedule?: {
+      __typename?: "work_schedules";
+      days: Array<boolean>;
+      shifts: Array<{
+        __typename?: "work_shifts";
+        start_time: any;
+        end_time: any;
+      }>;
+    } | null;
+  } | null;
 };
 
 export type InsertNewCourierMutationVariables = Exact<{
@@ -18390,7 +18672,19 @@ export type OnboardNewSupplierMutation = {
     __typename?: "users";
     role?: User_Role_Enum | null;
   } | null;
-  insert_suppliers_one?: { __typename?: "suppliers"; id: any } | null;
+  insert_suppliers_one?: {
+    __typename?: "suppliers";
+    id: any;
+    schedule?: {
+      __typename?: "work_schedules";
+      days: Array<boolean>;
+      shifts: Array<{
+        __typename?: "work_shifts";
+        start_time: any;
+        end_time: any;
+      }>;
+    } | null;
+  } | null;
 };
 
 export type RegisterUserActionMutationVariables = Exact<{
@@ -19224,6 +19518,33 @@ export const OnboardNewBusinessDocument = {
               kind: "SelectionSet",
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "id" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "schedule" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "days" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "shifts" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "start_time" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "end_time" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -19809,6 +20130,33 @@ export const OnboardNewSupplierDocument = {
               kind: "SelectionSet",
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "id" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "schedule" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "days" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "shifts" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "start_time" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "end_time" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },

@@ -36,8 +36,10 @@ export const WorkSchedule = ({ navigateToNextStep }: WorkScheduleProps) => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = WORK_SCHEDULE_SCHEMA.parse(data);
 
-    const booleanDays = daysOfWeek.map((day) => data.days.includes(day.value));
-    const schedule = { days: booleanDays, shifts: validatedInput.shifts };
+    const schedule = {
+      days: validatedInput.days,
+      shifts: validatedInput.shifts,
+    };
     updateStepFormData({ schedule });
     navigateToNextStep("preferences");
   };
@@ -58,9 +60,10 @@ export const WorkSchedule = ({ navigateToNextStep }: WorkScheduleProps) => {
             <div className="flex items-center justify-between">
               <h4 className="font-medium">Working hours</h4>
               <button
-                onClick={() => append(defaultShift)}
                 type="button"
                 className="btn btn-sm btn-primary"
+                disabled={fields.length >= 3}
+                onClick={() => fields.length < 3 && append(defaultShift)}
               >
                 New Shift <HiMiniPlus />
               </button>
@@ -89,9 +92,7 @@ export const WorkSchedule = ({ navigateToNextStep }: WorkScheduleProps) => {
                   onClick={() => index > 0 && remove(index)}
                   type="button"
                   disabled={index === 0}
-                  className={`btn btn-sm btn-error w-fit mt-2 ${
-                    index === 0 ? "btn-disabled" : ""
-                  }`}
+                  className="btn btn-sm btn-error w-fit mt-2"
                 >
                   Remove <HiXMark />
                 </button>

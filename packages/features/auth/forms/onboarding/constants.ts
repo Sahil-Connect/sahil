@@ -107,7 +107,10 @@ export const WORK_SHIFT_SCHEMA = z.object({
 
 export const WORK_SCHEDULE_SCHEMA = z.object({
   days: z.array(z.string()).min(1, "At least one day is required."),
-  shifts: z.array(WORK_SHIFT_SCHEMA).min(1, "At least one shift is required."),
+  shifts: z
+    .array(WORK_SHIFT_SCHEMA)
+    .min(1, "At least one shift is required.")
+    .max(3, "Maximum of 3 shifts allowed."),
 });
 
 export const daysOfWeek = [

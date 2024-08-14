@@ -22,6 +22,8 @@ import {
   GetSupplierByPkQueryVariables,
   GetSuppliersQuery,
   GetSuppliersQueryVariables,
+  OnboardNewSupplierMutation,
+  OnboardNewSupplierMutationVariables,
 } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const useFetchSuppliers = (category?: string) => {
@@ -165,7 +167,9 @@ export const useFetchSupplierCategories = () => {
 };
 
 export const useOnboardSupplier = () => {
-  const [onboardSupplier, { data, loading, error }] =
-    useMutation(ONBOARD_NEW_SUPPLIER);
+  const [onboardSupplier, { data, loading, error }] = useMutation<
+    OnboardNewSupplierMutation,
+    OnboardNewSupplierMutationVariables
+  >(ONBOARD_NEW_SUPPLIER);
   return { onboardSupplier, data, loading, error };
 };
