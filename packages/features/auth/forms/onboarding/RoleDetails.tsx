@@ -32,7 +32,7 @@ export const RoleDetails = ({ navigateToNextStep }: RoleDetailsProps) => {
     const validatedInput = schema.parse(data);
 
     updateStepFormData(validatedInput);
-    navigateToNextStep("preferences");
+    navigateToNextStep("schedule");
   };
 
   const renderForm = () => {
