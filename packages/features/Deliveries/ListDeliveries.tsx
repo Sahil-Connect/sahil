@@ -40,7 +40,6 @@ const deliveries = [
 export const ListDeliveries = () => {
   return (
     <section>
-
       <List 
         cols={4}
         data={deliveries}

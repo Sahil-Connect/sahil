@@ -2,9 +2,8 @@ import { ListDeliveryRequests } from "@sahil/features/Deliveries/ListDeliveryReq
 
 export default function Requests() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h3>Requests Page!</h3>
+    <section>
       <ListDeliveryRequests />
-    </main>
+    </section>
   );
 }
