@@ -1,7 +1,9 @@
+import { ListDeliveries } from "@sahil/features/Deliveries/ListDeliveries";
 export default function Deliveries() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <section>
       <h3>Deliveries Page!</h3>
-    </main>
+      <ListDeliveries />
+    </section>
   );
 }
