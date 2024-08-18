@@ -1,0 +1,27 @@
+import { useQuery, useMutation } from "@apollo/client";
+import { FETCH_DELIVERIES, FETCH_DELIVERY_BY_PK, FETCH_DELIVERIES_BY_COURIER, FETCH_DELIVERY_REQUESTS, FETCH_DELIVERY_REQUEST_BY_COURIER } from "../graphql/queries/deliveries";
+
+export const useFetchDeliveries = () => {
+  const { loading, error, data } = useQuery(FETCH_DELIVERIES);
+  return { loading, error, data };
+};
+
+export const useFetchDeliveryByPK = (id: string) => {
+  const { loading, error, data } = useQuery(FETCH_DELIVERY_BY_PK, { variables: { id } });
+  return { loading, error, data };
+};
+
+export const useFetchDeliveriesByCourier = (courier_id: string) => {
+  const { loading, error, data } = useQuery(FETCH_DELIVERIES_BY_COURIER, { variables: { courier_id } });
+  return { loading, error, data };
+};
+
+export const useFetchDeliveryRequests = () => {
+  const { loading, error, data } = useQuery(FETCH_DELIVERY_REQUESTS);
+  return { loading, error, data };
+};
+
+export const useFetchDeliveryRequestByCourier = (courier_id: string) => {
+  const { loading, error, data } = useQuery(FETCH_DELIVERY_REQUEST_BY_COURIER, { variables: { courier_id } });
+  return { loading, error, data };
+};

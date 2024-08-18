@@ -40,7 +40,7 @@ export const OrderOverviewCard: FC<Props> = ({ order }) => {
           <div className="flex justify-between items-center">
             <div className="flex gap-4 p-2 w-full items-center  border border-solid border-[#d2d6db] rounded">
               <div className="space-y-1 font-semibold">
-                <span className="opacity-70 text-sm font-normal">Customer</span>
+                <span className="opacity-270 text-sm font-normal">Customer</span>
                 <p>{order?.business?.name}</p>
               </div>
             </div>
