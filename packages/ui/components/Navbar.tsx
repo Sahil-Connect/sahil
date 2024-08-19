@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import Link from "next/link";
 import { Icon } from "./Icon";
 import type { IconType } from "react-icons";
@@ -16,6 +16,7 @@ type NavbarLink = {
 };
 
 export type NavbarProps = {
+  children?: ReactNode;
   links: NavbarLink[];
   logo?: any;
   header?: string;
@@ -73,10 +74,12 @@ const Right = ({
   user,
   links,
   onSignOut,
+  children,
 }: {
   user: any;
   links: NavbarLink[];
   onSignOut?: () => void;
+  children?: ReactNode;
 }) => {
   if (!user) {
     return (
@@ -90,9 +93,7 @@ const Right = ({
 
   return (
     <div className="navbar-end gap-4">
-      <Link href="/orders/new/order_details" className="btn btn-sm btn-primary">
-        New Order <HiOutlinePlus />{" "}
-      </Link>
+      {children}
       <div className="dropdown dropdown-end text-gray-600">
         <div
           tabIndex={0}
