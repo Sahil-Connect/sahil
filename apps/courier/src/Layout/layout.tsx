@@ -7,17 +7,15 @@ type LayoutProps = {
   children: ReactNode;
 };
 import {
-  HiOutlineBriefcase,
   HiOutlineQueueList,
   HiOutlineTruck,
-  HiOutlineBuildingOffice,
 } from "react-icons/hi2";
 
 const links = [
   {
     name: "Deliveries",
     href: "/deliveries",
-    icon: HiOutlineQueueList,
+    icon: HiOutlineTruck,
   },
   {
     name: "Requests",
