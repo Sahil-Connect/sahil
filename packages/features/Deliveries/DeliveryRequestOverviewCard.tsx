@@ -1,12 +1,10 @@
 import { FC } from "react";
 import { Card } from "ui";
 import {
-  HiOutlineMapPin,
-  HiOutlinePhone,
-  HiEllipsisVertical,
-  HiOutlineBriefcase,
   HiCalendarDays,
+  HiOutlineArrowRight
 } from "react-icons/hi2";
+import Link from "next/link";
 
 export const DeliveryRequestOverviewCard = ({ request }) => {
     const hasActions = false;
@@ -35,7 +33,7 @@ export const DeliveryRequestOverviewCard = ({ request }) => {
           <button className="btn btn-sm">Decline</button>
         </div>
       )}
-      <a className="btn btn-sm btn-primary">View Details</a>
+      <Link href={`/requests/${request.id}`} className="btn btn-sm btn-primary">View Details <HiOutlineArrowRight /></Link> 
     </Card>
   );
 };

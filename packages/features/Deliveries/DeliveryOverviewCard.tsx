@@ -1,5 +1,10 @@
 import { Card } from "ui";
-import Link from "next/link";
+import {
+    HiCalendarDays,
+    HiOutlineArrowRight
+  } from "react-icons/hi2";
+  import Link from "next/link";
+
 export const DeliveryOverviewCard = ({ delivery }: { delivery: any }) => {
   return (
     <Card title={`Order ID: ${delivery.orderId}`} titleSize="sm">
@@ -17,9 +22,7 @@ export const DeliveryOverviewCard = ({ delivery }: { delivery: any }) => {
         <p className="text-sm text-gray-500">{delivery.deliveryType}</p>
         <p className="text-sm text-gray-500">{delivery.totalAmount}</p>
       </div>
-      <div className="flex justify-between">
-        <a href={`/deliveries/${delivery.orderId}`}className="btn btn-sm btn-primary">View Order</a>
-      </div>
+      <Link href={`/deliveries/${delivery.orderId}`}className="btn btn-sm btn-primary">View Details <HiOutlineArrowRight /></Link>
     </Card>
   );
 };
