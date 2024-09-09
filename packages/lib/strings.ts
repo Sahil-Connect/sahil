@@ -15,3 +15,10 @@ export const generateInitials = (name: string) => {
     .map((word) => word.charAt(0).toUpperCase())
     .join("");
 };
+
+export const capitalizeFirstLetters = (str: string): string => {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};

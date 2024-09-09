@@ -27,21 +27,27 @@ export const AuthProviders: FC<Props> = ({ providers }) => {
       <div className="space-y-2">
         {providers &&
           Object.values(providers).map((provider) => {
-            return (
-              <div key={provider?.name}>
-                <div>
-                  <button
-                    className="btn w-full capitalize"
-                    onClick={() => {
-                      signIn(provider?.id, { callbackUrl: "/" });
-                    }}
-                  >
-                    {provider.name === "Google" ? <FaGoogle /> : <FaFacebook />}
-                    Continue with {provider?.name}
-                  </button>
+            if (provider.name !== "Email") {
+              return (
+                <div key={provider?.name}>
+                  <div>
+                    <button
+                      className="btn w-full capitalize"
+                      onClick={() => {
+                        signIn(provider?.id, { callbackUrl: "/" });
+                      }}
+                    >
+                      {provider.name === "Google" ? (
+                        <FaGoogle />
+                      ) : (
+                        <FaFacebook />
+                      )}
+                      Continue with {provider?.name}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            }
           })}
       </div>
     </div>
