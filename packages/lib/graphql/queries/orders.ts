@@ -7,7 +7,6 @@ export const FETCH_ORDERS = gql`
       created_at
       destination
       id
-      orderId
       customerId
       origin
       status
@@ -32,7 +31,6 @@ export const FETCH_ORDER_BY_PK = gql`
       created_at
       destination
       id
-      orderId
       customerId
       origin
       status
@@ -61,9 +59,7 @@ export const FETCH_ORDER_BY_PK = gql`
 export const FETCH_ORDER_DELIVERIES = gql`
   query getOrderDeliveries($orderId: uuid!) {
     delivery {
-      orderId
       status
-      orderId
       id
       created_at
       courierId
