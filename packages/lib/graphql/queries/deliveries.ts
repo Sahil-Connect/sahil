@@ -26,7 +26,7 @@ export const FETCH_DELIVERY_BY_PK = gql`
 
 export const FETCH_DELIVERIES_BY_COURIER = gql`
   query getDeliveriesByCourier($courier_id: uuid!) {
-    deliveries(where: {courier_id: {_eq: $courier_id}}) {
+    delivery(where: {courier_id: {_eq: $courier_id}}) {
       id
       created_at
     }
@@ -36,11 +36,11 @@ export const FETCH_DELIVERIES_BY_COURIER = gql`
 
 export const FETCH_DELIVERY_REQUESTS = gql`
   query getDeliveryRequests {
-    delivery_requests {
+    delivery_request {
       id
       created_at
     }
-    delivery_requests_aggregate {
+    delivery_request_aggregate {
       aggregate {
         count(columns: id, distinct: true)
       }
@@ -59,7 +59,7 @@ export const FETCH_DELIVERY_REQUEST_BY_PK = gql`
 
 export const FETCH_DELIVERY_REQUEST_BY_COURIER = gql`
   query getDeliveryRequestByCourier($courier_id: uuid!) {
-    delivery_requests(where: {courier_id: {_eq: $courier_id}}) {
+    delivery_request(where: {courier_id: {_eq: $courier_id}}) {
       id
       created_at
     }

@@ -18,12 +18,12 @@ export const useFetchDeliveriesByCourier = (courier_id: string) => {
 
 export const useFetchDeliveryRequests = () => {
   const { loading, error, data } = useQuery(FETCH_DELIVERY_REQUESTS);
-  return { loading, error, data };
+  return { loading, error, data: data?.delivery_request };
 };
 
 export const useFetchDeliveryRequestByPK = (id: string) => {
   const { loading, error, data } = useQuery(FETCH_DELIVERY_REQUEST_BY_PK, { variables: { id } });
-  return { loading, error, data: data?.delivery_request };
+  return { loading, error, data: data?.delivery_request[0] };
 };
 
 
