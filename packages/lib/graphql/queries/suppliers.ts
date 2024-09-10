@@ -34,7 +34,6 @@ export const FETCH_SUPPLIER_ORDERS = gql`
         created_at
         destination
         id
-        orderId
         customerId
         origin
         status

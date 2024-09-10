@@ -6,20 +6,20 @@ query GetZones {
     id
     name
     description
-    createdAt
-    updatedAt
+    created_at
+    updated_at
   }
 }
 `;
 
 export const GET_ZONE_BY_ID = gql`
-query GetZonesById($id: ID!) {
-  zones(where: { id: $id }) {
+query GetZonesById($id: uuid = "") {
+  zones(where: {id: {_eq: $id}}) {
     id
     name
     description
-    createdAt
-    updatedAt
+    created_at
+    updated_at
   }
 }
 `;
