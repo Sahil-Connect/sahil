@@ -12,7 +12,7 @@ export const BUSINESS_CORE_FIELDS = gql`
   }
 `;
 
-const ADDRESS_FIELDS = gql`
+export const ADDRESS_FIELDS = gql`
   fragment AddressFields on addresses {
     city
     street_address

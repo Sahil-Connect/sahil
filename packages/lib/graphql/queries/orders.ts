@@ -1,19 +1,42 @@
 import { gql } from "@apollo/client";
 
+export const ORDER_CORE_FIELDS = gql`
+  fragment OrderCoreFields on orders {
+    id
+    created_at
+    destination
+    customerId
+    origin
+    status
+  }
+`;
+
+export const ORDER_BUSINESS_FIELDS = gql`
+  fragment OrderBusinessFields on business {
+    contactName
+    phoneNumber
+    name
+  }
+`;
+
+export const ORDER_ITEMS_AGGREGATE = gql`
+  fragment OrderItemsAggregate on orders {
+    order_items_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
 export const FETCH_ORDERS = gql`
+  ${ORDER_CORE_FIELDS}
+  ${ORDER_BUSINESS_FIELDS}
   query getOrders {
     orders {
-      id
-      created_at
-      destination
-      id
-      customerId
-      origin
-      status
+      ...OrderCoreFields
       business {
-        contactName
-        phoneNumber
-        name
+        ...OrderBusinessFields
       }
     }
     orders_aggregate {
@@ -25,15 +48,12 @@ export const FETCH_ORDERS = gql`
 `;
 
 export const FETCH_ORDER_BY_PK = gql`
+  ${ORDER_CORE_FIELDS}
+  ${ORDER_ITEMS_AGGREGATE}
   query getorderByPK($id: uuid!) {
     orders_by_pk(id: $id) {
-      id
-      created_at
-      destination
-      id
-      customerId
-      origin
-      status
+      ...OrderCoreFields
+      ...OrderItemsAggregate
       order_items {
         id
         product {
@@ -43,14 +63,8 @@ export const FETCH_ORDER_BY_PK = gql`
           price
         }
       }
-      status
       agent {
         name
-      }
-      order_items_aggregate {
-        aggregate {
-          count
-        }
       }
     }
   }
