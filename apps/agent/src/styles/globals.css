@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  font-family: "Sen", sans-serif;
-  /* rest css code also here */
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
