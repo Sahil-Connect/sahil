@@ -4,7 +4,7 @@ import SupplierProductForm, {
   supplierProductSchema,
 } from "./SupplierProductForm";
 import Modal from "ui/components/Modal";
-import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { HiOutlinePlus } from "react-icons/hi2";
 import { useAddNewProduct } from "@sahil/lib/hooks/suppliers";
 import { SubmitHandler } from "react-hook-form";
 
@@ -39,7 +39,7 @@ const AddNewProductModal = ({ supplier_id }: { supplier_id: string }) => {
   return (
     <Modal
       btnSize="sm"
-      icon={<HiOutlinePlusCircle />}
+      icon={<HiOutlinePlus />}
       CTA="Add Product"
       id="add-product"
       CloseBtnRef={closeBtn}

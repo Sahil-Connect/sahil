@@ -16,7 +16,7 @@ export const ListHeader: React.FC<ListHeaderProps> = ({
   children,
 }) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-center md:justify-between">
       <div className="flex gap-2 items-center">
         {title && <h3 className="text-lg">{title}</h3>}
         {(size || sizeLabel) && (
@@ -81,7 +81,7 @@ export const ListSort = <T,>({
   return (
     <select
       onChange={onChange}
-      className="select select-bordered select-sm max-w-xs"
+      className="select focus:outline-none select-bordered select-sm max-w-xs"
       title="select"
     >
       <option disabled value="">

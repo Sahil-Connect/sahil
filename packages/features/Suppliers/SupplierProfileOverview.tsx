@@ -33,21 +33,26 @@ export const SupplierProfileOverview = ({
   return (
     <div className="space-y-2">
       <Card height="h-fit">
-        <div className="avatar placeholder">
-          <div className="bg-neutral text-neutral-content rounded-full w-12">
-            <span>{generateInitials("Supplier Name")}</span>
-          </div>
+        <div className="flex items-center gap-2">
+          {supplier?.name && (
+            <div className="avatar placeholder">
+              <div className="bg-neutral text-neutral-content rounded-full w-12 md:w-14">
+                {/* <span>{generateInitials("Supplier Name")}</span> */}
+                <span>{generateInitials(supplier?.name)}</span>
+              </div>
+            </div>
+          )}
+          <h2 className="card-title">{supplier?.name}</h2>
         </div>
-        <h2 className="card-title">{supplier?.name}</h2>
-        <p>{supplier?.description}</p>
-        <div className="flex flex-col p-2  gap-4 border border-solid border-[#d2d6db] rounded-xl">
+        <p className="my-3">{supplier?.description}</p>
+        <div className="flex flex-col p-2 gap-4 border border-solid rounded-xl">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <span className="shadow rounded-md p-2">
+              <span className="text-gray-500 text-base border rounded-full p-2">
                 <HiOutlineUser />
               </span>
               <div className="space-y-1 font-semibold">
-                <span className="text-gray-600 text-sm font-normal">
+                <span className="text-gray-500 text-sm font-normal">
                   Contact Name
                 </span>
                 <p>{supplier?.contactName}</p>
@@ -57,21 +62,21 @@ export const SupplierProfileOverview = ({
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="shadow rounded-md p-2">
+            <span className="text-gray-500 text-base border rounded-md p-2">
               <HiOutlineMapPin />
             </span>
             <p>{supplier?.streetAddress}</p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="shadow rounded-md p-2">
+            <span className="text-gray-500 text-base border rounded-md p-2">
               <HiOutlineEnvelope />
             </span>
             <p>{supplier?.contactEmail}</p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="shadow rounded-md p-2">
+            <span className="text-gray-500 text-base border rounded-md p-2">
               <HiOutlinePhone />
             </span>
             <p>{supplier?.phoneNumber}</p>
@@ -107,7 +112,7 @@ export const SupplierProfileOverview = ({
 const generateInitials = (name: string) => {
   return name
     ?.split(" ")
-    .slice(0, 3)
+    .slice(0, 2)
     .map((word) => word.charAt(0).toUpperCase())
     .join("");
 };

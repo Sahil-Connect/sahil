@@ -40,27 +40,29 @@ export const ProductSummary = ({
   };
 
   return (
-    <div className="card card-bordered card-compact shadow h-96 relative">
-      <figure>
-        <img src={product.mainImage || placeholder} alt={product.name} />
+    <div className="card card-bordered card-compact relative">
+      <figure className="aspect-video relative">
+        <img 
+          src={product.mainImage || placeholder} alt={product.name} 
+        />
+        <div className="absolute top-0 right-0 mt-3 mr-3 badge badge-success items-center text-[0.65rem] text-white">
+          98
+          <HiOutlineSparkles />
+        </div>
       </figure>
       {isInCart && (
-        <div className="absolute top-2 right-2 badge badge-primary">
-          <span className="mr-2">
+        <div className="absolute top-0 left-0 mt-3 ml-3 badge badge-success text-white text-[0.65rem]">
+          {/* <span>
             <HiOutlineShoppingCart />
-          </span>
+          </span> */}
           {product.name} - {quantity}x in cart
         </div>
       )}
       <div className="card-body">
         <div className="flex items-center justify-between">
-          <h3 className="card-title text-sm">{product.name}</h3>
-          <div className="badge badge-success items-center">
-            98
-            <HiOutlineSparkles />
-          </div>
+          <h3 className="card-title text-sm truncate ...">{product.name}</h3>
         </div>
-        <p>{product.description}</p>
+        <p className="mb-2 line-clamp-2">{product.description}</p>
         <div className="flex justify-between items-center w-full">
           <ProductPrice price={product.price} discount={product.discount} />
           <div>
@@ -69,7 +71,7 @@ export const ProductSummary = ({
             ) : null}
           </div>
         </div>
-        <div className="divider divider-vertical"> </div>
+        <hr className="my-3"/>
         <div className="card-actions items-center">
           {isAdding ? (
             <QuantityInput
@@ -103,7 +105,7 @@ export const ProductSummary = ({
               type="button"
               title="Add Item"
             >
-              <HiOutlineShoppingCart /> Add To Cart
+              Add To Cart
             </button>
           )}
           {!isAdding && <ProductCompareDrawer product={product} />}
@@ -164,7 +166,7 @@ const ProductCompareDrawer = ({ product }: ProductCompareDrawerProps) => {
     {
       label: "Sahil Score",
       value: (
-        <div className="badge badge-success items-center">
+        <div className="badge badge-success items-center text-white">
           98
           <HiOutlineSparkles />
         </div>
@@ -181,7 +183,7 @@ const ProductCompareDrawer = ({ product }: ProductCompareDrawerProps) => {
       </div>
 
       <Card className="w-full">
-        <figure className="h-48 w-full rounded-2xl overflow-hidden">
+        <figure className="aspect-video w-full rounded-2xl overflow-hidden">
           <img
             src={product.mainImage || placeholder}
             alt={product.name}
