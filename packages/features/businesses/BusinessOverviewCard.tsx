@@ -4,7 +4,7 @@ import { generateInitials } from "@sahil/lib/strings";
 import Link from "next/link";
 import { Card } from "ui";
 import {
-  HiOutlineEllipsisHorizontal,
+  HiEllipsisHorizontal,
   HiOutlinePhone,
   HiOutlineMapPin,
 } from "react-icons/hi2";
@@ -28,56 +28,62 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
   return (
     <Card className="w-full">
       <div className="flex justify-between">
-        <Link
-          href={`/businesses/${business.id}`}
-          className="avatar placeholder h-fit"
-        >
-          <div className="bg-neutral text-base text-neutral-content rounded-full w-12">
-            <span>{generateInitials(business.name)}</span>
-          </div>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/businesses/${business.id}`}
+            className="avatar placeholder h-fit"
+          >
+            <div className="bg-neutral text-base text-neutral-content rounded-full w-11">
+              <span>{generateInitials(business.name)}</span>
+            </div>
+          </Link>
+          <Link
+            href={`/businesses/${business.id}`}
+            className="card-title text-base max-w-[35ch] leading-tight"
+          >
+            {business.name}
+          </Link>
+        </div>
         <button title="More">
-          <HiOutlineEllipsisHorizontal />
+          <HiEllipsisHorizontal />
         </button>
       </div>
-      <div className="space-y-2">
-        <Link
-          href={`/businesses/${business.id}`}
-          className="card-title text-base md:text-lg"
-        >
-          {business.name}
-        </Link>
-      </div>
-      <div className="mt-2 flex flex-col bg-gray-50 p-4 gap-4 shadow-sm rounded-lg">
-        <div className="flex justify-between items-center">
-          <div className="space-y-1 font-semibold">
-            <span className="text-gray-500 text-sm font-normal">
+      <div className="my-4 flex flex-col bg-base-100 border p-4 gap-4 rounded-lg">
+        <div className="w-full flex justify-between items-center">
+          <div className="font-semibold">
+            <p className="text-gray-500 text-xs font-normal">
               Business Type
-            </span>
-            <p className="capitalize">{business.type}</p>
+            </p>
+            <p className="capitalize">
+              {business.type}
+            </p>
           </div>
-          <div className="space-y-1 font-semibold">
-            <span className="text-gray-500 text-sm font-normal">
+          <div className="font-semibold">
+            <p className="text-gray-500 text-xs font-normal text-right">
               Contact Name
-            </span>
-            <p className="capitalize">{business.contactName}</p>
+            </p>
+            <p className="capitalize text-right">
+              {business.contactName}
+            </p>
           </div>
         </div>
       </div>
+
       <div className="mt-3">
         {business.addresses &&
           business.addresses.map((address, index) => (
             <div key={index} className="flex items-center gap-2">
-              <span className="shadow rounded-md p-2 text-primary">
+              <span className="text-gray-500 text-base border rounded-md p-2">
                 <HiOutlineMapPin />
               </span>
               <p className="truncate ...">{address.street_address}</p>
             </div>
-          ))}
+          ))
+        }
       </div>
-      <div className="mt-3">
+      <div className="my-3">
         <div className="flex items-center gap-2">
-          <span className="shadow rounded-md p-2 text-primary">
+          <span className="text-gray-500 text-base border rounded-md p-2">
             <HiOutlinePhone />
           </span>
           <p>{business.phoneNumber}</p>
