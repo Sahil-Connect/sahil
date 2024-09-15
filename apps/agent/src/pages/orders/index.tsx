@@ -29,7 +29,7 @@ export default function OrdersPage() {
   return (
     <section className="space-y-4">
       <Card>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-2 justify-between md:flex-row md:items-center">
           <div>
             <h1 className="text-xl">Orders</h1>
           </div>
