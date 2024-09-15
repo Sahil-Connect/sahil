@@ -33,7 +33,7 @@ export const LatestOrders = () => {
           View All <HiArrowSmallRight />{" "}
         </Link>
       </div>
-      <div className="flex gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {orders.map((order) => (
           <div key={order.id} className="basis-1/4">
             <Card title={order.orderId} titleSize="sm">
