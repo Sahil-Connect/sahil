@@ -1,5 +1,5 @@
 import {
-  HiOutlineBuildingOffice,
+  HiOutlineBuildingStorefront,
   HiChevronDown,
   HiOutlineTruck,
   HiOutlineBriefcase,
@@ -48,7 +48,7 @@ export const AgentToolBar = () => {
             </li>
             <li>
               <Link href="/suppliers/register/business_info">
-                <HiOutlineBuildingOffice /> Supplier
+                <HiOutlineBuildingStorefront /> Supplier
               </Link>
             </li>
           </ul>
