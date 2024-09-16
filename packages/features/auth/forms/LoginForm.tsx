@@ -87,7 +87,7 @@ const LoginForm = () => {
         }`}
         type="submit"
       >
-        Sign in With Email
+        {loading ? "Signing in..." : "Sign in With Email"}
       </button>
     </form>
   );
