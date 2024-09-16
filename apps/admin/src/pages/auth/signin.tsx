@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { getProviders, useSession } from "next-auth/react";
-import logo from "../../../public/logo-alt.svg";
+import logo from "../../../public/logo.svg";
 import LoginForm from "@sahil/features/auth/forms/LoginForm";
 import AuthCard from "@sahil/features/auth/AuthCard";
+import agentDashboard from "../../../public/agentdashboard.svg";
 
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();
@@ -20,8 +21,10 @@ const SignInPage: NextPage = ({ providers }: any) => {
   return (
     <>
       <AuthCard
-        logo={logo}
         providers={providers}
+        logo={logo}
+        appTitle="Admin App"
+        agentDashboard={agentDashboard}
         form={<LoginForm />}
         title="Sign in to your account"
       />
