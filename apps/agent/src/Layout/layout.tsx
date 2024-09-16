@@ -46,14 +46,16 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
   return (
     <>
-      <Navbar
-        links={links}
-        logo={logo}
-        header="Agent"
-        onSignOut={onSignOut}
-        user={session?.user}
-      />
-      <main className="p-4">
+      {session?.user && (
+        <Navbar
+          links={links}
+          logo={logo}
+          header="Agent"
+          onSignOut={onSignOut}
+          user={session?.user}
+        />
+      )}
+      <main className={`p-4 ${!session?.user ? 'p-0' : ''}`}>
         {children}
       </main>
     </>
