@@ -10,7 +10,7 @@ type Props = {
   title: string;
 };
 
-const AuthCard = ({ providers=[], logo="", appTitle, illustration="", form, title }: Props) => {
+const AuthCard = ({ providers=[], logo="", appTitle, illustration="", form }: Props) => {
   return (
     <section className="w-full max-w-7xl mx-auto lg:max-w-full">
       <div className="flex h-[90vh]">
