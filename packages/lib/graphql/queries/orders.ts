@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const FETCH_ORDERS = gql`
   query getOrders {
@@ -9,7 +9,10 @@ export const FETCH_ORDERS = gql`
       id
       customerId
       origin
-      status
+      status_histories(limit: 1, order_by: { created_at: desc }) {
+        created_at
+        status
+      }
       business {
         contactName
         phoneNumber
@@ -25,7 +28,7 @@ export const FETCH_ORDERS = gql`
 `;
 
 export const FETCH_ORDER_BY_PK = gql`
-  query getorderByPK($id: uuid!) {
+  query getOrderByPK($id: uuid!) {
     orders_by_pk(id: $id) {
       id
       created_at
@@ -33,7 +36,10 @@ export const FETCH_ORDER_BY_PK = gql`
       id
       customerId
       origin
-      status
+      status_histories(order_by: { created_at: desc }) {
+        status
+        created_at
+      }
       order_items {
         id
         product {
@@ -43,7 +49,6 @@ export const FETCH_ORDER_BY_PK = gql`
           price
         }
       }
-      status
       agent {
         name
       }
