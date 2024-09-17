@@ -7,6 +7,8 @@
     "dev-api": "turbo run dev --filter=api",
     "build-agent": "turbo run build --filter=agent --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
     "dev-agent": "turbo run dev --filter=agent",
+    "build-client": "turbo run build --filter=client --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'",
+    "dev-client": "turbo run dev --filter=client",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
