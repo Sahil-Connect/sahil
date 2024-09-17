@@ -1,53 +1,20 @@
 import { ListBusinesses } from "@sahil/features/businesses/ListBusinesses";
-import { useRouter } from "next/router";
-import { Card, Stats, Stat } from "ui";
-import { HiPlus, HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
+import { HiPlus } from "react-icons/hi2";
+import { SectionHeader } from "ui";
 
-const stats: Stat[] = [
+const actions = [
   {
-    title: "Reports",
-    value: 9,
-    desc: "Oct 1st - Nov 1st",
-    trend: "negative",
-  },
-  {
-    title: "Registered Businesses",
-    value: 40,
-    desc: "Oct 1st - Nov 1st",
-    trend: "negative",
-  },
-  {
-    title: "Processed Orders",
-    value: 201,
-    desc: "Oct 1st - Nov 1st",
-    trend: "positive",
-  },
+    label: "Register Business",
+    icon: <HiPlus />,
+    href: "/businesses/register/basic_info",
+    primary: true
+  }
 ];
 
 export default function Business() {
-  const router = useRouter();
   return (
-    <section className="space-y-4">
-      <Card>
-        <div className="flex flex-col gap-2 justify-between md:flex-row md:items-center">
-          <div>
-            <h1 className="text-xl">Businesses</h1>
-          </div>
-          <div className="flex gap-2">
-            <button className="btn btn-sm">
-              <HiOutlineDocumentMagnifyingGlass />
-              track Order
-            </button>
-            <button
-              className="btn btn-sm btn-primary normal-case"
-              onClick={() => router.push("/businesses/register/basic_info")}
-            >
-              <HiPlus /> Register Business
-            </button>
-          </div>
-        </div>
-      </Card>
+    <SectionHeader title="Businesses" actions={actions}>
       <ListBusinesses />
-    </section>
+    </SectionHeader>
   );
 }

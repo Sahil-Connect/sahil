@@ -1,52 +1,25 @@
 import { ListCouriers } from "@sahil/features/Couriers/ListCouriers";
 import { HiOutlinePlus, HiOutlineMap } from "react-icons/hi2";
-import Link from "next/link";
-import { Card, Stats, Stat } from "ui";
+import { SectionHeader } from "ui";
 
-const stats: Stat[] = [
+const actions = [
   {
-    title: "Reports",
-    value: 9,
-    desc: "Oct 1st - Nov 1st",
-    trend: "negative",
+    label: "Track Courier",
+    icon: <HiOutlineMap />,
+    href: "/couriers/track"
   },
   {
-    title: "Registered Businesses",
-    value: 40,
-    desc: "Oct 1st - Nov 1st",
-    trend: "negative",
-  },
-  {
-    title: "Processed Orders",
-    value: 201,
-    desc: "Oct 1st - Nov 1st",
-    trend: "positive",
-  },
+    label: "Register Courier",
+    icon: <HiOutlinePlus />,
+    href: "/couriers/register/personal_info",
+    primary: true
+  }
 ];
 
 export default function CouriersPage() {
   return (
-    <section className="space-y-4">
-      <Card>
-        <div className="flex flex-col gap-2 justify-between md:flex-row md:items-center">
-          <div>
-            <h1 className="text-xl">Couriers</h1>
-          </div>
-          <div className="flex gap-2">
-            <Link href="/couriers/track" className="btn btn-sm">
-              <HiOutlineMap /> Track Courier
-            </Link>
-            <Link
-              href="couriers/register/personal_info"
-              className="btn btn-sm btn-primary"
-            >
-              <HiOutlinePlus />
-              Register Courier
-            </Link>
-          </div>
-        </div>
-      </Card>
+    <SectionHeader title="Couriers" actions={actions}>
       <ListCouriers />
-    </section>
+    </SectionHeader>
   );
 }
