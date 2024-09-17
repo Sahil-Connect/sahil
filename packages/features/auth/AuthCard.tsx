@@ -15,7 +15,7 @@ const AuthCard = ({ providers=[], logo="", appTitle, agentDashboard="", form, ti
     <section className="w-full max-w-7xl mx-auto lg:max-w-full">
       <div className="flex h-[90vh]">
         <div className="p-4 w-full flex items-center justify-center h-screen lg:w-3/5 md:p-0">
-          <div className="w-full md:w-[30rem]">
+          <div className="w-full md:w-[30rem] border px-4 py-6 rounded-xl lg:border-none lg:px-0 lg:py-0">
             <div className="">
               <div className="flex items-center flex-row gap-3">
                 <Image
