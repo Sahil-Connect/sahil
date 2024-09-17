@@ -1,66 +1,48 @@
-import { Card, JoinGrid, Timeline } from "ui";
-import { HiCheck, HiXMark, HiOutlineInformationCircle } from "react-icons/hi2";
+import { Card, Timeline } from 'ui';
+import { Orders } from '@sahil/lib/graphql/__generated__/graphql';
+import { formatDateTime } from '@sahil/lib/dates';
 
-const progress = [
-  {
-    id: 1,
-    prompt: "Review and Confirm Order",
-    completed: true,
-  },
-  {
-    id: 2,
-    prompt: "Confirm Courier Pickup",
-    completed: true,
-  },
-  {
-    id: 3,
-    prompt: "In Transit: Monitor Delivery",
-    completed: false,
-  },
-  {
-    id: 4,
-    prompt: "Confirm Delivery Completion",
-    completed: false,
-  },
-];
+const allStatuses = [
+  'PENDING',
+  'CONFIRMED',
+  'ENROUTE',
+  'DELIVERED',
+  'FULFILLED',
+] as const;
 
-export const OrderProgress = () => {
+const statusLabels = {
+  PENDING: 'Order received, awaiting confirmation.',
+  CONFIRMED: 'Order confirmed, preparing for shipment.',
+  ENROUTE: 'Order in transit, awaiting delivery.',
+  DELIVERED: 'Order delivered, awaiting confirmation.',
+  FULFILLED: 'Order completed, thank you for shopping with us.',
+  CANCELED: "Order canceled, we're sorry for any inconvenience.",
+};
+
+type Props = {
+  order: Orders;
+};
+
+export const OrderProgress = ({ order: { status_histories } }: Props) => {
+  const latestStatus = status_histories[0]?.status || 'PENDING';
+  const statusIndex = allStatuses.indexOf(latestStatus as any);
+
+  const timeline = allStatuses.map((status, index) => {
+    const statusHistory = status_histories.find((sh) => sh.status === status);
+    return {
+      prefix: statusHistory
+        ? formatDateTime(statusHistory.created_at, 'HH:mm')
+        : '',
+      label: status,
+      description: statusLabels[status],
+      status:
+        index <= statusIndex ? ('completed' as const) : ('pending' as const),
+    };
+  });
+
   return (
-    <Card title="Order Progress" height="h-fit" titleSize="sm">
-      <div className="space-y-4">
-        {progress.map((step) => (
-          <div className="flex justify-between items-center" key={step.id}>
-            <div className="basis-2/5">
-              <div className="flex gap-4 items-center">
-                <span className="p-2 shadow rounded-lg w-fit">
-                  <HiOutlineInformationCircle />
-                </span>
-                <p>{step.prompt}</p>
-              </div>
-            </div>
-            <div>
-              <JoinGrid>
-                <button
-                  className={`btn btn-xs join-item ${
-                    step?.completed ? "btn-disabled" : "btn-error"
-                  }`}
-                >
-                  <HiXMark />
-                  Cancel
-                </button>
-                <button
-                  className={`btn btn-xs join-item ${
-                    step?.completed ? "btn-success" : "btn-outline"
-                  }`}
-                >
-                  <HiCheck />
-                  {step?.completed ? "Accepted" : "Accept"}
-                </button>
-              </JoinGrid>
-            </div>
-          </div>
-        ))}
-      </div>
+    <Card title='Order Progress' height='h-fit' titleSize='sm'>
+      <Timeline items={timeline} />
     </Card>
   );
 };

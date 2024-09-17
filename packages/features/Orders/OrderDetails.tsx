@@ -48,7 +48,7 @@ export const OrderDetails: FC<Props> = ({ order }) => {
             </span>
             <div>
               <p className="text-gray-400">Status</p>
-              <h3 className="text-md">{order?.status}</h3>
+              <h3 className="text-md">{order?.status_histories![0]?.status ?? "Pending"}</h3>
             </div>
           </div>
           <div className="flex gap-4 items-center  grow">
