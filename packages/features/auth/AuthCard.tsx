@@ -5,12 +5,12 @@ type Props = {
   providers: any;
   logo?: string | StaticImageData;
   appTitle: string;
-  agentDashboard?: string | StaticImageData;
+  illustration?: string | StaticImageData;
   form: React.ReactNode;
   title: string;
 };
 
-const AuthCard = ({ providers=[], logo="", appTitle, agentDashboard="", form, title }: Props) => {
+const AuthCard = ({ providers=[], logo="", appTitle, illustration="", form, title }: Props) => {
   return (
     <section className="w-full max-w-7xl mx-auto lg:max-w-full">
       <div className="flex h-[90vh]">
@@ -50,7 +50,7 @@ const AuthCard = ({ providers=[], logo="", appTitle, agentDashboard="", form, ti
             </div>
             <div className="overflow-hidden absolute bottom-0 left-0">
               <Image
-                src={agentDashboard}
+                src={illustration}
                 alt="sahil-app-dashboard"
                 loading="eager"
                 className="rounded-tl-xl ml-9 mt-48 border-l-4 border-t-4 border-zinc-950"
