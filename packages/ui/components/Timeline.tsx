@@ -20,7 +20,7 @@ type Props = {
 const statusConfig = {
   completed: { icon: <HiOutlineCheckCircle />, color: 'success' },
   pending: { icon: <HiOutlineMinusCircle />, color: 'base-300' },
-  cancelled: { icon: <HiOutlineXCircle />, color: 'error' },
+  cancelled: { icon: <HiOutlineXCircle />, color: 'red-500' },
 };
 
 export const Timeline = ({ items }: Props) => {
@@ -64,7 +64,7 @@ const TimelineItem = ({
       <div className={`timeline-middle text-xl text-${color}`}>{icon}</div>
       <div className='timeline-end space-y-1' style={{ gridRowStart: 2 }}>
         <span className='font-semibold'>{label}</span>
-        {status !== 'pending' && <p className='text-sm'>{description}</p>}
+        <p className='text-sm'>{description}</p>
       </div>
       {!isLast && <hr className={`bg-${nextColor}`} />}
     </li>
