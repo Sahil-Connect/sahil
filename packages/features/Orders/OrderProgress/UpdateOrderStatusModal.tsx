@@ -6,13 +6,13 @@ import Modal from 'ui/components/Modal';
 import { Input, Select } from 'ui';
 import { Orders } from '@sahil/lib/graphql/__generated__/graphql';
 import { allStatuses } from './constants';
+import { useAppendOrderStatus } from '@sahil/lib/hooks/orders';
 
 const status = z.enum(allStatuses);
 
 const statusSchema = z.object({
   status: status,
-  note: z.string().min(10, 'Note must be at least 10 characters.'),
-  created_at: z.string(),
+  // note: z.string().min(10, 'Note must be at least 10 characters.'),
 });
 
 type FormData = z.infer<typeof statusSchema>;
@@ -24,6 +24,7 @@ type Props = {
 export const UpdateOrderStatusModal = ({ order }: Props) => {
   const id = `update-${order.id}-status`;
   const closeBtn = useRef<HTMLButtonElement>(null);
+  const { appendOrderStatus, loading } = useAppendOrderStatus();
 
   const {
     register,
@@ -31,14 +32,25 @@ export const UpdateOrderStatusModal = ({ order }: Props) => {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(statusSchema),
-    defaultValues: {
-      created_at: new Date().toISOString(),
-    },
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    // Handle form submission
+  const onSubmit = async (data: FormData) => {
+    if (loading) return;
+    const validatedInput = statusSchema.parse(data);
+
+    try {
+      await appendOrderStatus({
+        variables: {
+          object: {
+            order_id: order.id,
+            status: validatedInput.status,
+          },
+        },
+      });
+      closeBtn.current?.click();
+    } catch (error) {
+      console.error('Error appending order status:', error);
+    }
   };
 
   return (
@@ -59,10 +71,15 @@ export const UpdateOrderStatusModal = ({ order }: Props) => {
             errors={errors}
             options={status.options}
           />
-          <Input name='note' label='Note' register={register} errors={errors} />
+          {/* <Input name='note' label='Note' register={register} errors={errors} /> */}
         </div>
 
-        <button type='submit' className='btn btn-primary w-full'>
+        <button
+          type='submit'
+          className={`w-full btn normal-case btn-primary ${
+            loading && 'animate-pulse'
+          }`}
+        >
           Submit
         </button>
       </form>

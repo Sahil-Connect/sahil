@@ -15,3 +15,11 @@ export const INIT_ORDER_ACTION = gql`
     insertBusinessOrder(object: $object)
   }
 `;
+
+export const APPEND_ORDER_STATUS = gql`
+  mutation MyMutation($object: order_status_history_insert_input = {}) {
+    insert_order_status_history_one(object: $object) {
+      id
+    }
+  }
+`;

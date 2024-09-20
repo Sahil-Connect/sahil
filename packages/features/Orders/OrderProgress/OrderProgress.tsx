@@ -31,25 +31,30 @@ type Timeline = {
 };
 
 const createTimeline = (statusHistories: Orders['status_histories']) => {
-  const latestStatus = statusHistories[0]?.status || 'PENDING';
-  const isCanceled = latestStatus === 'CANCELED';
+  const timeline: Timeline[] = statusHistories
+    .map((history) => {
+      let status: 'completed' | 'pending' | 'cancelled';
 
-  const timeline: Timeline[] = statusHistories.map((history, index) => {
-    let status: 'completed' | 'pending' | 'cancelled';
+      switch (history.status) {
+        case 'CANCELED':
+          status = 'cancelled';
+          break;
+        case 'FULFILLED':
+          status = 'completed';
+          break;
+        default:
+          status = 'completed';
+          break;
+      }
 
-    if (isCanceled) {
-      status = history.status === 'CANCELED' ? 'cancelled' : 'completed';
-    } else {
-      status = index === 0 ? 'completed' : 'pending';
-    }
+      return {
+        prefix: formatDateTime(history.created_at),
+        label: history.status,
+        description: statusLabels[history.status],
+        status: status,
+      };
+    })
+    .reverse();
 
-    return {
-      prefix: formatDateTime(history.created_at),
-      label: history.status,
-      description: statusLabels[history.status],
-      status: status,
-    };
-  });
-
-  return timeline.reverse();
+  return timeline;
 };
