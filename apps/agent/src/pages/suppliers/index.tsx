@@ -1,7 +1,7 @@
 import { ListSuppliers } from "@sahil/features/Suppliers";
 import FilterSuppliersModal from "@sahil/features/Suppliers/FilterSuppliersModal";
 import { useRouter } from "next/router";
-import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { HiPlus } from "react-icons/hi2";
 
 import { Card, Stats, Stat } from "ui";
 
@@ -32,16 +32,16 @@ export default function Suppliers() {
     <>
       <section className="space-y-4">
         <Card>
-          <div className="flex justify-between items-start flex-wrap gap-4">
+          <div className="flex flex-col gap-2 justify-between md:flex-row md:items-center">
             <div>
               <h1 className="text-xl">Suppliers</h1>
             </div>
-            <div className="w-full lg:w-fit flex justify-end gap-4">
+            <div className="flex gap-2">
               <button
                 className="btn btn-sm btn-primary normal-case"
                 onClick={() => router.push("/suppliers/register/business_info")}
               >
-                <HiOutlinePlusCircle className="text-lg" />
+                <HiPlus />
                 Register Supplier
               </button>
             </div>

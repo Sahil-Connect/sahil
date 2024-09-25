@@ -52,14 +52,18 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
   return (
     <>
-      <Navbar
-        links={links}
-        logo={logo}
-        header="Admin"
-        onSignOut={onSignOut}
-        user={session?.user}
-      />
-      <main className="p-4 bg-gray-50">{children}</main>
+      {session?.user && (
+        <Navbar
+          links={links}
+          logo={logo}
+          header="Admin"
+          onSignOut={onSignOut}
+          user={session?.user}
+        />
+      )}
+      <main className={session?.user ? 'p-4' : 'p-0'}>      
+        {children}
+      </main>
     </>
   );
 }

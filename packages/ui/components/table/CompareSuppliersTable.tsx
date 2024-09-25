@@ -56,7 +56,7 @@ const CompareSuppliersTable = ({ suppliers }: Props) => {
       accessKey: "score",
       cell(row) {
         return (
-          <div className="badge badge-success items-center">
+          <div className="badge badge-success items-center text-white">
             98
             <HiOutlineSparkles />
           </div>
@@ -74,7 +74,7 @@ const CompareSuppliersTable = ({ suppliers }: Props) => {
         return (
           <button
             onClick={() => console.log(row.id)}
-            className="btn btn-sm text-primary normal-case btn-ghost"
+            className="text-primary normal-case font-semibold"
           >
             Add to Cart
           </button>

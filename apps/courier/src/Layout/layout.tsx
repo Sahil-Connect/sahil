@@ -34,14 +34,16 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
   return (
     <>
-      <Navbar
-        links={links}
-        logo={logo}
-        header="Courier"
-        onSignOut={onSignOut}
-        user={session?.user}
-      />
-      <main className="p-4 bg-gray-50">
+      {session?.user && (
+        <Navbar
+          links={links}
+          logo={logo}
+          header="Courier"
+          onSignOut={onSignOut}
+          user={session?.user}
+        />
+      )}
+      <main className={session?.user ? 'p-4' : 'p-0'}>
         {children}
       </main>
     </>

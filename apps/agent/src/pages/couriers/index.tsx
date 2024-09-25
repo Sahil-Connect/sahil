@@ -28,8 +28,10 @@ export default function CouriersPage() {
   return (
     <section className="space-y-4">
       <Card>
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl">Couriers</h1>
+        <div className="flex flex-col gap-2 justify-between md:flex-row md:items-center">
+          <div>
+            <h1 className="text-xl">Couriers</h1>
+          </div>
           <div className="flex gap-2">
             <Link href="/couriers/track" className="btn btn-sm">
               <HiOutlineMap /> Track Courier
