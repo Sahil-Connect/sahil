@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import logo from "../../public/logo.png";
+import logo from "../../public/logo-alt.svg";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { Navbar } from "ui";
@@ -8,9 +8,9 @@ type LayoutProps = {
 };
 import {
   HiOutlineBriefcase,
-  HiOutlineQueueList,
+  HiOutlineCube,
   HiOutlineTruck,
-  HiOutlineBuildingOffice,
+  HiOutlineBuildingStorefront,
 } from "react-icons/hi2";
 
 const links = [
@@ -27,12 +27,12 @@ const links = [
   {
     name: "Orders",
     href: "/orders",
-    icon: HiOutlineQueueList,
+    icon: HiOutlineCube,
   },
   {
     name: "Suppliers",
     href: "/suppliers",
-    icon: HiOutlineBuildingOffice,
+    icon: HiOutlineBuildingStorefront,
   },
 ];
 
@@ -46,14 +46,16 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
   return (
     <>
-      <Navbar
-        links={links}
-        logo={logo}
-        header="Sahil Agent"
-        onSignOut={onSignOut}
-        user={session?.user}
-      />
-      <main className="min-h-[calc(100vh-4.5rem)] p-4 bg-gray-50">
+      {session?.user && (
+        <Navbar
+          links={links}
+          logo={logo}
+          header="Agent"
+          onSignOut={onSignOut}
+          user={session?.user}
+        />
+      )}
+      <main className={session?.user ? 'p-4' : 'p-0'}>
         {children}
       </main>
     </>

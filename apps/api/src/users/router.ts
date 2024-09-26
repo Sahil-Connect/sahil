@@ -26,7 +26,7 @@ userRouter.post(
 userRouter.get("/", async (req: Request, res: Response, next: NextFunction) => {
   const users = await listUsers();
   res.status(200).json({
-    users
+    users,
   });
 });
 

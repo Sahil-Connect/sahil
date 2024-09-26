@@ -77,7 +77,8 @@ export const listRecommendedSuppliers = async () => {
   console.log("*****************");
   console.log("rankedSuppliers", rankedSuppliers[1]);
 
+
   let query = db.selectFrom("suppliers");
-  const suppliers = await query.selectAll().execute();
-  return { suppliers };
+  const result = await query.selectAll().execute();
+  return result;
 };

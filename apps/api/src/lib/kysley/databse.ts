@@ -19,8 +19,8 @@ const dialect = new PostgresDialect({
     password: databasePassword,
     max: 10,
     ssl: {
-        rejectUnauthorized: false,
-    }
+      rejectUnauthorized: false,
+    },
   }),
 });
 

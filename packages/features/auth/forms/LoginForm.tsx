@@ -1,12 +1,20 @@
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { CheckBox, Input } from "ui";
+import { signIn } from "next-auth/react";
+import { Input } from "ui";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAddUserInvite } from "@sahil/lib/hooks/users";
+import {
+  InputMaybe,
+  User_Role_Enum,
+} from "@sahil/lib/graphql/__generated__/graphql";
 
 const authSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
-  rememberMe: z.boolean().optional().default(false),
+  email: z
+    .string()
+    .email()
+    .transform((value) => value.toLowerCase()),
 });
 
 type FormData = z.infer<typeof authSchema>;
@@ -15,19 +23,53 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(authSchema),
   });
+  const { addUserInvite } = useAddUserInvite();
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    if (loading) return;
     const validatedInput = authSchema.parse(data);
-    console.log("yerrrr");
+    setLoading(true);
+    try {
+      const object = {
+        ...validatedInput,
+        role: "user" as InputMaybe<User_Role_Enum>,
+      };
+
+      await addUserInvite({
+        variables: {
+          object,
+        },
+      });
+
+      const results = await signIn("email", {
+        ...validatedInput,
+        redirect: false,
+      });
+
+      setResult(
+        results?.ok
+          ? "An invite has been sent to your inbox!"
+          : "An error occurred while sending invite!"
+      );
+
+      console.log("Email sign in result:", results);
+    } catch (error) {
+      console.error("Email sign in failed:", error);
+      setResult("An error occurred while sending invite!");
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Input
         name="email"
         type="email"
@@ -36,27 +78,16 @@ const LoginForm = () => {
         register={register}
         errors={errors}
       />
-      <Input
-        name="password"
-        type="password"
-        label="Password"
-        register={register}
-        errors={errors}
-      />
 
-      <div className="flex justify-between items-center">
-        <CheckBox
-          name="rememberMe"
-          label="Remember me"
-          register={register}
-          errors={errors}
-        />
-        <a href="#" className="text-sm link">
-          Forgot Password?
-        </a>
-      </div>
-      <button className="btn btn-primary w-full capitalize" type="submit">
-        Sign In
+      {result && <p className="text-center text-base">{result}</p>}
+
+      <button
+        className={`btn btn-primary w-full capitalize ${
+          loading && "animate-pulse"
+        }`}
+        type="submit"
+      >
+        {loading ? "Signing in..." : "Sign in"}
       </button>
     </form>
   );

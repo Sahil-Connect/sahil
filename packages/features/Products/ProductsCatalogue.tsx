@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFetchProducts } from "@sahil/lib/hooks/products";
 import { Card, List, ListHeader, ListPagination } from "ui";
-import { useOrderItemsStore } from "@sahil/lib/hooks/useOrderItemsStore";
+import { useOrderItemsStore } from "@sahil/lib/hooks/formStores/useOrderItemsStore";
 import Link from "next/link";
 import {
   HiOutlineShoppingCart,
@@ -13,23 +13,23 @@ import { ProductSummary } from "./ProductOverviewCard";
 
 export const ProductsCatalogue = () => {
   const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(10);
   const {
     data: products,
     error,
     loading,
     productsCount,
-  } = useFetchProducts({ offset });
+  } = useFetchProducts({ limit, offset });
 
   const {
     addOrderItem,
+    removeOrderItem,
+
     orderItems,
     setProducts,
-    products: availableProducts,
   } = useOrderItemsStore((state) => state);
 
-  const orderItemsMap = new Map(
-    orderItems.map((item) => [item.productId, item])
-  );
+  const orderItemsMap = new Map(orderItems.map((item) => [item.id, item]));
 
   useEffect(() => {
     setProducts(products as Products[]);
@@ -42,8 +42,8 @@ export const ProductsCatalogue = () => {
           <HiSignalSlash />
         </span>
         <p>
-          Products are not loading due to a technical problem on our side. Please
-          try again. If the issue continues,{" "}
+          Products are not loading due to a technical problem on our side.
+          Please try again. If the issue continues,{" "}
           <span className="text-primary">contact support.</span>
         </p>
         <div className="card-actions justify-end">
@@ -69,24 +69,21 @@ export const ProductsCatalogue = () => {
   }
 
   const onAddOrderItem = (product: any) => {
-    addOrderItem({
-      ...product,
-      productId: product.id,
-      quantity: 1,
-    });
+    addOrderItem(product);
   };
+
   const onRemoveOrderItem = (product: any) => {
-    console.log("remove product to order", product);
+    removeOrderItem(product);
   };
 
   return (
     <section className="space-y-4">
       <ListHeader size={productsCount.count} sizeLabel="Products">
         <ListPagination
-          onNextPage={() => setOffset((prev) => prev + 12)}
-          onPreviousPage={() => setOffset((prev) => prev - 12)}
+          onNextPage={() => setOffset((prev) => prev + 10)}
+          onPreviousPage={() => setOffset((prev) => prev - 10)}
           isNextDisabled={
-            (productsCount && offset + 12 >= productsCount.count) || false
+            (productsCount && offset + 10 >= productsCount.count) || false
           }
           isPrevDisabled={offset === 0}
         />
@@ -102,9 +99,9 @@ export const ProductsCatalogue = () => {
             <ProductSummary
               key={product.id}
               product={product}
+              isInCart={isInCart}
               onAddOrderItem={onAddOrderItem}
               onRemoveOrderItem={onRemoveOrderItem}
-              isInCart={isInCart}
             />
           );
         }}

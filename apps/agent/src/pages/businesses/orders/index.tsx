@@ -1,4 +1,4 @@
-import { Table } from "ui";
+// import { Table } from 'ui';
 export default function BusinessOrdersPage() {
   return (
     <main className="min-h-screen p-8">
@@ -12,7 +12,7 @@ export default function BusinessOrdersPage() {
             </p>
           </div>
         </div>
-        <Table />
+        {/* <Table /> */}
       </div>
     </main>
   );

@@ -11,6 +11,10 @@ const extendedConfig: Config = {
   ],
   theme: {
     ...baseConfig.theme,
+    fontFamily: {
+      inter: ["var(--font-inter)"],
+      jakarta: ["var(--font-jakarta)"],
+    },
     extend: {
       ...baseConfig.theme?.extend,
     },
@@ -20,12 +24,12 @@ const extendedConfig: Config = {
     themes: [
       {
         lemonade: {
-          ...require("daisyui/src/theming/themes")["[data-theme=lemonade]"],
+          ...require("daisyui/src/theming/themes")["lemonade"],
           primary: "#067a46",
           secondary: "#07ba3d",
-          accent: "#FFDB58",
+          accent: "#ffdb57",
           neutral: "#2d2f39",
-          "bg-base-100": "#F2F2F3",
+          "base-100": "#ffffff",
           info: "#76d1e5",
           success: "#22a05b",
           warning: "#f0bc2d",

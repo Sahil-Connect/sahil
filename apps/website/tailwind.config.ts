@@ -28,12 +28,12 @@ const config: Config = {
     themes: [
       {
         lemonade: {
-          ...require("daisyui/src/theming/themes")["[data-theme=lemonade]"],
+          ...require("daisyui/src/theming/themes")["lemonade"],
           primary: "#067a46",
           secondary: "#056835",
           accent: "#40efcf",
           neutral: "#2d2f39",
-          "bg-base-100": "#ffffff",
+          "base-100": "#ffffff",
           info: "#76d1e5",
           success: "#22a05b",
           warning: "#f0bc2d",

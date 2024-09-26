@@ -43,7 +43,7 @@ export default function Products() {
         </div>
       </div>
       <div>
-      <form onSubmit={handleSearch} className="form-control relative">
+        <form onSubmit={handleSearch} className="form-control relative">
           <div className="input-group ">
             <input
               type="text"

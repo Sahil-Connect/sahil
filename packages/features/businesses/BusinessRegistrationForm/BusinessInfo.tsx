@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useBusinessFormStore } from "@sahil/lib/hooks/useBusinessFormStore";
+import { useBusinessFormStore } from "@sahil/lib/hooks/formStores/useBusinessFormStore";
 import { Card, Input } from "ui";
 import { HiArrowSmallRight } from "react-icons/hi2";
 

@@ -17,62 +17,70 @@ type Props = {
 
 export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   return (
-    <Card>
-      <div className="flex justify-between text-4xl">
-        <Link
-          href={`/suppliers/${supplier.id}`}
-          className="avatar placeholder h-fit"
-        >
-          {supplier.name && (
-            <div className="bg-neutral-focus text-base text-neutral-content rounded-full w-12">
-              <span>{generateInitials(supplier?.name)}</span>
-            </div>
-          )}
-        </Link>
-        <button title="More Horizontal">
+    <Card className="w-full">
+      <div className="flex justify-between">
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/suppliers/${supplier.id}`}
+            className="avatar placeholder h-fit"
+          >
+            {supplier.name && (
+              <div className="bg-neutral text-base text-neutral-content rounded-full w-11">
+                <span>{generateInitials(supplier?.name)}</span>
+              </div>
+            )}
+          </Link>
+          <Link 
+            href={`/suppliers/${supplier.id}`} 
+            className="card-title max-w-[35ch] leading-tight text-base"
+          >
+            {supplier.name}
+          </Link>
+        </div>
+        <button title="More">
           <HiEllipsisHorizontal />
         </button>
       </div>
-      <div className="space-y-2 grow">
-        <Link href={`/suppliers/${supplier.id}`} className="card-title">
-          {supplier.name}
-        </Link>
-        <div className="flex flex-wrap gap-2">
-          {supplier.categories.map(({ category_name: name }) => {
-            return (
-              <span
-                key={name}
-                className="badge badge-sm badge-outline opacity-80"
-              >
-                {formatCategoryName(name)}
-              </span>
-            );
-          })}
+      <div className="mt-4 flex flex-col h-full">
+        <div className="mt-1 overflow-hidden text-ellipsis">
+          <span className="font-medium">Category:</span> {''}
+          {supplier.categories.map(({ category_name: name }, index) => (
+            <span key={name} className="text-xs text-zinc-500">
+              {formatCategoryName(name)}
+              {index < supplier.categories.length - 1 ? ", " : ""}
+            </span>
+          ))}
         </div>
       </div>
-      <div className="mt-2 bg-base-100 p-4 rounded-xl flex flex-col gap-4">
-        <div className="flex justify-between items-center">
-          <div className="space-y-1 font-semibold">
-            <span className="opacity-70 text-sm font-normal">Service Zone</span>
-            <p>{supplier.zone}</p>
+      <div className="my-4 flex flex-col bg-base-100 border p-4 gap-4 rounded-lg">
+        <div className="w-full flex justify-between items-center">
+          <div className="font-semibold">
+            <p className="text-gray-500 text-xs font-normal">
+              Service Zone
+            </p>
+            <p className="capitalize">{supplier.zone}</p>
           </div>
-          <div className="space-y-1 font-semibold">
-            <span className="opacity-70 text-sm font-normal">Contact Name</span>
-            <p>{supplier.contactName}</p>
+          <div className="font-semibold">
+            <p className="text-gray-500 text-xs font-normal text-right">
+              Contact Name
+            </p>
+            <p className="capitalize text-right">{supplier.contactName}</p>
           </div>
         </div>
-        <div className="space-y-2">
+        <div className="mt-2">
           <div className="flex items-center gap-2">
-            <span className="shadow rounded-md p-2">
+            <span className="text-gray-500 text-base border rounded-md p-2">
               <HiOutlineMapPin />
             </span>
-            <p>{supplier.streetAddress}</p>
+            <p className="truncate ...">{supplier.streetAddress}</p>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="shadow rounded-md p-2">
-              <HiOutlinePhone />
-            </span>
-            <p>{supplier.phoneNumber}</p>
+          <div className="mt-3">
+            <div className="flex items-center gap-2">
+              <span className="text-gray-500 text-base border rounded-md p-2">
+                <HiOutlinePhone />
+              </span>
+              <p>{supplier.phoneNumber}</p>
+            </div>
           </div>
         </div>
       </div>

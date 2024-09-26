@@ -1,7 +1,6 @@
 import { FC } from "react";
-import { HiOutlineGiftTop } from "react-icons/hi2";
+import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 
 interface Provider {
@@ -29,21 +28,27 @@ export const AuthProviders: FC<Props> = ({ providers }) => {
       <div className="space-y-2">
         {providers &&
           Object.values(providers).map((provider) => {
-            return (
-              <div key={provider?.name}>
-                <div>
-                  <button
-                    className="btn w-full capitalize"
-                    onClick={() => {
-                      signIn(provider?.id);
-                    }}
-                  >
-                    {provider.name === "Google" ? <FaGoogle /> : <FaFacebook />}
-                    Continue with {provider?.name}
-                  </button>
+            if (provider.name !== "Email") {
+              return (
+                <div key={provider?.name}>
+                  <div>
+                    <button
+                      className="btn w-full capitalize"
+                      onClick={() => {
+                        signIn(provider?.id, { callbackUrl: "/" });
+                      }}
+                    >
+                      {provider.name === "Google" ? (
+                        <FcGoogle size={24} />
+                      ) : (
+                        <FaFacebook />
+                      )}
+                      Continue with {provider?.name}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            }
           })}
       </div>
     </div>

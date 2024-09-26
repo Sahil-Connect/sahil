@@ -11,7 +11,14 @@ export const formatCategoryName = (categoryName: string) => {
 export const generateInitials = (name: string) => {
   return name
     .split(" ")
-    .slice(0, 3)
+    .slice(0, 2)
     .map((word) => word.charAt(0).toUpperCase())
     .join("");
+};
+
+export const capitalizeFirstLetters = (str: string): string => {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 };
