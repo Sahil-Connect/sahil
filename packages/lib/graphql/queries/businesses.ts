@@ -1,25 +1,39 @@
 import { gql } from "@apollo/client";
 
+export const BUSINESS_CORE_FIELDS = gql`
+  fragment BusinessCoreFields on business {
+    id
+    name
+    contactName
+    phoneNumber
+    description
+    contactEmail
+    type
+  }
+`;
+
+export const ADDRESS_FIELDS = gql`
+  fragment AddressFields on addresses {
+    city
+    street_address
+  }
+`;
+
 export const FETCH_BUSINESSES = gql`
+  ${BUSINESS_CORE_FIELDS}
+  ${ADDRESS_FIELDS}
   query getBusinesses {
     business {
+      ...BusinessCoreFields
       created_at
-      id
       updated_at
-      name
-      contactName
-      type
-      phoneNumber
-      description
-      contactEmail
       addresses {
-        city
+        ...AddressFields
         created_at
         id
         latitude
         longitude
         updated_at
-        street_address
       }
     }
     business_aggregate {
@@ -70,22 +84,17 @@ export const FETCH_BUSINESS_ORDERS = gql`
 `;
 
 export const FETCH_BUSINESS_BY_PK = gql`
+  ${BUSINESS_CORE_FIELDS}
+  ${ADDRESS_FIELDS}
   query getBusinessByPK($id: uuid!) {
     business_by_pk(id: $id) {
-      id
-      name
-      contactName
-      phoneNumber
-      description
-      contactEmail
-      type
+      ...BusinessCoreFields
       agent {
         name
         id
       }
       addresses {
-        city
-        street_address
+        ...AddressFields
       }
     }
   }

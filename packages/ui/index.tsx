@@ -34,3 +34,4 @@ export * from "./components/Wrapper";
 export * from "./components/CheckBox";
 export * from "./components/StatusPage";
 export * from "./components/CustomContainer";
+export * from "./components/SectionHeader";

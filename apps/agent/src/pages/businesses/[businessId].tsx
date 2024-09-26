@@ -21,14 +21,14 @@ export default function BusinessPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-4 lg:flex-row">
-        <div className="grow mb-4 lg:mb-0">
+      <div className="w-full flex flex-col lg:flex-row sm:gap-2">
+        <div className="mb-4 lg:mb-0 lg:w-4/12">
           {
             // @ts-ignore
             <BusinessProfileOverview business={business} />
           }
         </div>
-        <div className="basis-4/5 space-y-2">
+        <div className="space-y-2 lg:w-9/12">
           {
             // @ts-ignore
             <BusinessOrderHistory business={business} />

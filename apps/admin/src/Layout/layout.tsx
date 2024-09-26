@@ -6,7 +6,13 @@ import { Navbar } from "ui";
 type LayoutProps = {
   children: ReactNode;
 };
-import { HiOutlineUsers,  HiOutlineQueueList, HiOutlineMap, HiOutlineIdentification, HiOutlineBuildingOffice2 } from "react-icons/hi2";
+import {
+  HiOutlineUsers,
+  HiOutlineQueueList,
+  HiOutlineMap,
+  HiOutlineIdentification,
+  HiOutlineBuildingOffice2,
+} from "react-icons/hi2";
 
 const links = [
   {
@@ -27,13 +33,13 @@ const links = [
   {
     name: "Orders",
     href: "/orders",
-    icon:  HiOutlineQueueList,
+    icon: HiOutlineQueueList,
   },
   {
     name: "Clients",
     href: "/clients",
     icon: HiOutlineBuildingOffice2,
-  }
+  },
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {
@@ -46,14 +52,18 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
   return (
     <>
-      <Navbar
-        links={links}
-        logo={logo}
-        header="Admin"
-        onSignOut={onSignOut}
-        user={session?.user}
-      />
-      <main className="p-4 bg-gray-50">{children}</main>
+      {session?.user && (
+        <Navbar
+          links={links}
+          logo={logo}
+          header="Admin"
+          onSignOut={onSignOut}
+          user={session?.user}
+        />
+      )}
+      <main className={session?.user ? 'p-4' : 'p-0'}>      
+        {children}
+      </main>
     </>
   );
 }

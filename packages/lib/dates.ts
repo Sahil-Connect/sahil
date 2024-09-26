@@ -1,6 +1,11 @@
 import { parseISO, format } from "date-fns";
 import { createDate, TimeSpan, isWithinExpirationDate } from "oslo";
 
+export const formatCurrentDate = (): string => {
+  const currentDate = new Date();
+  return format(currentDate, 'EEEE, MMMM d, yyyy');
+};
+
 export const formatDateTime = (
   dateISO: any,
   formatPattern = "MMMM d, yyyy HH:mm"

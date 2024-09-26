@@ -16,7 +16,7 @@ const users = [
     id: 3,
     name: "John Doe",
     avatar: "https://avatars.dicebear.com/api/initials/JD.svg",
-  }
+  },
 ];
 
 export const ListUsers = () => {
@@ -24,9 +24,9 @@ export const ListUsers = () => {
     <section className="space-y-2">
       <UsersToolbar />
       <div className="space-y-2">
-      {users.map((user) => (
-        <UserOverview key={user.id} user={user} />
-      ))}
+        {users.map((user) => (
+          <UserOverview key={user.id} user={user} />
+        ))}
       </div>
     </section>
   );

@@ -58,19 +58,23 @@ const intervals = [
 export const AgentStats = () => {
   return (
     <section className="space-y-4">
-      <div className="flex items-center justify-between ">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <h3 className="text-lg">Overview</h3>
-        <div className="flex items-center gap-2">
-          {intervals.map((interval) => (
-            <div key={interval.id} className={"badge"}>
-              {interval.title}
-            </div>
-          ))}
-          <IconButton title="Left" icon={HiOutlineChevronLeft} />
-          <div className="badge py-4 gap-2">
-            <HiOutlineCalendar /> October 1st - November 1st{" "}
+        <div className="flex flex-col gap-2 md:flex-row md:items-center">
+          <div className="flex items-center gap-2">
+            {intervals.map((interval) => (
+              <div key={interval.id} className={"badge"}>
+                {interval.title}
+              </div>
+            ))}
           </div>
-          <IconButton title="Right" icon={HiOutlineChevronRight} />
+          <div className="flex items-center gap-2">
+            <IconButton title="Left" icon={HiOutlineChevronLeft} />
+            <div className="badge py-4 gap-2">
+              <HiOutlineCalendar /> October 1st - November 1st{" "}
+            </div>
+            <IconButton title="Right" icon={HiOutlineChevronRight} />
+          </div>
         </div>
       </div>
       <Stats stats={stats} />

@@ -39,7 +39,8 @@ export const Input = ({
         placeholder={placeholder}
         defaultValue={defaultValue}
         disabled={disabled}
-        className="input input-sm input-bordered w-full max-w-lg"
+        // className="input input-sm input-bordered w-full max-w-lg"
+        className="py-3 px-4 block w-full border outline-none border-zinc-200 rounded-lg text-sm placeholder-neutral-500"
         {...register(name, { valueAsNumber: type === "number" })}
       />
       {errorMessage && <FormControlError message={errorMessage} />}
