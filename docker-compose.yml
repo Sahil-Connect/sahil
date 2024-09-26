@@ -7,12 +7,12 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/Dockerfile.website
-    image: sahil-website-test
-    env_file:
-      - .env
+    image: sahil-website
     restart: always
     ports:
       - '3000:3000'
+    env_file:
+      - path: ./apps/website/.env
 
   # API
   sahil-api:
