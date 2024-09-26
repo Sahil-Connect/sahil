@@ -16,7 +16,6 @@ import { BUSINESS_VALIDATED } from "@sahil/lib/graphql/subscriptions/businesses"
 import {
   GetBusinessesQuery,
   GetBusinessesQueryVariables,
-  GetBusinessesDocument,
   GetBusinessByPkQuery,
   GetBusinessByPkQueryVariables,
   GetBusinessOrdersQuery,

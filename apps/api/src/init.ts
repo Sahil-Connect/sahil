@@ -4,6 +4,7 @@ import cors from "cors";
 // import compression from "compression";
 import * as helmet from "helmet";
 import { catchErrors } from "./middleware/errors";
+import { logRequest } from "./middleware/requestLogger";
 
 export function init(app: any) {
   app.use(cors());
@@ -16,5 +17,6 @@ export function init(app: any) {
   // app.use(helmet());
   // app.use(morganLogger("dev"));
   app.use(routers);
+  app.use(logRequest);
   app.use(catchErrors);
 }

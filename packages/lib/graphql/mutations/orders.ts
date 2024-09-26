@@ -8,6 +8,16 @@ export const INSERT_NEW_ORDER = gql`
   }
 `;
 
+
+export const UPDATE_ORDER_STATUS = gql`
+  mutation insertBusinessOrder($orderId: uuid!) {
+    update_order_status(where: {orders: {id: {_eq: $orderId}}}) {
+    affected_rows
+  }
+  }
+`;
+
+
 export const INIT_ORDER_ACTION = gql`
   mutation insertBusinessOrderAction(
     $object: InsertBusinessOrderOrdersInsertInput = {}
