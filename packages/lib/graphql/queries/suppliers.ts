@@ -1,17 +1,35 @@
 import { gql } from "@apollo/client";
 
+export const SUPPLIER_FIELDS_FRAGMENT = gql`
+  fragment SupplierFields on suppliers {
+    id
+    name
+    streetAddress
+    phoneNumber
+    contactName
+    zone
+    categories {
+      category_name
+    }
+  }
+`;
+
+export const PRODUCT_FIELDS_FRAGMENT = gql`
+  fragment ProductFields on products {
+    id
+    name
+    description
+    inStock
+    quantity
+    price
+  }
+`;
+
 export const FETCH_SUPPLIERS = gql`
+  ${SUPPLIER_FIELDS_FRAGMENT}
   query getSuppliers($offset: Int = 0, $limit: Int = 10) {
     suppliers(offset: $offset, limit: $limit) {
-      id
-      name
-      streetAddress
-      phoneNumber
-      contactName
-      zone
-      categories {
-        category_name
-      }
+      ...SupplierFields
     }
     suppliers_aggregate {
       aggregate {
@@ -48,6 +66,7 @@ export const FETCH_SUPPLIER_ORDERS = gql`
 `;
 
 export const FETCH_FILTERED_SUPPLIERS = gql`
+  ${SUPPLIER_FIELDS_FRAGMENT}
   query getFilteredSuppliers(
     $category_name: supplier_categories_enum_enum
     $offset: Int = 0
@@ -58,34 +77,19 @@ export const FETCH_FILTERED_SUPPLIERS = gql`
       offset: $offset
       limit: $limit
     ) {
-      id
-      name
-      streetAddress
-      phoneNumber
-      contactName
-      zone
-      categories {
-        category_name
-      }
+      ...SupplierFields
     }
   }
 `;
 
 export const FETCH_SUPPLIER_BY_PK = gql`
+  ${SUPPLIER_FIELDS_FRAGMENT}
   query getSupplierByPK($id: uuid!) {
     suppliers_by_pk(id: $id) {
+      ...SupplierFields
       created_at
-      id
-      name
       description
-      phoneNumber
-      contactName
       contactEmail
-      streetAddress
-      zone
-      categories {
-        category_name
-      }
       products_aggregate {
         aggregate {
           count
@@ -96,6 +100,7 @@ export const FETCH_SUPPLIER_BY_PK = gql`
 `;
 
 export const FETCH_SUPPLIER_PRODUCTS = gql`
+  ${PRODUCT_FIELDS_FRAGMENT}
   query getSupplierProducts(
     $id: uuid!
     $offset: Int = 0
@@ -108,18 +113,14 @@ export const FETCH_SUPPLIER_PRODUCTS = gql`
       offset: $offset
       order_by: $order_by
     ) {
-      id
-      name
-      description
-      inStock
-      quantity
-      price
+      ...ProductFields
       mainImage
     }
   }
 `;
 
 export const FETCH_SUPPLIER_PRODUCT_BY_NAME = gql`
+  ${PRODUCT_FIELDS_FRAGMENT}
   query getSupplierProductByName(
     $id: uuid!
     $offset: Int = 0
@@ -133,12 +134,7 @@ export const FETCH_SUPPLIER_PRODUCT_BY_NAME = gql`
       offset: $offset
       order_by: $order_by
     ) {
-      id
-      name
-      description
-      inStock
-      quantity
-      price
+      ...ProductFields
     }
   }
 `;

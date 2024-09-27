@@ -1,25 +1,29 @@
 import { gql } from "@apollo/client";
 
-export const GET_ZONES = gql`
-query GetZones {
-  zones {
+export const ZONE_FIELDS = gql`
+  fragment ZoneFields on Zone {
     id
     name
     description
     created_at
     updated_at
   }
-}
+`;
+
+export const GET_ZONES = gql`
+  ${ZONE_FIELDS}
+  query GetZones {
+    zones {
+      ...ZoneFields
+    }
+  }
 `;
 
 export const GET_ZONE_BY_ID = gql`
-query GetZonesById($id: uuid = "") {
-  zones(where: {id: {_eq: $id}}) {
-    id
-    name
-    description
-    created_at
-    updated_at
+  ${ZONE_FIELDS}
+  query GetZonesById($id: ID!) {
+    zones(where: { id: $id }) {
+      ...ZoneFields
+    }
   }
-}
 `;
