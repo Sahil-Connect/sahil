@@ -85,9 +85,6 @@ export default function OrderPage() {
             {currentTab === "progress" && <OrderProgress order={order} />}
           </div>
         </div>
-        <div className="w-full lg:w-1/3 mt-4 lg:mt-0">
-          <Timeline />
-        </div>
       </div>
     </section>
   );
