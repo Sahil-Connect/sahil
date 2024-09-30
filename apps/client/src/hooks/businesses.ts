@@ -6,7 +6,7 @@ import {
   FETCH_BUSINESS_ORDERS,
 } from "@sahil/lib/graphql";
 
-import { BUSINESS_VALIDATED } from "@sahil/lib/graphql/subscriptions/businesses";
+// import { BUSINESS_VALIDATED } from "@sahil/lib/graphql/subscriptions/businesses";
 
 // graphql types
 import {
@@ -72,12 +72,12 @@ export const useFetchBusinessOrders = ({
   };
 };
 
-export const useBusinessValidated = (actionId: string) => {
-  const { data, loading, error } = useSubscription(BUSINESS_VALIDATED, {
-    variables: {
-      id: actionId,
-    },
-    skip: !actionId,
-  });
-  return { data, error, loading };
-};
+// export const useBusinessValidated = (actionId: string) => {
+//   const { data, loading, error } = useSubscription(BUSINESS_VALIDATED, {
+//     variables: {
+//       id: actionId,
+//     },
+//     skip: !actionId,
+//   });
+//   return { data, error, loading };
+// };
