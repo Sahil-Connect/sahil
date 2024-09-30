@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import type { NextPage } from "next";
 import { Card, Input } from "ui";
 import { HiArrowSmallRight } from "react-icons/hi2";
-import { useRegisterUserAction } from "@sahil/lib/hooks/users";
+// import { useRegisterUserAction } from "@sahil/lib/hooks/users";
 import { getProviders, signIn, useSession, signOut } from "next-auth/react";
 
 const userSchema = z.object({
@@ -17,7 +17,7 @@ const userSchema = z.object({
 type FormData = z.infer<typeof userSchema>;
 
 const OnboardingPage: NextPage = ({ providers }: any) => {
-  const { registerUser } = useRegisterUserAction();
+  // const { registerUser } = useRegisterUserAction();
 
   const {
     register,
@@ -31,15 +31,15 @@ const OnboardingPage: NextPage = ({ providers }: any) => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = userSchema.parse(data);
-    const result = await registerUser({
-      variables: {
-        object: {
-          name: "Emmanuel Gatwech",
-          role: "admin",
-        },
-      },
-    });
-    console.log(result);
+    // const result = await registerUser({
+    //   variables: {
+    //     object: {
+    //       name: "Emmanuel Gatwech",
+    //       role: "admin",
+    //     },
+    //   },
+    // });
+    // console.log(result);
     // router.push(`/);
   };
 
