@@ -64,14 +64,15 @@ export default function OrderPage() {
   if (loading) return <p>loading</p>;
 
   return (
-    <section>
+    <section className="container mx-auto px-4">
       <div className="flex flex-col lg:flex-row gap-4">
-        <div className="basis-4/6 space-y-2">
+        <div className="w-full lg:w-2/3 space-y-4">
           <OrderOverview order={order} />
           <Tabs
             items={OrderTabs}
             onTabClick={handleTabClick}
             currentTab={currentTab}
+            className="overflow-x-auto"
           />
           <div>
             {currentTab === "info" && (
@@ -87,7 +88,7 @@ export default function OrderPage() {
             {currentTab === "progress" && <OrderProgress />}
           </div>
         </div>
-        <div className="grow space-y-2">
+        <div className="w-full lg:w-1/3 mt-4 lg:mt-0">
           <Timeline />
         </div>
       </div>

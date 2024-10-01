@@ -18,26 +18,26 @@ export const BusinessProfileOverview: FC<Props> = ({ business }) => {
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return (
     <Card height="h-fit">
-      {business?.name && (
-        <div className="avatar placeholder">
-          <div className="bg-neutral text-neutral-content rounded-full w-20">
-            <span>{generateInitials(business?.name)}</span>
+      <div className="flex items-center gap-2">
+        {business?.name && (
+          <div className="avatar placeholder">
+            <div className="bg-neutral text-neutral-content rounded-full w-12 md:w-14">
+              <span>{generateInitials(business?.name)}</span>
+            </div>
           </div>
-        </div>
-      )}
-
-      <h3 className="card-title">{business?.name}</h3>
-      <p>{business?.description}</p>
-
+        )}
+        <h2 className="card-title">{business?.name}</h2>
+      </div>
+      <p className="my-3">{business?.description}</p>
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <span className="shadow rounded-md p-2">
+          <span className="text-base border rounded-md p-2">
             <HiOutlineUser />
           </span>
           <p>{business?.contactName}</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="shadow rounded-md p-2">
+          <span className="text-base border rounded-md p-2">
             <HiOutlineMapPin />
           </span>
           {business?.addresses.map(({ street_address: name }) => {
@@ -45,13 +45,13 @@ export const BusinessProfileOverview: FC<Props> = ({ business }) => {
           })}
         </div>
         <div className="flex items-center gap-2">
-          <span className="shadow rounded-md p-2">
+          <span className="text-base border rounded-md p-2">
             <HiOutlineEnvelope />
           </span>
           <p>{business?.contactEmail}</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="shadow rounded-md p-2">
+          <span className="text-base border rounded-md p-2">
             <HiOutlinePhone />
           </span>
           <p>{business?.phoneNumber}</p>
@@ -66,7 +66,7 @@ export const BusinessProfileOverview: FC<Props> = ({ business }) => {
 const generateInitials = (name: string) => {
   return name
     ?.split(" ")
-    .slice(0, 3)
+    .slice(0, 2)
     .map((word) => word.charAt(0).toUpperCase())
     .join("");
 };
