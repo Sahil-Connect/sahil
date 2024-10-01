@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import {
   useRegisterBusiness,
-  useRegisterBusinessSubscription,
+  // useRegisterBusinessSubscription,
 } from "@sahil/lib/hooks/businesses";
 import { useBusinessFormStore } from "@sahil/lib/hooks/formStores/useBusinessFormStore";
 
@@ -14,20 +14,20 @@ export const BusinessInfoSummary = () => {
   const { formData } = useBusinessFormStore();
   const router = useRouter();
 
-  const { data, loading: subscriptionLoading } =
-    useRegisterBusinessSubscription(actionId);
+  // const { data, loading: subscriptionLoading } =
+  //   useRegisterBusinessSubscription(actionId);
 
   const { error, loading, registerBusinessAction } = useRegisterBusiness();
   const onSubmit = async () => {
-    const business = await registerBusinessAction({
-      variables: {
-        object: {
-          name: formData.name,
-        },
-      },
-    });
-    setActionId(business?.data?.registerBusinessAction);
-    router.push(`/businesses/${data?.output?.id}`);
+    // const business = await registerBusinessAction({
+    //   variables: {
+    //     object: {
+    //       name: formData.name,
+    //     },
+    //   },
+    // });
+    // setActionId(business?.data?.registerBusinessAction);
+    // router.push(`/businesses/${data?.output?.id}`);
   };
 
   if (error) {

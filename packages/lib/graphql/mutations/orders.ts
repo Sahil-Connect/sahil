@@ -8,10 +8,18 @@ export const INSERT_NEW_ORDER = gql`
   }
 `;
 
-export const INIT_ORDER_ACTION = gql`
-  mutation insertBusinessOrderAction(
-    $object: InsertBusinessOrderOrdersInsertInput = {}
-  ) {
-    insertBusinessOrder(object: $object)
+// export const INIT_ORDER_ACTION = gql`
+//   mutation insertBusinessOrderAction(
+//     $object: InsertBusinessOrderOrdersInsertInput = {}
+//   ) {
+//     insertBusinessOrder(object: $object)
+//   }
+// `;
+
+export const APPEND_ORDER_STATUS = gql`
+  mutation MyMutation($object: order_status_history_insert_input = {}) {
+    insert_order_status_history_one(object: $object) {
+      id
+    }
   }
 `;

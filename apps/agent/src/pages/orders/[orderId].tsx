@@ -7,7 +7,7 @@ import {
   OrderDetails,
   OrderProgress,
 } from "@sahil/features/Orders";
-import { Card, Tabs, Timeline } from "ui";
+import { Card, Tabs } from "ui";
 
 export type TabValue = "info" | "preferences" | "progress";
 
@@ -85,11 +85,8 @@ export default function OrderPage() {
               </Card>
             )}
             {currentTab === "preferences" && <OrderPreferences order={order} />}
-            {currentTab === "progress" && <OrderProgress />}
+            {currentTab === "progress" && <OrderProgress order={order} />}
           </div>
-        </div>
-        <div className="w-full lg:w-1/3 mt-4 lg:mt-0">
-          <Timeline />
         </div>
       </div>
     </section>

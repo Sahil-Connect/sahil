@@ -7,10 +7,10 @@ import {
   FETCH_BUSINESS_TYPES,
   INSERT_NEW_BUSINESS,
   ONBOARD_NEW_BUSINESS,
-  REGISTER_BUSINESS_ACTION,
+  // REGISTER_BUSINESS_ACTION,
 } from "@sahil/lib/graphql";
 
-import { BUSINESS_VALIDATED } from "@sahil/lib/graphql/subscriptions/businesses";
+// import { BUSINESS_VALIDATED } from "@sahil/lib/graphql/subscriptions/businesses";
 
 // graphql types
 import {
@@ -52,7 +52,7 @@ export const useFetchBusinesses = () => {
 
 export const useRegisterBusiness = () => {
   const [registerBusinessAction, { data, loading, error }] = useMutation(
-    REGISTER_BUSINESS_ACTION
+    INSERT_NEW_BUSINESS
   );
   return {
     data: data?.registerBusinessAction,
@@ -62,12 +62,12 @@ export const useRegisterBusiness = () => {
   };
 };
 
-export const useRegisterBusinessSubscription = (id: string) => {
-  const { data, loading } = useSubscription(BUSINESS_VALIDATED, {
-    variables: { id },
-  });
-  return { data: data?.registerBusinessAction, loading };
-};
+// export const useRegisterBusinessSubscription = (id: string) => {
+//   const { data, loading } = useSubscription(BUSINESS_VALIDATED, {
+//     variables: { id },
+//   });
+//   return { data: data?.registerBusinessAction, loading };
+// };
 
 export const useFetchBusinessOrders = ({
   customerId,

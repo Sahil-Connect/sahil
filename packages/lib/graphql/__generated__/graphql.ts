@@ -30,34 +30,27 @@ export type Scalars = {
   bigint: { input: any; output: any };
   date: { input: any; output: any };
   float8: { input: any; output: any };
-  json: { input: any; output: any };
   name: { input: any; output: any };
   time: { input: any; output: any };
   timestamptz: { input: any; output: any };
   uuid: { input: any; output: any };
 };
 
-export type AccountBalanceResponse = {
-  __typename?: "AccountBalanceResponse";
-  availableBalance?: Maybe<Scalars["String"]["output"]>;
-  currency?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type Address = {
-  __typename?: "Address";
-  location?: Maybe<GeoCoords>;
-  placeId?: Maybe<Scalars["String"]["output"]>;
-  types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
-};
-
-export type BasicUserInfoResponse = {
-  __typename?: "BasicUserInfoResponse";
-  birthdate?: Maybe<Scalars["String"]["output"]>;
-  family_name?: Maybe<Scalars["String"]["output"]>;
-  gender?: Maybe<Scalars["String"]["output"]>;
-  given_name?: Maybe<Scalars["String"]["output"]>;
-  locale?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Array_Comparison_Exp = {
+  /** is the array contained in the given array value */
+  _contained_in?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  /** does the array contain the given value */
+  _contains?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  _eq?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  _gt?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  _gte?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  _in?: InputMaybe<Array<Array<Scalars["Boolean"]["input"]>>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _lt?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  _lte?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  _neq?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  _nin?: InputMaybe<Array<Array<Scalars["Boolean"]["input"]>>>;
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -90,1885 +83,6 @@ export type Boolean_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
 };
 
-export type CreateAccessTokenResponse = {
-  __typename?: "CreateAccessTokenResponse";
-  expires_in?: Maybe<Scalars["Int"]["output"]>;
-  token?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type DirectionLeg = {
-  __typename?: "DirectionLeg";
-  distance?: Maybe<LegDistance>;
-  duration?: Maybe<LegDuration>;
-};
-
-export type DirectionRoute = {
-  __typename?: "DirectionRoute";
-  legs?: Maybe<Array<Maybe<DirectionLeg>>>;
-  name?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type Directions = {
-  __typename?: "Directions";
-  endLocation?: Maybe<GeoCoords>;
-  routes?: Maybe<DirectionRoute>;
-  startLocation?: Maybe<GeoCoords>;
-};
-
-export type GeoCoords = {
-  __typename?: "GeoCoords";
-  lat?: Maybe<Scalars["Float"]["output"]>;
-  lng?: Maybe<Scalars["Float"]["output"]>;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExp = {
-  avg?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpAvg>;
-  corr?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpCorr>;
-  count?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpCount>;
-  covar_samp?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpCovarSamp>;
-  max?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpMax>;
-  min?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpMin>;
-  stddev_samp?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpStddevSamp>;
-  sum?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpSum>;
-  var_samp?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExpVarSamp>;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpAvg = {
-  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpAvgArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderFloat8ComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpCorr = {
-  arguments: InsertBusinessOrderAddressesAggregateBoolExpCorrArguments;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderFloat8ComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpCorrArguments = {
-  X: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns;
-  Y: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderAddressesSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpCovarSamp = {
-  arguments: InsertBusinessOrderAddressesAggregateBoolExpCovarSampArguments;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderFloat8ComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpCovarSampArguments = {
-  X: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns;
-  Y: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpMax = {
-  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpMaxArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderFloat8ComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpMin = {
-  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpMinArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderFloat8ComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpStddevSamp = {
-  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpStddevSampArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderFloat8ComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpSum = {
-  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpSumArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderFloat8ComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesAggregateBoolExpVarSamp = {
-  arguments: InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpVarSampArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  predicate: InsertBusinessOrderFloat8ComparisonExp;
-};
-
-export type InsertBusinessOrderAddressesArrRelInsertInput = {
-  data: Array<InsertBusinessOrderAddressesInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderAddressesOnConflict>;
-};
-
-export type InsertBusinessOrderAddressesBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderAddressesBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderAddressesBoolExp>>;
-  business?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
-  business_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  city?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  latitude?: InputMaybe<InsertBusinessOrderFloat8ComparisonExp>;
-  longitude?: InputMaybe<InsertBusinessOrderFloat8ComparisonExp>;
-  street_address?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  updated_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-};
-
-export enum InsertBusinessOrderAddressesConstraint {
-  /** unique or primary key constraint on columns "id" */
-  AddressesPkey = "addresses_pkey",
-}
-
-export type InsertBusinessOrderAddressesInsertInput = {
-  business?: InputMaybe<InsertBusinessOrderBusinessObjRelInsertInput>;
-  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  city?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  latitude?: InputMaybe<Scalars["float8"]["input"]>;
-  longitude?: InputMaybe<Scalars["float8"]["input"]>;
-  street_address?: InputMaybe<Scalars["String"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-};
-
-export type InsertBusinessOrderAddressesOnConflict = {
-  constraint: InsertBusinessOrderAddressesConstraint;
-  update_columns: Array<InsertBusinessOrderAddressesUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-};
-
-export enum InsertBusinessOrderAddressesSelectColumn {
-  /** column name */
-  BusinessId = "business_id",
-  /** column name */
-  City = "city",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-  /** column name */
-  StreetAddress = "street_address",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpAvgArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpMaxArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpMinArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpStddevSampArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpSumArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum InsertBusinessOrderAddressesSelectColumnAddressesAggregateBoolExpVarSampArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum InsertBusinessOrderAddressesUpdateColumn {
-  /** column name */
-  BusinessId = "business_id",
-  /** column name */
-  City = "city",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-  /** column name */
-  StreetAddress = "street_address",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export type InsertBusinessOrderAgentBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderAgentBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderAgentBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderAgentBoolExp>>;
-  active?: InputMaybe<InsertBusinessOrderBooleanComparisonExp>;
-  agent_type?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  on_duty?: InputMaybe<InsertBusinessOrderBooleanComparisonExp>;
-};
-
-export enum InsertBusinessOrderAgentConstraint {
-  /** unique or primary key constraint on columns "id" */
-  AgentPkey = "agent_pkey",
-}
-
-export type InsertBusinessOrderAgentInsertInput = {
-  active?: InputMaybe<Scalars["Boolean"]["input"]>;
-  agent_type?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  on_duty?: InputMaybe<Scalars["Boolean"]["input"]>;
-};
-
-export type InsertBusinessOrderAgentObjRelInsertInput = {
-  data: InsertBusinessOrderAgentInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderAgentOnConflict>;
-};
-
-export type InsertBusinessOrderAgentOnConflict = {
-  constraint: InsertBusinessOrderAgentConstraint;
-  update_columns: Array<InsertBusinessOrderAgentUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderAgentBoolExp>;
-};
-
-export enum InsertBusinessOrderAgentUpdateColumn {
-  /** column name */
-  Active = "active",
-  /** column name */
-  AgentType = "agent_type",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  OnDuty = "on_duty",
-}
-
-export type InsertBusinessOrderBooleanComparisonExp = {
-  _eq?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _gt?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _gte?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lte?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
-};
-
-export type InsertBusinessOrderBusinessAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderBusinessAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderBusinessAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderBusinessSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderBusinessArrRelInsertInput = {
-  data: Array<InsertBusinessOrderBusinessInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderBusinessOnConflict>;
-};
-
-export type InsertBusinessOrderBusinessBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderBusinessBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderBusinessBoolExp>>;
-  addresses?: InputMaybe<InsertBusinessOrderAddressesBoolExp>;
-  addresses_aggregate?: InputMaybe<InsertBusinessOrderAddressesAggregateBoolExp>;
-  agent?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
-  business_type?: InputMaybe<InsertBusinessOrderBusinessTypeBoolExp>;
-  contactEmail?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  contactName?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  description?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  orders?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
-  orders_aggregate?: InputMaybe<InsertBusinessOrderOrdersAggregateBoolExp>;
-  owner?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
-  owner_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  phoneNumber?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  registeration_channel_type?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeBoolExp>;
-  registered_by?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  registration_channel?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeEnumComparisonExp>;
-  type?: InputMaybe<InsertBusinessOrderBusinessTypeEnumComparisonExp>;
-  updated_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-};
-
-export enum InsertBusinessOrderBusinessConstraint {
-  /** unique or primary key constraint on columns "id" */
-  BusinessPkey = "business_pkey",
-}
-
-export type InsertBusinessOrderBusinessInsertInput = {
-  addresses?: InputMaybe<InsertBusinessOrderAddressesArrRelInsertInput>;
-  agent?: InputMaybe<InsertBusinessOrderUsersObjRelInsertInput>;
-  business_type?: InputMaybe<InsertBusinessOrderBusinessTypeObjRelInsertInput>;
-  contactEmail?: InputMaybe<Scalars["String"]["input"]>;
-  contactName?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  orders?: InputMaybe<InsertBusinessOrderOrdersArrRelInsertInput>;
-  owner?: InputMaybe<InsertBusinessOrderUsersObjRelInsertInput>;
-  owner_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
-  registeration_channel_type?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeObjRelInsertInput>;
-  registered_by?: InputMaybe<Scalars["uuid"]["input"]>;
-  registration_channel?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeEnum>;
-  type?: InputMaybe<InsertBusinessOrderBusinessTypeEnum>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-};
-
-export type InsertBusinessOrderBusinessObjRelInsertInput = {
-  data: InsertBusinessOrderBusinessInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderBusinessOnConflict>;
-};
-
-export type InsertBusinessOrderBusinessOnConflict = {
-  constraint: InsertBusinessOrderBusinessConstraint;
-  update_columns: Array<InsertBusinessOrderBusinessUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
-};
-
-export enum InsertBusinessOrderBusinessSelectColumn {
-  /** column name */
-  ContactEmail = "contactEmail",
-  /** column name */
-  ContactName = "contactName",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  OwnerId = "owner_id",
-  /** column name */
-  PhoneNumber = "phoneNumber",
-  /** column name */
-  RegisteredBy = "registered_by",
-  /** column name */
-  RegistrationChannel = "registration_channel",
-  /** column name */
-  Type = "type",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export type InsertBusinessOrderBusinessTypeBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderBusinessTypeBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderBusinessTypeBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderBusinessTypeBoolExp>>;
-  businesses?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
-  businesses_aggregate?: InputMaybe<InsertBusinessOrderBusinessAggregateBoolExp>;
-  type?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-};
-
-export enum InsertBusinessOrderBusinessTypeConstraint {
-  /** unique or primary key constraint on columns "type" */
-  BusinessTypePkey = "business_type_pkey",
-}
-
-export enum InsertBusinessOrderBusinessTypeEnum {
-  Bar = "bar",
-  Hotel = "hotel",
-  Restaurant = "restaurant",
-}
-
-export type InsertBusinessOrderBusinessTypeEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderBusinessTypeEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderBusinessTypeEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderBusinessTypeEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderBusinessTypeEnum>>;
-};
-
-export type InsertBusinessOrderBusinessTypeInsertInput = {
-  businesses?: InputMaybe<InsertBusinessOrderBusinessArrRelInsertInput>;
-  type?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type InsertBusinessOrderBusinessTypeObjRelInsertInput = {
-  data: InsertBusinessOrderBusinessTypeInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderBusinessTypeOnConflict>;
-};
-
-export type InsertBusinessOrderBusinessTypeOnConflict = {
-  constraint: InsertBusinessOrderBusinessTypeConstraint;
-  update_columns: Array<InsertBusinessOrderBusinessTypeUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderBusinessTypeBoolExp>;
-};
-
-export enum InsertBusinessOrderBusinessTypeUpdateColumn {
-  /** column name */
-  Type = "type",
-}
-
-export enum InsertBusinessOrderBusinessUpdateColumn {
-  /** column name */
-  ContactEmail = "contactEmail",
-  /** column name */
-  ContactName = "contactName",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  OwnerId = "owner_id",
-  /** column name */
-  PhoneNumber = "phoneNumber",
-  /** column name */
-  RegisteredBy = "registered_by",
-  /** column name */
-  RegistrationChannel = "registration_channel",
-  /** column name */
-  Type = "type",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export type InsertBusinessOrderCourierRidesAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderCourierRidesAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderCourierRidesAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderCourierRidesSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderCourierRidesArrRelInsertInput = {
-  data: Array<InsertBusinessOrderCourierRidesInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderCourierRidesOnConflict>;
-};
-
-export type InsertBusinessOrderCourierRidesBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderCourierRidesBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderCourierRidesBoolExp>>;
-  color?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  courier?: InputMaybe<InsertBusinessOrderCouriersBoolExp>;
-  courier_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  license_plate_number?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  model?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  ride_status?: InputMaybe<InsertBusinessOrderRideStatusBoolExp>;
-  ride_type?: InputMaybe<InsertBusinessOrderRideTypeBoolExp>;
-  status?: InputMaybe<InsertBusinessOrderRideStatusEnumComparisonExp>;
-  type?: InputMaybe<InsertBusinessOrderRideTypeEnumComparisonExp>;
-  updated_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-};
-
-export enum InsertBusinessOrderCourierRidesConstraint {
-  /** unique or primary key constraint on columns "id" */
-  CourierRidesPkey = "courier_rides_pkey",
-}
-
-export type InsertBusinessOrderCourierRidesInsertInput = {
-  color?: InputMaybe<Scalars["String"]["input"]>;
-  courier?: InputMaybe<InsertBusinessOrderCouriersObjRelInsertInput>;
-  courier_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  license_plate_number?: InputMaybe<Scalars["String"]["input"]>;
-  model?: InputMaybe<Scalars["String"]["input"]>;
-  ride_status?: InputMaybe<InsertBusinessOrderRideStatusObjRelInsertInput>;
-  ride_type?: InputMaybe<InsertBusinessOrderRideTypeObjRelInsertInput>;
-  status?: InputMaybe<InsertBusinessOrderRideStatusEnum>;
-  type?: InputMaybe<InsertBusinessOrderRideTypeEnum>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-};
-
-export type InsertBusinessOrderCourierRidesOnConflict = {
-  constraint: InsertBusinessOrderCourierRidesConstraint;
-  update_columns: Array<InsertBusinessOrderCourierRidesUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
-};
-
-export enum InsertBusinessOrderCourierRidesSelectColumn {
-  /** column name */
-  Color = "color",
-  /** column name */
-  CourierId = "courier_id",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  LicensePlateNumber = "license_plate_number",
-  /** column name */
-  Model = "model",
-  /** column name */
-  Status = "status",
-  /** column name */
-  Type = "type",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export enum InsertBusinessOrderCourierRidesUpdateColumn {
-  /** column name */
-  Color = "color",
-  /** column name */
-  CourierId = "courier_id",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  LicensePlateNumber = "license_plate_number",
-  /** column name */
-  Model = "model",
-  /** column name */
-  Status = "status",
-  /** column name */
-  Type = "type",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export type InsertBusinessOrderCouriersBoolExp = {
-  DOB?: InputMaybe<InsertBusinessOrderDateComparisonExp>;
-  _and?: InputMaybe<Array<InsertBusinessOrderCouriersBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderCouriersBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderCouriersBoolExp>>;
-  assigned?: InputMaybe<InsertBusinessOrderBooleanComparisonExp>;
-  avatar?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  deliveries?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
-  deliveries_aggregate?: InputMaybe<InsertBusinessOrderDeliveryAggregateBoolExp>;
-  email?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  gender?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  phoneNumber?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  rides?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
-  rides_aggregate?: InputMaybe<InsertBusinessOrderCourierRidesAggregateBoolExp>;
-};
-
-export enum InsertBusinessOrderCouriersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  CouriersPkey = "couriers_pkey",
-}
-
-export type InsertBusinessOrderCouriersInsertInput = {
-  DOB?: InputMaybe<Scalars["date"]["input"]>;
-  assigned?: InputMaybe<Scalars["Boolean"]["input"]>;
-  avatar?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  deliveries?: InputMaybe<InsertBusinessOrderDeliveryArrRelInsertInput>;
-  email?: InputMaybe<Scalars["String"]["input"]>;
-  gender?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
-  rides?: InputMaybe<InsertBusinessOrderCourierRidesArrRelInsertInput>;
-};
-
-export type InsertBusinessOrderCouriersObjRelInsertInput = {
-  data: InsertBusinessOrderCouriersInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderCouriersOnConflict>;
-};
-
-export type InsertBusinessOrderCouriersOnConflict = {
-  constraint: InsertBusinessOrderCouriersConstraint;
-  update_columns: Array<InsertBusinessOrderCouriersUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderCouriersBoolExp>;
-};
-
-export enum InsertBusinessOrderCouriersUpdateColumn {
-  /** column name */
-  Dob = "DOB",
-  /** column name */
-  Assigned = "assigned",
-  /** column name */
-  Avatar = "avatar",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Email = "email",
-  /** column name */
-  Gender = "gender",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  PhoneNumber = "phoneNumber",
-}
-
-export type InsertBusinessOrderDateComparisonExp = {
-  _eq?: InputMaybe<Scalars["date"]["input"]>;
-  _gt?: InputMaybe<Scalars["date"]["input"]>;
-  _gte?: InputMaybe<Scalars["date"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["date"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["date"]["input"]>;
-  _lte?: InputMaybe<Scalars["date"]["input"]>;
-  _neq?: InputMaybe<Scalars["date"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["date"]["input"]>>;
-};
-
-export type InsertBusinessOrderDeliveryAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderDeliveryAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderDeliveryAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderDeliverySelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderDeliveryArrRelInsertInput = {
-  data: Array<InsertBusinessOrderDeliveryInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderDeliveryOnConflict>;
-};
-
-export type InsertBusinessOrderDeliveryBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderDeliveryBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderDeliveryBoolExp>>;
-  courier?: InputMaybe<InsertBusinessOrderCouriersBoolExp>;
-  courierId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  order?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
-  orderId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  status?: InputMaybe<InsertBusinessOrderDeliveryStatusEnumComparisonExp>;
-};
-
-export enum InsertBusinessOrderDeliveryConstraint {
-  /** unique or primary key constraint on columns "id" */
-  DeliveryPkey = "delivery_pkey",
-}
-
-export type InsertBusinessOrderDeliveryInsertInput = {
-  courier?: InputMaybe<InsertBusinessOrderCouriersObjRelInsertInput>;
-  courierId?: InputMaybe<Scalars["uuid"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  order?: InputMaybe<InsertBusinessOrderOrdersObjRelInsertInput>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
-  status?: InputMaybe<InsertBusinessOrderDeliveryStatusEnum>;
-};
-
-export type InsertBusinessOrderDeliveryOnConflict = {
-  constraint: InsertBusinessOrderDeliveryConstraint;
-  update_columns: Array<InsertBusinessOrderDeliveryUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
-};
-
-export enum InsertBusinessOrderDeliverySelectColumn {
-  /** column name */
-  CourierId = "courierId",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Status = "status",
-}
-
-export enum InsertBusinessOrderDeliveryStatusEnum {
-  Active = "active",
-  Pending = "pending",
-}
-
-export type InsertBusinessOrderDeliveryStatusEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderDeliveryStatusEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderDeliveryStatusEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderDeliveryStatusEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderDeliveryStatusEnum>>;
-};
-
-export enum InsertBusinessOrderDeliveryUpdateColumn {
-  /** column name */
-  CourierId = "courierId",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Status = "status",
-}
-
-export type InsertBusinessOrderFloat8ComparisonExp = {
-  _eq?: InputMaybe<Scalars["float8"]["input"]>;
-  _gt?: InputMaybe<Scalars["float8"]["input"]>;
-  _gte?: InputMaybe<Scalars["float8"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["float8"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["float8"]["input"]>;
-  _lte?: InputMaybe<Scalars["float8"]["input"]>;
-  _neq?: InputMaybe<Scalars["float8"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["float8"]["input"]>>;
-};
-
-export type InsertBusinessOrderIntComparisonExp = {
-  _eq?: InputMaybe<Scalars["Int"]["input"]>;
-  _gt?: InputMaybe<Scalars["Int"]["input"]>;
-  _gte?: InputMaybe<Scalars["Int"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["Int"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["Int"]["input"]>;
-  _lte?: InputMaybe<Scalars["Int"]["input"]>;
-  _neq?: InputMaybe<Scalars["Int"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["Int"]["input"]>>;
-};
-
-export enum InsertBusinessOrderOrderFulfillmentTypeEnum {
-  Full = "full",
-  Partial = "partial",
-}
-
-export type InsertBusinessOrderOrderFulfillmentTypeEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderOrderFulfillmentTypeEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderOrderFulfillmentTypeEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderOrderFulfillmentTypeEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderOrderFulfillmentTypeEnum>>;
-};
-
-export type InsertBusinessOrderOrderItemAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderOrderItemAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderOrderItemAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderOrderItemSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderOrderItemArrRelInsertInput = {
-  data: Array<InsertBusinessOrderOrderItemInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderOrderItemOnConflict>;
-};
-
-export type InsertBusinessOrderOrderItemBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderOrderItemBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderOrderItemBoolExp>>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  order?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
-  orderId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  price?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
-  product?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
-  productId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  quantity?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
-};
-
-export enum InsertBusinessOrderOrderItemConstraint {
-  /** unique or primary key constraint on columns "id" */
-  OrderItemsPkey = "order_items_pkey",
-}
-
-export type InsertBusinessOrderOrderItemInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  order?: InputMaybe<InsertBusinessOrderOrdersObjRelInsertInput>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
-  price?: InputMaybe<Scalars["Int"]["input"]>;
-  product?: InputMaybe<InsertBusinessOrderProductsObjRelInsertInput>;
-  productId?: InputMaybe<Scalars["uuid"]["input"]>;
-  quantity?: InputMaybe<Scalars["Int"]["input"]>;
-};
-
-export type InsertBusinessOrderOrderItemOnConflict = {
-  constraint: InsertBusinessOrderOrderItemConstraint;
-  update_columns: Array<InsertBusinessOrderOrderItemUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
-};
-
-export enum InsertBusinessOrderOrderItemSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Price = "price",
-  /** column name */
-  ProductId = "productId",
-  /** column name */
-  Quantity = "quantity",
-}
-
-export enum InsertBusinessOrderOrderItemUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Price = "price",
-  /** column name */
-  ProductId = "productId",
-  /** column name */
-  Quantity = "quantity",
-}
-
-export type InsertBusinessOrderOrderStatusBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderOrderStatusBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderOrderStatusBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderOrderStatusBoolExp>>;
-  orders?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
-  orders_aggregate?: InputMaybe<InsertBusinessOrderOrdersAggregateBoolExp>;
-  status?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-};
-
-export enum InsertBusinessOrderOrderStatusConstraint {
-  /** unique or primary key constraint on columns "status" */
-  OrderStatusPkey = "order_status_pkey",
-}
-
-export enum InsertBusinessOrderOrderStatusEnum {
-  Canceled = "CANCELED",
-  Confirmed = "CONFIRMED",
-  Delivered = "DELIVERED",
-  Enroute = "ENROUTE",
-  Fulfilled = "FULFILLED",
-  Pending = "PENDING",
-}
-
-export type InsertBusinessOrderOrderStatusEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderOrderStatusEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderOrderStatusEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderOrderStatusEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderOrderStatusEnum>>;
-};
-
-export type InsertBusinessOrderOrderStatusInsertInput = {
-  orders?: InputMaybe<InsertBusinessOrderOrdersArrRelInsertInput>;
-  status?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type InsertBusinessOrderOrderStatusObjRelInsertInput = {
-  data: InsertBusinessOrderOrderStatusInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderOrderStatusOnConflict>;
-};
-
-export type InsertBusinessOrderOrderStatusOnConflict = {
-  constraint: InsertBusinessOrderOrderStatusConstraint;
-  update_columns: Array<InsertBusinessOrderOrderStatusUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderOrderStatusBoolExp>;
-};
-
-export enum InsertBusinessOrderOrderStatusUpdateColumn {
-  /** column name */
-  Status = "status",
-}
-
-export type InsertBusinessOrderOrderSupplierAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderOrderSupplierAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderOrderSupplierAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderOrderSupplierSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderOrderSupplierArrRelInsertInput = {
-  data: Array<InsertBusinessOrderOrderSupplierInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderOrderSupplierOnConflict>;
-};
-
-export type InsertBusinessOrderOrderSupplierBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderOrderSupplierBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderOrderSupplierBoolExp>>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  order?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
-  order_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  supplier?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
-  supplierId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-};
-
-export enum InsertBusinessOrderOrderSupplierConstraint {
-  /** unique or primary key constraint on columns "id" */
-  OrderSupplierPkey = "order_supplier_pkey",
-}
-
-export type InsertBusinessOrderOrderSupplierInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  order?: InputMaybe<InsertBusinessOrderOrdersObjRelInsertInput>;
-  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  supplier?: InputMaybe<InsertBusinessOrderSuppliersObjRelInsertInput>;
-  supplierId?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-export type InsertBusinessOrderOrderSupplierOnConflict = {
-  constraint: InsertBusinessOrderOrderSupplierConstraint;
-  update_columns: Array<InsertBusinessOrderOrderSupplierUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
-};
-
-export enum InsertBusinessOrderOrderSupplierSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "order_id",
-  /** column name */
-  SupplierId = "supplierId",
-}
-
-export enum InsertBusinessOrderOrderSupplierUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "order_id",
-  /** column name */
-  SupplierId = "supplierId",
-}
-
-export type InsertBusinessOrderOrdersAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderOrdersAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderOrdersAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderOrdersSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderOrdersArrRelInsertInput = {
-  data: Array<InsertBusinessOrderOrdersInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderOrdersOnConflict>;
-};
-
-export type InsertBusinessOrderOrdersBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderOrdersBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderOrdersBoolExp>>;
-  agent?: InputMaybe<InsertBusinessOrderAgentBoolExp>;
-  business?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  customerId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  deliveries?: InputMaybe<InsertBusinessOrderDeliveryBoolExp>;
-  deliveries_aggregate?: InputMaybe<InsertBusinessOrderDeliveryAggregateBoolExp>;
-  destination?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  fulfillment_type?: InputMaybe<InsertBusinessOrderOrderFulfillmentTypeEnumComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  orderId?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  order_items?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
-  order_items_aggregate?: InputMaybe<InsertBusinessOrderOrderItemAggregateBoolExp>;
-  order_status?: InputMaybe<InsertBusinessOrderOrderStatusBoolExp>;
-  order_suppliers?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
-  order_suppliers_aggregate?: InputMaybe<InsertBusinessOrderOrderSupplierAggregateBoolExp>;
-  origin?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  processedBy?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  status?: InputMaybe<InsertBusinessOrderOrderStatusEnumComparisonExp>;
-};
-
-export enum InsertBusinessOrderOrdersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  OrdersPkey = "orders_pkey",
-}
-
-export type InsertBusinessOrderOrdersInsertInput = {
-  agent?: InputMaybe<InsertBusinessOrderAgentObjRelInsertInput>;
-  business?: InputMaybe<InsertBusinessOrderBusinessObjRelInsertInput>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  customerId?: InputMaybe<Scalars["uuid"]["input"]>;
-  deliveries?: InputMaybe<InsertBusinessOrderDeliveryArrRelInsertInput>;
-  destination?: InputMaybe<Scalars["String"]["input"]>;
-  fulfillment_type?: InputMaybe<InsertBusinessOrderOrderFulfillmentTypeEnum>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
-  order_items?: InputMaybe<InsertBusinessOrderOrderItemArrRelInsertInput>;
-  order_status?: InputMaybe<InsertBusinessOrderOrderStatusObjRelInsertInput>;
-  order_suppliers?: InputMaybe<InsertBusinessOrderOrderSupplierArrRelInsertInput>;
-  origin?: InputMaybe<Scalars["String"]["input"]>;
-  processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
-  status?: InputMaybe<InsertBusinessOrderOrderStatusEnum>;
-};
-
-export type InsertBusinessOrderOrdersObjRelInsertInput = {
-  data: InsertBusinessOrderOrdersInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderOrdersOnConflict>;
-};
-
-export type InsertBusinessOrderOrdersOnConflict = {
-  constraint: InsertBusinessOrderOrdersConstraint;
-  update_columns: Array<InsertBusinessOrderOrdersUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderOrdersBoolExp>;
-};
-
-export enum InsertBusinessOrderOrdersSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  CustomerId = "customerId",
-  /** column name */
-  Destination = "destination",
-  /** column name */
-  FulfillmentType = "fulfillment_type",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Origin = "origin",
-  /** column name */
-  ProcessedBy = "processedBy",
-  /** column name */
-  Status = "status",
-}
-
-export enum InsertBusinessOrderOrdersUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  CustomerId = "customerId",
-  /** column name */
-  Destination = "destination",
-  /** column name */
-  FulfillmentType = "fulfillment_type",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Origin = "origin",
-  /** column name */
-  ProcessedBy = "processedBy",
-  /** column name */
-  Status = "status",
-}
-
-export type InsertBusinessOrderOutput = {
-  __typename?: "InsertBusinessOrderOutput";
-  order?: Maybe<OrderPayload>;
-};
-
-export type InsertBusinessOrderProductsAggregateBoolExp = {
-  bool_and?: InputMaybe<InsertBusinessOrderProductsAggregateBoolExpBoolAnd>;
-  bool_or?: InputMaybe<InsertBusinessOrderProductsAggregateBoolExpBoolOr>;
-  count?: InputMaybe<InsertBusinessOrderProductsAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderProductsAggregateBoolExpBoolAnd = {
-  arguments: InsertBusinessOrderProductsSelectColumnProductsAggregateBoolExpBoolAndArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
-  predicate: InsertBusinessOrderBooleanComparisonExp;
-};
-
-export type InsertBusinessOrderProductsAggregateBoolExpBoolOr = {
-  arguments: InsertBusinessOrderProductsSelectColumnProductsAggregateBoolExpBoolOrArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
-  predicate: InsertBusinessOrderBooleanComparisonExp;
-};
-
-export type InsertBusinessOrderProductsAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderProductsSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderProductsArrRelInsertInput = {
-  data: Array<InsertBusinessOrderProductsInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderProductsOnConflict>;
-};
-
-export type InsertBusinessOrderProductsBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderProductsBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderProductsBoolExp>>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  description?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  discount?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  inStock?: InputMaybe<InsertBusinessOrderBooleanComparisonExp>;
-  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  order_items?: InputMaybe<InsertBusinessOrderOrderItemBoolExp>;
-  order_items_aggregate?: InputMaybe<InsertBusinessOrderOrderItemAggregateBoolExp>;
-  price?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
-  quantity?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
-  supplier?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
-  supplier_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-};
-
-export enum InsertBusinessOrderProductsConstraint {
-  /** unique or primary key constraint on columns "id" */
-  ProductsPkey = "products_pkey",
-}
-
-export type InsertBusinessOrderProductsInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  discount?: InputMaybe<Scalars["Int"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  inStock?: InputMaybe<Scalars["Boolean"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  order_items?: InputMaybe<InsertBusinessOrderOrderItemArrRelInsertInput>;
-  price?: InputMaybe<Scalars["Int"]["input"]>;
-  quantity?: InputMaybe<Scalars["Int"]["input"]>;
-  supplier?: InputMaybe<InsertBusinessOrderSuppliersObjRelInsertInput>;
-  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-export type InsertBusinessOrderProductsObjRelInsertInput = {
-  data: InsertBusinessOrderProductsInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderProductsOnConflict>;
-};
-
-export type InsertBusinessOrderProductsOnConflict = {
-  constraint: InsertBusinessOrderProductsConstraint;
-  update_columns: Array<InsertBusinessOrderProductsUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
-};
-
-export enum InsertBusinessOrderProductsSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Discount = "discount",
-  /** column name */
-  Id = "id",
-  /** column name */
-  InStock = "inStock",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Price = "price",
-  /** column name */
-  Quantity = "quantity",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export enum InsertBusinessOrderProductsSelectColumnProductsAggregateBoolExpBoolAndArgumentsColumns {
-  /** column name */
-  InStock = "inStock",
-}
-
-export enum InsertBusinessOrderProductsSelectColumnProductsAggregateBoolExpBoolOrArgumentsColumns {
-  /** column name */
-  InStock = "inStock",
-}
-
-export enum InsertBusinessOrderProductsUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Discount = "discount",
-  /** column name */
-  Id = "id",
-  /** column name */
-  InStock = "inStock",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Price = "price",
-  /** column name */
-  Quantity = "quantity",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export type InsertBusinessOrderRegisterationChannelTypeBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderRegisterationChannelTypeBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderRegisterationChannelTypeBoolExp>>;
-  businesses?: InputMaybe<InsertBusinessOrderBusinessBoolExp>;
-  businesses_aggregate?: InputMaybe<InsertBusinessOrderBusinessAggregateBoolExp>;
-  channel?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-};
-
-export enum InsertBusinessOrderRegisterationChannelTypeConstraint {
-  /** unique or primary key constraint on columns "channel" */
-  RegisterationChannelPkey = "registeration_channel_pkey",
-}
-
-export enum InsertBusinessOrderRegisterationChannelTypeEnum {
-  Agent = "AGENT",
-  App = "APP",
-  Ussd = "USSD",
-}
-
-export type InsertBusinessOrderRegisterationChannelTypeEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderRegisterationChannelTypeEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderRegisterationChannelTypeEnum>>;
-};
-
-export type InsertBusinessOrderRegisterationChannelTypeInsertInput = {
-  businesses?: InputMaybe<InsertBusinessOrderBusinessArrRelInsertInput>;
-  channel?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type InsertBusinessOrderRegisterationChannelTypeObjRelInsertInput = {
-  data: InsertBusinessOrderRegisterationChannelTypeInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeOnConflict>;
-};
-
-export type InsertBusinessOrderRegisterationChannelTypeOnConflict = {
-  constraint: InsertBusinessOrderRegisterationChannelTypeConstraint;
-  update_columns: Array<InsertBusinessOrderRegisterationChannelTypeUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderRegisterationChannelTypeBoolExp>;
-};
-
-export enum InsertBusinessOrderRegisterationChannelTypeUpdateColumn {
-  /** column name */
-  Channel = "channel",
-}
-
-export type InsertBusinessOrderRideStatusBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderRideStatusBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderRideStatusBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderRideStatusBoolExp>>;
-  courier_rides?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
-  courier_rides_aggregate?: InputMaybe<InsertBusinessOrderCourierRidesAggregateBoolExp>;
-  status?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-};
-
-export enum InsertBusinessOrderRideStatusConstraint {
-  /** unique or primary key constraint on columns "status" */
-  RideStatusPkey = "ride_status_pkey",
-}
-
-export enum InsertBusinessOrderRideStatusEnum {
-  Active = "Active",
-  Inactive = "Inactive",
-  Maintenance = "Maintenance",
-}
-
-export type InsertBusinessOrderRideStatusEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderRideStatusEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderRideStatusEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderRideStatusEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderRideStatusEnum>>;
-};
-
-export type InsertBusinessOrderRideStatusInsertInput = {
-  courier_rides?: InputMaybe<InsertBusinessOrderCourierRidesArrRelInsertInput>;
-  status?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type InsertBusinessOrderRideStatusObjRelInsertInput = {
-  data: InsertBusinessOrderRideStatusInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderRideStatusOnConflict>;
-};
-
-export type InsertBusinessOrderRideStatusOnConflict = {
-  constraint: InsertBusinessOrderRideStatusConstraint;
-  update_columns: Array<InsertBusinessOrderRideStatusUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderRideStatusBoolExp>;
-};
-
-export enum InsertBusinessOrderRideStatusUpdateColumn {
-  /** column name */
-  Status = "status",
-}
-
-export type InsertBusinessOrderRideTypeBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderRideTypeBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderRideTypeBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderRideTypeBoolExp>>;
-  courier_rides?: InputMaybe<InsertBusinessOrderCourierRidesBoolExp>;
-  courier_rides_aggregate?: InputMaybe<InsertBusinessOrderCourierRidesAggregateBoolExp>;
-  type?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-};
-
-export enum InsertBusinessOrderRideTypeConstraint {
-  /** unique or primary key constraint on columns "type" */
-  RideTypePkey = "ride_type_pkey",
-}
-
-export enum InsertBusinessOrderRideTypeEnum {
-  Bike = "Bike",
-  Car = "Car",
-}
-
-export type InsertBusinessOrderRideTypeEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderRideTypeEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderRideTypeEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderRideTypeEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderRideTypeEnum>>;
-};
-
-export type InsertBusinessOrderRideTypeInsertInput = {
-  courier_rides?: InputMaybe<InsertBusinessOrderCourierRidesArrRelInsertInput>;
-  type?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type InsertBusinessOrderRideTypeObjRelInsertInput = {
-  data: InsertBusinessOrderRideTypeInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderRideTypeOnConflict>;
-};
-
-export type InsertBusinessOrderRideTypeOnConflict = {
-  constraint: InsertBusinessOrderRideTypeConstraint;
-  update_columns: Array<InsertBusinessOrderRideTypeUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderRideTypeBoolExp>;
-};
-
-export enum InsertBusinessOrderRideTypeUpdateColumn {
-  /** column name */
-  Type = "type",
-}
-
-export type InsertBusinessOrderStringComparisonExp = {
-  _eq?: InputMaybe<Scalars["String"]["input"]>;
-  _gt?: InputMaybe<Scalars["String"]["input"]>;
-  _gte?: InputMaybe<Scalars["String"]["input"]>;
-  _ilike?: InputMaybe<Scalars["String"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["String"]["input"]>>;
-  _iregex?: InputMaybe<Scalars["String"]["input"]>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _like?: InputMaybe<Scalars["String"]["input"]>;
-  _lt?: InputMaybe<Scalars["String"]["input"]>;
-  _lte?: InputMaybe<Scalars["String"]["input"]>;
-  _neq?: InputMaybe<Scalars["String"]["input"]>;
-  _nilike?: InputMaybe<Scalars["String"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["String"]["input"]>>;
-  _niregex?: InputMaybe<Scalars["String"]["input"]>;
-  _nlike?: InputMaybe<Scalars["String"]["input"]>;
-  _nregex?: InputMaybe<Scalars["String"]["input"]>;
-  _nsimilar?: InputMaybe<Scalars["String"]["input"]>;
-  _regex?: InputMaybe<Scalars["String"]["input"]>;
-  _similar?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type InsertBusinessOrderSupplierCategoriesEnumBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderSupplierCategoriesEnumBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderSupplierCategoriesEnumBoolExp>>;
-  description?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  suppliers_categories?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
-  suppliers_categories_aggregate?: InputMaybe<InsertBusinessOrderSuppliersCategoriesAggregateBoolExp>;
-};
-
-export enum InsertBusinessOrderSupplierCategoriesEnumConstraint {
-  /** unique or primary key constraint on columns "name" */
-  SupplierCategoriesEnumPkey = "supplier_categories_enum_pkey",
-}
-
-export enum InsertBusinessOrderSupplierCategoriesEnumEnum {
-  /** Tools, seeds, and equipment for farmers, supporting agricultural productivity and local food production. */
-  AgriculturalSupplies = "agricultural_supplies",
-  /** Cosmetics, skincare products, grooming essentials, and personal care items, supporting local beauty entrepreneurs and promoting self-care. */
-  BeautyAndCare = "beauty_and_care",
-  /** Apparel, fabrics, and textiles, empowering local tailors and designers, fostering the textile industry */
-  ClothingAndTextiles = "clothing_and_textiles",
-  /** Essential materials like cement, steel, and bricks for construction projects, fostering infrastructure development. */
-  ConstructionMaterials = "construction_materials",
-  /** Books, educational tools, and e-learning resources, promoting education and literacy in the community. */
-  EducationalMaterials = "educational_materials",
-  /** Electronic devices, wiring, and appliances, promoting technological access and local electronic businesses */
-  ElectronicsAppliances = "electronics_appliances",
-  /** Solar panels, wind turbines, and energy-efficient appliances, promoting sustainable energy use and reducing the carbon footprint. */
-  EnergySolutions = "energy_solutions",
-  /** Fresh produce, packaged foods, beverages, and culinary supplies, supporting local agriculture and culinary enterprises. */
-  FoodAndBeverages = "food_and_beverages",
-  /** Medical supplies, safety equipment, and personal protective gear, ensuring the well-being of workers and communities. */
-  HealthAndSafety = "health_and_safety",
-  /** Furniture, home appliances, decor items, and household essentials, improving living standards and supporting local artisans. */
-  HomeAndLiving = "home_and_living",
-  /** Stationery, office materials, and supplies, supporting administrative functions of businesses and organizations. */
-  OfficeSupplies = "office_supplies",
-  /** Vehicles, spare parts, and transportation services, enhancing mobility and logistics for businesses and individuals. */
-  TransportationSolutions = "transportation_solutions",
-  /** Recycling equipment, waste bins, and eco-friendly products, encouraging responsible waste management practices. */
-  WasteAndRecycling = "waste_and_recycling",
-  /** Water filters, sanitation kits, and plumbing supplies, ensuring access to clean water and promoting hygiene. */
-  WaterAndSanitation = "water_and_sanitation",
-}
-
-export type InsertBusinessOrderSupplierCategoriesEnumEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderSupplierCategoriesEnumEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderSupplierCategoriesEnumEnum>>;
-};
-
-export type InsertBusinessOrderSupplierCategoriesEnumInsertInput = {
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  suppliers_categories?: InputMaybe<InsertBusinessOrderSuppliersCategoriesArrRelInsertInput>;
-};
-
-export type InsertBusinessOrderSupplierCategoriesEnumObjRelInsertInput = {
-  data: InsertBusinessOrderSupplierCategoriesEnumInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumOnConflict>;
-};
-
-export type InsertBusinessOrderSupplierCategoriesEnumOnConflict = {
-  constraint: InsertBusinessOrderSupplierCategoriesEnumConstraint;
-  update_columns: Array<InsertBusinessOrderSupplierCategoriesEnumUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumBoolExp>;
-};
-
-export enum InsertBusinessOrderSupplierCategoriesEnumUpdateColumn {
-  /** column name */
-  Description = "description",
-  /** column name */
-  Name = "name",
-}
-
-export type InsertBusinessOrderSupplierServiceZoneAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderSupplierServiceZoneAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderSupplierServiceZoneAggregateBoolExpCount = {
-  arguments?: InputMaybe<
-    Array<InsertBusinessOrderSupplierServiceZoneSelectColumn>
-  >;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderSupplierServiceZoneBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderSupplierServiceZoneArrRelInsertInput = {
-  data: Array<InsertBusinessOrderSupplierServiceZoneInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderSupplierServiceZoneOnConflict>;
-};
-
-export type InsertBusinessOrderSupplierServiceZoneBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderSupplierServiceZoneBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderSupplierServiceZoneBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderSupplierServiceZoneBoolExp>>;
-  coverage_area_radius?: InputMaybe<InsertBusinessOrderIntComparisonExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  location_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  supplier_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-};
-
-export enum InsertBusinessOrderSupplierServiceZoneConstraint {
-  /** unique or primary key constraint on columns "id" */
-  SupplierServiceZonePkey = "supplier_service_zone_pkey",
-}
-
-export type InsertBusinessOrderSupplierServiceZoneInsertInput = {
-  coverage_area_radius?: InputMaybe<Scalars["Int"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  location_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-export type InsertBusinessOrderSupplierServiceZoneOnConflict = {
-  constraint: InsertBusinessOrderSupplierServiceZoneConstraint;
-  update_columns: Array<InsertBusinessOrderSupplierServiceZoneUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderSupplierServiceZoneBoolExp>;
-};
-
-export enum InsertBusinessOrderSupplierServiceZoneSelectColumn {
-  /** column name */
-  CoverageAreaRadius = "coverage_area_radius",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  LocationId = "location_id",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export enum InsertBusinessOrderSupplierServiceZoneUpdateColumn {
-  /** column name */
-  CoverageAreaRadius = "coverage_area_radius",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  LocationId = "location_id",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export type InsertBusinessOrderSuppliersBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderSuppliersBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderSuppliersBoolExp>>;
-  categories?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
-  categories_aggregate?: InputMaybe<InsertBusinessOrderSuppliersCategoriesAggregateBoolExp>;
-  contactEmail?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  contactName?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  description?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  order_suppliers?: InputMaybe<InsertBusinessOrderOrderSupplierBoolExp>;
-  order_suppliers_aggregate?: InputMaybe<InsertBusinessOrderOrderSupplierAggregateBoolExp>;
-  phoneNumber?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  products?: InputMaybe<InsertBusinessOrderProductsBoolExp>;
-  products_aggregate?: InputMaybe<InsertBusinessOrderProductsAggregateBoolExp>;
-  service_zones?: InputMaybe<InsertBusinessOrderSupplierServiceZoneBoolExp>;
-  service_zones_aggregate?: InputMaybe<InsertBusinessOrderSupplierServiceZoneAggregateBoolExp>;
-  streetAddress?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  user_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  zone?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-};
-
-export type InsertBusinessOrderSuppliersCategoriesAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderSuppliersCategoriesAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderSuppliersCategoriesAggregateBoolExpCount = {
-  arguments?: InputMaybe<
-    Array<InsertBusinessOrderSuppliersCategoriesSelectColumn>
-  >;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderSuppliersCategoriesArrRelInsertInput = {
-  data: Array<InsertBusinessOrderSuppliersCategoriesInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderSuppliersCategoriesOnConflict>;
-};
-
-export type InsertBusinessOrderSuppliersCategoriesBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderSuppliersCategoriesBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderSuppliersCategoriesBoolExp>>;
-  category_name?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumEnumComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  supplier?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
-  supplier_categories_enum?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumBoolExp>;
-  supplier_id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-};
-
-export enum InsertBusinessOrderSuppliersCategoriesConstraint {
-  /** unique or primary key constraint on columns "id" */
-  SuppliersCategoriesPkey = "suppliers_categories_pkey",
-}
-
-export type InsertBusinessOrderSuppliersCategoriesInsertInput = {
-  category_name?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumEnum>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  supplier?: InputMaybe<InsertBusinessOrderSuppliersObjRelInsertInput>;
-  supplier_categories_enum?: InputMaybe<InsertBusinessOrderSupplierCategoriesEnumObjRelInsertInput>;
-  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-export type InsertBusinessOrderSuppliersCategoriesOnConflict = {
-  constraint: InsertBusinessOrderSuppliersCategoriesConstraint;
-  update_columns: Array<InsertBusinessOrderSuppliersCategoriesUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderSuppliersCategoriesBoolExp>;
-};
-
-export enum InsertBusinessOrderSuppliersCategoriesSelectColumn {
-  /** column name */
-  CategoryName = "category_name",
-  /** column name */
-  Id = "id",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export enum InsertBusinessOrderSuppliersCategoriesUpdateColumn {
-  /** column name */
-  CategoryName = "category_name",
-  /** column name */
-  Id = "id",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export enum InsertBusinessOrderSuppliersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  SuppliersPkey = "suppliers_pkey",
-}
-
-export type InsertBusinessOrderSuppliersInsertInput = {
-  categories?: InputMaybe<InsertBusinessOrderSuppliersCategoriesArrRelInsertInput>;
-  contactEmail?: InputMaybe<Scalars["String"]["input"]>;
-  contactName?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  order_suppliers?: InputMaybe<InsertBusinessOrderOrderSupplierArrRelInsertInput>;
-  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
-  products?: InputMaybe<InsertBusinessOrderProductsArrRelInsertInput>;
-  service_zones?: InputMaybe<InsertBusinessOrderSupplierServiceZoneArrRelInsertInput>;
-  streetAddress?: InputMaybe<Scalars["String"]["input"]>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  zone?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type InsertBusinessOrderSuppliersObjRelInsertInput = {
-  data: InsertBusinessOrderSuppliersInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderSuppliersOnConflict>;
-};
-
-export type InsertBusinessOrderSuppliersOnConflict = {
-  constraint: InsertBusinessOrderSuppliersConstraint;
-  update_columns: Array<InsertBusinessOrderSuppliersUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderSuppliersBoolExp>;
-};
-
-export enum InsertBusinessOrderSuppliersUpdateColumn {
-  /** column name */
-  ContactEmail = "contactEmail",
-  /** column name */
-  ContactName = "contactName",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  PhoneNumber = "phoneNumber",
-  /** column name */
-  StreetAddress = "streetAddress",
-  /** column name */
-  UserId = "user_id",
-  /** column name */
-  Zone = "zone",
-}
-
-export type InsertBusinessOrderTimestamptzComparisonExp = {
-  _eq?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _gt?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _gte?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _lte?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _neq?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
-};
-
-export type InsertBusinessOrderUserRoleBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderUserRoleBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderUserRoleBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderUserRoleBoolExp>>;
-  role?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  users?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
-  users_aggregate?: InputMaybe<InsertBusinessOrderUsersAggregateBoolExp>;
-};
-
-export enum InsertBusinessOrderUserRoleConstraint {
-  /** unique or primary key constraint on columns "role" */
-  UserRolePkey = "user_role_pkey",
-}
-
-export enum InsertBusinessOrderUserRoleEnum {
-  Admin = "admin",
-  Agent = "agent",
-  Customer = "customer",
-  Supplier = "supplier",
-}
-
-export type InsertBusinessOrderUserRoleEnumComparisonExp = {
-  _eq?: InputMaybe<InsertBusinessOrderUserRoleEnum>;
-  _in?: InputMaybe<Array<InsertBusinessOrderUserRoleEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<InsertBusinessOrderUserRoleEnum>;
-  _nin?: InputMaybe<Array<InsertBusinessOrderUserRoleEnum>>;
-};
-
-export type InsertBusinessOrderUserRoleInsertInput = {
-  role?: InputMaybe<Scalars["String"]["input"]>;
-  users?: InputMaybe<InsertBusinessOrderUsersArrRelInsertInput>;
-};
-
-export type InsertBusinessOrderUserRoleObjRelInsertInput = {
-  data: InsertBusinessOrderUserRoleInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderUserRoleOnConflict>;
-};
-
-export type InsertBusinessOrderUserRoleOnConflict = {
-  constraint: InsertBusinessOrderUserRoleConstraint;
-  update_columns: Array<InsertBusinessOrderUserRoleUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderUserRoleBoolExp>;
-};
-
-export enum InsertBusinessOrderUserRoleUpdateColumn {
-  /** column name */
-  Role = "role",
-}
-
-export type InsertBusinessOrderUsersAggregateBoolExp = {
-  count?: InputMaybe<InsertBusinessOrderUsersAggregateBoolExpCount>;
-};
-
-export type InsertBusinessOrderUsersAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<InsertBusinessOrderUsersSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
-  predicate: InsertBusinessOrderIntComparisonExp;
-};
-
-export type InsertBusinessOrderUsersArrRelInsertInput = {
-  data: Array<InsertBusinessOrderUsersInsertInput>;
-  on_conflict?: InputMaybe<InsertBusinessOrderUsersOnConflict>;
-};
-
-export type InsertBusinessOrderUsersBoolExp = {
-  _and?: InputMaybe<Array<InsertBusinessOrderUsersBoolExp>>;
-  _not?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
-  _or?: InputMaybe<Array<InsertBusinessOrderUsersBoolExp>>;
-  created_at?: InputMaybe<InsertBusinessOrderTimestamptzComparisonExp>;
-  id?: InputMaybe<InsertBusinessOrderUuidComparisonExp>;
-  name?: InputMaybe<InsertBusinessOrderStringComparisonExp>;
-  role?: InputMaybe<InsertBusinessOrderUserRoleEnumComparisonExp>;
-  user_role?: InputMaybe<InsertBusinessOrderUserRoleBoolExp>;
-};
-
-export enum InsertBusinessOrderUsersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  UsersPkey = "users_pkey",
-}
-
-export type InsertBusinessOrderUsersInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  role?: InputMaybe<InsertBusinessOrderUserRoleEnum>;
-  user_role?: InputMaybe<InsertBusinessOrderUserRoleObjRelInsertInput>;
-};
-
-export type InsertBusinessOrderUsersObjRelInsertInput = {
-  data: InsertBusinessOrderUsersInsertInput;
-  on_conflict?: InputMaybe<InsertBusinessOrderUsersOnConflict>;
-};
-
-export type InsertBusinessOrderUsersOnConflict = {
-  constraint: InsertBusinessOrderUsersConstraint;
-  update_columns: Array<InsertBusinessOrderUsersUpdateColumn>;
-  where?: InputMaybe<InsertBusinessOrderUsersBoolExp>;
-};
-
-export enum InsertBusinessOrderUsersSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Role = "role",
-}
-
-export enum InsertBusinessOrderUsersUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Role = "role",
-}
-
-export type InsertBusinessOrderUuidComparisonExp = {
-  _eq?: InputMaybe<Scalars["uuid"]["input"]>;
-  _gt?: InputMaybe<Scalars["uuid"]["input"]>;
-  _gte?: InputMaybe<Scalars["uuid"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["uuid"]["input"]>;
-  _lte?: InputMaybe<Scalars["uuid"]["input"]>;
-  _neq?: InputMaybe<Scalars["uuid"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
-};
-
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars["Int"]["input"]>;
@@ -1982,2151 +96,12 @@ export type Int_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars["Int"]["input"]>>;
 };
 
-export type LegDistance = {
-  __typename?: "LegDistance";
-  text?: Maybe<Scalars["String"]["output"]>;
-  value?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type LegDuration = {
-  __typename?: "LegDuration";
-  text?: Maybe<Scalars["String"]["output"]>;
-  value?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type LocationByCoords = {
-  __typename?: "LocationByCoords";
-  location?: Maybe<GeoCoords>;
-  placeId?: Maybe<Scalars["String"]["output"]>;
-  types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
-};
-
-export type OrderItemData = {
-  __typename?: "OrderItemData";
-  price?: Maybe<Scalars["Int"]["output"]>;
-  productId?: Maybe<Scalars["String"]["output"]>;
-  quantity?: Maybe<Scalars["Int"]["output"]>;
-};
-
-export type OrderItems = {
-  __typename?: "OrderItems";
-  data?: Maybe<Array<Maybe<OrderItemData>>>;
-};
-
-export type OrderPayload = {
-  __typename?: "OrderPayload";
-  customerId?: Maybe<Scalars["String"]["output"]>;
-  order_items?: Maybe<OrderItems>;
-};
-
-export type PayerInput = {
-  partyId: Scalars["String"]["input"];
-  partyIdType: Scalars["String"]["input"];
-};
-
-export type PaymentStatusResponse = {
-  __typename?: "PaymentStatusResponse";
-  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  referenceId?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type Places = {
-  __typename?: "Places";
-  address?: Maybe<Scalars["String"]["output"]>;
-  lat?: Maybe<Scalars["Float"]["output"]>;
-  lng?: Maybe<Scalars["Float"]["output"]>;
-  location?: Maybe<Scalars["String"]["output"]>;
-  name?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type PreApprovalStatusResponse = {
-  __typename?: "PreApprovalStatusResponse";
-  expirationDateTime?: Maybe<Scalars["String"]["output"]>;
-  payer?: Maybe<Scalars["String"]["output"]>;
-  payerCurrency?: Maybe<Scalars["String"]["output"]>;
-  payerMessage?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExp = {
-  avg?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpAvg>;
-  corr?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpCorr>;
-  count?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpCount>;
-  covar_samp?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpCovarSamp>;
-  max?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpMax>;
-  min?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpMin>;
-  stddev_samp?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpStddevSamp>;
-  sum?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpSum>;
-  var_samp?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExpVarSamp>;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpAvg = {
-  arguments: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpAvgArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionFloat8ComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpCorr = {
-  arguments: RegisterBusinessActionAddressesAggregateBoolExpCorrArguments;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionFloat8ComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpCorrArguments = {
-  X: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns;
-  Y: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterBusinessActionAddressesSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpCovarSamp = {
-  arguments: RegisterBusinessActionAddressesAggregateBoolExpCovarSampArguments;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionFloat8ComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpCovarSampArguments =
-  {
-    X: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns;
-    Y: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns;
-  };
-
-export type RegisterBusinessActionAddressesAggregateBoolExpMax = {
-  arguments: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpMaxArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionFloat8ComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpMin = {
-  arguments: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpMinArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionFloat8ComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpStddevSamp = {
-  arguments: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpStddevSampArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionFloat8ComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpSum = {
-  arguments: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpSumArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionFloat8ComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesAggregateBoolExpVarSamp = {
-  arguments: RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpVarSampArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  predicate: RegisterBusinessActionFloat8ComparisonExp;
-};
-
-export type RegisterBusinessActionAddressesArrRelInsertInput = {
-  data: Array<RegisterBusinessActionAddressesInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionAddressesOnConflict>;
-};
-
-export type RegisterBusinessActionAddressesBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionAddressesBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionAddressesBoolExp>>;
-  business?: InputMaybe<RegisterBusinessActionBusinessBoolExp>;
-  business_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  city?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  latitude?: InputMaybe<RegisterBusinessActionFloat8ComparisonExp>;
-  longitude?: InputMaybe<RegisterBusinessActionFloat8ComparisonExp>;
-  street_address?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  updated_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-};
-
-export enum RegisterBusinessActionAddressesConstraint {
-  /** unique or primary key constraint on columns "id" */
-  AddressesPkey = "addresses_pkey",
-}
-
-export type RegisterBusinessActionAddressesInsertInput = {
-  business?: InputMaybe<RegisterBusinessActionBusinessObjRelInsertInput>;
-  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  city?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  latitude?: InputMaybe<Scalars["float8"]["input"]>;
-  longitude?: InputMaybe<Scalars["float8"]["input"]>;
-  street_address?: InputMaybe<Scalars["String"]["input"]>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-};
-
-export type RegisterBusinessActionAddressesOnConflict = {
-  constraint: RegisterBusinessActionAddressesConstraint;
-  update_columns: Array<RegisterBusinessActionAddressesUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-};
-
-export enum RegisterBusinessActionAddressesSelectColumn {
-  /** column name */
-  BusinessId = "business_id",
-  /** column name */
-  City = "city",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-  /** column name */
-  StreetAddress = "street_address",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export enum RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpAvgArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpCorrArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpCovarSampArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpMaxArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpMinArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpStddevSampArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpSumArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum RegisterBusinessActionAddressesSelectColumnAddressesAggregateBoolExpVarSampArgumentsColumns {
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-}
-
-export enum RegisterBusinessActionAddressesUpdateColumn {
-  /** column name */
-  BusinessId = "business_id",
-  /** column name */
-  City = "city",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Latitude = "latitude",
-  /** column name */
-  Longitude = "longitude",
-  /** column name */
-  StreetAddress = "street_address",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export type RegisterBusinessActionAgentBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionAgentBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionAgentBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionAgentBoolExp>>;
-  active?: InputMaybe<RegisterBusinessActionBooleanComparisonExp>;
-  agent_type?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  name?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  on_duty?: InputMaybe<RegisterBusinessActionBooleanComparisonExp>;
-};
-
-export enum RegisterBusinessActionAgentConstraint {
-  /** unique or primary key constraint on columns "id" */
-  AgentPkey = "agent_pkey",
-}
-
-export type RegisterBusinessActionAgentInsertInput = {
-  active?: InputMaybe<Scalars["Boolean"]["input"]>;
-  agent_type?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  on_duty?: InputMaybe<Scalars["Boolean"]["input"]>;
-};
-
-export type RegisterBusinessActionAgentObjRelInsertInput = {
-  data: RegisterBusinessActionAgentInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionAgentOnConflict>;
-};
-
-export type RegisterBusinessActionAgentOnConflict = {
-  constraint: RegisterBusinessActionAgentConstraint;
-  update_columns: Array<RegisterBusinessActionAgentUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionAgentBoolExp>;
-};
-
-export enum RegisterBusinessActionAgentUpdateColumn {
-  /** column name */
-  Active = "active",
-  /** column name */
-  AgentType = "agent_type",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  OnDuty = "on_duty",
-}
-
-export type RegisterBusinessActionBooleanComparisonExp = {
-  _eq?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _gt?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _gte?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lte?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
-};
-
-export type RegisterBusinessActionBusinessAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionBusinessAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionBusinessAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterBusinessActionBusinessSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionBusinessBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionBusinessArrRelInsertInput = {
-  data: Array<RegisterBusinessActionBusinessInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionBusinessOnConflict>;
-};
-
-export type RegisterBusinessActionBusinessBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionBusinessBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionBusinessBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionBusinessBoolExp>>;
-  addresses?: InputMaybe<RegisterBusinessActionAddressesBoolExp>;
-  addresses_aggregate?: InputMaybe<RegisterBusinessActionAddressesAggregateBoolExp>;
-  agent?: InputMaybe<RegisterBusinessActionUsersBoolExp>;
-  business_type?: InputMaybe<RegisterBusinessActionBusinessTypeBoolExp>;
-  contactEmail?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  contactName?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  description?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  name?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  orders?: InputMaybe<RegisterBusinessActionOrdersBoolExp>;
-  orders_aggregate?: InputMaybe<RegisterBusinessActionOrdersAggregateBoolExp>;
-  owner?: InputMaybe<RegisterBusinessActionUsersBoolExp>;
-  owner_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  phoneNumber?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  preferredContactMethod?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  preferredDeliveryMethod?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  registeration_channel_type?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeBoolExp>;
-  registered_by?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  registration_channel?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeEnumComparisonExp>;
-  type?: InputMaybe<RegisterBusinessActionBusinessTypeEnumComparisonExp>;
-  updated_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-};
-
-export enum RegisterBusinessActionBusinessConstraint {
-  /** unique or primary key constraint on columns "id" */
-  BusinessPkey = "business_pkey",
-}
-
-export type RegisterBusinessActionBusinessInsertInput = {
-  addresses?: InputMaybe<RegisterBusinessActionAddressesArrRelInsertInput>;
-  agent?: InputMaybe<RegisterBusinessActionUsersObjRelInsertInput>;
-  business_type?: InputMaybe<RegisterBusinessActionBusinessTypeObjRelInsertInput>;
-  contactEmail?: InputMaybe<Scalars["String"]["input"]>;
-  contactName?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  orders?: InputMaybe<RegisterBusinessActionOrdersArrRelInsertInput>;
-  owner?: InputMaybe<RegisterBusinessActionUsersObjRelInsertInput>;
-  owner_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
-  preferredContactMethod?: InputMaybe<Scalars["String"]["input"]>;
-  preferredDeliveryMethod?: InputMaybe<Scalars["String"]["input"]>;
-  registeration_channel_type?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeObjRelInsertInput>;
-  registered_by?: InputMaybe<Scalars["uuid"]["input"]>;
-  registration_channel?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeEnum>;
-  type?: InputMaybe<RegisterBusinessActionBusinessTypeEnum>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-};
-
-export type RegisterBusinessActionBusinessObjRelInsertInput = {
-  data: RegisterBusinessActionBusinessInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionBusinessOnConflict>;
-};
-
-export type RegisterBusinessActionBusinessOnConflict = {
-  constraint: RegisterBusinessActionBusinessConstraint;
-  update_columns: Array<RegisterBusinessActionBusinessUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionBusinessBoolExp>;
-};
-
-export enum RegisterBusinessActionBusinessSelectColumn {
-  /** column name */
-  ContactEmail = "contactEmail",
-  /** column name */
-  ContactName = "contactName",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  OwnerId = "owner_id",
-  /** column name */
-  PhoneNumber = "phoneNumber",
-  /** column name */
-  PreferredContactMethod = "preferredContactMethod",
-  /** column name */
-  PreferredDeliveryMethod = "preferredDeliveryMethod",
-  /** column name */
-  RegisteredBy = "registered_by",
-  /** column name */
-  RegistrationChannel = "registration_channel",
-  /** column name */
-  Type = "type",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export type RegisterBusinessActionBusinessTypeBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionBusinessTypeBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionBusinessTypeBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionBusinessTypeBoolExp>>;
-  businesses?: InputMaybe<RegisterBusinessActionBusinessBoolExp>;
-  businesses_aggregate?: InputMaybe<RegisterBusinessActionBusinessAggregateBoolExp>;
-  type?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-};
-
-export enum RegisterBusinessActionBusinessTypeConstraint {
-  /** unique or primary key constraint on columns "type" */
-  BusinessTypePkey = "business_type_pkey",
-}
-
-export enum RegisterBusinessActionBusinessTypeEnum {
-  Bar = "bar",
-  Hotel = "hotel",
-  Restaurant = "restaurant",
-}
-
-export type RegisterBusinessActionBusinessTypeEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionBusinessTypeEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionBusinessTypeEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionBusinessTypeEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionBusinessTypeEnum>>;
-};
-
-export type RegisterBusinessActionBusinessTypeInsertInput = {
-  businesses?: InputMaybe<RegisterBusinessActionBusinessArrRelInsertInput>;
-  type?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RegisterBusinessActionBusinessTypeObjRelInsertInput = {
-  data: RegisterBusinessActionBusinessTypeInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionBusinessTypeOnConflict>;
-};
-
-export type RegisterBusinessActionBusinessTypeOnConflict = {
-  constraint: RegisterBusinessActionBusinessTypeConstraint;
-  update_columns: Array<RegisterBusinessActionBusinessTypeUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionBusinessTypeBoolExp>;
-};
-
-export enum RegisterBusinessActionBusinessTypeUpdateColumn {
-  /** column name */
-  Type = "type",
-}
-
-export enum RegisterBusinessActionBusinessUpdateColumn {
-  /** column name */
-  ContactEmail = "contactEmail",
-  /** column name */
-  ContactName = "contactName",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  OwnerId = "owner_id",
-  /** column name */
-  PhoneNumber = "phoneNumber",
-  /** column name */
-  PreferredContactMethod = "preferredContactMethod",
-  /** column name */
-  PreferredDeliveryMethod = "preferredDeliveryMethod",
-  /** column name */
-  RegisteredBy = "registered_by",
-  /** column name */
-  RegistrationChannel = "registration_channel",
-  /** column name */
-  Type = "type",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export type RegisterBusinessActionCourierRidesAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionCourierRidesAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionCourierRidesAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterBusinessActionCourierRidesSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionCourierRidesBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionCourierRidesArrRelInsertInput = {
-  data: Array<RegisterBusinessActionCourierRidesInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionCourierRidesOnConflict>;
-};
-
-export type RegisterBusinessActionCourierRidesBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionCourierRidesBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionCourierRidesBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionCourierRidesBoolExp>>;
-  color?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  courier?: InputMaybe<RegisterBusinessActionCouriersBoolExp>;
-  courier_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  license_plate_number?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  model?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  ride_status?: InputMaybe<RegisterBusinessActionRideStatusBoolExp>;
-  ride_type?: InputMaybe<RegisterBusinessActionRideTypeBoolExp>;
-  status?: InputMaybe<RegisterBusinessActionRideStatusEnumComparisonExp>;
-  type?: InputMaybe<RegisterBusinessActionRideTypeEnumComparisonExp>;
-  updated_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-};
-
-export enum RegisterBusinessActionCourierRidesConstraint {
-  /** unique or primary key constraint on columns "id" */
-  CourierRidesPkey = "courier_rides_pkey",
-}
-
-export type RegisterBusinessActionCourierRidesInsertInput = {
-  color?: InputMaybe<Scalars["String"]["input"]>;
-  courier?: InputMaybe<RegisterBusinessActionCouriersObjRelInsertInput>;
-  courier_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  license_plate_number?: InputMaybe<Scalars["String"]["input"]>;
-  model?: InputMaybe<Scalars["String"]["input"]>;
-  ride_status?: InputMaybe<RegisterBusinessActionRideStatusObjRelInsertInput>;
-  ride_type?: InputMaybe<RegisterBusinessActionRideTypeObjRelInsertInput>;
-  status?: InputMaybe<RegisterBusinessActionRideStatusEnum>;
-  type?: InputMaybe<RegisterBusinessActionRideTypeEnum>;
-  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-};
-
-export type RegisterBusinessActionCourierRidesOnConflict = {
-  constraint: RegisterBusinessActionCourierRidesConstraint;
-  update_columns: Array<RegisterBusinessActionCourierRidesUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionCourierRidesBoolExp>;
-};
-
-export enum RegisterBusinessActionCourierRidesSelectColumn {
-  /** column name */
-  Color = "color",
-  /** column name */
-  CourierId = "courier_id",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  LicensePlateNumber = "license_plate_number",
-  /** column name */
-  Model = "model",
-  /** column name */
-  Status = "status",
-  /** column name */
-  Type = "type",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export enum RegisterBusinessActionCourierRidesUpdateColumn {
-  /** column name */
-  Color = "color",
-  /** column name */
-  CourierId = "courier_id",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  LicensePlateNumber = "license_plate_number",
-  /** column name */
-  Model = "model",
-  /** column name */
-  Status = "status",
-  /** column name */
-  Type = "type",
-  /** column name */
-  UpdatedAt = "updated_at",
-}
-
-export type RegisterBusinessActionCouriersBoolExp = {
-  DOB?: InputMaybe<RegisterBusinessActionDateComparisonExp>;
-  _and?: InputMaybe<Array<RegisterBusinessActionCouriersBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionCouriersBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionCouriersBoolExp>>;
-  assigned?: InputMaybe<RegisterBusinessActionBooleanComparisonExp>;
-  avatar?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  deliveries?: InputMaybe<RegisterBusinessActionDeliveryBoolExp>;
-  deliveries_aggregate?: InputMaybe<RegisterBusinessActionDeliveryAggregateBoolExp>;
-  email?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  gender?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  name?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  phoneNumber?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  rides?: InputMaybe<RegisterBusinessActionCourierRidesBoolExp>;
-  rides_aggregate?: InputMaybe<RegisterBusinessActionCourierRidesAggregateBoolExp>;
-};
-
-export enum RegisterBusinessActionCouriersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  CouriersPkey = "couriers_pkey",
-}
-
-export type RegisterBusinessActionCouriersInsertInput = {
-  DOB?: InputMaybe<Scalars["date"]["input"]>;
-  assigned?: InputMaybe<Scalars["Boolean"]["input"]>;
-  avatar?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  deliveries?: InputMaybe<RegisterBusinessActionDeliveryArrRelInsertInput>;
-  email?: InputMaybe<Scalars["String"]["input"]>;
-  gender?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
-  rides?: InputMaybe<RegisterBusinessActionCourierRidesArrRelInsertInput>;
-};
-
-export type RegisterBusinessActionCouriersObjRelInsertInput = {
-  data: RegisterBusinessActionCouriersInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionCouriersOnConflict>;
-};
-
-export type RegisterBusinessActionCouriersOnConflict = {
-  constraint: RegisterBusinessActionCouriersConstraint;
-  update_columns: Array<RegisterBusinessActionCouriersUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionCouriersBoolExp>;
-};
-
-export enum RegisterBusinessActionCouriersUpdateColumn {
-  /** column name */
-  Dob = "DOB",
-  /** column name */
-  Assigned = "assigned",
-  /** column name */
-  Avatar = "avatar",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Email = "email",
-  /** column name */
-  Gender = "gender",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  PhoneNumber = "phoneNumber",
-}
-
-export type RegisterBusinessActionDateComparisonExp = {
-  _eq?: InputMaybe<Scalars["date"]["input"]>;
-  _gt?: InputMaybe<Scalars["date"]["input"]>;
-  _gte?: InputMaybe<Scalars["date"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["date"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["date"]["input"]>;
-  _lte?: InputMaybe<Scalars["date"]["input"]>;
-  _neq?: InputMaybe<Scalars["date"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["date"]["input"]>>;
-};
-
-export type RegisterBusinessActionDeliveryAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionDeliveryAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionDeliveryAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterBusinessActionDeliverySelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionDeliveryBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionDeliveryArrRelInsertInput = {
-  data: Array<RegisterBusinessActionDeliveryInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionDeliveryOnConflict>;
-};
-
-export type RegisterBusinessActionDeliveryBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionDeliveryBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionDeliveryBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionDeliveryBoolExp>>;
-  courier?: InputMaybe<RegisterBusinessActionCouriersBoolExp>;
-  courierId?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  order?: InputMaybe<RegisterBusinessActionOrdersBoolExp>;
-  orderId?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  status?: InputMaybe<RegisterBusinessActionDeliveryStatusEnumComparisonExp>;
-};
-
-export enum RegisterBusinessActionDeliveryConstraint {
-  /** unique or primary key constraint on columns "id" */
-  DeliveryPkey = "delivery_pkey",
-}
-
-export type RegisterBusinessActionDeliveryInsertInput = {
-  courier?: InputMaybe<RegisterBusinessActionCouriersObjRelInsertInput>;
-  courierId?: InputMaybe<Scalars["uuid"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  order?: InputMaybe<RegisterBusinessActionOrdersObjRelInsertInput>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
-  status?: InputMaybe<RegisterBusinessActionDeliveryStatusEnum>;
-};
-
-export type RegisterBusinessActionDeliveryOnConflict = {
-  constraint: RegisterBusinessActionDeliveryConstraint;
-  update_columns: Array<RegisterBusinessActionDeliveryUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionDeliveryBoolExp>;
-};
-
-export enum RegisterBusinessActionDeliverySelectColumn {
-  /** column name */
-  CourierId = "courierId",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Status = "status",
-}
-
-export enum RegisterBusinessActionDeliveryStatusEnum {
-  Active = "active",
-  Pending = "pending",
-}
-
-export type RegisterBusinessActionDeliveryStatusEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionDeliveryStatusEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionDeliveryStatusEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionDeliveryStatusEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionDeliveryStatusEnum>>;
-};
-
-export enum RegisterBusinessActionDeliveryUpdateColumn {
-  /** column name */
-  CourierId = "courierId",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Status = "status",
-}
-
-export type RegisterBusinessActionFloat8ComparisonExp = {
-  _eq?: InputMaybe<Scalars["float8"]["input"]>;
-  _gt?: InputMaybe<Scalars["float8"]["input"]>;
-  _gte?: InputMaybe<Scalars["float8"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["float8"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["float8"]["input"]>;
-  _lte?: InputMaybe<Scalars["float8"]["input"]>;
-  _neq?: InputMaybe<Scalars["float8"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["float8"]["input"]>>;
-};
-
-export type RegisterBusinessActionIntComparisonExp = {
-  _eq?: InputMaybe<Scalars["Int"]["input"]>;
-  _gt?: InputMaybe<Scalars["Int"]["input"]>;
-  _gte?: InputMaybe<Scalars["Int"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["Int"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["Int"]["input"]>;
-  _lte?: InputMaybe<Scalars["Int"]["input"]>;
-  _neq?: InputMaybe<Scalars["Int"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["Int"]["input"]>>;
-};
-
-export enum RegisterBusinessActionOrderFulfillmentTypeEnum {
-  Full = "full",
-  Partial = "partial",
-}
-
-export type RegisterBusinessActionOrderFulfillmentTypeEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionOrderFulfillmentTypeEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionOrderFulfillmentTypeEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionOrderFulfillmentTypeEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionOrderFulfillmentTypeEnum>>;
-};
-
-export type RegisterBusinessActionOrderItemAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionOrderItemAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionOrderItemAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterBusinessActionOrderItemSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionOrderItemBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionOrderItemArrRelInsertInput = {
-  data: Array<RegisterBusinessActionOrderItemInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionOrderItemOnConflict>;
-};
-
-export type RegisterBusinessActionOrderItemBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionOrderItemBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionOrderItemBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionOrderItemBoolExp>>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  order?: InputMaybe<RegisterBusinessActionOrdersBoolExp>;
-  orderId?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  price?: InputMaybe<RegisterBusinessActionIntComparisonExp>;
-  product?: InputMaybe<RegisterBusinessActionProductsBoolExp>;
-  productId?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  quantity?: InputMaybe<RegisterBusinessActionIntComparisonExp>;
-};
-
-export enum RegisterBusinessActionOrderItemConstraint {
-  /** unique or primary key constraint on columns "id" */
-  OrderItemsPkey = "order_items_pkey",
-}
-
-export type RegisterBusinessActionOrderItemInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  order?: InputMaybe<RegisterBusinessActionOrdersObjRelInsertInput>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
-  price?: InputMaybe<Scalars["Int"]["input"]>;
-  product?: InputMaybe<RegisterBusinessActionProductsObjRelInsertInput>;
-  productId?: InputMaybe<Scalars["uuid"]["input"]>;
-  quantity?: InputMaybe<Scalars["Int"]["input"]>;
-};
-
-export type RegisterBusinessActionOrderItemOnConflict = {
-  constraint: RegisterBusinessActionOrderItemConstraint;
-  update_columns: Array<RegisterBusinessActionOrderItemUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionOrderItemBoolExp>;
-};
-
-export enum RegisterBusinessActionOrderItemSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Price = "price",
-  /** column name */
-  ProductId = "productId",
-  /** column name */
-  Quantity = "quantity",
-}
-
-export enum RegisterBusinessActionOrderItemUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Price = "price",
-  /** column name */
-  ProductId = "productId",
-  /** column name */
-  Quantity = "quantity",
-}
-
-export type RegisterBusinessActionOrderStatusBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionOrderStatusBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionOrderStatusBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionOrderStatusBoolExp>>;
-  orders?: InputMaybe<RegisterBusinessActionOrdersBoolExp>;
-  orders_aggregate?: InputMaybe<RegisterBusinessActionOrdersAggregateBoolExp>;
-  status?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-};
-
-export enum RegisterBusinessActionOrderStatusConstraint {
-  /** unique or primary key constraint on columns "status" */
-  OrderStatusPkey = "order_status_pkey",
-}
-
-export enum RegisterBusinessActionOrderStatusEnum {
-  Canceled = "CANCELED",
-  Confirmed = "CONFIRMED",
-  Delivered = "DELIVERED",
-  Enroute = "ENROUTE",
-  Fulfilled = "FULFILLED",
-  Pending = "PENDING",
-}
-
-export type RegisterBusinessActionOrderStatusEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionOrderStatusEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionOrderStatusEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionOrderStatusEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionOrderStatusEnum>>;
-};
-
-export type RegisterBusinessActionOrderStatusInsertInput = {
-  orders?: InputMaybe<RegisterBusinessActionOrdersArrRelInsertInput>;
-  status?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RegisterBusinessActionOrderStatusObjRelInsertInput = {
-  data: RegisterBusinessActionOrderStatusInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionOrderStatusOnConflict>;
-};
-
-export type RegisterBusinessActionOrderStatusOnConflict = {
-  constraint: RegisterBusinessActionOrderStatusConstraint;
-  update_columns: Array<RegisterBusinessActionOrderStatusUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionOrderStatusBoolExp>;
-};
-
-export enum RegisterBusinessActionOrderStatusUpdateColumn {
-  /** column name */
-  Status = "status",
-}
-
-export type RegisterBusinessActionOrderSupplierAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionOrderSupplierAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionOrderSupplierAggregateBoolExpCount = {
-  arguments?: InputMaybe<
-    Array<RegisterBusinessActionOrderSupplierSelectColumn>
-  >;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionOrderSupplierBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionOrderSupplierArrRelInsertInput = {
-  data: Array<RegisterBusinessActionOrderSupplierInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionOrderSupplierOnConflict>;
-};
-
-export type RegisterBusinessActionOrderSupplierBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionOrderSupplierBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionOrderSupplierBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionOrderSupplierBoolExp>>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  order?: InputMaybe<RegisterBusinessActionOrdersBoolExp>;
-  order_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  supplier?: InputMaybe<RegisterBusinessActionSuppliersBoolExp>;
-  supplierId?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-};
-
-export enum RegisterBusinessActionOrderSupplierConstraint {
-  /** unique or primary key constraint on columns "id" */
-  OrderSupplierPkey = "order_supplier_pkey",
-}
-
-export type RegisterBusinessActionOrderSupplierInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  order?: InputMaybe<RegisterBusinessActionOrdersObjRelInsertInput>;
-  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  supplier?: InputMaybe<RegisterBusinessActionSuppliersObjRelInsertInput>;
-  supplierId?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-export type RegisterBusinessActionOrderSupplierOnConflict = {
-  constraint: RegisterBusinessActionOrderSupplierConstraint;
-  update_columns: Array<RegisterBusinessActionOrderSupplierUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionOrderSupplierBoolExp>;
-};
-
-export enum RegisterBusinessActionOrderSupplierSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "order_id",
-  /** column name */
-  SupplierId = "supplierId",
-}
-
-export enum RegisterBusinessActionOrderSupplierUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "order_id",
-  /** column name */
-  SupplierId = "supplierId",
-}
-
-export type RegisterBusinessActionOrdersAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionOrdersAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionOrdersAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterBusinessActionOrdersSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionOrdersBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionOrdersArrRelInsertInput = {
-  data: Array<RegisterBusinessActionOrdersInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionOrdersOnConflict>;
-};
-
-export type RegisterBusinessActionOrdersBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionOrdersBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionOrdersBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionOrdersBoolExp>>;
-  agent?: InputMaybe<RegisterBusinessActionAgentBoolExp>;
-  business?: InputMaybe<RegisterBusinessActionBusinessBoolExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  customerId?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  deliveries?: InputMaybe<RegisterBusinessActionDeliveryBoolExp>;
-  deliveries_aggregate?: InputMaybe<RegisterBusinessActionDeliveryAggregateBoolExp>;
-  destination?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  fulfillment_type?: InputMaybe<RegisterBusinessActionOrderFulfillmentTypeEnumComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  orderId?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  order_items?: InputMaybe<RegisterBusinessActionOrderItemBoolExp>;
-  order_items_aggregate?: InputMaybe<RegisterBusinessActionOrderItemAggregateBoolExp>;
-  order_status?: InputMaybe<RegisterBusinessActionOrderStatusBoolExp>;
-  order_suppliers?: InputMaybe<RegisterBusinessActionOrderSupplierBoolExp>;
-  order_suppliers_aggregate?: InputMaybe<RegisterBusinessActionOrderSupplierAggregateBoolExp>;
-  origin?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  processedBy?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  status?: InputMaybe<RegisterBusinessActionOrderStatusEnumComparisonExp>;
-};
-
-export enum RegisterBusinessActionOrdersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  OrdersPkey = "orders_pkey",
-}
-
-export type RegisterBusinessActionOrdersInsertInput = {
-  agent?: InputMaybe<RegisterBusinessActionAgentObjRelInsertInput>;
-  business?: InputMaybe<RegisterBusinessActionBusinessObjRelInsertInput>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  customerId?: InputMaybe<Scalars["uuid"]["input"]>;
-  deliveries?: InputMaybe<RegisterBusinessActionDeliveryArrRelInsertInput>;
-  destination?: InputMaybe<Scalars["String"]["input"]>;
-  fulfillment_type?: InputMaybe<RegisterBusinessActionOrderFulfillmentTypeEnum>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
-  order_items?: InputMaybe<RegisterBusinessActionOrderItemArrRelInsertInput>;
-  order_status?: InputMaybe<RegisterBusinessActionOrderStatusObjRelInsertInput>;
-  order_suppliers?: InputMaybe<RegisterBusinessActionOrderSupplierArrRelInsertInput>;
-  origin?: InputMaybe<Scalars["String"]["input"]>;
-  processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
-  status?: InputMaybe<RegisterBusinessActionOrderStatusEnum>;
-};
-
-export type RegisterBusinessActionOrdersObjRelInsertInput = {
-  data: RegisterBusinessActionOrdersInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionOrdersOnConflict>;
-};
-
-export type RegisterBusinessActionOrdersOnConflict = {
-  constraint: RegisterBusinessActionOrdersConstraint;
-  update_columns: Array<RegisterBusinessActionOrdersUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionOrdersBoolExp>;
-};
-
-export enum RegisterBusinessActionOrdersSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  CustomerId = "customerId",
-  /** column name */
-  Destination = "destination",
-  /** column name */
-  FulfillmentType = "fulfillment_type",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Origin = "origin",
-  /** column name */
-  ProcessedBy = "processedBy",
-  /** column name */
-  Status = "status",
-}
-
-export enum RegisterBusinessActionOrdersUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  CustomerId = "customerId",
-  /** column name */
-  Destination = "destination",
-  /** column name */
-  FulfillmentType = "fulfillment_type",
-  /** column name */
-  Id = "id",
-  /** column name */
-  OrderId = "orderId",
-  /** column name */
-  Origin = "origin",
-  /** column name */
-  ProcessedBy = "processedBy",
-  /** column name */
-  Status = "status",
-}
-
-export type RegisterBusinessActionOutput = {
-  __typename?: "RegisterBusinessActionOutput";
+export type OrderStatusHistoryOutput = {
+  __typename?: "OrderStatusHistoryOutput";
+  created_at: Scalars["timestamptz"]["output"];
   id: Scalars["uuid"]["output"];
-  name?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type RegisterBusinessActionProductsAggregateBoolExp = {
-  bool_and?: InputMaybe<RegisterBusinessActionProductsAggregateBoolExpBoolAnd>;
-  bool_or?: InputMaybe<RegisterBusinessActionProductsAggregateBoolExpBoolOr>;
-  count?: InputMaybe<RegisterBusinessActionProductsAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionProductsAggregateBoolExpBoolAnd = {
-  arguments: RegisterBusinessActionProductsSelectColumnProductsAggregateBoolExpBoolAndArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionProductsBoolExp>;
-  predicate: RegisterBusinessActionBooleanComparisonExp;
-};
-
-export type RegisterBusinessActionProductsAggregateBoolExpBoolOr = {
-  arguments: RegisterBusinessActionProductsSelectColumnProductsAggregateBoolExpBoolOrArgumentsColumns;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionProductsBoolExp>;
-  predicate: RegisterBusinessActionBooleanComparisonExp;
-};
-
-export type RegisterBusinessActionProductsAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterBusinessActionProductsSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionProductsBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionProductsArrRelInsertInput = {
-  data: Array<RegisterBusinessActionProductsInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionProductsOnConflict>;
-};
-
-export type RegisterBusinessActionProductsBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionProductsBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionProductsBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionProductsBoolExp>>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  description?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  discount?: InputMaybe<RegisterBusinessActionIntComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  inStock?: InputMaybe<RegisterBusinessActionBooleanComparisonExp>;
-  name?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  order_items?: InputMaybe<RegisterBusinessActionOrderItemBoolExp>;
-  order_items_aggregate?: InputMaybe<RegisterBusinessActionOrderItemAggregateBoolExp>;
-  price?: InputMaybe<RegisterBusinessActionIntComparisonExp>;
-  quantity?: InputMaybe<RegisterBusinessActionIntComparisonExp>;
-  supplier?: InputMaybe<RegisterBusinessActionSuppliersBoolExp>;
-  supplier_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-};
-
-export enum RegisterBusinessActionProductsConstraint {
-  /** unique or primary key constraint on columns "id" */
-  ProductsPkey = "products_pkey",
-}
-
-export type RegisterBusinessActionProductsInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  discount?: InputMaybe<Scalars["Int"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  inStock?: InputMaybe<Scalars["Boolean"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  order_items?: InputMaybe<RegisterBusinessActionOrderItemArrRelInsertInput>;
-  price?: InputMaybe<Scalars["Int"]["input"]>;
-  quantity?: InputMaybe<Scalars["Int"]["input"]>;
-  supplier?: InputMaybe<RegisterBusinessActionSuppliersObjRelInsertInput>;
-  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-export type RegisterBusinessActionProductsObjRelInsertInput = {
-  data: RegisterBusinessActionProductsInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionProductsOnConflict>;
-};
-
-export type RegisterBusinessActionProductsOnConflict = {
-  constraint: RegisterBusinessActionProductsConstraint;
-  update_columns: Array<RegisterBusinessActionProductsUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionProductsBoolExp>;
-};
-
-export enum RegisterBusinessActionProductsSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Discount = "discount",
-  /** column name */
-  Id = "id",
-  /** column name */
-  InStock = "inStock",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Price = "price",
-  /** column name */
-  Quantity = "quantity",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export enum RegisterBusinessActionProductsSelectColumnProductsAggregateBoolExpBoolAndArgumentsColumns {
-  /** column name */
-  InStock = "inStock",
-}
-
-export enum RegisterBusinessActionProductsSelectColumnProductsAggregateBoolExpBoolOrArgumentsColumns {
-  /** column name */
-  InStock = "inStock",
-}
-
-export enum RegisterBusinessActionProductsUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Discount = "discount",
-  /** column name */
-  Id = "id",
-  /** column name */
-  InStock = "inStock",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Price = "price",
-  /** column name */
-  Quantity = "quantity",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export type RegisterBusinessActionRegisterationChannelTypeBoolExp = {
-  _and?: InputMaybe<
-    Array<RegisterBusinessActionRegisterationChannelTypeBoolExp>
-  >;
-  _not?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeBoolExp>;
-  _or?: InputMaybe<
-    Array<RegisterBusinessActionRegisterationChannelTypeBoolExp>
-  >;
-  businesses?: InputMaybe<RegisterBusinessActionBusinessBoolExp>;
-  businesses_aggregate?: InputMaybe<RegisterBusinessActionBusinessAggregateBoolExp>;
-  channel?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-};
-
-export enum RegisterBusinessActionRegisterationChannelTypeConstraint {
-  /** unique or primary key constraint on columns "channel" */
-  RegisterationChannelPkey = "registeration_channel_pkey",
-}
-
-export enum RegisterBusinessActionRegisterationChannelTypeEnum {
-  Agent = "AGENT",
-  App = "APP",
-  Ussd = "USSD",
-}
-
-export type RegisterBusinessActionRegisterationChannelTypeEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionRegisterationChannelTypeEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionRegisterationChannelTypeEnum>>;
-};
-
-export type RegisterBusinessActionRegisterationChannelTypeInsertInput = {
-  businesses?: InputMaybe<RegisterBusinessActionBusinessArrRelInsertInput>;
-  channel?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RegisterBusinessActionRegisterationChannelTypeObjRelInsertInput = {
-  data: RegisterBusinessActionRegisterationChannelTypeInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeOnConflict>;
-};
-
-export type RegisterBusinessActionRegisterationChannelTypeOnConflict = {
-  constraint: RegisterBusinessActionRegisterationChannelTypeConstraint;
-  update_columns: Array<RegisterBusinessActionRegisterationChannelTypeUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionRegisterationChannelTypeBoolExp>;
-};
-
-export enum RegisterBusinessActionRegisterationChannelTypeUpdateColumn {
-  /** column name */
-  Channel = "channel",
-}
-
-export type RegisterBusinessActionRideStatusBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionRideStatusBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionRideStatusBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionRideStatusBoolExp>>;
-  courier_rides?: InputMaybe<RegisterBusinessActionCourierRidesBoolExp>;
-  courier_rides_aggregate?: InputMaybe<RegisterBusinessActionCourierRidesAggregateBoolExp>;
-  status?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-};
-
-export enum RegisterBusinessActionRideStatusConstraint {
-  /** unique or primary key constraint on columns "status" */
-  RideStatusPkey = "ride_status_pkey",
-}
-
-export enum RegisterBusinessActionRideStatusEnum {
-  Active = "Active",
-  Inactive = "Inactive",
-  Maintenance = "Maintenance",
-}
-
-export type RegisterBusinessActionRideStatusEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionRideStatusEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionRideStatusEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionRideStatusEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionRideStatusEnum>>;
-};
-
-export type RegisterBusinessActionRideStatusInsertInput = {
-  courier_rides?: InputMaybe<RegisterBusinessActionCourierRidesArrRelInsertInput>;
-  status?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RegisterBusinessActionRideStatusObjRelInsertInput = {
-  data: RegisterBusinessActionRideStatusInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionRideStatusOnConflict>;
-};
-
-export type RegisterBusinessActionRideStatusOnConflict = {
-  constraint: RegisterBusinessActionRideStatusConstraint;
-  update_columns: Array<RegisterBusinessActionRideStatusUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionRideStatusBoolExp>;
-};
-
-export enum RegisterBusinessActionRideStatusUpdateColumn {
-  /** column name */
-  Status = "status",
-}
-
-export type RegisterBusinessActionRideTypeBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionRideTypeBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionRideTypeBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionRideTypeBoolExp>>;
-  courier_rides?: InputMaybe<RegisterBusinessActionCourierRidesBoolExp>;
-  courier_rides_aggregate?: InputMaybe<RegisterBusinessActionCourierRidesAggregateBoolExp>;
-  type?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-};
-
-export enum RegisterBusinessActionRideTypeConstraint {
-  /** unique or primary key constraint on columns "type" */
-  RideTypePkey = "ride_type_pkey",
-}
-
-export enum RegisterBusinessActionRideTypeEnum {
-  Bike = "Bike",
-  Car = "Car",
-}
-
-export type RegisterBusinessActionRideTypeEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionRideTypeEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionRideTypeEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionRideTypeEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionRideTypeEnum>>;
-};
-
-export type RegisterBusinessActionRideTypeInsertInput = {
-  courier_rides?: InputMaybe<RegisterBusinessActionCourierRidesArrRelInsertInput>;
-  type?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RegisterBusinessActionRideTypeObjRelInsertInput = {
-  data: RegisterBusinessActionRideTypeInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionRideTypeOnConflict>;
-};
-
-export type RegisterBusinessActionRideTypeOnConflict = {
-  constraint: RegisterBusinessActionRideTypeConstraint;
-  update_columns: Array<RegisterBusinessActionRideTypeUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionRideTypeBoolExp>;
-};
-
-export enum RegisterBusinessActionRideTypeUpdateColumn {
-  /** column name */
-  Type = "type",
-}
-
-export type RegisterBusinessActionStringComparisonExp = {
-  _eq?: InputMaybe<Scalars["String"]["input"]>;
-  _gt?: InputMaybe<Scalars["String"]["input"]>;
-  _gte?: InputMaybe<Scalars["String"]["input"]>;
-  _ilike?: InputMaybe<Scalars["String"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["String"]["input"]>>;
-  _iregex?: InputMaybe<Scalars["String"]["input"]>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _like?: InputMaybe<Scalars["String"]["input"]>;
-  _lt?: InputMaybe<Scalars["String"]["input"]>;
-  _lte?: InputMaybe<Scalars["String"]["input"]>;
-  _neq?: InputMaybe<Scalars["String"]["input"]>;
-  _nilike?: InputMaybe<Scalars["String"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["String"]["input"]>>;
-  _niregex?: InputMaybe<Scalars["String"]["input"]>;
-  _nlike?: InputMaybe<Scalars["String"]["input"]>;
-  _nregex?: InputMaybe<Scalars["String"]["input"]>;
-  _nsimilar?: InputMaybe<Scalars["String"]["input"]>;
-  _regex?: InputMaybe<Scalars["String"]["input"]>;
-  _similar?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RegisterBusinessActionSupplierCategoriesEnumBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionSupplierCategoriesEnumBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionSupplierCategoriesEnumBoolExp>>;
-  description?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  name?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  suppliers_categories?: InputMaybe<RegisterBusinessActionSuppliersCategoriesBoolExp>;
-  suppliers_categories_aggregate?: InputMaybe<RegisterBusinessActionSuppliersCategoriesAggregateBoolExp>;
-};
-
-export enum RegisterBusinessActionSupplierCategoriesEnumConstraint {
-  /** unique or primary key constraint on columns "name" */
-  SupplierCategoriesEnumPkey = "supplier_categories_enum_pkey",
-}
-
-export enum RegisterBusinessActionSupplierCategoriesEnumEnum {
-  /** Tools, seeds, and equipment for farmers, supporting agricultural productivity and local food production. */
-  AgriculturalSupplies = "agricultural_supplies",
-  /** Cosmetics, skincare products, grooming essentials, and personal care items, supporting local beauty entrepreneurs and promoting self-care. */
-  BeautyAndCare = "beauty_and_care",
-  /** Apparel, fabrics, and textiles, empowering local tailors and designers, fostering the textile industry */
-  ClothingAndTextiles = "clothing_and_textiles",
-  /** Essential materials like cement, steel, and bricks for construction projects, fostering infrastructure development. */
-  ConstructionMaterials = "construction_materials",
-  /** Books, educational tools, and e-learning resources, promoting education and literacy in the community. */
-  EducationalMaterials = "educational_materials",
-  /** Electronic devices, wiring, and appliances, promoting technological access and local electronic businesses */
-  ElectronicsAppliances = "electronics_appliances",
-  /** Solar panels, wind turbines, and energy-efficient appliances, promoting sustainable energy use and reducing the carbon footprint. */
-  EnergySolutions = "energy_solutions",
-  /** Fresh produce, packaged foods, beverages, and culinary supplies, supporting local agriculture and culinary enterprises. */
-  FoodAndBeverages = "food_and_beverages",
-  /** Medical supplies, safety equipment, and personal protective gear, ensuring the well-being of workers and communities. */
-  HealthAndSafety = "health_and_safety",
-  /** Furniture, home appliances, decor items, and household essentials, improving living standards and supporting local artisans. */
-  HomeAndLiving = "home_and_living",
-  /** Stationery, office materials, and supplies, supporting administrative functions of businesses and organizations. */
-  OfficeSupplies = "office_supplies",
-  /** Vehicles, spare parts, and transportation services, enhancing mobility and logistics for businesses and individuals. */
-  TransportationSolutions = "transportation_solutions",
-  /** Recycling equipment, waste bins, and eco-friendly products, encouraging responsible waste management practices. */
-  WasteAndRecycling = "waste_and_recycling",
-  /** Water filters, sanitation kits, and plumbing supplies, ensuring access to clean water and promoting hygiene. */
-  WaterAndSanitation = "water_and_sanitation",
-}
-
-export type RegisterBusinessActionSupplierCategoriesEnumEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionSupplierCategoriesEnumEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionSupplierCategoriesEnumEnum>>;
-};
-
-export type RegisterBusinessActionSupplierCategoriesEnumInsertInput = {
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  suppliers_categories?: InputMaybe<RegisterBusinessActionSuppliersCategoriesArrRelInsertInput>;
-};
-
-export type RegisterBusinessActionSupplierCategoriesEnumObjRelInsertInput = {
-  data: RegisterBusinessActionSupplierCategoriesEnumInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumOnConflict>;
-};
-
-export type RegisterBusinessActionSupplierCategoriesEnumOnConflict = {
-  constraint: RegisterBusinessActionSupplierCategoriesEnumConstraint;
-  update_columns: Array<RegisterBusinessActionSupplierCategoriesEnumUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumBoolExp>;
-};
-
-export enum RegisterBusinessActionSupplierCategoriesEnumUpdateColumn {
-  /** column name */
-  Description = "description",
-  /** column name */
-  Name = "name",
-}
-
-export type RegisterBusinessActionSupplierServiceZoneAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionSupplierServiceZoneAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionSupplierServiceZoneAggregateBoolExpCount = {
-  arguments?: InputMaybe<
-    Array<RegisterBusinessActionSupplierServiceZoneSelectColumn>
-  >;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionSupplierServiceZoneBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionSupplierServiceZoneArrRelInsertInput = {
-  data: Array<RegisterBusinessActionSupplierServiceZoneInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionSupplierServiceZoneOnConflict>;
-};
-
-export type RegisterBusinessActionSupplierServiceZoneBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionSupplierServiceZoneBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionSupplierServiceZoneBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionSupplierServiceZoneBoolExp>>;
-  coverage_area_radius?: InputMaybe<RegisterBusinessActionIntComparisonExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  location_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  supplier_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-};
-
-export enum RegisterBusinessActionSupplierServiceZoneConstraint {
-  /** unique or primary key constraint on columns "id" */
-  SupplierServiceZonePkey = "supplier_service_zone_pkey",
-}
-
-export type RegisterBusinessActionSupplierServiceZoneInsertInput = {
-  coverage_area_radius?: InputMaybe<Scalars["Int"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  location_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-export type RegisterBusinessActionSupplierServiceZoneOnConflict = {
-  constraint: RegisterBusinessActionSupplierServiceZoneConstraint;
-  update_columns: Array<RegisterBusinessActionSupplierServiceZoneUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionSupplierServiceZoneBoolExp>;
-};
-
-export enum RegisterBusinessActionSupplierServiceZoneSelectColumn {
-  /** column name */
-  CoverageAreaRadius = "coverage_area_radius",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  LocationId = "location_id",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export enum RegisterBusinessActionSupplierServiceZoneUpdateColumn {
-  /** column name */
-  CoverageAreaRadius = "coverage_area_radius",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  LocationId = "location_id",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export type RegisterBusinessActionSuppliersBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionSuppliersBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionSuppliersBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionSuppliersBoolExp>>;
-  categories?: InputMaybe<RegisterBusinessActionSuppliersCategoriesBoolExp>;
-  categories_aggregate?: InputMaybe<RegisterBusinessActionSuppliersCategoriesAggregateBoolExp>;
-  contactEmail?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  contactName?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  description?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  name?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  order_suppliers?: InputMaybe<RegisterBusinessActionOrderSupplierBoolExp>;
-  order_suppliers_aggregate?: InputMaybe<RegisterBusinessActionOrderSupplierAggregateBoolExp>;
-  phoneNumber?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  products?: InputMaybe<RegisterBusinessActionProductsBoolExp>;
-  products_aggregate?: InputMaybe<RegisterBusinessActionProductsAggregateBoolExp>;
-  service_zones?: InputMaybe<RegisterBusinessActionSupplierServiceZoneBoolExp>;
-  service_zones_aggregate?: InputMaybe<RegisterBusinessActionSupplierServiceZoneAggregateBoolExp>;
-  streetAddress?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  user_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  zone?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-};
-
-export type RegisterBusinessActionSuppliersCategoriesAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionSuppliersCategoriesAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionSuppliersCategoriesAggregateBoolExpCount = {
-  arguments?: InputMaybe<
-    Array<RegisterBusinessActionSuppliersCategoriesSelectColumn>
-  >;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionSuppliersCategoriesBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionSuppliersCategoriesArrRelInsertInput = {
-  data: Array<RegisterBusinessActionSuppliersCategoriesInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionSuppliersCategoriesOnConflict>;
-};
-
-export type RegisterBusinessActionSuppliersCategoriesBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionSuppliersCategoriesBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionSuppliersCategoriesBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionSuppliersCategoriesBoolExp>>;
-  category_name?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumEnumComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  supplier?: InputMaybe<RegisterBusinessActionSuppliersBoolExp>;
-  supplier_categories_enum?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumBoolExp>;
-  supplier_id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-};
-
-export enum RegisterBusinessActionSuppliersCategoriesConstraint {
-  /** unique or primary key constraint on columns "id" */
-  SuppliersCategoriesPkey = "suppliers_categories_pkey",
-}
-
-export type RegisterBusinessActionSuppliersCategoriesInsertInput = {
-  category_name?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumEnum>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  supplier?: InputMaybe<RegisterBusinessActionSuppliersObjRelInsertInput>;
-  supplier_categories_enum?: InputMaybe<RegisterBusinessActionSupplierCategoriesEnumObjRelInsertInput>;
-  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
-};
-
-export type RegisterBusinessActionSuppliersCategoriesOnConflict = {
-  constraint: RegisterBusinessActionSuppliersCategoriesConstraint;
-  update_columns: Array<RegisterBusinessActionSuppliersCategoriesUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionSuppliersCategoriesBoolExp>;
-};
-
-export enum RegisterBusinessActionSuppliersCategoriesSelectColumn {
-  /** column name */
-  CategoryName = "category_name",
-  /** column name */
-  Id = "id",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export enum RegisterBusinessActionSuppliersCategoriesUpdateColumn {
-  /** column name */
-  CategoryName = "category_name",
-  /** column name */
-  Id = "id",
-  /** column name */
-  SupplierId = "supplier_id",
-}
-
-export enum RegisterBusinessActionSuppliersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  SuppliersPkey = "suppliers_pkey",
-}
-
-export type RegisterBusinessActionSuppliersInsertInput = {
-  categories?: InputMaybe<RegisterBusinessActionSuppliersCategoriesArrRelInsertInput>;
-  contactEmail?: InputMaybe<Scalars["String"]["input"]>;
-  contactName?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  order_suppliers?: InputMaybe<RegisterBusinessActionOrderSupplierArrRelInsertInput>;
-  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
-  products?: InputMaybe<RegisterBusinessActionProductsArrRelInsertInput>;
-  service_zones?: InputMaybe<RegisterBusinessActionSupplierServiceZoneArrRelInsertInput>;
-  streetAddress?: InputMaybe<Scalars["String"]["input"]>;
-  user_id?: InputMaybe<Scalars["uuid"]["input"]>;
-  zone?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RegisterBusinessActionSuppliersObjRelInsertInput = {
-  data: RegisterBusinessActionSuppliersInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionSuppliersOnConflict>;
-};
-
-export type RegisterBusinessActionSuppliersOnConflict = {
-  constraint: RegisterBusinessActionSuppliersConstraint;
-  update_columns: Array<RegisterBusinessActionSuppliersUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionSuppliersBoolExp>;
-};
-
-export enum RegisterBusinessActionSuppliersUpdateColumn {
-  /** column name */
-  ContactEmail = "contactEmail",
-  /** column name */
-  ContactName = "contactName",
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Description = "description",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  PhoneNumber = "phoneNumber",
-  /** column name */
-  StreetAddress = "streetAddress",
-  /** column name */
-  UserId = "user_id",
-  /** column name */
-  Zone = "zone",
-}
-
-export type RegisterBusinessActionTimestamptzComparisonExp = {
-  _eq?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _gt?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _gte?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _lte?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _neq?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
-};
-
-export type RegisterBusinessActionUserRoleBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionUserRoleBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionUserRoleBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionUserRoleBoolExp>>;
-  role?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  users?: InputMaybe<RegisterBusinessActionUsersBoolExp>;
-  users_aggregate?: InputMaybe<RegisterBusinessActionUsersAggregateBoolExp>;
-};
-
-export enum RegisterBusinessActionUserRoleConstraint {
-  /** unique or primary key constraint on columns "role" */
-  UserRolePkey = "user_role_pkey",
-}
-
-export enum RegisterBusinessActionUserRoleEnum {
-  Admin = "admin",
-  Agent = "agent",
-  Customer = "customer",
-  Supplier = "supplier",
-}
-
-export type RegisterBusinessActionUserRoleEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterBusinessActionUserRoleEnum>;
-  _in?: InputMaybe<Array<RegisterBusinessActionUserRoleEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterBusinessActionUserRoleEnum>;
-  _nin?: InputMaybe<Array<RegisterBusinessActionUserRoleEnum>>;
-};
-
-export type RegisterBusinessActionUserRoleInsertInput = {
-  role?: InputMaybe<Scalars["String"]["input"]>;
-  users?: InputMaybe<RegisterBusinessActionUsersArrRelInsertInput>;
-};
-
-export type RegisterBusinessActionUserRoleObjRelInsertInput = {
-  data: RegisterBusinessActionUserRoleInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionUserRoleOnConflict>;
-};
-
-export type RegisterBusinessActionUserRoleOnConflict = {
-  constraint: RegisterBusinessActionUserRoleConstraint;
-  update_columns: Array<RegisterBusinessActionUserRoleUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionUserRoleBoolExp>;
-};
-
-export enum RegisterBusinessActionUserRoleUpdateColumn {
-  /** column name */
-  Role = "role",
-}
-
-export type RegisterBusinessActionUsersAggregateBoolExp = {
-  count?: InputMaybe<RegisterBusinessActionUsersAggregateBoolExpCount>;
-};
-
-export type RegisterBusinessActionUsersAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterBusinessActionUsersSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterBusinessActionUsersBoolExp>;
-  predicate: RegisterBusinessActionIntComparisonExp;
-};
-
-export type RegisterBusinessActionUsersArrRelInsertInput = {
-  data: Array<RegisterBusinessActionUsersInsertInput>;
-  on_conflict?: InputMaybe<RegisterBusinessActionUsersOnConflict>;
-};
-
-export type RegisterBusinessActionUsersBoolExp = {
-  _and?: InputMaybe<Array<RegisterBusinessActionUsersBoolExp>>;
-  _not?: InputMaybe<RegisterBusinessActionUsersBoolExp>;
-  _or?: InputMaybe<Array<RegisterBusinessActionUsersBoolExp>>;
-  created_at?: InputMaybe<RegisterBusinessActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterBusinessActionUuidComparisonExp>;
-  name?: InputMaybe<RegisterBusinessActionStringComparisonExp>;
-  role?: InputMaybe<RegisterBusinessActionUserRoleEnumComparisonExp>;
-  user_role?: InputMaybe<RegisterBusinessActionUserRoleBoolExp>;
-};
-
-export enum RegisterBusinessActionUsersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  UsersPkey = "users_pkey",
-}
-
-export type RegisterBusinessActionUsersInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  role?: InputMaybe<RegisterBusinessActionUserRoleEnum>;
-  user_role?: InputMaybe<RegisterBusinessActionUserRoleObjRelInsertInput>;
-};
-
-export type RegisterBusinessActionUsersObjRelInsertInput = {
-  data: RegisterBusinessActionUsersInsertInput;
-  on_conflict?: InputMaybe<RegisterBusinessActionUsersOnConflict>;
-};
-
-export type RegisterBusinessActionUsersOnConflict = {
-  constraint: RegisterBusinessActionUsersConstraint;
-  update_columns: Array<RegisterBusinessActionUsersUpdateColumn>;
-  where?: InputMaybe<RegisterBusinessActionUsersBoolExp>;
-};
-
-export enum RegisterBusinessActionUsersSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Role = "role",
-}
-
-export enum RegisterBusinessActionUsersUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Role = "role",
-}
-
-export type RegisterBusinessActionUuidComparisonExp = {
-  _eq?: InputMaybe<Scalars["uuid"]["input"]>;
-  _gt?: InputMaybe<Scalars["uuid"]["input"]>;
-  _gte?: InputMaybe<Scalars["uuid"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["uuid"]["input"]>;
-  _lte?: InputMaybe<Scalars["uuid"]["input"]>;
-  _neq?: InputMaybe<Scalars["uuid"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
-};
-
-export type RegisterUserActionIntComparisonExp = {
-  _eq?: InputMaybe<Scalars["Int"]["input"]>;
-  _gt?: InputMaybe<Scalars["Int"]["input"]>;
-  _gte?: InputMaybe<Scalars["Int"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["Int"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["Int"]["input"]>;
-  _lte?: InputMaybe<Scalars["Int"]["input"]>;
-  _neq?: InputMaybe<Scalars["Int"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["Int"]["input"]>>;
-};
-
-export type RegisterUserActionOutput = {
-  __typename?: "RegisterUserActionOutput";
-  id: Scalars["uuid"]["output"];
-  name?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type RegisterUserActionStringComparisonExp = {
-  _eq?: InputMaybe<Scalars["String"]["input"]>;
-  _gt?: InputMaybe<Scalars["String"]["input"]>;
-  _gte?: InputMaybe<Scalars["String"]["input"]>;
-  _ilike?: InputMaybe<Scalars["String"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["String"]["input"]>>;
-  _iregex?: InputMaybe<Scalars["String"]["input"]>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _like?: InputMaybe<Scalars["String"]["input"]>;
-  _lt?: InputMaybe<Scalars["String"]["input"]>;
-  _lte?: InputMaybe<Scalars["String"]["input"]>;
-  _neq?: InputMaybe<Scalars["String"]["input"]>;
-  _nilike?: InputMaybe<Scalars["String"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["String"]["input"]>>;
-  _niregex?: InputMaybe<Scalars["String"]["input"]>;
-  _nlike?: InputMaybe<Scalars["String"]["input"]>;
-  _nregex?: InputMaybe<Scalars["String"]["input"]>;
-  _nsimilar?: InputMaybe<Scalars["String"]["input"]>;
-  _regex?: InputMaybe<Scalars["String"]["input"]>;
-  _similar?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RegisterUserActionTimestamptzComparisonExp = {
-  _eq?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _gt?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _gte?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _lte?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _neq?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["timestamptz"]["input"]>>;
-};
-
-export type RegisterUserActionUserRoleBoolExp = {
-  _and?: InputMaybe<Array<RegisterUserActionUserRoleBoolExp>>;
-  _not?: InputMaybe<RegisterUserActionUserRoleBoolExp>;
-  _or?: InputMaybe<Array<RegisterUserActionUserRoleBoolExp>>;
-  role?: InputMaybe<RegisterUserActionStringComparisonExp>;
-  users?: InputMaybe<RegisterUserActionUsersBoolExp>;
-  users_aggregate?: InputMaybe<RegisterUserActionUsersAggregateBoolExp>;
-};
-
-export enum RegisterUserActionUserRoleConstraint {
-  /** unique or primary key constraint on columns "role" */
-  UserRolePkey = "user_role_pkey",
-}
-
-export enum RegisterUserActionUserRoleEnum {
-  Admin = "admin",
-  Agent = "agent",
-  Customer = "customer",
-  Supplier = "supplier",
-}
-
-export type RegisterUserActionUserRoleEnumComparisonExp = {
-  _eq?: InputMaybe<RegisterUserActionUserRoleEnum>;
-  _in?: InputMaybe<Array<RegisterUserActionUserRoleEnum>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _neq?: InputMaybe<RegisterUserActionUserRoleEnum>;
-  _nin?: InputMaybe<Array<RegisterUserActionUserRoleEnum>>;
-};
-
-export type RegisterUserActionUserRoleInsertInput = {
-  role?: InputMaybe<Scalars["String"]["input"]>;
-  users?: InputMaybe<RegisterUserActionUsersArrRelInsertInput>;
-};
-
-export type RegisterUserActionUserRoleObjRelInsertInput = {
-  data: RegisterUserActionUserRoleInsertInput;
-  on_conflict?: InputMaybe<RegisterUserActionUserRoleOnConflict>;
-};
-
-export type RegisterUserActionUserRoleOnConflict = {
-  constraint: RegisterUserActionUserRoleConstraint;
-  update_columns: Array<RegisterUserActionUserRoleUpdateColumn>;
-  where?: InputMaybe<RegisterUserActionUserRoleBoolExp>;
-};
-
-export enum RegisterUserActionUserRoleUpdateColumn {
-  /** column name */
-  Role = "role",
-}
-
-export type RegisterUserActionUsersAggregateBoolExp = {
-  count?: InputMaybe<RegisterUserActionUsersAggregateBoolExpCount>;
-};
-
-export type RegisterUserActionUsersAggregateBoolExpCount = {
-  arguments?: InputMaybe<Array<RegisterUserActionUsersSelectColumn>>;
-  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
-  filter?: InputMaybe<RegisterUserActionUsersBoolExp>;
-  predicate: RegisterUserActionIntComparisonExp;
-};
-
-export type RegisterUserActionUsersArrRelInsertInput = {
-  data: Array<RegisterUserActionUsersInsertInput>;
-  on_conflict?: InputMaybe<RegisterUserActionUsersOnConflict>;
-};
-
-export type RegisterUserActionUsersBoolExp = {
-  _and?: InputMaybe<Array<RegisterUserActionUsersBoolExp>>;
-  _not?: InputMaybe<RegisterUserActionUsersBoolExp>;
-  _or?: InputMaybe<Array<RegisterUserActionUsersBoolExp>>;
-  created_at?: InputMaybe<RegisterUserActionTimestamptzComparisonExp>;
-  id?: InputMaybe<RegisterUserActionUuidComparisonExp>;
-  name?: InputMaybe<RegisterUserActionStringComparisonExp>;
-  role?: InputMaybe<RegisterUserActionUserRoleEnumComparisonExp>;
-  user_role?: InputMaybe<RegisterUserActionUserRoleBoolExp>;
-};
-
-export enum RegisterUserActionUsersConstraint {
-  /** unique or primary key constraint on columns "id" */
-  UsersPkey = "users_pkey",
-}
-
-export type RegisterUserActionUsersInsertInput = {
-  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  role?: InputMaybe<RegisterUserActionUserRoleEnum>;
-  user_role?: InputMaybe<RegisterUserActionUserRoleObjRelInsertInput>;
-};
-
-export type RegisterUserActionUsersOnConflict = {
-  constraint: RegisterUserActionUsersConstraint;
-  update_columns: Array<RegisterUserActionUsersUpdateColumn>;
-  where?: InputMaybe<RegisterUserActionUsersBoolExp>;
-};
-
-export enum RegisterUserActionUsersSelectColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Role = "role",
-}
-
-export enum RegisterUserActionUsersUpdateColumn {
-  /** column name */
-  CreatedAt = "created_at",
-  /** column name */
-  Id = "id",
-  /** column name */
-  Name = "name",
-  /** column name */
-  Role = "role",
-}
-
-export type RegisterUserActionUuidComparisonExp = {
-  _eq?: InputMaybe<Scalars["uuid"]["input"]>;
-  _gt?: InputMaybe<Scalars["uuid"]["input"]>;
-  _gte?: InputMaybe<Scalars["uuid"]["input"]>;
-  _in?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
-  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
-  _lt?: InputMaybe<Scalars["uuid"]["input"]>;
-  _lte?: InputMaybe<Scalars["uuid"]["input"]>;
-  _neq?: InputMaybe<Scalars["uuid"]["input"]>;
-  _nin?: InputMaybe<Array<Scalars["uuid"]["input"]>>;
-};
-
-export type RequestToPayInput = {
-  amount: Scalars["Float"]["input"];
-  currency?: InputMaybe<Scalars["String"]["input"]>;
-  externalId: Scalars["String"]["input"];
-  payeeNote?: InputMaybe<Scalars["String"]["input"]>;
-  payer: PayerInput;
-  payerMessage?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RequestToPayResponse = {
-  __typename?: "RequestToPayResponse";
-  message?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type RequestToPayTransactionStatusResponse = {
-  __typename?: "RequestToPayTransactionStatusResponse";
-  amount?: Maybe<Scalars["String"]["output"]>;
-  currency?: Maybe<Scalars["String"]["output"]>;
-  externalId?: Maybe<Scalars["String"]["output"]>;
-  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
-  payeeNote?: Maybe<Scalars["String"]["output"]>;
-  payer?: Maybe<Scalars["String"]["output"]>;
-  payerMessage?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
+  order_id: Scalars["uuid"]["output"];
+  status: Scalars["String"]["output"];
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -4162,34 +137,6 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars["String"]["input"]>;
 };
 
-export type UserInfoWithConsentResponse = {
-  __typename?: "UserInfoWithConsentResponse";
-  active?: Maybe<Scalars["Boolean"]["output"]>;
-  address?: Maybe<Scalars["String"]["output"]>;
-  birthdate?: Maybe<Scalars["String"]["output"]>;
-  city_of_birth?: Maybe<Scalars["String"]["output"]>;
-  country_of_birth?: Maybe<Scalars["String"]["output"]>;
-  credit_score?: Maybe<Scalars["String"]["output"]>;
-  email?: Maybe<Scalars["String"]["output"]>;
-  email_verified?: Maybe<Scalars["Boolean"]["output"]>;
-  employer_name?: Maybe<Scalars["String"]["output"]>;
-  family_name?: Maybe<Scalars["String"]["output"]>;
-  gender?: Maybe<Scalars["String"]["output"]>;
-  given_name?: Maybe<Scalars["String"]["output"]>;
-  identification_type?: Maybe<Scalars["String"]["output"]>;
-  identification_value?: Maybe<Scalars["String"]["output"]>;
-  locale?: Maybe<Scalars["String"]["output"]>;
-  middle_name?: Maybe<Scalars["String"]["output"]>;
-  name?: Maybe<Scalars["String"]["output"]>;
-  occupation?: Maybe<Scalars["String"]["output"]>;
-  phone_number?: Maybe<Scalars["String"]["output"]>;
-  phone_number_verified?: Maybe<Scalars["Boolean"]["output"]>;
-  region_of_birth?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-  sub?: Maybe<Scalars["String"]["output"]>;
-  updated_at?: Maybe<Scalars["Int"]["output"]>;
-};
-
 /** columns and relationships of "accounts" */
 export type Accounts = {
   __typename?: "accounts";
@@ -4207,6 +154,8 @@ export type Accounts = {
   session_state?: Maybe<Scalars["String"]["output"]>;
   token_type?: Maybe<Scalars["String"]["output"]>;
   type: Scalars["String"]["output"];
+  /** An object relationship */
+  user: Users;
   userId: Scalars["uuid"]["output"];
 };
 
@@ -4304,6 +253,7 @@ export type Accounts_Bool_Exp = {
   session_state?: InputMaybe<String_Comparison_Exp>;
   token_type?: InputMaybe<String_Comparison_Exp>;
   type?: InputMaybe<String_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -4335,6 +285,7 @@ export type Accounts_Insert_Input = {
   session_state?: InputMaybe<Scalars["String"]["input"]>;
   token_type?: InputMaybe<Scalars["String"]["input"]>;
   type?: InputMaybe<Scalars["String"]["input"]>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars["uuid"]["input"]>;
 };
 
@@ -4448,6 +399,7 @@ export type Accounts_Order_By = {
   session_state?: InputMaybe<Order_By>;
   token_type?: InputMaybe<Order_By>;
   type?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
@@ -9813,6 +5765,7 @@ export type Delivery = {
   order: Orders;
   orderId: Scalars["uuid"]["output"];
   status?: Maybe<Delivery_Status_Enum>;
+  tracking_number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** aggregated selection of "delivery" */
@@ -9836,9 +5789,17 @@ export type Delivery_Aggregate_Bool_Exp_Count = {
 /** aggregate fields of "delivery" */
 export type Delivery_Aggregate_Fields = {
   __typename?: "delivery_aggregate_fields";
+  avg?: Maybe<Delivery_Avg_Fields>;
   count: Scalars["Int"]["output"];
   max?: Maybe<Delivery_Max_Fields>;
   min?: Maybe<Delivery_Min_Fields>;
+  stddev?: Maybe<Delivery_Stddev_Fields>;
+  stddev_pop?: Maybe<Delivery_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Delivery_Stddev_Samp_Fields>;
+  sum?: Maybe<Delivery_Sum_Fields>;
+  var_pop?: Maybe<Delivery_Var_Pop_Fields>;
+  var_samp?: Maybe<Delivery_Var_Samp_Fields>;
+  variance?: Maybe<Delivery_Variance_Fields>;
 };
 
 /** aggregate fields of "delivery" */
@@ -9849,9 +5810,17 @@ export type Delivery_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "delivery" */
 export type Delivery_Aggregate_Order_By = {
+  avg?: InputMaybe<Delivery_Avg_Order_By>;
   count?: InputMaybe<Order_By>;
   max?: InputMaybe<Delivery_Max_Order_By>;
   min?: InputMaybe<Delivery_Min_Order_By>;
+  stddev?: InputMaybe<Delivery_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Delivery_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Delivery_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Delivery_Sum_Order_By>;
+  var_pop?: InputMaybe<Delivery_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Delivery_Var_Samp_Order_By>;
+  variance?: InputMaybe<Delivery_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "delivery" */
@@ -9859,6 +5828,17 @@ export type Delivery_Arr_Rel_Insert_Input = {
   data: Array<Delivery_Insert_Input>;
   /** upsert condition */
   on_conflict?: InputMaybe<Delivery_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Delivery_Avg_Fields = {
+  __typename?: "delivery_avg_fields";
+  tracking_number?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by avg() on columns of table "delivery" */
+export type Delivery_Avg_Order_By = {
+  tracking_number?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "delivery". All fields are combined with a logical 'AND'. */
@@ -9874,6 +5854,7 @@ export type Delivery_Bool_Exp = {
   order?: InputMaybe<Orders_Bool_Exp>;
   orderId?: InputMaybe<Uuid_Comparison_Exp>;
   status?: InputMaybe<Delivery_Status_Enum_Comparison_Exp>;
+  tracking_number?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "delivery" */
@@ -9881,6 +5862,11 @@ export enum Delivery_Constraint {
   /** unique or primary key constraint on columns "id" */
   DeliveryPkey = "delivery_pkey",
 }
+
+/** input type for incrementing numeric columns in table "delivery" */
+export type Delivery_Inc_Input = {
+  tracking_number?: InputMaybe<Scalars["Int"]["input"]>;
+};
 
 /** input type for inserting data into table "delivery" */
 export type Delivery_Insert_Input = {
@@ -9892,6 +5878,7 @@ export type Delivery_Insert_Input = {
   order?: InputMaybe<Orders_Obj_Rel_Insert_Input>;
   orderId?: InputMaybe<Scalars["uuid"]["input"]>;
   status?: InputMaybe<Delivery_Status_Enum>;
+  tracking_number?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 /** aggregate max on columns */
@@ -9901,6 +5888,7 @@ export type Delivery_Max_Fields = {
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
   orderId?: Maybe<Scalars["uuid"]["output"]>;
+  tracking_number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** order by max() on columns of table "delivery" */
@@ -9909,6 +5897,7 @@ export type Delivery_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   orderId?: InputMaybe<Order_By>;
+  tracking_number?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -9918,6 +5907,7 @@ export type Delivery_Min_Fields = {
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
   orderId?: Maybe<Scalars["uuid"]["output"]>;
+  tracking_number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** order by min() on columns of table "delivery" */
@@ -9926,6 +5916,7 @@ export type Delivery_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   orderId?: InputMaybe<Order_By>;
+  tracking_number?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "delivery" */
@@ -9954,6 +5945,152 @@ export type Delivery_Order_By = {
   order?: InputMaybe<Orders_Order_By>;
   orderId?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
+  tracking_number?: InputMaybe<Order_By>;
+};
+
+/** columns and relationships of "delivery_orders" */
+export type Delivery_Orders = {
+  __typename?: "delivery_orders";
+  created_at: Scalars["timestamptz"]["output"];
+  id: Scalars["uuid"]["output"];
+  order_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** aggregated selection of "delivery_orders" */
+export type Delivery_Orders_Aggregate = {
+  __typename?: "delivery_orders_aggregate";
+  aggregate?: Maybe<Delivery_Orders_Aggregate_Fields>;
+  nodes: Array<Delivery_Orders>;
+};
+
+/** aggregate fields of "delivery_orders" */
+export type Delivery_Orders_Aggregate_Fields = {
+  __typename?: "delivery_orders_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Delivery_Orders_Max_Fields>;
+  min?: Maybe<Delivery_Orders_Min_Fields>;
+};
+
+/** aggregate fields of "delivery_orders" */
+export type Delivery_Orders_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Delivery_Orders_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** Boolean expression to filter rows from the table "delivery_orders". All fields are combined with a logical 'AND'. */
+export type Delivery_Orders_Bool_Exp = {
+  _and?: InputMaybe<Array<Delivery_Orders_Bool_Exp>>;
+  _not?: InputMaybe<Delivery_Orders_Bool_Exp>;
+  _or?: InputMaybe<Array<Delivery_Orders_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  order_id?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "delivery_orders" */
+export enum Delivery_Orders_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  DeliveryOrdersPkey = "delivery_orders_pkey",
+}
+
+/** input type for inserting data into table "delivery_orders" */
+export type Delivery_Orders_Insert_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** aggregate max on columns */
+export type Delivery_Orders_Max_Fields = {
+  __typename?: "delivery_orders_max_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  order_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** aggregate min on columns */
+export type Delivery_Orders_Min_Fields = {
+  __typename?: "delivery_orders_min_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  order_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** response of any mutation on the table "delivery_orders" */
+export type Delivery_Orders_Mutation_Response = {
+  __typename?: "delivery_orders_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Delivery_Orders>;
+};
+
+/** on_conflict condition type for table "delivery_orders" */
+export type Delivery_Orders_On_Conflict = {
+  constraint: Delivery_Orders_Constraint;
+  update_columns?: Array<Delivery_Orders_Update_Column>;
+  where?: InputMaybe<Delivery_Orders_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "delivery_orders". */
+export type Delivery_Orders_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: delivery_orders */
+export type Delivery_Orders_Pk_Columns_Input = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** select columns of table "delivery_orders" */
+export enum Delivery_Orders_Select_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "order_id",
+}
+
+/** input type for updating data in table "delivery_orders" */
+export type Delivery_Orders_Set_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** Streaming cursor of the table "delivery_orders" */
+export type Delivery_Orders_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Delivery_Orders_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Delivery_Orders_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** update columns of table "delivery_orders" */
+export enum Delivery_Orders_Update_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "order_id",
+}
+
+export type Delivery_Orders_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Delivery_Orders_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Delivery_Orders_Bool_Exp;
 };
 
 /** columns and relationships of "delivery_personnel" */
@@ -10121,10 +6258,14 @@ export type Delivery_Pk_Columns_Input = {
 /** columns and relationships of "delivery_request" */
 export type Delivery_Request = {
   __typename?: "delivery_request";
+  courierId?: Maybe<Scalars["uuid"]["output"]>;
   created_at: Scalars["timestamptz"]["output"];
   delivery_method?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["uuid"]["output"];
-  updated_at: Scalars["timestamptz"]["output"];
+  /** An object relationship */
+  request_status?: Maybe<Delivery_Request_Status>;
+  status?: Maybe<Delivery_Request_Status_Enum>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
 };
 
 /** aggregated selection of "delivery_request" */
@@ -10153,9 +6294,12 @@ export type Delivery_Request_Bool_Exp = {
   _and?: InputMaybe<Array<Delivery_Request_Bool_Exp>>;
   _not?: InputMaybe<Delivery_Request_Bool_Exp>;
   _or?: InputMaybe<Array<Delivery_Request_Bool_Exp>>;
+  courierId?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   delivery_method?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  request_status?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
+  status?: InputMaybe<Delivery_Request_Status_Enum_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -10167,15 +6311,19 @@ export enum Delivery_Request_Constraint {
 
 /** input type for inserting data into table "delivery_request" */
 export type Delivery_Request_Insert_Input = {
+  courierId?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   delivery_method?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  request_status?: InputMaybe<Delivery_Request_Status_Obj_Rel_Insert_Input>;
+  status?: InputMaybe<Delivery_Request_Status_Enum>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
 };
 
 /** aggregate max on columns */
 export type Delivery_Request_Max_Fields = {
   __typename?: "delivery_request_max_fields";
+  courierId?: Maybe<Scalars["uuid"]["output"]>;
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
   delivery_method?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
@@ -10185,6 +6333,7 @@ export type Delivery_Request_Max_Fields = {
 /** aggregate min on columns */
 export type Delivery_Request_Min_Fields = {
   __typename?: "delivery_request_min_fields";
+  courierId?: Maybe<Scalars["uuid"]["output"]>;
   created_at?: Maybe<Scalars["timestamptz"]["output"]>;
   delivery_method?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
@@ -10209,10 +6358,170 @@ export type Delivery_Request_On_Conflict = {
 
 /** Ordering options when selecting data from "delivery_request". */
 export type Delivery_Request_Order_By = {
+  courierId?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   delivery_method?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  request_status?: InputMaybe<Delivery_Request_Status_Order_By>;
+  status?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
+};
+
+/** columns and relationships of "delivery_request_orders" */
+export type Delivery_Request_Orders = {
+  __typename?: "delivery_request_orders";
+  created_at: Scalars["timestamptz"]["output"];
+  delivery_request_id: Scalars["uuid"]["output"];
+  id: Scalars["uuid"]["output"];
+  order_id: Scalars["uuid"]["output"];
+};
+
+/** aggregated selection of "delivery_request_orders" */
+export type Delivery_Request_Orders_Aggregate = {
+  __typename?: "delivery_request_orders_aggregate";
+  aggregate?: Maybe<Delivery_Request_Orders_Aggregate_Fields>;
+  nodes: Array<Delivery_Request_Orders>;
+};
+
+/** aggregate fields of "delivery_request_orders" */
+export type Delivery_Request_Orders_Aggregate_Fields = {
+  __typename?: "delivery_request_orders_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Delivery_Request_Orders_Max_Fields>;
+  min?: Maybe<Delivery_Request_Orders_Min_Fields>;
+};
+
+/** aggregate fields of "delivery_request_orders" */
+export type Delivery_Request_Orders_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** Boolean expression to filter rows from the table "delivery_request_orders". All fields are combined with a logical 'AND'. */
+export type Delivery_Request_Orders_Bool_Exp = {
+  _and?: InputMaybe<Array<Delivery_Request_Orders_Bool_Exp>>;
+  _not?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+  _or?: InputMaybe<Array<Delivery_Request_Orders_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  delivery_request_id?: InputMaybe<Uuid_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  order_id?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "delivery_request_orders" */
+export enum Delivery_Request_Orders_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  DeliveryRequestOrdersPkey = "delivery_request_orders_pkey",
+}
+
+/** input type for inserting data into table "delivery_request_orders" */
+export type Delivery_Request_Orders_Insert_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  delivery_request_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** aggregate max on columns */
+export type Delivery_Request_Orders_Max_Fields = {
+  __typename?: "delivery_request_orders_max_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  delivery_request_id?: Maybe<Scalars["uuid"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  order_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** aggregate min on columns */
+export type Delivery_Request_Orders_Min_Fields = {
+  __typename?: "delivery_request_orders_min_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  delivery_request_id?: Maybe<Scalars["uuid"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  order_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** response of any mutation on the table "delivery_request_orders" */
+export type Delivery_Request_Orders_Mutation_Response = {
+  __typename?: "delivery_request_orders_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Delivery_Request_Orders>;
+};
+
+/** on_conflict condition type for table "delivery_request_orders" */
+export type Delivery_Request_Orders_On_Conflict = {
+  constraint: Delivery_Request_Orders_Constraint;
+  update_columns?: Array<Delivery_Request_Orders_Update_Column>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "delivery_request_orders". */
+export type Delivery_Request_Orders_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  delivery_request_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: delivery_request_orders */
+export type Delivery_Request_Orders_Pk_Columns_Input = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** select columns of table "delivery_request_orders" */
+export enum Delivery_Request_Orders_Select_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  DeliveryRequestId = "delivery_request_id",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "order_id",
+}
+
+/** input type for updating data in table "delivery_request_orders" */
+export type Delivery_Request_Orders_Set_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  delivery_request_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** Streaming cursor of the table "delivery_request_orders" */
+export type Delivery_Request_Orders_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Delivery_Request_Orders_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Delivery_Request_Orders_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  delivery_request_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+};
+
+/** update columns of table "delivery_request_orders" */
+export enum Delivery_Request_Orders_Update_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  DeliveryRequestId = "delivery_request_id",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "order_id",
+}
+
+export type Delivery_Request_Orders_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Delivery_Request_Orders_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Delivery_Request_Orders_Bool_Exp;
 };
 
 /** primary key columns input for table: delivery_request */
@@ -10223,21 +6532,171 @@ export type Delivery_Request_Pk_Columns_Input = {
 /** select columns of table "delivery_request" */
 export enum Delivery_Request_Select_Column {
   /** column name */
+  CourierId = "courierId",
+  /** column name */
   CreatedAt = "created_at",
   /** column name */
   DeliveryMethod = "delivery_method",
   /** column name */
   Id = "id",
   /** column name */
+  Status = "status",
+  /** column name */
   UpdatedAt = "updated_at",
 }
 
 /** input type for updating data in table "delivery_request" */
 export type Delivery_Request_Set_Input = {
+  courierId?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   delivery_method?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  status?: InputMaybe<Delivery_Request_Status_Enum>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** columns and relationships of "delivery_request_status" */
+export type Delivery_Request_Status = {
+  __typename?: "delivery_request_status";
+  status: Scalars["String"]["output"];
+};
+
+/** aggregated selection of "delivery_request_status" */
+export type Delivery_Request_Status_Aggregate = {
+  __typename?: "delivery_request_status_aggregate";
+  aggregate?: Maybe<Delivery_Request_Status_Aggregate_Fields>;
+  nodes: Array<Delivery_Request_Status>;
+};
+
+/** aggregate fields of "delivery_request_status" */
+export type Delivery_Request_Status_Aggregate_Fields = {
+  __typename?: "delivery_request_status_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Delivery_Request_Status_Max_Fields>;
+  min?: Maybe<Delivery_Request_Status_Min_Fields>;
+};
+
+/** aggregate fields of "delivery_request_status" */
+export type Delivery_Request_Status_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Delivery_Request_Status_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** Boolean expression to filter rows from the table "delivery_request_status". All fields are combined with a logical 'AND'. */
+export type Delivery_Request_Status_Bool_Exp = {
+  _and?: InputMaybe<Array<Delivery_Request_Status_Bool_Exp>>;
+  _not?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
+  _or?: InputMaybe<Array<Delivery_Request_Status_Bool_Exp>>;
+  status?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "delivery_request_status" */
+export enum Delivery_Request_Status_Constraint {
+  /** unique or primary key constraint on columns "status" */
+  DeliveryRequestStatusPkey = "delivery_request_status_pkey",
+}
+
+export enum Delivery_Request_Status_Enum {
+  Accepted = "ACCEPTED",
+  Declined = "DECLINED",
+  Expired = "EXPIRED",
+  Pending = "PENDING",
+}
+
+/** Boolean expression to compare columns of type "delivery_request_status_enum". All fields are combined with logical 'AND'. */
+export type Delivery_Request_Status_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Delivery_Request_Status_Enum>;
+  _in?: InputMaybe<Array<Delivery_Request_Status_Enum>>;
+  _is_null?: InputMaybe<Scalars["Boolean"]["input"]>;
+  _neq?: InputMaybe<Delivery_Request_Status_Enum>;
+  _nin?: InputMaybe<Array<Delivery_Request_Status_Enum>>;
+};
+
+/** input type for inserting data into table "delivery_request_status" */
+export type Delivery_Request_Status_Insert_Input = {
+  status?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** aggregate max on columns */
+export type Delivery_Request_Status_Max_Fields = {
+  __typename?: "delivery_request_status_max_fields";
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
+/** aggregate min on columns */
+export type Delivery_Request_Status_Min_Fields = {
+  __typename?: "delivery_request_status_min_fields";
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
+/** response of any mutation on the table "delivery_request_status" */
+export type Delivery_Request_Status_Mutation_Response = {
+  __typename?: "delivery_request_status_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Delivery_Request_Status>;
+};
+
+/** input type for inserting object relation for remote table "delivery_request_status" */
+export type Delivery_Request_Status_Obj_Rel_Insert_Input = {
+  data: Delivery_Request_Status_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Delivery_Request_Status_On_Conflict>;
+};
+
+/** on_conflict condition type for table "delivery_request_status" */
+export type Delivery_Request_Status_On_Conflict = {
+  constraint: Delivery_Request_Status_Constraint;
+  update_columns?: Array<Delivery_Request_Status_Update_Column>;
+  where?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "delivery_request_status". */
+export type Delivery_Request_Status_Order_By = {
+  status?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: delivery_request_status */
+export type Delivery_Request_Status_Pk_Columns_Input = {
+  status: Scalars["String"]["input"];
+};
+
+/** select columns of table "delivery_request_status" */
+export enum Delivery_Request_Status_Select_Column {
+  /** column name */
+  Status = "status",
+}
+
+/** input type for updating data in table "delivery_request_status" */
+export type Delivery_Request_Status_Set_Input = {
+  status?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** Streaming cursor of the table "delivery_request_status" */
+export type Delivery_Request_Status_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Delivery_Request_Status_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Delivery_Request_Status_Stream_Cursor_Value_Input = {
+  status?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** update columns of table "delivery_request_status" */
+export enum Delivery_Request_Status_Update_Column {
+  /** column name */
+  Status = "status",
+}
+
+export type Delivery_Request_Status_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Delivery_Request_Status_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Delivery_Request_Status_Bool_Exp;
 };
 
 /** Streaming cursor of the table "delivery_request" */
@@ -10250,20 +6709,26 @@ export type Delivery_Request_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Delivery_Request_Stream_Cursor_Value_Input = {
+  courierId?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   delivery_method?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  status?: InputMaybe<Delivery_Request_Status_Enum>;
   updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
 };
 
 /** update columns of table "delivery_request" */
 export enum Delivery_Request_Update_Column {
   /** column name */
+  CourierId = "courierId",
+  /** column name */
   CreatedAt = "created_at",
   /** column name */
   DeliveryMethod = "delivery_method",
   /** column name */
   Id = "id",
+  /** column name */
+  Status = "status",
   /** column name */
   UpdatedAt = "updated_at",
 }
@@ -10287,6 +6752,8 @@ export enum Delivery_Select_Column {
   OrderId = "orderId",
   /** column name */
   Status = "status",
+  /** column name */
+  TrackingNumber = "tracking_number",
 }
 
 /** input type for updating data in table "delivery" */
@@ -10296,6 +6763,7 @@ export type Delivery_Set_Input = {
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   orderId?: InputMaybe<Scalars["uuid"]["input"]>;
   status?: InputMaybe<Delivery_Status_Enum>;
+  tracking_number?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 /** columns and relationships of "delivery_status" */
@@ -10466,6 +6934,39 @@ export type Delivery_Status_Updates = {
   where: Delivery_Status_Bool_Exp;
 };
 
+/** aggregate stddev on columns */
+export type Delivery_Stddev_Fields = {
+  __typename?: "delivery_stddev_fields";
+  tracking_number?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev() on columns of table "delivery" */
+export type Delivery_Stddev_Order_By = {
+  tracking_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Delivery_Stddev_Pop_Fields = {
+  __typename?: "delivery_stddev_pop_fields";
+  tracking_number?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev_pop() on columns of table "delivery" */
+export type Delivery_Stddev_Pop_Order_By = {
+  tracking_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Delivery_Stddev_Samp_Fields = {
+  __typename?: "delivery_stddev_samp_fields";
+  tracking_number?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by stddev_samp() on columns of table "delivery" */
+export type Delivery_Stddev_Samp_Order_By = {
+  tracking_number?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "delivery" */
 export type Delivery_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -10481,6 +6982,18 @@ export type Delivery_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   orderId?: InputMaybe<Scalars["uuid"]["input"]>;
   status?: InputMaybe<Delivery_Status_Enum>;
+  tracking_number?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+/** aggregate sum on columns */
+export type Delivery_Sum_Fields = {
+  __typename?: "delivery_sum_fields";
+  tracking_number?: Maybe<Scalars["Int"]["output"]>;
+};
+
+/** order by sum() on columns of table "delivery" */
+export type Delivery_Sum_Order_By = {
+  tracking_number?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "delivery" */
@@ -10495,13 +7008,50 @@ export enum Delivery_Update_Column {
   OrderId = "orderId",
   /** column name */
   Status = "status",
+  /** column name */
+  TrackingNumber = "tracking_number",
 }
 
 export type Delivery_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Delivery_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Delivery_Set_Input>;
   /** filter the rows which have to be updated */
   where: Delivery_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Delivery_Var_Pop_Fields = {
+  __typename?: "delivery_var_pop_fields";
+  tracking_number?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by var_pop() on columns of table "delivery" */
+export type Delivery_Var_Pop_Order_By = {
+  tracking_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Delivery_Var_Samp_Fields = {
+  __typename?: "delivery_var_samp_fields";
+  tracking_number?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by var_samp() on columns of table "delivery" */
+export type Delivery_Var_Samp_Order_By = {
+  tracking_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Delivery_Variance_Fields = {
+  __typename?: "delivery_variance_fields";
+  tracking_number?: Maybe<Scalars["Float"]["output"]>;
+};
+
+/** order by variance() on columns of table "delivery" */
+export type Delivery_Variance_Order_By = {
+  tracking_number?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to compare columns of type "float8". All fields are combined with logical 'AND'. */
@@ -10915,19 +7465,6 @@ export type Geometry_Columns_Variance_Fields = {
   srid?: Maybe<Scalars["Float"]["output"]>;
 };
 
-/** fields of action: "insertBusinessOrder" */
-export type InsertBusinessOrder = {
-  __typename?: "insertBusinessOrder";
-  /** the time at which this action was created */
-  created_at: Scalars["timestamptz"]["output"];
-  /** errors related to the invocation */
-  errors?: Maybe<Scalars["json"]["output"]>;
-  /** the unique id of an action */
-  id: Scalars["uuid"]["output"];
-  /** the output fields of this action */
-  output?: Maybe<InsertBusinessOrderOutput>;
-};
-
 /** columns and relationships of "locations" */
 export type Locations = {
   __typename?: "locations";
@@ -11076,7 +7613,8 @@ export type Locations_Updates = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: "mutation_root";
-  createAccessToken?: Maybe<CreateAccessTokenResponse>;
+  /** add_order_status_history */
+  add_order_status_history?: Maybe<OrderStatusHistoryOutput>;
   /** delete data from the table: "accounts" */
   delete_accounts?: Maybe<Accounts_Mutation_Response>;
   /** delete single row from the table: "accounts" */
@@ -11121,6 +7659,10 @@ export type Mutation_Root = {
   delete_delivery?: Maybe<Delivery_Mutation_Response>;
   /** delete single row from the table: "delivery" */
   delete_delivery_by_pk?: Maybe<Delivery>;
+  /** delete data from the table: "delivery_orders" */
+  delete_delivery_orders?: Maybe<Delivery_Orders_Mutation_Response>;
+  /** delete single row from the table: "delivery_orders" */
+  delete_delivery_orders_by_pk?: Maybe<Delivery_Orders>;
   /** delete data from the table: "delivery_personnel" */
   delete_delivery_personnel?: Maybe<Delivery_Personnel_Mutation_Response>;
   /** delete single row from the table: "delivery_personnel" */
@@ -11129,6 +7671,14 @@ export type Mutation_Root = {
   delete_delivery_request?: Maybe<Delivery_Request_Mutation_Response>;
   /** delete single row from the table: "delivery_request" */
   delete_delivery_request_by_pk?: Maybe<Delivery_Request>;
+  /** delete data from the table: "delivery_request_orders" */
+  delete_delivery_request_orders?: Maybe<Delivery_Request_Orders_Mutation_Response>;
+  /** delete single row from the table: "delivery_request_orders" */
+  delete_delivery_request_orders_by_pk?: Maybe<Delivery_Request_Orders>;
+  /** delete data from the table: "delivery_request_status" */
+  delete_delivery_request_status?: Maybe<Delivery_Request_Status_Mutation_Response>;
+  /** delete single row from the table: "delivery_request_status" */
+  delete_delivery_request_status_by_pk?: Maybe<Delivery_Request_Status>;
   /** delete data from the table: "delivery_status" */
   delete_delivery_status?: Maybe<Delivery_Status_Mutation_Response>;
   /** delete single row from the table: "delivery_status" */
@@ -11155,6 +7705,10 @@ export type Mutation_Root = {
   delete_order_status?: Maybe<Order_Status_Mutation_Response>;
   /** delete single row from the table: "order_status" */
   delete_order_status_by_pk?: Maybe<Order_Status>;
+  /** delete data from the table: "order_status_history" */
+  delete_order_status_history?: Maybe<Order_Status_History_Mutation_Response>;
+  /** delete single row from the table: "order_status_history" */
+  delete_order_status_history_by_pk?: Maybe<Order_Status_History>;
   /** delete data from the table: "order_supplier" */
   delete_order_supplier?: Maybe<Order_Supplier_Mutation_Response>;
   /** delete single row from the table: "order_supplier" */
@@ -11223,18 +7777,6 @@ export type Mutation_Root = {
   delete_verification_tokens?: Maybe<Verification_Tokens_Mutation_Response>;
   /** delete single row from the table: "verification_tokens" */
   delete_verification_tokens_by_pk?: Maybe<Verification_Tokens>;
-  /** delete data from the table: "work_schedules" */
-  delete_work_schedules?: Maybe<Work_Schedules_Mutation_Response>;
-  /** delete single row from the table: "work_schedules" */
-  delete_work_schedules_by_pk?: Maybe<Work_Schedules>;
-  /** delete data from the table: "work_shifts" */
-  delete_work_shifts?: Maybe<Work_Shifts_Mutation_Response>;
-  /** delete single row from the table: "work_shifts" */
-  delete_work_shifts_by_pk?: Maybe<Work_Shifts>;
-  /** delete data from the table: "zones" */
-  delete_zones?: Maybe<Zones_Mutation_Response>;
-  /** delete single row from the table: "zones" */
-  delete_zones_by_pk?: Maybe<Zones>;
   /** Place order action */
   insertBusinessOrder: Scalars["uuid"]["output"];
   /** insert data into the table: "accounts" */
@@ -11281,6 +7823,10 @@ export type Mutation_Root = {
   insert_delivery?: Maybe<Delivery_Mutation_Response>;
   /** insert a single row into the table: "delivery" */
   insert_delivery_one?: Maybe<Delivery>;
+  /** insert data into the table: "delivery_orders" */
+  insert_delivery_orders?: Maybe<Delivery_Orders_Mutation_Response>;
+  /** insert a single row into the table: "delivery_orders" */
+  insert_delivery_orders_one?: Maybe<Delivery_Orders>;
   /** insert data into the table: "delivery_personnel" */
   insert_delivery_personnel?: Maybe<Delivery_Personnel_Mutation_Response>;
   /** insert a single row into the table: "delivery_personnel" */
@@ -11289,6 +7835,14 @@ export type Mutation_Root = {
   insert_delivery_request?: Maybe<Delivery_Request_Mutation_Response>;
   /** insert a single row into the table: "delivery_request" */
   insert_delivery_request_one?: Maybe<Delivery_Request>;
+  /** insert data into the table: "delivery_request_orders" */
+  insert_delivery_request_orders?: Maybe<Delivery_Request_Orders_Mutation_Response>;
+  /** insert a single row into the table: "delivery_request_orders" */
+  insert_delivery_request_orders_one?: Maybe<Delivery_Request_Orders>;
+  /** insert data into the table: "delivery_request_status" */
+  insert_delivery_request_status?: Maybe<Delivery_Request_Status_Mutation_Response>;
+  /** insert a single row into the table: "delivery_request_status" */
+  insert_delivery_request_status_one?: Maybe<Delivery_Request_Status>;
   /** insert data into the table: "delivery_status" */
   insert_delivery_status?: Maybe<Delivery_Status_Mutation_Response>;
   /** insert a single row into the table: "delivery_status" */
@@ -11315,6 +7869,10 @@ export type Mutation_Root = {
   insert_order_preference_one?: Maybe<Order_Preference>;
   /** insert data into the table: "order_status" */
   insert_order_status?: Maybe<Order_Status_Mutation_Response>;
+  /** insert data into the table: "order_status_history" */
+  insert_order_status_history?: Maybe<Order_Status_History_Mutation_Response>;
+  /** insert a single row into the table: "order_status_history" */
+  insert_order_status_history_one?: Maybe<Order_Status_History>;
   /** insert a single row into the table: "order_status" */
   insert_order_status_one?: Maybe<Order_Status>;
   /** insert data into the table: "order_supplier" */
@@ -11385,18 +7943,6 @@ export type Mutation_Root = {
   insert_verification_tokens?: Maybe<Verification_Tokens_Mutation_Response>;
   /** insert a single row into the table: "verification_tokens" */
   insert_verification_tokens_one?: Maybe<Verification_Tokens>;
-  /** insert data into the table: "work_schedules" */
-  insert_work_schedules?: Maybe<Work_Schedules_Mutation_Response>;
-  /** insert a single row into the table: "work_schedules" */
-  insert_work_schedules_one?: Maybe<Work_Schedules>;
-  /** insert data into the table: "work_shifts" */
-  insert_work_shifts?: Maybe<Work_Shifts_Mutation_Response>;
-  /** insert a single row into the table: "work_shifts" */
-  insert_work_shifts_one?: Maybe<Work_Shifts>;
-  /** insert data into the table: "zones" */
-  insert_zones?: Maybe<Zones_Mutation_Response>;
-  /** insert a single row into the table: "zones" */
-  insert_zones_one?: Maybe<Zones>;
   /** An action to register a new business */
   registerBusinessAction: Scalars["uuid"]["output"];
   /** An action to register a new user */
@@ -11476,6 +8022,14 @@ export type Mutation_Root = {
   update_delivery_by_pk?: Maybe<Delivery>;
   /** update multiples rows of table: "delivery" */
   update_delivery_many?: Maybe<Array<Maybe<Delivery_Mutation_Response>>>;
+  /** update data of the table: "delivery_orders" */
+  update_delivery_orders?: Maybe<Delivery_Orders_Mutation_Response>;
+  /** update single row of the table: "delivery_orders" */
+  update_delivery_orders_by_pk?: Maybe<Delivery_Orders>;
+  /** update multiples rows of table: "delivery_orders" */
+  update_delivery_orders_many?: Maybe<
+    Array<Maybe<Delivery_Orders_Mutation_Response>>
+  >;
   /** update data of the table: "delivery_personnel" */
   update_delivery_personnel?: Maybe<Delivery_Personnel_Mutation_Response>;
   /** update single row of the table: "delivery_personnel" */
@@ -11491,6 +8045,22 @@ export type Mutation_Root = {
   /** update multiples rows of table: "delivery_request" */
   update_delivery_request_many?: Maybe<
     Array<Maybe<Delivery_Request_Mutation_Response>>
+  >;
+  /** update data of the table: "delivery_request_orders" */
+  update_delivery_request_orders?: Maybe<Delivery_Request_Orders_Mutation_Response>;
+  /** update single row of the table: "delivery_request_orders" */
+  update_delivery_request_orders_by_pk?: Maybe<Delivery_Request_Orders>;
+  /** update multiples rows of table: "delivery_request_orders" */
+  update_delivery_request_orders_many?: Maybe<
+    Array<Maybe<Delivery_Request_Orders_Mutation_Response>>
+  >;
+  /** update data of the table: "delivery_request_status" */
+  update_delivery_request_status?: Maybe<Delivery_Request_Status_Mutation_Response>;
+  /** update single row of the table: "delivery_request_status" */
+  update_delivery_request_status_by_pk?: Maybe<Delivery_Request_Status>;
+  /** update multiples rows of table: "delivery_request_status" */
+  update_delivery_request_status_many?: Maybe<
+    Array<Maybe<Delivery_Request_Status_Mutation_Response>>
   >;
   /** update data of the table: "delivery_status" */
   update_delivery_status?: Maybe<Delivery_Status_Mutation_Response>;
@@ -11538,6 +8108,14 @@ export type Mutation_Root = {
   update_order_status?: Maybe<Order_Status_Mutation_Response>;
   /** update single row of the table: "order_status" */
   update_order_status_by_pk?: Maybe<Order_Status>;
+  /** update data of the table: "order_status_history" */
+  update_order_status_history?: Maybe<Order_Status_History_Mutation_Response>;
+  /** update single row of the table: "order_status_history" */
+  update_order_status_history_by_pk?: Maybe<Order_Status_History>;
+  /** update multiples rows of table: "order_status_history" */
+  update_order_status_history_many?: Maybe<
+    Array<Maybe<Order_Status_History_Mutation_Response>>
+  >;
   /** update multiples rows of table: "order_status" */
   update_order_status_many?: Maybe<
     Array<Maybe<Order_Status_Mutation_Response>>
@@ -11660,26 +8238,6 @@ export type Mutation_Root = {
   update_verification_tokens_many?: Maybe<
     Array<Maybe<Verification_Tokens_Mutation_Response>>
   >;
-  /** update data of the table: "work_schedules" */
-  update_work_schedules?: Maybe<Work_Schedules_Mutation_Response>;
-  /** update single row of the table: "work_schedules" */
-  update_work_schedules_by_pk?: Maybe<Work_Schedules>;
-  /** update multiples rows of table: "work_schedules" */
-  update_work_schedules_many?: Maybe<
-    Array<Maybe<Work_Schedules_Mutation_Response>>
-  >;
-  /** update data of the table: "work_shifts" */
-  update_work_shifts?: Maybe<Work_Shifts_Mutation_Response>;
-  /** update single row of the table: "work_shifts" */
-  update_work_shifts_by_pk?: Maybe<Work_Shifts>;
-  /** update multiples rows of table: "work_shifts" */
-  update_work_shifts_many?: Maybe<Array<Maybe<Work_Shifts_Mutation_Response>>>;
-  /** update data of the table: "zones" */
-  update_zones?: Maybe<Zones_Mutation_Response>;
-  /** update single row of the table: "zones" */
-  update_zones_by_pk?: Maybe<Zones>;
-  /** update multiples rows of table: "zones" */
-  update_zones_many?: Maybe<Array<Maybe<Zones_Mutation_Response>>>;
 };
 
 /** mutation root */
@@ -11793,6 +8351,16 @@ export type Mutation_RootDelete_Delivery_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDelete_Delivery_OrdersArgs = {
+  where: Delivery_Orders_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Delivery_Orders_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** mutation root */
 export type Mutation_RootDelete_Delivery_PersonnelArgs = {
   where: Delivery_Personnel_Bool_Exp;
 };
@@ -11810,6 +8378,26 @@ export type Mutation_RootDelete_Delivery_RequestArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Delivery_Request_By_PkArgs = {
   id: Scalars["uuid"]["input"];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Delivery_Request_OrdersArgs = {
+  where: Delivery_Request_Orders_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Delivery_Request_Orders_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Delivery_Request_StatusArgs = {
+  where: Delivery_Request_Status_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Delivery_Request_Status_By_PkArgs = {
+  status: Scalars["String"]["input"];
 };
 
 /** mutation root */
@@ -11875,6 +8463,16 @@ export type Mutation_RootDelete_Order_StatusArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Order_Status_By_PkArgs = {
   status: Scalars["String"]["input"];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Order_Status_HistoryArgs = {
+  where: Order_Status_History_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Order_Status_History_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
 };
 
 /** mutation root */
@@ -12098,8 +8696,33 @@ export type Mutation_RootDelete_Verification_Tokens_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootInsertBusinessOrderArgs = {
-  object: InsertBusinessOrderOrdersInsertInput;
+export type Mutation_RootDelete_Work_SchedulesArgs = {
+  where: Work_Schedules_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Work_Schedules_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Work_ShiftsArgs = {
+  where: Work_Shifts_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Work_Shifts_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_ZonesArgs = {
+  where: Zones_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Zones_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
 };
 
 /** mutation root */
@@ -12235,6 +8858,18 @@ export type Mutation_RootInsert_Delivery_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_Delivery_OrdersArgs = {
+  objects: Array<Delivery_Orders_Insert_Input>;
+  on_conflict?: InputMaybe<Delivery_Orders_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Delivery_Orders_OneArgs = {
+  object: Delivery_Orders_Insert_Input;
+  on_conflict?: InputMaybe<Delivery_Orders_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_Delivery_PersonnelArgs = {
   objects: Array<Delivery_Personnel_Insert_Input>;
   on_conflict?: InputMaybe<Delivery_Personnel_On_Conflict>;
@@ -12256,6 +8891,30 @@ export type Mutation_RootInsert_Delivery_RequestArgs = {
 export type Mutation_RootInsert_Delivery_Request_OneArgs = {
   object: Delivery_Request_Insert_Input;
   on_conflict?: InputMaybe<Delivery_Request_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Delivery_Request_OrdersArgs = {
+  objects: Array<Delivery_Request_Orders_Insert_Input>;
+  on_conflict?: InputMaybe<Delivery_Request_Orders_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Delivery_Request_Orders_OneArgs = {
+  object: Delivery_Request_Orders_Insert_Input;
+  on_conflict?: InputMaybe<Delivery_Request_Orders_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Delivery_Request_StatusArgs = {
+  objects: Array<Delivery_Request_Status_Insert_Input>;
+  on_conflict?: InputMaybe<Delivery_Request_Status_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Delivery_Request_Status_OneArgs = {
+  object: Delivery_Request_Status_Insert_Input;
+  on_conflict?: InputMaybe<Delivery_Request_Status_On_Conflict>;
 };
 
 /** mutation root */
@@ -12332,6 +8991,18 @@ export type Mutation_RootInsert_Order_Preference_OneArgs = {
 export type Mutation_RootInsert_Order_StatusArgs = {
   objects: Array<Order_Status_Insert_Input>;
   on_conflict?: InputMaybe<Order_Status_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Order_Status_HistoryArgs = {
+  objects: Array<Order_Status_History_Insert_Input>;
+  on_conflict?: InputMaybe<Order_Status_History_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Order_Status_History_OneArgs = {
+  object: Order_Status_History_Insert_Input;
+  on_conflict?: InputMaybe<Order_Status_History_On_Conflict>;
 };
 
 /** mutation root */
@@ -12581,18 +9252,39 @@ export type Mutation_RootInsert_Zones_OneArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootRegisterBusinessActionArgs = {
-  object: RegisterBusinessActionBusinessInsertInput;
+export type Mutation_RootInsert_Work_SchedulesArgs = {
+  objects: Array<Work_Schedules_Insert_Input>;
+  on_conflict?: InputMaybe<Work_Schedules_On_Conflict>;
 };
 
 /** mutation root */
-export type Mutation_RootRegisterUserActionArgs = {
-  object: RegisterUserActionUsersInsertInput;
+export type Mutation_RootInsert_Work_Schedules_OneArgs = {
+  object: Work_Schedules_Insert_Input;
+  on_conflict?: InputMaybe<Work_Schedules_On_Conflict>;
 };
 
 /** mutation root */
-export type Mutation_RootRequestToPayArgs = {
-  object?: InputMaybe<RequestToPayInput>;
+export type Mutation_RootInsert_Work_ShiftsArgs = {
+  objects: Array<Work_Shifts_Insert_Input>;
+  on_conflict?: InputMaybe<Work_Shifts_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Work_Shifts_OneArgs = {
+  object: Work_Shifts_Insert_Input;
+  on_conflict?: InputMaybe<Work_Shifts_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_ZonesArgs = {
+  objects: Array<Zones_Insert_Input>;
+  on_conflict?: InputMaybe<Zones_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Zones_OneArgs = {
+  object: Zones_Insert_Input;
+  on_conflict?: InputMaybe<Zones_On_Conflict>;
 };
 
 /** mutation root */
@@ -12771,12 +9463,14 @@ export type Mutation_RootUpdate_Couriers_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_DeliveryArgs = {
+  _inc?: InputMaybe<Delivery_Inc_Input>;
   _set?: InputMaybe<Delivery_Set_Input>;
   where: Delivery_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Delivery_By_PkArgs = {
+  _inc?: InputMaybe<Delivery_Inc_Input>;
   _set?: InputMaybe<Delivery_Set_Input>;
   pk_columns: Delivery_Pk_Columns_Input;
 };
@@ -12784,6 +9478,23 @@ export type Mutation_RootUpdate_Delivery_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Delivery_ManyArgs = {
   updates: Array<Delivery_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_OrdersArgs = {
+  _set?: InputMaybe<Delivery_Orders_Set_Input>;
+  where: Delivery_Orders_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Orders_By_PkArgs = {
+  _set?: InputMaybe<Delivery_Orders_Set_Input>;
+  pk_columns: Delivery_Orders_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Orders_ManyArgs = {
+  updates: Array<Delivery_Orders_Updates>;
 };
 
 /** mutation root */
@@ -12818,6 +9529,40 @@ export type Mutation_RootUpdate_Delivery_Request_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Delivery_Request_ManyArgs = {
   updates: Array<Delivery_Request_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Request_OrdersArgs = {
+  _set?: InputMaybe<Delivery_Request_Orders_Set_Input>;
+  where: Delivery_Request_Orders_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Request_Orders_By_PkArgs = {
+  _set?: InputMaybe<Delivery_Request_Orders_Set_Input>;
+  pk_columns: Delivery_Request_Orders_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Request_Orders_ManyArgs = {
+  updates: Array<Delivery_Request_Orders_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Request_StatusArgs = {
+  _set?: InputMaybe<Delivery_Request_Status_Set_Input>;
+  where: Delivery_Request_Status_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Request_Status_By_PkArgs = {
+  _set?: InputMaybe<Delivery_Request_Status_Set_Input>;
+  pk_columns: Delivery_Request_Status_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Delivery_Request_Status_ManyArgs = {
+  updates: Array<Delivery_Request_Status_Updates>;
 };
 
 /** mutation root */
@@ -12929,6 +9674,23 @@ export type Mutation_RootUpdate_Order_StatusArgs = {
 export type Mutation_RootUpdate_Order_Status_By_PkArgs = {
   _set?: InputMaybe<Order_Status_Set_Input>;
   pk_columns: Order_Status_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Order_Status_HistoryArgs = {
+  _set?: InputMaybe<Order_Status_History_Set_Input>;
+  where: Order_Status_History_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Order_Status_History_By_PkArgs = {
+  _set?: InputMaybe<Order_Status_History_Set_Input>;
+  pk_columns: Order_Status_History_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Order_Status_History_ManyArgs = {
+  updates: Array<Order_Status_History_Updates>;
 };
 
 /** mutation root */
@@ -14071,6 +10833,200 @@ export type Order_Status_Enum_Comparison_Exp = {
   _nin?: InputMaybe<Array<Order_Status_Enum>>;
 };
 
+/** columns and relationships of "order_status_history" */
+export type Order_Status_History = {
+  __typename?: "order_status_history";
+  created_at: Scalars["timestamptz"]["output"];
+  id: Scalars["uuid"]["output"];
+  order_id: Scalars["uuid"]["output"];
+  status: Order_Status_Enum;
+};
+
+/** aggregated selection of "order_status_history" */
+export type Order_Status_History_Aggregate = {
+  __typename?: "order_status_history_aggregate";
+  aggregate?: Maybe<Order_Status_History_Aggregate_Fields>;
+  nodes: Array<Order_Status_History>;
+};
+
+export type Order_Status_History_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Order_Status_History_Aggregate_Bool_Exp_Count>;
+};
+
+export type Order_Status_History_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<Order_Status_History_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "order_status_history" */
+export type Order_Status_History_Aggregate_Fields = {
+  __typename?: "order_status_history_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Order_Status_History_Max_Fields>;
+  min?: Maybe<Order_Status_History_Min_Fields>;
+};
+
+/** aggregate fields of "order_status_history" */
+export type Order_Status_History_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** order by aggregate values of table "order_status_history" */
+export type Order_Status_History_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Order_Status_History_Max_Order_By>;
+  min?: InputMaybe<Order_Status_History_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "order_status_history" */
+export type Order_Status_History_Arr_Rel_Insert_Input = {
+  data: Array<Order_Status_History_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Order_Status_History_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "order_status_history". All fields are combined with a logical 'AND'. */
+export type Order_Status_History_Bool_Exp = {
+  _and?: InputMaybe<Array<Order_Status_History_Bool_Exp>>;
+  _not?: InputMaybe<Order_Status_History_Bool_Exp>;
+  _or?: InputMaybe<Array<Order_Status_History_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  order_id?: InputMaybe<Uuid_Comparison_Exp>;
+  status?: InputMaybe<Order_Status_Enum_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "order_status_history" */
+export enum Order_Status_History_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  OrderStatusHistoryPkey = "order_status_history_pkey",
+}
+
+/** input type for inserting data into table "order_status_history" */
+export type Order_Status_History_Insert_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  status?: InputMaybe<Order_Status_Enum>;
+};
+
+/** aggregate max on columns */
+export type Order_Status_History_Max_Fields = {
+  __typename?: "order_status_history_max_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  order_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** order by max() on columns of table "order_status_history" */
+export type Order_Status_History_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Order_Status_History_Min_Fields = {
+  __typename?: "order_status_history_min_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  order_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** order by min() on columns of table "order_status_history" */
+export type Order_Status_History_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "order_status_history" */
+export type Order_Status_History_Mutation_Response = {
+  __typename?: "order_status_history_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Order_Status_History>;
+};
+
+/** on_conflict condition type for table "order_status_history" */
+export type Order_Status_History_On_Conflict = {
+  constraint: Order_Status_History_Constraint;
+  update_columns?: Array<Order_Status_History_Update_Column>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "order_status_history". */
+export type Order_Status_History_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order_id?: InputMaybe<Order_By>;
+  status?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: order_status_history */
+export type Order_Status_History_Pk_Columns_Input = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** select columns of table "order_status_history" */
+export enum Order_Status_History_Select_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "order_id",
+  /** column name */
+  Status = "status",
+}
+
+/** input type for updating data in table "order_status_history" */
+export type Order_Status_History_Set_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  status?: InputMaybe<Order_Status_Enum>;
+};
+
+/** Streaming cursor of the table "order_status_history" */
+export type Order_Status_History_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Order_Status_History_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Order_Status_History_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  status?: InputMaybe<Order_Status_Enum>;
+};
+
+/** update columns of table "order_status_history" */
+export enum Order_Status_History_Update_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Id = "id",
+  /** column name */
+  OrderId = "order_id",
+  /** column name */
+  Status = "status",
+}
+
+export type Order_Status_History_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Order_Status_History_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Order_Status_History_Bool_Exp;
+};
+
 /** input type for inserting data into table "order_status" */
 export type Order_Status_Insert_Input = {
   orders?: InputMaybe<Orders_Arr_Rel_Insert_Input>;
@@ -14096,13 +11052,6 @@ export type Order_Status_Mutation_Response = {
   affected_rows: Scalars["Int"]["output"];
   /** data from the rows affected by the mutation */
   returning: Array<Order_Status>;
-};
-
-/** input type for inserting object relation for remote table "order_status" */
-export type Order_Status_Obj_Rel_Insert_Input = {
-  data: Order_Status_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Order_Status_On_Conflict>;
 };
 
 /** on_conflict condition type for table "order_status" */
@@ -14384,15 +11333,13 @@ export type Orders = {
   destination?: Maybe<Scalars["String"]["output"]>;
   fulfillment_type?: Maybe<Order_Fulfillment_Type_Enum>;
   id: Scalars["uuid"]["output"];
-  orderId?: Maybe<Scalars["uuid"]["output"]>;
+  orderId?: Maybe<Scalars["String"]["output"]>;
   /** An object relationship */
   order_fulfillment_type?: Maybe<Order_Fulfillment_Type>;
   /** An array relationship */
   order_items: Array<Order_Item>;
   /** An aggregate relationship */
   order_items_aggregate: Order_Item_Aggregate;
-  /** An object relationship */
-  order_status?: Maybe<Order_Status>;
   /** An array relationship */
   order_suppliers: Array<Order_Supplier>;
   /** An aggregate relationship */
@@ -14400,6 +11347,10 @@ export type Orders = {
   origin?: Maybe<Scalars["String"]["output"]>;
   processedBy?: Maybe<Scalars["uuid"]["output"]>;
   status?: Maybe<Order_Status_Enum>;
+  /** An array relationship */
+  status_histories: Array<Order_Status_History>;
+  /** An aggregate relationship */
+  status_histories_aggregate: Order_Status_History_Aggregate;
 };
 
 /** columns and relationships of "orders" */
@@ -14454,6 +11405,24 @@ export type OrdersOrder_Suppliers_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Order_Supplier_Order_By>>;
   where?: InputMaybe<Order_Supplier_Bool_Exp>;
+};
+
+/** columns and relationships of "orders" */
+export type OrdersStatus_HistoriesArgs = {
+  distinct_on?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Order_Status_History_Order_By>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
+};
+
+/** columns and relationships of "orders" */
+export type OrdersStatus_Histories_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Order_Status_History_Order_By>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
 };
 
 /** aggregated selection of "orders" */
@@ -14516,16 +11485,17 @@ export type Orders_Bool_Exp = {
   destination?: InputMaybe<String_Comparison_Exp>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
-  orderId?: InputMaybe<Uuid_Comparison_Exp>;
+  orderId?: InputMaybe<String_Comparison_Exp>;
   order_fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Bool_Exp>;
   order_items?: InputMaybe<Order_Item_Bool_Exp>;
   order_items_aggregate?: InputMaybe<Order_Item_Aggregate_Bool_Exp>;
-  order_status?: InputMaybe<Order_Status_Bool_Exp>;
   order_suppliers?: InputMaybe<Order_Supplier_Bool_Exp>;
   order_suppliers_aggregate?: InputMaybe<Order_Supplier_Aggregate_Bool_Exp>;
   origin?: InputMaybe<String_Comparison_Exp>;
   processedBy?: InputMaybe<Uuid_Comparison_Exp>;
   status?: InputMaybe<Order_Status_Enum_Comparison_Exp>;
+  status_histories?: InputMaybe<Order_Status_History_Bool_Exp>;
+  status_histories_aggregate?: InputMaybe<Order_Status_History_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "orders" */
@@ -14544,14 +11514,14 @@ export type Orders_Insert_Input = {
   destination?: InputMaybe<Scalars["String"]["input"]>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  orderId?: InputMaybe<Scalars["String"]["input"]>;
   order_fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Obj_Rel_Insert_Input>;
   order_items?: InputMaybe<Order_Item_Arr_Rel_Insert_Input>;
-  order_status?: InputMaybe<Order_Status_Obj_Rel_Insert_Input>;
   order_suppliers?: InputMaybe<Order_Supplier_Arr_Rel_Insert_Input>;
   origin?: InputMaybe<Scalars["String"]["input"]>;
   processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
   status?: InputMaybe<Order_Status_Enum>;
+  status_histories?: InputMaybe<Order_Status_History_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -14561,7 +11531,7 @@ export type Orders_Max_Fields = {
   customerId?: Maybe<Scalars["uuid"]["output"]>;
   destination?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
-  orderId?: Maybe<Scalars["uuid"]["output"]>;
+  orderId?: Maybe<Scalars["String"]["output"]>;
   origin?: Maybe<Scalars["String"]["output"]>;
   processedBy?: Maybe<Scalars["uuid"]["output"]>;
 };
@@ -14584,7 +11554,7 @@ export type Orders_Min_Fields = {
   customerId?: Maybe<Scalars["uuid"]["output"]>;
   destination?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
-  orderId?: Maybe<Scalars["uuid"]["output"]>;
+  orderId?: Maybe<Scalars["String"]["output"]>;
   origin?: Maybe<Scalars["String"]["output"]>;
   processedBy?: Maybe<Scalars["uuid"]["output"]>;
 };
@@ -14636,11 +11606,11 @@ export type Orders_Order_By = {
   orderId?: InputMaybe<Order_By>;
   order_fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Order_By>;
   order_items_aggregate?: InputMaybe<Order_Item_Aggregate_Order_By>;
-  order_status?: InputMaybe<Order_Status_Order_By>;
   order_suppliers_aggregate?: InputMaybe<Order_Supplier_Aggregate_Order_By>;
   origin?: InputMaybe<Order_By>;
   processedBy?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
+  status_histories_aggregate?: InputMaybe<Order_Status_History_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: orders */
@@ -14677,7 +11647,7 @@ export type Orders_Set_Input = {
   destination?: InputMaybe<Scalars["String"]["input"]>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  orderId?: InputMaybe<Scalars["String"]["input"]>;
   origin?: InputMaybe<Scalars["String"]["input"]>;
   processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
   status?: InputMaybe<Order_Status_Enum>;
@@ -14698,7 +11668,7 @@ export type Orders_Stream_Cursor_Value_Input = {
   destination?: InputMaybe<Scalars["String"]["input"]>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
-  orderId?: InputMaybe<Scalars["uuid"]["input"]>;
+  orderId?: InputMaybe<Scalars["String"]["input"]>;
   origin?: InputMaybe<Scalars["String"]["input"]>;
   processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
   status?: InputMaybe<Order_Status_Enum>;
@@ -15224,14 +12194,12 @@ export type Products_Variance_Order_By = {
 
 export type Query_Root = {
   __typename?: "query_root";
-  accountBalance?: Maybe<AccountBalanceResponse>;
   /** An array relationship */
   accounts: Array<Accounts>;
   /** An aggregate relationship */
   accounts_aggregate: Accounts_Aggregate;
   /** fetch data from the table: "accounts" using primary key columns */
   accounts_by_pk?: Maybe<Accounts>;
-  address?: Maybe<Address>;
   /** An array relationship */
   addresses: Array<Addresses>;
   /** An aggregate relationship */
@@ -15250,7 +12218,6 @@ export type Query_Root = {
   agent_type_aggregate: Agent_Type_Aggregate;
   /** fetch data from the table: "agent_type" using primary key columns */
   agent_type_by_pk?: Maybe<Agent_Type>;
-  basicUserInfo?: Maybe<BasicUserInfoResponse>;
   /** fetch data from the table: "business" */
   business: Array<Business>;
   /** fetch aggregated fields from the table: "business" */
@@ -15275,7 +12242,6 @@ export type Query_Root = {
   contact_details_aggregate: Contact_Details_Aggregate;
   /** fetch data from the table: "contact_details" using primary key columns */
   contact_details_by_pk?: Maybe<Contact_Details>;
-  coords?: Maybe<LocationByCoords>;
   /** An array relationship */
   courier_rides: Array<Courier_Rides>;
   /** An aggregate relationship */
@@ -15294,6 +12260,12 @@ export type Query_Root = {
   delivery_aggregate: Delivery_Aggregate;
   /** fetch data from the table: "delivery" using primary key columns */
   delivery_by_pk?: Maybe<Delivery>;
+  /** fetch data from the table: "delivery_orders" */
+  delivery_orders: Array<Delivery_Orders>;
+  /** fetch aggregated fields from the table: "delivery_orders" */
+  delivery_orders_aggregate: Delivery_Orders_Aggregate;
+  /** fetch data from the table: "delivery_orders" using primary key columns */
+  delivery_orders_by_pk?: Maybe<Delivery_Orders>;
   /** fetch data from the table: "delivery_personnel" */
   delivery_personnel: Array<Delivery_Personnel>;
   /** fetch aggregated fields from the table: "delivery_personnel" */
@@ -15306,13 +12278,24 @@ export type Query_Root = {
   delivery_request_aggregate: Delivery_Request_Aggregate;
   /** fetch data from the table: "delivery_request" using primary key columns */
   delivery_request_by_pk?: Maybe<Delivery_Request>;
+  /** fetch data from the table: "delivery_request_orders" */
+  delivery_request_orders: Array<Delivery_Request_Orders>;
+  /** fetch aggregated fields from the table: "delivery_request_orders" */
+  delivery_request_orders_aggregate: Delivery_Request_Orders_Aggregate;
+  /** fetch data from the table: "delivery_request_orders" using primary key columns */
+  delivery_request_orders_by_pk?: Maybe<Delivery_Request_Orders>;
+  /** fetch data from the table: "delivery_request_status" */
+  delivery_request_status: Array<Delivery_Request_Status>;
+  /** fetch aggregated fields from the table: "delivery_request_status" */
+  delivery_request_status_aggregate: Delivery_Request_Status_Aggregate;
+  /** fetch data from the table: "delivery_request_status" using primary key columns */
+  delivery_request_status_by_pk?: Maybe<Delivery_Request_Status>;
   /** fetch data from the table: "delivery_status" */
   delivery_status: Array<Delivery_Status>;
   /** fetch aggregated fields from the table: "delivery_status" */
   delivery_status_aggregate: Delivery_Status_Aggregate;
   /** fetch data from the table: "delivery_status" using primary key columns */
   delivery_status_by_pk?: Maybe<Delivery_Status>;
-  directions?: Maybe<Directions>;
   /** fetch data from the table: "geography_columns" */
   geography_columns: Array<Geography_Columns>;
   /** fetch aggregated fields from the table: "geography_columns" */
@@ -15321,8 +12304,6 @@ export type Query_Root = {
   geometry_columns: Array<Geometry_Columns>;
   /** fetch aggregated fields from the table: "geometry_columns" */
   geometry_columns_aggregate: Geometry_Columns_Aggregate;
-  /** Place order action */
-  insertBusinessOrder?: Maybe<InsertBusinessOrder>;
   /** fetch data from the table: "locations" */
   locations: Array<Locations>;
   /** fetch aggregated fields from the table: "locations" */
@@ -15353,6 +12334,12 @@ export type Query_Root = {
   order_status_aggregate: Order_Status_Aggregate;
   /** fetch data from the table: "order_status" using primary key columns */
   order_status_by_pk?: Maybe<Order_Status>;
+  /** fetch data from the table: "order_status_history" */
+  order_status_history: Array<Order_Status_History>;
+  /** fetch aggregated fields from the table: "order_status_history" */
+  order_status_history_aggregate: Order_Status_History_Aggregate;
+  /** fetch data from the table: "order_status_history" using primary key columns */
+  order_status_history_by_pk?: Maybe<Order_Status_History>;
   /** fetch data from the table: "order_supplier" */
   order_supplier: Array<Order_Supplier>;
   /** fetch aggregated fields from the table: "order_supplier" */
@@ -15365,19 +12352,12 @@ export type Query_Root = {
   orders_aggregate: Orders_Aggregate;
   /** fetch data from the table: "orders" using primary key columns */
   orders_by_pk?: Maybe<Orders>;
-  paymentStatus?: Maybe<PaymentStatusResponse>;
-  places?: Maybe<Array<Maybe<Places>>>;
-  preApprovalStatus?: Maybe<PreApprovalStatusResponse>;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
   products_aggregate: Products_Aggregate;
   /** fetch data from the table: "products" using primary key columns */
   products_by_pk?: Maybe<Products>;
-  /** An action to register a new business */
-  registerBusinessAction?: Maybe<RegisterBusinessAction>;
-  /** An action to register a new user */
-  registerUserAction?: Maybe<RegisterUserAction>;
   /** fetch data from the table: "registeration_channel_type" */
   registeration_channel_type: Array<Registeration_Channel_Type>;
   /** fetch aggregated fields from the table: "registeration_channel_type" */
@@ -15390,7 +12370,6 @@ export type Query_Root = {
   reports_aggregate: Reports_Aggregate;
   /** fetch data from the table: "reports" using primary key columns */
   reports_by_pk?: Maybe<Reports>;
-  requestToPayTransactionStatus?: Maybe<RequestToPayTransactionStatusResponse>;
   /** fetch data from the table: "ride_status" */
   ride_status: Array<Ride_Status>;
   /** fetch aggregated fields from the table: "ride_status" */
@@ -15439,10 +12418,9 @@ export type Query_Root = {
   suppliers_categories_aggregate: Suppliers_Categories_Aggregate;
   /** fetch data from the table: "suppliers_categories" using primary key columns */
   suppliers_categories_by_pk?: Maybe<Suppliers_Categories>;
-  userInfoWithConsent?: Maybe<UserInfoWithConsentResponse>;
-  /** fetch data from the table: "user_invites" */
+  /** An array relationship */
   user_invites: Array<User_Invites>;
-  /** fetch aggregated fields from the table: "user_invites" */
+  /** An aggregate relationship */
   user_invites_aggregate: User_Invites_Aggregate;
   /** fetch data from the table: "user_invites" using primary key columns */
   user_invites_by_pk?: Maybe<User_Invites>;
@@ -15504,11 +12482,6 @@ export type Query_RootAccounts_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
-export type Query_RootAddressArgs = {
-  lat: Scalars["Float"]["input"];
-  lng: Scalars["Float"]["input"];
-};
-
 export type Query_RootAddressesArgs = {
   distinct_on?: InputMaybe<Array<Addresses_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -15567,10 +12540,6 @@ export type Query_RootAgent_Type_AggregateArgs = {
 
 export type Query_RootAgent_Type_By_PkArgs = {
   type: Scalars["String"]["input"];
-};
-
-export type Query_RootBasicUserInfoArgs = {
-  accountHolderMSISDN: Scalars["String"]["input"];
 };
 
 export type Query_RootBusinessArgs = {
@@ -15653,10 +12622,6 @@ export type Query_RootContact_Details_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
-export type Query_RootCoordsArgs = {
-  address: Scalars["String"]["input"];
-};
-
 export type Query_RootCourier_RidesArgs = {
   distinct_on?: InputMaybe<Array<Courier_Rides_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -15717,6 +12682,26 @@ export type Query_RootDelivery_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
+export type Query_RootDelivery_OrdersArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Orders_Bool_Exp>;
+};
+
+export type Query_RootDelivery_Orders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Orders_Bool_Exp>;
+};
+
+export type Query_RootDelivery_Orders_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
 export type Query_RootDelivery_PersonnelArgs = {
   distinct_on?: InputMaybe<Array<Delivery_Personnel_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -15757,6 +12742,46 @@ export type Query_RootDelivery_Request_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
+export type Query_RootDelivery_Request_OrdersArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
+export type Query_RootDelivery_Request_Orders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
+export type Query_RootDelivery_Request_Orders_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootDelivery_Request_StatusArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Status_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Status_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
+};
+
+export type Query_RootDelivery_Request_Status_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Status_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Status_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
+};
+
+export type Query_RootDelivery_Request_Status_By_PkArgs = {
+  status: Scalars["String"]["input"];
+};
+
 export type Query_RootDelivery_StatusArgs = {
   distinct_on?: InputMaybe<Array<Delivery_Status_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -15775,11 +12800,6 @@ export type Query_RootDelivery_Status_AggregateArgs = {
 
 export type Query_RootDelivery_Status_By_PkArgs = {
   status: Scalars["String"]["input"];
-};
-
-export type Query_RootDirectionsArgs = {
-  destination: Scalars["String"]["input"];
-  origin: Scalars["String"]["input"];
 };
 
 export type Query_RootGeography_ColumnsArgs = {
@@ -15812,10 +12832,6 @@ export type Query_RootGeometry_Columns_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Geometry_Columns_Order_By>>;
   where?: InputMaybe<Geometry_Columns_Bool_Exp>;
-};
-
-export type Query_RootInsertBusinessOrderArgs = {
-  id: Scalars["uuid"]["input"];
 };
 
 export type Query_RootLocationsArgs = {
@@ -15918,6 +12934,26 @@ export type Query_RootOrder_Status_By_PkArgs = {
   status: Scalars["String"]["input"];
 };
 
+export type Query_RootOrder_Status_HistoryArgs = {
+  distinct_on?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Order_Status_History_Order_By>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
+};
+
+export type Query_RootOrder_Status_History_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Order_Status_History_Order_By>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
+};
+
+export type Query_RootOrder_Status_History_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
 export type Query_RootOrder_SupplierArgs = {
   distinct_on?: InputMaybe<Array<Order_Supplier_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -15958,19 +12994,6 @@ export type Query_RootOrders_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
-export type Query_RootPaymentStatusArgs = {
-  referenceId: Scalars["String"]["input"];
-};
-
-export type Query_RootPlacesArgs = {
-  lat: Scalars["Float"]["input"];
-  lng: Scalars["Float"]["input"];
-};
-
-export type Query_RootPreApprovalStatusArgs = {
-  referenceId: Scalars["String"]["input"];
-};
-
 export type Query_RootProductsArgs = {
   distinct_on?: InputMaybe<Array<Products_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -15988,14 +13011,6 @@ export type Query_RootProducts_AggregateArgs = {
 };
 
 export type Query_RootProducts_By_PkArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-export type Query_RootRegisterBusinessActionArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-export type Query_RootRegisterUserActionArgs = {
   id: Scalars["uuid"]["input"];
 };
 
@@ -16037,10 +13052,6 @@ export type Query_RootReports_AggregateArgs = {
 
 export type Query_RootReports_By_PkArgs = {
   id: Scalars["uuid"]["input"];
-};
-
-export type Query_RootRequestToPayTransactionStatusArgs = {
-  referenceId: Scalars["String"]["input"];
 };
 
 export type Query_RootRide_StatusArgs = {
@@ -16363,30 +13374,64 @@ export type Query_RootVerification_Tokens_By_PkArgs = {
   token: Scalars["String"]["input"];
 };
 
-/** fields of action: "registerBusinessAction" */
-export type RegisterBusinessAction = {
-  __typename?: "registerBusinessAction";
-  /** the time at which this action was created */
-  created_at: Scalars["timestamptz"]["output"];
-  /** errors related to the invocation */
-  errors?: Maybe<Scalars["json"]["output"]>;
-  /** the unique id of an action */
-  id: Scalars["uuid"]["output"];
-  /** the output fields of this action */
-  output?: Maybe<RegisterBusinessActionOutput>;
+export type Query_RootWork_SchedulesArgs = {
+  distinct_on?: InputMaybe<Array<Work_Schedules_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Work_Schedules_Order_By>>;
+  where?: InputMaybe<Work_Schedules_Bool_Exp>;
 };
 
-/** fields of action: "registerUserAction" */
-export type RegisterUserAction = {
-  __typename?: "registerUserAction";
-  /** the time at which this action was created */
-  created_at: Scalars["timestamptz"]["output"];
-  /** errors related to the invocation */
-  errors?: Maybe<Scalars["json"]["output"]>;
-  /** the unique id of an action */
-  id: Scalars["uuid"]["output"];
-  /** the output fields of this action */
-  output?: Maybe<RegisterUserActionOutput>;
+export type Query_RootWork_Schedules_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Work_Schedules_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Work_Schedules_Order_By>>;
+  where?: InputMaybe<Work_Schedules_Bool_Exp>;
+};
+
+export type Query_RootWork_Schedules_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootWork_ShiftsArgs = {
+  distinct_on?: InputMaybe<Array<Work_Shifts_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Work_Shifts_Order_By>>;
+  where?: InputMaybe<Work_Shifts_Bool_Exp>;
+};
+
+export type Query_RootWork_Shifts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Work_Shifts_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Work_Shifts_Order_By>>;
+  where?: InputMaybe<Work_Shifts_Bool_Exp>;
+};
+
+export type Query_RootWork_Shifts_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootZonesArgs = {
+  distinct_on?: InputMaybe<Array<Zones_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Zones_Order_By>>;
+  where?: InputMaybe<Zones_Bool_Exp>;
+};
+
+export type Query_RootZones_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Zones_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Zones_Order_By>>;
+  where?: InputMaybe<Zones_Bool_Exp>;
+};
+
+export type Query_RootZones_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
 };
 
 /** columns and relationships of "registeration_channel_type" */
@@ -17763,6 +14808,14 @@ export type Subscription_Root = {
   delivery_aggregate: Delivery_Aggregate;
   /** fetch data from the table: "delivery" using primary key columns */
   delivery_by_pk?: Maybe<Delivery>;
+  /** fetch data from the table: "delivery_orders" */
+  delivery_orders: Array<Delivery_Orders>;
+  /** fetch aggregated fields from the table: "delivery_orders" */
+  delivery_orders_aggregate: Delivery_Orders_Aggregate;
+  /** fetch data from the table: "delivery_orders" using primary key columns */
+  delivery_orders_by_pk?: Maybe<Delivery_Orders>;
+  /** fetch data from the table in a streaming manner: "delivery_orders" */
+  delivery_orders_stream: Array<Delivery_Orders>;
   /** fetch data from the table: "delivery_personnel" */
   delivery_personnel: Array<Delivery_Personnel>;
   /** fetch aggregated fields from the table: "delivery_personnel" */
@@ -17777,6 +14830,22 @@ export type Subscription_Root = {
   delivery_request_aggregate: Delivery_Request_Aggregate;
   /** fetch data from the table: "delivery_request" using primary key columns */
   delivery_request_by_pk?: Maybe<Delivery_Request>;
+  /** fetch data from the table: "delivery_request_orders" */
+  delivery_request_orders: Array<Delivery_Request_Orders>;
+  /** fetch aggregated fields from the table: "delivery_request_orders" */
+  delivery_request_orders_aggregate: Delivery_Request_Orders_Aggregate;
+  /** fetch data from the table: "delivery_request_orders" using primary key columns */
+  delivery_request_orders_by_pk?: Maybe<Delivery_Request_Orders>;
+  /** fetch data from the table in a streaming manner: "delivery_request_orders" */
+  delivery_request_orders_stream: Array<Delivery_Request_Orders>;
+  /** fetch data from the table: "delivery_request_status" */
+  delivery_request_status: Array<Delivery_Request_Status>;
+  /** fetch aggregated fields from the table: "delivery_request_status" */
+  delivery_request_status_aggregate: Delivery_Request_Status_Aggregate;
+  /** fetch data from the table: "delivery_request_status" using primary key columns */
+  delivery_request_status_by_pk?: Maybe<Delivery_Request_Status>;
+  /** fetch data from the table in a streaming manner: "delivery_request_status" */
+  delivery_request_status_stream: Array<Delivery_Request_Status>;
   /** fetch data from the table in a streaming manner: "delivery_request" */
   delivery_request_stream: Array<Delivery_Request>;
   /** fetch data from the table: "delivery_status" */
@@ -17801,8 +14870,6 @@ export type Subscription_Root = {
   geometry_columns_aggregate: Geometry_Columns_Aggregate;
   /** fetch data from the table in a streaming manner: "geometry_columns" */
   geometry_columns_stream: Array<Geometry_Columns>;
-  /** Place order action */
-  insertBusinessOrder?: Maybe<InsertBusinessOrder>;
   /** fetch data from the table: "locations" */
   locations: Array<Locations>;
   /** fetch aggregated fields from the table: "locations" */
@@ -17841,6 +14908,14 @@ export type Subscription_Root = {
   order_status_aggregate: Order_Status_Aggregate;
   /** fetch data from the table: "order_status" using primary key columns */
   order_status_by_pk?: Maybe<Order_Status>;
+  /** fetch data from the table: "order_status_history" */
+  order_status_history: Array<Order_Status_History>;
+  /** fetch aggregated fields from the table: "order_status_history" */
+  order_status_history_aggregate: Order_Status_History_Aggregate;
+  /** fetch data from the table: "order_status_history" using primary key columns */
+  order_status_history_by_pk?: Maybe<Order_Status_History>;
+  /** fetch data from the table in a streaming manner: "order_status_history" */
+  order_status_history_stream: Array<Order_Status_History>;
   /** fetch data from the table in a streaming manner: "order_status" */
   order_status_stream: Array<Order_Status>;
   /** fetch data from the table: "order_supplier" */
@@ -17867,10 +14942,6 @@ export type Subscription_Root = {
   products_by_pk?: Maybe<Products>;
   /** fetch data from the table in a streaming manner: "products" */
   products_stream: Array<Products>;
-  /** An action to register a new business */
-  registerBusinessAction?: Maybe<RegisterBusinessAction>;
-  /** An action to register a new user */
-  registerUserAction?: Maybe<RegisterUserAction>;
   /** fetch data from the table: "registeration_channel_type" */
   registeration_channel_type: Array<Registeration_Channel_Type>;
   /** fetch aggregated fields from the table: "registeration_channel_type" */
@@ -17951,9 +15022,9 @@ export type Subscription_Root = {
   suppliers_categories_stream: Array<Suppliers_Categories>;
   /** fetch data from the table in a streaming manner: "suppliers" */
   suppliers_stream: Array<Suppliers>;
-  /** fetch data from the table: "user_invites" */
+  /** An array relationship */
   user_invites: Array<User_Invites>;
-  /** fetch aggregated fields from the table: "user_invites" */
+  /** An aggregate relationship */
   user_invites_aggregate: User_Invites_Aggregate;
   /** fetch data from the table: "user_invites" using primary key columns */
   user_invites_by_pk?: Maybe<User_Invites>;
@@ -18289,6 +15360,32 @@ export type Subscription_RootDelivery_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
+export type Subscription_RootDelivery_OrdersArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Orders_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Orders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Orders_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Orders_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Subscription_RootDelivery_Orders_StreamArgs = {
+  batch_size: Scalars["Int"]["input"];
+  cursor: Array<InputMaybe<Delivery_Orders_Stream_Cursor_Input>>;
+  where?: InputMaybe<Delivery_Orders_Bool_Exp>;
+};
+
 export type Subscription_RootDelivery_PersonnelArgs = {
   distinct_on?: InputMaybe<Array<Delivery_Personnel_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -18333,6 +15430,58 @@ export type Subscription_RootDelivery_Request_AggregateArgs = {
 
 export type Subscription_RootDelivery_Request_By_PkArgs = {
   id: Scalars["uuid"]["input"];
+};
+
+export type Subscription_RootDelivery_Request_OrdersArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Request_Orders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Request_Orders_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Subscription_RootDelivery_Request_Orders_StreamArgs = {
+  batch_size: Scalars["Int"]["input"];
+  cursor: Array<InputMaybe<Delivery_Request_Orders_Stream_Cursor_Input>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Request_StatusArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Status_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Status_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Request_Status_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Status_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Status_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
+};
+
+export type Subscription_RootDelivery_Request_Status_By_PkArgs = {
+  status: Scalars["String"]["input"];
+};
+
+export type Subscription_RootDelivery_Request_Status_StreamArgs = {
+  batch_size: Scalars["Int"]["input"];
+  cursor: Array<InputMaybe<Delivery_Request_Status_Stream_Cursor_Input>>;
+  where?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
 };
 
 export type Subscription_RootDelivery_Request_StreamArgs = {
@@ -18415,10 +15564,6 @@ export type Subscription_RootGeometry_Columns_StreamArgs = {
   batch_size: Scalars["Int"]["input"];
   cursor: Array<InputMaybe<Geometry_Columns_Stream_Cursor_Input>>;
   where?: InputMaybe<Geometry_Columns_Bool_Exp>;
-};
-
-export type Subscription_RootInsertBusinessOrderArgs = {
-  id: Scalars["uuid"]["input"];
 };
 
 export type Subscription_RootLocationsArgs = {
@@ -18545,6 +15690,32 @@ export type Subscription_RootOrder_Status_By_PkArgs = {
   status: Scalars["String"]["input"];
 };
 
+export type Subscription_RootOrder_Status_HistoryArgs = {
+  distinct_on?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Order_Status_History_Order_By>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
+};
+
+export type Subscription_RootOrder_Status_History_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Order_Status_History_Order_By>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
+};
+
+export type Subscription_RootOrder_Status_History_By_PkArgs = {
+  id: Scalars["uuid"]["input"];
+};
+
+export type Subscription_RootOrder_Status_History_StreamArgs = {
+  batch_size: Scalars["Int"]["input"];
+  cursor: Array<InputMaybe<Order_Status_History_Stream_Cursor_Input>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
+};
+
 export type Subscription_RootOrder_Status_StreamArgs = {
   batch_size: Scalars["Int"]["input"];
   cursor: Array<InputMaybe<Order_Status_Stream_Cursor_Input>>;
@@ -18627,14 +15798,6 @@ export type Subscription_RootProducts_StreamArgs = {
   batch_size: Scalars["Int"]["input"];
   cursor: Array<InputMaybe<Products_Stream_Cursor_Input>>;
   where?: InputMaybe<Products_Bool_Exp>;
-};
-
-export type Subscription_RootRegisterBusinessActionArgs = {
-  id: Scalars["uuid"]["input"];
-};
-
-export type Subscription_RootRegisterUserActionArgs = {
-  id: Scalars["uuid"]["input"];
 };
 
 export type Subscription_RootRegisteration_Channel_TypeArgs = {
@@ -20209,43 +17372,6 @@ export type Suppliers_Updates = {
   where: Suppliers_Bool_Exp;
 };
 
-export type Subscription_RootVerification_TokensArgs = {
-  distinct_on?: InputMaybe<Array<Verification_Tokens_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Verification_Tokens_Order_By>>;
-  where?: InputMaybe<Verification_Tokens_Bool_Exp>;
-};
-
-export type Subscription_RootVerification_Tokens_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Verification_Tokens_Select_Column>>;
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
-  order_by?: InputMaybe<Array<Verification_Tokens_Order_By>>;
-  where?: InputMaybe<Verification_Tokens_Bool_Exp>;
-};
-
-export type Subscription_RootVerification_Tokens_By_PkArgs = {
-  token: Scalars["String"]["input"];
-};
-
-export type Subscription_RootVerification_Tokens_StreamArgs = {
-  batch_size: Scalars["Int"]["input"];
-  cursor: Array<InputMaybe<Verification_Tokens_Stream_Cursor_Input>>;
-  where?: InputMaybe<Verification_Tokens_Bool_Exp>;
-};
-
-/** columns and relationships of "supplier_categories_enum" */
-export type Supplier_Categories_Enum = {
-  __typename?: "supplier_categories_enum";
-  description: Scalars["String"]["output"];
-  name: Scalars["String"]["output"];
-  /** An array relationship */
-  suppliers_categories: Array<Suppliers_Categories>;
-  /** An aggregate relationship */
-  suppliers_categories_aggregate: Suppliers_Categories_Aggregate;
-};
-
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
   _eq?: InputMaybe<Scalars["timestamptz"]["input"]>;
@@ -20267,6 +17393,8 @@ export type User_Invites = {
   id: Scalars["uuid"]["output"];
   name?: Maybe<Scalars["String"]["output"]>;
   role: User_Role_Enum;
+  /** An object relationship */
+  user_role: User_Role;
 };
 
 /** aggregated selection of "user_invites" */
@@ -20274,6 +17402,17 @@ export type User_Invites_Aggregate = {
   __typename?: "user_invites_aggregate";
   aggregate?: Maybe<User_Invites_Aggregate_Fields>;
   nodes: Array<User_Invites>;
+};
+
+export type User_Invites_Aggregate_Bool_Exp = {
+  count?: InputMaybe<User_Invites_Aggregate_Bool_Exp_Count>;
+};
+
+export type User_Invites_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<User_Invites_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<User_Invites_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "user_invites" */
@@ -20290,6 +17429,20 @@ export type User_Invites_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+/** order by aggregate values of table "user_invites" */
+export type User_Invites_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<User_Invites_Max_Order_By>;
+  min?: InputMaybe<User_Invites_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "user_invites" */
+export type User_Invites_Arr_Rel_Insert_Input = {
+  data: Array<User_Invites_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<User_Invites_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "user_invites". All fields are combined with a logical 'AND'. */
 export type User_Invites_Bool_Exp = {
   _and?: InputMaybe<Array<User_Invites_Bool_Exp>>;
@@ -20300,6 +17453,7 @@ export type User_Invites_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   role?: InputMaybe<User_Role_Enum_Comparison_Exp>;
+  user_role?: InputMaybe<User_Role_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "user_invites" */
@@ -20315,6 +17469,7 @@ export type User_Invites_Insert_Input = {
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   role?: InputMaybe<User_Role_Enum>;
+  user_role?: InputMaybe<User_Role_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -20326,6 +17481,14 @@ export type User_Invites_Max_Fields = {
   name?: Maybe<Scalars["String"]["output"]>;
 };
 
+/** order by max() on columns of table "user_invites" */
+export type User_Invites_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type User_Invites_Min_Fields = {
   __typename?: "user_invites_min_fields";
@@ -20333,6 +17496,14 @@ export type User_Invites_Min_Fields = {
   email?: Maybe<Scalars["String"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
   name?: Maybe<Scalars["String"]["output"]>;
+};
+
+/** order by min() on columns of table "user_invites" */
+export type User_Invites_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "user_invites" */
@@ -20358,6 +17529,7 @@ export type User_Invites_Order_By = {
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   role?: InputMaybe<Order_By>;
+  user_role?: InputMaybe<User_Role_Order_By>;
 };
 
 /** primary key columns input for table: user_invites */
@@ -20431,9 +17603,31 @@ export type User_Role = {
   __typename?: "user_role";
   role: Scalars["String"]["output"];
   /** An array relationship */
+  user_invites: Array<User_Invites>;
+  /** An aggregate relationship */
+  user_invites_aggregate: User_Invites_Aggregate;
+  /** An array relationship */
   users: Array<Users>;
   /** An aggregate relationship */
   users_aggregate: Users_Aggregate;
+};
+
+/** columns and relationships of "user_role" */
+export type User_RoleUser_InvitesArgs = {
+  distinct_on?: InputMaybe<Array<User_Invites_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<User_Invites_Order_By>>;
+  where?: InputMaybe<User_Invites_Bool_Exp>;
+};
+
+/** columns and relationships of "user_role" */
+export type User_RoleUser_Invites_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<User_Invites_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<User_Invites_Order_By>>;
+  where?: InputMaybe<User_Invites_Bool_Exp>;
 };
 
 /** columns and relationships of "user_role" */
@@ -20481,6 +17675,8 @@ export type User_Role_Bool_Exp = {
   _not?: InputMaybe<User_Role_Bool_Exp>;
   _or?: InputMaybe<Array<User_Role_Bool_Exp>>;
   role?: InputMaybe<String_Comparison_Exp>;
+  user_invites?: InputMaybe<User_Invites_Bool_Exp>;
+  user_invites_aggregate?: InputMaybe<User_Invites_Aggregate_Bool_Exp>;
   users?: InputMaybe<Users_Bool_Exp>;
   users_aggregate?: InputMaybe<Users_Aggregate_Bool_Exp>;
 };
@@ -20512,6 +17708,7 @@ export type User_Role_Enum_Comparison_Exp = {
 /** input type for inserting data into table "user_role" */
 export type User_Role_Insert_Input = {
   role?: InputMaybe<Scalars["String"]["input"]>;
+  user_invites?: InputMaybe<User_Invites_Arr_Rel_Insert_Input>;
   users?: InputMaybe<Users_Arr_Rel_Insert_Input>;
 };
 
@@ -20553,6 +17750,7 @@ export type User_Role_On_Conflict = {
 /** Ordering options when selecting data from "user_role". */
 export type User_Role_Order_By = {
   role?: InputMaybe<Order_By>;
+  user_invites_aggregate?: InputMaybe<User_Invites_Aggregate_Order_By>;
   users_aggregate?: InputMaybe<Users_Aggregate_Order_By>;
 };
 
@@ -22167,6 +19365,628 @@ export type Verification_Tokens_Updates = {
   where: Verification_Tokens_Bool_Exp;
 };
 
+/** columns and relationships of "work_schedules" */
+export type Work_Schedules = {
+  __typename?: "work_schedules";
+  /** An object relationship */
+  business?: Maybe<Business>;
+  business_id?: Maybe<Scalars["uuid"]["output"]>;
+  created_at: Scalars["timestamptz"]["output"];
+  days: Array<Scalars["Boolean"]["output"]>;
+  id: Scalars["uuid"]["output"];
+  /** An array relationship */
+  shifts: Array<Work_Shifts>;
+  /** An aggregate relationship */
+  shifts_aggregate: Work_Shifts_Aggregate;
+  /** An object relationship */
+  supplier?: Maybe<Suppliers>;
+  supplier_id?: Maybe<Scalars["uuid"]["output"]>;
+  updated_at: Scalars["timestamptz"]["output"];
+};
+
+/** columns and relationships of "work_schedules" */
+export type Work_SchedulesShiftsArgs = {
+  distinct_on?: InputMaybe<Array<Work_Shifts_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Work_Shifts_Order_By>>;
+  where?: InputMaybe<Work_Shifts_Bool_Exp>;
+};
+
+/** columns and relationships of "work_schedules" */
+export type Work_SchedulesShifts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Work_Shifts_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Work_Shifts_Order_By>>;
+  where?: InputMaybe<Work_Shifts_Bool_Exp>;
+};
+
+/** aggregated selection of "work_schedules" */
+export type Work_Schedules_Aggregate = {
+  __typename?: "work_schedules_aggregate";
+  aggregate?: Maybe<Work_Schedules_Aggregate_Fields>;
+  nodes: Array<Work_Schedules>;
+};
+
+/** aggregate fields of "work_schedules" */
+export type Work_Schedules_Aggregate_Fields = {
+  __typename?: "work_schedules_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Work_Schedules_Max_Fields>;
+  min?: Maybe<Work_Schedules_Min_Fields>;
+};
+
+/** aggregate fields of "work_schedules" */
+export type Work_Schedules_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Work_Schedules_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** Boolean expression to filter rows from the table "work_schedules". All fields are combined with a logical 'AND'. */
+export type Work_Schedules_Bool_Exp = {
+  _and?: InputMaybe<Array<Work_Schedules_Bool_Exp>>;
+  _not?: InputMaybe<Work_Schedules_Bool_Exp>;
+  _or?: InputMaybe<Array<Work_Schedules_Bool_Exp>>;
+  business?: InputMaybe<Business_Bool_Exp>;
+  business_id?: InputMaybe<Uuid_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  days?: InputMaybe<Boolean_Array_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  shifts?: InputMaybe<Work_Shifts_Bool_Exp>;
+  shifts_aggregate?: InputMaybe<Work_Shifts_Aggregate_Bool_Exp>;
+  supplier?: InputMaybe<Suppliers_Bool_Exp>;
+  supplier_id?: InputMaybe<Uuid_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "work_schedules" */
+export enum Work_Schedules_Constraint {
+  /** unique or primary key constraint on columns "business_id" */
+  WorkSchedulesBusinessIdKey = "work_schedules_business_id_key",
+  /** unique or primary key constraint on columns "id" */
+  WorkSchedulesPkey = "work_schedules_pkey",
+  /** unique or primary key constraint on columns "supplier_id" */
+  WorkSchedulesSupplierIdKey = "work_schedules_supplier_id_key",
+}
+
+/** input type for inserting data into table "work_schedules" */
+export type Work_Schedules_Insert_Input = {
+  business?: InputMaybe<Business_Obj_Rel_Insert_Input>;
+  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  days?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  shifts?: InputMaybe<Work_Shifts_Arr_Rel_Insert_Input>;
+  supplier?: InputMaybe<Suppliers_Obj_Rel_Insert_Input>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** aggregate max on columns */
+export type Work_Schedules_Max_Fields = {
+  __typename?: "work_schedules_max_fields";
+  business_id?: Maybe<Scalars["uuid"]["output"]>;
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  days?: Maybe<Array<Scalars["Boolean"]["output"]>>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  supplier_id?: Maybe<Scalars["uuid"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** aggregate min on columns */
+export type Work_Schedules_Min_Fields = {
+  __typename?: "work_schedules_min_fields";
+  business_id?: Maybe<Scalars["uuid"]["output"]>;
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  days?: Maybe<Array<Scalars["Boolean"]["output"]>>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  supplier_id?: Maybe<Scalars["uuid"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** response of any mutation on the table "work_schedules" */
+export type Work_Schedules_Mutation_Response = {
+  __typename?: "work_schedules_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Work_Schedules>;
+};
+
+/** input type for inserting object relation for remote table "work_schedules" */
+export type Work_Schedules_Obj_Rel_Insert_Input = {
+  data: Work_Schedules_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Work_Schedules_On_Conflict>;
+};
+
+/** on_conflict condition type for table "work_schedules" */
+export type Work_Schedules_On_Conflict = {
+  constraint: Work_Schedules_Constraint;
+  update_columns?: Array<Work_Schedules_Update_Column>;
+  where?: InputMaybe<Work_Schedules_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "work_schedules". */
+export type Work_Schedules_Order_By = {
+  business?: InputMaybe<Business_Order_By>;
+  business_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  days?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  shifts_aggregate?: InputMaybe<Work_Shifts_Aggregate_Order_By>;
+  supplier?: InputMaybe<Suppliers_Order_By>;
+  supplier_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: work_schedules */
+export type Work_Schedules_Pk_Columns_Input = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** select columns of table "work_schedules" */
+export enum Work_Schedules_Select_Column {
+  /** column name */
+  BusinessId = "business_id",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Days = "days",
+  /** column name */
+  Id = "id",
+  /** column name */
+  SupplierId = "supplier_id",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+/** input type for updating data in table "work_schedules" */
+export type Work_Schedules_Set_Input = {
+  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  days?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** Streaming cursor of the table "work_schedules" */
+export type Work_Schedules_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Work_Schedules_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Work_Schedules_Stream_Cursor_Value_Input = {
+  business_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  days?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  supplier_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** update columns of table "work_schedules" */
+export enum Work_Schedules_Update_Column {
+  /** column name */
+  BusinessId = "business_id",
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Days = "days",
+  /** column name */
+  Id = "id",
+  /** column name */
+  SupplierId = "supplier_id",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export type Work_Schedules_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Work_Schedules_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Work_Schedules_Bool_Exp;
+};
+
+/** columns and relationships of "work_shifts" */
+export type Work_Shifts = {
+  __typename?: "work_shifts";
+  created_at: Scalars["timestamptz"]["output"];
+  end_time: Scalars["time"]["output"];
+  id: Scalars["uuid"]["output"];
+  schedule_id: Scalars["uuid"]["output"];
+  start_time: Scalars["time"]["output"];
+  updated_at: Scalars["timestamptz"]["output"];
+  /** An object relationship */
+  work_schedule: Work_Schedules;
+};
+
+/** aggregated selection of "work_shifts" */
+export type Work_Shifts_Aggregate = {
+  __typename?: "work_shifts_aggregate";
+  aggregate?: Maybe<Work_Shifts_Aggregate_Fields>;
+  nodes: Array<Work_Shifts>;
+};
+
+export type Work_Shifts_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Work_Shifts_Aggregate_Bool_Exp_Count>;
+};
+
+export type Work_Shifts_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Work_Shifts_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<Work_Shifts_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "work_shifts" */
+export type Work_Shifts_Aggregate_Fields = {
+  __typename?: "work_shifts_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Work_Shifts_Max_Fields>;
+  min?: Maybe<Work_Shifts_Min_Fields>;
+};
+
+/** aggregate fields of "work_shifts" */
+export type Work_Shifts_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Work_Shifts_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** order by aggregate values of table "work_shifts" */
+export type Work_Shifts_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Work_Shifts_Max_Order_By>;
+  min?: InputMaybe<Work_Shifts_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "work_shifts" */
+export type Work_Shifts_Arr_Rel_Insert_Input = {
+  data: Array<Work_Shifts_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Work_Shifts_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "work_shifts". All fields are combined with a logical 'AND'. */
+export type Work_Shifts_Bool_Exp = {
+  _and?: InputMaybe<Array<Work_Shifts_Bool_Exp>>;
+  _not?: InputMaybe<Work_Shifts_Bool_Exp>;
+  _or?: InputMaybe<Array<Work_Shifts_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  end_time?: InputMaybe<Time_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  schedule_id?: InputMaybe<Uuid_Comparison_Exp>;
+  start_time?: InputMaybe<Time_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  work_schedule?: InputMaybe<Work_Schedules_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "work_shifts" */
+export enum Work_Shifts_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  WorkShiftsPkey = "work_shifts_pkey",
+}
+
+/** input type for inserting data into table "work_shifts" */
+export type Work_Shifts_Insert_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  end_time?: InputMaybe<Scalars["time"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  schedule_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  start_time?: InputMaybe<Scalars["time"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  work_schedule?: InputMaybe<Work_Schedules_Obj_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Work_Shifts_Max_Fields = {
+  __typename?: "work_shifts_max_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  schedule_id?: Maybe<Scalars["uuid"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** order by max() on columns of table "work_shifts" */
+export type Work_Shifts_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  schedule_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Work_Shifts_Min_Fields = {
+  __typename?: "work_shifts_min_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  schedule_id?: Maybe<Scalars["uuid"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** order by min() on columns of table "work_shifts" */
+export type Work_Shifts_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  schedule_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "work_shifts" */
+export type Work_Shifts_Mutation_Response = {
+  __typename?: "work_shifts_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Work_Shifts>;
+};
+
+/** on_conflict condition type for table "work_shifts" */
+export type Work_Shifts_On_Conflict = {
+  constraint: Work_Shifts_Constraint;
+  update_columns?: Array<Work_Shifts_Update_Column>;
+  where?: InputMaybe<Work_Shifts_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "work_shifts". */
+export type Work_Shifts_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  end_time?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  schedule_id?: InputMaybe<Order_By>;
+  start_time?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  work_schedule?: InputMaybe<Work_Schedules_Order_By>;
+};
+
+/** primary key columns input for table: work_shifts */
+export type Work_Shifts_Pk_Columns_Input = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** select columns of table "work_shifts" */
+export enum Work_Shifts_Select_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  EndTime = "end_time",
+  /** column name */
+  Id = "id",
+  /** column name */
+  ScheduleId = "schedule_id",
+  /** column name */
+  StartTime = "start_time",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+/** input type for updating data in table "work_shifts" */
+export type Work_Shifts_Set_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  end_time?: InputMaybe<Scalars["time"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  schedule_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  start_time?: InputMaybe<Scalars["time"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** Streaming cursor of the table "work_shifts" */
+export type Work_Shifts_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Work_Shifts_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Work_Shifts_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  end_time?: InputMaybe<Scalars["time"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  schedule_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  start_time?: InputMaybe<Scalars["time"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** update columns of table "work_shifts" */
+export enum Work_Shifts_Update_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  EndTime = "end_time",
+  /** column name */
+  Id = "id",
+  /** column name */
+  ScheduleId = "schedule_id",
+  /** column name */
+  StartTime = "start_time",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export type Work_Shifts_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Work_Shifts_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Work_Shifts_Bool_Exp;
+};
+
+/** columns and relationships of "zones" */
+export type Zones = {
+  __typename?: "zones";
+  created_at: Scalars["timestamptz"]["output"];
+  description?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["uuid"]["output"];
+  name?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** aggregated selection of "zones" */
+export type Zones_Aggregate = {
+  __typename?: "zones_aggregate";
+  aggregate?: Maybe<Zones_Aggregate_Fields>;
+  nodes: Array<Zones>;
+};
+
+/** aggregate fields of "zones" */
+export type Zones_Aggregate_Fields = {
+  __typename?: "zones_aggregate_fields";
+  count: Scalars["Int"]["output"];
+  max?: Maybe<Zones_Max_Fields>;
+  min?: Maybe<Zones_Min_Fields>;
+};
+
+/** aggregate fields of "zones" */
+export type Zones_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Zones_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** Boolean expression to filter rows from the table "zones". All fields are combined with a logical 'AND'. */
+export type Zones_Bool_Exp = {
+  _and?: InputMaybe<Array<Zones_Bool_Exp>>;
+  _not?: InputMaybe<Zones_Bool_Exp>;
+  _or?: InputMaybe<Array<Zones_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "zones" */
+export enum Zones_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ZonesPkey = "zones_pkey",
+}
+
+/** input type for inserting data into table "zones" */
+export type Zones_Insert_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** aggregate max on columns */
+export type Zones_Max_Fields = {
+  __typename?: "zones_max_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  description?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** aggregate min on columns */
+export type Zones_Min_Fields = {
+  __typename?: "zones_min_fields";
+  created_at?: Maybe<Scalars["timestamptz"]["output"]>;
+  description?: Maybe<Scalars["String"]["output"]>;
+  id?: Maybe<Scalars["uuid"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
+};
+
+/** response of any mutation on the table "zones" */
+export type Zones_Mutation_Response = {
+  __typename?: "zones_mutation_response";
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]["output"];
+  /** data from the rows affected by the mutation */
+  returning: Array<Zones>;
+};
+
+/** on_conflict condition type for table "zones" */
+export type Zones_On_Conflict = {
+  constraint: Zones_Constraint;
+  update_columns?: Array<Zones_Update_Column>;
+  where?: InputMaybe<Zones_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "zones". */
+export type Zones_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: zones */
+export type Zones_Pk_Columns_Input = {
+  id: Scalars["uuid"]["input"];
+};
+
+/** select columns of table "zones" */
+export enum Zones_Select_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+/** input type for updating data in table "zones" */
+export type Zones_Set_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** Streaming cursor of the table "zones" */
+export type Zones_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Zones_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Zones_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["uuid"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+};
+
+/** update columns of table "zones" */
+export enum Zones_Update_Column {
+  /** column name */
+  CreatedAt = "created_at",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  UpdatedAt = "updated_at",
+}
+
+export type Zones_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Zones_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Zones_Bool_Exp;
+};
+
+export type OrderFragment = { __typename?: "orders"; id: any };
+
 export type RegisterBusinessMutationVariables = Exact<{
   object: Business_Insert_Input;
 }>;
@@ -22178,15 +19998,6 @@ export type RegisterBusinessMutation = {
     id: any;
     name?: string | null;
   } | null;
-};
-
-export type RegisterBusinessActionMutationVariables = Exact<{
-  object: RegisterBusinessActionBusinessInsertInput;
-}>;
-
-export type RegisterBusinessActionMutation = {
-  __typename?: "mutation_root";
-  registerBusinessAction: any;
 };
 
 export type InsertBusinessAddressMutationVariables = Exact<{
@@ -22239,13 +20050,16 @@ export type InsertBusinessOrderMutation = {
   insert_orders_one?: { __typename?: "orders"; id: any } | null;
 };
 
-export type InsertBusinessOrderActionMutationVariables = Exact<{
-  object?: InputMaybe<InsertBusinessOrderOrdersInsertInput>;
+export type MyMutationMutationVariables = Exact<{
+  object?: InputMaybe<Order_Status_History_Insert_Input>;
 }>;
 
-export type InsertBusinessOrderActionMutation = {
+export type MyMutationMutation = {
   __typename?: "mutation_root";
-  insertBusinessOrder: any;
+  insert_order_status_history_one?: {
+    __typename?: "order_status_history";
+    id: any;
+  } | null;
 };
 
 export type RegisterSupplierMutationVariables = Exact<{
@@ -22340,15 +20154,6 @@ export type OnboardNewSupplierMutation = {
   insert_suppliers_one?: { __typename?: "suppliers"; id: any } | null;
 };
 
-export type RegisterUserActionMutationVariables = Exact<{
-  object: RegisterUserActionUsersInsertInput;
-}>;
-
-export type RegisterUserActionMutation = {
-  __typename?: "mutation_root";
-  registerUserAction: any;
-};
-
 export type InsertNewInviteMutationVariables = Exact<{
   object?: InputMaybe<User_Invites_Insert_Input>;
 }>;
@@ -22358,15 +20163,6 @@ export type InsertNewInviteMutation = {
   insert_user_invites_one?: { __typename?: "user_invites"; id: any } | null;
 };
 
-export type RegisterUserActionMutationVariables = Exact<{
-  object: RegisterUserActionUsersInsertInput;
-}>;
-
-export type RegisterUserActionMutation = {
-  __typename?: "mutation_root";
-  registerUserAction: any;
-};
-
 export type GetBusinessesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetBusinessesQuery = {
@@ -22374,22 +20170,22 @@ export type GetBusinessesQuery = {
   business: Array<{
     __typename?: "business";
     created_at: any;
-    id: any;
     updated_at: any;
+    id: any;
     name?: string | null;
     contactName?: string | null;
-    type?: Business_Type_Enum | null;
     phoneNumber?: string | null;
     description?: string | null;
     contactEmail?: string | null;
+    type?: Business_Type_Enum | null;
     addresses: Array<{
       __typename?: "addresses";
-      city?: string | null;
       created_at: any;
       id: any;
       latitude?: any | null;
       longitude?: any | null;
       updated_at: any;
+      city?: string | null;
       street_address?: string | null;
     }>;
   }>;
@@ -22415,7 +20211,6 @@ export type GetBusinessOrdersQuery = {
     id: any;
     created_at: any;
     destination?: string | null;
-    orderId?: any | null;
     customerId?: any | null;
     origin?: string | null;
     status?: Order_Status_Enum | null;
@@ -22477,19 +20272,37 @@ export type GetBusinessTypesQuery = {
   business_type: Array<{ __typename?: "business_type"; type: string }>;
 };
 
+export type CourierBasicFieldsFragment = {
+  __typename?: "couriers";
+  id: any;
+  name: string;
+  avatar?: string | null;
+};
+
+export type CourierExtendedFieldsFragment = {
+  __typename?: "couriers";
+  DOB?: any | null;
+  phoneNumber?: string | null;
+  gender?: string | null;
+  email?: string | null;
+  id: any;
+  name: string;
+  avatar?: string | null;
+};
+
 export type GetCouriersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetCouriersQuery = {
   __typename?: "query_root";
   couriers: Array<{
     __typename?: "couriers";
-    id: any;
-    avatar?: string | null;
-    name: string;
     DOB?: any | null;
     phoneNumber?: string | null;
     gender?: string | null;
     email?: string | null;
+    id: any;
+    name: string;
+    avatar?: string | null;
   }>;
   couriers_aggregate: {
     __typename?: "couriers_aggregate";
@@ -22514,11 +20327,146 @@ export type GetCouriersByPkQuery = {
   } | null;
 };
 
+export type DeliveryFieldsFragment = {
+  __typename?: "delivery";
+  id: any;
+  created_at: any;
+};
+
+export type DeliveryRequestFieldsFragment = {
+  __typename?: "delivery_request";
+  id: any;
+  created_at: any;
+};
+
+export type GetDeliveriesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetDeliveriesQuery = {
+  __typename?: "query_root";
+  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
+  delivery_aggregate: {
+    __typename?: "delivery_aggregate";
+    aggregate?: {
+      __typename?: "delivery_aggregate_fields";
+      count: number;
+    } | null;
+  };
+};
+
+export type GetDeliveryByPkQueryVariables = Exact<{
+  id: Scalars["uuid"]["input"];
+}>;
+
+export type GetDeliveryByPkQuery = {
+  __typename?: "query_root";
+  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
+};
+
+export type GetDeliveriesByCourierQueryVariables = Exact<{
+  courier_id: Scalars["uuid"]["input"];
+}>;
+
+export type GetDeliveriesByCourierQuery = {
+  __typename?: "query_root";
+  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
+};
+
+export type GetDeliveryRequestsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetDeliveryRequestsQuery = {
+  __typename?: "query_root";
+  delivery_request: Array<{
+    __typename?: "delivery_request";
+    id: any;
+    created_at: any;
+  }>;
+  delivery_request_aggregate: {
+    __typename?: "delivery_request_aggregate";
+    aggregate?: {
+      __typename?: "delivery_request_aggregate_fields";
+      count: number;
+    } | null;
+  };
+};
+
+export type GetDeliveryRequestByPkQueryVariables = Exact<{
+  id: Scalars["uuid"]["input"];
+}>;
+
+export type GetDeliveryRequestByPkQuery = {
+  __typename?: "query_root";
+  delivery_request: Array<{
+    __typename?: "delivery_request";
+    id: any;
+    created_at: any;
+  }>;
+};
+
+export type GetDeliveryRequestByCourierQueryVariables = Exact<{
+  courier_id: Scalars["uuid"]["input"];
+}>;
+
+export type GetDeliveryRequestByCourierQuery = {
+  __typename?: "query_root";
+  delivery_request: Array<{
+    __typename?: "delivery_request";
+    id: any;
+    created_at: any;
+  }>;
+};
+
 export type FetchSahilZonesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type FetchSahilZonesQuery = {
   __typename?: "query_root";
   locations: Array<{ __typename?: "locations"; id: any }>;
+};
+
+export type OrderCoreFieldsFragment = {
+  __typename?: "orders";
+  id: any;
+  created_at: any;
+  destination?: string | null;
+  customerId?: any | null;
+  origin?: string | null;
+  status?: Order_Status_Enum | null;
+};
+
+export type OrderBusinessFieldsFragment = {
+  __typename?: "business";
+  id: any;
+  contactName?: string | null;
+  phoneNumber?: string | null;
+  name?: string | null;
+};
+
+export type OrderItemsAggregateFragment = {
+  __typename?: "orders";
+  order_items_aggregate: {
+    __typename?: "order_item_aggregate";
+    aggregate?: {
+      __typename?: "order_item_aggregate_fields";
+      count: number;
+    } | null;
+  };
+};
+
+export type LatestStatusHistoryFragment = {
+  __typename?: "orders";
+  status_histories: Array<{
+    __typename?: "order_status_history";
+    created_at: any;
+    status: Order_Status_Enum;
+  }>;
+};
+
+export type AllStatusHistoriesFragment = {
+  __typename?: "orders";
+  status_histories: Array<{
+    __typename?: "order_status_history";
+    status: Order_Status_Enum;
+    created_at: any;
+  }>;
 };
 
 export type GetOrdersQueryVariables = Exact<{ [key: string]: never }>;
@@ -22530,16 +20478,21 @@ export type GetOrdersQuery = {
     id: any;
     created_at: any;
     destination?: string | null;
-    orderId?: any | null;
     customerId?: any | null;
     origin?: string | null;
     status?: Order_Status_Enum | null;
     business?: {
       __typename?: "business";
+      id: any;
       contactName?: string | null;
       phoneNumber?: string | null;
       name?: string | null;
     } | null;
+    status_histories: Array<{
+      __typename?: "order_status_history";
+      created_at: any;
+      status: Order_Status_Enum;
+    }>;
   }>;
   orders_aggregate: {
     __typename?: "orders_aggregate";
@@ -22550,18 +20503,17 @@ export type GetOrdersQuery = {
   };
 };
 
-export type GetorderByPkQueryVariables = Exact<{
+export type GetOrderByPkQueryVariables = Exact<{
   id: Scalars["uuid"]["input"];
 }>;
 
-export type GetorderByPkQuery = {
+export type GetOrderByPkQuery = {
   __typename?: "query_root";
   orders_by_pk?: {
     __typename?: "orders";
     id: any;
     created_at: any;
     destination?: string | null;
-    orderId?: any | null;
     customerId?: any | null;
     origin?: string | null;
     status?: Order_Status_Enum | null;
@@ -22584,6 +20536,11 @@ export type GetorderByPkQuery = {
         count: number;
       } | null;
     };
+    status_histories: Array<{
+      __typename?: "order_status_history";
+      status: Order_Status_Enum;
+      created_at: any;
+    }>;
   } | null;
 };
 
@@ -22595,7 +20552,6 @@ export type GetOrderDeliveriesQuery = {
   __typename?: "query_root";
   delivery: Array<{
     __typename?: "delivery";
-    orderId: any;
     status?: Delivery_Status_Enum | null;
     id: any;
     created_at: any;
@@ -22619,6 +20575,22 @@ export type GetOrdersStatsQuery = {
   };
 };
 
+export type ProductFieldsFragment = {
+  __typename?: "products";
+  discount?: number | null;
+  id: any;
+  name?: string | null;
+  price?: number | null;
+};
+
+export type ProductsAggregateFragment = {
+  __typename?: "products_aggregate";
+  aggregate?: {
+    __typename?: "products_aggregate_fields";
+    count: number;
+  } | null;
+};
+
 export type GetProductsQueryVariables = Exact<{
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -22628,12 +20600,12 @@ export type GetProductsQuery = {
   __typename?: "query_root";
   products: Array<{
     __typename?: "products";
+    mainImage?: string | null;
+    description?: string | null;
     discount?: number | null;
     id: any;
     name?: string | null;
     price?: number | null;
-    mainImage?: string | null;
-    description?: string | null;
   }>;
   products_aggregate: {
     __typename?: "products_aggregate";
@@ -22666,6 +20638,30 @@ export type GetProductsByNameQuery = {
       count: number;
     } | null;
   };
+};
+
+export type SupplierFieldsFragment = {
+  __typename?: "suppliers";
+  id: any;
+  name?: string | null;
+  streetAddress?: string | null;
+  phoneNumber?: string | null;
+  contactName?: string | null;
+  zone?: string | null;
+  categories: Array<{
+    __typename?: "suppliers_categories";
+    category_name: Supplier_Categories_Enum_Enum;
+  }>;
+};
+
+export type SupplierProductFieldsFragment = {
+  __typename?: "products";
+  id: any;
+  name?: string | null;
+  description?: string | null;
+  inStock: boolean;
+  quantity: number;
+  price?: number | null;
 };
 
 export type GetSuppliersQueryVariables = Exact<{
@@ -22712,7 +20708,6 @@ export type GetSupplierOrdersQuery = {
       id: any;
       created_at: any;
       destination?: string | null;
-      orderId?: any | null;
       customerId?: any | null;
       origin?: string | null;
       status?: Order_Status_Enum | null;
@@ -22758,18 +20753,14 @@ export type GetSupplierByPkQuery = {
   suppliers_by_pk?: {
     __typename?: "suppliers";
     created_at: any;
+    description?: string | null;
+    contactEmail?: string | null;
     id: any;
     name?: string | null;
-    description?: string | null;
+    streetAddress?: string | null;
     phoneNumber?: string | null;
     contactName?: string | null;
-    contactEmail?: string | null;
-    streetAddress?: string | null;
     zone?: string | null;
-    categories: Array<{
-      __typename?: "suppliers_categories";
-      category_name: Supplier_Categories_Enum_Enum;
-    }>;
     products_aggregate: {
       __typename?: "products_aggregate";
       aggregate?: {
@@ -22777,17 +20768,6 @@ export type GetSupplierByPkQuery = {
         count: number;
       } | null;
     };
-    schedule?: {
-      __typename?: "work_schedules";
-      id: any;
-      days: Array<boolean>;
-      shifts: Array<{
-        __typename?: "work_shifts";
-        id: any;
-        start_time: any;
-        end_time: any;
-      }>;
-    } | null;
   } | null;
 };
 
@@ -22802,13 +20782,13 @@ export type GetSupplierProductsQuery = {
   __typename?: "query_root";
   products: Array<{
     __typename?: "products";
+    mainImage?: string | null;
     id: any;
     name?: string | null;
     description?: string | null;
     inStock: boolean;
     quantity: number;
     price?: number | null;
-    mainImage?: string | null;
   }>;
 };
 
@@ -22845,16 +20825,37 @@ export type GetSupplierCategoriesQuery = {
   }>;
 };
 
+export type UserBasicFieldsFragment = {
+  __typename?: "users";
+  id: any;
+  name?: string | null;
+  role?: User_Role_Enum | null;
+};
+
+export type UserAuthFieldsFragment = {
+  __typename?: "users";
+  email?: string | null;
+  role?: User_Role_Enum | null;
+};
+
+export type UserInviteFieldsFragment = {
+  __typename?: "user_invites";
+  id: any;
+  email: string;
+  name?: string | null;
+  role: User_Role_Enum;
+};
+
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUsersQuery = {
   __typename?: "query_root";
   users: Array<{
     __typename?: "users";
-    id: any;
     created_at: any;
-    role?: User_Role_Enum | null;
+    id: any;
     name?: string | null;
+    role?: User_Role_Enum | null;
   }>;
 };
 
@@ -22894,58 +20895,353 @@ export type GetUserInvitesQuery = {
   user_invites: Array<{
     __typename?: "user_invites";
     id: any;
+    email: string;
     name?: string | null;
     role: User_Role_Enum;
   }>;
 };
 
-export type RegisterBusinessActionSubscriptionSubscriptionVariables = Exact<{
+export type ZoneFieldsFragment = {
+  __typename?: "zones";
+  id: any;
+  name?: string | null;
+  description?: string | null;
+  created_at: any;
+  updated_at?: any | null;
+};
+
+export type GetZonesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetZonesQuery = {
+  __typename?: "query_root";
+  zones: Array<{
+    __typename?: "zones";
+    id: any;
+    name?: string | null;
+    description?: string | null;
+    created_at: any;
+    updated_at?: any | null;
+  }>;
+};
+
+export type GetZonesByIdQueryVariables = Exact<{
   id: Scalars["uuid"]["input"];
 }>;
 
-export type RegisterBusinessActionSubscriptionSubscription = {
-  __typename?: "subscription_root";
-  registerBusinessAction?: {
-    __typename?: "registerBusinessAction";
-    created_at: any;
-    errors?: any | null;
+export type GetZonesByIdQuery = {
+  __typename?: "query_root";
+  zones: Array<{
+    __typename?: "zones";
     id: any;
-    output?: {
-      __typename?: "RegisterBusinessActionOutput";
-      id: any;
-      name?: string | null;
-    } | null;
-  } | null;
+    name?: string | null;
+    description?: string | null;
+    created_at: any;
+    updated_at?: any | null;
+  }>;
 };
 
-export type GetOrderValidationSubscriptionVariables = Exact<{
-  id?: InputMaybe<Scalars["uuid"]["input"]>;
-}>;
-
-export type GetOrderValidationSubscription = {
-  __typename?: "subscription_root";
-  insertBusinessOrder?: {
-    __typename?: "insertBusinessOrder";
-    output?: {
-      __typename?: "InsertBusinessOrderOutput";
-      order?: {
-        __typename?: "OrderPayload";
-        customerId?: string | null;
-        order_items?: {
-          __typename?: "OrderItems";
-          data?: Array<{
-            __typename?: "OrderItemData";
-            price?: number | null;
-            productId?: string | null;
-            quantity?: number | null;
-          } | null> | null;
-        } | null;
-      } | null;
-    } | null;
-  } | null;
-};
-
-export const RegisterBusinessDocument = {
+export const OrderFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "order" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [{ kind: "Field", name: { kind: "Name", value: "id" } }],
+      },
+    },
+  ],
+} as unknown as DocumentNode<OrderFragment, unknown>;
+export const BusinessCoreFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "BusinessCoreFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "business" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "description" } },
+          { kind: "Field", name: { kind: "Name", value: "contactEmail" } },
+          { kind: "Field", name: { kind: "Name", value: "type" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<BusinessCoreFieldsFragment, unknown>;
+export const AddressFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "AddressFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "addresses" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "city" } },
+          { kind: "Field", name: { kind: "Name", value: "street_address" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AddressFieldsFragment, unknown>;
+export const CourierBasicFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CourierBasicFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "couriers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "avatar" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CourierBasicFieldsFragment, unknown>;
+export const CourierExtendedFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CourierExtendedFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "couriers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "FragmentSpread",
+            name: { kind: "Name", value: "CourierBasicFields" },
+          },
+          { kind: "Field", name: { kind: "Name", value: "DOB" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "gender" } },
+          { kind: "Field", name: { kind: "Name", value: "email" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CourierBasicFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "couriers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "avatar" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CourierExtendedFieldsFragment, unknown>;
+export const DeliveryFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "DeliveryFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "delivery" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeliveryFieldsFragment, unknown>;
+export const DeliveryRequestFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "DeliveryRequestFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "delivery_request" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeliveryRequestFieldsFragment, unknown>;
+export const OrderCoreFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "OrderCoreFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "destination" } },
+          { kind: "Field", name: { kind: "Name", value: "customerId" } },
+          { kind: "Field", name: { kind: "Name", value: "origin" } },
+          { kind: "Field", name: { kind: "Name", value: "status" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<OrderCoreFieldsFragment, unknown>;
+export const OrderBusinessFieldsFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "OrderBusinessFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "business" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<OrderBusinessFieldsFragment, unknown>;
+export const OrderItemsAggregateFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "OrderItemsAggregate" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "order_items_aggregate" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "aggregate" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "count" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<OrderItemsAggregateFragment, unknown>;
+export const LatestStatusHistoryFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "LatestStatusHistory" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "status_histories" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "limit" },
+                value: { kind: "IntValue", value: "1" },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "order_by" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "created_at" },
+                      value: { kind: "EnumValue", value: "desc" },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  RegisterBusinessMutation,
+  RegisterBusinessMutationVariables
+>;
+export const RegisterBusinessActionDocument = {
   kind: "Document",
   definitions: [
     {
@@ -22999,164 +21295,6 @@ export const RegisterBusinessDocument = {
 } as unknown as DocumentNode<
   RegisterBusinessMutation,
   RegisterBusinessMutationVariables
->;
-export const RegisterBusinessActionDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "mutation",
-      name: { kind: "Name", value: "registerBusinessAction" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "object" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: {
-                kind: "Name",
-                value: "RegisterBusinessActionBusinessInsertInput",
-              },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "registerBusinessAction" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "object" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "object" },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  RegisterBusinessActionMutation,
-  RegisterBusinessActionMutationVariables
->;
-export const InsertBusinessAddressDocument = {
-
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "mutation",
-      name: { kind: "Name", value: "registerBusiness" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "object" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "addresses_insert_input" },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "insert_addresses_one" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "object" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "object" },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  RegisterBusinessMutation,
-  RegisterBusinessMutationVariables
->;
-export const RegisterBusinessActionDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "mutation",
-      name: { kind: "Name", value: "registerBusinessAction" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "object" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: {
-                kind: "Name",
-                value: "RegisterBusinessActionBusinessInsertInput",
-              },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "registerBusinessAction" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "object" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "object" },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  RegisterBusinessActionMutation,
-  RegisterBusinessActionMutationVariables
 >;
 export const InsertBusinessAddressDocument = {
   kind: "Document",
@@ -23481,13 +21619,13 @@ export const InsertBusinessOrderDocument = {
   InsertBusinessOrderMutation,
   InsertBusinessOrderMutationVariables
 >;
-export const InsertBusinessOrderActionDocument = {
+export const MyMutationDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "mutation",
-      name: { kind: "Name", value: "insertBusinessOrderAction" },
+      name: { kind: "Name", value: "MyMutation" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -23497,10 +21635,7 @@ export const InsertBusinessOrderActionDocument = {
           },
           type: {
             kind: "NamedType",
-            name: {
-              kind: "Name",
-              value: "InsertBusinessOrderOrdersInsertInput",
-            },
+            name: { kind: "Name", value: "order_status_history_insert_input" },
           },
           defaultValue: { kind: "ObjectValue", fields: [] },
         },
@@ -23510,7 +21645,7 @@ export const InsertBusinessOrderActionDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "insertBusinessOrder" },
+            name: { kind: "Name", value: "insert_order_status_history_one" },
             arguments: [
               {
                 kind: "Argument",
@@ -23521,15 +21656,18 @@ export const InsertBusinessOrderActionDocument = {
                 },
               },
             ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+              ],
+            },
           },
         ],
       },
     },
   ],
-} as unknown as DocumentNode<
-  InsertBusinessOrderActionMutation,
-  InsertBusinessOrderActionMutationVariables
->;
+} as unknown as DocumentNode<MyMutationMutation, MyMutationMutationVariables>;
 export const RegisterSupplierDocument = {
   kind: "Document",
   definitions: [
@@ -24001,176 +22139,12 @@ export const RegisterUserActionDocument = {
                 },
               },
             ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "created_at" } },
-                { kind: "Field", name: { kind: "Name", value: "description" } },
-                { kind: "Field", name: { kind: "Name", value: "discount" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "inStock" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "price" } },
-                { kind: "Field", name: { kind: "Name", value: "quantity" } },
-                { kind: "Field", name: { kind: "Name", value: "supplier_id" } },
-              ],
-            },
           },
         ],
       },
     },
   ],
 } as unknown as DocumentNode<
-  AddNewProductMutation,
-  AddNewProductMutationVariables
->;
-export const OnboardNewSupplierDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "mutation",
-      name: { kind: "Name", value: "OnboardNewSupplier" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "userId" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
-          },
-        },
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "role" } },
-          type: {
-            kind: "NamedType",
-            name: { kind: "Name", value: "user_role_enum" },
-          },
-        },
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "object" },
-          },
-          type: {
-            kind: "NamedType",
-            name: { kind: "Name", value: "suppliers_insert_input" },
-          },
-          defaultValue: { kind: "ObjectValue", fields: [] },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "update_users_by_pk" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "pk_columns" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "id" },
-                      value: {
-                        kind: "Variable",
-                        name: { kind: "Name", value: "userId" },
-                      },
-                    },
-                  ],
-                },
-              },
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "_set" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "hasCompletedOnboarding" },
-                      value: { kind: "BooleanValue", value: true },
-                    },
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "role" },
-                      value: {
-                        kind: "Variable",
-                        name: { kind: "Name", value: "role" },
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "role" } },
-              ],
-            },
-          },
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "insert_suppliers_one" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "object" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "object" },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "schedule" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "days" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "shifts" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "start_time" },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "end_time" },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-
   RegisterUserActionMutation,
   RegisterUserActionMutationVariables
 >;
@@ -24242,25 +22216,22 @@ export const GetBusinessesDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "created_at" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "updated_at" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "contactName" } },
-                { kind: "Field", name: { kind: "Name", value: "type" } },
-                { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
-                { kind: "Field", name: { kind: "Name", value: "description" } },
                 {
-                  kind: "Field",
-                  name: { kind: "Name", value: "contactEmail" },
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "BusinessCoreFields" },
                 },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                { kind: "Field", name: { kind: "Name", value: "updated_at" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "addresses" },
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "city" } },
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "AddressFields" },
+                      },
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "created_at" },
@@ -24277,10 +22248,6 @@ export const GetBusinessesDocument = {
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "updated_at" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "street_address" },
                       },
                     ],
                   },
@@ -24322,6 +22289,41 @@ export const GetBusinessesDocument = {
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "BusinessCoreFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "business" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "description" } },
+          { kind: "Field", name: { kind: "Name", value: "contactEmail" } },
+          { kind: "Field", name: { kind: "Name", value: "type" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "AddressFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "addresses" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "city" } },
+          { kind: "Field", name: { kind: "Name", value: "street_address" } },
         ],
       },
     },
@@ -24475,7 +22477,6 @@ export const GetBusinessOrdersDocument = {
                 { kind: "Field", name: { kind: "Name", value: "created_at" } },
                 { kind: "Field", name: { kind: "Name", value: "destination" } },
                 { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "orderId" } },
                 { kind: "Field", name: { kind: "Name", value: "customerId" } },
                 { kind: "Field", name: { kind: "Name", value: "origin" } },
                 { kind: "Field", name: { kind: "Name", value: "status" } },
@@ -24606,16 +22607,10 @@ export const GetBusinessByPkDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "contactName" } },
-                { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
-                { kind: "Field", name: { kind: "Name", value: "description" } },
                 {
-                  kind: "Field",
-                  name: { kind: "Name", value: "contactEmail" },
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "BusinessCoreFields" },
                 },
-                { kind: "Field", name: { kind: "Name", value: "type" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "agent" },
@@ -24633,10 +22628,9 @@ export const GetBusinessByPkDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "city" } },
                       {
-                        kind: "Field",
-                        name: { kind: "Name", value: "street_address" },
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "AddressFields" },
                       },
                     ],
                   },
@@ -24676,6 +22670,41 @@ export const GetBusinessByPkDocument = {
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "BusinessCoreFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "business" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "description" } },
+          { kind: "Field", name: { kind: "Name", value: "contactEmail" } },
+          { kind: "Field", name: { kind: "Name", value: "type" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "AddressFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "addresses" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "city" } },
+          { kind: "Field", name: { kind: "Name", value: "street_address" } },
         ],
       },
     },
@@ -24731,13 +22760,10 @@ export const GetCouriersDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "avatar" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "DOB" } },
-                { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
-                { kind: "Field", name: { kind: "Name", value: "gender" } },
-                { kind: "Field", name: { kind: "Name", value: "email" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "CourierExtendedFields" },
+                },
               ],
             },
           },
@@ -24775,6 +22801,43 @@ export const GetCouriersDocument = {
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CourierBasicFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "couriers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "avatar" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CourierExtendedFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "couriers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "FragmentSpread",
+            name: { kind: "Name", value: "CourierBasicFields" },
+          },
+          { kind: "Field", name: { kind: "Name", value: "DOB" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "gender" } },
+          { kind: "Field", name: { kind: "Name", value: "email" } },
         ],
       },
     },
@@ -24816,12 +22879,29 @@ export const GetCouriersByPkDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "avatar" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "CourierBasicFields" },
+                },
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CourierBasicFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "couriers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "avatar" } },
         ],
       },
     },
@@ -24829,6 +22909,505 @@ export const GetCouriersByPkDocument = {
 } as unknown as DocumentNode<
   GetCouriersByPkQuery,
   GetCouriersByPkQueryVariables
+>;
+export const GetDeliveriesDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "getDeliveries" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "delivery" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "DeliveryFields" },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "delivery_aggregate" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "aggregate" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "count" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "columns" },
+                            value: { kind: "EnumValue", value: "id" },
+                          },
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "distinct" },
+                            value: { kind: "BooleanValue", value: true },
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "DeliveryFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "delivery" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetDeliveriesQuery, GetDeliveriesQueryVariables>;
+export const GetDeliveryByPkDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "getDeliveryByPK" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "delivery" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "id" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "DeliveryFields" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "DeliveryFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "delivery" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetDeliveryByPkQuery,
+  GetDeliveryByPkQueryVariables
+>;
+export const GetDeliveriesByCourierDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "getDeliveriesByCourier" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "courier_id" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "delivery" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "courierId" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "courier_id" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "DeliveryFields" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "DeliveryFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "delivery" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetDeliveriesByCourierQuery,
+  GetDeliveriesByCourierQueryVariables
+>;
+export const GetDeliveryRequestsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "getDeliveryRequests" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "delivery_request" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "DeliveryRequestFields" },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "delivery_request_aggregate" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "aggregate" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "count" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "columns" },
+                            value: { kind: "EnumValue", value: "id" },
+                          },
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "distinct" },
+                            value: { kind: "BooleanValue", value: true },
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "DeliveryRequestFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "delivery_request" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetDeliveryRequestsQuery,
+  GetDeliveryRequestsQueryVariables
+>;
+export const GetDeliveryRequestByPkDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "getDeliveryRequestByPK" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "delivery_request" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "id" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "DeliveryRequestFields" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "DeliveryRequestFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "delivery_request" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetDeliveryRequestByPkQuery,
+  GetDeliveryRequestByPkQueryVariables
+>;
+export const GetDeliveryRequestByCourierDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "getDeliveryRequestByCourier" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "courier_id" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "delivery_request" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "courierId" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "courier_id" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "DeliveryRequestFields" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "DeliveryRequestFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "delivery_request" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetDeliveryRequestByCourierQuery,
+  GetDeliveryRequestByCourierQueryVariables
 >;
 export const FetchSahilZonesDocument = {
   kind: "Document",
@@ -24874,14 +23453,14 @@ export const GetOrdersDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "created_at" } },
-                { kind: "Field", name: { kind: "Name", value: "destination" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "orderId" } },
-                { kind: "Field", name: { kind: "Name", value: "customerId" } },
-                { kind: "Field", name: { kind: "Name", value: "origin" } },
-                { kind: "Field", name: { kind: "Name", value: "status" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "OrderCoreFields" },
+                },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "LatestStatusHistory" },
+                },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "business" },
@@ -24889,14 +23468,9 @@ export const GetOrdersDocument = {
                     kind: "SelectionSet",
                     selections: [
                       {
-                        kind: "Field",
-                        name: { kind: "Name", value: "contactName" },
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "OrderBusinessFields" },
                       },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "phoneNumber" },
-                      },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
                     ],
                   },
                 },
@@ -24940,15 +23514,96 @@ export const GetOrdersDocument = {
         ],
       },
     },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "OrderCoreFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "destination" } },
+          { kind: "Field", name: { kind: "Name", value: "customerId" } },
+          { kind: "Field", name: { kind: "Name", value: "origin" } },
+          { kind: "Field", name: { kind: "Name", value: "status" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "LatestStatusHistory" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "status_histories" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "limit" },
+                value: { kind: "IntValue", value: "1" },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "order_by" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "created_at" },
+                      value: { kind: "EnumValue", value: "desc" },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                { kind: "Field", name: { kind: "Name", value: "status" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "OrderBusinessFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "business" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+        ],
+      },
+    },
   ],
 } as unknown as DocumentNode<GetOrdersQuery, GetOrdersQueryVariables>;
-export const GetorderByPkDocument = {
+export const GetOrderByPkDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "getorderByPK" },
+      name: { kind: "Name", value: "getOrderByPK" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -24978,14 +23633,18 @@ export const GetorderByPkDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "created_at" } },
-                { kind: "Field", name: { kind: "Name", value: "destination" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "orderId" } },
-                { kind: "Field", name: { kind: "Name", value: "customerId" } },
-                { kind: "Field", name: { kind: "Name", value: "origin" } },
-                { kind: "Field", name: { kind: "Name", value: "status" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "OrderCoreFields" },
+                },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "OrderItemsAggregate" },
+                },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "AllStatusHistories" },
+                },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "order_items" },
@@ -25021,7 +23680,6 @@ export const GetorderByPkDocument = {
                     ],
                   },
                 },
-                { kind: "Field", name: { kind: "Name", value: "status" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "agent" },
@@ -25032,25 +23690,54 @@ export const GetorderByPkDocument = {
                     ],
                   },
                 },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "OrderCoreFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "destination" } },
+          { kind: "Field", name: { kind: "Name", value: "customerId" } },
+          { kind: "Field", name: { kind: "Name", value: "origin" } },
+          { kind: "Field", name: { kind: "Name", value: "status" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "OrderItemsAggregate" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "order_items_aggregate" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
                 {
                   kind: "Field",
-                  name: { kind: "Name", value: "order_items_aggregate" },
+                  name: { kind: "Name", value: "aggregate" },
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "aggregate" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "count" },
-                            },
-                          ],
-                        },
-                      },
+                      { kind: "Field", name: { kind: "Name", value: "count" } },
                     ],
                   },
                 },
@@ -25060,8 +23747,48 @@ export const GetorderByPkDocument = {
         ],
       },
     },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "AllStatusHistories" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "orders" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "status_histories" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "order_by" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "created_at" },
+                      value: { kind: "EnumValue", value: "desc" },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "status" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
   ],
-} as unknown as DocumentNode<GetorderByPkQuery, GetorderByPkQueryVariables>;
+} as unknown as DocumentNode<GetOrderByPkQuery, GetOrderByPkQueryVariables>;
 export const GetOrderDeliveriesDocument = {
   kind: "Document",
   definitions: [
@@ -25091,9 +23818,7 @@ export const GetOrderDeliveriesDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "orderId" } },
                 { kind: "Field", name: { kind: "Name", value: "status" } },
-                { kind: "Field", name: { kind: "Name", value: "orderId" } },
                 { kind: "Field", name: { kind: "Name", value: "id" } },
                 { kind: "Field", name: { kind: "Name", value: "created_at" } },
                 { kind: "Field", name: { kind: "Name", value: "courierId" } },
@@ -25270,10 +23995,10 @@ export const GetProductsDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "discount" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "price" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "ProductFields" },
+                },
                 { kind: "Field", name: { kind: "Name", value: "mainImage" } },
                 { kind: "Field", name: { kind: "Name", value: "description" } },
               ],
@@ -25286,29 +24011,63 @@ export const GetProductsDocument = {
               kind: "SelectionSet",
               selections: [
                 {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "ProductsAggregate" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ProductFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "products" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "discount" } },
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "price" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ProductsAggregate" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "products_aggregate" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "aggregate" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
                   kind: "Field",
-                  name: { kind: "Name", value: "aggregate" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "count" },
-                        arguments: [
-                          {
-                            kind: "Argument",
-                            name: { kind: "Name", value: "columns" },
-                            value: { kind: "EnumValue", value: "id" },
-                          },
-                          {
-                            kind: "Argument",
-                            name: { kind: "Name", value: "distinct" },
-                            value: { kind: "BooleanValue", value: true },
-                          },
-                        ],
-                      },
-                    ],
-                  },
+                  name: { kind: "Name", value: "count" },
+                  arguments: [
+                    {
+                      kind: "Argument",
+                      name: { kind: "Name", value: "columns" },
+                      value: { kind: "EnumValue", value: "id" },
+                    },
+                    {
+                      kind: "Argument",
+                      name: { kind: "Name", value: "distinct" },
+                      value: { kind: "BooleanValue", value: true },
+                    },
+                  ],
                 },
               ],
             },
@@ -25432,10 +24191,10 @@ export const GetProductsByNameDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "discount" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "price" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "ProductFields" },
+                },
               ],
             },
           },
@@ -25488,29 +24247,63 @@ export const GetProductsByNameDocument = {
               kind: "SelectionSet",
               selections: [
                 {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "ProductsAggregate" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ProductFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "products" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "discount" } },
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "price" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ProductsAggregate" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "products_aggregate" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "aggregate" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
                   kind: "Field",
-                  name: { kind: "Name", value: "aggregate" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "count" },
-                        arguments: [
-                          {
-                            kind: "Argument",
-                            name: { kind: "Name", value: "columns" },
-                            value: { kind: "EnumValue", value: "id" },
-                          },
-                          {
-                            kind: "Argument",
-                            name: { kind: "Name", value: "distinct" },
-                            value: { kind: "BooleanValue", value: true },
-                          },
-                        ],
-                      },
-                    ],
-                  },
+                  name: { kind: "Name", value: "count" },
+                  arguments: [
+                    {
+                      kind: "Argument",
+                      name: { kind: "Name", value: "columns" },
+                      value: { kind: "EnumValue", value: "id" },
+                    },
+                    {
+                      kind: "Argument",
+                      name: { kind: "Name", value: "distinct" },
+                      value: { kind: "BooleanValue", value: true },
+                    },
+                  ],
                 },
               ],
             },
@@ -25577,27 +24370,9 @@ export const GetSuppliersDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
                 {
-                  kind: "Field",
-                  name: { kind: "Name", value: "streetAddress" },
-                },
-                { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
-                { kind: "Field", name: { kind: "Name", value: "contactName" } },
-                { kind: "Field", name: { kind: "Name", value: "zone" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "categories" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "category_name" },
-                      },
-                    ],
-                  },
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SupplierFields" },
                 },
               ],
             },
@@ -25632,6 +24407,38 @@ export const GetSuppliersDocument = {
                       },
                     ],
                   },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SupplierFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "suppliers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "streetAddress" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "zone" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "categories" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "category_name" },
                 },
               ],
             },
@@ -25718,10 +24525,6 @@ export const GetSupplierOrdersDocument = {
                         name: { kind: "Name", value: "destination" },
                       },
                       { kind: "Field", name: { kind: "Name", value: "id" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "orderId" },
-                      },
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "customerId" },
@@ -25872,27 +24675,41 @@ export const GetFilteredSuppliersDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
                 {
-                  kind: "Field",
-                  name: { kind: "Name", value: "streetAddress" },
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SupplierFields" },
                 },
-                { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
-                { kind: "Field", name: { kind: "Name", value: "contactName" } },
-                { kind: "Field", name: { kind: "Name", value: "zone" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SupplierFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "suppliers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "streetAddress" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "zone" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "categories" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
                 {
                   kind: "Field",
-                  name: { kind: "Name", value: "categories" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "category_name" },
-                      },
-                    ],
-                  },
+                  name: { kind: "Name", value: "category_name" },
                 },
               ],
             },
@@ -25941,33 +24758,15 @@ export const GetSupplierByPkDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SupplierFields" },
+                },
                 { kind: "Field", name: { kind: "Name", value: "created_at" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
                 { kind: "Field", name: { kind: "Name", value: "description" } },
-                { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
-                { kind: "Field", name: { kind: "Name", value: "contactName" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "contactEmail" },
-                },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "streetAddress" },
-                },
-                { kind: "Field", name: { kind: "Name", value: "zone" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "categories" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "category_name" },
-                      },
-                    ],
-                  },
                 },
                 {
                   kind: "Field",
@@ -25990,6 +24789,38 @@ export const GetSupplierByPkDocument = {
                       },
                     ],
                   },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SupplierFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "suppliers" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "streetAddress" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "zone" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "categories" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "category_name" },
                 },
               ],
             },
@@ -26125,16 +24956,33 @@ export const GetSupplierProductsDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "description" } },
-                { kind: "Field", name: { kind: "Name", value: "inStock" } },
-                { kind: "Field", name: { kind: "Name", value: "quantity" } },
-                { kind: "Field", name: { kind: "Name", value: "price" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SupplierProductFields" },
+                },
                 { kind: "Field", name: { kind: "Name", value: "mainImage" } },
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SupplierProductFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "products" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "description" } },
+          { kind: "Field", name: { kind: "Name", value: "inStock" } },
+          { kind: "Field", name: { kind: "Name", value: "quantity" } },
+          { kind: "Field", name: { kind: "Name", value: "price" } },
         ],
       },
     },
@@ -26289,15 +25137,32 @@ export const GetSupplierProductByNameDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "description" } },
-                { kind: "Field", name: { kind: "Name", value: "inStock" } },
-                { kind: "Field", name: { kind: "Name", value: "quantity" } },
-                { kind: "Field", name: { kind: "Name", value: "price" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SupplierProductFields" },
+                },
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SupplierProductFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "products" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "description" } },
+          { kind: "Field", name: { kind: "Name", value: "inStock" } },
+          { kind: "Field", name: { kind: "Name", value: "quantity" } },
+          { kind: "Field", name: { kind: "Name", value: "price" } },
         ],
       },
     },
@@ -26432,13 +25297,30 @@ export const GetUsersDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "UserBasicFields" },
+                },
                 { kind: "Field", name: { kind: "Name", value: "created_at" } },
-                { kind: "Field", name: { kind: "Name", value: "role" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "UserBasicFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "users" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "role" } },
         ],
       },
     },
@@ -26504,12 +25386,29 @@ export const GetUserByEmailDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "UserAuthFields" },
+                },
                 { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "email" } },
-                { kind: "Field", name: { kind: "Name", value: "role" } },
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "UserAuthFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "users" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "email" } },
+          { kind: "Field", name: { kind: "Name", value: "role" } },
         ],
       },
     },
@@ -26639,100 +25538,9 @@ export const GetUserInvitesDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "role" } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetSupplierProductByNameQuery,
-  GetSupplierProductByNameQueryVariables
->;
-export const GetSupplierCategoriesDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "getSupplierCategories" },
-      directives: [
-        { kind: "Directive", name: { kind: "Name", value: "cached" } },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "supplier_categories_enum" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetSupplierCategoriesQuery,
-  GetSupplierCategoriesQueryVariables
->;
-export const GetUsersDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "subscription",
-      name: { kind: "Name", value: "registerBusinessActionSubscription" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
-          type: {
-            kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "registerBusinessAction" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "id" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "id" },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "created_at" } },
-                { kind: "Field", name: { kind: "Name", value: "errors" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
                 {
-                  kind: "Field",
-                  name: { kind: "Name", value: "output" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "id" } },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
-                    ],
-                  },
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "UserInviteFields" },
                 },
               ],
             },
@@ -26741,57 +25549,7 @@ export const GetUsersDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
-export const GetAdditionalAuthUserInfoDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "getAdditionalAuthUserInfo" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
-          type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
-          defaultValue: { kind: "StringValue", value: "", block: false },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "users_by_pk" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "id" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "id" },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "hasCompletedOnboarding" },
-                },
-                { kind: "Field", name: { kind: "Name", value: "role" } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetAdditionalAuthUserInfoQuery,
-  GetAdditionalAuthUserInfoQueryVariables
->;
+} as unknown as DocumentNode<GetUserInvitesQuery, GetUserInvitesQueryVariables>;
 export const RegisterBusinessActionSubscriptionDocument = {
   kind: "Document",
   definitions: [
@@ -26812,35 +25570,34 @@ export const RegisterBusinessActionSubscriptionDocument = {
       selectionSet: {
         kind: "SelectionSet",
         selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "email" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "role" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetUserInvitesQuery, GetUserInvitesQueryVariables>;
+export const GetZonesDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetZones" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "registerBusinessAction" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "id" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "id" },
-                },
-              },
-            ],
+            name: { kind: "Name", value: "zones" },
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "created_at" } },
-                { kind: "Field", name: { kind: "Name", value: "errors" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
                 {
-                  kind: "Field",
-                  name: { kind: "Name", value: "output" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "id" } },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
-                    ],
-                  },
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "ZoneFields" },
                 },
               ],
             },
@@ -26848,24 +25605,41 @@ export const RegisterBusinessActionSubscriptionDocument = {
         ],
       },
     },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ZoneFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "zones" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "description" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "updated_at" } },
+        ],
+      },
+    },
   ],
-} as unknown as DocumentNode<
-  RegisterBusinessActionSubscriptionSubscription,
-  RegisterBusinessActionSubscriptionSubscriptionVariables
->;
-export const GetOrderValidationDocument = {
+} as unknown as DocumentNode<GetZonesQuery, GetZonesQueryVariables>;
+export const GetZonesByIdDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
-      operation: "subscription",
-      name: { kind: "Name", value: "getOrderValidation" },
+      operation: "query",
+      name: { kind: "Name", value: "GetZonesById" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
           variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
-          type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
-          defaultValue: { kind: "StringValue", value: "", block: false },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
         },
       ],
       selectionSet: {
@@ -26873,14 +25647,32 @@ export const GetOrderValidationDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "insertBusinessOrder" },
+            name: { kind: "Name", value: "zones" },
             arguments: [
               {
                 kind: "Argument",
-                name: { kind: "Name", value: "id" },
+                name: { kind: "Name", value: "where" },
                 value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "id" },
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "id" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
                 },
               },
             ],
@@ -26888,65 +25680,8 @@ export const GetOrderValidationDocument = {
               kind: "SelectionSet",
               selections: [
                 {
-                  kind: "Field",
-                  name: { kind: "Name", value: "output" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "order" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "customerId" },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "order_items" },
-                              selectionSet: {
-                                kind: "SelectionSet",
-                                selections: [
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "data" },
-                                    selectionSet: {
-                                      kind: "SelectionSet",
-                                      selections: [
-                                        {
-                                          kind: "Field",
-                                          name: {
-                                            kind: "Name",
-                                            value: "price",
-                                          },
-                                        },
-                                        {
-                                          kind: "Field",
-                                          name: {
-                                            kind: "Name",
-                                            value: "productId",
-                                          },
-                                        },
-                                        {
-                                          kind: "Field",
-                                          name: {
-                                            kind: "Name",
-                                            value: "quantity",
-                                          },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "ZoneFields" },
                 },
               ],
             },
@@ -26954,8 +25689,23 @@ export const GetOrderValidationDocument = {
         ],
       },
     },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "ZoneFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "zones" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "description" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "updated_at" } },
+        ],
+      },
+    },
   ],
-} as unknown as DocumentNode<
-  GetOrderValidationSubscription,
-  GetOrderValidationSubscriptionVariables
->;
+} as unknown as DocumentNode<GetZonesByIdQuery, GetZonesByIdQueryVariables>;

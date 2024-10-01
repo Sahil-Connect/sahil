@@ -1,5 +1,6 @@
 import { DeliveryOverviewCard } from "./DeliveryOverviewCard";
 import { List, ListHeader, ListErrorState, ListPagination } from "ui";
+import { useFetchDeliveries } from "@sahil/lib/hooks/deliveries";
 
 const deliveries = [
     {
@@ -38,6 +39,10 @@ const deliveries = [
 ]
 
 export const ListDeliveries = () => {
+  const { data, loading, error } = useFetchDeliveries();
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  console.log(data);
   return (
     <section>
       <List 
