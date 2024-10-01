@@ -18,7 +18,7 @@ const documents = {
     types.RegisterBusinessDocument,
   "\n  mutation insertBusinessAddress($object: addresses_insert_input!) {\n    insert_addresses_one(object: $object) {\n      business_id\n      city\n    }\n  }\n":
     types.InsertBusinessAddressDocument,
-  "\n  mutation OnboardNewBusiness(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: business_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_business_one(object: $object) {\n      id\n    }\n  }\n":
+  "\n  mutation OnboardNewBusiness(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: business_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_business_one(object: $object) {\n      id\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n":
     types.OnboardNewBusinessDocument,
   "\n  mutation insertNewCourier($object: couriers_insert_input = {}) {\n    insert_couriers_one(object: $object) {\n      id\n      name\n    }\n  }\n":
     types.InsertNewCourierDocument,
@@ -34,7 +34,7 @@ const documents = {
     types.DeleteProductByPkDocument,
   "\n  mutation addNewProduct($product: products_insert_input = {}) {\n    insert_products_one(object: $product) {\n      created_at\n      description\n      discount\n      id\n      inStock\n      name\n      price\n      quantity\n      supplier_id\n    }\n  }\n":
     types.AddNewProductDocument,
-  "\n  mutation OnboardNewSupplier(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: suppliers_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_suppliers_one(object: $object) {\n      id\n    }\n  }\n":
+  "\n  mutation OnboardNewSupplier(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: suppliers_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_suppliers_one(object: $object) {\n      id\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n":
     types.OnboardNewSupplierDocument,
   "\n  mutation insertNewInvite($object: user_invites_insert_input = {}) {\n    insert_user_invites_one(object: $object) {\n      id\n    }\n  }\n":
     types.InsertNewInviteDocument,
@@ -46,7 +46,7 @@ const documents = {
     types.GetBusinessesDocument,
   "\n  query getBusinessOrders(\n    $customerId: uuid\n    $limit: Int = 4\n    $offset: Int = 0\n  ) {\n    orders(\n      where: {\n        _or: [\n          { customerId: { _eq: $customerId } }\n          { customerId: { _is_null: true } }\n        ]\n        customerId: { _eq: $customerId }\n      }\n      limit: $limit\n      offset: $offset\n    ) {\n      id\n      created_at\n      destination\n      id\n      customerId\n      origin\n      status\n      business {\n        contactName\n        phoneNumber\n        name\n      }\n    }\n    orders_aggregate(where: { customerId: { _eq: $customerId } }) {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
     types.GetBusinessOrdersDocument,
-  "\n  \n  \n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      ...BusinessCoreFields\n      agent {\n        name\n        id\n      }\n      addresses {\n        ...AddressFields\n      }\n    }\n  }\n":
+  "\n  \n  \n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      ...BusinessCoreFields\n      agent {\n        name\n        id\n      }\n      addresses {\n        ...AddressFields\n      }\n      schedule {\n        id\n        days\n        shifts {\n          id\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n":
     types.GetBusinessByPkDocument,
   "\n  query getBusinessTypes @cached {\n    business_type {\n      type\n    }\n  }\n":
     types.GetBusinessTypesDocument,
@@ -112,7 +112,7 @@ const documents = {
     types.GetSupplierOrdersDocument,
   "\n  \n  query getFilteredSuppliers(\n    $category_name: supplier_categories_enum_enum\n    $offset: Int = 0\n    $limit: Int = 10\n  ) {\n    suppliers(\n      where: { categories: { category_name: { _eq: $category_name } } }\n      offset: $offset\n      limit: $limit\n    ) {\n      ...SupplierFields\n    }\n  }\n":
     types.GetFilteredSuppliersDocument,
-  "\n  \n  query getSupplierByPK($id: uuid!) {\n    suppliers_by_pk(id: $id) {\n      ...SupplierFields\n      created_at\n      description\n      contactEmail\n      products_aggregate {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n":
+  "\n  \n  query getSupplierByPK($id: uuid!) {\n    suppliers_by_pk(id: $id) {\n      ...SupplierFields\n      created_at\n      description\n      contactEmail\n      products_aggregate {\n        aggregate {\n          count\n        }\n      }\n      schedule {\n        id\n        days\n        shifts {\n          id\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n":
     types.GetSupplierByPkDocument,
   "\n  \n  query getSupplierProducts(\n    $id: uuid!\n    $offset: Int = 0\n    $limit: Int = 4\n    $order_by: [products_order_by!] = { name: asc }\n  ) {\n    products(\n      where: { supplier_id: { _eq: $id } }\n      limit: $limit\n      offset: $offset\n      order_by: $order_by\n    ) {\n      ...SupplierProductFields\n      mainImage\n    }\n  }\n":
     types.GetSupplierProductsDocument,
@@ -178,8 +178,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  mutation OnboardNewBusiness(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: business_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_business_one(object: $object) {\n      id\n    }\n  }\n"
-): (typeof documents)["\n  mutation OnboardNewBusiness(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: business_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_business_one(object: $object) {\n      id\n    }\n  }\n"];
+  source: "\n  mutation OnboardNewBusiness(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: business_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_business_one(object: $object) {\n      id\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"
+): (typeof documents)["\n  mutation OnboardNewBusiness(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: business_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_business_one(object: $object) {\n      id\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -226,8 +226,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  mutation OnboardNewSupplier(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: suppliers_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_suppliers_one(object: $object) {\n      id\n    }\n  }\n"
-): (typeof documents)["\n  mutation OnboardNewSupplier(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: suppliers_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_suppliers_one(object: $object) {\n      id\n    }\n  }\n"];
+  source: "\n  mutation OnboardNewSupplier(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: suppliers_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_suppliers_one(object: $object) {\n      id\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"
+): (typeof documents)["\n  mutation OnboardNewSupplier(\n    $userId: uuid!\n    $role: user_role_enum\n    $object: suppliers_insert_input = {}\n  ) {\n    update_users_by_pk(\n      pk_columns: { id: $userId }\n      _set: { hasCompletedOnboarding: true, role: $role }\n    ) {\n      role\n    }\n    insert_suppliers_one(object: $object) {\n      id\n      schedule {\n        days\n        shifts {\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -262,8 +262,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  \n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      ...BusinessCoreFields\n      agent {\n        name\n        id\n      }\n      addresses {\n        ...AddressFields\n      }\n    }\n  }\n"
-): (typeof documents)["\n  \n  \n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      ...BusinessCoreFields\n      agent {\n        name\n        id\n      }\n      addresses {\n        ...AddressFields\n      }\n    }\n  }\n"];
+  source: "\n  \n  \n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      ...BusinessCoreFields\n      agent {\n        name\n        id\n      }\n      addresses {\n        ...AddressFields\n      }\n      schedule {\n        id\n        days\n        shifts {\n          id\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"
+): (typeof documents)["\n  \n  \n  query getBusinessByPK($id: uuid!) {\n    business_by_pk(id: $id) {\n      ...BusinessCoreFields\n      agent {\n        name\n        id\n      }\n      addresses {\n        ...AddressFields\n      }\n      schedule {\n        id\n        days\n        shifts {\n          id\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -460,8 +460,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  query getSupplierByPK($id: uuid!) {\n    suppliers_by_pk(id: $id) {\n      ...SupplierFields\n      created_at\n      description\n      contactEmail\n      products_aggregate {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n"
-): (typeof documents)["\n  \n  query getSupplierByPK($id: uuid!) {\n    suppliers_by_pk(id: $id) {\n      ...SupplierFields\n      created_at\n      description\n      contactEmail\n      products_aggregate {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n"];
+  source: "\n  \n  query getSupplierByPK($id: uuid!) {\n    suppliers_by_pk(id: $id) {\n      ...SupplierFields\n      created_at\n      description\n      contactEmail\n      products_aggregate {\n        aggregate {\n          count\n        }\n      }\n      schedule {\n        id\n        days\n        shifts {\n          id\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"
+): (typeof documents)["\n  \n  query getSupplierByPK($id: uuid!) {\n    suppliers_by_pk(id: $id) {\n      ...SupplierFields\n      created_at\n      description\n      contactEmail\n      products_aggregate {\n        aggregate {\n          count\n        }\n      }\n      schedule {\n        id\n        days\n        shifts {\n          id\n          start_time\n          end_time\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
