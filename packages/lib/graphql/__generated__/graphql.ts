@@ -15665,9 +15665,7 @@ export type Zones_Updates = {
   where: Zones_Bool_Exp;
 };
 
-export type OrderFragment = { __typename?: "orders"; id: any } & {
-  " $fragmentName"?: "OrderFragment";
-};
+export type OrderFragment = { __typename?: "orders"; id: any };
 
 export type RegisterBusinessMutationVariables = Exact<{
   object: Business_Insert_Input;
@@ -15841,41 +15839,40 @@ export type BusinessCoreFieldsFragment = {
   description?: string | null;
   contactEmail?: string | null;
   type?: Business_Type_Enum | null;
-} & { " $fragmentName"?: "BusinessCoreFieldsFragment" };
+};
 
 export type AddressFieldsFragment = {
   __typename?: "addresses";
   city?: string | null;
   street_address?: string | null;
-} & { " $fragmentName"?: "AddressFieldsFragment" };
+};
 
 export type GetBusinessesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetBusinessesQuery = {
   __typename?: "query_root";
-  business: Array<
-    {
-      __typename?: "business";
+  business: Array<{
+    __typename?: "business";
+    created_at: any;
+    updated_at: any;
+    id: any;
+    name?: string | null;
+    contactName?: string | null;
+    phoneNumber?: string | null;
+    description?: string | null;
+    contactEmail?: string | null;
+    type?: Business_Type_Enum | null;
+    addresses: Array<{
+      __typename?: "addresses";
       created_at: any;
+      id: any;
+      latitude?: any | null;
+      longitude?: any | null;
       updated_at: any;
-      addresses: Array<
-        {
-          __typename?: "addresses";
-          created_at: any;
-          id: any;
-          latitude?: any | null;
-          longitude?: any | null;
-          updated_at: any;
-        } & {
-          " $fragmentRefs"?: { AddressFieldsFragment: AddressFieldsFragment };
-        }
-      >;
-    } & {
-      " $fragmentRefs"?: {
-        BusinessCoreFieldsFragment: BusinessCoreFieldsFragment;
-      };
-    }
-  >;
+      city?: string | null;
+      street_address?: string | null;
+    }>;
+  }>;
   business_aggregate: {
     __typename?: "business_aggregate";
     aggregate?: {
@@ -15923,21 +15920,22 @@ export type GetBusinessByPkQueryVariables = Exact<{
 
 export type GetBusinessByPkQuery = {
   __typename?: "query_root";
-  business_by_pk?:
-    | ({
-        __typename?: "business";
-        agent?: { __typename?: "users"; name?: string | null; id: any } | null;
-        addresses: Array<
-          { __typename?: "addresses" } & {
-            " $fragmentRefs"?: { AddressFieldsFragment: AddressFieldsFragment };
-          }
-        >;
-      } & {
-        " $fragmentRefs"?: {
-          BusinessCoreFieldsFragment: BusinessCoreFieldsFragment;
-        };
-      })
-    | null;
+  business_by_pk?: {
+    __typename?: "business";
+    id: any;
+    name?: string | null;
+    contactName?: string | null;
+    phoneNumber?: string | null;
+    description?: string | null;
+    contactEmail?: string | null;
+    type?: Business_Type_Enum | null;
+    agent?: { __typename?: "users"; name?: string | null; id: any } | null;
+    addresses: Array<{
+      __typename?: "addresses";
+      city?: string | null;
+      street_address?: string | null;
+    }>;
+  } | null;
 };
 
 export type GetBusinessTypesQueryVariables = Exact<{ [key: string]: never }>;
@@ -15952,29 +15950,33 @@ export type CourierBasicFieldsFragment = {
   id: any;
   name: string;
   avatar?: string | null;
-} & { " $fragmentName"?: "CourierBasicFieldsFragment" };
+};
 
-export type CourierExtendedFieldsFragment = ({
+export type CourierExtendedFieldsFragment = {
   __typename?: "couriers";
   DOB?: any | null;
   phoneNumber?: string | null;
   gender?: string | null;
   email?: string | null;
-} & {
-  " $fragmentRefs"?: { CourierBasicFieldsFragment: CourierBasicFieldsFragment };
-}) & { " $fragmentName"?: "CourierExtendedFieldsFragment" };
+  id: any;
+  name: string;
+  avatar?: string | null;
+};
 
 export type GetCouriersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetCouriersQuery = {
   __typename?: "query_root";
-  couriers: Array<
-    { __typename?: "couriers" } & {
-      " $fragmentRefs"?: {
-        CourierExtendedFieldsFragment: CourierExtendedFieldsFragment;
-      };
-    }
-  >;
+  couriers: Array<{
+    __typename?: "couriers";
+    DOB?: any | null;
+    phoneNumber?: string | null;
+    gender?: string | null;
+    email?: string | null;
+    id: any;
+    name: string;
+    avatar?: string | null;
+  }>;
   couriers_aggregate: {
     __typename?: "couriers_aggregate";
     aggregate?: {
@@ -15990,36 +15992,31 @@ export type GetCouriersByPkQueryVariables = Exact<{
 
 export type GetCouriersByPkQuery = {
   __typename?: "query_root";
-  couriers_by_pk?:
-    | ({ __typename?: "couriers" } & {
-        " $fragmentRefs"?: {
-          CourierBasicFieldsFragment: CourierBasicFieldsFragment;
-        };
-      })
-    | null;
+  couriers_by_pk?: {
+    __typename?: "couriers";
+    id: any;
+    name: string;
+    avatar?: string | null;
+  } | null;
 };
 
 export type DeliveryFieldsFragment = {
   __typename?: "delivery";
   id: any;
   created_at: any;
-} & { " $fragmentName"?: "DeliveryFieldsFragment" };
+};
 
 export type DeliveryRequestFieldsFragment = {
   __typename?: "delivery_request";
   id: any;
   created_at: any;
-} & { " $fragmentName"?: "DeliveryRequestFieldsFragment" };
+};
 
 export type GetDeliveriesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetDeliveriesQuery = {
   __typename?: "query_root";
-  delivery: Array<
-    { __typename?: "delivery" } & {
-      " $fragmentRefs"?: { DeliveryFieldsFragment: DeliveryFieldsFragment };
-    }
-  >;
+  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
   delivery_aggregate: {
     __typename?: "delivery_aggregate";
     aggregate?: {
@@ -16035,11 +16032,7 @@ export type GetDeliveryByPkQueryVariables = Exact<{
 
 export type GetDeliveryByPkQuery = {
   __typename?: "query_root";
-  delivery: Array<
-    { __typename?: "delivery" } & {
-      " $fragmentRefs"?: { DeliveryFieldsFragment: DeliveryFieldsFragment };
-    }
-  >;
+  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
 };
 
 export type GetDeliveriesByCourierQueryVariables = Exact<{
@@ -16048,24 +16041,18 @@ export type GetDeliveriesByCourierQueryVariables = Exact<{
 
 export type GetDeliveriesByCourierQuery = {
   __typename?: "query_root";
-  delivery: Array<
-    { __typename?: "delivery" } & {
-      " $fragmentRefs"?: { DeliveryFieldsFragment: DeliveryFieldsFragment };
-    }
-  >;
+  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
 };
 
 export type GetDeliveryRequestsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetDeliveryRequestsQuery = {
   __typename?: "query_root";
-  delivery_request: Array<
-    { __typename?: "delivery_request" } & {
-      " $fragmentRefs"?: {
-        DeliveryRequestFieldsFragment: DeliveryRequestFieldsFragment;
-      };
-    }
-  >;
+  delivery_request: Array<{
+    __typename?: "delivery_request";
+    id: any;
+    created_at: any;
+  }>;
   delivery_request_aggregate: {
     __typename?: "delivery_request_aggregate";
     aggregate?: {
@@ -16081,13 +16068,11 @@ export type GetDeliveryRequestByPkQueryVariables = Exact<{
 
 export type GetDeliveryRequestByPkQuery = {
   __typename?: "query_root";
-  delivery_request: Array<
-    { __typename?: "delivery_request" } & {
-      " $fragmentRefs"?: {
-        DeliveryRequestFieldsFragment: DeliveryRequestFieldsFragment;
-      };
-    }
-  >;
+  delivery_request: Array<{
+    __typename?: "delivery_request";
+    id: any;
+    created_at: any;
+  }>;
 };
 
 export type GetDeliveryRequestByCourierQueryVariables = Exact<{
@@ -16096,13 +16081,11 @@ export type GetDeliveryRequestByCourierQueryVariables = Exact<{
 
 export type GetDeliveryRequestByCourierQuery = {
   __typename?: "query_root";
-  delivery_request: Array<
-    { __typename?: "delivery_request" } & {
-      " $fragmentRefs"?: {
-        DeliveryRequestFieldsFragment: DeliveryRequestFieldsFragment;
-      };
-    }
-  >;
+  delivery_request: Array<{
+    __typename?: "delivery_request";
+    id: any;
+    created_at: any;
+  }>;
 };
 
 export type FetchSahilZonesQueryVariables = Exact<{ [key: string]: never }>;
@@ -16120,7 +16103,7 @@ export type OrderCoreFieldsFragment = {
   customerId?: any | null;
   origin?: string | null;
   status?: Order_Status_Enum | null;
-} & { " $fragmentName"?: "OrderCoreFieldsFragment" };
+};
 
 export type OrderBusinessFieldsFragment = {
   __typename?: "business";
@@ -16128,7 +16111,7 @@ export type OrderBusinessFieldsFragment = {
   contactName?: string | null;
   phoneNumber?: string | null;
   name?: string | null;
-} & { " $fragmentName"?: "OrderBusinessFieldsFragment" };
+};
 
 export type OrderItemsAggregateFragment = {
   __typename?: "orders";
@@ -16139,7 +16122,7 @@ export type OrderItemsAggregateFragment = {
       count: number;
     } | null;
   };
-} & { " $fragmentName"?: "OrderItemsAggregateFragment" };
+};
 
 export type LatestStatusHistoryFragment = {
   __typename?: "orders";
@@ -16148,7 +16131,7 @@ export type LatestStatusHistoryFragment = {
     created_at: any;
     status: Order_Status_Enum;
   }>;
-} & { " $fragmentName"?: "LatestStatusHistoryFragment" };
+};
 
 export type AllStatusHistoriesFragment = {
   __typename?: "orders";
@@ -16157,29 +16140,33 @@ export type AllStatusHistoriesFragment = {
     status: Order_Status_Enum;
     created_at: any;
   }>;
-} & { " $fragmentName"?: "AllStatusHistoriesFragment" };
+};
 
 export type GetOrdersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetOrdersQuery = {
   __typename?: "query_root";
-  orders: Array<
-    {
-      __typename?: "orders";
-      business?:
-        | ({ __typename?: "business" } & {
-            " $fragmentRefs"?: {
-              OrderBusinessFieldsFragment: OrderBusinessFieldsFragment;
-            };
-          })
-        | null;
-    } & {
-      " $fragmentRefs"?: {
-        OrderCoreFieldsFragment: OrderCoreFieldsFragment;
-        LatestStatusHistoryFragment: LatestStatusHistoryFragment;
-      };
-    }
-  >;
+  orders: Array<{
+    __typename?: "orders";
+    id: any;
+    created_at: any;
+    destination?: string | null;
+    customerId?: any | null;
+    origin?: string | null;
+    status?: Order_Status_Enum | null;
+    business?: {
+      __typename?: "business";
+      id: any;
+      contactName?: string | null;
+      phoneNumber?: string | null;
+      name?: string | null;
+    } | null;
+    status_histories: Array<{
+      __typename?: "order_status_history";
+      created_at: any;
+      status: Order_Status_Enum;
+    }>;
+  }>;
   orders_aggregate: {
     __typename?: "orders_aggregate";
     aggregate?: {
@@ -16195,29 +16182,39 @@ export type GetOrderByPkQueryVariables = Exact<{
 
 export type GetOrderByPkQuery = {
   __typename?: "query_root";
-  orders_by_pk?:
-    | ({
-        __typename?: "orders";
-        order_items: Array<{
-          __typename?: "order_item";
-          id: any;
-          product: {
-            __typename?: "products";
-            id: any;
-            name?: string | null;
-            quantity: number;
-            price?: number | null;
-          };
-        }>;
-        agent?: { __typename?: "agent"; name: string } | null;
-      } & {
-        " $fragmentRefs"?: {
-          OrderCoreFieldsFragment: OrderCoreFieldsFragment;
-          OrderItemsAggregateFragment: OrderItemsAggregateFragment;
-          AllStatusHistoriesFragment: AllStatusHistoriesFragment;
-        };
-      })
-    | null;
+  orders_by_pk?: {
+    __typename?: "orders";
+    id: any;
+    created_at: any;
+    destination?: string | null;
+    customerId?: any | null;
+    origin?: string | null;
+    status?: Order_Status_Enum | null;
+    order_items: Array<{
+      __typename?: "order_item";
+      id: any;
+      product: {
+        __typename?: "products";
+        id: any;
+        name?: string | null;
+        quantity: number;
+        price?: number | null;
+      };
+    }>;
+    agent?: { __typename?: "agent"; name: string } | null;
+    order_items_aggregate: {
+      __typename?: "order_item_aggregate";
+      aggregate?: {
+        __typename?: "order_item_aggregate_fields";
+        count: number;
+      } | null;
+    };
+    status_histories: Array<{
+      __typename?: "order_status_history";
+      status: Order_Status_Enum;
+      created_at: any;
+    }>;
+  } | null;
 };
 
 export type GetOrderDeliveriesQueryVariables = Exact<{
@@ -16257,7 +16254,7 @@ export type ProductFieldsFragment = {
   id: any;
   name?: string | null;
   price?: number | null;
-} & { " $fragmentName"?: "ProductFieldsFragment" };
+};
 
 export type ProductsAggregateFragment = {
   __typename?: "products_aggregate";
@@ -16265,7 +16262,7 @@ export type ProductsAggregateFragment = {
     __typename?: "products_aggregate_fields";
     count: number;
   } | null;
-} & { " $fragmentName"?: "ProductsAggregateFragment" };
+};
 
 export type GetProductsQueryVariables = Exact<{
   offset?: InputMaybe<Scalars["Int"]["input"]>;
@@ -16274,15 +16271,21 @@ export type GetProductsQueryVariables = Exact<{
 
 export type GetProductsQuery = {
   __typename?: "query_root";
-  products: Array<
-    {
-      __typename?: "products";
-      mainImage?: string | null;
-      description?: string | null;
-    } & { " $fragmentRefs"?: { ProductFieldsFragment: ProductFieldsFragment } }
-  >;
-  products_aggregate: { __typename?: "products_aggregate" } & {
-    " $fragmentRefs"?: { ProductsAggregateFragment: ProductsAggregateFragment };
+  products: Array<{
+    __typename?: "products";
+    mainImage?: string | null;
+    description?: string | null;
+    discount?: number | null;
+    id: any;
+    name?: string | null;
+    price?: number | null;
+  }>;
+  products_aggregate: {
+    __typename?: "products_aggregate";
+    aggregate?: {
+      __typename?: "products_aggregate_fields";
+      count: number;
+    } | null;
   };
 };
 
@@ -16294,13 +16297,19 @@ export type GetProductsByNameQueryVariables = Exact<{
 
 export type GetProductsByNameQuery = {
   __typename?: "query_root";
-  products: Array<
-    { __typename?: "products" } & {
-      " $fragmentRefs"?: { ProductFieldsFragment: ProductFieldsFragment };
-    }
-  >;
-  products_aggregate: { __typename?: "products_aggregate" } & {
-    " $fragmentRefs"?: { ProductsAggregateFragment: ProductsAggregateFragment };
+  products: Array<{
+    __typename?: "products";
+    discount?: number | null;
+    id: any;
+    name?: string | null;
+    price?: number | null;
+  }>;
+  products_aggregate: {
+    __typename?: "products_aggregate";
+    aggregate?: {
+      __typename?: "products_aggregate_fields";
+      count: number;
+    } | null;
   };
 };
 
@@ -16316,7 +16325,7 @@ export type SupplierFieldsFragment = {
     __typename?: "suppliers_categories";
     category_name: Supplier_Categories_Enum_Enum;
   }>;
-} & { " $fragmentName"?: "SupplierFieldsFragment" };
+};
 
 export type SupplierProductFieldsFragment = {
   __typename?: "products";
@@ -16326,7 +16335,7 @@ export type SupplierProductFieldsFragment = {
   inStock: boolean;
   quantity: number;
   price?: number | null;
-} & { " $fragmentName"?: "SupplierProductFieldsFragment" };
+};
 
 export type GetSuppliersQueryVariables = Exact<{
   offset?: InputMaybe<Scalars["Int"]["input"]>;
@@ -16335,11 +16344,19 @@ export type GetSuppliersQueryVariables = Exact<{
 
 export type GetSuppliersQuery = {
   __typename?: "query_root";
-  suppliers: Array<
-    { __typename?: "suppliers" } & {
-      " $fragmentRefs"?: { SupplierFieldsFragment: SupplierFieldsFragment };
-    }
-  >;
+  suppliers: Array<{
+    __typename?: "suppliers";
+    id: any;
+    name?: string | null;
+    streetAddress?: string | null;
+    phoneNumber?: string | null;
+    contactName?: string | null;
+    zone?: string | null;
+    categories: Array<{
+      __typename?: "suppliers_categories";
+      category_name: Supplier_Categories_Enum_Enum;
+    }>;
+  }>;
   suppliers_aggregate: {
     __typename?: "suppliers_aggregate";
     aggregate?: {
@@ -16385,11 +16402,19 @@ export type GetFilteredSuppliersQueryVariables = Exact<{
 
 export type GetFilteredSuppliersQuery = {
   __typename?: "query_root";
-  suppliers: Array<
-    { __typename?: "suppliers" } & {
-      " $fragmentRefs"?: { SupplierFieldsFragment: SupplierFieldsFragment };
-    }
-  >;
+  suppliers: Array<{
+    __typename?: "suppliers";
+    id: any;
+    name?: string | null;
+    streetAddress?: string | null;
+    phoneNumber?: string | null;
+    contactName?: string | null;
+    zone?: string | null;
+    categories: Array<{
+      __typename?: "suppliers_categories";
+      category_name: Supplier_Categories_Enum_Enum;
+    }>;
+  }>;
 };
 
 export type GetSupplierByPkQueryVariables = Exact<{
@@ -16398,23 +16423,29 @@ export type GetSupplierByPkQueryVariables = Exact<{
 
 export type GetSupplierByPkQuery = {
   __typename?: "query_root";
-  suppliers_by_pk?:
-    | ({
-        __typename?: "suppliers";
-        created_at: any;
-        description?: string | null;
-        contactEmail?: string | null;
-        products_aggregate: {
-          __typename?: "products_aggregate";
-          aggregate?: {
-            __typename?: "products_aggregate_fields";
-            count: number;
-          } | null;
-        };
-      } & {
-        " $fragmentRefs"?: { SupplierFieldsFragment: SupplierFieldsFragment };
-      })
-    | null;
+  suppliers_by_pk?: {
+    __typename?: "suppliers";
+    created_at: any;
+    description?: string | null;
+    contactEmail?: string | null;
+    id: any;
+    name?: string | null;
+    streetAddress?: string | null;
+    phoneNumber?: string | null;
+    contactName?: string | null;
+    zone?: string | null;
+    products_aggregate: {
+      __typename?: "products_aggregate";
+      aggregate?: {
+        __typename?: "products_aggregate_fields";
+        count: number;
+      } | null;
+    };
+    categories: Array<{
+      __typename?: "suppliers_categories";
+      category_name: Supplier_Categories_Enum_Enum;
+    }>;
+  } | null;
 };
 
 export type GetSupplierProductsQueryVariables = Exact<{
@@ -16426,13 +16457,16 @@ export type GetSupplierProductsQueryVariables = Exact<{
 
 export type GetSupplierProductsQuery = {
   __typename?: "query_root";
-  products: Array<
-    { __typename?: "products"; mainImage?: string | null } & {
-      " $fragmentRefs"?: {
-        SupplierProductFieldsFragment: SupplierProductFieldsFragment;
-      };
-    }
-  >;
+  products: Array<{
+    __typename?: "products";
+    mainImage?: string | null;
+    id: any;
+    name?: string | null;
+    description?: string | null;
+    inStock: boolean;
+    quantity: number;
+    price?: number | null;
+  }>;
 };
 
 export type GetSupplierProductByNameQueryVariables = Exact<{
@@ -16445,13 +16479,15 @@ export type GetSupplierProductByNameQueryVariables = Exact<{
 
 export type GetSupplierProductByNameQuery = {
   __typename?: "query_root";
-  products: Array<
-    { __typename?: "products" } & {
-      " $fragmentRefs"?: {
-        SupplierProductFieldsFragment: SupplierProductFieldsFragment;
-      };
-    }
-  >;
+  products: Array<{
+    __typename?: "products";
+    id: any;
+    name?: string | null;
+    description?: string | null;
+    inStock: boolean;
+    quantity: number;
+    price?: number | null;
+  }>;
 };
 
 export type GetSupplierCategoriesQueryVariables = Exact<{
@@ -16471,13 +16507,13 @@ export type UserBasicFieldsFragment = {
   id: any;
   name?: string | null;
   role?: User_Role_Enum | null;
-} & { " $fragmentName"?: "UserBasicFieldsFragment" };
+};
 
 export type UserAuthFieldsFragment = {
   __typename?: "users";
   email?: string | null;
   role?: User_Role_Enum | null;
-} & { " $fragmentName"?: "UserAuthFieldsFragment" };
+};
 
 export type UserInviteFieldsFragment = {
   __typename?: "user_invites";
@@ -16485,17 +16521,19 @@ export type UserInviteFieldsFragment = {
   email: string;
   name?: string | null;
   role: User_Role_Enum;
-} & { " $fragmentName"?: "UserInviteFieldsFragment" };
+};
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUsersQuery = {
   __typename?: "query_root";
-  users: Array<
-    { __typename?: "users"; created_at: any } & {
-      " $fragmentRefs"?: { UserBasicFieldsFragment: UserBasicFieldsFragment };
-    }
-  >;
+  users: Array<{
+    __typename?: "users";
+    created_at: any;
+    id: any;
+    name?: string | null;
+    role?: User_Role_Enum | null;
+  }>;
 };
 
 export type GetUserByEmailQueryVariables = Exact<{
@@ -16504,11 +16542,12 @@ export type GetUserByEmailQueryVariables = Exact<{
 
 export type GetUserByEmailQuery = {
   __typename?: "query_root";
-  users: Array<
-    { __typename?: "users"; name?: string | null } & {
-      " $fragmentRefs"?: { UserAuthFieldsFragment: UserAuthFieldsFragment };
-    }
-  >;
+  users: Array<{
+    __typename?: "users";
+    name?: string | null;
+    email?: string | null;
+    role?: User_Role_Enum | null;
+  }>;
 };
 
 export type GetAdditionalAuthUserInfoQueryVariables = Exact<{
@@ -16530,11 +16569,13 @@ export type GetUserInvitesQueryVariables = Exact<{
 
 export type GetUserInvitesQuery = {
   __typename?: "query_root";
-  user_invites: Array<
-    { __typename?: "user_invites" } & {
-      " $fragmentRefs"?: { UserInviteFieldsFragment: UserInviteFieldsFragment };
-    }
-  >;
+  user_invites: Array<{
+    __typename?: "user_invites";
+    id: any;
+    email: string;
+    name?: string | null;
+    role: User_Role_Enum;
+  }>;
 };
 
 export type ZoneFieldsFragment = {
@@ -16544,17 +16585,20 @@ export type ZoneFieldsFragment = {
   description?: string | null;
   created_at: any;
   updated_at?: any | null;
-} & { " $fragmentName"?: "ZoneFieldsFragment" };
+};
 
 export type GetZonesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetZonesQuery = {
   __typename?: "query_root";
-  zones: Array<
-    { __typename?: "zones" } & {
-      " $fragmentRefs"?: { ZoneFieldsFragment: ZoneFieldsFragment };
-    }
-  >;
+  zones: Array<{
+    __typename?: "zones";
+    id: any;
+    name?: string | null;
+    description?: string | null;
+    created_at: any;
+    updated_at?: any | null;
+  }>;
 };
 
 export type GetZonesByIdQueryVariables = Exact<{
@@ -16563,11 +16607,14 @@ export type GetZonesByIdQueryVariables = Exact<{
 
 export type GetZonesByIdQuery = {
   __typename?: "query_root";
-  zones: Array<
-    { __typename?: "zones" } & {
-      " $fragmentRefs"?: { ZoneFieldsFragment: ZoneFieldsFragment };
-    }
-  >;
+  zones: Array<{
+    __typename?: "zones";
+    id: any;
+    name?: string | null;
+    description?: string | null;
+    created_at: any;
+    updated_at?: any | null;
+  }>;
 };
 
 export const OrderFragmentDoc = {

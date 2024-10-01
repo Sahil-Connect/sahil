@@ -43,8 +43,8 @@ export const LatestDeliveries: FC<Props> = ({ courierId }) => {
       </div>
       <div className="flex flex-wrap gap-2">
         {deliveries &&
-          deliveries.map((delivery) => (
-            <DeliveryOverviewCard key={delivery.id} delivery={delivery} />
+          deliveries.map((delivery, idx) => (
+            <DeliveryOverviewCard key={idx} delivery={delivery} />
           ))}
       </div>
     </section>
