@@ -7,6 +7,9 @@ import {
   HiOutlineBanknotes,
   HiOutlineMapPin,
   HiOutlineFlag,
+  HiOutlineBriefcase,
+  HiOutlineUser,
+  HiOutlinePhone,
 } from "react-icons/hi2";
 
 type Props = {
@@ -17,38 +20,49 @@ export const OrderDetails: FC<Props> = ({ order }) => {
 
   const orderInfoItems = [
     {
-      icon: <HiCalendarDays />,
-      label: "Order Date",
-      value: formatDateTime(order?.created_at)
-    },
-    {
       icon: <HiOutlineHandRaised />,
       label: "Status",
       value: order?.status_histories?.[0]?.status ?? "Pending"
     },
     {
+      icon: <HiCalendarDays />,
+      label: "Order Date",
+      value: formatDateTime(order?.created_at)
+    },
+    {
       icon: <HiOutlineBanknotes />,
       label: "Payment Method",
       value: "Cash on Delivery"
-    }
+    },
+    {
+      icon: <HiOutlineBriefcase />,
+      label: "Client",
+      value: order?.business?.name as string,
+    },
+    {
+      icon: <HiOutlineUser />,
+      label: "Contact Name",
+      value: order?.business?.contactName as string,
+    },
+    {
+      icon: <HiOutlinePhone />,
+      label: "Contact Number",
+      value: order?.business?.phoneNumber as string,
+    },
+    {
+      icon: <HiOutlineMapPin />,
+      label: "Origin",
+      value: order?.origin as string,
+    },
+    {
+      icon: <HiOutlineFlag />,
+      label: "Destination",
+      value: order?.destination as string,
+    },
   ];
   
   return (
     <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-        <div className="flex gap-2 items-center">
-          <span className="p-2 shadow rounded w-fit">
-            <HiOutlineMapPin />
-          </span>
-          <p className="text-sm sm:text-base">{order?.origin}</p>
-        </div>
-        <div className="flex gap-2 items-center">
-          <span className="p-2 shadow rounded w-fit">
-            <HiOutlineFlag />
-          </span>
-          <p className="text-sm sm:text-base">{order?.destination}</p>
-        </div>
-      </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
       {orderInfoItems.map((item, index) => (
         <OrderInfoItem

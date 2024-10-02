@@ -42,16 +42,10 @@ export const OrderOverview: FC<Props> = ({ order }) => {
   return (
     <>
       <div className='flex flex-col md:flex-row justify-between gap-2'>
-        <h1 className='text-lg'>
-          Order ID: #{order.id.slice(0, 8).toLocaleUpperCase()}
-        </h1>
         <div className='flex gap-2 items-center'>
-          <button className='btn btn-sm'>
-            <HiOutlinePrinter /> Print
-          </button>
-          <button className='btn btn-sm btn-primary'>
-            <HiOutlineArrowPathRoundedSquare /> Order Again
-          </button>
+          <h1 className='text-lg'>
+            Order ID: #{order.id.slice(0, 8).toLocaleUpperCase()}
+          </h1>
           <button
             onClick={onCancel}
             disabled={isCanceled || loading}
@@ -61,6 +55,15 @@ export const OrderOverview: FC<Props> = ({ order }) => {
           >
             <HiOutlineXCircle /> Cancel
           </button>
+        </div>
+        <div className='flex gap-2 items-center'>
+          <button className='btn btn-sm'>
+            <HiOutlinePrinter /> Print
+          </button>
+          <button className='btn btn-sm btn-primary'>
+            <HiOutlineArrowPathRoundedSquare /> Order Again
+          </button>
+          
         </div>
       </div>
       <Toaster position='bottom-center' reverseOrder={false} />

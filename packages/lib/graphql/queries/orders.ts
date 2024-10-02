@@ -72,11 +72,15 @@ export const FETCH_ORDER_BY_PK = gql`
   ${ORDER_CORE_FIELDS}
   ${ORDER_ITEMS_AGGREGATE}
   ${ALL_STATUS_HISTORIES}
+  ${ORDER_BUSINESS_FIELDS}
   query getOrderByPK($id: uuid!) {
     orders_by_pk(id: $id) {
       ...OrderCoreFields
       ...OrderItemsAggregate
       ...AllStatusHistories
+      business {
+        ...OrderBusinessFields
+      }
       order_items {
         id
         product {
