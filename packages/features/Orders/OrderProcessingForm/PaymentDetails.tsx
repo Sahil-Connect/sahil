@@ -4,13 +4,12 @@ import { useRouter } from "next/router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useOrderFormStore } from "@sahil/lib/hooks/formStores/useOrderFormStore";
-import { Card } from "ui";
+import { Card, Icon, RadioGroup } from "ui";
 import {
   HiXMark,
-  HiOutlineCreditCard,
-  HiOutlineBanknotes,
   HiArrowSmallRight,
 } from "react-icons/hi2";
+import { PaymentMethodOptions } from "../OrderPreferences";
 
 const paymentDetailsSchema = z.object({
   paymentMethod: z.string(),
@@ -47,36 +46,7 @@ export const PaymentDetails: FC<PaymentDetailsProps> = ({
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <Card title="Payment Method" titleSize="sm">
         <div className="flex gap-2">
-          <div className="form-control">
-            <label className="label cursor-pointer">
-              <input
-                type="radio"
-                className="radio radio-sm checked:bg-secondary"
-                {...register("paymentMethod")}
-              />
-              <div className="flex ml-4 items-center gap-2">
-                <span className="shadow p-2 rounded-md">
-                  <HiOutlineCreditCard />
-                </span>
-                <span className="label-text">Momo Pay</span>
-              </div>
-            </label>
-          </div>
-          <div className="form-control">
-            <label className="label cursor-pointer">
-              <input
-                type="radio"
-                className="radio radio-sm checked:bg-secondary"
-                {...register("paymentMethod")}
-              />
-              <div className="flex ml-4 items-center gap-2">
-                <span className="shadow p-2 rounded-md">
-                  <HiOutlineBanknotes />
-                </span>
-                <span className="label-text">Cash On Delivery</span>
-              </div>
-            </label>
-          </div>
+        <PaymentMethodOptions register={register} errors={errors}/>
         </div>
         <div className="card-actions">
           <div className="flex gap-2">
