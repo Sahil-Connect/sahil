@@ -13,7 +13,7 @@ export type ModalProps = {
   className?: string;
 };
 
-const Modal = ({
+export const Modal = ({
   id,
   children,
   title,
