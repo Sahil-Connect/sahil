@@ -5,6 +5,7 @@ import {
   FETCH_ORDER_DELIVERIES,
   FETCH_ORDERS_STATS,
   INSERT_NEW_ORDER,
+  APPEND_ORDER_STATUS,
 } from "@sahil/lib/graphql";
 
 // graphql types
@@ -54,4 +55,11 @@ export const useGetOrdersStats = () => {
   const { data, loading, error } = useQuery(FETCH_ORDERS_STATS);
 
   return { error, ordersCount: data?.orders_aggregate?.aggregate, loading };
+};
+
+export const useAppendOrderStatus = () => {
+  const [appendOrderStatus, { data, loading, error }] =
+    useMutation(APPEND_ORDER_STATUS);
+
+  return { loading, data, error, appendOrderStatus };
 };

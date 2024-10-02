@@ -25,7 +25,7 @@ const useQueryStore = create<StoreProps>((set) => ({
 
 export const useSyncQueryWithStore = () => {
   const router = useRouter();
-  const { currentTab, setCurrentTab }= useQueryStore((state) => state);
+  const { currentTab, setCurrentTab } = useQueryStore((state) => state);
 
   // const initialState = useMemo(() => {
   //   // wait for isReady to access dynamic route variables
@@ -74,6 +74,6 @@ export const useSyncQueryWithStore = () => {
 
   return {
     handleChange,
-    currentTab
+    currentTab,
   };
 };

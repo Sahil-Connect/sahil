@@ -8,7 +8,7 @@ export const DELIVERY_FIELDS = gql`
 `;
 
 export const DELIVERY_REQUEST_FIELDS = gql`
-  fragment DeliveryRequestFields on delivery_requests {
+  fragment DeliveryRequestFields on delivery_request {
     id
     created_at
   }
@@ -40,7 +40,7 @@ export const FETCH_DELIVERY_BY_PK = gql`
 export const FETCH_DELIVERIES_BY_COURIER = gql`
   ${DELIVERY_FIELDS}
   query getDeliveriesByCourier($courier_id: uuid!) {
-    deliveries(where: {courier_id: {_eq: $courier_id}}) {
+    delivery(where: {courierId: {_eq: $courier_id}}) {
       ...DeliveryFields
     }
   }
@@ -49,10 +49,10 @@ export const FETCH_DELIVERIES_BY_COURIER = gql`
 export const FETCH_DELIVERY_REQUESTS = gql`
   ${DELIVERY_REQUEST_FIELDS}
   query getDeliveryRequests {
-    delivery_requests {
+    delivery_request {
       ...DeliveryRequestFields
     }
-    delivery_requests_aggregate {
+    delivery_request_aggregate {
       aggregate {
         count(columns: id, distinct: true)
       }
@@ -72,7 +72,7 @@ export const FETCH_DELIVERY_REQUEST_BY_PK = gql`
 export const FETCH_DELIVERY_REQUEST_BY_COURIER = gql`
   ${DELIVERY_REQUEST_FIELDS}
   query getDeliveryRequestByCourier($courier_id: uuid!) {
-    delivery_requests(where: {courier_id: {_eq: $courier_id}}) {
+    delivery_request(where: {courierId: {_eq: $courier_id}}) {
       ...DeliveryRequestFields
     }
   }

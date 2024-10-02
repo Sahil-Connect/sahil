@@ -3,7 +3,7 @@ import { BaseInputProps } from "../types";
 import type { FieldValues } from "react-hook-form";
 
 type InputProps = BaseInputProps<any> & {
-  type?: "text" | "email" | "password" | "number" | "date" | "tel";
+  type?: "text" | "email" | "password" | "number" | "date" | "tel" | "time";
   placeholder?: string;
   defaultValue?: string | number;
   disabled?: boolean;

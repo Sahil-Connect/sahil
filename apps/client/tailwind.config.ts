@@ -28,6 +28,14 @@ const extendedConfig: Config = {
       ...baseConfig.theme?.extend,
     },
   },
+  safelist: [
+    {
+      pattern: /bg-\w+/,
+    },
+    {
+      pattern: /text-\w+/,
+    },
+  ],
   // @ts-expect-error
   plugins: [...baseConfig.plugins, require("daisyui")],
   daisyui: {

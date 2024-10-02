@@ -9,13 +9,13 @@ export const INSERT_NEW_BUSINESS = gql`
   }
 `;
 
-export const REGISTER_BUSINESS_ACTION = gql`
-  mutation registerBusinessAction(
-    $object: RegisterBusinessActionBusinessInsertInput!
-  ) {
-    registerBusinessAction(object: $object)
-  }
-`;
+// export const REGISTER_BUSINESS_ACTION = gql`
+//   mutation registerBusinessAction(
+//     $object: RegisterBusinessActionBusinessInsertInput!
+//   ) {
+//     registerBusinessAction(object: $object)
+//   }
+// `;
 
 export const INSERT_BUSINESS_ADDRESS = gql`
   mutation insertBusinessAddress($object: addresses_insert_input!) {
@@ -40,6 +40,13 @@ export const ONBOARD_NEW_BUSINESS = gql`
     }
     insert_business_one(object: $object) {
       id
+      schedule {
+        days
+        shifts {
+          start_time
+          end_time
+        }
+      }
     }
   }
 `;
