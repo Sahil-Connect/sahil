@@ -40,8 +40,8 @@ export const ListDeliveryRequests = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-    console.log(error);
-    console.log(data);
+  console.log(error);
+  console.log(data);
 
   return (
     <section>

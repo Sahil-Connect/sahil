@@ -17,22 +17,21 @@ type Props = {
 };
 
 export const OrderDetails: FC<Props> = ({ order }) => {
-
   const orderInfoItems = [
     {
       icon: <HiOutlineHandRaised />,
       label: "Status",
-      value: order?.status_histories?.[0]?.status ?? "Pending"
+      value: order?.status_histories?.[0]?.status ?? "Pending",
     },
     {
       icon: <HiCalendarDays />,
       label: "Order Date",
-      value: formatDateTime(order?.created_at)
+      value: formatDateTime(order?.created_at),
     },
     {
       icon: <HiOutlineBanknotes />,
       label: "Payment Method",
-      value: "Cash on Delivery"
+      value: "Cash on Delivery",
     },
     {
       icon: <HiOutlineBriefcase />,
@@ -60,19 +59,19 @@ export const OrderDetails: FC<Props> = ({ order }) => {
       value: order?.destination as string,
     },
   ];
-  
+
   return (
     <div className="space-y-4">
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
-      {orderInfoItems.map((item, index) => (
-        <OrderInfoItem
-          key={index}
-          icon={item.icon}
-          label={item.label}
-          value={item.value}
-        />
-      ))}
-    </div>
+        {orderInfoItems.map((item, index) => (
+          <OrderInfoItem
+            key={index}
+            icon={item.icon}
+            label={item.label}
+            value={item.value}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -83,12 +82,9 @@ export type OrderInfoItemProps = {
   value: string;
 };
 
-
 export const OrderInfoItem = ({ icon, label, value }: OrderInfoItemProps) => (
   <div className="w-full flex gap-2 items-center">
-    <span className="p-2 border text-primary rounded w-fit">
-      {icon}
-    </span>
+    <span className="p-2 border text-primary rounded w-fit">{icon}</span>
     <div>
       <h3 className="text-gray-400 text-sm">{label}</h3>
       <span className="text-sm">{value}</span>

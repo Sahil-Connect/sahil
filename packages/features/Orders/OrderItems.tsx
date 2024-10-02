@@ -17,15 +17,14 @@ export const OrderItem: FC<OrderItemProps> = ({ price, quantity, title }) => {
         <div>
           <h2 className="card-title text-sm">{title}</h2>
           <div className="flex gap-2">
-          <p className="flex items-center gap-2 text-gray-600">
-            <HiOutlineReceiptPercent /> {quantity} Quantity
-          </p>
-          <p className="flex items-center gap-2 text-gray-600">
-            {formatCurrency(parseInt(price))}
-          </p>
+            <p className="flex items-center gap-2 text-gray-600">
+              <HiOutlineReceiptPercent /> {quantity} Quantity
+            </p>
+            <p className="flex items-center gap-2 text-gray-600">
+              {formatCurrency(parseInt(price))}
+            </p>
+          </div>
         </div>
-        </div>
-
       </div>
     </Card>
   );

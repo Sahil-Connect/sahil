@@ -13,7 +13,7 @@ export type TabValue = "info" | "preferences" | "progress";
 
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
-import { useSyncQueryWithStore} from "@sahil/lib/hooks/utilities/useQueryStore";
+import { useSyncQueryWithStore } from "@sahil/lib/hooks/utilities/useQueryStore";
 
 import {
   HiOutlineAdjustmentsVertical,
@@ -81,9 +81,11 @@ export default function OrderPage() {
               </Card>
             )}
             {currentTab === "preferences" && <OrderPreferences order={order} />}
-            {currentTab === "progress" && <div>
-              <UpdateOrderStatusForm order={order}/>
-              </div>}
+            {currentTab === "progress" && (
+              <div>
+                <UpdateOrderStatusForm order={order} />
+              </div>
+            )}
           </div>
         </div>
         <div className="w-full xl:basis-1/3 space-y-4">

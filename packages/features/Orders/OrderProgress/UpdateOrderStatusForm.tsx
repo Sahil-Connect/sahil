@@ -1,17 +1,17 @@
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { Select, Card } from 'ui';
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Select, Card } from "ui";
 import {
   Orders,
   Order_Status_Enum,
-} from '@sahil/lib/graphql/__generated__/graphql';
-import { allStatuses } from './constants';
-import { useAppendOrderStatus } from '@sahil/lib/hooks/orders';
-import { OrderInfoItem } from '../OrderDetails';
-import { formatDateTime } from '@sahil/lib/dates';
-import { HiOutlineHandRaised, HiCalendarDays } from 'react-icons/hi2';
-import toast, { Toaster } from 'react-hot-toast';
+} from "@sahil/lib/graphql/__generated__/graphql";
+import { allStatuses } from "./constants";
+import { useAppendOrderStatus } from "@sahil/lib/hooks/orders";
+import { OrderInfoItem } from "../OrderDetails";
+import { formatDateTime } from "@sahil/lib/dates";
+import { HiOutlineHandRaised, HiCalendarDays } from "react-icons/hi2";
+import toast, { Toaster } from "react-hot-toast";
 
 const status = z.enum(allStatuses);
 
@@ -42,13 +42,13 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
   const orderInfoItems = [
     {
       icon: <HiCalendarDays />,
-      label: 'Order Date',
+      label: "Order Date",
       value: formatDateTime(order?.created_at),
     },
     {
       icon: <HiOutlineHandRaised />,
-      label: 'Status',
-      value: order?.status_histories?.[0]?.status ?? 'Pending',
+      label: "Status",
+      value: order?.status_histories?.[0]?.status ?? "Pending",
     },
   ];
 
@@ -65,9 +65,9 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
           },
         },
       });
-      toast.success('Order status updated successfully');
+      toast.success("Order status updated successfully");
     } catch (error) {
-      console.error('Error appending order status:', error);
+      console.error("Error appending order status:", error);
       toast.error("Order status couldn't be updated, try again later.");
     }
   };
@@ -75,10 +75,10 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
   return (
     <>
       <Card>
-        <div className='space-y-4'>
-          <div className='space-y-2'>
+        <div className="space-y-4">
+          <div className="space-y-2">
             <h3>Current Order Status</h3>
-            <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4'>
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
               {orderInfoItems.map((item, index) => (
                 <OrderInfoItem
                   key={index}
@@ -92,14 +92,14 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className='space-y-2 max-w-xl'
+            className="space-y-2 max-w-xl"
           >
             <h3>Manage Order Status</h3>
 
-            <div className='grid grid-cols-2 gap-2'>
+            <div className="grid grid-cols-2 gap-2">
               <Select
-                name='status'
-                label='New Status'
+                name="status"
+                label="New Status"
                 register={register}
                 errors={errors}
                 options={status.options}
@@ -109,9 +109,9 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
 
               {!isCanceled && (
                 <button
-                  type='submit'
+                  type="submit"
                   className={`w-fit btn btn-sm normal-case btn-primary ${
-                    loading && 'animate-pulse cursor-not-allowed'
+                    loading && "animate-pulse cursor-not-allowed"
                   }`}
                   disabled={loading}
                 >
@@ -125,7 +125,7 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
         {order?.status_histories?.[0]?.status ===
           Order_Status_Enum.Canceled && <p>Order Has Been Cancelled</p>}
       </Card>
-      <Toaster position='bottom-center' reverseOrder={false} />
+      <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );
 };

@@ -31,20 +31,20 @@ export const FETCH_DELIVERIES = gql`
 export const FETCH_DELIVERY_BY_PK = gql`
   ${DELIVERY_FIELDS}
   query getDeliveryByPK($id: uuid!) {
-    delivery(where: {id: {_eq: $id}}) {
+    delivery(where: { id: { _eq: $id } }) {
       ...DeliveryFields
     }
   }
-`;  
+`;
 
 export const FETCH_DELIVERIES_BY_COURIER = gql`
   ${DELIVERY_FIELDS}
   query getDeliveriesByCourier($courier_id: uuid!) {
-    delivery(where: {courierId: {_eq: $courier_id}}) {
+    delivery(where: { courierId: { _eq: $courier_id } }) {
       ...DeliveryFields
     }
   }
-`;  
+`;
 
 export const FETCH_DELIVERY_REQUESTS = gql`
   ${DELIVERY_REQUEST_FIELDS}
@@ -58,12 +58,12 @@ export const FETCH_DELIVERY_REQUESTS = gql`
       }
     }
   }
-`; 
+`;
 
 export const FETCH_DELIVERY_REQUEST_BY_PK = gql`
   ${DELIVERY_REQUEST_FIELDS}
   query getDeliveryRequestByPK($id: uuid!) {
-    delivery_request(where: {id: {_eq: $id}}) {
+    delivery_request(where: { id: { _eq: $id } }) {
       ...DeliveryRequestFields
     }
   }
@@ -72,7 +72,7 @@ export const FETCH_DELIVERY_REQUEST_BY_PK = gql`
 export const FETCH_DELIVERY_REQUEST_BY_COURIER = gql`
   ${DELIVERY_REQUEST_FIELDS}
   query getDeliveryRequestByCourier($courier_id: uuid!) {
-    delivery_request(where: {courierId: {_eq: $courier_id}}) {
+    delivery_request(where: { courierId: { _eq: $courier_id } }) {
       ...DeliveryRequestFields
     }
   }

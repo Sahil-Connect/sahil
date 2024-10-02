@@ -30,8 +30,8 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
               </div>
             )}
           </Link>
-          <Link 
-            href={`/suppliers/${supplier.id}`} 
+          <Link
+            href={`/suppliers/${supplier.id}`}
             className="card-title max-w-[35ch] leading-tight text-base"
           >
             {supplier.name}
@@ -43,7 +43,7 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
       </div>
       <div className="mt-4 flex flex-col h-full">
         <div className="mt-1 overflow-hidden text-ellipsis">
-          <span className="font-medium">Category:</span> {''}
+          <span className="font-medium">Category:</span> {""}
           {supplier.categories.map(({ category_name: name }, index) => (
             <span key={name} className="text-xs text-zinc-500">
               {formatCategoryName(name)}
@@ -55,9 +55,7 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
       <div className="my-4 flex flex-col bg-base-100 border p-4 gap-4 rounded-lg">
         <div className="w-full flex justify-between items-center">
           <div className="font-semibold">
-            <p className="text-gray-500 text-xs font-normal">
-              Service Zone
-            </p>
+            <p className="text-gray-500 text-xs font-normal">Service Zone</p>
             <p className="capitalize">{supplier.zone}</p>
           </div>
           <div className="font-semibold">

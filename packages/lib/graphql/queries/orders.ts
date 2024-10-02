@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const ORDER_CORE_FIELDS = gql`
   fragment OrderCoreFields on orders {

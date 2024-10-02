@@ -36,10 +36,8 @@ const RequestOrders = () => {
         ))}
       </div>
     </div>
-  )
-}
-
-
+  );
+};
 
 export default function RequestPage() {
   const router = useRouter();

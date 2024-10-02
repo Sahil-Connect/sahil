@@ -1,13 +1,10 @@
 import { FC } from "react";
 import { Card } from "ui";
-import {
-  HiCalendarDays,
-  HiOutlineArrowRight
-} from "react-icons/hi2";
+import { HiCalendarDays, HiOutlineArrowRight } from "react-icons/hi2";
 import Link from "next/link";
 
 export const DeliveryRequestOverviewCard = ({ request }) => {
-    const hasActions = false;
+  const hasActions = false;
   return (
     <Card title="Request ID: 1" titleSize="sm">
       <div className="flex justify-between">
@@ -33,7 +30,9 @@ export const DeliveryRequestOverviewCard = ({ request }) => {
           <button className="btn btn-sm">Decline</button>
         </div>
       )}
-      <Link href={`/requests/${request.id}`} className="btn btn-sm btn-primary">View Details <HiOutlineArrowRight /></Link> 
+      <Link href={`/requests/${request.id}`} className="btn btn-sm btn-primary">
+        View Details <HiOutlineArrowRight />
+      </Link>
     </Card>
   );
 };

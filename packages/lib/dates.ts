@@ -3,7 +3,7 @@ import { createDate, TimeSpan, isWithinExpirationDate } from "oslo";
 
 export const formatCurrentDate = (): string => {
   const currentDate = new Date();
-  return format(currentDate, 'EEEE, MMMM d, yyyy');
+  return format(currentDate, "EEEE, MMMM d, yyyy");
 };
 
 export const formatDateTime = (

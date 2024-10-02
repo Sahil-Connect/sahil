@@ -33,12 +33,7 @@ type FormData = z.infer<typeof userInfoSchema>;
 
 export const CreateUser = () => {
   // const { registerUser, data, loading, error } = useRegisterUserAction();
-  const {
-    addUserInvite,
-    data: invites,
-    loading,
-    error,
-  } = useAddUserInvite();
+  const { addUserInvite, data: invites, loading, error } = useAddUserInvite();
 
   const {
     register,

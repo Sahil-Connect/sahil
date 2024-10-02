@@ -1,9 +1,6 @@
 import { Card } from "ui";
-import {
-    HiCalendarDays,
-    HiOutlineArrowRight
-  } from "react-icons/hi2";
-  import Link from "next/link";
+import { HiCalendarDays, HiOutlineArrowRight } from "react-icons/hi2";
+import Link from "next/link";
 
 export const DeliveryOverviewCard = ({ delivery }: { delivery: any }) => {
   return (
@@ -22,7 +19,12 @@ export const DeliveryOverviewCard = ({ delivery }: { delivery: any }) => {
         <p className="text-sm text-gray-500">{delivery.deliveryType}</p>
         <p className="text-sm text-gray-500">{delivery.totalAmount}</p>
       </div>
-      <Link href={`/deliveries/${delivery.orderId}`}className="btn btn-sm btn-primary">View Details <HiOutlineArrowRight /></Link>
+      <Link
+        href={`/deliveries/${delivery.orderId}`}
+        className="btn btn-sm btn-primary"
+      >
+        View Details <HiOutlineArrowRight />
+      </Link>
     </Card>
   );
 };
