@@ -7,4 +7,4 @@ export * from "./OrderClient";
 export * from "./OrderDetails";
 
 export * from "./OrderProgress/OrderProgress";
-export * from "./OrderProgress/UpdateOrderStatusModal";
+export * from "./OrderProgress/UpdateOrderStatusForm";
