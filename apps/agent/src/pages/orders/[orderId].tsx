@@ -60,10 +60,10 @@ export default function OrderPage() {
   if (loading) return <p>loading</p>;
 
   return (
-    <section>
+    <section className="space-y-4">
+      <OrderOverview order={order} />
       <div className="flex flex-col lg:flex-row gap-4">
         <div className="w-full xl:basis-2/3 space-y-4">
-          <OrderOverview order={order} />
           <Tabs
             items={OrderTabs}
             onTabClick={handleTabClick}

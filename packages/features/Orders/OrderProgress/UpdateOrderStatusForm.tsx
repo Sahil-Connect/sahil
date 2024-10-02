@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { useRef } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Select, Card } from 'ui';
@@ -28,9 +27,7 @@ type Props = {
 };
 
 export const UpdateOrderStatusForm = ({ order }: Props) => {
-  const closeBtn = useRef<HTMLButtonElement>(null);
   const { appendOrderStatus, loading } = useAppendOrderStatus();
-
   const isCanceled =
     order.status_histories?.[0]?.status === Order_Status_Enum.Canceled;
 
@@ -69,10 +66,9 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
         },
       });
       toast.success('Order status updated successfully');
-      closeBtn.current?.click();
     } catch (error) {
       console.error('Error appending order status:', error);
-      toast.error("This didn't work.");
+      toast.error("Order status couldn't be updated, try again later.");
     }
   };
 
