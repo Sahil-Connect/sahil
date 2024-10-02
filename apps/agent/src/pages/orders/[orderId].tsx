@@ -60,9 +60,9 @@ export default function OrderPage() {
   if (loading) return <p>loading</p>;
 
   return (
-    <section className="container mx-auto px-4">
+    <section>
       <div className="flex flex-col lg:flex-row gap-4">
-        <div className="w-full lg:w-2/3 space-y-4">
+        <div className="w-full xl:basis-2/3 space-y-4">
           <OrderOverview order={order} />
           <Tabs
             items={OrderTabs}
@@ -86,7 +86,9 @@ export default function OrderPage() {
               </div>}
           </div>
         </div>
-        <OrderProgress order={order} />
+        <div className="w-full xl:basis-1/3 space-y-4">
+          <OrderProgress order={order} />
+        </div>
       </div>
     </section>
   );
