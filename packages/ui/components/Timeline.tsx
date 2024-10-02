@@ -1,7 +1,7 @@
 import {
   HiOutlineCheckCircle,
   HiOutlineMinusCircle,
-  HiOutlineXCircle,
+  HiOutlineXCircle
 } from 'react-icons/hi2';
 
 type Status = 'completed' | 'pending' | 'cancelled';
@@ -25,7 +25,7 @@ const statusConfig = {
 
 export const Timeline = ({ items }: Props) => {
   return (
-    <ul className='timeline timeline-vertical timeline-snap-icon'>
+    <ul className='timeline timeline-vertical timeline-snap-icon w-fit'>
       {items.map((item, index) => (
         <TimelineItem
           key={index}
@@ -60,10 +60,12 @@ const TimelineItem = ({
   return (
     <li>
       {!isFirst && <hr className={`bg-${color}`} />}
-      <div className='timeline-start'>{prefix}</div>
+      <div className='timeline-start timeline-box'>{prefix}</div>
       <div className={`timeline-middle text-xl text-${color}`}>{icon}</div>
       <div className='timeline-end space-y-1' style={{ gridRowStart: 2 }}>
-        <span className='font-semibold'>{label}</span>
+        <div className={`badge py-2 text-${color}`}>
+          {label}
+        </div> 
         <p className='text-sm'>{description}</p>
       </div>
       {!isLast && <hr className={`bg-${nextColor}`} />}

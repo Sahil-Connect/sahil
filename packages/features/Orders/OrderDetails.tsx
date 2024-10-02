@@ -63,14 +63,14 @@ export const OrderDetails: FC<Props> = ({ order }) => {
   );
 };
 
-type OrderInfoItemProps = {
+export type OrderInfoItemProps = {
   icon: React.ReactNode;
   label: string;
   value: string;
 };
 
 
-const OrderInfoItem = ({ icon, label, value }: OrderInfoItemProps) => (
+export const OrderInfoItem = ({ icon, label, value }: OrderInfoItemProps) => (
   <div className="w-full flex gap-2 items-center">
     <span className="p-2 border text-primary rounded w-fit">
       {icon}

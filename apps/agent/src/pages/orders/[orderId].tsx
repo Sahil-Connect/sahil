@@ -3,14 +3,13 @@ import {
   OrderItems,
   OrderOverview,
   OrderPreferences,
-  OrderClient,
   OrderDetails,
   OrderProgress,
 } from "@sahil/features/Orders";
 import { Card, Tabs } from "ui";
+import { UpdateOrderStatusModal } from "@sahil/features/Orders";
 
 export type TabValue = "info" | "preferences" | "progress";
-
 
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
@@ -82,9 +81,12 @@ export default function OrderPage() {
               </Card>
             )}
             {currentTab === "preferences" && <OrderPreferences order={order} />}
-            {currentTab === "progress" && <OrderProgress order={order} />}
+            {currentTab === "progress" && <div>
+              <UpdateOrderStatusModal order={order}/>
+              </div>}
           </div>
         </div>
+        <OrderProgress order={order} />
       </div>
     </section>
   );

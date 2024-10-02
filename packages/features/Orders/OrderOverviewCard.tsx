@@ -7,7 +7,7 @@ import {
   HiOutlineMapPin,
   HiOutlinePhone,
   HiEllipsisVertical,
-  HiOutlineBriefcase,
+  HiOutlineClock,
   HiCalendarDays,
 } from "react-icons/hi2";
 
@@ -34,7 +34,7 @@ export const OrderOverviewCard: FC<Props> = ({ order }) => {
           />
         </div>
         <div className="badge badge-primary gap-2">
-          <HiCalendarDays /> {order?.status_histories![0]?.status ?? "Pending"}
+          <HiOutlineClock /> {order?.status_histories![0]?.status ?? "Pending"}
         </div>
         <div className="mt-2 bg-grey-200 rounded-xl flex flex-col gap-4">
           <div className="flex justify-between items-center">
