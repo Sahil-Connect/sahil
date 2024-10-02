@@ -1,19 +1,27 @@
+import { Fragment } from "react";
 import { z } from "zod";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useOnBoardingFormStore } from "@sahil/lib/hooks/formStores/useOnBoardingFormStore";
 import { formatCategoryName } from "@sahil/lib/strings";
 import {
+  daysOfWeek,
   PREFERENCE_SCHEMA,
   ROLE_DETAILS_SCHEMA,
   USER_DETAILS_SCHEMA,
+  WORK_SCHEDULE_SCHEMA,
 } from "./constants";
 import { Card } from "ui";
 import { HiArrowSmallRight } from "react-icons/hi2";
 import { useOnboardBusiness } from "@sahil/lib/hooks/businesses";
 import { useOnboardSupplier } from "@sahil/lib/hooks/suppliers";
+import {
+  Business_Insert_Input,
+  Suppliers_Insert_Input,
+  User_Role_Enum,
+} from "@sahil/lib/graphql/__generated__/graphql";
+import { formatTime } from "@sahil/lib";
 
 type Props = {
   user: any;
@@ -44,6 +52,7 @@ export const Summary = ({ user, update }: Props) => {
   const combinedSchema = baseSchema.extend({
     [role]: ROLE_DETAILS_SCHEMA.shape[role],
     preference: PREFERENCE_SCHEMA.shape[role],
+    schedule: WORK_SCHEDULE_SCHEMA,
   });
 
   type FormData = z.infer<typeof combinedSchema>;
@@ -51,29 +60,44 @@ export const Summary = ({ user, update }: Props) => {
   const {
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<FormData>({
     resolver: zodResolver(combinedSchema),
     values: formData as any,
   });
 
   const onSubmit: SubmitHandler<FormData> = async () => {
+    console.log(formData);
     const validatedInput = combinedSchema.parse(formData);
 
     if (!businessLoading && !supplierLoading) {
-      const { business, supplier, preference } = validatedInput;
+      const { business, supplier, preference, schedule } = validatedInput;
 
-      switch (role) {
+      const _schedule = {
+        data: {
+          days: daysOfWeek.map((day) => schedule?.days.includes(day.value)),
+          shifts: {
+            data: schedule?.shifts,
+          },
+        },
+      };
+
+      const _role = role as User_Role_Enum;
+
+      switch (_role) {
         case "business":
           const businessObject = {
             ...preference,
             ...business,
+            schedule: _schedule,
             owner_id: user?.id,
             registration_channel: "APP",
-          };
+          } as Business_Insert_Input;
+
           await onboardBusiness({
             variables: {
               userId: user?.id,
-              role,
+              role: _role,
               object: businessObject,
             },
           });
@@ -88,15 +112,17 @@ export const Summary = ({ user, update }: Props) => {
           });
           const supplierObject = {
             ...supplier,
+            schedule: _schedule,
             user_id: user?.id,
             categories: {
               data: categories,
             },
-          };
+          } as Suppliers_Insert_Input;
+
           await onboardSupplier({
             variables: {
               userId: user?.id,
-              role,
+              role: _role,
               object: supplierObject,
             },
           });
@@ -254,6 +280,40 @@ export const Summary = ({ user, update }: Props) => {
         </div>
 
         {renderForm()}
+
+        <div>
+          <h3 className="text-lg font-bold">Work Schedule</h3>
+
+          <div className="mb-1">
+            <b>Days of week</b>
+            <div className="flex flex-wrap gap-2">
+              {daysOfWeek.map((day) => (
+                <div key={day.value} className="flex  items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={watch("schedule.days").includes(day.value)}
+                    readOnly={true}
+                  />
+                  {day.label}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <b>Working hours</b>
+            <div className="flex flex-wrap gap-2">
+              {watch("schedule.shifts").map((shift, index) => (
+                <Fragment key={index}>
+                  <span className="flex items-center gap-2">
+                    {formatTime(shift.start_time)} -{" "}
+                    {formatTime(shift.end_time)}
+                  </span>
+                  <div className="divider divider-horizontal mx-2 md:mx-4 last:hidden" />
+                </Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
 
         {(businessError || supplierError) && (
           <div className="my-4">

@@ -15705,7 +15705,19 @@ export type OnboardNewBusinessMutation = {
     __typename?: "users";
     role?: User_Role_Enum | null;
   } | null;
-  insert_business_one?: { __typename?: "business"; id: any } | null;
+  insert_business_one?: {
+    __typename?: "business";
+    id: any;
+    schedule?: {
+      __typename?: "work_schedules";
+      days: Array<boolean>;
+      shifts: Array<{
+        __typename?: "work_shifts";
+        start_time: any;
+        end_time: any;
+      }>;
+    } | null;
+  } | null;
 };
 
 export type InsertNewCourierMutationVariables = Exact<{
@@ -15818,7 +15830,19 @@ export type OnboardNewSupplierMutation = {
     __typename?: "users";
     role?: User_Role_Enum | null;
   } | null;
-  insert_suppliers_one?: { __typename?: "suppliers"; id: any } | null;
+  insert_suppliers_one?: {
+    __typename?: "suppliers";
+    id: any;
+    schedule?: {
+      __typename?: "work_schedules";
+      days: Array<boolean>;
+      shifts: Array<{
+        __typename?: "work_shifts";
+        start_time: any;
+        end_time: any;
+      }>;
+    } | null;
+  } | null;
 };
 
 export type InsertNewInviteMutationVariables = Exact<{
@@ -15935,6 +15959,17 @@ export type GetBusinessByPkQuery = {
       city?: string | null;
       street_address?: string | null;
     }>;
+    schedule?: {
+      __typename?: "work_schedules";
+      id: any;
+      days: Array<boolean>;
+      shifts: Array<{
+        __typename?: "work_shifts";
+        id: any;
+        start_time: any;
+        end_time: any;
+      }>;
+    } | null;
   } | null;
 };
 
@@ -16441,6 +16476,17 @@ export type GetSupplierByPkQuery = {
         count: number;
       } | null;
     };
+    schedule?: {
+      __typename?: "work_schedules";
+      id: any;
+      days: Array<boolean>;
+      shifts: Array<{
+        __typename?: "work_shifts";
+        id: any;
+        start_time: any;
+        end_time: any;
+      }>;
+    } | null;
     categories: Array<{
       __typename?: "suppliers_categories";
       category_name: Supplier_Categories_Enum_Enum;
@@ -17393,6 +17439,33 @@ export const OnboardNewBusinessDocument = {
               kind: "SelectionSet",
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "id" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "schedule" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "days" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "shifts" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "start_time" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "end_time" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -17978,6 +18051,33 @@ export const OnboardNewSupplierDocument = {
               kind: "SelectionSet",
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "id" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "schedule" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "days" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "shifts" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "start_time" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "end_time" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -18472,6 +18572,38 @@ export const GetBusinessByPkDocument = {
                       {
                         kind: "FragmentSpread",
                         name: { kind: "Name", value: "AddressFields" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "schedule" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "days" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "shifts" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "id" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "start_time" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "end_time" },
+                            },
+                          ],
+                        },
                       },
                     ],
                   },
@@ -20592,6 +20724,38 @@ export const GetSupplierByPkDocument = {
                             {
                               kind: "Field",
                               name: { kind: "Name", value: "count" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "schedule" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "days" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "shifts" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "id" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "start_time" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "end_time" },
                             },
                           ],
                         },

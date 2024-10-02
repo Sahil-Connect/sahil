@@ -95,6 +95,15 @@ export const FETCH_SUPPLIER_BY_PK = gql`
           count
         }
       }
+      schedule {
+        id
+        days
+        shifts {
+          id
+          start_time
+          end_time
+        }
+      }
     }
   }
 `;
