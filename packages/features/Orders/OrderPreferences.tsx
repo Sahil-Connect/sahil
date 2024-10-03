@@ -2,35 +2,48 @@ import { Card, RadioGroup } from "ui";
 import { FC } from "react";
 import { Orders } from "@sahil/lib/graphql/__generated__/graphql";
 import { paymentMethods, deliveryMethods, notificationOptions, contactMethodOptions } from "./constants";
+import {
+  FieldValues,
+} from "react-hook-form";
+import { BaseInputProps } from "ui/types";
+
+type BaseProps = BaseInputProps<FieldValues> & {
+  disabled?: boolean;
+};
+
+type RadioGroupProps = BaseProps & {
+  options: { value: string; label: string }[];
+  disabled?: boolean;
+};
 
 type Props = {
   order: Orders;
 };
 
-export const NotificationPreference = ({ register, errors, defaultValue, disabled }: { register?: any; errors?: any; defaultValue?: string; disabled?: boolean }) => {
+export const NotificationPreference = ({ register, errors, defaultValue, disabled }: RadioGroupProps) => {
   return (
     <RadioGroup
       name="notifyWhen"
       label="Notify when order is ready to fulfill"
       options={notificationOptions}
       defaultValue={defaultValue}
-      disabled={disabled}
-      {...(register && { register })}
-      {...(errors && { errors })}
+      readOnly={disabled}
+      register={register}
+      errors={errors}
     />
   );
 };
 
-export const ContactMethodPreference = ({ register, errors, defaultValue, disabled }: { register?: any; errors?: any; defaultValue?: string; disabled?: boolean }) => {
+export const ContactMethodPreference = ({ register, errors, defaultValue, disabled }: RadioGroupProps) => {
   return (
     <RadioGroup
       name="contactMethod"
       label="Preferred contact method"
       options={contactMethodOptions}
       defaultValue={defaultValue}
-      disabled={disabled}
-      {...(register && { register })}
-      {...(errors && { errors })}
+      readOnly={disabled}
+      register={register}
+      errors={errors}
     />
   );
 };
@@ -40,21 +53,16 @@ export const PaymentMethodOptions = ({
   errors,
   defaultValue,
   disabled
-}: {
-  register?: any;
-  errors?: any;
-  defaultValue?: string;
-  disabled?: boolean;
-}) => {
+}: RadioGroupProps) => {
   return (
     <RadioGroup
       name="paymentMethod"
       label="Payment Method"
       options={paymentMethods}
       defaultValue={defaultValue}
-      disabled={disabled}
-      {...(register && { register })}
-      {...(errors && { errors })}
+      readOnly={disabled}
+      register={register}
+      errors={errors}
     />
   );
 };
@@ -64,21 +72,16 @@ export const OrderDeliveryOptions = ({
   errors,
   defaultValue,
   disabled
-}: {
-  register?: any;
-  errors?: any;
-  defaultValue?: string;
-  disabled?: boolean;
-}) => {
+}: RadioGroupProps) => {
   return (
     <RadioGroup
       name="deliveryMethod"
       label="Delivery Method"
       options={deliveryMethods}
       defaultValue={defaultValue}
-      disabled={disabled}
-      {...(register && { register })}
-      {...(errors && { errors })}
+      readOnly={disabled}
+      register={register}
+      errors={errors}
     />
   );
 };

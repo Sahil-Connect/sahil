@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 type CancelOrderDialogProps = {
   orderId: string;
+  onCancel: () => void;
 };
 
 export const CancelOrderDialog: React.FC<CancelOrderDialogProps> = ({ orderId }) => {

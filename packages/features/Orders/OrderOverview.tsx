@@ -24,7 +24,6 @@ export const OrderOverview: FC<Props> = ({ order }) => {
 
   const onCancel = async () => {
     if (loading) return;
-
     try {
       await appendOrderStatus({
         variables: {
@@ -43,13 +42,13 @@ export const OrderOverview: FC<Props> = ({ order }) => {
 
   return (
     <>
-    <Card title={`Order ID: #${order.id.slice(0, 8).toLocaleUpperCase()}` } titleSize="sm" height="h-fit">
+    <Card title={`Order ID #${order.id.slice(0, 8).toLocaleUpperCase()}` } height="h-fit">
     <div className="flex flex-col md:flex-row justify-between gap-2">
         <div className="flex gap-2 items-center">
         <button className="btn btn-sm">
             <HiOutlineExclamationCircle /> Report Problem
           </button>
-          <CancelOrderDialog orderId={order.id} />
+          <CancelOrderDialog orderId={order.id} onCancel={onCancel} />
         </div>
         <div className="flex gap-2 items-center">
           <button className="btn btn-sm">
