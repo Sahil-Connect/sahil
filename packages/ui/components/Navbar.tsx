@@ -102,6 +102,12 @@ const Right = ({
           <div className="absolute inline-flex items-center justify-center w-3 h-3 text-sm font-bold bg-red-500 border-2 border-white rounded-full -top-1 -end-1" />
         </div> */}
         <Link 
+          href="/notifications"
+          className="text-sm ml-2"
+        >
+          <Icon icon={HiOutlineBell} />
+        </Link>
+        <Link 
           href="/settings"
           className="text-sm ml-2"
         >
