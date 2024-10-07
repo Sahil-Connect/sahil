@@ -35,4 +35,6 @@ export * from "./components/StatusPage";
 export * from "./components/CustomContainer";
 export * from "./components/Schedule";
 export * from "./components/SectionHeader";
+export * from "./components/Sidebar";
+export * from "./components/Settings";
 
