@@ -4,6 +4,7 @@ import { Orders } from "@sahil/lib/graphql/__generated__/graphql";
 import { paymentMethods, deliveryMethods, notificationOptions, contactMethodOptions } from "./constants";
 import {
   FieldValues,
+  useForm,
 } from "react-hook-form";
 import { BaseInputProps } from "ui/types";
 
@@ -11,7 +12,7 @@ type BaseProps = BaseInputProps<FieldValues> & {
   disabled?: boolean;
 };
 
-type RadioGroupProps = BaseProps & {
+type RadioGroupProps = Partial<BaseProps> & {
   options: { value: string; label: string }[];
   disabled?: boolean;
 };
@@ -20,7 +21,7 @@ type Props = {
   order: Orders;
 };
 
-export const NotificationPreference = ({ register, errors, defaultValue, disabled }: RadioGroupProps) => {
+export const NotificationPreference = ({ register, errors, defaultValue, disabled }: any) => {
   return (
     <RadioGroup
       name="notifyWhen"
@@ -29,12 +30,12 @@ export const NotificationPreference = ({ register, errors, defaultValue, disable
       defaultValue={defaultValue}
       readOnly={disabled}
       register={register}
-      errors={errors}
+      errors={errors ?? {}}
     />
   );
 };
 
-export const ContactMethodPreference = ({ register, errors, defaultValue, disabled }: RadioGroupProps) => {
+export const ContactMethodPreference = ({ register, errors, defaultValue, disabled }: any) => {
   return (
     <RadioGroup
       name="contactMethod"
@@ -43,7 +44,7 @@ export const ContactMethodPreference = ({ register, errors, defaultValue, disabl
       defaultValue={defaultValue}
       readOnly={disabled}
       register={register}
-      errors={errors}
+      errors={errors ?? {}}
     />
   );
 };
@@ -53,7 +54,7 @@ export const PaymentMethodOptions = ({
   errors,
   defaultValue,
   disabled
-}: RadioGroupProps) => {
+}: any) => {
   return (
     <RadioGroup
       name="paymentMethod"
@@ -62,7 +63,7 @@ export const PaymentMethodOptions = ({
       defaultValue={defaultValue}
       readOnly={disabled}
       register={register}
-      errors={errors}
+      errors={errors ?? {}}
     />
   );
 };
@@ -72,7 +73,7 @@ export const OrderDeliveryOptions = ({
   errors,
   defaultValue,
   disabled
-}: RadioGroupProps) => {
+}: any) => {
   return (
     <RadioGroup
       name="deliveryMethod"
@@ -81,12 +82,27 @@ export const OrderDeliveryOptions = ({
       defaultValue={defaultValue}
       readOnly={disabled}
       register={register}
-      errors={errors}
+      errors={errors ?? {}}
     />
   );
 };
 
 export const OrderPreferences: FC<Props> = ({ order }) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
+    defaultValues: {
+      paymentMethod: "",
+      deliveryMethod: "",
+      notifyWhen: "",
+      contactMethod: "",
+      undeliverableAction: "",
+    }
+  });
+
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+    // Handle form submission
+  };
+
   return (
     <Card
       title="Order Preferences"
@@ -94,21 +110,49 @@ export const OrderPreferences: FC<Props> = ({ order }) => {
       height="h-fit"
       className="space-y-2 p-2 rounded-xl shadow"
     >
-      <div className="flex flex-col md:flex-row gap-2 items-center">
-        <div className="grow">
-          <PaymentMethodOptions defaultValue={order?.payment_method} disabled={false} />
-          <OrderDeliveryOptions defaultValue={order?.delivery_method} disabled={false} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col md:flex-row gap-2 items-center">
+          <div className="grow">
+            <PaymentMethodOptions
+              register={register}
+              errors={errors}
+              defaultValue=""
+              disabled={false}
+            />
+            <OrderDeliveryOptions
+              register={register}
+              errors={errors}
+              defaultValue=""
+              disabled={false}
+            />
+          </div>
         </div>
-      </div>
-      <div className="space-y-2">
-        <NotificationPreference defaultValue={order?.notify_when} disabled={false} />
-        <ContactMethodPreference defaultValue={order?.contact_method} disabled={false} />
-        <div>
-          <label htmlFor="undeliverableAction" className="label">Action to take when order can&apos;t be delivered:</label>
-          <textarea id="undeliverableAction" className="textarea textarea-bordered w-full" rows={3} placeholder="Enter instructions here"></textarea>
-          <button className="btn btn-sm btn-primary">Save</button>
+        <div className="space-y-2">
+          <NotificationPreference
+            register={register}
+            errors={errors}
+            defaultValue=""
+            disabled={false}
+          />
+          <ContactMethodPreference
+            register={register}
+            errors={errors}
+            defaultValue=""
+            disabled={false}
+          />
+          <div>
+            <label htmlFor="undeliverableAction" className="label">Action to take when order can&apos;t be delivered:</label>
+            <textarea
+              id="undeliverableAction"
+              className="textarea textarea-bordered w-full"
+              rows={3}
+              placeholder="Enter instructions here"
+              {...register("undeliverableAction")}
+            ></textarea>
+            <button type="submit" className="btn btn-sm btn-primary">Save</button>
+          </div>
         </div>
-      </div>
+      </form>
     </Card>
   );
 };
