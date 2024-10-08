@@ -8,8 +8,8 @@ const actions = [
     label: "Register Supplier",
     icon: <HiPlus />,
     href: "/suppliers/register/business_info",
-    primary: true
-  }
+    primary: true,
+  },
 ];
 
 export default function Suppliers() {

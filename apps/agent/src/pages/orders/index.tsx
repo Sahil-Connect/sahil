@@ -7,8 +7,8 @@ const actions = [
     label: "New Order",
     icon: <HiPlus />,
     href: "/orders/new/order_details",
-    primary: true
-  }
+    primary: true,
+  },
 ];
 
 export default function OrdersPage() {

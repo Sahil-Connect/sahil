@@ -8,7 +8,7 @@ import {
   HiOutlineArrowRightOnRectangle,
   HiOutlinePlus,
   HiOutlineCog6Tooth,
-  HiOutlineBell
+  HiOutlineBell,
 } from "react-icons/hi2";
 
 type NavbarLink = {
@@ -101,10 +101,7 @@ const Right = ({
           <Icon icon={HiOutlineBell} />
           <div className="absolute inline-flex items-center justify-center w-3 h-3 text-sm font-bold bg-red-500 border-2 border-white rounded-full -top-1 -end-1" />
         </div> */}
-        <Link 
-          href="/settings"
-          className="text-sm ml-2"
-        >
+        <Link href="/settings" className="text-sm ml-2">
           <Icon icon={HiOutlineCog6Tooth} />
         </Link>
         <div className="divider divider-horizontal h-6 m-auto" />

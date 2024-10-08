@@ -8,13 +8,13 @@ import Inter from "next/font/local";
 import Plus_Jakarta_Sans from "next/font/local";
 
 const inter = Inter({
-  src: '../../public/fonts/Inter-VariableFont_slnt,wght.ttf', 
+  src: "../../public/fonts/Inter-VariableFont_slnt,wght.ttf",
   variable: "--font-inter",
   display: "swap",
 });
 
 const jakarta = Plus_Jakarta_Sans({
-  src: '../../public/fonts/PlusJakartaSans-VariableFont_wght.ttf', 
+  src: "../../public/fonts/PlusJakartaSans-VariableFont_wght.ttf",
   variable: "--font-jakarta",
   display: "swap",
 });
@@ -42,7 +42,9 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <ApolloProvider client={client}>
-        <div className={`${inter.variable} ${jakarta.variable} font-inter antialiased text-zinc-900 min-h-full leading-normal`}>
+        <div
+          className={`${inter.variable} ${jakarta.variable} font-inter antialiased text-zinc-900 min-h-full leading-normal`}
+        >
           <Layout>
             <Component {...pageProps} />
           </Layout>

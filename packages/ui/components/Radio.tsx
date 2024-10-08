@@ -12,6 +12,7 @@ type Option = {
 
 type RadioGroupProps = BaseInputProps<any> & {
   options: Option[];
+  readOnly?: boolean;
 };
 
 export const RadioGroup: FC<RadioGroupProps> = ({
@@ -20,17 +21,18 @@ export const RadioGroup: FC<RadioGroupProps> = ({
   register,
   errors,
   options,
+  readOnly = false,
 }) => {
   //handle nested errors
   const errorPath = name.split(".");
   let errorMessage;
 
-  if (errorPath.length > 1) {
+  if (errors && errorPath.length > 1) {
     errorMessage = errorPath.reduce(
       (obj, key) => obj && obj[key],
       errors
     )?.message;
-  } else {
+  } else if (errors) {
     errorMessage = errors[name]?.message;
   }
 
@@ -38,7 +40,13 @@ export const RadioGroup: FC<RadioGroupProps> = ({
     <FormControl label={label!}>
       <div className="flex flex-wrap gap-2">
         {options.map((option, index) => (
-          <Radio key={index} register={register} name={name} option={option} />
+          <Radio 
+            key={index} 
+            register={register} 
+            name={name} 
+            option={option} 
+            readOnly={readOnly}
+          />
         ))}
       </div>
       {errorMessage && <FormControlError message={errorMessage} />}
@@ -50,25 +58,30 @@ type RadioProps = {
   option: Option;
   name: string;
   register: BaseInputProps<any>["register"];
+  readOnly?: boolean;
 };
 
-const Radio = ({
+export const Radio = ({
   name,
   register,
   option: { value, label, icon },
+  readOnly = false,
 }: RadioProps) => {
   return (
-    <label className="label cursor-pointer">
+    <label className={`label cursor-pointer ${readOnly ? 'opacity-50' : ''}`}>
       <input
         type="radio"
         value={value}
         className="radio radio-sm checked:bg-secondary"
-        {...register(name)}
+        {...(register ? register(name) : {})}
+        disabled={readOnly}
       />
       <div className="flex ml-4 items-center gap-2">
-        <span className="shadow p-2 rounded-md">
-          <Icon icon={icon!} />
-        </span>
+        {icon && (
+          <span className="shadow p-2 rounded-md">
+            <Icon icon={icon} />
+          </span>
+        )}
         <span className="label-text">{label}</span>
       </div>
     </label>

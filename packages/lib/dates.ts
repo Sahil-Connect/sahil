@@ -15,7 +15,7 @@ export const isValidTimeString = (time: string): boolean => {
 
 export const formatCurrentDate = (): string => {
   const currentDate = new Date();
-  return format(currentDate, 'EEEE, MMMM d, yyyy');
+  return format(currentDate, "EEEE, MMMM d, yyyy");
 };
 
 export const formatDateTime = (

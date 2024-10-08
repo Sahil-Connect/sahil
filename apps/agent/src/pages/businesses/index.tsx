@@ -7,8 +7,8 @@ const actions = [
     label: "Register Business",
     icon: <HiPlus />,
     href: "/businesses/register/basic_info",
-    primary: true
-  }
+    primary: true,
+  },
 ];
 
 export default function Business() {
