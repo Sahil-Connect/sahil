@@ -10,7 +10,7 @@ import {
 
 export const useFetchDeliveries = () => {
   const { loading, error, data } = useQuery(FETCH_DELIVERIES);
-  return { loading, error, data };
+  return { loading, error, data:data?.delivery };
 };
 
 export const useFetchDeliveryByPK = (id: string) => {
@@ -24,7 +24,7 @@ export const useFetchDeliveriesByCourier = (courier_id: string) => {
   const { loading, error, data } = useQuery(FETCH_DELIVERIES_BY_COURIER, {
     variables: { courier_id },
   });
-  return { loading, error, data };
+  return { loading, error, data: data?.delivery };
 };
 
 export const useFetchDeliveryRequests = () => {
@@ -43,5 +43,5 @@ export const useFetchDeliveryRequestByCourier = (courier_id: string) => {
   const { loading, error, data } = useQuery(FETCH_DELIVERY_REQUEST_BY_COURIER, {
     variables: { courier_id },
   });
-  return { loading, error, data };
+  return { loading, error, data: data?.delivery_request[0] };
 };
