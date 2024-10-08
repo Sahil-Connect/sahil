@@ -6,6 +6,7 @@ export function handleDecryptToken(
   return async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
       const payload = await getIdTokenClaims(req);
+      console.log("payload", payload);
       if (!payload) {
         res.status(401).json({ message: "Unauthorized" });
         return;
