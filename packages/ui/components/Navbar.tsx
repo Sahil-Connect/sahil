@@ -119,6 +119,7 @@ const Right = ({
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
           >
+<<<<<<< Updated upstream
             <li className="border-b font-semibold">
               <p>Quick Menu:</p>
             </li>
@@ -139,9 +140,41 @@ const Right = ({
               </li>
               <li>
                 <button onClick={onSignOut}>
+=======
+            <div className="flex items-center gap-2 border-b py-1">
+              <div className="avatar">
+                <div className="w-10 rounded-full">
+                  <img alt={user.name} src={user.image} />
+                </div>
+              </div>
+              <div>
+                <h4 className="text-sm leading-tight">{user.name}</h4>
+                <p className="text-xs">{user.email}</p>
+              </div>
+            </div>
+            <li>
+                <Link href="/settings/profile">
+                  <Icon icon={HiOutlineUser} /> View profile
+                </Link>
+              </li>
+              <li>
+                <Link href="/settings/general">
+                  <Icon icon={HiOutlineCog6Tooth} /> Account settings
+                </Link>
+              </li>
+              <li>
+                <a 
+                  href="https://sahil.app/help"
+                  target="_blank" 
+                >
+                  <Icon icon={HiOutlineInformationCircle} /> Help & Support
+                </a>
+              </li>
+            <div className="border-t pt-2">
+            <button onClick={onSignOut} className="text-red-600">
+>>>>>>> Stashed changes
                   <Icon icon={HiOutlineArrowRightOnRectangle} /> Logout
                 </button>
-              </li>
             </div>
           </ul>
         </div>
