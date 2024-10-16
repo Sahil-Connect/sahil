@@ -8,7 +8,7 @@ import {
 } from "@sahil/features/Orders";
 import { Tabs } from "ui";
 
-import { useFetchOrderByPK } from "@/hooks/orders";
+import { useFetchOrderByPK } from "@sahil/lib/hooks/orders";
 import { useRouter } from "next/router";
 
 export default function OrderPage() {
@@ -26,7 +26,7 @@ export default function OrderPage() {
         <div className="divider divider-horizontal"></div>
         <div className="basis-4/6 space-y-2">
           <OrderOverview order={order} />
-          <Tabs />
+      
           {true ? (
             <>
               <OrderDetails order={order} />
