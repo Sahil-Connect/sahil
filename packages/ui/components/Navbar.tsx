@@ -9,6 +9,8 @@ import {
   HiOutlinePlus,
   HiOutlineCog6Tooth,
   HiOutlineBell,
+  HiOutlineUser,
+  HiOutlineInformationCircle,
 } from "react-icons/hi2";
 
 type NavbarLink = {
@@ -119,28 +121,6 @@ const Right = ({
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
           >
-<<<<<<< Updated upstream
-            <li className="border-b font-semibold">
-              <p>Quick Menu:</p>
-            </li>
-            {links.map(({ name, href, icon }) => {
-              return (
-                <li key={name}>
-                  <Link href={href}>
-                    <Icon icon={icon} /> {name}
-                  </Link>
-                </li>
-              );
-            })}
-            <div className="border-t py-2">
-              <li>
-                <Link href="/settings">
-                  <Icon icon={HiOutlineAdjustmentsHorizontal} /> Settings
-                </Link>
-              </li>
-              <li>
-                <button onClick={onSignOut}>
-=======
             <div className="flex items-center gap-2 border-b py-1">
               <div className="avatar">
                 <div className="w-10 rounded-full">
@@ -172,7 +152,6 @@ const Right = ({
               </li>
             <div className="border-t pt-2">
             <button onClick={onSignOut} className="text-red-600">
->>>>>>> Stashed changes
                   <Icon icon={HiOutlineArrowRightOnRectangle} /> Logout
                 </button>
             </div>

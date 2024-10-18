@@ -1,0 +1,170 @@
+name: Docker image build and publish
+on:
+  push:
+    branches: [ migrate-to-aws ]
+
+# concurrency required to avoid terraform lock contention during ECR provisioning
+concurrency: ci-${{ github.repository }}-docker-pipeline
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    env:
+      LIFECYCLE_POLICY: |
+       
+        {
+          "rules": [
+            {
+              "rulePriority": 1,
+              "description": "Keep last 1 image",
+              "selection": {
+                "tagStatus": "tagged",
+                "tagPrefixList": [ "website", "client", "agent", "api" ],
+                "countType": "imageCountMoreThan",
+                "countNumber": 1
+              },
+              "action": {
+                "type": "expire"
+              }
+            }
+          ]
+        }
+
+    permissions:
+      id-token: write
+      contents: read
+
+    outputs:
+      image_tag: ${{ steps.build-publish.outputs.image_tag }}
+      full_image: ${{ steps.build-publish.outputs.full_image }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.ACCOUNT_ID }}:role/${{ vars.ROLE_NAME }}
+          role-session-name: github_action_session
+          aws-region: ${{ vars.REGION }}
+
+      - name: Get OIDC Token
+        id: get_oidc_token
+        run: |
+          curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r '.value' > /tmp/web_identity_token_file
+
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: prepare ECR repo name based on the Github repository
+        shell: bash
+        run: |
+          set -eux
+          # lowercase the name
+          repo="${GITHUB_REPOSITORY,,}"
+
+          # replace / with _
+          echo "ECR_REPO_NAME=${repo//\//_}" >> $GITHUB_ENV
+
+          
+
+      - name: TF init
+        shell: bash
+        run: |
+          set -eux
+          terraform init -upgrade -reconfigure \
+            -input=false \
+            -backend-config="key=docker-ecr/terraform-${{ env.ECR_REPO_NAME }}.tfstate" \
+            -backend-config="role_arn=arn:aws:iam::${{vars.ACCOUNT_ID}}:role/${{vars.BACKEND_IAM_ROLE}}"
+            # terraform force-unlock -force 1f0bd248-d99d-a23f-6669-47e57dcedd87
+        working-directory: infra/terraform
+
+      - name: Terraform Plan
+        shell: bash 
+        run: |
+          set -eux
+          terraform plan \
+          -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
+          -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
+          -var 'iam_role=arn:aws:iam::${vars.ACCOUNT_ID}:role/${vars.ROLE_NAME}' \
+          -var 'aws_account_id=${{ vars.ACCOUNT_ID }}' \
+          -out terraform.plan
+        working-directory: infra/terraform
+
+      - name: Check for Terraform Plan errors
+        shell: bash
+        run: |
+          set -eux
+          if [[ -s terraform.plan ]]; then
+            cat terraform.plan
+            exit 1
+          fi
+  
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1  
+
+      - name: Create ECR repo [TF apply]
+        shell: bash
+        run: |
+          set -eux
+          terraform apply \
+            -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
+            -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
+            -var 'iam_role=arn:aws:iam::${vars.ACCOUNT_ID}:role/${vars.ROLE_NAME}' \
+            -var 'aws_account_id=${{ vars.ACCOUNT_ID }}' \
+            -auto-approve
+        working-directory: infra/terraform
+
+      # - name: Destroy ECR repo [TF destroy]
+      #   shell: bash
+      #   run: |
+      #     set -eux
+      #     terraform destroy \
+      #       -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
+      #       -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
+      #       -var 'iam_role=arn:aws:iam::${vars.ACCOUNT_ID}:role/${vars.ROLE_NAME}' \
+      #       -var 'aws_account_id=${{ vars.ACCOUNT_ID }}' \
+      #       -auto-approve
+      #   working-directory: infra/terraform
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ vars.ACCOUNT_ID }}
+
+      # - name: Set IMAGE_TAG
+      #   run: echo "IMAGE_TAG=website-latest" >> $GITHUB_ENV
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-publish
+        shell: bash
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
+          DOCKER_BUILD_DIR: "."
+          PATH_TO_DOCKERFILE: "./infra/docker/Dockerfile.website"
+        run: |
+          docker build -f ./infra/docker/Dockerfile.website $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:website-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:website-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:website-latest" pushed to ECR
+          
+          docker build -f ./infra/docker/Dockerfile.agent $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:agent-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:agent-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:agent-latest" pushed to ECR
+        
+          docker build -f ./infra/docker/Dockerfile.api $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:api-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:api-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:api-latest" pushed to ECR
+
+          docker build -f ./infra/docker/Dockerfile.client $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:client-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:client-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:client-latest" pushed to ECR
+          
+
+
+      
