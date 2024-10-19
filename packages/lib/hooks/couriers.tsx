@@ -32,6 +32,7 @@ export const useFetchCourierByPK = (id: string) => {
       id,
     },
   });
+  console.log("data", data);
   return { error, data: data?.couriers_by_pk, loading };
 };
 

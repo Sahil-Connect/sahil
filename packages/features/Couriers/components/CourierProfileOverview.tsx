@@ -7,6 +7,7 @@ type Props = {
 };
 
 export const CourierProfileOverview: FC<Props> = ({ courier }) => {
+  console.log(courier)
   return (
     <div>
       {courier?.avatar && <Avatar src={courier?.avatar} alt={courier.name} />}

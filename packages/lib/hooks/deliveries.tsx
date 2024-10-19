@@ -19,7 +19,7 @@ export const useFetchDeliveryByPK = (id: string) => {
   const { loading, error, data } = useQuery<GetDeliveryByPkQuery, GetDeliveryByPkQueryVariables>(FETCH_DELIVERY_BY_PK, {
     variables: { id },
   });
-  return { loading, error, data: data?.delivery[0] };
+  return { loading, error, data: data?.delivery };
 };
 
 export const useFetchDeliveriesByCourier = (courier_id: string) => {
@@ -38,12 +38,12 @@ export const useFetchDeliveryRequestByPK = (id: string) => {
   const { loading, error, data } = useQuery<GetDeliveryRequestByPkQuery, GetDeliveryRequestByPkQueryVariables>(FETCH_DELIVERY_REQUEST_BY_PK, {
     variables: { id },
   });
-  return { loading, error, data: data?.delivery_request[0] };
+  return { loading, error, data: data?.delivery_request };
 };
 
 export const useFetchDeliveryRequestByCourier = (courier_id: string) => {
   const { loading, error, data } = useQuery<GetDeliveryRequestByCourierQuery, GetDeliveryRequestByCourierQueryVariables>(FETCH_DELIVERY_REQUEST_BY_COURIER, {
     variables: { courier_id },
   });
-  return { loading, error, data: data?.delivery_request[0] };
+  return { loading, error, data: data?.delivery_request };
 };
