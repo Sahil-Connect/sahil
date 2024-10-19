@@ -77,11 +77,6 @@ export default function RequestPage() {
       label: "Payment Method",
       value: "Cash on Delivery",
     },
-    {
-      icon: <HiOutlineBriefcase />,
-      label: "Client",
-      value: deliveryRequest?.business?.name as string,
-    },
   ];
 
   const isSingleOrder = deliveryRequest.delivery_request_orders.length === 1;

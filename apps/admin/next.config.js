@@ -1,17 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@sahil/lib', 'ui', '@sahil/configs', "@sahil/features"],
+  transpilePackages: ['@sahil/lib', 'ui', '@sahil/configs', "@sahil/features", "tsconfig", "eslint-config-custom"],
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'https://lh3.googleusercontent.com',
         port: '',
       },
     ],
