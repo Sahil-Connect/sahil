@@ -57,6 +57,7 @@ export const FETCH_DELIVERY_BY_PK = gql`
       order {
       customerId
       created_at
+      status
       order_items {
         product {
           created_at

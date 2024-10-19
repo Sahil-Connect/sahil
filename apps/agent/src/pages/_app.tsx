@@ -43,7 +43,7 @@ export default function App({
     <SessionProvider session={session}>
       <ApolloProvider client={client}>
         <div
-          className={`${inter.variable} ${jakarta.variable} font-inter antialiased text-zinc-900 min-h-full leading-normal`}
+          className={`${inter.variable} ${jakarta.variable} font-inter antialiased text-gray-600 min-h-full leading-normal`}
         >
           <Layout>
             <Component {...pageProps} />

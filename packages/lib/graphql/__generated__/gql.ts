@@ -60,19 +60,19 @@ const documents = {
     types.GetCouriersByPkDocument,
   "\n  fragment DeliveryFields on delivery {\n    id\n    created_at\n  }\n":
     types.DeliveryFieldsFragmentDoc,
-  "\n  fragment DeliveryRequestFields on delivery_request {\n    id\n    created_at\n  }\n":
+  "\n  fragment DeliveryRequestFields on delivery_request {\n    id\n    created_at\n    delivery_method\n    status\n    courierId\n    created_at\n    updated_at\n  }\n":
     types.DeliveryRequestFieldsFragmentDoc,
-  "\n  \n  query getDeliveries {\n    delivery {\n      ...DeliveryFields\n    }\n    delivery_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
+  "\n  \n  query getDeliveries {\n    delivery {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n    delivery_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
     types.GetDeliveriesDocument,
-  "\n  \n  query getDeliveryByPK($id: uuid!) {\n    delivery(where: {id: {_eq: $id}}) {\n      ...DeliveryFields\n    }\n  }\n":
+  "\n  \n  query getDeliveryByPK($id: uuid!) {\n    delivery(where: { id: { _eq: $id } }) {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      status\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n  }\n":
     types.GetDeliveryByPkDocument,
-  "\n  \n  query getDeliveriesByCourier($courier_id: uuid!) {\n    delivery(where: {courierId: {_eq: $courier_id}}) {\n      ...DeliveryFields\n    }\n  }\n":
+  "\n  \n  query getDeliveriesByCourier($courier_id: uuid!) {\n    delivery(where: { courierId: { _eq: $courier_id } }) {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n  }\n":
     types.GetDeliveriesByCourierDocument,
-  "\n  \n  query getDeliveryRequests {\n    delivery_request {\n      ...DeliveryRequestFields\n    }\n    delivery_request_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
+  "\n  \n  query getDeliveryRequests {\n    delivery_request {\n      ...DeliveryRequestFields\n      delivery_request_orders {\n        id\n        order_id\n        order {\n          id\n          order_items {\n            id\n            product {\n              id\n              description\n              discount\n              inStock\n              mainImage\n              name\n              quantity\n              price\n            }\n          }\n        }\n      }\n    }\n    delivery_request_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
     types.GetDeliveryRequestsDocument,
-  "\n  \n  query getDeliveryRequestByPK($id: uuid!) {\n    delivery_request(where: {id: {_eq: $id}}) {\n      ...DeliveryRequestFields\n    }\n  }\n":
+  "\n  \n  query getDeliveryRequestByPK($id: uuid!) {\n    delivery_request(where: { id: { _eq: $id } }) {\n      ...DeliveryRequestFields\n      delivery_request_orders {\n        id\n        order_id\n        order {\n          id\n          order_items {\n            id\n            product {\n              id\n              description\n              discount\n              inStock\n              mainImage\n              name\n              quantity\n              price\n            }\n          }\n        }\n      }\n    }\n  }\n":
     types.GetDeliveryRequestByPkDocument,
-  "\n  \n  query getDeliveryRequestByCourier($courier_id: uuid!) {\n    delivery_request(where: {courierId: {_eq: $courier_id}}) {\n      ...DeliveryRequestFields\n    }\n  }\n":
+  "\n  \n  query getDeliveryRequestByCourier($courier_id: uuid!) {\n    delivery_request(where: { courierId: { _eq: $courier_id } }) {\n      ...DeliveryRequestFields\n    }\n  }\n":
     types.GetDeliveryRequestByCourierDocument,
   "\n  query fetchSahilZones {\n    locations {\n      id\n    }\n  }\n":
     types.FetchSahilZonesDocument,
@@ -88,7 +88,7 @@ const documents = {
     types.AllStatusHistoriesFragmentDoc,
   "\n  \n  \n  \n  query getOrders {\n    orders {\n      ...OrderCoreFields\n      ...LatestStatusHistory\n      business {\n        ...OrderBusinessFields\n      }\n    }\n    orders_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n":
     types.GetOrdersDocument,
-  "\n  \n  \n  \n  query getOrderByPK($id: uuid!) {\n    orders_by_pk(id: $id) {\n      ...OrderCoreFields\n      ...OrderItemsAggregate\n      ...AllStatusHistories\n      order_items {\n        id\n        product {\n          id\n          name\n          quantity\n          price\n        }\n      }\n      agent {\n        name\n      }\n    }\n  }\n":
+  "\n  \n  \n  \n  \n  query getOrderByPK($id: uuid!) {\n    orders_by_pk(id: $id) {\n      ...OrderCoreFields\n      ...OrderItemsAggregate\n      ...AllStatusHistories\n      business {\n        ...OrderBusinessFields\n      }\n      order_items {\n        id\n        product {\n          id\n          name\n          quantity\n          price\n        }\n      }\n      agent {\n        name\n      }\n    }\n  }\n":
     types.GetOrderByPkDocument,
   "\n  query getOrderDeliveries($orderId: uuid!) {\n    delivery {\n      status\n      id\n      created_at\n      courierId\n    }\n  }\n":
     types.GetOrderDeliveriesDocument,
@@ -138,7 +138,7 @@ const documents = {
     types.ZoneFieldsFragmentDoc,
   "\n  \n  query GetZones {\n    zones {\n      ...ZoneFields\n    }\n  }\n":
     types.GetZonesDocument,
-  "\n  \n  query GetZonesById($id: uuid!) {\n    zones(where: { id: {_eq: $id } }) {\n      ...ZoneFields\n    }\n  }\n":
+  "\n  \n  query GetZonesById($id: uuid!) {\n    zones(where: { id: { _eq: $id } }) {\n      ...ZoneFields\n    }\n  }\n":
     types.GetZonesByIdDocument,
 };
 
@@ -304,44 +304,44 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  fragment DeliveryRequestFields on delivery_request {\n    id\n    created_at\n  }\n"
-): (typeof documents)["\n  fragment DeliveryRequestFields on delivery_request {\n    id\n    created_at\n  }\n"];
+  source: "\n  fragment DeliveryRequestFields on delivery_request {\n    id\n    created_at\n    delivery_method\n    status\n    courierId\n    created_at\n    updated_at\n  }\n"
+): (typeof documents)["\n  fragment DeliveryRequestFields on delivery_request {\n    id\n    created_at\n    delivery_method\n    status\n    courierId\n    created_at\n    updated_at\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  query getDeliveries {\n    delivery {\n      ...DeliveryFields\n    }\n    delivery_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"
-): (typeof documents)["\n  \n  query getDeliveries {\n    delivery {\n      ...DeliveryFields\n    }\n    delivery_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"];
+  source: "\n  \n  query getDeliveries {\n    delivery {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n    delivery_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"
+): (typeof documents)["\n  \n  query getDeliveries {\n    delivery {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n    delivery_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  query getDeliveryByPK($id: uuid!) {\n    delivery(where: {id: {_eq: $id}}) {\n      ...DeliveryFields\n    }\n  }\n"
-): (typeof documents)["\n  \n  query getDeliveryByPK($id: uuid!) {\n    delivery(where: {id: {_eq: $id}}) {\n      ...DeliveryFields\n    }\n  }\n"];
+  source: "\n  \n  query getDeliveryByPK($id: uuid!) {\n    delivery(where: { id: { _eq: $id } }) {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      status\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n  }\n"
+): (typeof documents)["\n  \n  query getDeliveryByPK($id: uuid!) {\n    delivery(where: { id: { _eq: $id } }) {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      status\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  query getDeliveriesByCourier($courier_id: uuid!) {\n    delivery(where: {courierId: {_eq: $courier_id}}) {\n      ...DeliveryFields\n    }\n  }\n"
-): (typeof documents)["\n  \n  query getDeliveriesByCourier($courier_id: uuid!) {\n    delivery(where: {courierId: {_eq: $courier_id}}) {\n      ...DeliveryFields\n    }\n  }\n"];
+  source: "\n  \n  query getDeliveriesByCourier($courier_id: uuid!) {\n    delivery(where: { courierId: { _eq: $courier_id } }) {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n  }\n"
+): (typeof documents)["\n  \n  query getDeliveriesByCourier($courier_id: uuid!) {\n    delivery(where: { courierId: { _eq: $courier_id } }) {\n      ...DeliveryFields\n      order {\n      customerId\n      created_at\n      order_items {\n        product {\n          created_at\n          description\n          discount\n          name\n          price\n          quantity\n          inStock\n        }\n      }\n    }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  query getDeliveryRequests {\n    delivery_request {\n      ...DeliveryRequestFields\n    }\n    delivery_request_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"
-): (typeof documents)["\n  \n  query getDeliveryRequests {\n    delivery_request {\n      ...DeliveryRequestFields\n    }\n    delivery_request_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"];
+  source: "\n  \n  query getDeliveryRequests {\n    delivery_request {\n      ...DeliveryRequestFields\n      delivery_request_orders {\n        id\n        order_id\n        order {\n          id\n          order_items {\n            id\n            product {\n              id\n              description\n              discount\n              inStock\n              mainImage\n              name\n              quantity\n              price\n            }\n          }\n        }\n      }\n    }\n    delivery_request_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"
+): (typeof documents)["\n  \n  query getDeliveryRequests {\n    delivery_request {\n      ...DeliveryRequestFields\n      delivery_request_orders {\n        id\n        order_id\n        order {\n          id\n          order_items {\n            id\n            product {\n              id\n              description\n              discount\n              inStock\n              mainImage\n              name\n              quantity\n              price\n            }\n          }\n        }\n      }\n    }\n    delivery_request_aggregate {\n      aggregate {\n        count(columns: id, distinct: true)\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  query getDeliveryRequestByPK($id: uuid!) {\n    delivery_request(where: {id: {_eq: $id}}) {\n      ...DeliveryRequestFields\n    }\n  }\n"
-): (typeof documents)["\n  \n  query getDeliveryRequestByPK($id: uuid!) {\n    delivery_request(where: {id: {_eq: $id}}) {\n      ...DeliveryRequestFields\n    }\n  }\n"];
+  source: "\n  \n  query getDeliveryRequestByPK($id: uuid!) {\n    delivery_request(where: { id: { _eq: $id } }) {\n      ...DeliveryRequestFields\n      delivery_request_orders {\n        id\n        order_id\n        order {\n          id\n          order_items {\n            id\n            product {\n              id\n              description\n              discount\n              inStock\n              mainImage\n              name\n              quantity\n              price\n            }\n          }\n        }\n      }\n    }\n  }\n"
+): (typeof documents)["\n  \n  query getDeliveryRequestByPK($id: uuid!) {\n    delivery_request(where: { id: { _eq: $id } }) {\n      ...DeliveryRequestFields\n      delivery_request_orders {\n        id\n        order_id\n        order {\n          id\n          order_items {\n            id\n            product {\n              id\n              description\n              discount\n              inStock\n              mainImage\n              name\n              quantity\n              price\n            }\n          }\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  query getDeliveryRequestByCourier($courier_id: uuid!) {\n    delivery_request(where: {courierId: {_eq: $courier_id}}) {\n      ...DeliveryRequestFields\n    }\n  }\n"
-): (typeof documents)["\n  \n  query getDeliveryRequestByCourier($courier_id: uuid!) {\n    delivery_request(where: {courierId: {_eq: $courier_id}}) {\n      ...DeliveryRequestFields\n    }\n  }\n"];
+  source: "\n  \n  query getDeliveryRequestByCourier($courier_id: uuid!) {\n    delivery_request(where: { courierId: { _eq: $courier_id } }) {\n      ...DeliveryRequestFields\n    }\n  }\n"
+): (typeof documents)["\n  \n  query getDeliveryRequestByCourier($courier_id: uuid!) {\n    delivery_request(where: { courierId: { _eq: $courier_id } }) {\n      ...DeliveryRequestFields\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -388,8 +388,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  \n  \n  query getOrderByPK($id: uuid!) {\n    orders_by_pk(id: $id) {\n      ...OrderCoreFields\n      ...OrderItemsAggregate\n      ...AllStatusHistories\n      order_items {\n        id\n        product {\n          id\n          name\n          quantity\n          price\n        }\n      }\n      agent {\n        name\n      }\n    }\n  }\n"
-): (typeof documents)["\n  \n  \n  \n  query getOrderByPK($id: uuid!) {\n    orders_by_pk(id: $id) {\n      ...OrderCoreFields\n      ...OrderItemsAggregate\n      ...AllStatusHistories\n      order_items {\n        id\n        product {\n          id\n          name\n          quantity\n          price\n        }\n      }\n      agent {\n        name\n      }\n    }\n  }\n"];
+  source: "\n  \n  \n  \n  \n  query getOrderByPK($id: uuid!) {\n    orders_by_pk(id: $id) {\n      ...OrderCoreFields\n      ...OrderItemsAggregate\n      ...AllStatusHistories\n      business {\n        ...OrderBusinessFields\n      }\n      order_items {\n        id\n        product {\n          id\n          name\n          quantity\n          price\n        }\n      }\n      agent {\n        name\n      }\n    }\n  }\n"
+): (typeof documents)["\n  \n  \n  \n  \n  query getOrderByPK($id: uuid!) {\n    orders_by_pk(id: $id) {\n      ...OrderCoreFields\n      ...OrderItemsAggregate\n      ...AllStatusHistories\n      business {\n        ...OrderBusinessFields\n      }\n      order_items {\n        id\n        product {\n          id\n          name\n          quantity\n          price\n        }\n      }\n      agent {\n        name\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -538,8 +538,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n  \n  query GetZonesById($id: uuid!) {\n    zones(where: { id: {_eq: $id } }) {\n      ...ZoneFields\n    }\n  }\n"
-): (typeof documents)["\n  \n  query GetZonesById($id: uuid!) {\n    zones(where: { id: {_eq: $id } }) {\n      ...ZoneFields\n    }\n  }\n"];
+  source: "\n  \n  query GetZonesById($id: uuid!) {\n    zones(where: { id: { _eq: $id } }) {\n      ...ZoneFields\n    }\n  }\n"
+): (typeof documents)["\n  \n  query GetZonesById($id: uuid!) {\n    zones(where: { id: { _eq: $id } }) {\n      ...ZoneFields\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

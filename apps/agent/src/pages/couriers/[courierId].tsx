@@ -1,4 +1,5 @@
 import { CourierProfileOverview } from "@sahil/features/Couriers/components/CourierProfileOverview";
+import { Couriers } from "@sahil/lib/graphql/__generated__/graphql";
 
 import { useRouter } from "next/router";
 import { useFetchCourierByPK } from "@sahil/lib/hooks/couriers";
@@ -23,11 +24,11 @@ export default function CourierPage() {
     return <p>Loading...</p>;
   }
 
+
   return (
-    <>
       <section className="flex">
         <div className="basis-1/4">
-          <CourierProfileOverview courier={courier} />
+          <CourierProfileOverview courier={courier as Couriers} />
         </div>
         <div className="divider divider-horizontal"></div>
         <div className="space-y-4 grow">
@@ -37,6 +38,5 @@ export default function CourierPage() {
           <ZoneInformation />
         </div>
       </section>
-    </>
   );
 }
