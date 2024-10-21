@@ -9,9 +9,8 @@ import {
   HiOutlinePlus,
   HiOutlineCog6Tooth,
   HiOutlineBell,
-  HiOutlineUser,
-  HiOutlineInformationCircle,
 } from "react-icons/hi2";
+import { useRouter } from "next/router";
 
 type NavbarLink = {
   name: string;
@@ -35,6 +34,8 @@ export const Navbar: FC<NavbarProps> = ({
   onSignOut,
   user,
 }) => {
+  const router = useRouter();
+
   return (
     <header className="bg-white navbar border-b">
       <div className="navbar-start w-full gap-2">
@@ -58,7 +59,9 @@ export const Navbar: FC<NavbarProps> = ({
               <li key={name}>
                 <Link
                   href={href}
-                  className="px-2 py-1 text-sm transition duration-300 hover:text-green-dark"
+                  className={`btn btn-sm transition duration-300 ${
+                    router.pathname === href ? "btn-primary-content text-primary" : "btn-ghost"
+                  }`}
                 >
                   {icon && <Icon icon={icon} />} {name}
                 </Link>
@@ -85,6 +88,8 @@ const Right = ({
   onSignOut?: () => void;
   children?: ReactNode;
 }) => {
+  const router = useRouter();
+
   if (!user) {
     return (
       <div className="navbar-end">
@@ -121,39 +126,35 @@ const Right = ({
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
           >
-            <div className="flex items-center gap-2 border-b py-1">
-              <div className="avatar">
-                <div className="w-10 rounded-full">
-                  <img alt={user.name} src={user.image} />
-                </div>
-              </div>
-              <div>
-                <h4 className="text-sm leading-tight">{user.name}</h4>
-                <p className="text-xs">{user.email}</p>
-              </div>
-            </div>
-            <li>
-                <Link href="/settings/profile">
-                  <Icon icon={HiOutlineUser} /> View profile
-                </Link>
-              </li>
+            <li className="border-b font-semibold">
+              <p>Quick Menu:</p>
+            </li>
+            {links.map(({ name, href, icon }) => {
+              return (
+                <li key={name}>
+                  <Link
+                    href={href}
+                    className={router.pathname === href ? "text-secondary font-semibold" : ""}
+                  >
+                    <Icon icon={icon} /> {name}
+                  </Link>
+                </li>
+              );
+            })}
+            <div className="border-t py-2">
               <li>
-                <Link href="/settings/general">
-                  <Icon icon={HiOutlineCog6Tooth} /> Account settings
-                </Link>
-              </li>
-              <li>
-                <a 
-                  href="https://sahil.app/help"
-                  target="_blank" 
+                <Link
+                  href="/settings"
+                  className={router.pathname === "/settings" ? "text-secondary font-semibold" : ""}
                 >
-                  <Icon icon={HiOutlineInformationCircle} /> Help & Support
-                </a>
+                  <Icon icon={HiOutlineAdjustmentsHorizontal} /> Settings
+                </Link>
               </li>
-            <div className="border-t pt-2">
-            <button onClick={onSignOut} className="text-red-600">
+              <li>
+                <button onClick={onSignOut}>
                   <Icon icon={HiOutlineArrowRightOnRectangle} /> Logout
                 </button>
+              </li>
             </div>
           </ul>
         </div>

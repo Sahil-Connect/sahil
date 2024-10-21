@@ -4,14 +4,14 @@ import { useFetchDeliveryRequests } from "@sahil/lib/hooks/deliveries";
 
 export const ListDeliveryRequests = () => {
   const { loading, error, data: deliveryRequests } = useFetchDeliveryRequests();
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (error) return <ListErrorState />;
   return (
     <section>
       <List
         cols={4}
         data={deliveryRequests}
-        loading={false}
+        loading={loading}
+        error={error}
         renderItem={(request) => (
           <DeliveryRequestOverviewCard key={request.id} request={request} />
         )}

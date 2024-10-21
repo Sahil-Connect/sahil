@@ -9,6 +9,8 @@ import {
 import {
   GetCouriersQuery,
   GetCouriersQueryVariables,
+  GetCouriersByPkQuery,
+  GetCouriersByPkQueryVariables,
 } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const useFetchCouriers = () => {
@@ -25,11 +27,12 @@ export const useFetchCouriers = () => {
 };
 
 export const useFetchCourierByPK = (id: string) => {
-  const { error, data, loading } = useQuery(FETCH_COURIER_BY_PK, {
+  const { error, data, loading } = useQuery<GetCouriersByPkQuery, GetCouriersByPkQueryVariables>(FETCH_COURIER_BY_PK, {
     variables: {
       id,
     },
   });
+  console.log("data", data);
   return { error, data: data?.couriers_by_pk, loading };
 };
 

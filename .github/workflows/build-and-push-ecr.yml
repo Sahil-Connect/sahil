@@ -1,7 +1,7 @@
 name: Docker image build and publish
-on:
-  push:
-    branches: [ migrate-to-aws ]
+# on:
+#   push:
+#     branches: [ migrate-to-aws ]
 
 # concurrency required to avoid terraform lock contention during ECR provisioning
 concurrency: ci-${{ github.repository }}-docker-pipeline
@@ -146,24 +146,29 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
+          ENV: ${{ github.ref == 'refs/heads/develop' && 'prod' || 'dev' }}
           DOCKER_BUILD_DIR: "."
           PATH_TO_DOCKERFILE: "./infra/docker/Dockerfile.website"
         run: |
-          docker build -f ./infra/docker/Dockerfile.website $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:website-latest"
-          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:website-latest"
-          echo "$ECR_REGISTRY/$ECR_REPOSITORY:website-latest" pushed to ECR
+          docker build -f ./infra/docker/Dockerfile.website $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-latest" pushed to ECR
           
-          docker build -f ./infra/docker/Dockerfile.agent $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:agent-latest"
-          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:agent-latest"
-          echo "$ECR_REGISTRY/$ECR_REPOSITORY:agent-latest" pushed to ECR
+          docker build -f ./infra/docker/Dockerfile.agent $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-agent-$ENV-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-agent-$ENV-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-agent-$ENV-latest" pushed to ECR
         
-          docker build -f ./infra/docker/Dockerfile.api $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:api-latest"
-          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:api-latest"
-          echo "$ECR_REGISTRY/$ECR_REPOSITORY:api-latest" pushed to ECR
+          docker build -f ./infra/docker/Dockerfile.api $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-api-$ENV-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-api-$ENV-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-api-$ENV-latest" pushed to ECR
 
-          docker build -f ./infra/docker/Dockerfile.client $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:client-latest"
-          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:client-latest"
-          echo "$ECR_REGISTRY/$ECR_REPOSITORY:client-latest" pushed to ECR
+          docker build -f ./infra/docker/Dockerfile.client $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-client-$ENV-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-client-$ENV-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-client-$ENV-latest" pushed to ECR
+
+          docker build -f ./infra/docker/Dockerfile.admin $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-latest" pushed to ECR
           
 
 
