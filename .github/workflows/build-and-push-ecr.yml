@@ -74,7 +74,6 @@ jobs:
           set -eux
           terraform plan \
           -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
-          -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
           -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
           -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
           -out terraform.plan
@@ -99,7 +98,6 @@ jobs:
           set -eux
           terraform apply \
             -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
-            -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
             -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
             -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
             -auto-approve
@@ -111,7 +109,6 @@ jobs:
       #     set -eux
       #     terraform destroy \
       #       -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
-      #       -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
       #       -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
       #       -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
       #       -auto-approve
@@ -133,24 +130,24 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
           DOCKER_BUILD_DIR: "."
-          LIFECYCLE_POLICY: | 
-            {
-              "rules": [
-                {
-                  "rulePriority": 1,
-                  "description": "Keep last 1 image",
-                  "selection": {
-                    "tagStatus": "tagged",
-                    "tagPrefixList": [ "website", "client", "agent", "api", "courier", "admin" ],
-                    "countType": "imageCountMoreThan",
-                    "countNumber": 1
-                  },
-                  "action": {
-                    "type": "expire"
-                  }
-                }
-              ]
-            }
+          # LIFECYCLE_POLICY: | 
+          #   {
+          #     "rules": [
+          #       {
+          #         "rulePriority": 1,
+          #         "description": "Keep last 1 image",
+          #         "selection": {
+          #           "tagStatus": "tagged",
+          #           "tagPrefixList": [ "website", "client", "agent", "api", "courier", "admin" ],
+          #           "countType": "imageCountMoreThan",
+          #           "countNumber": 1
+          #         },
+          #         "action": {
+          #           "type": "expire"
+          #         }
+          #       }
+          #     ]
+          #   }
         run: |
           docker build -f ./infra/docker/Dockerfile.website $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-latest"
           docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-latest"
