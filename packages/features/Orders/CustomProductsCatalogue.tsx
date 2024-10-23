@@ -20,16 +20,22 @@ import {
 
 export const CustomProductsCatalogue = () => {
   const [offset, setOffset] = useState(0);
-  const { data, error, loading, productsCount } = useFetchProducts({ offset });
+  const {
+    data: products,
+    error,
+    loading,
+    productsCount,
+  } = useFetchProducts({ offset });
 
-  const { addOrderItem, orderItems, setProducts, products } =
-    useOrderItemsStore((state) => state);
+  const { addOrderItem, orderItems, setProducts } = useOrderItemsStore(
+    (state) => state
+  );
 
   const orderItemsMap = new Map(orderItems.map((item) => [item.id, item]));
 
   useEffect(() => {
-    setProducts(data);
-  }, [data, setProducts]);
+    if (products) setProducts(products);
+  }, [products, setProducts]);
 
   if (error) {
     return (
@@ -91,20 +97,23 @@ export const CustomProductsCatalogue = () => {
             >
               <HiArrowSmallLeft />
             </button>
-            <button
-              onClick={() => setOffset((prev) => prev + 12)}
-              disabled={offset + 12 >= productsCount}
-              className="join-item btn btn-sm btn-square btn-neutral"
-              title="right"
-              type="button"
-            >
-              <HiArrowSmallRight />
-            </button>
+            {productsCount && (
+              <button
+                onClick={() => setOffset((prev) => prev + 12)}
+                disabled={offset + 12 >= productsCount?.count}
+                className="join-item btn btn-sm btn-square btn-neutral"
+                title="right"
+                type="button"
+                aria-label="right"
+              >
+                <HiArrowSmallRight />
+              </button>
+            )}
           </JoinGrid>
         </div>
         <div className="bg-gray-100 flex items-center justify-between p-2 rounded-xl">
           <div>
-            <p className="text-bold">{productsCount.count} Items</p>
+            <p className="text-bold">{productsCount?.count} Items</p>
           </div>
           <div className="flex gap-2">
             <button className="btn btn-sm ghost">

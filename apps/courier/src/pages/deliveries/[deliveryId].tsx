@@ -102,17 +102,17 @@ export default function DeliveryPage() {
     {
       icon: <HiOutlineBanknotes />,
       label: "Payment Method",
-      value: delivery?.payment_method || "N/A",
+      value:  "N/A",
     },
     {
       icon: <HiOutlineBriefcase />,
       label: "Client",
-      value: delivery?.client?.name || "N/A",
+      value:  "N/A",
     },
     {
       icon: <HiOutlineTruck />,
       label: "Status",
-      value: delivery?.status || "N/A",
+      value:  "N/A",
     },
   ];
 
@@ -129,7 +129,7 @@ export default function DeliveryPage() {
 
   return (
     <section className="space-y-4">
-      <Card title={`Delivery ID: ${delivery.id}`}>
+      <Card title={`Delivery ID: ${delivery[0].id}`}>
         <div className="space-y-4">
           <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
             {deliveryInfoItems.map((item, index) => (
@@ -151,14 +151,16 @@ export default function DeliveryPage() {
               Navigate Independently
             </button>
           </div>
-          {delivery.status === 'pending' && (
+          {/* {
+
+          delivery.status === 'pending' && (
             <button 
               className="btn btn-sm w-full sm:w-auto btn-secondary"
               onClick={() => handleUpdateStatus(delivery.id, 'en_route')}
             >
               Start Trip
             </button>
-          )}
+          )} */}
         </div>
       </Card>
       <DeliveryOrders 

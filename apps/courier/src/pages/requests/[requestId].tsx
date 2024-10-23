@@ -70,25 +70,20 @@ export default function RequestPage() {
     {
       icon: <HiCalendarDays />,
       label: "Order Date",
-      value: formatDateTime(deliveryRequest?.created_at),
+      value: formatDateTime(deliveryRequest[0].created_at),
     },
     {
       icon: <HiOutlineBanknotes />,
       label: "Payment Method",
       value: "Cash on Delivery",
     },
-    {
-      icon: <HiOutlineBriefcase />,
-      label: "Client",
-      value: deliveryRequest?.business?.name as string,
-    },
   ];
 
-  const isSingleOrder = deliveryRequest.delivery_request_orders.length === 1;
+  const isSingleOrder = deliveryRequest[0].delivery_request_orders.length === 1;
 
   return (
     <section className="space-y-4">
-      <Card title={`Request ID: ${deliveryRequest.id}`}>
+      <Card title={`Request ID: ${deliveryRequest[0].id}`}>
         <div className="space-y-4">
           <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
             {orderInfoItems.map((item, index) => (
@@ -106,7 +101,7 @@ export default function RequestPage() {
         </div>
       </Card>
       <RequestOrders 
-        orders={deliveryRequest.delivery_request_orders} 
+        orders={deliveryRequest[0].delivery_request_orders} 
         isSingleOrder={isSingleOrder}
       />
     </section>

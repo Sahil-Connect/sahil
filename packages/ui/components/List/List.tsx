@@ -3,13 +3,13 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Card } from "../Card";
 import type { ApolloError } from "@apollo/client";
 import { ListEmptyState } from "./ListEmptyState";
+import { HiOutlineExclamationCircle } from "react-icons/hi2";
 
 type ListProps<T> = {
   data?: T[] | null;
   error?: ApolloError;
   loading?: boolean;
   renderItem: (item: T) => JSX.Element;
-
   cols?: number;
 };
 
@@ -19,17 +19,23 @@ type ListAsyncResultProps = {
 };
 
 export const ListErrorState: FC<ListAsyncResultProps> = ({
-  heading,
-  message,
+  heading = "An error occurred",
+  message = "We're having trouble loading the data. Please try again later.",
 }) => (
   <Card title={heading} titleSize="sm">
-    <p>{message}</p>
-    <div className="card-actions">
-      <button className="btn btn-sm btn-secondary">Reload</button>
-      <button className="btn btn-sm btn-outline">Go Back</button>
+    <div className="flex flex-col items-center">
+      <span className="text-4xl mb-4">
+        <HiOutlineExclamationCircle />
+      </span>
+      <p>{message}</p>
+      <div className="card-actions mt-4">
+        <button className="btn btn-sm btn-secondary">Reload</button>
+        <button className="btn btn-sm btn-outline">Go Back</button>
+      </div>
     </div>
   </Card>
 );
+
 export const ListLoadingState: FC<ListAsyncResultProps> = ({
   heading = "Loading Data",
   message,
@@ -51,9 +57,8 @@ export const List = <T extends unknown>({
   if (error) {
     return (
       <ListErrorState
-        heading="Unable to load products..."
-        message="Products aren't loading due to a technical problem on our side. Please
-      try again."
+        heading="Unable to load data"
+        message="We're experiencing technical difficulties. Please try again later."
       />
     );
   }

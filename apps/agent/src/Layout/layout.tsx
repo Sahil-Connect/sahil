@@ -46,8 +46,8 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
   return (
     <>
-      {session?.user && (
-        <Navbar
+    {session?.user && (
+      <Navbar
           links={links}
           logo={logo}
           header="Agent"

@@ -10,6 +10,7 @@ import {
   HiOutlineCog6Tooth,
   HiOutlineBell,
 } from "react-icons/hi2";
+import { useRouter } from "next/router";
 
 type NavbarLink = {
   name: string;
@@ -33,6 +34,8 @@ export const Navbar: FC<NavbarProps> = ({
   onSignOut,
   user,
 }) => {
+  const router = useRouter();
+
   return (
     <header className="bg-white navbar border-b">
       <div className="navbar-start w-full gap-2">
@@ -56,7 +59,9 @@ export const Navbar: FC<NavbarProps> = ({
               <li key={name}>
                 <Link
                   href={href}
-                  className="px-2 py-1 text-sm transition duration-300 hover:text-green-dark"
+                  className={`btn btn-sm transition duration-300 ${
+                    router.pathname === href ? "bg-white text-primary" : "btn-ghost"
+                  }`}
                 >
                   {icon && <Icon icon={icon} />} {name}
                 </Link>
@@ -83,6 +88,8 @@ const Right = ({
   onSignOut?: () => void;
   children?: ReactNode;
 }) => {
+  const router = useRouter();
+
   if (!user) {
     return (
       <div className="navbar-end">
@@ -125,7 +132,10 @@ const Right = ({
             {links.map(({ name, href, icon }) => {
               return (
                 <li key={name}>
-                  <Link href={href}>
+                  <Link
+                    href={href}
+                    className={router.pathname === href ? "text-secondary font-semibold" : ""}
+                  >
                     <Icon icon={icon} /> {name}
                   </Link>
                 </li>
@@ -133,7 +143,10 @@ const Right = ({
             })}
             <div className="border-t py-2">
               <li>
-                <Link href="/settings">
+                <Link
+                  href="/settings"
+                  className={router.pathname === "/settings" ? "text-secondary font-semibold" : ""}
+                >
                   <Icon icon={HiOutlineAdjustmentsHorizontal} /> Settings
                 </Link>
               </li>
