@@ -10,25 +10,11 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     env:
-      LIFECYCLE_POLICY: |
-       
-        {
-          "rules": [
-            {
-              "rulePriority": 1,
-              "description": "Keep last 1 image",
-              "selection": {
-                "tagStatus": "tagged",
-                "tagPrefixList": [ "website", "client", "agent", "api", "courier", "admin" ],
-                "countType": "imageCountMoreThan",
-                "countNumber": 1
-              },
-              "action": {
-                "type": "expire"
-              }
-            }
-          ]
-        }
+      ACCOUNT_ID: '060795911441'  
+      ROLE_NAME: 'sahil-deployment-role'  
+      REGION: 'eu-west-1'
+      BACKEND_IAM_ROLE: 'workload-assumable-role'
+      ENV: ${{ github.ref == 'refs/heads/develop' && 'prod' || 'dev' }}
 
     permissions:
       id-token: write
@@ -44,9 +30,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::${{ vars.ACCOUNT_ID }}:role/${{ vars.ROLE_NAME }}
+          role-to-assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/${{ env.ROLE_NAME }}
           role-session-name: github_action_session
-          aws-region: ${{ vars.REGION }}
+          aws-region: ${{ env.REGION }}
 
       - name: Get OIDC Token
         id: get_oidc_token
@@ -78,7 +64,7 @@ jobs:
           terraform init -upgrade -reconfigure \
             -input=false \
             -backend-config="key=docker-ecr/terraform-${{ env.ECR_REPO_NAME }}.tfstate" \
-            -backend-config="role_arn=arn:aws:iam::${{vars.ACCOUNT_ID}}:role/${{vars.BACKEND_IAM_ROLE}}"
+            -backend-config="role_arn=arn:aws:iam::${{env.ACCOUNT_ID}}:role/${{env.BACKEND_IAM_ROLE}}"
             # terraform force-unlock -force 1f0bd248-d99d-a23f-6669-47e57dcedd87
         working-directory: infra/terraform
 
@@ -89,8 +75,8 @@ jobs:
           terraform plan \
           -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
           -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
-          -var 'iam_role=arn:aws:iam::${vars.ACCOUNT_ID}:role/${vars.ROLE_NAME}' \
-          -var 'aws_account_id=${{ vars.ACCOUNT_ID }}' \
+          -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
+          -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
           -out terraform.plan
         working-directory: infra/terraform
 
@@ -114,8 +100,8 @@ jobs:
           terraform apply \
             -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
             -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
-            -var 'iam_role=arn:aws:iam::${vars.ACCOUNT_ID}:role/${vars.ROLE_NAME}' \
-            -var 'aws_account_id=${{ vars.ACCOUNT_ID }}' \
+            -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
+            -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
             -auto-approve
         working-directory: infra/terraform
 
@@ -126,8 +112,8 @@ jobs:
       #     terraform destroy \
       #       -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
       #       -var 'lifecycle_policy=${{ env.LIFECYCLE_POLICY }}' \
-      #       -var 'iam_role=arn:aws:iam::${vars.ACCOUNT_ID}:role/${vars.ROLE_NAME}' \
-      #       -var 'aws_account_id=${{ vars.ACCOUNT_ID }}' \
+      #       -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
+      #       -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
       #       -auto-approve
       #   working-directory: infra/terraform
 
@@ -135,7 +121,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
         with:
-          registries: ${{ vars.ACCOUNT_ID }}
+          registries: ${{ env.ACCOUNT_ID }}
 
       # - name: Set IMAGE_TAG
       #   run: echo "IMAGE_TAG=website-latest" >> $GITHUB_ENV
@@ -146,9 +132,25 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
-          ENV: ${{ github.ref == 'refs/heads/develop' && 'prod' || 'dev' }}
           DOCKER_BUILD_DIR: "."
-          PATH_TO_DOCKERFILE: "./infra/docker/Dockerfile.website"
+          LIFECYCLE_POLICY: | 
+            {
+              "rules": [
+                {
+                  "rulePriority": 1,
+                  "description": "Keep last 1 image",
+                  "selection": {
+                    "tagStatus": "tagged",
+                    "tagPrefixList": [ "website", "client", "agent", "api", "courier", "admin" ],
+                    "countType": "imageCountMoreThan",
+                    "countNumber": 1
+                  },
+                  "action": {
+                    "type": "expire"
+                  }
+                }
+              ]
+            }
         run: |
           docker build -f ./infra/docker/Dockerfile.website $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-latest"
           docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-latest"
