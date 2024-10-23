@@ -129,7 +129,7 @@ export default function DeliveryPage() {
 
   return (
     <section className="space-y-4">
-      <Card title={`Delivery ID: ${delivery.id}`}>
+      <Card title={`Delivery ID: ${delivery[0].id}`}>
         <div className="space-y-4">
           <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
             {deliveryInfoItems.map((item, index) => (

@@ -60,7 +60,7 @@ export const Navbar: FC<NavbarProps> = ({
                 <Link
                   href={href}
                   className={`btn btn-sm transition duration-300 ${
-                    router.pathname === href ? "btn-primary-content text-primary" : "btn-ghost"
+                    router.pathname === href ? "bg-white text-primary" : "btn-ghost"
                   }`}
                 >
                   {icon && <Icon icon={icon} />} {name}

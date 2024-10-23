@@ -46,4 +46,8 @@ export const useFetchDeliveryRequestByCourier = (courier_id: string) => {
     variables: { courier_id },
   });
   return { loading, error, data: data?.delivery_request };
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> develop

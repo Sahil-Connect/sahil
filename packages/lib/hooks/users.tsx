@@ -44,3 +44,4 @@ export const useFetchUsers = () => {
   >(GET_USERS);
   return { error, data: data?.users, loading };
 };
+
