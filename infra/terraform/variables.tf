@@ -12,32 +12,32 @@ variable "lifecycle_policy" {
   type        = string
   description = "the lifecycle policy to be applied to the ECR repo"
   default     = <<EOF
-{ 
-  "rules" = [
+{
+  "rules": [
     {
       "rulePriority": 1,
       "description": "Keep last 10 images",
       "selection": {
         "tagStatus": "tagged",
-        "tagPrefixList": [ "website", "client", "agent", "api", "courier", "admin" ],
+        "tagPrefixList": ["website", "client", "agent", "api", "courier", "admin"],
         "countType": "imageCountMoreThan",
         "countNumber": 10
       },
-      action = {
-        type = "expire"
+      "action": {
+        "type": "expire"
       }
     },
     {
-      rulePriority = 2,
-      description  = "Expire images older than 14 days",
-      selection = {
-        tagStatus   = "untagged",
-        countType   = "sinceImagePushed",
-        countUnit   = "days",
-        countNumber = 14
+      "rulePriority": 2,
+      "description": "Expire images older than 14 days",
+      "selection": {
+        "tagStatus": "untagged",
+        "countType": "sinceImagePushed",
+        "countUnit": "days",
+        "countNumber": 14
       },
-      action = {
-        type = "expire"
+      "action": {
+        "type": "expire"
       }
     }
   ]
