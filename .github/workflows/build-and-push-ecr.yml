@@ -1,7 +1,7 @@
 name: Docker image build and publish
-# on:
-#   push:
-#     branches: [ migrate-to-aws ]
+on:
+  push:
+    branches: [ migrate-to-aws ]
 
 # concurrency required to avoid terraform lock contention during ECR provisioning
 concurrency: ci-${{ github.repository }}-docker-pipeline
@@ -19,7 +19,7 @@ jobs:
               "description": "Keep last 1 image",
               "selection": {
                 "tagStatus": "tagged",
-                "tagPrefixList": [ "website", "client", "agent", "api" ],
+                "tagPrefixList": [ "website", "client", "agent", "api", "courier", "admin" ],
                 "countType": "imageCountMoreThan",
                 "countNumber": 1
               },
@@ -169,6 +169,10 @@ jobs:
           docker build -f ./infra/docker/Dockerfile.admin $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-latest"
           docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-latest"
           echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-latest" pushed to ECR
+
+          docker build -f ./infra/docker/Dockerfile.courier $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-latest"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-latest"
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-latest" pushed to ECR
           
 
 
