@@ -95,6 +95,36 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DATABASE=${POSTGRES_DATABASE}
 
+  # MAPS
+  sahil-maps:
+    container_name: sahil-maps
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.maps
+    image: sahil-maps
+    restart: always
+    ports:
+      - '3005:3000'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+
+  # PAY
+  sahil-pay:
+    container_name: sahil-pay
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.pay
+    image: sahil-pay
+    restart: always
+    ports:
+      - '3006:3000'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+
   #### LOCAL DEV ENVIRONMENTS ####
 
   # HASURA ENGINE

@@ -151,10 +151,25 @@ jobs:
           docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-latest"
           echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-latest" pushed to ECR
 
-          docker build -f ./infra/docker/Dockerfile.courier $DOCKER_BUILD_DIR  -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-latest"
-          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-latest"
-          echo "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-latest" pushed to ECR
-          
+          # Client Image
+          docker build -f ./infra/docker/Dockerfile.client . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-client-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-client-$ENV-$IMAGE_TAG"
 
+          # Admin Image
+          docker build -f ./infra/docker/Dockerfile.admin . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-$IMAGE_TAG"
 
-      
+          # Courier Image
+          docker build -f ./infra/docker/Dockerfile.courier . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-$IMAGE_TAG"
+
+          # Maps Image
+          docker build -f ./infra/docker/Dockerfile.maps . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-maps-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-maps-$ENV-$IMAGE_TAG"
+
+          # Pay Image
+          docker build -f ./infra/docker/Dockerfile.pay . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-pay-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-pay-$ENV-$IMAGE_TAG"
+
+          echo "Images pushed to ECR with tag $IMAGE_TAG"
+

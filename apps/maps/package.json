@@ -1,5 +1,5 @@
 {
-  "name": "maps_api",
+  "name": "maps",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -28,6 +28,6 @@
     "typescript": "^5.2.2"
   },
   "engines": {
-    "node": "v20.10.0"
+    "node": ">=18.17.0 <21.0.0"
   }
 }
