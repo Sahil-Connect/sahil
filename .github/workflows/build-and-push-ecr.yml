@@ -1,0 +1,167 @@
+name: Docker image build and publish
+on:
+  push:
+    branches: [ migrate-to-aws ]
+
+# concurrency required to avoid terraform lock contention during ECR provisioning
+concurrency: ci-${{ github.repository }}-docker-pipeline
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    env:
+      ACCOUNT_ID: '060795911441'  
+      ROLE_NAME: 'sahil-deployment-role'  
+      REGION: 'eu-west-1'
+      BACKEND_IAM_ROLE: 'workload-assumable-role'
+      ENV: ${{ github.ref == 'refs/heads/develop' && 'prod' || 'dev' }}
+
+    permissions:
+      id-token: write
+      contents: read
+
+    outputs:
+      image_tag: ${{ steps.build-publish.outputs.image_tag }}
+      full_image: ${{ steps.build-publish.outputs.full_image }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/${{ env.ROLE_NAME }}
+          role-session-name: github_action_session
+          aws-region: ${{ env.REGION }}
+
+      - name: Get OIDC Token
+        id: get_oidc_token
+        run: |
+          curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r '.value' > /tmp/web_identity_token_file
+
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: prepare ECR repo name based on the Github repository
+        shell: bash
+        run: |
+          set -eux
+          # lowercase the name
+          repo="${GITHUB_REPOSITORY,,}"
+
+          # replace / with _
+          echo "ECR_REPO_NAME=${repo//\//_}" >> $GITHUB_ENV
+
+          
+
+      - name: TF init
+        shell: bash
+        run: |
+          set -eux
+          terraform init -upgrade -reconfigure \
+            -input=false \
+            -backend-config="key=docker-ecr/terraform-${{ env.ECR_REPO_NAME }}.tfstate" \
+            -backend-config="role_arn=arn:aws:iam::${{env.ACCOUNT_ID}}:role/${{env.BACKEND_IAM_ROLE}}"
+            # terraform force-unlock -force 1f0bd248-d99d-a23f-6669-47e57dcedd87
+        working-directory: infra/terraform
+
+      - name: Terraform Plan
+        shell: bash 
+        run: |
+          set -eux
+          terraform plan \
+          -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
+          -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
+          -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
+          -out terraform.plan
+        working-directory: infra/terraform
+
+      - name: Check for Terraform Plan errors
+        shell: bash
+        run: |
+          set -eux
+          if [[ -s terraform.plan ]]; then
+            cat terraform.plan
+            exit 1
+          fi
+  
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1  
+
+      - name: Create ECR repo [TF apply]
+        shell: bash
+        run: |
+          set -eux
+          terraform apply \
+            -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
+            -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
+            -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
+            -auto-approve
+        working-directory: infra/terraform
+
+      # - name: Destroy ECR repo [TF destroy]
+      #   shell: bash
+      #   run: |
+      #     set -eux
+      #     terraform destroy \
+      #       -var 'repository_name=${{ env.ECR_REPO_NAME }}' \
+      #       -var 'iam_role=arn:aws:iam::${env.ACCOUNT_ID}:role/${env.ROLE_NAME}' \
+      #       -var 'aws_account_id=${{ env.ACCOUNT_ID }}' \
+      #       -auto-approve
+      #   working-directory: infra/terraform
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ env.ACCOUNT_ID }}
+
+
+      - name: Build and push images to Amazon ECR
+        id: build-publish
+        shell: bash
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Website Image
+          docker build -f ./infra/docker/Dockerfile.website . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-website-$ENV-$IMAGE_TAG"
+
+          # Agent Image
+          docker build -f ./infra/docker/Dockerfile.agent . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-agent-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-agent-$ENV-$IMAGE_TAG"
+
+          # API Image
+          docker build -f ./infra/docker/Dockerfile.api . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-api-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-api-$ENV-$IMAGE_TAG"
+
+          # Client Image
+          docker build -f ./infra/docker/Dockerfile.client . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-client-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-client-$ENV-$IMAGE_TAG"
+
+          # Admin Image
+          docker build -f ./infra/docker/Dockerfile.admin . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-admin-$ENV-$IMAGE_TAG"
+
+          # Courier Image
+          docker build -f ./infra/docker/Dockerfile.courier . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-courier-$ENV-$IMAGE_TAG"
+
+          # maps Image
+          docker build -f ./infra/docker/Dockerfile.maps . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-maps-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-maps-$ENV-$IMAGE_TAG"
+
+          # pay Image
+          docker build -f ./infra/docker/Dockerfile.pay . -t "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-pay-$ENV-$IMAGE_TAG"
+          docker push "$ECR_REGISTRY/$ECR_REPOSITORY:sahil-pay-$ENV-$IMAGE_TAG"
+
+          
+
+          echo "Images pushed to ECR with tag $IMAGE_TAG"
+

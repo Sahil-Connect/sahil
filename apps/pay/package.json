@@ -1,5 +1,5 @@
 {
-  "name": "payments",
+  "name": "pay",
   "version": "1.0.0",
   "main": "index.ts",
   "license": "MIT",
@@ -32,6 +32,6 @@
     "zod": "^3.22.4"
   },
   "engines": {
-    "node": "v20.10.0"
+    "node": ">=18.17.0 <21.0.0"
   }
 }
