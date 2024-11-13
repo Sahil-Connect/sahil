@@ -1,0 +1,17 @@
+{
+  "rules": [
+    {
+      "rulePriority": 1,
+      "description": "Keep last 50 images",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": [ "sahil" ],
+        "countType": "imageCountMoreThan",
+        "countNumber": 50
+      },
+      "action": {
+        "type": "expire"
+      }
+    }
+  ]
+}
