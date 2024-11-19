@@ -18,13 +18,21 @@ const extendedConfig: Config = {
   theme: {
     ...baseConfig.theme,
     fontFamily: {
-      inter: ['var(--font-inter)'],
-      jakarta: ['var(--font-jakarta)'],
+      inter: ["var(--font-inter)"],
+      jakarta: ["var(--font-jakarta)"],
     },
     extend: {
       ...baseConfig.theme?.extend,
     },
   },
+  safelist: [
+    {
+      pattern: /bg-\w+/,
+    },
+    {
+      pattern: /text-\w+/,
+    },
+  ],
   // @ts-expect-error
   plugins: [...baseConfig.plugins, require("daisyui")],
   daisyui: {

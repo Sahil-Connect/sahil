@@ -15,7 +15,12 @@ type TabsProps = {
   className?: string;
 };
 
-export const Tabs = ({ items, onTabClick, currentTab, className = "" }: TabsProps) => {
+export const Tabs = ({
+  items,
+  onTabClick,
+  currentTab,
+  className = "",
+}: TabsProps) => {
   return (
     <div className={`tabs tabs-boxed flex flex-wrap ${className}`}>
       {items.map((tab, index) => (

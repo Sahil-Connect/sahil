@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   useAddUserInvite,
-  useRegisterUserAction,
+  // useRegisterUserAction,
 } from "@sahil/lib/hooks/users";
 import { Card, Input, Select } from "ui";
 import {
@@ -32,13 +32,8 @@ const userInfoSchema = z.object({
 type FormData = z.infer<typeof userInfoSchema>;
 
 export const CreateUser = () => {
-  const { registerUser, data, loading, error } = useRegisterUserAction();
-  const {
-    addUserInvite,
-    data: invites,
-    loading: inviteLoading,
-    error: inviteError,
-  } = useAddUserInvite();
+  // const { registerUser, data, loading, error } = useRegisterUserAction();
+  const { addUserInvite, data: invites, loading, error } = useAddUserInvite();
 
   const {
     register,

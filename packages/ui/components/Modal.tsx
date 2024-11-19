@@ -6,14 +6,14 @@ export type ModalProps = {
   children: ReactNode | ReactNode[];
   title?: string;
   CTA?: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   CloseBtnRef: React.RefObject<HTMLButtonElement>;
   btnStyle?: "primary" | "secondary" | "accent" | "ghost" | "error";
   btnSize?: "xs" | "sm" | "md" | "lg";
   className?: string;
 };
 
-const Modal = ({
+export const Modal = ({
   id,
   children,
   title,

@@ -65,7 +65,6 @@ export const FETCH_BUSINESS_ORDERS = gql`
       created_at
       destination
       id
-      orderId
       customerId
       origin
       status
@@ -95,6 +94,15 @@ export const FETCH_BUSINESS_BY_PK = gql`
       }
       addresses {
         ...AddressFields
+      }
+      schedule {
+        id
+        days
+        shifts {
+          id
+          start_time
+          end_time
+        }
       }
     }
   }

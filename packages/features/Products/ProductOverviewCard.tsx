@@ -42,9 +42,7 @@ export const ProductSummary = ({
   return (
     <div className="card card-bordered card-compact relative">
       <figure className="aspect-video relative">
-        <img 
-          src={product.mainImage || placeholder} alt={product.name} 
-        />
+        <img src={product.mainImage || placeholder} alt={product.name} />
         <div className="absolute top-0 right-0 mt-3 mr-3 badge badge-success items-center text-[0.65rem] text-white">
           98
           <HiOutlineSparkles />
@@ -71,7 +69,7 @@ export const ProductSummary = ({
             ) : null}
           </div>
         </div>
-        <hr className="my-3"/>
+        <hr className="my-3" />
         <div className="card-actions items-center">
           {isAdding ? (
             <QuantityInput

@@ -10,6 +10,7 @@ import {
   RoleDetails,
   Summary,
   UserDetails,
+  WorkSchedule,
 } from "@sahil/features/auth/forms/onboarding";
 import { StepsPaginator } from "ui";
 
@@ -60,6 +61,9 @@ const OnboardingPage = () => {
           )}
           {currentStep === "role_details" && (
             <RoleDetails navigateToNextStep={navigateToNextStep} />
+          )}
+          {currentStep === "schedule" && (
+            <WorkSchedule navigateToNextStep={navigateToNextStep} />
           )}
           {currentStep === "preferences" && (
             <Preferences navigateToNextStep={navigateToNextStep} />

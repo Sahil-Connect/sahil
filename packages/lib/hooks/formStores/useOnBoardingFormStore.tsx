@@ -5,6 +5,7 @@ import {
   HiOutlineShieldCheck,
   HiOutlineAdjustmentsHorizontal,
   HiOutlineCheckCircle,
+  HiCalendarDays,
 } from "react-icons/hi2";
 
 export const ON_BOARDING_FORM_HEADERS: Array<StepItem> = [
@@ -18,6 +19,12 @@ export const ON_BOARDING_FORM_HEADERS: Array<StepItem> = [
     title: "Role Details",
     step: "role_details",
     icon: HiOutlineShieldCheck,
+    completed: false,
+  },
+  {
+    title: "Work Schedule",
+    step: "schedule",
+    icon: HiCalendarDays,
     completed: false,
   },
   {
@@ -39,6 +46,7 @@ export const INITIAL_STEP = "user_details";
 export const ON_BOARDING_STEPS = [
   "user_details",
   "role_details",
+  "schedule",
   "preferences",
   "summary",
 ] as const;

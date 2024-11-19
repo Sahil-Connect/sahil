@@ -15,7 +15,7 @@ export const SUPPLIER_FIELDS_FRAGMENT = gql`
 `;
 
 export const PRODUCT_FIELDS_FRAGMENT = gql`
-  fragment ProductFields on products {
+  fragment SupplierProductFields on products {
     id
     name
     description
@@ -52,7 +52,6 @@ export const FETCH_SUPPLIER_ORDERS = gql`
         created_at
         destination
         id
-        orderId
         customerId
         origin
         status
@@ -96,6 +95,15 @@ export const FETCH_SUPPLIER_BY_PK = gql`
           count
         }
       }
+      schedule {
+        id
+        days
+        shifts {
+          id
+          start_time
+          end_time
+        }
+      }
     }
   }
 `;
@@ -114,7 +122,7 @@ export const FETCH_SUPPLIER_PRODUCTS = gql`
       offset: $offset
       order_by: $order_by
     ) {
-      ...ProductFields
+      ...SupplierProductFields
       mainImage
     }
   }
@@ -135,7 +143,7 @@ export const FETCH_SUPPLIER_PRODUCT_BY_NAME = gql`
       offset: $offset
       order_by: $order_by
     ) {
-      ...ProductFields
+      ...SupplierProductFields
     }
   }
 `;

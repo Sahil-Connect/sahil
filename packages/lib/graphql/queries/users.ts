@@ -15,6 +15,15 @@ export const USER_AUTH_FIELDS = gql`
   }
 `;
 
+export const USER_INVITE_FIELDS = gql`
+  fragment UserInviteFields on user_invites {
+    id
+    email
+    name
+    role
+  }
+`;
+
 export const GET_USERS = gql`
   ${USER_BASIC_FIELDS}
   query getUsers {
@@ -45,14 +54,14 @@ export const GET_ADDITIONAL_AUTH_USER_INFO = gql`
 `;
 
 export const GET_LATEST_USER_INVITE = gql`
-  ${USER_BASIC_FIELDS}
+  ${USER_INVITE_FIELDS}
   query getUserInvites($email: String = "") {
     user_invites(
       where: { email: { _eq: $email } }
       limit: 1
       order_by: { created_at: desc }
     ) {
-      ...UserBasicFields
+      ...UserInviteFields
     }
   }
 `;

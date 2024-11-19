@@ -1,5 +1,5 @@
 {
-  "globalDotEnv": [".env"],
+  "globalEnv": [".env"],
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local", ".env.development", ".env.production"],
   "remoteCache": {

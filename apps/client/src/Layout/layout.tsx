@@ -12,6 +12,7 @@ import {
   HiOutlineTruck,
   HiOutlineBuildingOffice,
   HiOutlineCube
+  HiOutlineCreditCard,
 } from "react-icons/hi2";
 
 const links = [
@@ -31,10 +32,16 @@ const links = [
     icon: HiOutlineUserCircle,
   },
   {
+
+    name: "Billing",
+    href: "/billing",
+    icon: HiOutlineCreditCard,
+  },
+  {
     name: "Inventory",
     href: "/inventory",
-    icon: HiOutlineCube,
-  }
+    icon: HiOutlineCube
+}
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {
@@ -57,9 +64,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
           user={session?.user}
         />
       )}
-      <main className={session?.user ? 'p-4' : 'p-0'}>
-        {children}
-      </main>
+      <main className={session?.user ? "p-4" : "p-0"}>{children}</main>
     </>
   );
 }
