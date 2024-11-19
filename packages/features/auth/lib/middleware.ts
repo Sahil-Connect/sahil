@@ -6,7 +6,7 @@ import { ON_BOARDING_STEPS } from "@sahil/lib/hooks/formStores/useOnBoardingForm
 export const skippedRoutes = [
   "/auth/signin",
   "/auth/error",
-  "/auth/verify-request",
+  "/auth/verify",
   "/auth/onboarding/user_details",
   "/unauthorized",
   // Add more routes as needed

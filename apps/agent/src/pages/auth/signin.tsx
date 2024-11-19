@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import LoginForm from "@sahil/features/auth/forms/LoginForm";
 import AuthCard from "@sahil/features/auth/AuthCard";
 import logo from "../../../public/logo.svg";
+import illustration from "../../../public/illustration.svg";
 
 const SignInPage: NextPage = ({ providers }: any) => {
   const { data: session } = useSession();
@@ -21,13 +22,10 @@ const SignInPage: NextPage = ({ providers }: any) => {
       <AuthCard
         providers={providers}
         logo={logo}
+        appTitle="Agent App"
+        illustration={illustration}
         form={<LoginForm />}
         title="Sign in to your account"
-        sub={{
-          text: "Don't have an account?",
-          href: "/auth/signup",
-          cta: "Sign Up",
-        }}
       />
     </>
   );

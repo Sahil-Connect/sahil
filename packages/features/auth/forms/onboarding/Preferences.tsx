@@ -36,6 +36,8 @@ export const Preferences = ({ navigateToNextStep }: PreferencesProps) => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const validatedInput = schema.parse(data);
 
+    console.log(validatedInput);
+
     updateStepFormData({
       preference: validatedInput[role],
     });

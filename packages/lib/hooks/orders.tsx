@@ -5,12 +5,19 @@ import {
   FETCH_ORDER_DELIVERIES,
   FETCH_ORDERS_STATS,
   INSERT_NEW_ORDER,
+  APPEND_ORDER_STATUS,
 } from "@sahil/lib/graphql";
 
 // graphql types
 import {
   GetOrdersQuery,
   GetOrdersQueryVariables,
+  GetOrderByPkQuery, 
+  GetOrderByPkQueryVariables,
+  GetOrderDeliveriesQuery,
+  GetOrderDeliveriesQueryVariables,
+  GetOrdersStatsQuery,
+  GetOrdersStatsQueryVariables,
 } from "@sahil/lib/graphql/__generated__/graphql";
 
 export const useFetchOrders = () => {
@@ -27,7 +34,7 @@ export const useFetchOrders = () => {
 };
 
 export const useFetchOrderByPK = (id: string) => {
-  const { error, data, loading } = useQuery(FETCH_ORDER_BY_PK, {
+  const { error, data, loading } = useQuery<GetOrderByPkQuery, GetOrderByPkQueryVariables>(FETCH_ORDER_BY_PK, {
     variables: {
       id,
     },
@@ -36,7 +43,7 @@ export const useFetchOrderByPK = (id: string) => {
 };
 
 export const useFetchOrderDeliveriesByPK = (id: string) => {
-  const { error, data, loading } = useQuery(FETCH_ORDER_DELIVERIES, {
+  const { error, data, loading } = useQuery<GetOrderDeliveriesQuery, GetOrderDeliveriesQueryVariables>(FETCH_ORDER_DELIVERIES, {
     variables: {
       orderId: id,
     },
@@ -51,7 +58,14 @@ export const usePlaceBusinessOrder = () => {
 };
 
 export const useGetOrdersStats = () => {
-  const { data, loading, error } = useQuery(FETCH_ORDERS_STATS);
+  const { data, loading, error } = useQuery<GetOrdersStatsQuery, GetOrdersStatsQueryVariables>(FETCH_ORDERS_STATS);
 
   return { error, ordersCount: data?.orders_aggregate?.aggregate, loading };
+};
+
+export const useAppendOrderStatus = () => {
+  const [appendOrderStatus, { data, loading, error }] =
+    useMutation(APPEND_ORDER_STATUS);
+
+  return { loading, data, error, appendOrderStatus };
 };

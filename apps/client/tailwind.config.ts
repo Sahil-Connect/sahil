@@ -16,13 +16,26 @@ const extendedConfig: Config = {
     "./src/Suppliers/**/*.{js,ts,tsx,tsx,mdx}",
     "./src/Products/**/*.{js,ts,tsx,tsx,mdx}",
     "./src/Layout/*.{js,ts,tsx,tsx,mdx}",
+    "./src/**/*.{js,ts,tsx,tsx,mdx}",
   ],
   theme: {
     ...baseConfig.theme,
+    fontFamily: {
+      inter: ["var(--font-inter)"],
+      jakarta: ["var(--font-jakarta)"],
+    },
     extend: {
       ...baseConfig.theme?.extend,
     },
   },
+  safelist: [
+    {
+      pattern: /bg-\w+/,
+    },
+    {
+      pattern: /text-\w+/,
+    },
+  ],
   // @ts-expect-error
   plugins: [...baseConfig.plugins, require("daisyui")],
   daisyui: {

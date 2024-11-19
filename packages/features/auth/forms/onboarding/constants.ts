@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isValidTimeString } from "@sahil/lib";
 
 export const USER_ROLES = ["business", "supplier"];
 
@@ -93,3 +94,33 @@ export const PREFERENCE_SCHEMA = z.object({
   business: BUSINESS_PREFERENCE,
   supplier: SUPPLIER_PREFERENCE,
 });
+
+// Schedule schema
+export const WORK_SHIFT_SCHEMA = z.object({
+  start_time: z.string().refine(isValidTimeString, {
+    message: "Invalid time format.",
+  }),
+  end_time: z.string().refine(isValidTimeString, {
+    message: "Invalid time format.",
+  }),
+});
+
+export const WORK_SCHEDULE_SCHEMA = z.object({
+  days: z.array(z.string()).min(1, "At least one day is required."),
+  shifts: z
+    .array(WORK_SHIFT_SCHEMA)
+    .min(1, "At least one shift is required.")
+    .max(3, "Maximum of 3 shifts allowed."),
+});
+
+export const daysOfWeek = [
+  { value: "0", label: "Sunday" },
+  { value: "1", label: "Monday" },
+  { value: "2", label: "Tuesday" },
+  { value: "3", label: "Wednesday" },
+  { value: "4", label: "Thursday" },
+  { value: "5", label: "Friday" },
+  { value: "6", label: "Saturday" },
+];
+
+export const defaultShift = { start_time: "09:00", end_time: "17:00" };

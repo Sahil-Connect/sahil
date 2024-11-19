@@ -10,7 +10,9 @@ export const UsersToolbar = () => {
           <h1 className="text-xl">Manage Users</h1>
         </div>
         <div>
-          <Link className="btn btn-sm btn-primary" href="/users/new">New User <HiPlus /></Link>
+          <Link className="btn btn-sm btn-primary" href="/users/new">
+            New User <HiPlus />
+          </Link>
         </div>
       </div>
     </Card>

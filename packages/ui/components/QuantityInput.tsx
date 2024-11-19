@@ -34,7 +34,7 @@ export const QuantityInput = ({
     <div className="w-full space-y-2">
       <div className="flex gap-2 items-center w-full">
         <button
-          className="btn btn-sm"
+          className="btn btn-sm text-xs"
           onClick={handleDecrement}
           type="button"
           title="Decrement Item"
@@ -48,7 +48,7 @@ export const QuantityInput = ({
           className="input input-sm input-bordered w-full max-w-xs font-bold text-center"
         />
         <button
-          className="btn btn-sm btn-secondary"
+          className="btn btn-sm btn-secondary text-xs"
           onClick={handleIncrement}
           type="button"
           title="Increase Item"

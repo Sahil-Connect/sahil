@@ -76,6 +76,13 @@ export const ONBOARD_NEW_SUPPLIER = gql`
     }
     insert_suppliers_one(object: $object) {
       id
+      schedule {
+        days
+        shifts {
+          start_time
+          end_time
+        }
+      }
     }
   }
 `;

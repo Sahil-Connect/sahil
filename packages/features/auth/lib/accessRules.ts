@@ -11,7 +11,7 @@ export const AGENT_ACCESS_RULES = [
 ];
 
 export const CLIENT_ACCESS_RULES = [
-  { path: "/", roles: ["supplier", "business"] },
+  { path: "/", roles: ["supplier", "business", "admin"] },
   // Add more rules as needed for client
 ];
 

@@ -42,7 +42,7 @@ export const Drawer: FC<DrawerProps> = ({ id, children, CTA, className }) => {
           className="drawer-overlay"
         ></label>
         <div
-          className={`relative menu flex-nowrap p-4 w-2/3 xl:w-1/2 h-full min-h-full overflow-y-auto bg-base-100 text-base-content ${className}`}
+          className={`relative menu flex-nowrap p-4 w-full lg:w-3/5 h-full min-h-full overflow-y-auto bg-base-100 text-base-content ${className}`}
         >
           {/* Sidebar content here */}
           {children}

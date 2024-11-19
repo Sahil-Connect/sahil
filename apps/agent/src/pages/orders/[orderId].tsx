@@ -3,18 +3,17 @@ import {
   OrderItems,
   OrderOverview,
   OrderPreferences,
-  OrderClient,
   OrderDetails,
   OrderProgress,
 } from "@sahil/features/Orders";
-import { Card, Tabs, Timeline } from "ui";
+import { Card, Tabs } from "ui";
+import { UpdateOrderStatusForm } from "@sahil/features/Orders";
 
 export type TabValue = "info" | "preferences" | "progress";
 
-
 import { useFetchOrderByPK } from "@/hooks/orders";
 import { useRouter } from "next/router";
-import { useSyncQueryWithStore, INITIAL_TAB, tabs } from "@sahil/lib/hooks/utilities/useQueryStore";
+import { useSyncQueryWithStore } from "@sahil/lib/hooks/utilities/useQueryStore";
 
 import {
   HiOutlineAdjustmentsVertical,
@@ -61,14 +60,15 @@ export default function OrderPage() {
   if (loading) return <p>loading</p>;
 
   return (
-    <section>
+    <section className="space-y-4">
+      <OrderOverview order={order} />
       <div className="flex flex-col lg:flex-row gap-4">
-        <div className="basis-4/6 space-y-2">
-          <OrderOverview order={order} />
+        <div className="w-full xl:basis-2/3 space-y-4">
           <Tabs
             items={OrderTabs}
             onTabClick={handleTabClick}
             currentTab={currentTab}
+            className="overflow-x-auto"
           />
           <div>
             {currentTab === "info" && (
@@ -81,11 +81,15 @@ export default function OrderPage() {
               </Card>
             )}
             {currentTab === "preferences" && <OrderPreferences order={order} />}
-            {currentTab === "progress" && <OrderProgress />}
+            {currentTab === "progress" && (
+              <div>
+                <UpdateOrderStatusForm order={order} />
+              </div>
+            )}
           </div>
         </div>
-        <div className="grow space-y-2">
-          <Timeline />
+        <div className="w-full xl:basis-1/3 space-y-4">
+          <OrderProgress order={order} />
         </div>
       </div>
     </section>
