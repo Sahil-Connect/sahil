@@ -10,7 +10,7 @@ import {
   HiOutlineBriefcase,
   HiOutlineUserCircle,
   HiOutlineTruck,
-  HiOutlineBuildingOffice,
+  HiOutlineCreditCard,
 } from "react-icons/hi2";
 
 const links = [
@@ -29,6 +29,11 @@ const links = [
     href: "/account",
     icon: HiOutlineUserCircle,
   },
+  {
+    name: "Billing",
+    href: "/billing",
+    icon: HiOutlineCreditCard,
+  }
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {
