@@ -51,20 +51,14 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
       <div className="my-4 flex flex-col bg-base-100 border p-4 gap-4 rounded-lg">
         <div className="w-full flex justify-between items-center">
           <div className="font-semibold">
-            <p className="text-gray-500 text-xs font-normal">
-              Business Type
-            </p>
-            <p className="capitalize">
-              {business.type}
-            </p>
+            <p className="text-gray-500 text-xs font-normal">Business Type</p>
+            <p className="capitalize">{business.type}</p>
           </div>
           <div className="font-semibold">
             <p className="text-gray-500 text-xs font-normal text-right">
               Contact Name
             </p>
-            <p className="capitalize text-right">
-              {business.contactName}
-            </p>
+            <p className="capitalize text-right">{business.contactName}</p>
           </div>
         </div>
       </div>
@@ -78,8 +72,7 @@ export const BusinessOverviewCard: FC<Props> = ({ business }) => {
               </span>
               <p className="truncate ...">{address.street_address}</p>
             </div>
-          ))
-        }
+          ))}
       </div>
       <div className="my-3">
         <div className="flex items-center gap-2">

@@ -51,9 +51,8 @@ export const useFetchBusinesses = () => {
 };
 
 export const useRegisterBusiness = () => {
-  const [registerBusinessAction, { data, loading, error }] = useMutation(
-    INSERT_NEW_BUSINESS
-  );
+  const [registerBusinessAction, { data, loading, error }] =
+    useMutation(INSERT_NEW_BUSINESS);
   return {
     data: data?.registerBusinessAction,
     loading,

@@ -8,8 +8,9 @@ import {
   HiOutlineArrowRightOnRectangle,
   HiOutlineUser,
   HiOutlineCog6Tooth,
-  HiOutlineBell
+  HiOutlineBell,
 } from "react-icons/hi2";
+import { useRouter } from "next/router";
 
 type NavbarLink = {
   name: string;
@@ -33,6 +34,8 @@ export const Navbar: FC<NavbarProps> = ({
   onSignOut,
   user,
 }) => {
+  const router = useRouter();
+
   return (
     <header className="bg-white navbar border-b">
       <div className="w-full flex items-center gap-2">
@@ -113,6 +116,8 @@ const Right = ({
   onSignOut?: () => void;
   children?: ReactNode;
 }) => {
+  const router = useRouter();
+
   if (!user) {
     return (
       <div className="navbar-end">

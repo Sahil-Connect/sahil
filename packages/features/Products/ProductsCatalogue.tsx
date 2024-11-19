@@ -78,7 +78,7 @@ export const ProductsCatalogue = () => {
 
   return (
     <section className="space-y-4">
-      <ListHeader size={productsCount.count} sizeLabel="Products">
+      <ListHeader size={productsCount?.count} sizeLabel="Products">
         <ListPagination
           onNextPage={() => setOffset((prev) => prev + 10)}
           onPreviousPage={() => setOffset((prev) => prev - 10)}

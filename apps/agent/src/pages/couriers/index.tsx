@@ -6,14 +6,14 @@ const actions = [
   {
     label: "Track Courier",
     icon: <HiOutlineMap />,
-    href: "/couriers/track"
+    href: "/couriers/track",
   },
   {
     label: "Register Courier",
     icon: <HiOutlinePlus />,
     href: "/couriers/register/personal_info",
-    primary: true
-  }
+    primary: true,
+  },
 ];
 
 export default function CouriersPage() {

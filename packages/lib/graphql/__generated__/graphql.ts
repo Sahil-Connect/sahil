@@ -36,6 +36,29 @@ export type Scalars = {
   uuid: { input: any; output: any };
 };
 
+export type AccountBalanceResponse = {
+  __typename?: "AccountBalanceResponse";
+  availableBalance?: Maybe<Scalars["String"]["output"]>;
+  currency?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type Address = {
+  __typename?: "Address";
+  location?: Maybe<GeoCoords>;
+  placeId?: Maybe<Scalars["String"]["output"]>;
+  types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+};
+
+export type BasicUserInfoResponse = {
+  __typename?: "BasicUserInfoResponse";
+  birthdate?: Maybe<Scalars["String"]["output"]>;
+  family_name?: Maybe<Scalars["String"]["output"]>;
+  gender?: Maybe<Scalars["String"]["output"]>;
+  given_name?: Maybe<Scalars["String"]["output"]>;
+  locale?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_Array_Comparison_Exp = {
   /** is the array contained in the given array value */
@@ -66,6 +89,37 @@ export type Boolean_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
 };
 
+export type CreateAccessTokenResponse = {
+  __typename?: "CreateAccessTokenResponse";
+  expires_in?: Maybe<Scalars["Int"]["output"]>;
+  token?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type DirectionLeg = {
+  __typename?: "DirectionLeg";
+  distance?: Maybe<LegDistance>;
+  duration?: Maybe<LegDuration>;
+};
+
+export type DirectionRoute = {
+  __typename?: "DirectionRoute";
+  legs?: Maybe<Array<Maybe<DirectionLeg>>>;
+  name?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type Directions = {
+  __typename?: "Directions";
+  endLocation?: Maybe<GeoCoords>;
+  routes?: Maybe<DirectionRoute>;
+  startLocation?: Maybe<GeoCoords>;
+};
+
+export type GeoCoords = {
+  __typename?: "GeoCoords";
+  lat?: Maybe<Scalars["Float"]["output"]>;
+  lng?: Maybe<Scalars["Float"]["output"]>;
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars["Int"]["input"]>;
@@ -79,12 +133,91 @@ export type Int_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars["Int"]["input"]>>;
 };
 
+export type LegDistance = {
+  __typename?: "LegDistance";
+  text?: Maybe<Scalars["String"]["output"]>;
+  value?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type LegDuration = {
+  __typename?: "LegDuration";
+  text?: Maybe<Scalars["String"]["output"]>;
+  value?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type LocationByCoords = {
+  __typename?: "LocationByCoords";
+  location?: Maybe<GeoCoords>;
+  placeId?: Maybe<Scalars["String"]["output"]>;
+  types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+};
+
 export type OrderStatusHistoryOutput = {
   __typename?: "OrderStatusHistoryOutput";
   created_at: Scalars["timestamptz"]["output"];
   id: Scalars["uuid"]["output"];
   order_id: Scalars["uuid"]["output"];
   status: Scalars["String"]["output"];
+};
+
+export type PayerInput = {
+  partyId: Scalars["String"]["input"];
+  partyIdType: Scalars["String"]["input"];
+};
+
+export type PaymentStatusResponse = {
+  __typename?: "PaymentStatusResponse";
+  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
+  reason?: Maybe<Scalars["String"]["output"]>;
+  referenceId?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type Places = {
+  __typename?: "Places";
+  address?: Maybe<Scalars["String"]["output"]>;
+  lat?: Maybe<Scalars["Float"]["output"]>;
+  lng?: Maybe<Scalars["Float"]["output"]>;
+  location?: Maybe<Scalars["String"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type PreApprovalStatusResponse = {
+  __typename?: "PreApprovalStatusResponse";
+  expirationDateTime?: Maybe<Scalars["String"]["output"]>;
+  payer?: Maybe<Scalars["String"]["output"]>;
+  payerCurrency?: Maybe<Scalars["String"]["output"]>;
+  payerMessage?: Maybe<Scalars["String"]["output"]>;
+  reason?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type RequestToPayInput = {
+  amount: Scalars["Float"]["input"];
+  currency?: InputMaybe<Scalars["String"]["input"]>;
+  externalId: Scalars["String"]["input"];
+  payeeNote?: InputMaybe<Scalars["String"]["input"]>;
+  payer: PayerInput;
+  payerMessage?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type RequestToPayResponse = {
+  __typename?: "RequestToPayResponse";
+  message?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type RequestToPayTransactionStatusResponse = {
+  __typename?: "RequestToPayTransactionStatusResponse";
+  amount?: Maybe<Scalars["String"]["output"]>;
+  currency?: Maybe<Scalars["String"]["output"]>;
+  externalId?: Maybe<Scalars["String"]["output"]>;
+  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
+  payeeNote?: Maybe<Scalars["String"]["output"]>;
+  payer?: Maybe<Scalars["String"]["output"]>;
+  payerMessage?: Maybe<Scalars["String"]["output"]>;
+  reason?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -118,6 +251,34 @@ export type String_Comparison_Exp = {
   _regex?: InputMaybe<Scalars["String"]["input"]>;
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type UserInfoWithConsentResponse = {
+  __typename?: "UserInfoWithConsentResponse";
+  active?: Maybe<Scalars["Boolean"]["output"]>;
+  address?: Maybe<Scalars["String"]["output"]>;
+  birthdate?: Maybe<Scalars["String"]["output"]>;
+  city_of_birth?: Maybe<Scalars["String"]["output"]>;
+  country_of_birth?: Maybe<Scalars["String"]["output"]>;
+  credit_score?: Maybe<Scalars["String"]["output"]>;
+  email?: Maybe<Scalars["String"]["output"]>;
+  email_verified?: Maybe<Scalars["Boolean"]["output"]>;
+  employer_name?: Maybe<Scalars["String"]["output"]>;
+  family_name?: Maybe<Scalars["String"]["output"]>;
+  gender?: Maybe<Scalars["String"]["output"]>;
+  given_name?: Maybe<Scalars["String"]["output"]>;
+  identification_type?: Maybe<Scalars["String"]["output"]>;
+  identification_value?: Maybe<Scalars["String"]["output"]>;
+  locale?: Maybe<Scalars["String"]["output"]>;
+  middle_name?: Maybe<Scalars["String"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  occupation?: Maybe<Scalars["String"]["output"]>;
+  phone_number?: Maybe<Scalars["String"]["output"]>;
+  phone_number_verified?: Maybe<Scalars["Boolean"]["output"]>;
+  region_of_birth?: Maybe<Scalars["String"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
+  sub?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** columns and relationships of "accounts" */
@@ -3391,6 +3552,10 @@ export type Delivery_Request = {
   courierId?: Maybe<Scalars["uuid"]["output"]>;
   created_at: Scalars["timestamptz"]["output"];
   delivery_method?: Maybe<Scalars["String"]["output"]>;
+  /** An array relationship */
+  delivery_request_orders: Array<Delivery_Request_Orders>;
+  /** An aggregate relationship */
+  delivery_request_orders_aggregate: Delivery_Request_Orders_Aggregate;
   id: Scalars["uuid"]["output"];
   /** An object relationship */
   request_status?: Maybe<Delivery_Request_Status>;
@@ -3398,11 +3563,40 @@ export type Delivery_Request = {
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
 };
 
+/** columns and relationships of "delivery_request" */
+export type Delivery_RequestDelivery_Request_OrdersArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
+/** columns and relationships of "delivery_request" */
+export type Delivery_RequestDelivery_Request_Orders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
 /** aggregated selection of "delivery_request" */
 export type Delivery_Request_Aggregate = {
   __typename?: "delivery_request_aggregate";
   aggregate?: Maybe<Delivery_Request_Aggregate_Fields>;
   nodes: Array<Delivery_Request>;
+};
+
+export type Delivery_Request_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Delivery_Request_Aggregate_Bool_Exp_Count>;
+};
+
+export type Delivery_Request_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Delivery_Request_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<Delivery_Request_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "delivery_request" */
@@ -3419,6 +3613,20 @@ export type Delivery_Request_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+/** order by aggregate values of table "delivery_request" */
+export type Delivery_Request_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Delivery_Request_Max_Order_By>;
+  min?: InputMaybe<Delivery_Request_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "delivery_request" */
+export type Delivery_Request_Arr_Rel_Insert_Input = {
+  data: Array<Delivery_Request_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Delivery_Request_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "delivery_request". All fields are combined with a logical 'AND'. */
 export type Delivery_Request_Bool_Exp = {
   _and?: InputMaybe<Array<Delivery_Request_Bool_Exp>>;
@@ -3427,6 +3635,8 @@ export type Delivery_Request_Bool_Exp = {
   courierId?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   delivery_method?: InputMaybe<String_Comparison_Exp>;
+  delivery_request_orders?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+  delivery_request_orders_aggregate?: InputMaybe<Delivery_Request_Orders_Aggregate_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   request_status?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
   status?: InputMaybe<Delivery_Request_Status_Enum_Comparison_Exp>;
@@ -3444,6 +3654,7 @@ export type Delivery_Request_Insert_Input = {
   courierId?: InputMaybe<Scalars["uuid"]["input"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   delivery_method?: InputMaybe<Scalars["String"]["input"]>;
+  delivery_request_orders?: InputMaybe<Delivery_Request_Orders_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   request_status?: InputMaybe<Delivery_Request_Status_Obj_Rel_Insert_Input>;
   status?: InputMaybe<Delivery_Request_Status_Enum>;
@@ -3460,6 +3671,15 @@ export type Delivery_Request_Max_Fields = {
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
 };
 
+/** order by max() on columns of table "delivery_request" */
+export type Delivery_Request_Max_Order_By = {
+  courierId?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  delivery_method?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Delivery_Request_Min_Fields = {
   __typename?: "delivery_request_min_fields";
@@ -3470,6 +3690,15 @@ export type Delivery_Request_Min_Fields = {
   updated_at?: Maybe<Scalars["timestamptz"]["output"]>;
 };
 
+/** order by min() on columns of table "delivery_request" */
+export type Delivery_Request_Min_Order_By = {
+  courierId?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  delivery_method?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
 /** response of any mutation on the table "delivery_request" */
 export type Delivery_Request_Mutation_Response = {
   __typename?: "delivery_request_mutation_response";
@@ -3477,6 +3706,13 @@ export type Delivery_Request_Mutation_Response = {
   affected_rows: Scalars["Int"]["output"];
   /** data from the rows affected by the mutation */
   returning: Array<Delivery_Request>;
+};
+
+/** input type for inserting object relation for remote table "delivery_request" */
+export type Delivery_Request_Obj_Rel_Insert_Input = {
+  data: Delivery_Request_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Delivery_Request_On_Conflict>;
 };
 
 /** on_conflict condition type for table "delivery_request" */
@@ -3491,6 +3727,7 @@ export type Delivery_Request_Order_By = {
   courierId?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   delivery_method?: InputMaybe<Order_By>;
+  delivery_request_orders_aggregate?: InputMaybe<Delivery_Request_Orders_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   request_status?: InputMaybe<Delivery_Request_Status_Order_By>;
   status?: InputMaybe<Order_By>;
@@ -3501,8 +3738,12 @@ export type Delivery_Request_Order_By = {
 export type Delivery_Request_Orders = {
   __typename?: "delivery_request_orders";
   created_at: Scalars["timestamptz"]["output"];
+  /** An object relationship */
+  delivery_request: Delivery_Request;
   delivery_request_id: Scalars["uuid"]["output"];
   id: Scalars["uuid"]["output"];
+  /** An object relationship */
+  order: Orders;
   order_id: Scalars["uuid"]["output"];
 };
 
@@ -3511,6 +3752,17 @@ export type Delivery_Request_Orders_Aggregate = {
   __typename?: "delivery_request_orders_aggregate";
   aggregate?: Maybe<Delivery_Request_Orders_Aggregate_Fields>;
   nodes: Array<Delivery_Request_Orders>;
+};
+
+export type Delivery_Request_Orders_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Delivery_Request_Orders_Aggregate_Bool_Exp_Count>;
+};
+
+export type Delivery_Request_Orders_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
+  filter?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "delivery_request_orders" */
@@ -3527,14 +3779,30 @@ export type Delivery_Request_Orders_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+/** order by aggregate values of table "delivery_request_orders" */
+export type Delivery_Request_Orders_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Delivery_Request_Orders_Max_Order_By>;
+  min?: InputMaybe<Delivery_Request_Orders_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "delivery_request_orders" */
+export type Delivery_Request_Orders_Arr_Rel_Insert_Input = {
+  data: Array<Delivery_Request_Orders_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Delivery_Request_Orders_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "delivery_request_orders". All fields are combined with a logical 'AND'. */
 export type Delivery_Request_Orders_Bool_Exp = {
   _and?: InputMaybe<Array<Delivery_Request_Orders_Bool_Exp>>;
   _not?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
   _or?: InputMaybe<Array<Delivery_Request_Orders_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  delivery_request?: InputMaybe<Delivery_Request_Bool_Exp>;
   delivery_request_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  order?: InputMaybe<Orders_Bool_Exp>;
   order_id?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -3547,8 +3815,10 @@ export enum Delivery_Request_Orders_Constraint {
 /** input type for inserting data into table "delivery_request_orders" */
 export type Delivery_Request_Orders_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
+  delivery_request?: InputMaybe<Delivery_Request_Obj_Rel_Insert_Input>;
   delivery_request_id?: InputMaybe<Scalars["uuid"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order?: InputMaybe<Orders_Obj_Rel_Insert_Input>;
   order_id?: InputMaybe<Scalars["uuid"]["input"]>;
 };
 
@@ -3561,6 +3831,14 @@ export type Delivery_Request_Orders_Max_Fields = {
   order_id?: Maybe<Scalars["uuid"]["output"]>;
 };
 
+/** order by max() on columns of table "delivery_request_orders" */
+export type Delivery_Request_Orders_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  delivery_request_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Delivery_Request_Orders_Min_Fields = {
   __typename?: "delivery_request_orders_min_fields";
@@ -3568,6 +3846,14 @@ export type Delivery_Request_Orders_Min_Fields = {
   delivery_request_id?: Maybe<Scalars["uuid"]["output"]>;
   id?: Maybe<Scalars["uuid"]["output"]>;
   order_id?: Maybe<Scalars["uuid"]["output"]>;
+};
+
+/** order by min() on columns of table "delivery_request_orders" */
+export type Delivery_Request_Orders_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  delivery_request_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "delivery_request_orders" */
@@ -3589,8 +3875,10 @@ export type Delivery_Request_Orders_On_Conflict = {
 /** Ordering options when selecting data from "delivery_request_orders". */
 export type Delivery_Request_Orders_Order_By = {
   created_at?: InputMaybe<Order_By>;
+  delivery_request?: InputMaybe<Delivery_Request_Order_By>;
   delivery_request_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  order?: InputMaybe<Orders_Order_By>;
   order_id?: InputMaybe<Order_By>;
 };
 
@@ -3688,7 +3976,29 @@ export type Delivery_Request_Set_Input = {
 /** columns and relationships of "delivery_request_status" */
 export type Delivery_Request_Status = {
   __typename?: "delivery_request_status";
+  /** An array relationship */
+  delivery_requests: Array<Delivery_Request>;
+  /** An aggregate relationship */
+  delivery_requests_aggregate: Delivery_Request_Aggregate;
   status: Scalars["String"]["output"];
+};
+
+/** columns and relationships of "delivery_request_status" */
+export type Delivery_Request_StatusDelivery_RequestsArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Bool_Exp>;
+};
+
+/** columns and relationships of "delivery_request_status" */
+export type Delivery_Request_StatusDelivery_Requests_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Bool_Exp>;
 };
 
 /** aggregated selection of "delivery_request_status" */
@@ -3717,6 +4027,8 @@ export type Delivery_Request_Status_Bool_Exp = {
   _and?: InputMaybe<Array<Delivery_Request_Status_Bool_Exp>>;
   _not?: InputMaybe<Delivery_Request_Status_Bool_Exp>;
   _or?: InputMaybe<Array<Delivery_Request_Status_Bool_Exp>>;
+  delivery_requests?: InputMaybe<Delivery_Request_Bool_Exp>;
+  delivery_requests_aggregate?: InputMaybe<Delivery_Request_Aggregate_Bool_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -3744,6 +4056,7 @@ export type Delivery_Request_Status_Enum_Comparison_Exp = {
 
 /** input type for inserting data into table "delivery_request_status" */
 export type Delivery_Request_Status_Insert_Input = {
+  delivery_requests?: InputMaybe<Delivery_Request_Arr_Rel_Insert_Input>;
   status?: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -3784,6 +4097,7 @@ export type Delivery_Request_Status_On_Conflict = {
 
 /** Ordering options when selecting data from "delivery_request_status". */
 export type Delivery_Request_Status_Order_By = {
+  delivery_requests_aggregate?: InputMaybe<Delivery_Request_Aggregate_Order_By>;
   status?: InputMaybe<Order_By>;
 };
 
@@ -4745,6 +5059,7 @@ export type Mutation_Root = {
   __typename?: "mutation_root";
   /** add_order_status_history */
   add_order_status_history?: Maybe<OrderStatusHistoryOutput>;
+  createAccessToken?: Maybe<CreateAccessTokenResponse>;
   /** delete data from the table: "accounts" */
   delete_accounts?: Maybe<Accounts_Mutation_Response>;
   /** delete single row from the table: "accounts" */
@@ -5095,6 +5410,7 @@ export type Mutation_Root = {
   insert_zones?: Maybe<Zones_Mutation_Response>;
   /** insert a single row into the table: "zones" */
   insert_zones_one?: Maybe<Zones>;
+  requestToPay?: Maybe<RequestToPayResponse>;
   /** update data of the table: "accounts" */
   update_accounts?: Maybe<Accounts_Mutation_Response>;
   /** update single row of the table: "accounts" */
@@ -6372,6 +6688,11 @@ export type Mutation_RootInsert_ZonesArgs = {
 export type Mutation_RootInsert_Zones_OneArgs = {
   object: Zones_Insert_Input;
   on_conflict?: InputMaybe<Zones_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootRequestToPayArgs = {
+  object?: InputMaybe<RequestToPayInput>;
 };
 
 /** mutation root */
@@ -7841,10 +8162,32 @@ export type Order_Preference_Updates = {
 export type Order_Status = {
   __typename?: "order_status";
   /** An array relationship */
+  order_status_histories: Array<Order_Status_History>;
+  /** An aggregate relationship */
+  order_status_histories_aggregate: Order_Status_History_Aggregate;
+  /** An array relationship */
   orders: Array<Orders>;
   /** An aggregate relationship */
   orders_aggregate: Orders_Aggregate;
   status: Scalars["String"]["output"];
+};
+
+/** columns and relationships of "order_status" */
+export type Order_StatusOrder_Status_HistoriesArgs = {
+  distinct_on?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Order_Status_History_Order_By>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
+};
+
+/** columns and relationships of "order_status" */
+export type Order_StatusOrder_Status_Histories_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Status_History_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Order_Status_History_Order_By>>;
+  where?: InputMaybe<Order_Status_History_Bool_Exp>;
 };
 
 /** columns and relationships of "order_status" */
@@ -7891,6 +8234,8 @@ export type Order_Status_Bool_Exp = {
   _and?: InputMaybe<Array<Order_Status_Bool_Exp>>;
   _not?: InputMaybe<Order_Status_Bool_Exp>;
   _or?: InputMaybe<Array<Order_Status_Bool_Exp>>;
+  order_status_histories?: InputMaybe<Order_Status_History_Bool_Exp>;
+  order_status_histories_aggregate?: InputMaybe<Order_Status_History_Aggregate_Bool_Exp>;
   orders?: InputMaybe<Orders_Bool_Exp>;
   orders_aggregate?: InputMaybe<Orders_Aggregate_Bool_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
@@ -7925,7 +8270,11 @@ export type Order_Status_History = {
   __typename?: "order_status_history";
   created_at: Scalars["timestamptz"]["output"];
   id: Scalars["uuid"]["output"];
+  /** An object relationship */
+  order: Orders;
   order_id: Scalars["uuid"]["output"];
+  /** An object relationship */
+  order_status: Order_Status;
   status: Order_Status_Enum;
 };
 
@@ -7982,7 +8331,9 @@ export type Order_Status_History_Bool_Exp = {
   _or?: InputMaybe<Array<Order_Status_History_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  order?: InputMaybe<Orders_Bool_Exp>;
   order_id?: InputMaybe<Uuid_Comparison_Exp>;
+  order_status?: InputMaybe<Order_Status_Bool_Exp>;
   status?: InputMaybe<Order_Status_Enum_Comparison_Exp>;
 };
 
@@ -7996,7 +8347,9 @@ export enum Order_Status_History_Constraint {
 export type Order_Status_History_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order?: InputMaybe<Orders_Obj_Rel_Insert_Input>;
   order_id?: InputMaybe<Scalars["uuid"]["input"]>;
+  order_status?: InputMaybe<Order_Status_Obj_Rel_Insert_Input>;
   status?: InputMaybe<Order_Status_Enum>;
 };
 
@@ -8050,7 +8403,9 @@ export type Order_Status_History_On_Conflict = {
 export type Order_Status_History_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  order?: InputMaybe<Orders_Order_By>;
   order_id?: InputMaybe<Order_By>;
+  order_status?: InputMaybe<Order_Status_Order_By>;
   status?: InputMaybe<Order_By>;
 };
 
@@ -8116,6 +8471,7 @@ export type Order_Status_History_Updates = {
 
 /** input type for inserting data into table "order_status" */
 export type Order_Status_Insert_Input = {
+  order_status_histories?: InputMaybe<Order_Status_History_Arr_Rel_Insert_Input>;
   orders?: InputMaybe<Orders_Arr_Rel_Insert_Input>;
   status?: InputMaybe<Scalars["String"]["input"]>;
 };
@@ -8141,6 +8497,13 @@ export type Order_Status_Mutation_Response = {
   returning: Array<Order_Status>;
 };
 
+/** input type for inserting object relation for remote table "order_status" */
+export type Order_Status_Obj_Rel_Insert_Input = {
+  data: Order_Status_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Order_Status_On_Conflict>;
+};
+
 /** on_conflict condition type for table "order_status" */
 export type Order_Status_On_Conflict = {
   constraint: Order_Status_Constraint;
@@ -8150,6 +8513,7 @@ export type Order_Status_On_Conflict = {
 
 /** Ordering options when selecting data from "order_status". */
 export type Order_Status_Order_By = {
+  order_status_histories_aggregate?: InputMaybe<Order_Status_History_Aggregate_Order_By>;
   orders_aggregate?: InputMaybe<Orders_Aggregate_Order_By>;
   status?: InputMaybe<Order_By>;
 };
@@ -8417,6 +8781,10 @@ export type Orders = {
   deliveries: Array<Delivery>;
   /** An aggregate relationship */
   deliveries_aggregate: Delivery_Aggregate;
+  /** An array relationship */
+  delivery_request_orders: Array<Delivery_Request_Orders>;
+  /** An aggregate relationship */
+  delivery_request_orders_aggregate: Delivery_Request_Orders_Aggregate;
   destination?: Maybe<Scalars["String"]["output"]>;
   fulfillment_type?: Maybe<Order_Fulfillment_Type_Enum>;
   id: Scalars["uuid"]["output"];
@@ -8427,6 +8795,8 @@ export type Orders = {
   order_items: Array<Order_Item>;
   /** An aggregate relationship */
   order_items_aggregate: Order_Item_Aggregate;
+  /** An object relationship */
+  order_status?: Maybe<Order_Status>;
   /** An array relationship */
   order_suppliers: Array<Order_Supplier>;
   /** An aggregate relationship */
@@ -8456,6 +8826,24 @@ export type OrdersDeliveries_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   order_by?: InputMaybe<Array<Delivery_Order_By>>;
   where?: InputMaybe<Delivery_Bool_Exp>;
+};
+
+/** columns and relationships of "orders" */
+export type OrdersDelivery_Request_OrdersArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+};
+
+/** columns and relationships of "orders" */
+export type OrdersDelivery_Request_Orders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Delivery_Request_Orders_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  order_by?: InputMaybe<Array<Delivery_Request_Orders_Order_By>>;
+  where?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
 };
 
 /** columns and relationships of "orders" */
@@ -8569,6 +8957,8 @@ export type Orders_Bool_Exp = {
   customerId?: InputMaybe<Uuid_Comparison_Exp>;
   deliveries?: InputMaybe<Delivery_Bool_Exp>;
   deliveries_aggregate?: InputMaybe<Delivery_Aggregate_Bool_Exp>;
+  delivery_request_orders?: InputMaybe<Delivery_Request_Orders_Bool_Exp>;
+  delivery_request_orders_aggregate?: InputMaybe<Delivery_Request_Orders_Aggregate_Bool_Exp>;
   destination?: InputMaybe<String_Comparison_Exp>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -8576,6 +8966,7 @@ export type Orders_Bool_Exp = {
   order_fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Bool_Exp>;
   order_items?: InputMaybe<Order_Item_Bool_Exp>;
   order_items_aggregate?: InputMaybe<Order_Item_Aggregate_Bool_Exp>;
+  order_status?: InputMaybe<Order_Status_Bool_Exp>;
   order_suppliers?: InputMaybe<Order_Supplier_Bool_Exp>;
   order_suppliers_aggregate?: InputMaybe<Order_Supplier_Aggregate_Bool_Exp>;
   origin?: InputMaybe<String_Comparison_Exp>;
@@ -8598,12 +8989,14 @@ export type Orders_Insert_Input = {
   created_at?: InputMaybe<Scalars["timestamptz"]["input"]>;
   customerId?: InputMaybe<Scalars["uuid"]["input"]>;
   deliveries?: InputMaybe<Delivery_Arr_Rel_Insert_Input>;
+  delivery_request_orders?: InputMaybe<Delivery_Request_Orders_Arr_Rel_Insert_Input>;
   destination?: InputMaybe<Scalars["String"]["input"]>;
   fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Enum>;
   id?: InputMaybe<Scalars["uuid"]["input"]>;
   orderId?: InputMaybe<Scalars["String"]["input"]>;
   order_fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Obj_Rel_Insert_Input>;
   order_items?: InputMaybe<Order_Item_Arr_Rel_Insert_Input>;
+  order_status?: InputMaybe<Order_Status_Obj_Rel_Insert_Input>;
   order_suppliers?: InputMaybe<Order_Supplier_Arr_Rel_Insert_Input>;
   origin?: InputMaybe<Scalars["String"]["input"]>;
   processedBy?: InputMaybe<Scalars["uuid"]["input"]>;
@@ -8687,12 +9080,14 @@ export type Orders_Order_By = {
   created_at?: InputMaybe<Order_By>;
   customerId?: InputMaybe<Order_By>;
   deliveries_aggregate?: InputMaybe<Delivery_Aggregate_Order_By>;
+  delivery_request_orders_aggregate?: InputMaybe<Delivery_Request_Orders_Aggregate_Order_By>;
   destination?: InputMaybe<Order_By>;
   fulfillment_type?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   orderId?: InputMaybe<Order_By>;
   order_fulfillment_type?: InputMaybe<Order_Fulfillment_Type_Order_By>;
   order_items_aggregate?: InputMaybe<Order_Item_Aggregate_Order_By>;
+  order_status?: InputMaybe<Order_Status_Order_By>;
   order_suppliers_aggregate?: InputMaybe<Order_Supplier_Aggregate_Order_By>;
   origin?: InputMaybe<Order_By>;
   processedBy?: InputMaybe<Order_By>;
@@ -9281,12 +9676,14 @@ export type Products_Variance_Order_By = {
 
 export type Query_Root = {
   __typename?: "query_root";
+  accountBalance?: Maybe<AccountBalanceResponse>;
   /** An array relationship */
   accounts: Array<Accounts>;
   /** An aggregate relationship */
   accounts_aggregate: Accounts_Aggregate;
   /** fetch data from the table: "accounts" using primary key columns */
   accounts_by_pk?: Maybe<Accounts>;
+  address?: Maybe<Address>;
   /** An array relationship */
   addresses: Array<Addresses>;
   /** An aggregate relationship */
@@ -9305,6 +9702,7 @@ export type Query_Root = {
   agent_type_aggregate: Agent_Type_Aggregate;
   /** fetch data from the table: "agent_type" using primary key columns */
   agent_type_by_pk?: Maybe<Agent_Type>;
+  basicUserInfo?: Maybe<BasicUserInfoResponse>;
   /** fetch data from the table: "business" */
   business: Array<Business>;
   /** fetch aggregated fields from the table: "business" */
@@ -9329,6 +9727,7 @@ export type Query_Root = {
   contact_details_aggregate: Contact_Details_Aggregate;
   /** fetch data from the table: "contact_details" using primary key columns */
   contact_details_by_pk?: Maybe<Contact_Details>;
+  coords?: Maybe<LocationByCoords>;
   /** An array relationship */
   courier_rides: Array<Courier_Rides>;
   /** An aggregate relationship */
@@ -9365,9 +9764,9 @@ export type Query_Root = {
   delivery_request_aggregate: Delivery_Request_Aggregate;
   /** fetch data from the table: "delivery_request" using primary key columns */
   delivery_request_by_pk?: Maybe<Delivery_Request>;
-  /** fetch data from the table: "delivery_request_orders" */
+  /** An array relationship */
   delivery_request_orders: Array<Delivery_Request_Orders>;
-  /** fetch aggregated fields from the table: "delivery_request_orders" */
+  /** An aggregate relationship */
   delivery_request_orders_aggregate: Delivery_Request_Orders_Aggregate;
   /** fetch data from the table: "delivery_request_orders" using primary key columns */
   delivery_request_orders_by_pk?: Maybe<Delivery_Request_Orders>;
@@ -9383,6 +9782,7 @@ export type Query_Root = {
   delivery_status_aggregate: Delivery_Status_Aggregate;
   /** fetch data from the table: "delivery_status" using primary key columns */
   delivery_status_by_pk?: Maybe<Delivery_Status>;
+  directions?: Maybe<Directions>;
   /** fetch data from the table: "geography_columns" */
   geography_columns: Array<Geography_Columns>;
   /** fetch aggregated fields from the table: "geography_columns" */
@@ -9439,6 +9839,9 @@ export type Query_Root = {
   orders_aggregate: Orders_Aggregate;
   /** fetch data from the table: "orders" using primary key columns */
   orders_by_pk?: Maybe<Orders>;
+  paymentStatus?: Maybe<PaymentStatusResponse>;
+  places?: Maybe<Array<Maybe<Places>>>;
+  preApprovalStatus?: Maybe<PreApprovalStatusResponse>;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
@@ -9457,6 +9860,7 @@ export type Query_Root = {
   reports_aggregate: Reports_Aggregate;
   /** fetch data from the table: "reports" using primary key columns */
   reports_by_pk?: Maybe<Reports>;
+  requestToPayTransactionStatus?: Maybe<RequestToPayTransactionStatusResponse>;
   /** fetch data from the table: "ride_status" */
   ride_status: Array<Ride_Status>;
   /** fetch aggregated fields from the table: "ride_status" */
@@ -9505,6 +9909,7 @@ export type Query_Root = {
   suppliers_categories_aggregate: Suppliers_Categories_Aggregate;
   /** fetch data from the table: "suppliers_categories" using primary key columns */
   suppliers_categories_by_pk?: Maybe<Suppliers_Categories>;
+  userInfoWithConsent?: Maybe<UserInfoWithConsentResponse>;
   /** An array relationship */
   user_invites: Array<User_Invites>;
   /** An aggregate relationship */
@@ -9569,6 +9974,11 @@ export type Query_RootAccounts_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
+export type Query_RootAddressArgs = {
+  lat: Scalars["Float"]["input"];
+  lng: Scalars["Float"]["input"];
+};
+
 export type Query_RootAddressesArgs = {
   distinct_on?: InputMaybe<Array<Addresses_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -9627,6 +10037,10 @@ export type Query_RootAgent_Type_AggregateArgs = {
 
 export type Query_RootAgent_Type_By_PkArgs = {
   type: Scalars["String"]["input"];
+};
+
+export type Query_RootBasicUserInfoArgs = {
+  accountHolderMSISDN: Scalars["String"]["input"];
 };
 
 export type Query_RootBusinessArgs = {
@@ -9707,6 +10121,10 @@ export type Query_RootContact_Details_AggregateArgs = {
 
 export type Query_RootContact_Details_By_PkArgs = {
   id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootCoordsArgs = {
+  address: Scalars["String"]["input"];
 };
 
 export type Query_RootCourier_RidesArgs = {
@@ -9887,6 +10305,11 @@ export type Query_RootDelivery_Status_AggregateArgs = {
 
 export type Query_RootDelivery_Status_By_PkArgs = {
   status: Scalars["String"]["input"];
+};
+
+export type Query_RootDirectionsArgs = {
+  destination: Scalars["String"]["input"];
+  origin: Scalars["String"]["input"];
 };
 
 export type Query_RootGeography_ColumnsArgs = {
@@ -10081,6 +10504,19 @@ export type Query_RootOrders_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
+export type Query_RootPaymentStatusArgs = {
+  referenceId: Scalars["String"]["input"];
+};
+
+export type Query_RootPlacesArgs = {
+  lat: Scalars["Float"]["input"];
+  lng: Scalars["Float"]["input"];
+};
+
+export type Query_RootPreApprovalStatusArgs = {
+  referenceId: Scalars["String"]["input"];
+};
+
 export type Query_RootProductsArgs = {
   distinct_on?: InputMaybe<Array<Products_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]["input"]>;
@@ -10139,6 +10575,10 @@ export type Query_RootReports_AggregateArgs = {
 
 export type Query_RootReports_By_PkArgs = {
   id: Scalars["uuid"]["input"];
+};
+
+export type Query_RootRequestToPayTransactionStatusArgs = {
+  referenceId: Scalars["String"]["input"];
 };
 
 export type Query_RootRide_StatusArgs = {
@@ -11634,9 +12074,9 @@ export type Subscription_Root = {
   delivery_request_aggregate: Delivery_Request_Aggregate;
   /** fetch data from the table: "delivery_request" using primary key columns */
   delivery_request_by_pk?: Maybe<Delivery_Request>;
-  /** fetch data from the table: "delivery_request_orders" */
+  /** An array relationship */
   delivery_request_orders: Array<Delivery_Request_Orders>;
-  /** fetch aggregated fields from the table: "delivery_request_orders" */
+  /** An aggregate relationship */
   delivery_request_orders_aggregate: Delivery_Request_Orders_Aggregate;
   /** fetch data from the table: "delivery_request_orders" using primary key columns */
   delivery_request_orders_by_pk?: Maybe<Delivery_Request_Orders>;
@@ -16045,13 +16485,39 @@ export type DeliveryRequestFieldsFragment = {
   __typename?: "delivery_request";
   id: any;
   created_at: any;
+  delivery_method?: string | null;
+  status?: Delivery_Request_Status_Enum | null;
+  courierId?: any | null;
+  updated_at?: any | null;
 };
 
 export type GetDeliveriesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetDeliveriesQuery = {
   __typename?: "query_root";
-  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
+  delivery: Array<{
+    __typename?: "delivery";
+    id: any;
+    created_at: any;
+    order: {
+      __typename?: "orders";
+      customerId?: any | null;
+      created_at: any;
+      order_items: Array<{
+        __typename?: "order_item";
+        product: {
+          __typename?: "products";
+          created_at: any;
+          description?: string | null;
+          discount?: number | null;
+          name?: string | null;
+          price?: number | null;
+          quantity: number;
+          inStock: boolean;
+        };
+      }>;
+    };
+  }>;
   delivery_aggregate: {
     __typename?: "delivery_aggregate";
     aggregate?: {
@@ -16067,7 +16533,30 @@ export type GetDeliveryByPkQueryVariables = Exact<{
 
 export type GetDeliveryByPkQuery = {
   __typename?: "query_root";
-  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
+  delivery: Array<{
+    __typename?: "delivery";
+    id: any;
+    created_at: any;
+    order: {
+      __typename?: "orders";
+      customerId?: any | null;
+      created_at: any;
+      status?: Order_Status_Enum | null;
+      order_items: Array<{
+        __typename?: "order_item";
+        product: {
+          __typename?: "products";
+          created_at: any;
+          description?: string | null;
+          discount?: number | null;
+          name?: string | null;
+          price?: number | null;
+          quantity: number;
+          inStock: boolean;
+        };
+      }>;
+    };
+  }>;
 };
 
 export type GetDeliveriesByCourierQueryVariables = Exact<{
@@ -16076,7 +16565,29 @@ export type GetDeliveriesByCourierQueryVariables = Exact<{
 
 export type GetDeliveriesByCourierQuery = {
   __typename?: "query_root";
-  delivery: Array<{ __typename?: "delivery"; id: any; created_at: any }>;
+  delivery: Array<{
+    __typename?: "delivery";
+    id: any;
+    created_at: any;
+    order: {
+      __typename?: "orders";
+      customerId?: any | null;
+      created_at: any;
+      order_items: Array<{
+        __typename?: "order_item";
+        product: {
+          __typename?: "products";
+          created_at: any;
+          description?: string | null;
+          discount?: number | null;
+          name?: string | null;
+          price?: number | null;
+          quantity: number;
+          inStock: boolean;
+        };
+      }>;
+    };
+  }>;
 };
 
 export type GetDeliveryRequestsQueryVariables = Exact<{ [key: string]: never }>;
@@ -16087,6 +16598,34 @@ export type GetDeliveryRequestsQuery = {
     __typename?: "delivery_request";
     id: any;
     created_at: any;
+    delivery_method?: string | null;
+    status?: Delivery_Request_Status_Enum | null;
+    courierId?: any | null;
+    updated_at?: any | null;
+    delivery_request_orders: Array<{
+      __typename?: "delivery_request_orders";
+      id: any;
+      order_id: any;
+      order: {
+        __typename?: "orders";
+        id: any;
+        order_items: Array<{
+          __typename?: "order_item";
+          id: any;
+          product: {
+            __typename?: "products";
+            id: any;
+            description?: string | null;
+            discount?: number | null;
+            inStock: boolean;
+            mainImage?: string | null;
+            name?: string | null;
+            quantity: number;
+            price?: number | null;
+          };
+        }>;
+      };
+    }>;
   }>;
   delivery_request_aggregate: {
     __typename?: "delivery_request_aggregate";
@@ -16107,6 +16646,34 @@ export type GetDeliveryRequestByPkQuery = {
     __typename?: "delivery_request";
     id: any;
     created_at: any;
+    delivery_method?: string | null;
+    status?: Delivery_Request_Status_Enum | null;
+    courierId?: any | null;
+    updated_at?: any | null;
+    delivery_request_orders: Array<{
+      __typename?: "delivery_request_orders";
+      id: any;
+      order_id: any;
+      order: {
+        __typename?: "orders";
+        id: any;
+        order_items: Array<{
+          __typename?: "order_item";
+          id: any;
+          product: {
+            __typename?: "products";
+            id: any;
+            description?: string | null;
+            discount?: number | null;
+            inStock: boolean;
+            mainImage?: string | null;
+            name?: string | null;
+            quantity: number;
+            price?: number | null;
+          };
+        }>;
+      };
+    }>;
   }>;
 };
 
@@ -16120,6 +16687,10 @@ export type GetDeliveryRequestByCourierQuery = {
     __typename?: "delivery_request";
     id: any;
     created_at: any;
+    delivery_method?: string | null;
+    status?: Delivery_Request_Status_Enum | null;
+    courierId?: any | null;
+    updated_at?: any | null;
   }>;
 };
 
@@ -16225,6 +16796,13 @@ export type GetOrderByPkQuery = {
     customerId?: any | null;
     origin?: string | null;
     status?: Order_Status_Enum | null;
+    business?: {
+      __typename?: "business";
+      id: any;
+      contactName?: string | null;
+      phoneNumber?: string | null;
+      name?: string | null;
+    } | null;
     order_items: Array<{
       __typename?: "order_item";
       id: any;
@@ -16823,6 +17401,11 @@ export const DeliveryRequestFieldsFragmentDoc = {
         selections: [
           { kind: "Field", name: { kind: "Name", value: "id" } },
           { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "delivery_method" } },
+          { kind: "Field", name: { kind: "Name", value: "status" } },
+          { kind: "Field", name: { kind: "Name", value: "courierId" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "updated_at" } },
         ],
       },
     },
@@ -18871,6 +19454,72 @@ export const GetDeliveriesDocument = {
                   kind: "FragmentSpread",
                   name: { kind: "Name", value: "DeliveryFields" },
                 },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "order" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "customerId" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "created_at" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "order_items" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "product" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "created_at" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: {
+                                      kind: "Name",
+                                      value: "description",
+                                    },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "discount" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "name" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "price" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "quantity" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "inStock" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -18986,6 +19635,76 @@ export const GetDeliveryByPkDocument = {
                   kind: "FragmentSpread",
                   name: { kind: "Name", value: "DeliveryFields" },
                 },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "order" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "customerId" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "created_at" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "status" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "order_items" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "product" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "created_at" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: {
+                                      kind: "Name",
+                                      value: "description",
+                                    },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "discount" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "name" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "price" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "quantity" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "inStock" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -19073,6 +19792,72 @@ export const GetDeliveriesByCourierDocument = {
                   kind: "FragmentSpread",
                   name: { kind: "Name", value: "DeliveryFields" },
                 },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "order" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "customerId" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "created_at" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "order_items" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "product" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "created_at" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: {
+                                      kind: "Name",
+                                      value: "description",
+                                    },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "discount" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "name" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "price" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "quantity" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "inStock" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -19118,6 +19903,105 @@ export const GetDeliveryRequestsDocument = {
                 {
                   kind: "FragmentSpread",
                   name: { kind: "Name", value: "DeliveryRequestFields" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "delivery_request_orders" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "order_id" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "order" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "id" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "order_items" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "id" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "product" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "id" },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "description",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "discount",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "inStock",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "mainImage",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "name" },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "quantity",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "price",
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
                 },
               ],
             },
@@ -19171,6 +20055,11 @@ export const GetDeliveryRequestsDocument = {
         selections: [
           { kind: "Field", name: { kind: "Name", value: "id" } },
           { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "delivery_method" } },
+          { kind: "Field", name: { kind: "Name", value: "status" } },
+          { kind: "Field", name: { kind: "Name", value: "courierId" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "updated_at" } },
         ],
       },
     },
@@ -19237,6 +20126,105 @@ export const GetDeliveryRequestByPkDocument = {
                   kind: "FragmentSpread",
                   name: { kind: "Name", value: "DeliveryRequestFields" },
                 },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "delivery_request_orders" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "order_id" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "order" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "id" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "order_items" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "id" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "product" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "id" },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "description",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "discount",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "inStock",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "mainImage",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "name" },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "quantity",
+                                          },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "price",
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -19255,6 +20243,11 @@ export const GetDeliveryRequestByPkDocument = {
         selections: [
           { kind: "Field", name: { kind: "Name", value: "id" } },
           { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "delivery_method" } },
+          { kind: "Field", name: { kind: "Name", value: "status" } },
+          { kind: "Field", name: { kind: "Name", value: "courierId" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "updated_at" } },
         ],
       },
     },
@@ -19342,6 +20335,11 @@ export const GetDeliveryRequestByCourierDocument = {
         selections: [
           { kind: "Field", name: { kind: "Name", value: "id" } },
           { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "delivery_method" } },
+          { kind: "Field", name: { kind: "Name", value: "status" } },
+          { kind: "Field", name: { kind: "Name", value: "courierId" } },
+          { kind: "Field", name: { kind: "Name", value: "created_at" } },
+          { kind: "Field", name: { kind: "Name", value: "updated_at" } },
         ],
       },
     },
@@ -19588,6 +20586,19 @@ export const GetOrderByPkDocument = {
                 },
                 {
                   kind: "Field",
+                  name: { kind: "Name", value: "business" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "OrderBusinessFields" },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
                   name: { kind: "Name", value: "order_items" },
                   selectionSet: {
                     kind: "SelectionSet",
@@ -19725,6 +20736,23 @@ export const GetOrderByPkDocument = {
               ],
             },
           },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "OrderBusinessFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "business" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "contactName" } },
+          { kind: "Field", name: { kind: "Name", value: "phoneNumber" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
         ],
       },
     },

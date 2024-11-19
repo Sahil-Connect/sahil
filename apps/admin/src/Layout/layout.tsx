@@ -61,9 +61,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
           user={session?.user}
         />
       )}
-      <main className={session?.user ? 'p-4' : 'p-0'}>      
-        {children}
-      </main>
+      <main className={session?.user ? "p-4" : "p-0"}>{children}</main>
     </>
   );
 }
