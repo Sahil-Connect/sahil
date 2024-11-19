@@ -137,12 +137,6 @@ const Right = ({
         >
           <Icon icon={HiOutlineBell} />
         </Link>
-        <Link 
-          href="/settings"
-          className="text-sm ml-2"
-        >
-          <Icon icon={HiOutlineCog6Tooth} />
-        </Link>
         <div className="divider divider-horizontal h-6 m-auto" />
         <div className="dropdown dropdown-end text-gray-600">
           <div
