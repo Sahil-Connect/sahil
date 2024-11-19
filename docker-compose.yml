@@ -65,6 +65,36 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DATABASE=${POSTGRES_DATABASE}
 
+  # ADMIN
+  sahil-admin:
+    container_name: sahil-admin
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.admin
+    image: sahil-admin
+    restart: always
+    ports:
+      - '3003:3000'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+
+  # COURIER
+  sahil-courier:
+    container_name: sahil-courier
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.courier
+    image: sahil-courier
+    restart: always
+    ports:
+      - '3004:3000'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+
   #### LOCAL DEV ENVIRONMENTS ####
 
   # HASURA ENGINE
@@ -115,9 +145,9 @@ services:
       retries: 5
       start_period: 5s
 
-  # API
-  sahil-api-local-dev:
-    container_name: sahil-redis-postgres
+  # Redis
+  sahil-redis:
+    container_name: sahil-redis
     image: redis:6.0-alpine
     restart: always
     environment:

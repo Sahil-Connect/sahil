@@ -6,10 +6,7 @@ import { Navbar } from "ui";
 type LayoutProps = {
   children: ReactNode;
 };
-import {
-  HiOutlineQueueList,
-  HiOutlineTruck,
-} from "react-icons/hi2";
+import { HiOutlineQueueList, HiOutlineTruck } from "react-icons/hi2";
 
 const links = [
   {
@@ -43,9 +40,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
           user={session?.user}
         />
       )}
-      <main className={session?.user ? 'p-4' : 'p-0'}>
-        {children}
-      </main>
+      <main className={session?.user ? "p-4" : "p-0"}>{children}</main>
     </>
   );
 }

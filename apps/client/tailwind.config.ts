@@ -21,8 +21,8 @@ const extendedConfig: Config = {
   theme: {
     ...baseConfig.theme,
     fontFamily: {
-      inter: ['var(--font-inter)'],
-      jakarta: ['var(--font-jakarta)'],
+      inter: ["var(--font-inter)"],
+      jakarta: ["var(--font-jakarta)"],
     },
     extend: {
       ...baseConfig.theme?.extend,

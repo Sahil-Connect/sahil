@@ -22,7 +22,7 @@ export const GET_ZONES = gql`
 export const GET_ZONE_BY_ID = gql`
   ${ZONE_FIELDS}
   query GetZonesById($id: uuid!) {
-    zones(where: { id: {_eq: $id } }) {
+    zones(where: { id: { _eq: $id } }) {
       ...ZoneFields
     }
   }

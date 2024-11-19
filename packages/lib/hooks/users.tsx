@@ -1,12 +1,15 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
   GET_LATEST_USER_INVITE,
+  GET_USERS,
   INSERT_NEW_INVITE,
   // INSERT_NEW_USER,
 } from "@sahil/lib/graphql";
 import {
   GetUserInvitesQuery,
+  GetUsersQuery,
   GetUserInvitesQueryVariables,
+  GetUsersQueryVariables,
   InsertNewInviteMutation,
   InsertNewInviteMutationVariables,
 } from "../graphql/__generated__/graphql";
@@ -32,4 +35,12 @@ export const useFetchUserInvites = () => {
     GetUserInvitesQueryVariables
   >(GET_LATEST_USER_INVITE);
   return { error, data: data?.user_invites, loading };
+};
+
+export const useFetchUsers = () => {
+  const { error, data, loading } = useQuery<
+    GetUsersQuery,
+    GetUsersQueryVariables
+  >(GET_USERS);
+  return { error, data: data?.users, loading };
 };
