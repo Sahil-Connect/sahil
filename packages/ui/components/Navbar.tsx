@@ -138,7 +138,7 @@ const Right = ({
           <Icon icon={HiOutlineBell} />
         </Link>
         <Link 
-          href="/settings/profile"
+          href="/settings"
           className="text-sm ml-2"
         >
           <Icon icon={HiOutlineCog6Tooth} />
