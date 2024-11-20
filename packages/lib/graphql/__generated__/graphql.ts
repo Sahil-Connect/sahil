@@ -17202,6 +17202,77 @@ export type GetUserInvitesQuery = {
   }>;
 };
 
+export type GetUserByPkQueryVariables = Exact<{
+  id: Scalars["uuid"]["input"];
+}>;
+
+export type GetUserByPkQuery = {
+  __typename?: "query_root";
+  users_by_pk?: {
+    __typename?: "users";
+    email?: string | null;
+    created_at: any;
+    hasCompletedOnboarding?: boolean | null;
+    id: any;
+    name?: string | null;
+    role?: User_Role_Enum | null;
+  } | null;
+};
+
+export type GetUserOrganizationSupplierQueryVariables = Exact<{
+  userId: Scalars["uuid"]["input"];
+}>;
+
+export type GetUserOrganizationSupplierQuery = {
+  __typename?: "query_root";
+  suppliers: Array<{
+    __typename?: "suppliers";
+    id: any;
+    name?: string | null;
+    user_id?: any | null;
+  }>;
+};
+
+export type GetUserSupplierQueryVariables = Exact<{
+  userId: Scalars["uuid"]["input"];
+}>;
+
+export type GetUserSupplierQuery = {
+  __typename?: "query_root";
+  suppliers: Array<{
+    __typename?: "suppliers";
+    id: any;
+    name?: string | null;
+    user_id?: any | null;
+  }>;
+};
+
+export type GetUserBusinessQueryVariables = Exact<{
+  userId: Scalars["uuid"]["input"];
+}>;
+
+export type GetUserBusinessQuery = {
+  __typename?: "query_root";
+  business: Array<{
+    __typename?: "business";
+    id: any;
+    name?: string | null;
+    owner_id?: any | null;
+  }>;
+};
+
+export type GetAllSuppliersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllSuppliersQuery = {
+  __typename?: "query_root";
+  suppliers: Array<{
+    __typename?: "suppliers";
+    id: any;
+    name?: string | null;
+    user_id?: any | null;
+  }>;
+};
+
 export type ZoneFieldsFragment = {
   __typename?: "zones";
   id: any;
@@ -22489,6 +22560,319 @@ export const GetUserInvitesDocument = {
     },
   ],
 } as unknown as DocumentNode<GetUserInvitesQuery, GetUserInvitesQueryVariables>;
+export const GetUserByPkDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetUserByPk" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "users_by_pk" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "UserBasicFields" },
+                },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "hasCompletedOnboarding" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "UserBasicFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "users" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "role" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetUserByPkQuery, GetUserByPkQueryVariables>;
+export const GetUserOrganizationSupplierDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetUserOrganizationSupplier" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "userId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "suppliers" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "user_id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "userId" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "user_id" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetUserOrganizationSupplierQuery,
+  GetUserOrganizationSupplierQueryVariables
+>;
+export const GetUserSupplierDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetUserSupplier" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "userId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "suppliers" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "user_id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "userId" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "user_id" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetUserSupplierQuery,
+  GetUserSupplierQueryVariables
+>;
+export const GetUserBusinessDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetUserBusiness" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "userId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "business" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "owner_id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "userId" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "owner_id" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetUserBusinessQuery,
+  GetUserBusinessQueryVariables
+>;
+export const GetAllSuppliersDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllSuppliers" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "suppliers" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "user_id" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetAllSuppliersQuery,
+  GetAllSuppliersQueryVariables
+>;
 export const GetZonesDocument = {
   kind: "Document",
   definitions: [

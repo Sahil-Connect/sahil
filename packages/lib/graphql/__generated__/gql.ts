@@ -134,6 +134,16 @@ const documents = {
     types.GetAdditionalAuthUserInfoDocument,
   '\n  \n  query getUserInvites($email: String = "") {\n    user_invites(\n      where: { email: { _eq: $email } }\n      limit: 1\n      order_by: { created_at: desc }\n    ) {\n      ...UserInviteFields\n    }\n  }\n':
     types.GetUserInvitesDocument,
+  "\n  \n  query GetUserByPk($id: uuid!) {\n    users_by_pk(id: $id) {\n      ...UserBasicFields\n      email\n      created_at\n      hasCompletedOnboarding\n    }\n  }\n":
+    types.GetUserByPkDocument,
+  "\n  query GetUserOrganizationSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n":
+    types.GetUserOrganizationSupplierDocument,
+  "\n  query GetUserSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n":
+    types.GetUserSupplierDocument,
+  "\n  query GetUserBusiness($userId: uuid!) {\n    business(where: { owner_id: { _eq: $userId } }) {\n      id\n      name\n      owner_id\n    }\n  }\n":
+    types.GetUserBusinessDocument,
+  "\n  query GetAllSuppliers {\n    suppliers {\n      id\n      name\n      user_id\n    }\n  }\n":
+    types.GetAllSuppliersDocument,
   "\n  fragment ZoneFields on zones {\n    id\n    name\n    description\n    created_at\n    updated_at\n  }\n":
     types.ZoneFieldsFragmentDoc,
   "\n  \n  query GetZones {\n    zones {\n      ...ZoneFields\n    }\n  }\n":
@@ -522,6 +532,36 @@ export function gql(
 export function gql(
   source: '\n  \n  query getUserInvites($email: String = "") {\n    user_invites(\n      where: { email: { _eq: $email } }\n      limit: 1\n      order_by: { created_at: desc }\n    ) {\n      ...UserInviteFields\n    }\n  }\n'
 ): (typeof documents)['\n  \n  query getUserInvites($email: String = "") {\n    user_invites(\n      where: { email: { _eq: $email } }\n      limit: 1\n      order_by: { created_at: desc }\n    ) {\n      ...UserInviteFields\n    }\n  }\n'];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  \n  query GetUserByPk($id: uuid!) {\n    users_by_pk(id: $id) {\n      ...UserBasicFields\n      email\n      created_at\n      hasCompletedOnboarding\n    }\n  }\n"
+): (typeof documents)["\n  \n  query GetUserByPk($id: uuid!) {\n    users_by_pk(id: $id) {\n      ...UserBasicFields\n      email\n      created_at\n      hasCompletedOnboarding\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query GetUserOrganizationSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n"
+): (typeof documents)["\n  query GetUserOrganizationSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query GetUserSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n"
+): (typeof documents)["\n  query GetUserSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query GetUserBusiness($userId: uuid!) {\n    business(where: { owner_id: { _eq: $userId } }) {\n      id\n      name\n      owner_id\n    }\n  }\n"
+): (typeof documents)["\n  query GetUserBusiness($userId: uuid!) {\n    business(where: { owner_id: { _eq: $userId } }) {\n      id\n      name\n      owner_id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query GetAllSuppliers {\n    suppliers {\n      id\n      name\n      user_id\n    }\n  }\n"
+): (typeof documents)["\n  query GetAllSuppliers {\n    suppliers {\n      id\n      name\n      user_id\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

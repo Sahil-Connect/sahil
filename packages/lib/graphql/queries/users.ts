@@ -79,7 +79,7 @@ export const GET_USER_BY_PK = gql`
 `;
 
 export const GET_USER_ORGANIZATION = gql`
-  query GetUserOrganization($userId: uuid!) {
+  query GetUserOrganizationSupplier($userId: uuid!) {
     suppliers(where: { user_id: { _eq: $userId } }) {
       id
       name
@@ -99,54 +99,15 @@ export const GET_USER_SUPPLIER = gql`
 `;
 
 export const GET_USER_BUSINESS = gql`
-  query GetUserOrganization($userId: uuid!) {
-    business(where: { user_id: { _eq: $userId } }) {
+  query GetUserBusiness($userId: uuid!) {
+    business(where: { owner_id: { _eq: $userId } }) {
       id
       name
-      user_id
+      owner_id
     }
   }
 `;
 
-export const GET_USER_ORGANIZATIONS = gql`
-  query GetUserOrganizations($userId: uuid!) {
-    organizations(where: { user_id: { _eq: $userId } }) {
-      id
-      name
-      user_id
-    }
-  }
-`;
-
-export const GET_ALL_ORGANIZATIONS = gql`
-  query GetAllOrganizations {
-    suppliers {
-      id
-      name
-      user_id
-    }
-    businesses {
-      id
-      name
-      user_id
-    }
-  }
-`;
-
-export const GET_USER_AFFILIATED_ORGANIZATIONS = gql`
-  query GetUserAffiliatedOrganizations($userId: uuid!) {
-    suppliers(where: { user_id: { _eq: $userId } }) {
-      id
-      name
-      user_id
-    }
-    businesses(where: { user_id: { _eq: $userId } }) {
-      id
-      name
-      user_id
-    }
-  }
-`;
 
 export const GET_ALL_SUPPLIERS = gql`
   query GetAllSuppliers {

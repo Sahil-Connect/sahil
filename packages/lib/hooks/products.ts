@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { FETCH_PRODUCTS } from "@sahil/lib/graphql";
+import { FETCH_PRODUCTS, FETCH_SUPPLIER_PRODUCTS } from "@sahil/lib/graphql";
 
 // graphql types
 import {
