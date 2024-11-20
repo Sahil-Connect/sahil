@@ -1,30 +1,29 @@
 "use client";
-import { FC, ReactNode, MouseEvent } from "react";
+import { FC, ReactNode, ButtonHTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
-export type ButtonProps = {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  className?: string;
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "secondary" | "danger" | "outline";
   size?: "sm" | "md" | "lg";
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-};
+}
 
 export const Button: FC<ButtonProps> = ({
   children,
-  className,
   variant = "primary",
   size = "md",
-  onClick,
   leftIcon,
   rightIcon,
+  className = "",
+  ...props
 }) => {
-  const baseClasses = "btn";
+  const baseClasses = "btn font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2";
   const variantClasses = {
     primary: "btn-primary",
     secondary: "btn-secondary",
+    danger: "btn-error",
     outline: "btn-outline",
   };
   const sizeClasses = {
@@ -33,7 +32,7 @@ export const Button: FC<ButtonProps> = ({
     lg: "btn-lg",
   };
 
-  const mergedClasses = twMerge(
+  const buttonClasses = twMerge(
     baseClasses,
     variantClasses[variant],
     sizeClasses[size],
@@ -41,7 +40,7 @@ export const Button: FC<ButtonProps> = ({
   );
 
   return (
-    <button className={mergedClasses} onClick={onClick}>
+    <button className={buttonClasses} {...props}>
       {leftIcon && <span className="mr-2">{leftIcon}</span>}
       {children}
       {rightIcon && <span className="ml-2">{rightIcon}</span>}

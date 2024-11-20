@@ -55,3 +55,27 @@ export const FETCH_PRODUCTS_BY_NAME = gql`
     }
   }
 `;
+
+export const FETCH_SUPPLIER_PRODUCTS = gql`
+  ${PRODUCT_FIELDS}
+  ${PRODUCTS_AGGREGATE}
+  query getSupplierProducts(
+    $supplierId: uuid!
+    $offset: Int = 0
+    $limit: Int = 12
+  ) {
+    products(
+      limit: $limit
+      order_by: { created_at: desc }
+      offset: $offset
+      where: { supplier_id: { _eq: $supplierId } }
+    ) {
+      ...ProductFields
+      mainImage
+      description
+    }
+    products_aggregate(where: { supplier_id: { _eq: $supplierId } }) {
+      ...ProductsAggregate
+    }
+  }
+`;

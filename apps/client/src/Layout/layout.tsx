@@ -11,7 +11,7 @@ import {
   HiOutlineUserCircle,
   HiOutlineTruck,
   HiOutlineBuildingOffice,
-  HiOutlineCube
+  HiOutlineCube,
   HiOutlineCreditCard,
 } from "react-icons/hi2";
 

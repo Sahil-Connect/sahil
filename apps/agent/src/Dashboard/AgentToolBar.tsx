@@ -3,6 +3,7 @@ import {
   HiChevronDown,
   HiOutlineTruck,
   HiOutlineBriefcase,
+  HiOutlineBuildingOffice,
 } from "react-icons/hi2";
 import Link from "next/link";
 
@@ -25,9 +26,6 @@ const dropdownOptions = [
     icon: HiOutlineBuildingOffice,
   },
 ];
-
-
-import { Avatar } from "ui";
 
 import { useSession } from "next-auth/react";
 import { formatCurrentDate } from "@sahil/lib/dates";

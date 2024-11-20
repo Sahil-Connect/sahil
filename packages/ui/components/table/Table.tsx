@@ -1,167 +1,101 @@
-import { ReactNode } from "react";
-import { JoinGrid } from "../JoinGrid";
-import { HiArrowSmallLeft, HiArrowSmallRight } from "react-icons/hi2";
+import { HiOutlineClock, HiOutlineArrowDown } from "react-icons/hi2";
+import { TableFooter } from "./TableFooter";
+import { TableRow } from "./TableRow";
+import { TableHead } from "./TableHead";
 
-export type Column<T> = {
-  accessKey: keyof T;
-  header: string;
-  cell?: (row: T) => JSX.Element;
-};
+const orders = [
+  {
+    id: 1,
+    name: "Radisson Blu",
+    job: "Job",
+    favoriteColor: "Red",
+    status: "Processing",
+    createdAt: "27/03/2024",
+    address: "Kigali Heights",
+    source: "Direct",
+  },
+  {
+    id: 2,
+    name: "Norrsken House",
+    job: "Job",
+    favoriteColor: "Red",
+    status: "Processing",
+    createdAt: "27/03/2024",
+    address: "Kigali Heights",
+    source: "Agent Assisted",
+  },
+  {
+    id: 3,
+    name: "KFC",
+    job: "Job",
+    favoriteColor: "Red",
+    status: "Processing",
+    createdAt: "27/03/2024",
+    address: "Kigali Heights",
+    source: "Direct",
+  },
+];
 
-type TableProps<T> = {
-  data: T[];
-  columns: Column<T>[];
-  title: string;
-  onNextPage: () => void;
-  onPreviousPage: () => void;
-  isNextDisabled?: boolean;
-  isPrevDisabled?: boolean;
-};
-
-export const Table = <T extends unknown>({
-  data,
-  columns,
-  title,
-  onNextPage,
-  onPreviousPage,
-  isNextDisabled,
-  isPrevDisabled,
-}: TableProps<T>) => {
+export const TableControls = () => {
   return (
-    <div className="space-y-2">
-      <TableControls
-        title={title}
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
-        isNextDisabled={isNextDisabled}
-        isPrevDisabled={isPrevDisabled}
-      />
-      <div className="overflow-auto rounded-2xl shadow">
-        <table className="table">
-          <TableHead columns={columns} />
-          <tbody>
-            {data.map((row, rowIndex) => (
-              <TableRow
-                key={rowIndex}
-                className={` ${rowIndex % 2 ? "bg-base-200 " : ""}`}
-              >
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.accessKey as string}
-                    row={row}
-                    column={column}
-                  />
-                ))}
-              </TableRow>
-            ))}
-          </tbody>
-        </table>
+    <div>
+      <div>
+        <h3>Hello, World</h3>
+      </div>
+      <div>
+        <button>Sort</button>
       </div>
     </div>
   );
 };
 
-type TableHeadProps<T> = {
-  columns: T[];
-};
 
-export const TableHead = <T extends unknown>({
-  columns,
-}: TableHeadProps<Column<T>>) => {
+export const TablePagination = () => {
   return (
-    <thead className="bg-primary/90 text-primary-content">
-      <TableRow>
-        {columns.map((column, index) => (
-          <th key={index} className="font-bold">
-            {column.header}
-          </th>
-        ))}
-      </TableRow>
-    </thead>
-  );
-};
-
-export const TableRow = ({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) => {
-  return <tr className={` ${className}`}>{children}</tr>;
-};
-
-type TableCellProps<T> = {
-  row: T;
-  column: Column<T>;
-};
-
-export const TableCell = <T extends unknown>({
-  row,
-  column,
-}: TableCellProps<T>) => {
-  return (
-    <td className="min-w-[5rem]">
-      {column.cell ? column.cell(row) : String(row[column.accessKey])}
-    </td>
-  );
-};
-
-type TableControlsProps = {
-  title: string;
-} & TablePaginationProps;
-
-export const TableControls = ({
-  title = "Suppliers",
-  onNextPage,
-  onPreviousPage,
-  isNextDisabled,
-  isPrevDisabled,
-}: TableControlsProps) => {
-  return (
-    <div className="flex justify-between items-center px-2">
-      <h3 className="font-bold text-lg">{title}</h3>
-      <TablePagination
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
-        isNextDisabled={isNextDisabled}
-        isPrevDisabled={isPrevDisabled}
-      />
+    <div className="join">
+      <button className="join-item btn">1</button>
+      <button className="join-item btn btn-active">2</button>
+      <button className="join-item btn">3</button>
+      <button className="join-item btn">4</button>
     </div>
   );
 };
 
-type TablePaginationProps = {
-  onPreviousPage: () => void;
-  onNextPage: () => void;
-  isNextDisabled?: boolean;
-  isPrevDisabled?: boolean;
-};
 
-export const TablePagination = ({
-  onPreviousPage,
-  onNextPage,
-  isNextDisabled = false,
-  isPrevDisabled = false,
-}: TablePaginationProps) => {
+
+export const Table = () => {
   return (
-    <JoinGrid>
-      <button
-        className="join-item btn btn-sm"
-        title="Left"
-        onClick={onPreviousPage}
-        disabled={isPrevDisabled}
-      >
-        <HiArrowSmallLeft />
-      </button>
-      <button
-        className="join-item btn btn-sm"
-        title="Right"
-        onClick={onNextPage}
-        disabled={isNextDisabled}
-      >
-        <HiArrowSmallRight />
-      </button>
-    </JoinGrid>
+    <div className=" bg-base-100 rounded-xl shadow-sm">
+      <table className="table table-bordered">
+        {/* head */}
+        <thead className="border-b">
+          <tr>
+            <th>
+              <label>
+                <input type="checkbox" className="checkbox" />
+              </label>
+            </th>
+            <th className="flex gap-2 items-center">Product <HiOutlineArrowDown /></th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* row 1 */}
+          {orders.map(order => <TableRow key={order.id} row={order} /> )}
+        </tbody>
+        {/* foot */}
+        <tfoot>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Job</th>
+            <th>Favorite Color</th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   );
 };
