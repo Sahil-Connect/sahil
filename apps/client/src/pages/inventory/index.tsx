@@ -1,51 +1,14 @@
 import { Card } from "ui";
 import { useSession } from "next-auth/react";
-import { HiOutlinePlus, HiOutlineArrowDown } from "react-icons/hi2";
+import { HiOutlinePlus, HiOutlineArrowDown, HiArrowLeft, HiChevronRight } from "react-icons/hi2";
 import { useGetUserById } from "@sahil/lib/hooks/users";
 import { useUserSuppliers } from "@sahil/lib/hooks/useUserOrganizations";
 import { useFetchProducts } from "@sahil/lib/hooks/products";
 import type { Supplier } from "@sahil/lib/hooks/useUserOrganizations";
 import { useRouter } from 'next/router';
 import { formatDateTime } from "@sahil/lib/dates";
-
-interface SupplierSwitcherProps {
-  suppliers: Supplier[];
-  activeSupplier?: Supplier | null;
-  onSupplierSelect: (supplier: Supplier) => void;
-  isLoading?: boolean;
-}
-
-function SupplierSwitcher({
-  suppliers,
-  activeSupplier,
-  onSupplierSelect,
-  isLoading = false
-}: SupplierSwitcherProps) {
-  if (isLoading) {
-    return (
-      <div className="h-10 w-48 animate-pulse rounded bg-gray-100" />
-    );
-  }
-
-  return (
-    <select
-      aria-label="Select supplier"
-      className="block w-48 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-      value={activeSupplier?.id || ''}
-      onChange={(e) => {
-        const selected = suppliers.find(s => s.id === e.target.value);
-        if (selected) onSupplierSelect(selected);
-      }}
-    >
-      <option value="" disabled>Select Supplier</option>
-      {suppliers.map((supplier) => (
-        <option key={supplier.id} value={supplier.id}>
-          {supplier.name}
-        </option>
-      ))}
-    </select>
-  );
-}
+import BusinessInventoryHeader from '@sahil/features/Inventory/BusinessInventoryHeader';
+import FilterPanel from '@sahil/features/Inventory/FilterPanel';
 
 interface ProductsTableProps {
   products: any[];
@@ -83,7 +46,7 @@ function ProductsTable({ products, isLoading, error, onProductClick }: ProductsT
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto bg-white">
       <table className="table">
         <thead>
           <tr>
@@ -93,7 +56,8 @@ function ProductsTable({ products, isLoading, error, onProductClick }: ProductsT
               </label>
             </th>
             <th>Product</th>
-            <th>Price & Stock</th>
+            <th>SKU</th>
+            <th>Price</th>
             <th>Status</th>
             <th></th>
           </tr>
@@ -132,13 +96,13 @@ function ProductsTable({ products, isLoading, error, onProductClick }: ProductsT
               </td>
               <td>
                 ${product.price}
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Stock: {product.quantity}
-                </span>
               </td>
               <td>
-                <span className={`badge ${
+            
+              {product.price}
+              </td>
+              <td>
+                <span className={`badge badge-md py-2 ${
                   product.quantity > 0 ? 'badge-success' : 'badge-error'
                 } badge-sm`}>
                   {product.quantity > 0 ? 'In Stock' : 'Out of Stock'}
@@ -149,7 +113,7 @@ function ProductsTable({ products, isLoading, error, onProductClick }: ProductsT
                   className="btn btn-ghost btn-xs"
                   aria-label={`Edit ${product.name}`}
                 >
-                  details
+                  View Product
                 </button>
               </th>
             </tr>
@@ -198,41 +162,39 @@ export default function InventoryPage() {
     router.push(`/inventory/${productId}`);
   };
 
+  const handleAddProduct = () => {
+    router.push('/inventory/new');
+  };
+
   if (userLoading || suppliersLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="space-y-2">
-      <Card>
-        <div className="flex justify-between items-center">
-          <div className="space-y-2">
-            <h3 className="text-xl">Inventory</h3>
-            <SupplierSwitcher
-              suppliers={suppliers}
-              activeSupplier={activeSupplier}
-              onSupplierSelect={switchSupplier}
-              isLoading={suppliersLoading}
-            />
-          </div>
-          <div>
-            <button
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={() => router.push('/inventory/new')}
-              disabled={!activeSupplier}
-            >
-              <HiOutlinePlus className="-ml-1 mr-2 h-5 w-5" />
-              Add Product
-            </button>
-          </div>
-        </div>
-      </Card>
-      <ProductsTable 
-        products={products || []}
-        isLoading={productsLoading}
-        error={productsError}
-        onProductClick={handleProductClick}
+    <div className="flex flex-col h-screen">
+      <BusinessInventoryHeader
+        suppliers={suppliers}
+        activeSupplier={activeSupplier}
+        onSupplierSelect={switchSupplier}
+        isLoading={suppliersLoading}
+        onAddProduct={handleAddProduct}
       />
+      
+      <div className="flex flex-1 overflow-hidden">
+        <FilterPanel 
+          suppliers={suppliers}
+          activeSupplier={activeSupplier}
+          onSupplierSelect={switchSupplier}
+        />
+        <div className="flex-1 overflow-auto p-6">
+          <ProductsTable 
+            products={products || []}
+            isLoading={productsLoading}
+            error={productsError}
+            onProductClick={handleProductClick}
+          />
+        </div>
+      </div>
     </div>
   );
 }

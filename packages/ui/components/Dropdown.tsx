@@ -6,7 +6,7 @@ import type { IconType } from "react-icons";
 import { HiOutlineArrowSmallDown } from "react-icons/hi2";
 
 type DropdownOption = {
-  id?: string;
+  id?: string | number;
   label?: string;
   icon?: IconType;
   handler?: () => void;

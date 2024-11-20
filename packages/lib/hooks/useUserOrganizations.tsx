@@ -3,11 +3,13 @@ import { create } from 'zustand';
 import { GET_USER_SUPPLIER, GET_ALL_SUPPLIERS } from '../graphql/queries/users';
 import { useEffect } from 'react';
 
-export type Supplier = {
+export interface Supplier {
   id: string;
   name: string;
+  totalProducts?: number;
+  inStockProducts?: number;
   user_id: string;
-};
+}
 
 type SupplierStore = {
   activeSupplier: Supplier | null;
