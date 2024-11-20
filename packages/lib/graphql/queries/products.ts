@@ -55,3 +55,25 @@ export const FETCH_PRODUCTS_BY_NAME = gql`
     }
   }
 `;
+
+export const GET_PRODUCT_BY_ID = gql`
+  query GetProductById($id: uuid!) {
+    products_by_pk(id: $id) {
+      created_at
+    description
+    discount
+    id
+    inStock
+    mainImage
+    name
+    price
+    quantity
+    supplier {
+      name
+      contactName
+      contactEmail
+      phoneNumber
+    }
+    }
+  }
+`;

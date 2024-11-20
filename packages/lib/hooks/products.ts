@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { FETCH_PRODUCTS, FETCH_SUPPLIER_PRODUCTS } from "@sahil/lib/graphql";
+import { FETCH_PRODUCTS, FETCH_SUPPLIER_PRODUCTS, GET_PRODUCT_BY_ID } from "@sahil/lib/graphql";
 
 // graphql types
 import {
@@ -59,5 +59,17 @@ export const useFetchSupplierProducts = ({
     data: data?.products,
     loading,
     productsCount: data?.products_aggregate?.aggregate,
+  };
+};
+
+export const useFetchProductById = (productId: string) => {
+  const { data, loading, error } = useQuery(GET_PRODUCT_BY_ID, {
+    variables: { id: productId },
+    skip: !productId,
+  });
+  return {
+    product: data?.products_by_pk,
+    loading,
+    error,
   };
 };

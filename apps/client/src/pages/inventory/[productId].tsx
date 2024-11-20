@@ -1,27 +1,78 @@
-import React, { useState } from 'react';
-import { HiHeart, HiChatBubbleOvalLeft, HiFlag, HiPencilSquare, HiTrash, HiPlus, HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import { useRouter } from 'next/router';
-import { Card, Button } from 'ui';
+import React, { useState } from 'react';
+import { 
+  HiChevronLeft, 
+  HiChevronRight, 
+  HiOutlineInformationCircle, 
+  HiOutlineShoppingCart,
+  HiShieldCheck,
+  HiHeart,
+  HiFlag,
+  HiArrowPath
+} from 'react-icons/hi2';
+import { Card, Button, Tabs } from 'ui';
+import { useSyncQueryWithStore } from "@sahil/lib/hooks/utilities/useQueryStore";
+import type { TabValue as BaseTabValue } from "@sahil/lib/hooks/utilities/useQueryStore";
+import { useFetchProductById } from "@sahil/lib/hooks/products";
+
+export type TabValue = BaseTabValue;
+
+type TabItem = {
+  icon?: React.ReactNode;
+  label: string;
+  value: TabValue;
+};
+
+const ProductTabs: TabItem[] = [
+  {
+    label: "Product Details",
+    value: "info",
+    icon: <HiOutlineInformationCircle />,
+  },
+  {
+    label: "Orders Management",
+    value: "progress",
+    icon: <HiOutlineShoppingCart />,
+  },
+];
 
 const ProductDetailsPage = ({ isSellerView = false }) => {
+  const router = useRouter();
+  console.log(router.query);
+  const { productId } = router.query;
+  const { product, loading, error } = useFetchProductById(productId as string);
+  const { currentTab, handleChange } = useSyncQueryWithStore();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isEditing, setIsEditing] = useState(false);
 
-  const images = [
-    "https://res.cloudinary.com/dwacr3zpp/image/upload/v1711123098/Sahil/How-to-Choose-a-Laptop-August-2023-Gear.webp",
-    "https://res.cloudinary.com/dwacr3zpp/image/upload/v1711123098/Sahil/How-to-Choose-a-Laptop-August-2023-Gear.webp",
-    "https://res.cloudinary.com/dwacr3zpp/image/upload/v1711123098/Sahil/How-to-Choose-a-Laptop-August-2023-Gear.webp"
+  console.log(product);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading product</div>;
+  if (!product) return <div>Product not found</div>;
+
+  const images = product?.mainImage ? [product.mainImage] : [];
+
+  // Sample pending orders data
+  const pendingOrders = [
+    {
+      id: 1,
+      orderId: "1001",
+      quantity: 1,
+      type: "Recurring Monthly Order"
+    },
+    {
+      id: 2,
+      orderId: "1002",
+      quantity: 1,
+      type: "Recurring Monthly Order"
+    },
+    {
+      id: 3,
+      orderId: "1003",
+      quantity: 1,
+      type: "Recurring Monthly Order"
+    }
   ];
-
-  const [viewMode, setViewMode] = useState('supplier');
-  const [isAdmin, setIsAdmin] = useState(false); // This should be set based on user role
-
-  const toggleView = () => {
-    setViewMode(prevMode => prevMode === 'supplier' ? 'business' : 'supplier');
-  };
-
-  const isSupplierView = viewMode === 'supplier';
-  const isBusinessView = viewMode === 'business';
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -31,167 +82,179 @@ const ProductDetailsPage = ({ isSellerView = false }) => {
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
-  return (
-    <Card className="max-w-4xl mx-auto p-4">
-      <header className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Product Details</h1>
-        {isSellerView && (
-          <div className="flex space-x-2">
-            <Button
-              onClick={() => setIsEditing(!isEditing)}
-              variant="primary"
-            >
-              {isEditing ? 'Save Changes' : 'Edit Listing'}
-            </Button>
-            <Button
-              variant="danger"
-            >
-              Delete Listing
-            </Button>
-          </div>
-        )}
-      </header>
+  const handleTabClick = (value: TabValue) => {
+    handleChange(value);
+  };
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="relative">
-          <img src={images[currentImageIndex]} alt="Product" className="w-full h-auto rounded-lg" />
-          <Button onClick={prevImage} className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1" aria-label="Previous image">
-            <HiChevronLeft />
-          </Button>
-          <Button onClick={nextImage} className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1" aria-label="Next image">
-            <HiChevronRight />
-          </Button>
-          <div className="flex justify-center mt-2">
-            {images.map((_, index) => (
-              <div
-                key={index}
-                className={`h-2 w-2 rounded-full mx-1 ${index === currentImageIndex ? 'bg-green-500' : 'bg-gray-300'}`}
-              />
-            ))}
+  return (
+    <section className="space-y-4">
+      <div className="flex flex-col lg:flex-row gap-4">
+        <div className="w-full xl:basis-2/3 space-y-4">
+          <Tabs
+            items={ProductTabs}
+            onTabClick={handleChange}
+            currentTab={currentTab}
+            className="overflow-x-auto"
+          />
+          
+          <div>
+            {currentTab === "info" && (
+              <div className="space-y-4">
+                <Card>
+                  <div className="relative">
+                    <img 
+                      src={product.mainImage || '/placeholder-image.jpg'} 
+                      alt={product.name} 
+                      className="w-full aspect-square object-cover rounded-lg"
+                    />
+                  </div>
+                </Card>
+
+                <Card>
+                  <div className="p-6">
+                    <div className="space-y-6">
+                      <div>
+                        <h1 className="text-2xl font-semibold mb-2">{product.name}</h1>
+                        <p className="text-sm text-gray-500">Added on {new Date(product.created_at).toLocaleDateString()}</p>
+                      </div>
+
+                      <div>
+                        <h2 className="text-3xl font-bold mb-2">
+                          USh {product.price.toLocaleString()}
+                        </h2>
+                        {product.discount > 0 && (
+                          <div className="text-sm text-green-600">
+                            {product.discount}% off
+                          </div>
+                        )}
+                        <div className="secondary">
+                          {product.inStock ? 'In Stock' : 'Out of Stock'}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h3 className="font-medium mb-2">Quantity Available</h3>
+                        <p>{product.quantity}</p>
+                      </div>
+
+                      <div>
+                        <h3 className="font-medium mb-2">Description</h3>
+                        <p className="text-gray-600">{product.description}</p>
+                      </div>
+
+                      {!isSellerView && (
+                        <div className="flex gap-3">
+                          <Button className="flex-1">
+                            Place Order
+                          </Button>
+                          <Button variant="outline" className="p-2">
+                            <HiHeart className="w-5 h-5" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            )}
+
+            {currentTab === "progress" && (
+              <Card>
+                <div className="p-6 space-y-6">
+                  <div>
+                    <h2 className="text-xl font-semibold">Pending Orders</h2>
+                    <p className="text-sm text-gray-500">Manage incoming orders for this product</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    {pendingOrders.map((order) => (
+                      <Card key={order.id} className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <h3 className="font-medium">Order #{order.id}</h3>
+                              <div className="secondary">Pending</div>
+                            </div>
+                            <p className="text-sm text-gray-500">Customer ID: {order.orderId}</p>
+                            <div className="space-y-1">
+                              <p className="text-sm">Quantity: {order.quantity}</p>
+                              <p className="text-sm flex items-center text-gray-500">
+                                <HiArrowPath className="w-4 h-4 mr-2" />
+                                {order.type}
+                              </p>
+                            </div>
+                          </div>
+                          <Button variant="outline">Manage Order</Button>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            )}
           </div>
-          {isSellerView && (
-            <Button className="absolute bottom-2 right-2 rounded-full p-2 btn-primary" aria-label="Add image">
-              <HiPlus />
-            </Button>
-          )}
         </div>
 
-        <Card>
-          <h2 className="text-xl font-semibold mb-2">
-            {isEditing ? (
-              <input
-                type="text"
-                defaultValue="Embelazo by Clack Ssaku"
-                className="w-full border rounded px-2 py-1"
-                aria-label="Product name"
-              />
-            ) : (
-              "Embelazo by Clack Ssaku"
-            )}
-          </h2>
-          <p className="text-2xl font-bold mb-4">
-            {isEditing ? (
-              <input
-                type="text"
-                defaultValue="USh 2,000,000"
-                className="w-full border rounded px-2 py-1"
-                aria-label="Product price"
-              />
-            ) : (
-              "USh 2,000,000"
-            )}
-          </p>
-          <div className="mb-4">
-            <span className="font-semibold">Condition: </span>
-            {isEditing ? (
-              <select className="border rounded px-2 py-1" aria-label="Product condition">
-                <option>New</option>
-                <option>Used</option>
-              </select>
-            ) : (
-              "New"
-            )}
-          </div>
-          <div className="mb-4">
-            <span className="font-semibold">Quantity: </span>
-            {isEditing ? (
-              <input
-                type="number"
-                defaultValue="1"
-                className="border rounded px-2 py-1 w-16"
-                aria-label="Product quantity"
-              />
-            ) : (
-              "1"
-            )}
-          </div>
-          <p className="mb-4">
-            {isEditing ? (
-              <textarea
-                defaultValue="Description of the product goes here..."
-                className="w-full border rounded px-2 py-1"
-                rows={4}
-                aria-label="Product description"
-              />
-            ) : (
-              "Description of the product goes here..."
-            )}
-          </p>
-          {!isSellerView && (
-            <div className="flex space-x-2 mb-4">
-              <Button variant="primary" className="flex items-center">
-                <HiChatBubbleOvalLeft className="mr-2" /> Contact Seller
-              </Button>
-              <Button variant="secondary" className="flex items-center">
-                <HiHeart className="mr-2" /> Save
-              </Button>
+        <div className="w-full xl:basis-1/3 space-y-4">
+          <Card className="p-6">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <HiOutlineInformationCircle className="w-5 h-5" />
+                <h2 className="text-lg font-semibold">Supplier Information</h2>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <h3 className="text-sm text-gray-500">Company Name</h3>
+                  <p className="font-medium">{product.supplier.name}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm text-gray-500">Contact Person</h3>
+                  <p className="font-medium">{product.supplier.contactName}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm text-gray-500">Contact Details</h3>
+                  <p className="font-medium">{product.supplier.contactEmail}</p>
+                  <p className="font-medium">{product.supplier.phoneNumber}</p>
+                </div>
+                {!isSellerView && (
+                  <Button 
+                    variant="outline" 
+                    className="w-full mt-4"
+                    onClick={() => window.location.href = `mailto:${product.supplier.contactEmail}`}
+                  >
+                    Contact Supplier
+                  </Button>
+                )}
+              </div>
             </div>
-          )}
-          {!isSellerView && (
-            <Button variant="text" className="text-red-500 flex items-center">
-              <HiFlag className="mr-2" /> Report Abuse
-            </Button>
-          )}
-        </Card>
-      </div>
+          </Card>
 
-      <Card className="mt-6">
-        <h3 className="text-lg font-semibold mb-2">Safety Tips</h3>
-        <ul className="list-disc pl-5">
-          <li>Avoid paying in advance, even for delivery</li>
-          <li>Meet with the seller at a safe public place</li>
-          <li>Inspect the item and ensure it&apos;s exactly what you want</li>
-          <li>Make sure that the packed item is the one you&apos;ve inspected</li>
-          <li>Only pay if you&apos;re satisfied</li>
-        </ul>
-      </Card>
-    </Card>
+          <Card className="p-6">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <HiShieldCheck className="w-5 h-5" />
+                <h2 className="text-lg font-semibold">Safety Tips</h2>
+              </div>
+              <ul className="space-y-2 text-gray-600">
+                <li>• Avoid paying in advance, even for delivery</li>
+                <li>• Meet with the seller at a safe public place</li>
+                <li>• Inspect the item and ensure it&apos;s exactly what you want</li>
+                <li>• Make sure that the packed item is the one you&apos;ve inspected</li>
+                <li>• Only pay if you&apos;re satisfied</li>
+              </ul>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <Button variant="outline" className="w-full flex items-center justify-center">
+              <HiFlag className="w-5 h-5 mr-2" />
+              Report Issue
+            </Button>
+          </Card>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default function ProductPage() {
-  const [viewMode, setViewMode] = useState('buyer');
-  const router = useRouter();
-  const { productId } = router.query;
-
-  return (
-    <div className="p-4">
-      <div className="mb-4">
-        <Button
-          onClick={() => setViewMode('buyer')}
-          variant={viewMode === 'buyer' ? 'primary' : 'secondary'}
-          className="mr-2"
-        >
-          Buyer View
-        </Button>
-        <Button
-          onClick={() => setViewMode('seller')}
-          variant={viewMode === 'seller' ? 'primary' : 'secondary'}
-        >
-          Seller View
-        </Button>
-      </div>
-      <ProductDetailsPage isSellerView={viewMode === 'seller'} />
-    </div>
-  );
-}
+export default ProductDetailsPage;

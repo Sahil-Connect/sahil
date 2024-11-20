@@ -30,7 +30,7 @@ export const Dropdown: FC<DropdownProps> = ({ options, CTA }) => {
         {options?.map((option: DropdownOption) => (
           <li key={option?.id}>
             <button className="btn btn-sm btn-ghost">
-              <Icon icon={option.icon} /> {option.label}
+              {option.icon && <Icon icon={option.icon} />} {option.label}
             </button>
           </li>
         ))}
