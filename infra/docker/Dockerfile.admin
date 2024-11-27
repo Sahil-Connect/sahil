@@ -4,23 +4,25 @@ FROM node:${NODE_VERSION}-alpine As base
 
 FROM base AS builder
 RUN apk add --no-cache libc6-compat
-RUN apk update
 # Set working directory
 WORKDIR /app
 RUN yarn global add turbo
+
+# Copy all files and lockfile, then prune dependencies
 COPY . .
+COPY yarn.lock yarn.lock
 RUN turbo prune admin --docker
+
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
 RUN apk add --no-cache libc6-compat
-RUN apk update
 WORKDIR /app
 
 # Install the dependencies
 COPY .gitignore .gitignore
-COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
+COPY --from=builder /app/out/json/ .
 RUN yarn install --network-timeout 100000
 
 # Build the project

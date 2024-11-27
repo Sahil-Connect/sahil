@@ -73,3 +73,4 @@ export const useFetchProductById = (productId: string) => {
     error,
   };
 };
+
