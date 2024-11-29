@@ -1,9 +1,7 @@
-import React from 'react';
 import { Card } from 'ui';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 import BusinessSwitcher from '../Shared/BusinessSwitcher';
 import { CustomSelect, type SelectOption } from '../Shared/CustomSelect';
-import { StatusBadge } from './StatusBadge';
 import { HiOutlineCalendarDays } from 'react-icons/hi2';
 
 type DateRange = 'today' | 'week' | 'month' | 'custom';
