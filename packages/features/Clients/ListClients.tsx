@@ -9,13 +9,13 @@ export const ListClients = () => {
   
   const { 
     data: suppliers = [], 
-    isLoading: isSuppliersLoading,
+    loading: isSuppliersLoading,
     error: suppliersError 
   } = useFetchSuppliers();
   
   const { 
     data: businesses = [], 
-    isLoading: isBusinessesLoading,
+    loading: isBusinessesLoading,
     error: businessesError 
   } = useFetchBusinesses();
 
@@ -33,15 +33,16 @@ export const ListClients = () => {
           size={businesses.length} 
           sizeLabel="Businesses" 
           title="Business Clients"
-        />
+        >
         <List
           data={businesses}
           loading={isBusinessesLoading}
           cols={4}
           renderItem={(client) => (
-            <ClientOverviewCard key={client.id} client={client} />
+            <ClientOverviewCard key={client.id} client={client as any} />
           )}
         />
+        </ListHeader>
       </section>
 
       <section className="space-y-4">
@@ -49,15 +50,16 @@ export const ListClients = () => {
           size={suppliers.length} 
           sizeLabel="Suppliers" 
           title="Supplier Clients"
-        />
+        >
         <List
           data={suppliers}
           loading={isSuppliersLoading}
           cols={4}
           renderItem={(client) => (
-            <ClientOverviewCard key={client.id} client={client} />
+            <ClientOverviewCard key={client.id} client={client as any} />
           )}
-        />
+          />
+          </ListHeader>
       </section>
     </div>
   );
