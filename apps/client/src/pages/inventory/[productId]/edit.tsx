@@ -74,8 +74,8 @@ const EditProductPage = () => {
                 <h2 className="text-lg font-semibold">Need Help?</h2>
               </div>
               <p className="text-gray-600">
-                If you're having trouble updating your product or have any questions,
-                our support team is here to help.
+                {`If you're having trouble updating your product or have any questions,
+                our support team is here to help.`}
               </p>
               <button 
                 onClick={() => window.location.href = 'mailto:support@example.com'}
