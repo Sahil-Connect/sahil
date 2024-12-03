@@ -1,4 +1,5 @@
 import { Input, PartnerTitle, Select } from "@/components/shared";
+import { HiOutlineArrowUpRight } from "react-icons/hi2";
 
 export const metadata = {
   title: "Partners - Sahil App",
@@ -47,9 +48,7 @@ export default function CouriersPage() {
             >
               Submit
               <span className="relative group flex justify-center items-center rounded-full">
-                <svg className="group-hover:rotate-45 transition" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                  <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
-                </svg>
+                <HiOutlineArrowUpRight className="group-hover:rotate-45 transition" />
               </span>
             </button>
           </div>
