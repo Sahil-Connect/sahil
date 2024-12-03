@@ -10,12 +10,16 @@ export const Benefits = () => {
   return (
     <SectionWrapper>
       <GridContainer>
-        <SectionTitle subtitle="Explore our Benefits" title="Why Choose Us" />
-        <ul className="grid items-center gap-y-10 md:grid-cols-2 md:gap-x-10 lg:grid-cols-3 lg:gap-14">
+        <SectionTitle 
+          subtitle="Benefits" 
+          title="Why Choose Us" 
+          textCentered={true}
+        />
+        <ul className="grid items-center gap-y-12 md:grid-cols-2 md:gap-x-10 lg:grid-cols-3 lg:gap-14">
           {benefitsData.map(({ id, image, title, desc }) => {
             return (
               <li key={id}>
-                <div className="flex justify-center flex-nowrap items-center w-16 h-16 p-2 border border-solid border-lime bg-lime rounded-[8rem] mb-5">
+                <div className="flex justify-center flex-nowrap items-center w-16 h-16 p-2 bg-zinc-100 rounded-full mb-5">
                   <div className="flex justify-center items-center">
                     <Image
                       src={image}

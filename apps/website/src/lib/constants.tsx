@@ -5,8 +5,16 @@ import benefitThree from "../../public/benefits-3.svg";
 import benefitFour from "../../public/benefits-4.svg";
 import benefitFive from "../../public/benefits-5.svg";
 import benefitSix from "../../public/benefits-6.svg";
-import agentSupplier from "../../public/agent-supplier.png";
-import agentBusiness from "../../public/agent-business.png";
+import featureOne from "../../public/feature-1.svg";
+import featureTwo from "../../public/feature-2.svg";
+import featureThree from "../../public/feature-3.svg";
+
+interface FeaturesData {
+  id: number;
+  image: StaticImageData;
+  title: string;
+  description: string;
+}
 
 interface BenefitsData {
   id: number;
@@ -15,20 +23,32 @@ interface BenefitsData {
   desc: string;
 }
 
-interface RegistrationRoleData {
-  id: number;
-  title: string;
-  description: string;
-  image: StaticImageData;
-  link: string;
-  alt: string;
-}
-
 interface FaqData {
   id: number;
   title: string;
   desc: string;
 }
+
+export const featuresData: FeaturesData[] = [
+  {
+    id: 1,
+    title: "Supplier Matching Algorithm",
+    description: "We connect you with the right suppliers based on various factors such as product type, location, quantity, and price.",
+    image: featureOne,
+  },
+  {
+    id: 2,
+    title: "Seamless Delivery Process",
+    description: "Your  orders are distributed from suppliers to businesses, and from businesses to customers in a timely manner.",
+    image: featureTwo,
+  },
+  {
+    id: 3,
+    title: "Automated Procurement Process",
+    description: "Significantly reduce manual labor, eliminate errors, and streamline operations through our automated systems.",
+    image: featureThree,
+  },
+];
 
 export const benefitsData: BenefitsData[] = [
   {
@@ -66,27 +86,6 @@ export const benefitsData: BenefitsData[] = [
     image: benefitSix,
     title: "Data Analysis",
     desc: "We provide valuable insights and data that can help businesses make informed decisions.",
-  },
-];
-
-export const registrationRoleData: RegistrationRoleData[] = [
-  {
-    id: 1,
-    title: "Are You a Supplier Looking to Grow Your Business?",
-    description:
-      "Sahil is not just a platform - it’s your partner in achieving growth and success. Join Sahil today and revolutionize your supply operations.",
-    image: agentSupplier,
-    link: "/",
-    alt: "agent-supplier",
-  },
-  {
-    id: 2,
-    title: "Are You a Business in Need of Supplies?",
-    description:
-      "Take your business to new heights, tap into a network of potential suppliers and customers. Join Sahil today and grow your business.",
-    image: agentBusiness,
-    link: "/",
-    alt: "agent-business",
   },
 ];
 

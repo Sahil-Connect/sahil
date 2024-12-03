@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "../../../public/logo.svg";
 import { GridContainer } from "../shared";
+import { HiOutlineBars3 } from "react-icons/hi2";
 
 const links = [
   {
@@ -9,7 +10,7 @@ const links = [
     href: "/",
   },
   {
-    name: "About",
+    name: "About Us",
     href: "/about",
   },
   {
@@ -17,38 +18,24 @@ const links = [
     href: "/features",
   },
   {
-    name: "Blog",
-    href: "/blog",
+    name: "Partner with Us",
+    href: "/partners",
   },
   {
-    name: "Contact",
+    name: "Contact Us",
     href: "/contact",
   },
 ];
 
 export const Navbar = () => {
   return (
-    <header className="w-full h-16 lg:h-20 bg-zinc-50">
+    <header className="w-full h-16 lg:h-20 bg-gray-50 border-b border-b-gray-300 lg:border-none">
       <GridContainer className="px-2">
         <nav className="navbar p-0 lg:h-20">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
+                <HiOutlineBars3 size={24} />
               </label>
               <ul
                 tabIndex={0}
@@ -77,14 +64,14 @@ export const Navbar = () => {
               />
             </Link>
           </div>
-          <div className="navbar-center hidden lg:flex border border-gray-50 rounded-full shadow">
+          <div className="navbar-center hidden lg:flex lg:border lg:bg-white lg:px-4 lg:rounded-full">
             <ul className="menu menu-horizontal px-1 lg:gap-x-6">
               {links.map(({ name, href }) => {
                 return (
                   <li key={name}>
                     <Link
                       href={href}
-                      className="px-3 py-1 text-zinc-900 text-base transition duration-300 hover:text-primary"
+                      className="px-2 py-2 text-zinc-900 transition duration-300 hover:text-primary focus:text-primary lg:rounded-full"
                     >
                       {name}
                     </Link>
@@ -94,9 +81,14 @@ export const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <Link href={"/"} className="btn btn-primary font-medium">
+            <a 
+              href="https://agent.sahil.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary font-medium text-white rounded-full"
+            >
               Get Started
-            </Link>
+            </a>
           </div>
         </nav>
       </GridContainer>

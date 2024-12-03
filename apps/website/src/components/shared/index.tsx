@@ -3,3 +3,6 @@ export * from "./GridContainer";
 export * from "./PageTitle";
 export * from "./SectionWrapper";
 export * from "./SectionTitle";
+export * from "./Card";
+export * from "./Form";
+export * from "./JourneySection";

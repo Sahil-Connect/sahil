@@ -10,7 +10,7 @@ export const SectionWrapper = ({
   children,
   className,
 }: SectionWrapperProps) => {
-  const defaultClass = "pt-16 pb-8 px-0 lg:pt-24";
+  const defaultClass = "pt-20 pb-4 px-0 lg:pt-24";
   const mergedClass = twMerge(defaultClass, className);
-  return <div className={mergedClass}>{children}</div>;
+  return <section className={mergedClass}>{children}</section>;
 };
