@@ -6,3 +6,5 @@ export * from "./SectionTitle";
 export * from "./Card";
 export * from "./Form";
 export * from "./JourneySection";
+export * from "./ContactCard";
+export * from "./PartnerCard";

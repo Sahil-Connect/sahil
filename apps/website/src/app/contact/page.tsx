@@ -1,4 +1,5 @@
 import { 
+  ContactCard,
   GridContainer, 
   PageTitle, 
 } from "@/components/shared";
@@ -29,47 +30,31 @@ export default function ContactPage() {
                 If you have any questions or need assistance, feel free to reach out to us through our contact details below.
               </p>
               <div className="mt-12 grid lg:grid-cols-3 gap-3">
-                <div className="group relative px-5 py-10 w-full flex flex-col gap-2 justify-between items-center border rounded-lg text-center overflow-hidden transition duration-300 ease-in hover:bg-green-50 hover:border-green-300">
-                  <div className="flex items-center justify-center rounded-full">
-                    <span className="text-3xl group-hover:text-green-700">
-                      <HiEnvelope />
-                    </span>
-                  </div>
-                  <div className="z-50">
-                    <h3 className="text-lg font-bold group-hover:text-green-700">Drop us a line</h3>
-                    <a href="mailto:sahil.business@gmail.com" className="text-gray-500 group-hover:text-green-400">sahil.business@gmail.com</a>
-                  </div>
-                  <div className="hidden absolute w-20 h-20 bottom-0 right-0 bg-green-200 rounded-tl-full rounded-tr-none z-0 delay-100 ease-in-out group-hover:block"></div>
-                  <div className="hidden absolute w-16 h-16 bottom-0 right-0 bg-green-300 rounded-tl-full rounded-tr-none z-0 delay-200 ease-in-out group-hover:block"></div>
-                </div>
-
-                <div className="group relative px-5 py-10 w-full flex flex-col gap-2 justify-between items-center border rounded-lg text-center overflow-hidden transition duration-300 ease-in hover:bg-blue-50 hover:border-blue-300">
-                  <div className="flex items-center justify-center rounded-full">
-                    <span className="text-3xl group-hover:text-blue-700">
-                      <HiMapPin />
-                    </span>
-                  </div>
-                  <div className="z-50">
-                    <h3 className="text-lg font-bold group-hover:text-blue-700">Our Head Office</h3>
-                    <p className="text-gray-500 group-hover:text-blue-400">Norrsken House Kigali <br/> 1 KN 78 St, Kigali - Rwanda</p>
-                  </div>
-                  <div className="hidden absolute w-20 h-20 bottom-0 right-0 bg-blue-200 rounded-tl-full rounded-tr-none z-0 delay-100 ease-in-out group-hover:block"></div>
-                  <div className="hidden absolute w-16 h-16 bottom-0 right-0 bg-blue-300 rounded-tl-full rounded-tr-none z-0 delay-200 ease-in-out group-hover:block"></div>
-                </div>
-
-                <div className="group relative px-5 py-10 w-full flex flex-col gap-2 justify-between items-center border rounded-lg text-center overflow-hidden transition duration-300 ease-in hover:bg-purple-50 hover:border-purple-300">
-                  <div className="flex items-center justify-center rounded-full">
-                    <span className="text-3xl group-hover:text-purple-700">
-                      <HiPhone />
-                    </span>
-                  </div>
-                  <div className="z-50">
-                    <h3 className="text-lg font-bold group-hover:text-purple-700">Book a Call</h3>
-                    <a href="tel:+250790336525" className="text-gray-500 group-hover:text-purple-400">+250-790-336-525</a>
-                  </div>
-                  <div className="hidden absolute w-20 h-20 bottom-0 right-0 bg-purple-200 rounded-tl-full rounded-tr-none z-0 delay-100 ease-in-out group-hover:block"></div>
-                  <div className="hidden absolute w-16 h-16 bottom-0 right-0 bg-purple-300 rounded-tl-full rounded-tr-none z-0 delay-200 ease-in-out group-hover:block"></div>
-                </div>
+                <ContactCard
+                  icon={HiEnvelope}
+                  title="Drop us a line"
+                  content="sahil.business@gmail.com"
+                  linkHref="mailto:sahil.business@gmail.com"
+                  colorScheme="green"
+                />
+                <ContactCard
+                  icon={HiMapPin}
+                  title="Our Head Office"
+                  content={
+                    <>
+                      Norrsken House Kigali <br/> 
+                      1 KN 78 St, Kigali - Rwanda
+                    </>
+                  }
+                  colorScheme="blue"
+                />
+                <ContactCard
+                  icon={HiPhone}
+                  title="Book a Call"
+                  content="+250-790-336-525"
+                  linkHref="tel:+250790336525"
+                  colorScheme="purple"
+                />
               </div>
             </div>
           </div>
