@@ -1,4 +1,5 @@
-import { PageTitle, GridContainer, ComingSoon } from "@/components/shared";
+import { Benefits, Cta, Features } from "@/components/segments";
+import { PageTitle } from "@/components/shared";
 
 export const metadata = {
   title: "Features - Sahil App",
@@ -14,9 +15,9 @@ export default function FeaturesPage() {
         subtitle="Our Services"
         description="Explore the wide range of features we offer to help you revolutionize your business operations."
       />
-      <GridContainer>
-        <ComingSoon />
-      </GridContainer>
+      <Features />
+      <Benefits />
+      <Cta />
     </>
   );
 }

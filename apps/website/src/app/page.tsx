@@ -3,9 +3,9 @@ import {
   Features,
   About,
   Benefits,
-  RegistrationRole,
   Cta,
   Faqs,
+  ParterWithUs,
 } from "../components/segments";
 
 export default function Page() {
@@ -15,7 +15,7 @@ export default function Page() {
       <Features />
       <About />
       <Benefits />
-      <RegistrationRole />
+      <ParterWithUs />
       <Cta />
       <Faqs />
     </main>
