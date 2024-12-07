@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
 
-interface PartnerCardProps {
+export interface PartnerCardProps {
   title: string;
   description: string;
   linkHref: string;
-  colorScheme?: 'purple' | 'blue' | 'neutral';
+  colorScheme?: 'slate' | 'gray' | 'neutral';
 }
 
 interface PartnerTitleProps {
@@ -17,22 +17,22 @@ export const PartnerCard = ({
   title,
   description,
   linkHref,
-  colorScheme = 'purple'
+  colorScheme = 'slate'
 }: PartnerCardProps) => {
   const colorVariants = {
-    purple: {
-      hover: 'hover:bg-purple-50 hover:border-purple-300',
-      titleHover: 'group-hover:text-purple-700',
-      descHover: 'group-hover:text-purple-400',
-      btnHover: 'group-hover:bg-purple-600',
-      bgColors: ['bg-purple-200', 'bg-purple-300']
+    slate: {
+      hover: 'hover:bg-slate-50 hover:border-slate-300',
+      titleHover: 'group-hover:text-slate-700',
+      descHover: 'group-hover:text-slate-400',
+      btnHover: 'group-hover:bg-slate-600',
+      bgColors: ['bg-slate-200', 'bg-slate-300']
     },
-    blue: {
-      hover: 'hover:bg-blue-50 hover:border-blue-300',
-      titleHover: 'group-hover:text-blue-700',
-      descHover: 'group-hover:text-blue-400',
-      btnHover: 'group-hover:bg-blue-600',
-      bgColors: ['bg-blue-200', 'bg-blue-300']
+    gray: {
+      hover: 'hover:bg-gray-50 hover:border-gray-300',
+      titleHover: 'group-hover:text-gray-700',
+      descHover: 'group-hover:text-gray-400',
+      btnHover: 'group-hover:bg-gray-600',
+      bgColors: ['bg-gray-200', 'bg-gray-300']
     },
     neutral: {
       hover: 'hover:bg-neutral-50 hover:border-neutral-300',

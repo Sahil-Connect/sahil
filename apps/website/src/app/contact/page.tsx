@@ -1,5 +1,6 @@
 import { 
   ContactCard,
+  ContactCardProps,
   GridContainer, 
   PageTitle, 
 } from "@/components/shared";
@@ -10,6 +11,34 @@ export const metadata = {
   title: "Contact Us - Sahil App",
   description: "We’re here to help and would love to hear from you.",
 };
+
+const contactDetails: ContactCardProps[] = [
+  {
+    icon: HiEnvelope,
+    title: "Drop us a line",
+    content: "sahil.business@gmail.com",
+    linkHref: "mailto:sahil.business@gmail.com",
+    colorScheme: "neutral"
+  },
+  {
+    icon: HiMapPin,
+    title: "Our Head Office",
+    content: (
+      <>
+        Norrsken House Kigali <br/> 
+        1 KN 78 St, Kigali - Rwanda
+      </>
+    ),
+    colorScheme: "gray"
+  },
+  {
+    icon: HiPhone,
+    title: "Book a Call",
+    content: "+250-790-336-525",
+    linkHref: "tel:+250790336525",
+    colorScheme: "slate"
+  }
+];
 
 export default function ContactPage() {
   return (
@@ -30,31 +59,16 @@ export default function ContactPage() {
                 If you have any questions or need assistance, feel free to reach out to us through our contact details below.
               </p>
               <div className="mt-12 grid lg:grid-cols-3 gap-3">
-                <ContactCard
-                  icon={HiEnvelope}
-                  title="Drop us a line"
-                  content="sahil.business@gmail.com"
-                  linkHref="mailto:sahil.business@gmail.com"
-                  colorScheme="green"
-                />
-                <ContactCard
-                  icon={HiMapPin}
-                  title="Our Head Office"
-                  content={
-                    <>
-                      Norrsken House Kigali <br/> 
-                      1 KN 78 St, Kigali - Rwanda
-                    </>
-                  }
-                  colorScheme="blue"
-                />
-                <ContactCard
-                  icon={HiPhone}
-                  title="Book a Call"
-                  content="+250-790-336-525"
-                  linkHref="tel:+250790336525"
-                  colorScheme="purple"
-                />
+                {contactDetails.map((contact, index) => (
+                  <ContactCard
+                    key={index}
+                    icon={contact.icon}
+                    title={contact.title}
+                    content={contact.content}
+                    linkHref={contact.linkHref}
+                    colorScheme={contact.colorScheme}
+                  />
+                ))}
               </div>
             </div>
           </div>

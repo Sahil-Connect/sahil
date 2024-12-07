@@ -1,11 +1,11 @@
 import { IconType } from 'react-icons';
 
-interface ContactCardProps {
+export interface ContactCardProps {
   icon: IconType;
   title: string;
   content: string | React.ReactNode;
   linkHref?: string;
-  colorScheme?: 'green' | 'blue' | 'purple';
+  colorScheme?: 'neutral' | 'gray' | 'slate';
 }
 
 export const ContactCard = ({ 
@@ -13,29 +13,29 @@ export const ContactCard = ({
   title,
   content,
   linkHref,
-  colorScheme = 'green'
+  colorScheme = 'neutral'
 }: ContactCardProps) => {
   const colorVariants = {
-    green: {
-      hover: 'hover:bg-green-50 hover:border-green-300',
-      iconHover: 'group-hover:text-green-700',
-      titleHover: 'group-hover:text-green-700',
-      contentHover: 'group-hover:text-green-700',
-      bgColors: ['bg-green-200', 'bg-green-300']
+    neutral: {
+      hover: 'hover:bg-neutral-50 hover:border-neutral-300',
+      iconHover: 'group-hover:text-neutral-700',
+      titleHover: 'group-hover:text-neutral-700',
+      contentHover: 'group-hover:text-neutral-700',
+      bgColors: ['bg-neutral-200', 'bg-neutral-300']
     },
-    blue: {
-      hover: 'hover:bg-blue-50 hover:border-blue-300',
-      iconHover: 'group-hover:text-blue-700',
-      titleHover: 'group-hover:text-blue-700',
-      contentHover: 'group-hover:text-blue-400',
-      bgColors: ['bg-blue-200', 'bg-blue-300']
+    gray: {
+      hover: 'hover:bg-gray-50 hover:border-gray-300',
+      iconHover: 'group-hover:text-gray-700',
+      titleHover: 'group-hover:text-gray-700',
+      contentHover: 'group-hover:text-gray-400',
+      bgColors: ['bg-gray-200', 'bg-gray-300']
     },
-    purple: {
-      hover: 'hover:bg-purple-50 hover:border-purple-300',
-      iconHover: 'group-hover:text-purple-700',
-      titleHover: 'group-hover:text-purple-700',
-      contentHover: 'group-hover:text-purple-400',
-      bgColors: ['bg-purple-200', 'bg-purple-300']
+    slate: {
+      hover: 'hover:bg-slate-50 hover:border-slate-300',
+      iconHover: 'group-hover:text-slate-700',
+      titleHover: 'group-hover:text-slate-700',
+      contentHover: 'group-hover:text-slate-400',
+      bgColors: ['bg-slate-200', 'bg-slate-300']
     }
   };
 
