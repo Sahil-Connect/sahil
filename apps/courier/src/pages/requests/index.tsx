@@ -2,7 +2,7 @@ import { ListDeliveryRequests } from "@sahil/features/Deliveries/ListDeliveryReq
 
 export default function Requests() {
   return (
-    <section>
+    <section className="p-4">
       <ListDeliveryRequests />
     </section>
   );

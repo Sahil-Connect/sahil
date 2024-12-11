@@ -49,11 +49,11 @@ export function BottomNav () {
             return (
               <div 
                 key={item.href}
-                className={`${isActive ? 'text-primary' : 'text-muted-foreground'} flex flex-col items-center justify-center gap-2`}
+                className={`flex flex-col items-center justify-center gap-2`}
               >
                 <Link 
                   href={item.href} 
-                  className="flex items-center justify-center gap-2 p-2 rounded-full transition-all duration-200 ease-in-out"
+                  className={`flex items-center justify-center gap-2 p-2 rounded-full transition-all duration-200 ease-in-out ${isActive ? 'flex items-center justify-center rounded-full bg-primary/50 border-secondary/40 border-2  shadow-sm' : ''}`}
                 >
                   <item.icon 
                     size={20} 

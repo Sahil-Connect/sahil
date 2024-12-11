@@ -45,11 +45,13 @@ const destination = {
   type: "Destination",
 };
 
+// lat: -1.94815,
+// lng: 30.06057,
 const currentLocation = {
   id: 6,
   name: "Current Location",
-  lat: -1.94815,
-  lng: 30.06057,
+  lat: -1.9446,
+  lng: 30.0593,
   icon: HiOutlineArrowUpCircle,
   type: "CurrentLocation",
 };
@@ -96,15 +98,42 @@ export const cleanMapStyle = [
 const CurrentLocationMarker = ({ currentLocation }) => {
   return (
     <div
-      className={`flex items-center gap-2 w-fit bg-accent/50  rounded-2xl shadow-lg transition-all duration-200 flex items-center justify-center rounded-full
+      className={`flex items-center gap-2 w-fit bg-accent  rounded-2xl shadow-lg transition-all duration-200 flex items-center justify-center rounded-full
         border-accent/40 
-      border-2 shadow-accent/20 shadow-sm p-2`}
+      border-2 shadow-accent/10 shadow-sm p-2`}
     >
       <currentLocation.icon
         className={`text-primary-foreground/80`}
         size={24}
       />
     </div>
+  );
+};
+
+const LocationMarker = ({ location }) => {
+  return (
+    <div
+    className={
+      "flex items-center gap-2 w-40 bg-background/55 backdrop-blur supports-[backdrop-filter]:bg-background/20 rounded-2xl shadow-lg transition-all duration-200"
+    }
+  >
+    <div
+      className={`flex items-center justify-center rounded-full bg-primary/50 border-secondary/40 border-2 shadow-secondary/20 shadow-sm p-2`}
+    >
+      <location.icon
+        className={`text-secondary-foreground/10`} size={20}
+      />
+    </div>
+
+    {/* Text Content */}
+    <div className="py-1">
+      <p
+        className={`font-medium text-secondary-foreground`}
+      >
+        {location.name}
+      </p>
+    </div>
+  </div>
   );
 };
 
@@ -188,8 +217,6 @@ export const MapView = () => {
           }}
         >
           {[origin, destination, currentLocation].map((location) => {
-            console.log("Location:", location);
-            console.log("type", location.type === "CurrentLocation");
             return (
               <React.Fragment key={location.id}>
                 <OverlayView
@@ -206,42 +233,7 @@ export const MapView = () => {
                   {location.type === "CurrentLocation" ? (
                     <CurrentLocationMarker currentLocation={location} />
                   ) : (
-                    <div
-                      className={
-                        "flex items-center gap-2 w-56 bg-background/55 backdrop-blur supports-[backdrop-filter]:bg-background/20 rounded-2xl shadow-lg transition-all duration-200 py-1"
-                      }
-                    >
-                      <div
-                        className={`w-8 h-8 flex items-center justify-center rounded-full
-                              ${
-                                location.id === 6
-                                  ? "bg-primary/10 border-primary/40"
-                                  : "bg-secondary/10 border-secondary/40"
-                              } 
-                              border-2 shadow-secondary/20 shadow-sm p-2`}
-                      >
-                        <location.icon
-                          className={`w-6 h-6 ${
-                            location.id === 6
-                              ? "text-primary-foreground/80"
-                              : "text-secondary-foreground/80"
-                          }`}
-                        />
-                      </div>
-
-                      {/* Text Content */}
-                      <div>
-                        <p
-                          className={`font-medium ${
-                            location.id === 6
-                              ? "text-primary-foreground"
-                              : "text-secondary-foreground"
-                          }`}
-                        >
-                          {location.name}
-                        </p>
-                      </div>
-                    </div>
+                    <LocationMarker location={location} />
                   )}
                 </OverlayView>
               </React.Fragment>
