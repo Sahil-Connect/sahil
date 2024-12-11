@@ -22,8 +22,8 @@ const navItems: NavItem[] = [
       },
     {
       icon: HiOutlineMapPin,
-      label: 'Discover',
-      href: '/discover'
+      label: 'Deliveries',
+      href: '/deliveries'
     },
     {
       href: "/requests",
