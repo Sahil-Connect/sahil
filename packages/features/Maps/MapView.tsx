@@ -50,8 +50,8 @@ const destination = {
 const currentLocation = {
   id: 6,
   name: "Current Location",
-  lat: -1.9446,
-  lng: 30.0593,
+lat: -1.94815,
+lng: 30.06057,
   icon: HiOutlineArrowUpCircle,
   type: "CurrentLocation",
 };
