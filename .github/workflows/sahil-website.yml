@@ -45,6 +45,19 @@ on:
   push:
     branches: ["develop", "main"]
 
+env:
+  PATH_TO_DOCKERFILE: infra/docker/Dockerfile.website
+  DOCKER_BUILD_DIR: .
+  IMAGE_TAG: sahil-website
+  LIFECYCLE_POLICY_FILE: policy.json
+  BACKEND_S3_BUCKET: sahil-terraform-state-bucket
+  BACKEND_IAM_ROLE: workload-assumable-role
+  GITHUB_IAM_ROLE: github-actions-role
+  AWS_ACCOUNT_ID: 060795911441
+  AWS_REGION: eu-west-1
+  BACKEND_DYNAMODB_TABLE: sahil-terraform-table-locks
+
+
 # concurrency required to avoid terraform lock contention during ECR provisioning
 concurrency: ci-${{ github.repository }}-website-docker-pipeline
 
