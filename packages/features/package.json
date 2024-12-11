@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@sahil/lib": "*",
+    "@react-google-maps/api": "^2.20.3",
     "@sahil/configs": "*",
+    "@sahil/lib": "*",
     "ui": "*"
   }
 }
