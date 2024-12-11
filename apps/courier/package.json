@@ -12,7 +12,7 @@
     "@apollo/react-hooks": "^4.0.0",
     "@formkit/auto-animate": "^0.7.0",
     "@hookform/resolvers": "^3.3.0",
-    "@react-google-maps/api": "^2.19.2",
+    "@react-google-maps/api": "^2.20.3",
     "@sahil/configs": "*",
     "@sahil/features": "*",
     "@sahil/lib": "*",
