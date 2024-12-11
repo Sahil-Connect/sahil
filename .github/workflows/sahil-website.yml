@@ -42,6 +42,8 @@ on:
         description: DynamoDB table for State lock
         default: "sahil-terraform-table-locks"
         type: string
+  push:
+    branches: ["develop", "main"]
 
 # concurrency required to avoid terraform lock contention during ECR provisioning
 concurrency: ci-${{ github.repository }}-website-docker-pipeline
