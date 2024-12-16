@@ -2,8 +2,11 @@ import { useState } from "react";
 import { BusinessOverviewCard } from "./BusinessOverviewCard";
 import { useFetchBusinesses } from "@sahil/lib/hooks/businesses";
 import { List, ListHeader, ListErrorState, ListPagination } from "ui";
+import { CollectionControls } from "@sahil/features/shared/CollectionControls";
+import { useSession } from "next-auth/react";
 
 export const ListBusinesses = () => {
+  const { data: session } = useSession();
   const [page, setPage] = useState(0);
   const {
     data: businesses,
@@ -41,10 +44,7 @@ export const ListBusinesses = () => {
         sizeLabel="Businesses"
         title="Businesses"
       >
-        <ListPagination
-          onNextPage={onNextPage}
-          onPreviousPage={onPreviousPage}
-        />
+        <CollectionControls user={session?.user} title="Businesses" />
       </ListHeader>
       <List
         data={businesses}

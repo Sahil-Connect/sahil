@@ -17,15 +17,7 @@ export const ListHeader: React.FC<ListHeaderProps> = ({
 }) => {
   return (
     // <div className="flex items-center justify-center md:justify-between">
-    <div className="w-full flex items-center justify-between">
-      <div className="flex gap-2 items-center">
-        {title && <h3 className="text-lg">{title}</h3>}
-        {(size || sizeLabel) && (
-          <div className="badge badge-accent">
-            {size} {sizeLabel}
-          </div>
-        )}
-      </div>
+    <div className="">
       {children}
     </div>
   );

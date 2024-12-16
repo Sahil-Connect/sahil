@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import logo from "../../public/logo-alt.svg";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
-import { Navbar } from "ui";
+import { Button, Navbar } from "ui";
 type LayoutProps = {
   children: ReactNode;
 };
@@ -12,6 +12,7 @@ import {
   HiOutlineMap,
   HiOutlineIdentification,
   HiOutlineBuildingOffice2,
+  HiMiniArrowLeftCircle, HiArrowPath
 } from "react-icons/hi2";
 
 const links = [
@@ -45,10 +46,18 @@ const links = [
 export default function Layout({ children, ...props }: LayoutProps) {
   const router = useRouter();
   const { data: session } = useSession();
+  const isAuthRoute = router.pathname.startsWith('/auth');
 
   const onSignOut = async () => {
     await signOut();
     router.push("/auth/signin");
+  };
+  const handleBack = () => {
+    router.back();
+  };
+
+  const handleRefresh = () => {
+    router.replace(router.asPath);
   };
   return (
     <>
@@ -56,12 +65,36 @@ export default function Layout({ children, ...props }: LayoutProps) {
         <Navbar
           links={links}
           logo={logo}
-          header="Admin"
+          header="Agent"
           onSignOut={onSignOut}
           user={session?.user}
         />
       )}
-      <main className={session?.user ? "p-4" : "p-0"}>{children}</main>
+      <main className={isAuthRoute ? "p-0" : "p-4 space-y-4"}>
+        {!isAuthRoute && router.pathname !== "/" && (
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={handleBack}
+              variant="ghost"
+              size="sm"
+              className="flex items-center text-gray-600 hover:text-gray-900"
+            >
+              <HiMiniArrowLeftCircle className="w-5 h-5 mr-1" />
+              Back
+            </Button>
+            <Button
+              onClick={handleRefresh}
+              variant="ghost"
+              size="sm"
+              className="flex items-center text-gray-600 hover:text-gray-900"
+            >
+              Refresh
+              <HiArrowPath className="w-5 h-5 ml-1" />
+            </Button>
+          </div>
+        )}
+        {children}
+      </main>
     </>
   );
 }

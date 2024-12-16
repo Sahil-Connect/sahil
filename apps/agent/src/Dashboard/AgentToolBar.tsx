@@ -6,6 +6,7 @@ import {
   HiOutlineBuildingOffice,
 } from "react-icons/hi2";
 import Link from "next/link";
+import { useUser } from "../context/UserContext";
 
 import { Avatar, Card, Dropdown } from "ui";
 

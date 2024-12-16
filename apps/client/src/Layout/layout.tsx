@@ -1,20 +1,26 @@
-import React, { ReactChild } from "react";
+import React, { ReactNode } from "react";
+import logo from "../../public/logo-alt.svg";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { Navbar } from "ui";
-import logo from "../../public/logo-alt.svg";
-type LayoutProps = {
-  children: ReactChild | ReactChild[];
-};
+
 import {
+  HiOutlineBriefcase,
+  HiOutlineCube,
+  HiOutlineTruck,
+  HiOutlineBuildingStorefront,
+  HiMiniArrowLeftCircle, HiArrowPath,
   HiOutlineShoppingCart,
   HiOutlineUserCircle,
-  HiOutlineTruck,
-  HiOutlineBuildingOffice,
-  HiOutlineCube,
-  HiOutlineCreditCard,
-  HiOutlineDocumentChartBar,
+  HiOutlineDocumentChartBar
 } from "react-icons/hi2";
+
+import { Button } from "ui";
+
+type LayoutProps = {
+  children: ReactNode;
+};
+
 
 const links = [
   {
@@ -36,21 +42,30 @@ const links = [
     name: "Inventory",
     href: "/inventory",
     icon: HiOutlineCube
-},
-{
-  name: "Reports",
-  href: "/reports",
-  icon: HiOutlineDocumentChartBar
-}
+  },
+  {
+    name: "Reports",
+    href: "/reports",
+    icon: HiOutlineDocumentChartBar
+  }
 ];
 
 export default function Layout({ children, ...props }: LayoutProps) {
   const router = useRouter();
   const { data: session } = useSession();
+  const isAuthRoute = router.pathname.startsWith('/auth');
 
   const onSignOut = async () => {
-    await signOut({ redirect: false, callbackUrl: "/signin" });
+    await signOut();
     router.push("/auth/signin");
+  };
+
+  const handleBack = () => {
+    router.back();
+  };
+
+  const handleRefresh = () => {
+    router.replace(router.asPath);
   };
 
   return (
@@ -58,13 +73,37 @@ export default function Layout({ children, ...props }: LayoutProps) {
       {session?.user && (
         <Navbar
           links={links}
-          header="Client"
-          onSignOut={onSignOut}
           logo={logo}
+          header="Agent"
+          onSignOut={onSignOut}
           user={session?.user}
         />
       )}
-      <main className={session?.user ? "p-4" : "p-0"}>{children}</main>
+      <main className={isAuthRoute ? "p-0" : "p-4 space-y-4"}>
+        {!isAuthRoute && router.pathname !== "/" && (
+          <div className="flex items-center justify-between">
+            <Button
+              onClick={handleBack}
+              variant="ghost"
+              size="sm"
+              className="flex items-center text-gray-600 hover:text-gray-900"
+            >
+              <HiMiniArrowLeftCircle className="w-5 h-5 mr-1" />
+              Back
+            </Button>
+            <Button
+              onClick={handleRefresh}
+              variant="ghost"
+              size="sm"
+              className="flex items-center text-gray-600 hover:text-gray-900"
+            >
+              Refresh
+              <HiArrowPath className="w-5 h-5 ml-1" />
+            </Button>
+          </div>
+        )}
+        {children}
+      </main>
     </>
   );
 }
