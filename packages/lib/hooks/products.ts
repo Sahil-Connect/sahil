@@ -24,7 +24,6 @@ export const useFetchProducts = ({
       offset,
       where: supplierId ? { supplier_id: { _eq: supplierId } } : {},
     },
-    skip: !supplierId
   });
 
   return {

@@ -33,6 +33,11 @@ const links = [
     icon: HiOutlineShoppingCart,
   },
   {
+    name: "Suppliers",
+    href: "/suppliers",
+    icon: HiOutlineBuildingStorefront,
+  },
+  {
     name: "Orders",
     href: "/orders",
     icon: HiOutlineTruck,

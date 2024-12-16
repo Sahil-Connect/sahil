@@ -26,7 +26,6 @@ export const CourierOverviewCard: FC<Props> = ({ courier }) => {
     <EntityCard
       id={courier.id}
       name={courier.name}
-      phoneNumber={courier.phoneNumber}
       route="couriers"
       extraInfo={[
         {
