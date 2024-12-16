@@ -1,7 +1,6 @@
 import { ListCouriers } from "@sahil/features/Couriers/ListCouriers";
 import { HiOutlinePlus, HiOutlineMap } from "react-icons/hi2";
 import { SectionHeader } from "ui";
-import { CollectionControls } from "@sahil/features/shared/CollectionControls";
 import { useUser } from "@sahil/features/auth/UserContext";
 
 
@@ -23,7 +22,6 @@ export default function CouriersPage() {
   const { currentUser } = useUser();
   return (
     <section className="space-y-4">
-      <CollectionControls user={currentUser} title="Couriers" />
       <SectionHeader title="Couriers" actions={actions}>
         <ListCouriers />
       </SectionHeader>
