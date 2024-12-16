@@ -76,7 +76,7 @@ export default function OrderPage() {
                 <div className="space-y-4">
                   <OrderDetails order={order} />
                   <OrderItems items={order?.order_items} />
-                  <CourierOverview order={order} />
+  
                 </div>
               </Card>
             )}
@@ -84,12 +84,14 @@ export default function OrderPage() {
             {currentTab === "progress" && (
               <div>
                 <UpdateOrderStatusForm order={order} />
+             
               </div>
             )}
           </div>
         </div>
         <div className="w-full xl:basis-1/3 space-y-4">
           <OrderProgress order={order} />
+          <CourierOverview order={order} />
         </div>
       </div>
     </section>
