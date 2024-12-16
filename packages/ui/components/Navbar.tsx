@@ -78,34 +78,7 @@ export const Navbar: FC<NavbarProps> = ({
   return (
     <header className="bg-white navbar border-b">
       <div className="w-full flex items-center gap-2">
-        {/* mobile hamburger */}
-        <div className="dropdown dropdown-start text-gray-600 lg:hidden">
-          <div
-            tabIndex={0}
-            role="button"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
-              <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-10 p-2 border shadow bg-base-100 rounded-lg w-fit space-y-2"
-          >
-            <li className="border-b font-semibold">
-              <p>Quick Menu:</p>
-            </li>
-            {links.map(({ name, href, icon }) => {
-              return (
-                <li key={name}>
-                  <Link href={href}>
-                    <Icon icon={icon} /> {name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+
         <div className="navbar-start flex w-full gap-2">
           <Link
             href="/"

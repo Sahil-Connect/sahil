@@ -27,10 +27,15 @@ const initialFilters: FilterState = {
     sortBy: 'date_desc'
 };
 
+interface CollectionControlsProps {
+    user: {
+        id: string;
+        role: string;
+    };
+    title: string;
+}
 
-export const CollectionControls = ({ user, title }) => {
-    console.log(user);
-    
+export const CollectionControls = ({ user, title }: CollectionControlsProps) => {
 
     const [dateRange, setDateRange] = useState({ from: new Date(), to: new Date() })
 
@@ -74,42 +79,48 @@ export const CollectionControls = ({ user, title }) => {
     return (
         <Card className="border-x-0 border-t-0">
             <div className="space-y-4">
-                <div className="flex items-center gap-3">
-
-                    <div>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div className="w-full sm:w-auto">
                         <h1 className="text-xl">{title}</h1>
                     </div>
-                    <CustomSelect
-                        value={filters.status}
-                        onChange={(value) => setFilters({ ...filters, status: value as OrderStatus })}
-                        options={statusOptions}
-                        placeholder="Filter by status"
-                        width="180px"
-                    />
+                    
+                    <div className="flex flex-col gap-2 w-full sm:flex-row sm:items-center">
+                        <CustomSelect
+                            value={filters.status}
+                            onChange={(value) => setFilters({ ...filters, status: value as OrderStatus })}
+                            options={statusOptions}
+                            placeholder="Filter by status"
+                            width="100%"
+                            className="w-full sm:w-[180px]"
+                        />
 
-                    <CustomSelect
-                        value={filters.dateRange}
-                        onChange={(value) => setFilters({ ...filters, dateRange: value as DateRange })}
-                        options={dateRangeOptions}
-                        placeholder="Select date range"
-                        width="180px"
-                    />
+                        <CustomSelect
+                            value={filters.dateRange}
+                            onChange={(value) => setFilters({ ...filters, dateRange: value as DateRange })}
+                            options={dateRangeOptions}
+                            placeholder="Select date range"
+                            width="100%"
+                            className="w-full sm:w-[180px]"
+                        />
 
-                    <CustomSelect
-                        value={filters.sortBy}
-                        onChange={(value) => setFilters({ ...filters, sortBy: value as SortOption })}
-                        options={sortOptions}
-                        placeholder="Sort by"
-                        width="150px"
-                    />
-                    <ListPagination
-                        onNextPage={() => { }}
-                        onPreviousPage={() => { }}
-                    />
+                        <CustomSelect
+                            value={filters.sortBy}
+                            onChange={(value) => setFilters({ ...filters, sortBy: value as SortOption })}
+                            options={sortOptions}
+                            placeholder="Sort by"
+                            width="100%"
+                            className="w-full sm:w-[150px]"
+                        />
+                        
+                        <div className="w-full sm:w-auto">
+                            <ListPagination
+                                onNextPage={() => { }}
+                                onPreviousPage={() => { }}
+                            />
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
         </Card>
     )
 }
