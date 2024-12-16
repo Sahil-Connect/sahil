@@ -19,7 +19,7 @@ import {
 } from "react-icons/hi2";
 import { useRouter } from "next/router";
 import { useGetUserById } from "@sahil/lib/hooks/users";
-import { useUser } from '../../../apps/agent/src/context/UserContext';
+import { useUser } from '@sahil/features/auth/UserContext';
 
 type NavbarLink = {
   name: string;

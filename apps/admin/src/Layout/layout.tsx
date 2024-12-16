@@ -1,19 +1,32 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import logo from "../../public/logo-alt.svg";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
-import { Button, Navbar } from "ui";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import { UserProvider } from '@sahil/features/auth/UserContext';
+import { useGetUserById } from "@sahil/lib/hooks/users";
+import { SplashScreen, Navbar, ContentLayout } from "ui";
+
+import {
+  HiOutlineBriefcase,
+  HiOutlineCube,
+  HiOutlineTruck,
+  HiOutlineBuildingStorefront,
+  HiMiniArrowLeftCircle, HiArrowPath,
+  HiOutlineIdentification,
+  HiOutlineMap,
+  HiOutlineUsers,
+  HiOutlineBuildingOffice2,
+  HiOutlineQueueList
+} from "react-icons/hi2";
+
+import { Button } from "ui";
+
 type LayoutProps = {
   children: ReactNode;
 };
-import {
-  HiOutlineUsers,
-  HiOutlineQueueList,
-  HiOutlineMap,
-  HiOutlineIdentification,
-  HiOutlineBuildingOffice2,
-  HiMiniArrowLeftCircle, HiArrowPath
-} from "react-icons/hi2";
+
 
 const links = [
   {
@@ -43,15 +56,44 @@ const links = [
   },
 ];
 
+
 export default function Layout({ children, ...props }: LayoutProps) {
   const router = useRouter();
   const { data: session } = useSession();
   const isAuthRoute = router.pathname.startsWith('/auth');
+ 
+  const { data: currentUser, loading: userLoading } = useGetUserById(session?.user?.id);
+  useEffect(() => {
+    NProgress.configure({ 
+      showSpinner: false,
+      trickleSpeed: 200,
+      minimum: 0.08
+    });
+
+    const handleStart = () => {
+      NProgress.start();
+    };
+
+    const handleStop = () => {
+      NProgress.done();
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleStop);
+    router.events.on('routeChangeError', handleStop);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleStop);
+      router.events.off('routeChangeError', handleStop);
+    };
+  }, [router]);
 
   const onSignOut = async () => {
     await signOut();
     router.push("/auth/signin");
   };
+
   const handleBack = () => {
     router.back();
   };
@@ -59,42 +101,32 @@ export default function Layout({ children, ...props }: LayoutProps) {
   const handleRefresh = () => {
     router.replace(router.asPath);
   };
+
+  if (!session) {
+    return <SplashScreen />;
+  }
+
   return (
-    <>
-      {session?.user && (
+    <UserProvider session={session}>
         <Navbar
           links={links}
           logo={logo}
-          header="Agent"
+          header="Admin"
           onSignOut={onSignOut}
-          user={session?.user}
+          user={{
+            ...session.user,
+            ...currentUser
+          }}
         />
-      )}
-      <main className={isAuthRoute ? "p-0" : "p-4 space-y-4"}>
-        {!isAuthRoute && router.pathname !== "/" && (
-          <div className="flex items-center justify-between">
-            <Button
-              onClick={handleBack}
-              variant="ghost"
-              size="sm"
-              className="flex items-center text-gray-600 hover:text-gray-900"
-            >
-              <HiMiniArrowLeftCircle className="w-5 h-5 mr-1" />
-              Back
-            </Button>
-            <Button
-              onClick={handleRefresh}
-              variant="ghost"
-              size="sm"
-              className="flex items-center text-gray-600 hover:text-gray-900"
-            >
-              Refresh
-              <HiArrowPath className="w-5 h-5 ml-1" />
-            </Button>
-          </div>
-        )}
+      <ContentLayout
+        isAuthRoute={isAuthRoute}
+        router={router}
+        handleBack={handleBack}
+        handleRefresh={handleRefresh}
+        bottomLinks={links}
+      >
         {children}
-      </main>
-    </>
+      </ContentLayout>
+    </UserProvider>
   );
 }

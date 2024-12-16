@@ -2,7 +2,7 @@ import { ListCouriers } from "@sahil/features/Couriers/ListCouriers";
 import { HiOutlinePlus, HiOutlineMap } from "react-icons/hi2";
 import { SectionHeader } from "ui";
 import { CollectionControls } from "@sahil/features/shared/CollectionControls";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "@sahil/features/auth/UserContext";
 
 
 const actions = [

@@ -3,7 +3,7 @@ import { Session } from 'next-auth';
 import { useGetUserById } from "@sahil/lib/hooks/users";
 
 type UserContextType = {
-  currentUser: any; // Replace 'any' with your user type
+  currentUser: any;
   userLoading: boolean;
   session: Session | null;
 };

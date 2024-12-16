@@ -1,7 +1,7 @@
 import { ListBusinesses } from "@sahil/features/businesses/ListBusinesses";
 import { HiPlus } from "react-icons/hi2";
 import { SectionHeader } from "ui";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "@sahil/features/auth/UserContext";
 const actions = [
   {
     label: "Register Business",

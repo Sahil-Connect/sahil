@@ -3,7 +3,7 @@ import FilterSuppliersModal from "@sahil/features/Suppliers/FilterSuppliersModal
 import { HiPlus } from "react-icons/hi2";
 import { SectionHeader } from "ui";
 import { CollectionControls } from "@sahil/features/shared/CollectionControls";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "@sahil/features/auth/UserContext";
 const actions = [
   {
     label: "Register Supplier",
