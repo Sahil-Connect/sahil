@@ -4,7 +4,7 @@ import { useState } from "react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { Card } from "ui"
+import { Button, Card, IconButton } from "ui"
 import {
   Orders,
   Order_Status_Enum,
@@ -18,7 +18,9 @@ import {
   HiOutlineArchiveBox,
   HiOutlineXCircle,
   HiCalendarDays,
-  HiArrowRight
+  HiArrowRight,
+  HiArrowPathRoundedSquare,
+  HiOutlineInformationCircle
 } from "react-icons/hi2"
 import toast from "react-hot-toast"
 
@@ -91,6 +93,7 @@ const STATUS_INFO = {
 export const UpdateOrderStatusForm = ({ order }: Props) => {
   const { appendOrderStatus, loading } = useAppendOrderStatus()
   const [showNote, setShowNote] = useState(false)
+  const [showStatusInfo, setShowStatusInfo] = useState(false)
   const currentStatus = order.status_histories?.[0]?.status || "PENDING"
 
   const {
@@ -125,7 +128,7 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
   }
 
   return (
-    <Card title="Current Order Status" titleSize="sm">
+    <Card>
       <div className="space-y-4">
         {/* Current Status */}
         <div className="space-y-4">
@@ -154,7 +157,14 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
         {/* Available Status Updates */}
         {availableStatuses.length > 0 && (
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Update Status</h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold flex gap-2 items-center"><HiArrowPathRoundedSquare /> Update Status</h3>
+              <IconButton 
+                icon={HiOutlineInformationCircle} 
+                onClick={() => setShowStatusInfo(true)}
+                title="View status flow information"
+              />
+            </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {availableStatuses.map((status) => {
@@ -211,7 +221,7 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
                   className="btn btn-sm btn-primary"
                   disabled={loading}
                 >
-                  Update Status
+                  Confirm
                   <HiArrowRight className="w-4 h-4" />
                 </button>
                 <button
@@ -219,16 +229,17 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
                   className="btn btn-sm btn-ghost"
                   onClick={() => setShowNote(!showNote)}
                 >
-                  {showNote ? "Remove Note" : "Add Note"}
+                  {showNote ? "Close" : "Add Note"}
                 </button>
               </div>
             </form>
           </div>
         )}
 
+        <div className="divider">Status History</div>
+
         {/* Status History */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Status History</h3>
           <div className="space-y-2">
             {order.status_histories?.map((history, index) => {
               const statusInfo = STATUS_INFO[history.status as keyof typeof STATUS_INFO]
@@ -254,7 +265,46 @@ export const UpdateOrderStatusForm = ({ order }: Props) => {
           </div>
         </div>
       </div>
+
+      {/* Status Flow Information Dialog */}
+      <dialog className={`modal ${showStatusInfo ? 'modal-open' : ''}`}>
+        <div className="modal-box">
+          <h3 className="font-bold text-lg mb-4">Order Status Flow</h3>
+          <div className="space-y-4">
+            {Object.entries(STATUS_FLOW).map(([status, nextStatuses]) => {
+              const statusInfo = STATUS_INFO[status as keyof typeof STATUS_INFO]
+              return (
+                <div key={status} className="space-y-2">
+                  <div className={`flex items-center gap-2`}>
+                    <div className={`flex items-center gap-2 p-2 rounded-full ${statusInfo.bgColor}`}>
+                    <statusInfo.icon className={`w-5 h-5 ${statusInfo.color}`} />
+                      </div>
+               
+                    <span className="font-medium">{status}</span>
+                  </div>
+                  <div className="pl-7">
+                    {nextStatuses.length > 0 ? (
+                      <div className="text-sm text-gray-600">
+                        Can be updated to: {nextStatuses.join(', ')}
+                      </div>
+                    ) : (
+                      <div className="text-sm text-gray-600">
+                        Final status - no further updates possible
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          <div className="modal-action">
+            <button className="btn" onClick={() => setShowStatusInfo(false)}>Close</button>
+          </div>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <Button onClick={() => setShowStatusInfo(false)}>close</Button>
+        </form>
+      </dialog>
     </Card>
   )
 }
-

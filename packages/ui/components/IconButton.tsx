@@ -9,7 +9,7 @@ export type IconButtonProps = IconProps & {
 };
 
 export const IconButton: FC<IconButtonProps> = ({ className, icon, title, onClick }) => {
-  const merged = twMerge("btn btn-xs btn-square", className);
+  const merged = twMerge("btn btn-xs btn-circle btn-ghost", className);
   return (
     <button className={merged} title={title} onClick={onClick}>
       <Icon icon={icon} />
