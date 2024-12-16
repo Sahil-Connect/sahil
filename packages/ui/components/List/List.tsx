@@ -18,6 +18,17 @@ type ListAsyncResultProps = {
   message?: string;
 };
 
+const Skeleton = () => {
+  return (
+    <div className="flex w-52 flex-col gap-4">
+      <div className="skeleton h-32 w-full"></div>
+      <div className="skeleton h-4 w-28"></div>
+      <div className="skeleton h-4 w-full"></div>
+      <div className="skeleton h-4 w-full"></div>
+    </div>
+  );
+};
+
 export const ListErrorState: FC<ListAsyncResultProps> = ({
   heading = "An error occurred",
   message = "We're having trouble loading the data. Please try again later.",
@@ -40,9 +51,18 @@ export const ListLoadingState: FC<ListAsyncResultProps> = ({
   heading = "Loading Data",
   message,
 }) => (
-  <Card title={heading} titleSize="sm">
-    <span className="loading loading-spinner loading-lg"></span>
-  </Card>
+  <div className="w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="flex w-full flex-col gap-4 p-4 border rounded-lg">
+          <div className="skeleton h-32 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+      ))}
+    </div>
+  </div>
 );
 
 export const List = <T extends unknown>({

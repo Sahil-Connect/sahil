@@ -54,7 +54,7 @@ export const ContentLayout = ({
           </Button>
         </div>
       )}
-      <div className="border border-2 border-dashed border-gray-200 rounded-lg p-2">
+      <div className="border border-2 border-gray-200 rounded-lg p-2">
         {children}
       </div>
       
