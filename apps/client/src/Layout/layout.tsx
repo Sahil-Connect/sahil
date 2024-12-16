@@ -13,6 +13,7 @@ import {
   HiOutlineBuildingOffice,
   HiOutlineCube,
   HiOutlineCreditCard,
+  HiOutlineDocumentChartBar,
 } from "react-icons/hi2";
 
 const links = [
@@ -32,15 +33,14 @@ const links = [
     icon: HiOutlineUserCircle,
   },
   {
-
-    name: "Billing",
-    href: "/billing",
-    icon: HiOutlineCreditCard,
-  },
-  {
     name: "Inventory",
     href: "/inventory",
     icon: HiOutlineCube
+},
+{
+  name: "Reports",
+  href: "/reports",
+  icon: HiOutlineDocumentChartBar
 }
 ];
 
