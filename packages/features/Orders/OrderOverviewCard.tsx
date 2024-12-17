@@ -8,8 +8,6 @@ import {
   HiChevronRight
 
 } from "react-icons/hi2";
-import { EntityCard } from "../Shared/EntityCard";
-
 type Props = {
   order: Partial<Orders>;
 };

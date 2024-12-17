@@ -14,10 +14,10 @@ export const SupplierOverviewCard: FC<Props> = ({ supplier }) => {
   return (
     <EntityCard
       id={supplier.id}
-      name={supplier.name}
-      contactName={supplier.contactName}
-      phoneNumber={supplier.phoneNumber}
-      address={supplier.streetAddress}
+      name={supplier.name as string}
+      contactName={supplier?.contactName as string}
+      phoneNumber={supplier.phoneNumber as string}
+      address={supplier.streetAddress as string}
       categories={supplier.categories}
       route="suppliers"
       extraInfo={[
