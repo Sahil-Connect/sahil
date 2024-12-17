@@ -17,50 +17,49 @@ type HttpOptions = {
     "x-hasura-admin-secret"?: string;
     "x-hasura-role"?: string;
   };
-  token?: string;
 };
 
 interface ApolloClientOptions {
-  uri: string;
-  httpOptions: HttpOptions;
-  ws: string;
+  uri: string; // HTTP endpoint for GraphQL
+  httpOptions: HttpOptions; // HTTP headers for requests
+  ws?: string; // WebSocket endpoint for subscriptions
 }
 
 export const createApolloClient = ({
   uri,
   httpOptions,
-  ws,
+  ws = "ws://localhost:3000", // Default WebSocket URL
 }: ApolloClientOptions): ApolloClient<NormalizedCacheObject> => {
   const initialState: Record<string, any> = {};
 
-  const link = createHttpLink({
+  // Create HTTP link for queries/mutations
+  const httpLink = createHttpLink({
     uri,
-    credentials: "include",
+    credentials: "include", // Include cookies in requests
     headers: {
       ...httpOptions.headers,
-      "x-hasura-admin-secret":
-        httpOptions.headers?.["x-hasura-admin-secret"] || "",
+      "x-hasura-admin-secret": httpOptions.headers?.["x-hasura-admin-secret"] || "",
     },
   });
 
+  // Create WebSocket link for subscriptions (only in the browser)
   const wsLink = isBrowser
     ? new GraphQLWsLink(
         createClient({
-          url: ws || "localhost:3000",
+          url: ws,
           connectionParams: {
             headers: {
               ...httpOptions.headers,
-              "x-hasura-admin-secret":
-                httpOptions.headers?.["x-hasura-admin-secret"] || "",
-              Authorization: "secret",
-              "x-hasura-role": "admin",
+              Authorization: httpOptions.headers?.Authorization || "Bearer secret",
+              "x-hasura-role": httpOptions.headers?.["x-hasura-role"] || "admin",
             },
           },
         })
       )
-    : link;
+    : null;
 
-  const splitLink = isBrowser
+  // Split traffic between subscriptions and queries/mutations
+  const splitLink = isBrowser && wsLink
     ? split(
         ({ query }) => {
           const definition = getMainDefinition(query);
@@ -70,24 +69,26 @@ export const createApolloClient = ({
           );
         },
         wsLink,
-        link
+        httpLink
       )
-    : link;
+    : httpLink;
 
+  // Initialize Apollo Client
   const client = new ApolloClient({
-    connectToDevTools: !isBrowser,
-    ssrMode: isBrowser,
+    connectToDevTools: isBrowser, // Enable DevTools in the browser
+    ssrMode: !isBrowser, // Enable SSR mode on the server
     link: splitLink,
-    cache: new InMemoryCache().restore(initialState || {}),
+    cache: new InMemoryCache().restore(initialState),
     defaultOptions: {
       watchQuery: {
-        fetchPolicy: "cache-and-network",
+        fetchPolicy: "cache-and-network", // Fetch from network while updating cache
       },
     },
   });
 
+  // Explicitly set link for SSR environments
   if (!isBrowser) {
-    client.setLink(link);
+    client.setLink(httpLink);
   }
 
   return client;

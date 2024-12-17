@@ -4,6 +4,7 @@ import * as React from "react";
 export * from "./components/Avatar";
 export * from "./components/Button";
 export * from "./components/Card";
+export * from "./components/ContentLayout";
 export * from "./components/Dropdown";
 export * from "./components/Drawer";
 export * from "./components/FormControl";
@@ -37,4 +38,5 @@ export * from "./components/Schedule";
 export * from "./components/SectionHeader";
 export * from "./components/Sidebar";
 export * from "./components/Settings";
+export * from './components/SplashScreen';
 

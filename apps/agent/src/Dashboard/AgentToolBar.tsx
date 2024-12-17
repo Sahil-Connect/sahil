@@ -9,24 +9,6 @@ import Link from "next/link";
 
 import { Avatar, Card, Dropdown } from "ui";
 
-const dropdownOptions = [
-  {
-    id: "business",
-    label: "Business",
-    icon: HiOutlineBriefcase,
-  },
-  {
-    id: "courier",
-    label: "Courier",
-    icon: HiOutlineTruck,
-  },
-  {
-    id: "supplier",
-    label: "Supplier",
-    icon: HiOutlineBuildingOffice,
-  },
-];
-
 import { useSession } from "next-auth/react";
 import { formatCurrentDate } from "@sahil/lib/dates";
 

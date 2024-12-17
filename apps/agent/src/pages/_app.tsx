@@ -6,6 +6,7 @@ import Layout from "@/Layout/layout";
 import { createApolloClient } from "@sahil/lib/graphql";
 import Inter from "next/font/local";
 import Plus_Jakarta_Sans from "next/font/local";
+import '../styles/nprogress.css'
 
 const inter = Inter({
   src: "../../public/fonts/Inter-VariableFont_slnt,wght.ttf",

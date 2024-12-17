@@ -18,7 +18,7 @@ export const Avatar = ({ alt, src, className }: AvatarProps) => {
         </div>
       ) : (
         <div className="avatar placeholder">
-          <div className="bg-neutral text-neutral-content rounded-full w-12 ring-2 ring-accent">
+          <div className="bg-neutral text-neutral-content rounded-full w-12 h-12 ring-2 ring-secondary">
             <span>{generateInitials(alt as string)}</span>
           </div>
         </div>

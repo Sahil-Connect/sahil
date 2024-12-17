@@ -99,7 +99,7 @@ export const getClientSizeStats = (orders: Order[]) => {
 }
 
 // Filter data by date range (reused from original code)
-export const filterDataByDateRange = (data: Order[], dateRange: DateRange | undefined) => {
+export const filterDataByDateRange = (data: Order[], dateRange: any) => {
   if (!dateRange?.from || !dateRange?.to || !data?.length) return data
   
   return data.filter(item => {

@@ -36,7 +36,7 @@ export default function Products() {
 
   return (
     <section className="space-y-2">
-      <CollectionControls user={currentUser} />
+  
       <div>
         <form onSubmit={handleSearch} className="form-control relative">
           <div className="input-group ">

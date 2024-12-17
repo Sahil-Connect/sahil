@@ -70,9 +70,7 @@ export const OrderProgress = ({ order }: Props) => {
       {sortedHistory.map((history, index) => (
         <div key={index} className="relative flex gap-4">
           <div className="flex flex-col items-center">
-            <div className={`rounded-full p-2 bg-base-100 border-2 ${
-              index === sortedHistory.length - 1 ? getStatusColor(history.status) : "border-gray-200"
-            }`}>
+            <div className={`rounded-full p-2 bg-base-100 border-2 y ${history.status === "CANCELED" ? "border-red-500" : "border-primary"}`}>
               {getStatusIcon(history.status)}
             </div>
             {index < sortedHistory.length - 1 && (
