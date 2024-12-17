@@ -7,6 +7,7 @@ import { Icon } from "./Icon";
 type SidebarLink = {
   name: string;
   href: string;
+  icon: any;
 };
 
 export type SidebarProps = {
