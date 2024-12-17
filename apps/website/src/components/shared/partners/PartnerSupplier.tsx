@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchema } from "@/lib/schema";
+import { supplierPartnerSchema } from "@/lib/schema";
 import { Input, TextArea } from "../Form";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
 import { FormInputType } from "./type";
@@ -16,7 +16,7 @@ export const PartnerSupplier = () => {
     reset, 
     formState: {errors, isSubmitting}
   } = useForm<FormInputType>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(supplierPartnerSchema),
   })
 
   const [submissionStatus, setSubmissionStatus] = useState<{

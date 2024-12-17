@@ -1,15 +1,13 @@
 "use server";
-import { z } from "zod";
 import { Resend } from "resend";
-import { formSchema } from "@/lib/schema";
+import { basePartnerSchema } from "@/lib/schema";
 import PartnerEmail from "@/emails/partners";
-
-type Inputs = z.infer<typeof formSchema>
+import { FormInputType } from "@/components/shared/partners/type";
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function sendEmail(data: Inputs) {
-  const result = formSchema.safeParse(data)
+export async function sendEmail(data: FormInputType) {
+  const result = basePartnerSchema.safeParse(data)
 
   if (result.success) {
     const { name, email } = result.data

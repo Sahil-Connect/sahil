@@ -1,4 +1,11 @@
-import { formSchema } from "@/lib/schema";
 import { z } from "zod";
+import { businessPartnerSchema, courierPartnerSchema, supplierPartnerSchema } from "@/lib/schema";
 
-export type FormInputType = z.infer<typeof formSchema>
+export type FormInputType = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  companyName: string;
+  vehicleDetails?: "yes" | "no";
+  supplyDetails?: string;
+}

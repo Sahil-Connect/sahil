@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchema } from "@/lib/schema";
+import { businessPartnerSchema } from "@/lib/schema";
 import { Input } from "../Form";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
 import { FormInputType } from "./type";
@@ -16,7 +16,7 @@ export const PartnerBusiness = () => {
     reset, 
     formState: {errors, isSubmitting}
   } = useForm<FormInputType>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(businessPartnerSchema),
   })
   
   const [submissionStatus, setSubmissionStatus] = useState<{
@@ -134,11 +134,11 @@ export const PartnerBusiness = () => {
           type="submit"
           disabled={isSubmitting}
           className={`
-            group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors
+            group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm text-white font-semibold transition-colors
             ${
               isSubmitting
-                ? 'bg-gray-400 text-black cursor-not-allowed'
-                : 'bg-primary text-white hover:bg-secondary'
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-primary hover:bg-secondary'
             }
           `}
         >

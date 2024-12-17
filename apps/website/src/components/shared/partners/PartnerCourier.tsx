@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchema, mappedVehicleStatuses } from "@/lib/schema";
+import { courierPartnerSchema, mappedVehicleStatuses } from "@/lib/schema";
 import { Input, Select } from "../Form";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
 import { FormInputType } from "./type";
@@ -16,7 +16,7 @@ export const PartnerCourier = () => {
     reset, 
     formState: {errors, isSubmitting}
   } = useForm<FormInputType>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(courierPartnerSchema),
   })
 
   const [submissionStatus, setSubmissionStatus] = useState<{
@@ -73,7 +73,7 @@ export const PartnerCourier = () => {
           user_name: data.name,
           user_email: data.email,
           user_phone: data.phoneNumber.toString(),
-          user_message: `Vehicle Status: ${data.vehicleStatus}`
+          user_vehicle_status: data.vehicleDetails
         },
         {
           publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY!,
@@ -115,7 +115,7 @@ export const PartnerCourier = () => {
         </div>
         <Select 
           label="Do you own a vehicle?"
-          name="vehicleStatus"
+          name="vehicleDetails"
           register={register}
           errors={errors}
           options={vehicleStatusOptions}
