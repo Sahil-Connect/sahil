@@ -106,7 +106,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
   };
 
 
-  if (!session) {
+  if (!session && !isAuthRoute) {
     return <SplashScreen />;
   }
   return (
@@ -117,7 +117,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
         header="Courier"
         onSignOut={onSignOut}
         user={{
-          ...session.user,
+          ...session?.user,
           ...currentUser
         }}
       />

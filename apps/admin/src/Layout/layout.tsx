@@ -102,7 +102,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
     router.replace(router.asPath);
   };
 
-  if (!session) {
+  if (!session && !isAuthRoute) {
     return <SplashScreen />;
   }
 
@@ -114,7 +114,7 @@ export default function Layout({ children, ...props }: LayoutProps) {
           header="Admin"
           onSignOut={onSignOut}
           user={{
-            ...session.user,
+            ...session?.user,
             ...currentUser
           }}
         />
