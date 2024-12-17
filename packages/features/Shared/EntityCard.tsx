@@ -62,9 +62,9 @@ export const EntityCard: FC<BaseEntityCardProps> = ({
                     >
                         <div className="avatar placeholder">
                             <Avatar
-                                size="sm"
+                               
                                 alt={name}
-                                initials={initials}
+                              
                                 
                             />
                         </div>
