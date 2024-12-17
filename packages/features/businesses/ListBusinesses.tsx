@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BusinessOverviewCard } from "./BusinessOverviewCard";
 import { useFetchBusinesses } from "@sahil/lib/hooks/businesses";
 import { List, ListHeader, ListErrorState, ListPagination } from "ui";
-import { CollectionControls } from "@sahil/features/shared/CollectionControls";
+// import { CollectionControls } from "@sahil/features/Shared/CollectionControls";
 import { useSession } from "next-auth/react";
 
 export const ListBusinesses = () => {
@@ -39,13 +39,7 @@ export const ListBusinesses = () => {
 
   return (
     <section className="space-y-4">
-      <ListHeader
-        size={businessCount?.count}
-        sizeLabel="Businesses"
-        title="Businesses"
-      >
-        <CollectionControls user={session?.user} title="Businesses" />
-      </ListHeader>
+
       <List
         data={businesses}
         loading={loading}
