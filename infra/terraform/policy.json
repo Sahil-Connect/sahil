@@ -2,12 +2,25 @@
   "rules": [
     {
       "rulePriority": 1,
-      "description": "Keep last 50 images",
+      "description": "Keep only 5 most recent versioned images",
       "selection": {
         "tagStatus": "tagged",
-        "tagPrefixList": [ "sahil" ],
+        "tagPrefixList": [ "v" ],
         "countType": "imageCountMoreThan",
-        "countNumber": 50
+        "countNumber": 5
+      },
+      "action": {
+        "type": "expire"
+      }
+    },
+    {
+      "rulePriority": 2,
+      "description": "Protect sahil-admin tagged image",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": ["sahil-admin"],
+        "countType": "imageCountMoreThan",
+        "countNumber": 1
       },
       "action": {
         "type": "expire"
