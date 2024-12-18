@@ -18,7 +18,7 @@
       "description": "Protect sahil-admin tagged image",
       "selection": {
         "tagStatus": "tagged",
-        "tagPrefixList": ["sahil-admin"],
+        "tagPrefixList": ["sahil-admin", "sahil-agent", "sahil-api", "sahil-client", "sahil-courier", "sahil-maps", "sahil-pay", "sahil-website"],
         "countType": "imageCountMoreThan",
         "countNumber": 1
       },
