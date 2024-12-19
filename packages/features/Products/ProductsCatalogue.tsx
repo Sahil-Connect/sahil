@@ -21,6 +21,8 @@ export const ProductsCatalogue = () => {
     productsCount,
   } = useFetchProducts({ limit, offset });
 
+  console.log("products", products);
+
   const {
     addOrderItem,
     removeOrderItem,

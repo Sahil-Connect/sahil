@@ -17,6 +17,7 @@ export const CourierOverview: FC<Props> = ({ order }) => {
 
   return (
     <Card>
+      <p className="text-gray-400 mb-1">Your order is being delivered by</p>
       <div className="flex gap-4 items-center">
         <div className="flex gap-2 items-center">
           <Avatar
@@ -24,7 +25,6 @@ export const CourierOverview: FC<Props> = ({ order }) => {
             src="https://res.cloudinary.com/dwacr3zpp/image/upload/v1699609157/black-delivery-man-holding-pile-boxes-best-service-concept-smiling-blue-cap-unform-cardboard-standing-isolated-over-202731809.webp"
           />
           <div>
-            <p className="text-gray-400">Courier</p>
             <h3 className="text-lg">Ladu Lumori</h3>
           </div>
         </div>

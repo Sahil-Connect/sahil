@@ -36,27 +36,11 @@ export type Scalars = {
   uuid: { input: any; output: any };
 };
 
-export type AccountBalanceResponse = {
-  __typename?: "AccountBalanceResponse";
-  availableBalance?: Maybe<Scalars["String"]["output"]>;
-  currency?: Maybe<Scalars["String"]["output"]>;
-};
-
 export type Address = {
   __typename?: "Address";
   location?: Maybe<GeoCoords>;
   placeId?: Maybe<Scalars["String"]["output"]>;
   types?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
-};
-
-export type BasicUserInfoResponse = {
-  __typename?: "BasicUserInfoResponse";
-  birthdate?: Maybe<Scalars["String"]["output"]>;
-  family_name?: Maybe<Scalars["String"]["output"]>;
-  gender?: Maybe<Scalars["String"]["output"]>;
-  given_name?: Maybe<Scalars["String"]["output"]>;
-  locale?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -87,12 +71,6 @@ export type Boolean_Comparison_Exp = {
   _lte?: InputMaybe<Scalars["Boolean"]["input"]>;
   _neq?: InputMaybe<Scalars["Boolean"]["input"]>;
   _nin?: InputMaybe<Array<Scalars["Boolean"]["input"]>>;
-};
-
-export type CreateAccessTokenResponse = {
-  __typename?: "CreateAccessTokenResponse";
-  expires_in?: Maybe<Scalars["Int"]["output"]>;
-  token?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type DirectionLeg = {
@@ -160,19 +138,6 @@ export type OrderStatusHistoryOutput = {
   status: Scalars["String"]["output"];
 };
 
-export type PayerInput = {
-  partyId: Scalars["String"]["input"];
-  partyIdType: Scalars["String"]["input"];
-};
-
-export type PaymentStatusResponse = {
-  __typename?: "PaymentStatusResponse";
-  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  referenceId?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
 export type Places = {
   __typename?: "Places";
   address?: Maybe<Scalars["String"]["output"]>;
@@ -180,44 +145,6 @@ export type Places = {
   lng?: Maybe<Scalars["Float"]["output"]>;
   location?: Maybe<Scalars["String"]["output"]>;
   name?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type PreApprovalStatusResponse = {
-  __typename?: "PreApprovalStatusResponse";
-  expirationDateTime?: Maybe<Scalars["String"]["output"]>;
-  payer?: Maybe<Scalars["String"]["output"]>;
-  payerCurrency?: Maybe<Scalars["String"]["output"]>;
-  payerMessage?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type RequestToPayInput = {
-  amount: Scalars["Float"]["input"];
-  currency?: InputMaybe<Scalars["String"]["input"]>;
-  externalId: Scalars["String"]["input"];
-  payeeNote?: InputMaybe<Scalars["String"]["input"]>;
-  payer: PayerInput;
-  payerMessage?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type RequestToPayResponse = {
-  __typename?: "RequestToPayResponse";
-  message?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-};
-
-export type RequestToPayTransactionStatusResponse = {
-  __typename?: "RequestToPayTransactionStatusResponse";
-  amount?: Maybe<Scalars["String"]["output"]>;
-  currency?: Maybe<Scalars["String"]["output"]>;
-  externalId?: Maybe<Scalars["String"]["output"]>;
-  financialTransactionId?: Maybe<Scalars["String"]["output"]>;
-  payeeNote?: Maybe<Scalars["String"]["output"]>;
-  payer?: Maybe<Scalars["String"]["output"]>;
-  payerMessage?: Maybe<Scalars["String"]["output"]>;
-  reason?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -251,34 +178,6 @@ export type String_Comparison_Exp = {
   _regex?: InputMaybe<Scalars["String"]["input"]>;
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type UserInfoWithConsentResponse = {
-  __typename?: "UserInfoWithConsentResponse";
-  active?: Maybe<Scalars["Boolean"]["output"]>;
-  address?: Maybe<Scalars["String"]["output"]>;
-  birthdate?: Maybe<Scalars["String"]["output"]>;
-  city_of_birth?: Maybe<Scalars["String"]["output"]>;
-  country_of_birth?: Maybe<Scalars["String"]["output"]>;
-  credit_score?: Maybe<Scalars["String"]["output"]>;
-  email?: Maybe<Scalars["String"]["output"]>;
-  email_verified?: Maybe<Scalars["Boolean"]["output"]>;
-  employer_name?: Maybe<Scalars["String"]["output"]>;
-  family_name?: Maybe<Scalars["String"]["output"]>;
-  gender?: Maybe<Scalars["String"]["output"]>;
-  given_name?: Maybe<Scalars["String"]["output"]>;
-  identification_type?: Maybe<Scalars["String"]["output"]>;
-  identification_value?: Maybe<Scalars["String"]["output"]>;
-  locale?: Maybe<Scalars["String"]["output"]>;
-  middle_name?: Maybe<Scalars["String"]["output"]>;
-  name?: Maybe<Scalars["String"]["output"]>;
-  occupation?: Maybe<Scalars["String"]["output"]>;
-  phone_number?: Maybe<Scalars["String"]["output"]>;
-  phone_number_verified?: Maybe<Scalars["Boolean"]["output"]>;
-  region_of_birth?: Maybe<Scalars["String"]["output"]>;
-  status?: Maybe<Scalars["String"]["output"]>;
-  sub?: Maybe<Scalars["String"]["output"]>;
-  updated_at?: Maybe<Scalars["Int"]["output"]>;
 };
 
 /** columns and relationships of "accounts" */
@@ -5059,7 +4958,6 @@ export type Mutation_Root = {
   __typename?: "mutation_root";
   /** add_order_status_history */
   add_order_status_history?: Maybe<OrderStatusHistoryOutput>;
-  createAccessToken?: Maybe<CreateAccessTokenResponse>;
   /** delete data from the table: "accounts" */
   delete_accounts?: Maybe<Accounts_Mutation_Response>;
   /** delete single row from the table: "accounts" */
@@ -5410,7 +5308,6 @@ export type Mutation_Root = {
   insert_zones?: Maybe<Zones_Mutation_Response>;
   /** insert a single row into the table: "zones" */
   insert_zones_one?: Maybe<Zones>;
-  requestToPay?: Maybe<RequestToPayResponse>;
   /** update data of the table: "accounts" */
   update_accounts?: Maybe<Accounts_Mutation_Response>;
   /** update single row of the table: "accounts" */
@@ -6688,11 +6585,6 @@ export type Mutation_RootInsert_ZonesArgs = {
 export type Mutation_RootInsert_Zones_OneArgs = {
   object: Zones_Insert_Input;
   on_conflict?: InputMaybe<Zones_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootRequestToPayArgs = {
-  object?: InputMaybe<RequestToPayInput>;
 };
 
 /** mutation root */
@@ -9676,7 +9568,6 @@ export type Products_Variance_Order_By = {
 
 export type Query_Root = {
   __typename?: "query_root";
-  accountBalance?: Maybe<AccountBalanceResponse>;
   /** An array relationship */
   accounts: Array<Accounts>;
   /** An aggregate relationship */
@@ -9702,7 +9593,6 @@ export type Query_Root = {
   agent_type_aggregate: Agent_Type_Aggregate;
   /** fetch data from the table: "agent_type" using primary key columns */
   agent_type_by_pk?: Maybe<Agent_Type>;
-  basicUserInfo?: Maybe<BasicUserInfoResponse>;
   /** fetch data from the table: "business" */
   business: Array<Business>;
   /** fetch aggregated fields from the table: "business" */
@@ -9839,9 +9729,7 @@ export type Query_Root = {
   orders_aggregate: Orders_Aggregate;
   /** fetch data from the table: "orders" using primary key columns */
   orders_by_pk?: Maybe<Orders>;
-  paymentStatus?: Maybe<PaymentStatusResponse>;
   places?: Maybe<Array<Maybe<Places>>>;
-  preApprovalStatus?: Maybe<PreApprovalStatusResponse>;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
@@ -9860,7 +9748,6 @@ export type Query_Root = {
   reports_aggregate: Reports_Aggregate;
   /** fetch data from the table: "reports" using primary key columns */
   reports_by_pk?: Maybe<Reports>;
-  requestToPayTransactionStatus?: Maybe<RequestToPayTransactionStatusResponse>;
   /** fetch data from the table: "ride_status" */
   ride_status: Array<Ride_Status>;
   /** fetch aggregated fields from the table: "ride_status" */
@@ -9909,7 +9796,6 @@ export type Query_Root = {
   suppliers_categories_aggregate: Suppliers_Categories_Aggregate;
   /** fetch data from the table: "suppliers_categories" using primary key columns */
   suppliers_categories_by_pk?: Maybe<Suppliers_Categories>;
-  userInfoWithConsent?: Maybe<UserInfoWithConsentResponse>;
   /** An array relationship */
   user_invites: Array<User_Invites>;
   /** An aggregate relationship */
@@ -10037,10 +9923,6 @@ export type Query_RootAgent_Type_AggregateArgs = {
 
 export type Query_RootAgent_Type_By_PkArgs = {
   type: Scalars["String"]["input"];
-};
-
-export type Query_RootBasicUserInfoArgs = {
-  accountHolderMSISDN: Scalars["String"]["input"];
 };
 
 export type Query_RootBusinessArgs = {
@@ -10504,17 +10386,9 @@ export type Query_RootOrders_By_PkArgs = {
   id: Scalars["uuid"]["input"];
 };
 
-export type Query_RootPaymentStatusArgs = {
-  referenceId: Scalars["String"]["input"];
-};
-
 export type Query_RootPlacesArgs = {
   lat: Scalars["Float"]["input"];
   lng: Scalars["Float"]["input"];
-};
-
-export type Query_RootPreApprovalStatusArgs = {
-  referenceId: Scalars["String"]["input"];
 };
 
 export type Query_RootProductsArgs = {
@@ -10575,10 +10449,6 @@ export type Query_RootReports_AggregateArgs = {
 
 export type Query_RootReports_By_PkArgs = {
   id: Scalars["uuid"]["input"];
-};
-
-export type Query_RootRequestToPayTransactionStatusArgs = {
-  referenceId: Scalars["String"]["input"];
 };
 
 export type Query_RootRide_StatusArgs = {
@@ -16194,6 +16064,47 @@ export type MyMutationMutation = {
   } | null;
 };
 
+export type CreateProductMutationVariables = Exact<{
+  input: Products_Insert_Input;
+}>;
+
+export type CreateProductMutation = {
+  __typename?: "mutation_root";
+  insert_products_one?: {
+    __typename?: "products";
+    id: any;
+    name?: string | null;
+    description?: string | null;
+    price?: number | null;
+    quantity: number;
+    discount?: number | null;
+    inStock: boolean;
+    mainImage?: string | null;
+    created_at: any;
+  } | null;
+};
+
+export type UpdateProductMutationVariables = Exact<{
+  id: Scalars["uuid"]["input"];
+  input: Products_Set_Input;
+}>;
+
+export type UpdateProductMutation = {
+  __typename?: "mutation_root";
+  update_products_by_pk?: {
+    __typename?: "products";
+    id: any;
+    name?: string | null;
+    description?: string | null;
+    price?: number | null;
+    quantity: number;
+    discount?: number | null;
+    inStock: boolean;
+    mainImage?: string | null;
+    created_at: any;
+  } | null;
+};
+
 export type RegisterSupplierMutationVariables = Exact<{
   object: Suppliers_Insert_Input;
 }>;
@@ -16926,6 +16837,33 @@ export type GetProductsByNameQuery = {
   };
 };
 
+export type GetProductByIdQueryVariables = Exact<{
+  id: Scalars["uuid"]["input"];
+}>;
+
+export type GetProductByIdQuery = {
+  __typename?: "query_root";
+  products_by_pk?: {
+    __typename?: "products";
+    created_at: any;
+    description?: string | null;
+    discount?: number | null;
+    id: any;
+    inStock: boolean;
+    mainImage?: string | null;
+    name?: string | null;
+    price?: number | null;
+    quantity: number;
+    supplier?: {
+      __typename?: "suppliers";
+      name?: string | null;
+      contactName?: string | null;
+      contactEmail?: string | null;
+      phoneNumber?: string | null;
+    } | null;
+  } | null;
+};
+
 export type SupplierFieldsFragment = {
   __typename?: "suppliers";
   id: any;
@@ -17199,6 +17137,77 @@ export type GetUserInvitesQuery = {
     email: string;
     name?: string | null;
     role: User_Role_Enum;
+  }>;
+};
+
+export type GetUserByPkQueryVariables = Exact<{
+  id: Scalars["uuid"]["input"];
+}>;
+
+export type GetUserByPkQuery = {
+  __typename?: "query_root";
+  users_by_pk?: {
+    __typename?: "users";
+    email?: string | null;
+    created_at: any;
+    hasCompletedOnboarding?: boolean | null;
+    id: any;
+    name?: string | null;
+    role?: User_Role_Enum | null;
+  } | null;
+};
+
+export type GetUserOrganizationSupplierQueryVariables = Exact<{
+  userId: Scalars["uuid"]["input"];
+}>;
+
+export type GetUserOrganizationSupplierQuery = {
+  __typename?: "query_root";
+  suppliers: Array<{
+    __typename?: "suppliers";
+    id: any;
+    name?: string | null;
+    user_id?: any | null;
+  }>;
+};
+
+export type GetUserSupplierQueryVariables = Exact<{
+  userId: Scalars["uuid"]["input"];
+}>;
+
+export type GetUserSupplierQuery = {
+  __typename?: "query_root";
+  suppliers: Array<{
+    __typename?: "suppliers";
+    id: any;
+    name?: string | null;
+    user_id?: any | null;
+  }>;
+};
+
+export type GetUserBusinessQueryVariables = Exact<{
+  userId: Scalars["uuid"]["input"];
+}>;
+
+export type GetUserBusinessQuery = {
+  __typename?: "query_root";
+  business: Array<{
+    __typename?: "business";
+    id: any;
+    name?: string | null;
+    owner_id?: any | null;
+  }>;
+};
+
+export type GetAllSuppliersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllSuppliersQuery = {
+  __typename?: "query_root";
+  suppliers: Array<{
+    __typename?: "suppliers";
+    id: any;
+    name?: string | null;
+    user_id?: any | null;
   }>;
 };
 
@@ -18216,6 +18225,155 @@ export const MyMutationDocument = {
     },
   ],
 } as unknown as DocumentNode<MyMutationMutation, MyMutationMutationVariables>;
+export const CreateProductDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateProduct" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "input" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "products_insert_input" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "insert_products_one" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "object" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "input" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                { kind: "Field", name: { kind: "Name", value: "price" } },
+                { kind: "Field", name: { kind: "Name", value: "quantity" } },
+                { kind: "Field", name: { kind: "Name", value: "discount" } },
+                { kind: "Field", name: { kind: "Name", value: "inStock" } },
+                { kind: "Field", name: { kind: "Name", value: "mainImage" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  CreateProductMutation,
+  CreateProductMutationVariables
+>;
+export const UpdateProductDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateProduct" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "input" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "products_set_input" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "update_products_by_pk" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "pk_columns" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "id" },
+                      value: {
+                        kind: "Variable",
+                        name: { kind: "Name", value: "id" },
+                      },
+                    },
+                  ],
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "_set" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "input" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                { kind: "Field", name: { kind: "Name", value: "price" } },
+                { kind: "Field", name: { kind: "Name", value: "quantity" } },
+                { kind: "Field", name: { kind: "Name", value: "discount" } },
+                { kind: "Field", name: { kind: "Name", value: "inStock" } },
+                { kind: "Field", name: { kind: "Name", value: "mainImage" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UpdateProductMutation,
+  UpdateProductMutationVariables
+>;
 export const RegisterSupplierDocument = {
   kind: "Document",
   definitions: [
@@ -21285,6 +21443,81 @@ export const GetProductsByNameDocument = {
   GetProductsByNameQuery,
   GetProductsByNameQueryVariables
 >;
+export const GetProductByIdDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetProductById" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "products_by_pk" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                { kind: "Field", name: { kind: "Name", value: "discount" } },
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "inStock" } },
+                { kind: "Field", name: { kind: "Name", value: "mainImage" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "price" } },
+                { kind: "Field", name: { kind: "Name", value: "quantity" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "supplier" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "contactName" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "contactEmail" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "phoneNumber" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetProductByIdQuery, GetProductByIdQueryVariables>;
 export const GetSuppliersDocument = {
   kind: "Document",
   definitions: [
@@ -22489,6 +22722,319 @@ export const GetUserInvitesDocument = {
     },
   ],
 } as unknown as DocumentNode<GetUserInvitesQuery, GetUserInvitesQueryVariables>;
+export const GetUserByPkDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetUserByPk" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "users_by_pk" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "id" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "UserBasicFields" },
+                },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "hasCompletedOnboarding" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "UserBasicFields" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "users" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "role" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetUserByPkQuery, GetUserByPkQueryVariables>;
+export const GetUserOrganizationSupplierDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetUserOrganizationSupplier" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "userId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "suppliers" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "user_id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "userId" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "user_id" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetUserOrganizationSupplierQuery,
+  GetUserOrganizationSupplierQueryVariables
+>;
+export const GetUserSupplierDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetUserSupplier" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "userId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "suppliers" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "user_id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "userId" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "user_id" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetUserSupplierQuery,
+  GetUserSupplierQueryVariables
+>;
+export const GetUserBusinessDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetUserBusiness" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "userId" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "uuid" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "business" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "owner_id" },
+                      value: {
+                        kind: "ObjectValue",
+                        fields: [
+                          {
+                            kind: "ObjectField",
+                            name: { kind: "Name", value: "_eq" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "userId" },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "owner_id" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetUserBusinessQuery,
+  GetUserBusinessQueryVariables
+>;
+export const GetAllSuppliersDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetAllSuppliers" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "suppliers" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "user_id" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetAllSuppliersQuery,
+  GetAllSuppliersQueryVariables
+>;
 export const GetZonesDocument = {
   kind: "Document",
   definitions: [

@@ -30,6 +30,7 @@
     "next": "^14.2.3",
     "next-auth": "^4.24.7",
     "next-auth-hasura-adapter": "^2.0.0",
+    "nprogress": "^0.2.0",
     "postcss": "8.4.28",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@apollo/link-schema": "^2.0.0-beta.3",
     "@types/node": "^20.8.10",
+    "@types/nprogress": "^0.2.3",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "@welldone-software/why-did-you-render": "^8.0.1",

@@ -1,182 +1,87 @@
-import {
-  BusinessProfileOverview,
-  BusinessOrderHistory,
-} from "@sahil/features/businesses";
-// import { useGetAccountBalance, useGetMomoAccountInfo } from "@/hooks/accounts";
-import { useFetchBusinessByPK } from "@sahil/lib/hooks/businesses";
-import { Card, JoinGrid } from "ui";
-import { useState } from "react";
-import {
+"use client"
+
+import { useState } from "react"
+import { Card, JoinGrid } from "ui"
+import { 
+  HiOutlineCurrencyDollar, 
+  HiOutlineCreditCard, 
+  HiOutlineDocumentText, 
+  HiPlus,
   HiArrowSmallLeft,
   HiArrowSmallRight,
   HiOutlineMinusCircle,
   HiOutlineXCircle,
-  HiOutlineCheckCircle,
-} from "react-icons/hi2";
-import { formatDateTime } from "@sahil/lib/dates";
-import { formatCurrency } from "@sahil/lib";
+  HiOutlineCheckCircle
+} from "react-icons/hi2"
+import { formatDateTime } from "@sahil/lib/dates"
+import { formatCurrency } from "@sahil/lib"
+import { BusinessProfileOverview } from "@sahil/features/businesses"
+import { useFetchBusinessByPK } from "@sahil/lib/hooks/businesses"
 
-export default function Account() {
-  const {
-    data: business,
-    error,
-    loading,
-  } = useFetchBusinessByPK("e87924e8-69e4-4171-bd89-0c8963e03d08");
+const PaymentMethodCard = ({ method, isPreferred, onEdit, onSetPreferred }) => (
+  <Card className="mb-4">
+    <div className="flex items-center justify-between p-2">
+      <div>
+        <span className="font-medium">{method.type} ending in {method.last4}</span>
+        {isPreferred && <span className="ml-2 text-sm text-green-600">Preferred</span>}
+      </div>
+      <div>
+        <button onClick={onEdit} className="text-blue-600 hover:underline mr-2">Edit</button>
+        {!isPreferred && (
+          <button onClick={onSetPreferred} className="text-green-600 hover:underline">Set as Preferred</button>
+        )}
+      </div>
+    </div>
+  </Card>
+)
 
-  if (error) {
-    return <p>An error occurred while fetching you account details!</p>;
+const TransactionCard = ({ transaction }) => {
+  const cardIcon = (status: string) => {
+    switch (status) {
+      case "Pending":
+        return <HiOutlineMinusCircle className="text-3xl" />
+      case "Canceled":
+        return <HiOutlineXCircle className="text-4xl text-error" />
+      case "Confirmed":
+        return <HiOutlineCheckCircle className="text-3xl text-success" />
+      default:
+        return null
+    }
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col gap-1 lg:gap-4 lg:flex-row">
-        <div className="grow mb-4 lg:mb-0 space-y-2">
-          {
-            // @ts-ignore
-            business && <BusinessProfileOverview business={business} />
-          }
-          <MomoAccountDetails />
+    <Card>
+      <div className="flex items-center gap-4 p-4">
+        <div className="grid place-items-center">
+          {cardIcon(transaction.status)}
         </div>
-        <div className="basis-4/5 space-y-2">
-          <BusinessOrderHistory />
-          <TransactionsHistory />
+        <div className="w-full space-y-2">
+          <time className="text-sm">
+            {formatDateTime(transaction.date.toISOString())}
+          </time>
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-gray-400 text-sm">Method</p>
+              <p>{transaction.method}</p>
+            </div>
+            <div>
+              <p className="text-gray-400 text-sm">Amount</p>
+              <p>{formatCurrency(transaction.amount)}</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    </Card>
+  )
 }
 
-const MomoAccountDetails = () => {
-  return (
-    <Card>
-      <h3 className="text-xl">Momo Account Details</h3>
-      <MomoUserInfo />
-      <MomoAccountBalance />
-    </Card>
-  );
-};
+export default function BillingDashboard() {
+  const [paymentMethods, setPaymentMethods] = useState([
+    { id: 1, type: 'Visa', last4: '1234' },
+    { id: 2, type: 'Mastercard', last4: '5678' },
+  ])
+  const [preferredMethodId, setPreferredMethodId] = useState(1)
 
-const MomoUserInfo = () => {
-  // const { data, loading, refetch } = useGetMomoAccountInfo();
-  // const [isRefetching, setIsRefetching] = useState(false);
-
-  // const handleRefetch = async () => {
-  //   if (!isRefetching) {
-  //     setIsRefetching(true);
-  //     await refetch().then(() => setIsRefetching(false));
-  //   }
-  // };
-  return (
-    <Card>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2">
-        <div>
-          <p className="text-gray-400 text-sm">Given Name</p>
-          {/* {loading ? (
-            <div className="w-12 h-4 bg-base-200 animate-pulse" />
-          ) : (
-            <p>{data?.given_name}</p>
-          )} */}
-        </div>
-        <div>
-          <p className="text-gray-400 text-sm">Family Name</p>
-          {/* {loading ? (
-            <div className="w-12 h-4 bg-base-200 animate-pulse" />
-          ) : (
-            <p>{data?.family_name}</p>
-          )} */}
-        </div>
-        <div>
-          <p className="text-gray-400 text-sm">Gender</p>
-          {/* {loading ? (
-            <div className="w-12 h-4 bg-base-200 animate-pulse" />
-          ) : (
-            <p>{data?.gender}</p>
-          )} */}
-        </div>
-        <div>
-          <p className="text-gray-400 text-sm">Status</p>
-          {/* {loading ? (
-            <div className="w-12 h-4 bg-base-200 animate-pulse" />
-          ) : (
-            <p>{data?.status || "Active"}</p>
-          )} */}
-        </div>
-      </div>
-      {/* {data === null && (
-        <div className="card-actions flex-col">
-          <p>
-            {isRefetching
-              ? "Refetching account info..."
-              : "Couldn't fetch account info."}
-          </p>
-          <button
-            onClick={handleRefetch}
-            className={`btn btn-sm btn-secondary ${
-              isRefetching && "animate-pulse"
-            }`}
-          >
-            Reload
-          </button>
-        </div>
-      )} */}
-    </Card>
-  );
-};
-
-const MomoAccountBalance = () => {
-  // const { data, loading, refetch } = useGetAccountBalance();
-  const [isRefetching, setIsRefetching] = useState(false);
-
-  // const handleRefetch = async () => {
-  //   if (!isRefetching) {
-  //     setIsRefetching(true);
-  //     await refetch().then(() => setIsRefetching(false));
-  //   }
-  // };
-
-  return (
-    <Card>
-      <p>Hello</p>
-      {/* <div className="grid grid-cols-2 gap-2">
-        <div>
-          <p className="text-gray-400 text-sm">Currency</p>
-          {loading ? (
-            <div className="w-12 h-4 bg-base-200 animate-pulse" />
-          ) : (
-            <p>{data?.currency}</p>
-          )}
-        </div>
-        <div>
-          <p className="text-gray-400 text-sm">Balance</p>
-          {loading ? (
-            <div className="w-12 h-4 bg-base-200 animate-pulse" />
-          ) : (
-            <p>{data?.availableBalance}</p>
-          )}
-        </div>
-      </div>
-      {data === null && (
-        <div className="card-actions flex-col">
-          <p>
-            {isRefetching
-              ? "Refetching balance..."
-              : "Couldn't fetch account balance."}
-          </p>
-          <button
-            onClick={handleRefetch}
-            className={`btn btn-sm btn-secondary ${
-              isRefetching && "animate-pulse"
-            }`}
-          >
-            Reload
-          </button>
-        </div>
-      )} */}
-    </Card>
-  );
-};
-
-const TransactionsHistory = () => {
   const transactions = [
     {
       amount: 1000,
@@ -202,89 +107,114 @@ const TransactionsHistory = () => {
       status: "Confirmed",
       method: "Cash",
     },
-  ];
-  return (
-    <div className="bg-gray-100 space-y-2 grow p-4 rounded-xl">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl">Latest Transactions</h3>
-      </div>
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2 items-center">
-          <div className="badge badge-accent">4 Transactions</div>
-        </div>
-        <div>
-          <JoinGrid>
-            <button
-              className="join-item btn btn-sm"
-              title="Left"
-              onClick={() => {}}
-            >
-              <HiArrowSmallLeft />
-            </button>
-            <button
-              className="join-item btn btn-sm"
-              title="Right"
-              onClick={() => {}}
-            >
-              <HiArrowSmallRight />
-            </button>
-          </JoinGrid>
-        </div>
-      </div>
-      <div className={`grid grid-cols-auto-250 xl:grid-cols-4 gap-2`}>
-        {transactions.map((item, index) => (
-          <TransactionCard key={index} transaction={item} />
-        ))}
-      </div>
-    </div>
-  );
-};
+  ]
 
-type cardProps = {
-  transaction: {
-    amount: number;
-    date: Date;
-    status: string;
-    method: string;
-  };
-};
+  const handleAddPaymentMethod = () => {
+    // Implement add payment method logic
+  }
 
-const TransactionCard = ({ transaction }: cardProps) => {
-  const cardIcon = (status: string) => {
-    switch (status) {
-      case "Pending":
-        return <HiOutlineMinusCircle className="text-3xl " />;
-        break;
-      case "Canceled":
-        return <HiOutlineXCircle className="text-4xl text-error" />;
-        break;
-      case "Confirmed":
-        return <HiOutlineCheckCircle className="text-3xl text-success" />;
-    }
-  };
+  const handleEditPaymentMethod = (id) => {
+    // Implement edit payment method logic
+  }
+
+  const handleSetPreferred = (id) => {
+    setPreferredMethodId(id)
+  }
+
+  const {
+    data: business,
+    error,
+    loading,
+  } = useFetchBusinessByPK("e87924e8-69e4-4171-bd89-0c8963e03d08")
+
+  if (error) {
+    return <p>An error occurred while fetching your account details!</p>
+  }
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
 
   return (
-    <Card>
-      <div className="flex items-center gap-4">
-        <div className="grid place-items-center">
-          {cardIcon(transaction.status)}
+    <div className="max-w-7xl mx-auto space-y-6">
+      
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="lg:w-1/3 space-y-6">
+          {business && <BusinessProfileOverview business={business} />}
+
+          <section>
+            <h2 className="text-xl font-semibold mb-4 flex items-center">
+              <HiOutlineCreditCard className="mr-2" /> Payment Methods
+            </h2>
+            {paymentMethods.map((method) => (
+              <PaymentMethodCard
+                key={method.id}
+                method={method}
+                isPreferred={method.id === preferredMethodId}
+                onEdit={() => handleEditPaymentMethod(method.id)}
+                onSetPreferred={() => handleSetPreferred(method.id)}
+              />
+            ))}
+            <button
+              onClick={handleAddPaymentMethod}
+              className="btn btn-primary w-full flex items-center justify-center"
+            >
+              <HiPlus className="mr-2" /> Add Payment Method
+            </button>
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-xl font-semibold flex items-center">
+              <HiOutlineCurrencyDollar className="mr-2" /> Summary
+            </h2>
+            <Card className="p-4">
+              <div className="grid gap-4">
+                <div>
+                  <span className="block text-sm font-medium text-gray-500">Total Earned</span>
+                  <span className="text-2xl font-bold">$1,234.56</span>
+                </div>
+                <div>
+                  <span className="block text-sm font-medium text-gray-500">Total Spent</span>
+                  <span className="text-2xl font-bold">$567.89</span>
+                </div>
+              </div>
+            </Card>
+          </section>
         </div>
-        <div className="w-full space-y-2">
-          <time className="text-sm">
-            {formatDateTime(transaction.date.toISOString())}
-          </time>
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="text-gray-400 text-sm">Method</p>
-              <p>{transaction.method}</p>
+
+        <div className="lg:w-2/3">
+          <div className="bg-gray-100 space-y-4 p-4 rounded-xl">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold flex items-center">
+                <HiOutlineDocumentText className="mr-2" /> Latest Transactions
+              </h2>
             </div>
-            <div>
-              <p className="text-gray-400 text-sm">Amount</p>
-              <p>{formatCurrency(transaction.amount)}</p>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2 items-center">
+                <div className="badge badge-accent">{transactions.length} Transactions</div>
+              </div>
+              <div>
+                <JoinGrid>
+                  <button className="join-item btn btn-sm" title="Previous">
+                    <HiArrowSmallLeft />
+                  </button>
+                  <button className="join-item btn btn-sm" title="Next">
+                    <HiArrowSmallRight />
+                  </button>
+                </JoinGrid>
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {transactions.map((transaction, index) => (
+                <TransactionCard key={index} transaction={transaction} />
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </Card>
-  );
-};
+    </div>
+  )
+}
+

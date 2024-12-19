@@ -5,164 +5,172 @@ import { GridContainer } from "../shared";
 
 const quickLinks = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
+  { name: "About Us", href: "/about" },
   { name: "Features", href: "/features" },
-  { name: "Blog", href: "/blog" },
+  { name: "Partner with Us", href: "/partners" },
+  // { name: "Blog", href: "/blog" },
 ];
 const companyLinks = [
-  { name: "Support Center", href: "/contact" },
   { name: "Contact Us", href: "/contact" },
-  { name: "FAQs", href: "/about" },
+  { name: "FAQs", href: "/contact" },
   { name: "Privacy Policy", href: "/privacy-policy" },
 ];
 
 export const Footer = () => {
   return (
-    <footer className="pt-12 pb-8">
-      <GridContainer className="grid gap-y-8">
-        <div className="grid gap-y-8 justify-between pb-12 border-b border-b-solid border-b-gray-200 md:grid-cols-[repeat(2,1fr)] lg:grid-cols-[repeat(4,max-content)]">
+    <footer className="mt-28 bg-gray-50">
+      <div className="footerTop py-4 border-t border-b">
+        <GridContainer className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <h3 className="text-2xl font-inter font-semibold lg:text-3xl">
+            Let’s build something great together.
+          </h3>
           <div>
-            <Link href="/">
-              <Image
-                src={logo}
-                alt={"Sahil logo"}
-                className="w-20 max-w-full object-contain"
-              />
+            <Link 
+              href="/contact"
+              className="btn btn-primary font-medium text-white rounded-full" 
+            >
+              Contact Us
             </Link>
-            <p className="max-w-[50ch] mb-3">Empowering businesses.</p>
-            <h3 className="text-lg">Follow us on:</h3>
-            <ul className="flex gap-4 mt-3">
-              <li>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-8 h-8 flex items-center justify-center bg-primary rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 896 1664"
-                  >
-                    <path
-                      fill="#ffffff"
-                      d="M895 12v264H738q-86 0-116 36t-30 108v189h293l-39 296H592v759H286V905H31V609h255V391q0-186 104-288.5T667 0q147 0 228 12z"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-8 h-8 flex items-center justify-center bg-primary rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 1600 1280"
-                  >
-                    <path
-                      fill="#ffffff"
-                      d="M1588 152q-67 98-162 167q1 14 1 42q0 130-38 259.5T1273.5 869T1089 1079.5t-258 146t-323 54.5q-271 0-496-145q35 4 78 4q225 0 401-138q-105-2-188-64.5T189 777q33 5 61 5q43 0 85-11q-112-23-185.5-111.5T76 454v-4q68 38 146 41q-66-44-105-115T78 222q0-88 44-163q121 149 294.5 238.5T788 397q-8-38-8-74q0-134 94.5-228.5T1103 0q140 0 236 102q109-21 205-78q-37 115-142 178q93-10 186-50z"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-8 h-8 flex items-center justify-center bg-primary rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 1536 1536"
-                  >
-                    <path
-                      fill="#ffffff"
-                      d="M1024 768q0-106-75-181t-181-75t-181 75t-75 181t75 181t181 75t181-75t75-181zm138 0q0 164-115 279t-279 115t-279-115t-115-279t115-279t279-115t279 115t115 279zm108-410q0 38-27 65t-65 27t-65-27t-27-65t27-65t65-27t65 27t27 65zM768 138q-7 0-76.5-.5t-105.5 0t-96.5 3t-103 10T315 169q-50 20-88 58t-58 88q-11 29-18.5 71.5t-10 103t-3 96.5t0 105.5t.5 76.5t-.5 76.5t0 105.5t3 96.5t10 103T169 1221q20 50 58 88t88 58q29 11 71.5 18.5t103 10t96.5 3t105.5 0t76.5-.5t76.5.5t105.5 0t96.5-3t103-10t71.5-18.5q50-20 88-58t58-88q11-29 18.5-71.5t10-103t3-96.5t0-105.5t-.5-76.5t.5-76.5t0-105.5t-3-96.5t-10-103T1367 315q-20-50-58-88t-88-58q-29-11-71.5-18.5t-103-10t-96.5-3t-105.5 0t-76.5.5zm768 630q0 229-5 317q-10 208-124 322t-322 124q-88 5-317 5t-317-5q-208-10-322-124T5 1085q-5-88-5-317t5-317q10-208 124-322T451 5q88-5 317-5t317 5q208 10 322 124t124 322q5 88 5 317z"
-                    />
-                  </svg>
-                </a>
-              </li>
-            </ul>
           </div>
-          <div>
-            <h3 className="text-base font-bold mb-2 lg:text-xl">Quick Links</h3>
-            <ul className="flex flex-col gap-y-3">
-              {quickLinks.map(({ name, href }) => {
-                return (
-                  <li key={name}>
-                    <Link
-                      href={href}
-                      className="p-1 text-base transition duration-300 hover:text-primary"
+        </GridContainer>
+      </div>
+      <div className="footerContent mt-8 mb-20">
+        <GridContainer className="grid gap-y-8">
+          <div className="grid gap-y-8 justify-between md:grid-cols-[repeat(2,1fr)] lg:grid-cols-[repeat(4,max-content)]">
+            <div>
+              <Link href="/">
+                <Image
+                  src={logo}
+                  alt={"Sahil logo"}
+                  className="w-20 max-w-full object-contain"
+                />
+              </Link>
+              <p className="max-w-[50ch] mb-3">Empowering businesses.</p>
+              <h3 className="mt-8 text-base font-medium">Follow us on:</h3>
+              <ul className="flex gap-4 mt-3">
+                <li>
+                  <a
+                    href="https://www.linkedin.com/company/sahil-app/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="24" 
+                      height="24" 
+                      viewBox="0 0 24 24"
+                      className="text-primary"
                     >
-                      {name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-base font-bold mb-2 lg:text-xl">Company</h3>
-            <ul className="flex flex-col gap-y-3">
-              {companyLinks.map(({ name, href }) => {
-                return (
-                  <li key={name}>
-                    <Link
-                      href={href}
-                      className="p-1 text-base transition duration-300 hover:text-primary"
+                      <path fill="currentColor" d="M6.94 5a2 2 0 1 1-4-.002a2 2 0 0 1 4 .002M7 8.48H3V21h4zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91z"/>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://x.com/sahilhq/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg"  
+                      width="24" 
+                      height="24" 
+                      viewBox="0 0 24 24"
+                      className="text-primary"
                     >
-                      {name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+                      <path fill="currentColor" d="M18.205 2.25h3.308l-7.227 8.26l8.502 11.24H16.13l-5.214-6.817L4.95 21.75H1.64l7.73-8.835L1.215 2.25H8.04l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/sahil.connect/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="24" 
+                      height="24" 
+                      viewBox="0 0 24 24"
+                      className="text-primary"
+                    >
+                      <path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"/>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-base font-bold mb-5 lg:text-lg">Pages</h3>
+              <ul className="flex flex-col gap-y-3">
+                {quickLinks.map(({ name, href }) => {
+                  return (
+                    <li key={name}>
+                      <Link
+                        href={href}
+                        className="ps-0 p-1 text-base text-gray-600 transition duration-300 hover:text-primary"
+                      >
+                        {name}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-base font-bold mb-5 lg:text-lg">Resources</h3>
+              <ul className="flex flex-col gap-y-3">
+                {companyLinks.map(({ name, href }) => {
+                  return (
+                    <li key={name}>
+                      <Link
+                        href={href}
+                        className="ps-0 p-1 text-base text-gray-600 transition duration-300 hover:text-primary"
+                      >
+                        {name}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-base font-bold mb-5 lg:text-lg">Contact</h3>
+              <ul className="flex flex-col gap-y-3">
+                <li>
+                  <p className="ps-0 p-1 text-base text-gray-600 transition duration-300 hover:text-primary">
+                    Norrsken House Kigali <br/> 1 KN 78 St, Kigali-Rwanda
+                  </p>
+                </li>
+                <li>
+                  <a
+                    href="mailto:sahil.business@gmail.com"
+                    className="ps-0 p-1 text-base text-gray-600 transition duration-300 hover:text-primary"
+                  >
+                    sahil.business@gmail.com
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="tel:+250790336525"
+                    className="ps-0 p-1 text-base text-gray-600 transition duration-300 hover:text-primary"
+                  >
+                    +250-790-336-525
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h3 className="text-base font-bold mb-2 lg:text-xl">
-              Contact Info
-            </h3>
-            <ul className="flex flex-col gap-y-3">
-              <li>
-                <p className="p-1 text-base transition duration-300 hover:text-primary">
-                  Juba - South Sudan
-                </p>
-              </li>
-              <li>
-                <a
-                  href="mailto:sahil.business@gmail.com"
-                  className="p-1 text-base transition duration-300 hover:text-primary"
-                >
-                  sahil.business@gmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+211912000000"
-                  className="p-1 text-base transition duration-300 hover:text-primary"
-                >
-                  +211-912-000-000
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="relative flex flex-col text-center text-base pt-8">
-          <p className="font-medium">
-            &copy; 2023 Sahil – Company Ltd. All Rights Reserved.
+        </GridContainer>
+      </div>
+      <div className="footerBottom py-6 border-t">
+        <div className="flex flex-col text-center text-base">
+          <p className="font-medium text-sm">
+            &copy; 2024 Sahil – Company Ltd. All Rights Reserved.
           </p>
         </div>
-      </GridContainer>
+      </div>
     </footer>
   );
 };

@@ -2,10 +2,15 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { ProductsCatalogue } from "@sahil/features/Products/ProductsCatalogue";
 import { HiMagnifyingGlass, HiOutlineShoppingCart } from "react-icons/hi2";
+import { CollectionControls } from "@sahil/features/Shared/CollectionControls";
+import { useSession } from "next-auth/react";
+import { useGetUserById } from "@sahil/lib/hooks/users";
 
 export default function Products() {
   const [name, setName] = useState("");
   const router = useRouter();
+  const { data: sessionData } = useSession();
+  const { data: currentUser, loading: userLoading } = useGetUserById(sessionData?.user?.id);
 
   const onInputChange = (e: { target: { value: string } }) => {
     const value = e.target.value;
@@ -31,17 +36,7 @@ export default function Products() {
 
   return (
     <section className="space-y-2">
-      <div className="flex justify-between items-center">
-        <h3 className="text-2xl">Available Products</h3>
-        <div className="flex gap-2 items-center">
-          <div className="indicator">
-            <span className="indicator-item badge badge-accent">5</span>
-            <button className="btn btn-sm" title="Shopping Cart" type="button">
-              <HiOutlineShoppingCart />
-            </button>
-          </div>
-        </div>
-      </div>
+  
       <div>
         <form onSubmit={handleSearch} className="form-control relative">
           <div className="input-group ">

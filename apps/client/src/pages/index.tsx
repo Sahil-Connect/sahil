@@ -58,7 +58,7 @@ export default function Home() {
           Radisson Blu
         </h1>
       </Card>
-      <MyComponent />
+     
     </section>
   );
 }

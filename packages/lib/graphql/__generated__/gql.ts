@@ -26,6 +26,10 @@ const documents = {
     types.InsertBusinessOrderDocument,
   "\n  mutation MyMutation($object: order_status_history_insert_input = {}) {\n    insert_order_status_history_one(object: $object) {\n      id\n    }\n  }\n":
     types.MyMutationDocument,
+  "\n  mutation CreateProduct($input: products_insert_input!) {\n    insert_products_one(object: $input) {\n      id\n      name\n      description\n      price\n      quantity\n      discount\n      inStock\n      mainImage\n      created_at\n    }\n  }\n":
+    types.CreateProductDocument,
+  "\n  mutation UpdateProduct($id: uuid!, $input: products_set_input!) {\n    update_products_by_pk(\n      pk_columns: { id: $id }\n      _set: $input\n    ) {\n      id\n      name\n      description\n      price\n      quantity\n      discount\n      inStock\n      mainImage\n      created_at\n    }\n  }\n":
+    types.UpdateProductDocument,
   "\n  mutation registerSupplier($object: suppliers_insert_input!) {\n    insert_suppliers_one(object: $object) {\n      id\n      name\n    }\n  }\n":
     types.RegisterSupplierDocument,
   '\n  mutation updateProductByPk(\n    $id: uuid = ""\n    $inStock: Boolean\n    $name: String\n    $price: Int\n    $quantity: Int\n    $description: String\n  ) {\n    update_products_by_pk(\n      pk_columns: { id: $id }\n      _set: {\n        inStock: $inStock\n        name: $name\n        price: $price\n        quantity: $quantity\n        description: $description\n      }\n    ) {\n      id\n      inStock\n      name\n      price\n      quantity\n      description\n    }\n  }\n':
@@ -102,6 +106,8 @@ const documents = {
     types.GetProductsDocument,
   '\n  \n  \n  query getProductsByName(\n    $offset: Int = 0\n    $limit: Int = 12\n    $name: String = ""\n  ) {\n    products(\n      limit: $limit\n      order_by: { created_at: desc }\n      offset: $offset\n      where: { inStock: { _eq: true }, name: { _ilike: $name } }\n    ) {\n      ...ProductFields\n    }\n    products_aggregate(\n      where: { inStock: { _eq: true }, name: { _ilike: $name } }\n    ) {\n      ...ProductsAggregate\n    }\n  }\n':
     types.GetProductsByNameDocument,
+  "\n  query GetProductById($id: uuid!) {\n    products_by_pk(id: $id) {\n      created_at\n    description\n    discount\n    id\n    inStock\n    mainImage\n    name\n    price\n    quantity\n    supplier {\n      name\n      contactName\n      contactEmail\n      phoneNumber\n    }\n    }\n  }\n":
+    types.GetProductByIdDocument,
   "\n  fragment SupplierFields on suppliers {\n    id\n    name\n    streetAddress\n    phoneNumber\n    contactName\n    zone\n    categories {\n      category_name\n    }\n  }\n":
     types.SupplierFieldsFragmentDoc,
   "\n  fragment SupplierProductFields on products {\n    id\n    name\n    description\n    inStock\n    quantity\n    price\n  }\n":
@@ -134,6 +140,16 @@ const documents = {
     types.GetAdditionalAuthUserInfoDocument,
   '\n  \n  query getUserInvites($email: String = "") {\n    user_invites(\n      where: { email: { _eq: $email } }\n      limit: 1\n      order_by: { created_at: desc }\n    ) {\n      ...UserInviteFields\n    }\n  }\n':
     types.GetUserInvitesDocument,
+  "\n  \n  query GetUserByPk($id: uuid!) {\n    users_by_pk(id: $id) {\n      ...UserBasicFields\n      email\n      created_at\n      hasCompletedOnboarding\n    }\n  }\n":
+    types.GetUserByPkDocument,
+  "\n  query GetUserOrganizationSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n":
+    types.GetUserOrganizationSupplierDocument,
+  "\n  query GetUserSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n":
+    types.GetUserSupplierDocument,
+  "\n  query GetUserBusiness($userId: uuid!) {\n    business(where: { owner_id: { _eq: $userId } }) {\n      id\n      name\n      owner_id\n    }\n  }\n":
+    types.GetUserBusinessDocument,
+  "\n  query GetAllSuppliers {\n    suppliers {\n      id\n      name\n      user_id\n    }\n  }\n":
+    types.GetAllSuppliersDocument,
   "\n  fragment ZoneFields on zones {\n    id\n    name\n    description\n    created_at\n    updated_at\n  }\n":
     types.ZoneFieldsFragmentDoc,
   "\n  \n  query GetZones {\n    zones {\n      ...ZoneFields\n    }\n  }\n":
@@ -198,6 +214,18 @@ export function gql(
 export function gql(
   source: "\n  mutation MyMutation($object: order_status_history_insert_input = {}) {\n    insert_order_status_history_one(object: $object) {\n      id\n    }\n  }\n"
 ): (typeof documents)["\n  mutation MyMutation($object: order_status_history_insert_input = {}) {\n    insert_order_status_history_one(object: $object) {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  mutation CreateProduct($input: products_insert_input!) {\n    insert_products_one(object: $input) {\n      id\n      name\n      description\n      price\n      quantity\n      discount\n      inStock\n      mainImage\n      created_at\n    }\n  }\n"
+): (typeof documents)["\n  mutation CreateProduct($input: products_insert_input!) {\n    insert_products_one(object: $input) {\n      id\n      name\n      description\n      price\n      quantity\n      discount\n      inStock\n      mainImage\n      created_at\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  mutation UpdateProduct($id: uuid!, $input: products_set_input!) {\n    update_products_by_pk(\n      pk_columns: { id: $id }\n      _set: $input\n    ) {\n      id\n      name\n      description\n      price\n      quantity\n      discount\n      inStock\n      mainImage\n      created_at\n    }\n  }\n"
+): (typeof documents)["\n  mutation UpdateProduct($id: uuid!, $input: products_set_input!) {\n    update_products_by_pk(\n      pk_columns: { id: $id }\n      _set: $input\n    ) {\n      id\n      name\n      description\n      price\n      quantity\n      discount\n      inStock\n      mainImage\n      created_at\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -430,6 +458,12 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
+  source: "\n  query GetProductById($id: uuid!) {\n    products_by_pk(id: $id) {\n      created_at\n    description\n    discount\n    id\n    inStock\n    mainImage\n    name\n    price\n    quantity\n    supplier {\n      name\n      contactName\n      contactEmail\n      phoneNumber\n    }\n    }\n  }\n"
+): (typeof documents)["\n  query GetProductById($id: uuid!) {\n    products_by_pk(id: $id) {\n      created_at\n    description\n    discount\n    id\n    inStock\n    mainImage\n    name\n    price\n    quantity\n    supplier {\n      name\n      contactName\n      contactEmail\n      phoneNumber\n    }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
   source: "\n  fragment SupplierFields on suppliers {\n    id\n    name\n    streetAddress\n    phoneNumber\n    contactName\n    zone\n    categories {\n      category_name\n    }\n  }\n"
 ): (typeof documents)["\n  fragment SupplierFields on suppliers {\n    id\n    name\n    streetAddress\n    phoneNumber\n    contactName\n    zone\n    categories {\n      category_name\n    }\n  }\n"];
 /**
@@ -522,6 +556,36 @@ export function gql(
 export function gql(
   source: '\n  \n  query getUserInvites($email: String = "") {\n    user_invites(\n      where: { email: { _eq: $email } }\n      limit: 1\n      order_by: { created_at: desc }\n    ) {\n      ...UserInviteFields\n    }\n  }\n'
 ): (typeof documents)['\n  \n  query getUserInvites($email: String = "") {\n    user_invites(\n      where: { email: { _eq: $email } }\n      limit: 1\n      order_by: { created_at: desc }\n    ) {\n      ...UserInviteFields\n    }\n  }\n'];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  \n  query GetUserByPk($id: uuid!) {\n    users_by_pk(id: $id) {\n      ...UserBasicFields\n      email\n      created_at\n      hasCompletedOnboarding\n    }\n  }\n"
+): (typeof documents)["\n  \n  query GetUserByPk($id: uuid!) {\n    users_by_pk(id: $id) {\n      ...UserBasicFields\n      email\n      created_at\n      hasCompletedOnboarding\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query GetUserOrganizationSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n"
+): (typeof documents)["\n  query GetUserOrganizationSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query GetUserSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n"
+): (typeof documents)["\n  query GetUserSupplier($userId: uuid!) {\n    suppliers(where: { user_id: { _eq: $userId } }) {\n      id\n      name\n      user_id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query GetUserBusiness($userId: uuid!) {\n    business(where: { owner_id: { _eq: $userId } }) {\n      id\n      name\n      owner_id\n    }\n  }\n"
+): (typeof documents)["\n  query GetUserBusiness($userId: uuid!) {\n    business(where: { owner_id: { _eq: $userId } }) {\n      id\n      name\n      owner_id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  query GetAllSuppliers {\n    suppliers {\n      id\n      name\n      user_id\n    }\n  }\n"
+): (typeof documents)["\n  query GetAllSuppliers {\n    suppliers {\n      id\n      name\n      user_id\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

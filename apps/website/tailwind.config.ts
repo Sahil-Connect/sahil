@@ -7,7 +7,7 @@ const config: Config = {
   theme: {
     ...baseConfig.theme,
     fontFamily: {
-      alata: ["var(--font-alata)"],
+      inter: ["var(--font-inter)"],
       jakarta: ["var(--font-jakarta)"],
     },
     extend: {
@@ -15,7 +15,7 @@ const config: Config = {
       colors: {
         primary: "#067a46",
         secondary: "#056835",
-        accent: "#F1C40F",
+        accent: "#F9CA60",
         lime: "#84faa1",
       },
       backgroundImage: {
@@ -31,9 +31,10 @@ const config: Config = {
           ...require("daisyui/src/theming/themes")["lemonade"],
           primary: "#067a46",
           secondary: "#056835",
-          accent: "#40efcf",
+          accent: "#F9CA60",
           neutral: "#2d2f39",
           "base-100": "#ffffff",
+          "base-content": "#C1C1C1",
           info: "#76d1e5",
           success: "#22a05b",
           warning: "#f0bc2d",

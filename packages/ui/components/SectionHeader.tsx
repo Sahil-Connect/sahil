@@ -21,18 +21,17 @@ export const SectionHeader = ({
   children,
 }: SectionHeaderProps) => {
   return (
-    <section className="space-y-4">
-      <Card>
-        <div className="flex flex-wrap items-center gap-2 justify-between md:flex-row">
-          <div>
+    <section className="space-y-4 py-2">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="w-full sm:w-auto">
             <h1 className="text-xl">{title}</h1>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto justify-start sm:justify-end">
             {actions.map((action, index) => (
               <Link
                 key={index}
                 href={action.href}
-                className={`btn btn-sm ${
+                className={`btn btn-sm flex-1 sm:flex-none ${
                   action.primary ? "btn-primary" : ""
                 } normal-case`}
               >
@@ -42,7 +41,6 @@ export const SectionHeader = ({
             ))}
           </div>
         </div>
-      </Card>
       {children}
     </section>
   );

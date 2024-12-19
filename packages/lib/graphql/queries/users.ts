@@ -65,3 +65,56 @@ export const GET_LATEST_USER_INVITE = gql`
     }
   }
 `;
+
+export const GET_USER_BY_PK = gql`
+  ${USER_BASIC_FIELDS}
+  query GetUserByPk($id: uuid!) {
+    users_by_pk(id: $id) {
+      ...UserBasicFields
+      email
+      created_at
+      hasCompletedOnboarding
+    }
+  }
+`;
+
+export const GET_USER_ORGANIZATION = gql`
+  query GetUserOrganizationSupplier($userId: uuid!) {
+    suppliers(where: { user_id: { _eq: $userId } }) {
+      id
+      name
+      user_id
+    }
+  }
+`;
+
+export const GET_USER_SUPPLIER = gql`
+  query GetUserSupplier($userId: uuid!) {
+    suppliers(where: { user_id: { _eq: $userId } }) {
+      id
+      name
+      user_id
+    }
+  }
+`;
+
+export const GET_USER_BUSINESS = gql`
+  query GetUserBusiness($userId: uuid!) {
+    business(where: { owner_id: { _eq: $userId } }) {
+      id
+      name
+      owner_id
+    }
+  }
+`;
+
+
+export const GET_ALL_SUPPLIERS = gql`
+  query GetAllSuppliers {
+    suppliers {
+      id
+      name
+      user_id
+    }
+  }
+`;

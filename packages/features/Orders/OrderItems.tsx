@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Card } from "ui";
-import { HiOutlineReceiptPercent } from "react-icons/hi2";
+import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { formatCurrency } from "@sahil/lib";
 
 type OrderItemProps = {
@@ -12,21 +12,23 @@ type OrderItemProps = {
 
 export const OrderItem: FC<OrderItemProps> = ({ price, quantity, title }) => {
   return (
-    <Card>
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="card-title text-sm">{title}</h2>
-          <div className="flex gap-2">
-            <p className="flex items-center gap-2 text-gray-600">
-              <HiOutlineReceiptPercent /> {quantity} Quantity
-            </p>
-            <p className="flex items-center gap-2 text-gray-600">
-              {formatCurrency(parseInt(price))}
-            </p>
+    <div className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+      <div>
+        <div className="flex items-center gap-2">
+          <div className={`p-2 rounded-full bg-white shadow-sm border `}>
+            <HiOutlineShoppingCart
+              className={`w-4 h-4 `}
+            />
+          </div>
+          <div>
+          <h3 className="text-sm">{title}</h3>
+          <p className="flex items-center gap-2 text-gray-600">
+            {formatCurrency(parseInt(price))}
+          </p>
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
 
@@ -48,8 +50,8 @@ export const OrderItems: FC<Props> = ({ items }) => {
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center gap-4">
-        <h3>Order Items</h3>
-        <p>items</p>
+        <div className="divider">Order Items</div>
+
       </div>
       <ul className="space-y-2">
         {items?.map((item, index) => (

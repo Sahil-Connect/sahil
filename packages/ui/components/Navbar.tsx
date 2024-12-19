@@ -4,18 +4,38 @@ import Link from "next/link";
 import { Icon } from "./Icon";
 import type { IconType } from "react-icons";
 import {
-  HiOutlineAdjustmentsHorizontal,
+  HiOutlineInformationCircle,
   HiOutlineArrowRightOnRectangle,
-  HiOutlinePlus,
+  HiOutlineUser,
   HiOutlineCog6Tooth,
   HiOutlineBell,
+  HiArrowsRightLeft,
+  HiOutlineEye,
+  HiOutlineBuildingStorefront,
+  HiOutlineBriefcase,
+  HiOutlineTruck,
+  HiOutlineCube,
+  HiOutlineShieldExclamation
 } from "react-icons/hi2";
 import { useRouter } from "next/router";
+import { useGetUserById } from "@sahil/lib/hooks/users";
+import { useUser } from '@sahil/features/auth/UserContext';
 
 type NavbarLink = {
   name: string;
   href: string;
   icon: IconType;
+};
+
+type ProfileType = 'admin' | 'supplier' | 'agent' | 'business';
+
+type UserWithProfile = {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  profileType: ProfileType;
+  canSwitchProfiles?: boolean;
 };
 
 export type NavbarProps = {
@@ -24,8 +44,16 @@ export type NavbarProps = {
   logo?: any;
   header?: string;
   onSignOut?: () => void;
-  user?: any;
+  user?: UserWithProfile;
+  onProfileSwitch?: (profileType: ProfileType) => void;
 };
+
+const MapRoleToIcon = {
+  admin: HiOutlineShieldExclamation,
+  supplier: HiOutlineBriefcase,
+  agent: HiOutlineTruck,
+  business: HiOutlineBriefcase,
+}
 
 export const Navbar: FC<NavbarProps> = ({
   links,
@@ -33,59 +61,119 @@ export const Navbar: FC<NavbarProps> = ({
   header = "Sahil",
   onSignOut,
   user,
+  onProfileSwitch,
 }) => {
   const router = useRouter();
+  const { currentUser } = useUser();
+
+  // Merge session user with current user data
+  const userData = {
+    ...user,
+    ...currentUser
+  };
+
+  const isActive = (href: string) => router.pathname === href;
+
 
   return (
     <header className="bg-white navbar border-b">
-      <div className="navbar-start w-full gap-2">
-        <Link
-          href="/"
-          className="flex items-center text-base font-semibold lg:text-lg"
-        >
-          {logo && (
-            <Image
-              src={logo}
-              alt="Sahil"
-              loading="eager"
-              className="w-10 max-w-full object-cover"
-            />
-          )}
-          {header}
-        </Link>
-        <nav>
-          <ul className="menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-2 flex-nowrap">
-            {links.map(({ name, href, icon }) => (
-              <li key={name}>
-                <Link
-                  href={href}
-                  className={`btn btn-sm transition duration-300 ${
-                    router.pathname === href ? "bg-white text-primary" : "btn-ghost"
-                  }`}
-                >
-                  {icon && <Icon icon={icon} />} {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+      <div className="w-full flex items-center gap-2">
+
+        <div className="navbar-start flex w-full gap-2">
+          <Link
+            href="/"
+            className="flex items-center text-base font-semibold lg:text-lg"
+          >
+            {logo && (
+              <Image
+                src={logo}
+                alt="Sahil"
+                loading="eager"
+                className="w-10 max-w-full object-cover"
+              />
+            )}
+            {header}
+          </Link>
+          <nav>
+            <ul className="menu menu-horizontal px-1 hidden lg:flex lg:items-center lg:gap-2 flex-nowrap">
+              {links.map(({ name, href, icon }) => (
+                <li key={name}>
+                  <Link
+                    href={href}
+                    className={`px-2 py-2 text-sm transition duration-300 hover:text-green-dark relative
+                      ${isActive(href) ? 'bg-primary text-white' : 'bg-transparent'}`}
+                  >
+                    {icon && <Icon icon={icon} />} {name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
-      <Right user={user} links={links} onSignOut={onSignOut} />
+      <Right user={userData} links={links} onSignOut={onSignOut} onProfileSwitch={onProfileSwitch} />
     </header>
   );
 };
 
 export default Navbar;
 
+type ViewAsProps = {
+  currentRole: string;
+  isAdmin: boolean;
+  onRoleSwitch?: (type: ProfileType) => void;
+};
+
+const ViewAs: FC<ViewAsProps> = ({ currentRole, isAdmin, onRoleSwitch }) => {
+  if (!currentRole) return null;
+
+  return (
+    <div className="flex items-center gap-2">
+      <div className="badge badge-lg badge-info capitalize py-4 text-foreground text-sm gap-2">
+        <Icon icon={MapRoleToIcon[currentRole as keyof typeof MapRoleToIcon]} /> {currentRole}
+      </div>
+      {isAdmin && (
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-sm btn-ghost"
+            title="View as different role"
+          >
+            <Icon icon={HiOutlineEye} />
+          </div>
+          <ul tabIndex={0} className="dropdown-content menu p-2 shadow border bg-base-100 rounded-lg w-48 mt-2">
+            <li className="menu-title px-2 pt-0">
+              <span className="text-xs text-gray-500">View as:</span>
+            </li>
+            {(['supplier', 'agent', 'business'] as ProfileType[]).map((type) => (
+              <li key={type}>
+                <button
+                  onClick={() => onRoleSwitch?.(type)}
+                  className={`capitalize ${type === currentRole ? 'bg-primary/10' : ''}`}
+                >
+                  {type}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Right = ({
   user,
   links,
   onSignOut,
+  onProfileSwitch,
   children,
 }: {
   user: any;
   links: NavbarLink[];
   onSignOut?: () => void;
+  onProfileSwitch?: (profileType: ProfileType) => void;
   children?: ReactNode;
 }) => {
   const router = useRouter();
@@ -102,16 +190,22 @@ const Right = ({
 
   return (
     <div className="navbar-end">
-      <div className="flex items-center gap-0">
-        {/* for now commented out the notification icon */}
-        {/* <div className="relative">
+      <div className="flex items-center gap-2">
+        {user.role && (
+          <ViewAs
+            currentRole={user.role}
+            isAdmin={user.role === 'admin'}
+            onRoleSwitch={onProfileSwitch}
+          />
+        )}
+
+        <Link
+          href="/notifications"
+          className="text-sm flex items-center gap-2"
+        >
           <Icon icon={HiOutlineBell} />
-          <div className="absolute inline-flex items-center justify-center w-3 h-3 text-sm font-bold bg-red-500 border-2 border-white rounded-full -top-1 -end-1" />
-        </div> */}
-        <Link href="/settings" className="text-sm ml-2">
-          <Icon icon={HiOutlineCog6Tooth} />
         </Link>
-        <div className="divider divider-horizontal h-6 m-auto" />
+
         <div className="dropdown dropdown-end text-gray-600">
           <div
             tabIndex={0}
@@ -124,34 +218,45 @@ const Right = ({
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
+            className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow border bg-base-100 rounded-lg w-fit space-y-2"
           >
-            <li className="border-b font-semibold">
-              <p>Quick Menu:</p>
-            </li>
-            {links.map(({ name, href, icon }) => {
-              return (
-                <li key={name}>
-                  <Link
-                    href={href}
-                    className={router.pathname === href ? "text-secondary font-semibold" : ""}
-                  >
-                    <Icon icon={icon} /> {name}
-                  </Link>
-                </li>
-              );
-            })}
-            <div className="border-t py-2">
+            <div className="flex items-center gap-2 border-b py-1">
+              <div className="avatar">
+                <div className="w-10 rounded-full">
+                  <img alt={user.name} src={user.image} />
+                </div>
+              </div>
+              <div>
+                <h4 className="text-sm leading-tight">{user.name}</h4>
+                <p className="text-xs">{user.email}</p>
+              </div>
+            </div>
+            <div>
               <li>
-                <Link
-                  href="/settings"
-                  className={router.pathname === "/settings" ? "text-secondary font-semibold" : ""}
-                >
-                  <Icon icon={HiOutlineAdjustmentsHorizontal} /> Settings
+                <Link href="/settings/profile">
+                  <Icon icon={HiOutlineUser} /> View profile
                 </Link>
               </li>
               <li>
-                <button onClick={onSignOut}>
+                <Link href="/settings/general">
+                  <Icon icon={HiOutlineCog6Tooth} /> Account settings
+                </Link>
+              </li>
+            </div>
+            <div className="border-t pt-2">
+              <li>
+                <a
+                  href="https://sahil.app/help"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon icon={HiOutlineInformationCircle} /> Help & Support
+                </a>
+              </li>
+            </div>
+            <div className="border-t pt-2">
+              <li>
+                <button onClick={onSignOut} className="text-red-600">
                   <Icon icon={HiOutlineArrowRightOnRectangle} /> Logout
                 </button>
               </li>
