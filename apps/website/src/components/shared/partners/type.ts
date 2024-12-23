@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { businessPartnerSchema, courierPartnerSchema, supplierPartnerSchema } from "@/lib/schema";
+// import { z } from "zod";
+// import { businessPartnerSchema, courierPartnerSchema, supplierPartnerSchema } from "@/lib/schema";
 
 export type FormInputType = {
   name: string;

@@ -2,12 +2,11 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { businessPartnerSchema } from "@/lib/schema";
+import { basePartnerSchema } from "@/lib/schema";
 import { Input } from "../Form";
 import { HiOutlineArrowUpRight } from "react-icons/hi2";
 import { FormInputType } from "./type";
-import { sendEmail } from "@/app/_action";
-import emailjs from '@emailjs/browser';
+import { sendEmail, storeUserDetails } from "@/app/_action";
 
 export const PartnerBusiness = () => {
   const {
@@ -16,7 +15,7 @@ export const PartnerBusiness = () => {
     reset, 
     formState: {errors, isSubmitting}
   } = useForm<FormInputType>({
-    resolver: zodResolver(businessPartnerSchema),
+    resolver: zodResolver(basePartnerSchema),
   })
   
   const [submissionStatus, setSubmissionStatus] = useState<{
@@ -34,10 +33,10 @@ export const PartnerBusiness = () => {
     try {
       // first, send email via Resend
       const resendResult = await sendEmail(data);
-      // then, send email via Email.js
-      const emailJsResult = await sendEmailViaEmailJs(data);
+      // store user details
+      const storeResult = await storeUserDetails(data);
 
-      if (resendResult?.success && emailJsResult) {
+      if (resendResult?.success && storeResult) {
         setSubmissionStatus({
           type: 'success',
           message: 'Message sent successfully!'
@@ -55,30 +54,6 @@ export const PartnerBusiness = () => {
         type: 'error',
         message: 'An unexpected error occurred.'
       });
-    }
-  }
-
-  // helper function to send email via Email.js
-  const sendEmailViaEmailJs = async (data: FormInputType): Promise<boolean> => {
-    try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_TEMPLATE_ID_BUSINESS!,
-        {
-          // map form data to Email.js template fields
-          user_name: data.name,
-          user_email: data.email,
-          user_phone: data.phoneNumber.toString(),
-          user_company: data.companyName,
-        },
-        {
-          publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY!,
-        }
-      );
-      return true;
-    } catch (error) {
-      console.error('Email.js send error:', error);
-      return false;
     }
   }
 
@@ -137,7 +112,7 @@ export const PartnerBusiness = () => {
             group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm text-white font-semibold transition-colors
             ${
               isSubmitting
-                ? 'bg-gray-400 cursor-not-allowed'
+                ? 'bg-gray-400 text-white cursor-not-allowed'
                 : 'bg-primary hover:bg-secondary'
             }
           `}

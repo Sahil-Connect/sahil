@@ -21,22 +21,11 @@ export const basePartnerSchema = z.object({
   name: z.string().min(3, 'Must be at least 3 characters'),
   email: z.string().email({message: "Email is required"}),
   phoneNumber: z.string().regex(phoneRegex, 'Phone number is required'),
-});
-
-export const businessPartnerSchema = basePartnerSchema.extend({
-  companyName: z.string().min(3, 'Must be at least 3 characters'),
-});
-
-export const supplierPartnerSchema = basePartnerSchema.extend({
-  companyName: z.string().min(3, 'Must be at least 3 characters'),
+  companyName: z.string().min(3, 'Must be at least 3 characters').optional(),
   supplyDetails: z
   .string()
   .min(3, {message: 'Must be at least 3 characters'})
-  .max(250, {message: 'Must not exceed 250 characters'}),
-});
-
-export const courierPartnerSchema = basePartnerSchema.extend({
-  vehicleDetails: z.enum(vehicleStatuses, {
-    errorMap: () => ({ message: 'Please select your vehicle status' }),
-  }),
+  .max(250, {message: 'Must not exceed 250 characters'})
+  .optional(),
+  vehicleDetails: z.enum(vehicleStatuses).optional(),
 });
