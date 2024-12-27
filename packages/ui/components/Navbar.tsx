@@ -9,13 +9,33 @@ import {
   HiOutlineUser,
   HiOutlineCog6Tooth,
   HiOutlineBell,
+  HiArrowsRightLeft,
+  HiOutlineEye,
+  HiOutlineBuildingStorefront,
+  HiOutlineBriefcase,
+  HiOutlineTruck,
+  HiOutlineCube,
+  HiOutlineShieldExclamation
 } from "react-icons/hi2";
 import { useRouter } from "next/router";
+import { useGetUserById } from "@sahil/lib/hooks/users";
+import { useUser } from '@sahil/features/auth/UserContext';
 
 type NavbarLink = {
   name: string;
   href: string;
   icon: IconType;
+};
+
+type ProfileType = 'admin' | 'supplier' | 'agent' | 'business';
+
+type UserWithProfile = {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  profileType: ProfileType;
+  canSwitchProfiles?: boolean;
 };
 
 export type NavbarProps = {
@@ -24,8 +44,16 @@ export type NavbarProps = {
   logo?: any;
   header?: string;
   onSignOut?: () => void;
-  user?: any;
+  user?: UserWithProfile;
+  onProfileSwitch?: (profileType: ProfileType) => void;
 };
+
+const MapRoleToIcon = {
+  admin: HiOutlineShieldExclamation,
+  supplier: HiOutlineBriefcase,
+  agent: HiOutlineTruck,
+  business: HiOutlineBriefcase,
+}
 
 export const Navbar: FC<NavbarProps> = ({
   links,
@@ -33,40 +61,24 @@ export const Navbar: FC<NavbarProps> = ({
   header = "Sahil",
   onSignOut,
   user,
+  onProfileSwitch,
 }) => {
   const router = useRouter();
+  const { currentUser } = useUser();
+
+  // Merge session user with current user data
+  const userData = {
+    ...user,
+    ...currentUser
+  };
+
+  const isActive = (href: string) => router.pathname === href;
+
 
   return (
     <header className="bg-white navbar border-b">
       <div className="w-full flex items-center gap-2">
-        {/* mobile hamburger */}
-        <div className="dropdown dropdown-start text-gray-600 lg:hidden">
-          <div
-            tabIndex={0}
-            role="button"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
-              <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-10 p-2 border shadow bg-base-100 rounded-lg w-fit space-y-2"
-          >
-            <li className="border-b font-semibold">
-              <p>Quick Menu:</p>
-            </li>
-            {links.map(({ name, href, icon }) => {
-              return (
-                <li key={name}>
-                  <Link href={href}>
-                    <Icon icon={icon} /> {name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+
         <div className="navbar-start flex w-full gap-2">
           <Link
             href="/"
@@ -88,7 +100,8 @@ export const Navbar: FC<NavbarProps> = ({
                 <li key={name}>
                   <Link
                     href={href}
-                    className="px-2 py-1 text-sm transition duration-300 hover:text-green-dark"
+                    className={`px-2 py-2 text-sm transition duration-300 hover:text-green-dark relative
+                      ${isActive(href) ? 'bg-primary text-white' : 'bg-transparent'}`}
                   >
                     {icon && <Icon icon={icon} />} {name}
                   </Link>
@@ -98,22 +111,69 @@ export const Navbar: FC<NavbarProps> = ({
           </nav>
         </div>
       </div>
-      <Right user={user} links={links} onSignOut={onSignOut} />
+      <Right user={userData} links={links} onSignOut={onSignOut} onProfileSwitch={onProfileSwitch} />
     </header>
   );
 };
 
 export default Navbar;
 
+type ViewAsProps = {
+  currentRole: string;
+  isAdmin: boolean;
+  onRoleSwitch?: (type: ProfileType) => void;
+};
+
+const ViewAs: FC<ViewAsProps> = ({ currentRole, isAdmin, onRoleSwitch }) => {
+  if (!currentRole) return null;
+
+  return (
+    <div className="flex items-center gap-2">
+      <div className="badge badge-lg badge-info capitalize py-4 text-foreground text-sm gap-2">
+        <Icon icon={MapRoleToIcon[currentRole as keyof typeof MapRoleToIcon]} /> {currentRole}
+      </div>
+      {isAdmin && (
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-sm btn-ghost"
+            title="View as different role"
+          >
+            <Icon icon={HiOutlineEye} />
+          </div>
+          <ul tabIndex={0} className="dropdown-content menu p-2 shadow border bg-base-100 rounded-lg w-48 mt-2">
+            <li className="menu-title px-2 pt-0">
+              <span className="text-xs text-gray-500">View as:</span>
+            </li>
+            {(['supplier', 'agent', 'business'] as ProfileType[]).map((type) => (
+              <li key={type}>
+                <button
+                  onClick={() => onRoleSwitch?.(type)}
+                  className={`capitalize ${type === currentRole ? 'bg-primary/10' : ''}`}
+                >
+                  {type}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Right = ({
   user,
   links,
   onSignOut,
+  onProfileSwitch,
   children,
 }: {
   user: any;
   links: NavbarLink[];
   onSignOut?: () => void;
+  onProfileSwitch?: (profileType: ProfileType) => void;
   children?: ReactNode;
 }) => {
   const router = useRouter();
@@ -130,14 +190,22 @@ const Right = ({
 
   return (
     <div className="navbar-end">
-      <div className="flex items-center gap-0">
-        <Link 
+      <div className="flex items-center gap-2">
+        {user.role && (
+          <ViewAs
+            currentRole={user.role}
+            isAdmin={user.role === 'admin'}
+            onRoleSwitch={onProfileSwitch}
+          />
+        )}
+
+        <Link
           href="/notifications"
-          className="text-sm ml-2"
+          className="text-sm flex items-center gap-2"
         >
           <Icon icon={HiOutlineBell} />
         </Link>
-        <div className="divider divider-horizontal h-6 m-auto" />
+
         <div className="dropdown dropdown-end text-gray-600">
           <div
             tabIndex={0}
@@ -177,9 +245,10 @@ const Right = ({
             </div>
             <div className="border-t pt-2">
               <li>
-                <a 
+                <a
                   href="https://sahil.app/help"
-                  target="_blank" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Icon icon={HiOutlineInformationCircle} /> Help & Support
                 </a>

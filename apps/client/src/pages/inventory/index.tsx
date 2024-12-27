@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { formatDateTime } from "@sahil/lib/dates";
 import BusinessInventoryHeader from '@sahil/features/Inventory/BusinessInventoryHeader';
 import FilterPanel from '@sahil/features/Inventory/FilterPanel';
+import { CollectionControls } from "@sahil/features/Shared/CollectionControls";
 
 interface ProductsTableProps {
   products: any[];
@@ -172,13 +173,7 @@ export default function InventoryPage() {
 
   return (
     <div className="flex flex-col h-screen">
-      <BusinessInventoryHeader
-        suppliers={suppliers}
-        activeSupplier={activeSupplier}
-        onSupplierSelect={switchSupplier}
-        isLoading={suppliersLoading}
-        onAddProduct={handleAddProduct}
-      />
+      <CollectionControls user={currentUser} />
       
       <div className="flex flex-1 overflow-hidden">
         <FilterPanel 

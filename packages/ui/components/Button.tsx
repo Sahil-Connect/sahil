@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  variant?: "primary" | "secondary" | "danger" | "outline";
+  variant?: "primary" | "secondary" | "danger" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
@@ -25,6 +25,7 @@ export const Button: FC<ButtonProps> = ({
     secondary: "btn-secondary",
     danger: "btn-error",
     outline: "btn-outline",
+    ghost: "btn-ghost",
   };
   const sizeClasses = {
     sm: "btn-sm",

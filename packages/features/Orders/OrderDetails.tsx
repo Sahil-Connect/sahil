@@ -84,7 +84,7 @@ export type OrderInfoItemProps = {
 
 export const OrderInfoItem = ({ icon, label, value }: OrderInfoItemProps) => (
   <div className="w-full flex gap-2 items-center">
-    <span className="p-2 border rounded w-fit">{icon}</span>
+    <span className="p-2 border rounded-full shadow-sm w-fit text-primary">{icon}</span>
     <div>
       <h3 className="text-gray-400 text-sm">{label}</h3>
       <span className="text-sm">{value}</span>
