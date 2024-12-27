@@ -1,57 +1,105 @@
+import React from 'react';
+import { 
+  UseFormRegister, 
+  FieldErrors, 
+  FieldValues, 
+  Path 
+} from 'react-hook-form';
 
-interface InputProps {
+// Generic type constrained to FieldValues
+interface BaseInputProps<TFieldValues extends FieldValues> {
   label: string;
   placeholder: string;
-  type: string;
-  required: boolean;
+  register: UseFormRegister<TFieldValues>;
+  errors: FieldErrors<TFieldValues>;
+  name: Path<TFieldValues>;
+  type?: string;
 }
 
-interface TextAreaProps {
+interface SelectProps<TFieldValues extends FieldValues> {
   label: string;
-  placeholder: string;
-  required: boolean;
+  name: Path<TFieldValues>;
+  register: UseFormRegister<TFieldValues>;
+  errors: FieldErrors<TFieldValues>;
+  options: { value: string; label: string }[];
 }
 
-interface SelectProps {
-  label: string;
-}
-
-export const Input = ({ label, placeholder, type, required }: InputProps) => {
+export const Input = <TFieldValues extends FieldValues>({ 
+  label, 
+  placeholder, 
+  register, 
+  errors, 
+  name, 
+  type = 'text'
+}: BaseInputProps<TFieldValues>) => {
   return (
     <div>
-      <label htmlFor={label} className="label text-sm p-0 mb-2 font-medium">{label}</label>
+      <label htmlFor={name} className="label text-sm p-0 mb-2 font-medium">{label}</label>
       <input 
         type={type}
         placeholder={placeholder} 
-        required={required}
-        className="input input-bordered border border-gray-200 w-full text-sm outline-none focus:outline-none focus:border-gray-300" 
+        {...register(name)}
+        className={`input input-bordered border border-gray-200 w-full text-sm outline-none focus:outline-none focus:border-gray-300 ${errors[name] ? 'input-error' : ''}`}
       />
+      {errors[name] && (
+        <p className="mt-1 text-red-700 text-sm">
+          {errors[name]?.message as string}
+        </p>
+      )}
     </div>
   );
 };
 
-export const TextArea = ({ label, placeholder, required }: TextAreaProps) => {
+export const TextArea = <TFieldValues extends FieldValues>({ 
+  label, 
+  placeholder, 
+  register, 
+  errors, 
+  name
+}: BaseInputProps<TFieldValues>) => {
   return (
     <div>
-      <label htmlFor={label} className="label text-sm p-0 mb-2 font-medium">{label}</label>
+      <label htmlFor={name} className="label text-sm p-0 mb-2 font-medium">{label}</label>
       <textarea 
         placeholder={placeholder} 
-        required={required}
-        className="textarea textarea-bordered h-28 resize-none border border-gray-200 w-full text-sm outline-none focus:outline-none focus:border-gray-300" 
+        {...register(name)}
+        className={`textarea textarea-bordered h-28 resize-none border border-gray-200 w-full text-sm outline-none focus:outline-none focus:border-gray-300 ${errors[name] ? 'textarea-error' : ''}`}
       />
+      {errors[name] && (
+        <p className="mt-1 text-red-700 text-sm">
+          {errors[name]?.message as string}
+        </p>
+      )}
     </div>
   );
 };
 
-export const Select = ({ label }: SelectProps) => {
+export const Select = <TFieldValues extends FieldValues>({ 
+  label, 
+  name, 
+  register, 
+  errors, 
+  options 
+}: SelectProps<TFieldValues>) => {
   return (
     <div>
-      <label htmlFor={label} className="label text-sm p-0 mb-2 font-medium">{label}</label>
-      <select className="select select-bordered border border-gray-200 w-full text-sm outline-none focus:outline-none focus:border-gray-300 required">
-        <option disabled selected>Select</option>
-        <option>Yes</option>
-        <option>No</option>
+      <label htmlFor={name} className="label text-sm p-0 mb-2 font-medium">{label}</label>
+      <select 
+        {...register(name)}
+        className={`select select-bordered border border-gray-200 w-full text-sm outline-none focus:outline-none focus:border-gray-300 ${errors[name] ? 'select-error' : ''}`}
+      >
+        <option value="" disabled>Select</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
       </select>
+      {errors[name] && (
+        <p className="mt-1 text-red-700 text-sm">
+          {errors[name]?.message as string}
+        </p>
+      )}
     </div>
   );
 };
