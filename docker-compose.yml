@@ -125,6 +125,21 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DATABASE=${POSTGRES_DATABASE}
 
+  # SERVER
+  sahil-server:
+    container_name: sahil-server
+    build:
+      context: .
+      dockerfile: ./infra/docker/Dockerfile.server
+    image: sahil-server
+    restart: always
+    ports:
+      - '3007:3000'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+
   #### LOCAL DEV ENVIRONMENTS ####
 
   # HASURA ENGINE
