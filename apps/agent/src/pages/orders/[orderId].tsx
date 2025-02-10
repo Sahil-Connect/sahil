@@ -19,6 +19,7 @@ import {
   HiOutlineAdjustmentsVertical,
   HiOutlineExclamationCircle,
   HiArrowsRightLeft,
+  HiExclamationTriangle,
 } from "react-icons/hi2";
 
 type TabItem = {
@@ -29,7 +30,7 @@ type TabItem = {
 
 export const OrderTabs: TabItem[] = [
   {
-    label: "Oder Info",
+    label: "Order Info",
     value: "info",
     icon: <HiOutlineExclamationCircle />,
   },
@@ -45,6 +46,37 @@ export const OrderTabs: TabItem[] = [
   },
 ];
 
+const LoadingSkeleton = () => (
+  <div className="animate-pulse space-y-4">
+    <div className="h-24 bg-gray-200 rounded-lg"/>
+    <div className="flex flex-col lg:flex-row gap-4">
+      <div className="w-full xl:basis-2/3 space-y-4">
+        <div className="h-12 bg-gray-200 rounded-lg"/>
+        <Card>
+          <div className="space-y-4">
+            <div className="h-32 bg-gray-200 rounded"/>
+            <div className="h-48 bg-gray-200 rounded"/>
+          </div>
+        </Card>
+      </div>
+      <div className="w-full xl:basis-1/3 space-y-4">
+        <div className="h-64 bg-gray-200 rounded-lg"/>
+        <div className="h-48 bg-gray-200 rounded-lg"/>
+      </div>
+    </div>
+  </div>
+);
+
+const ErrorState = ({ message }: { message: string }) => (
+  <Card className="p-8">
+    <div className="text-center space-y-4">
+      <HiExclamationTriangle className="w-12 h-12 text-red-500 mx-auto"/>
+      <h2 className="text-xl font-semibold text-gray-900">Error Loading Order</h2>
+      <p className="text-gray-600">{message}</p>
+    </div>
+  </Card>
+);
+
 export default function OrderPage() {
   const router = useRouter();
   const { orderId } = router.query;
@@ -56,8 +88,8 @@ export default function OrderPage() {
     handleChange(value);
   };
 
-  if (error) return <p>error</p>;
-  if (loading) return <p>loading</p>;
+  if (error) return <ErrorState message={error.message || "Failed to load order details"} />;
+  if (loading) return <LoadingSkeleton />;
 
   return (
     <section className="space-y-4">
