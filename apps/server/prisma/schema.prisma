@@ -1,0 +1,403 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model accounts {
+  id                       String  @id @default(dbgenerated("public.gen_random_uuid()")) @db.Uuid
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  access_token             String?
+  expires_at               BigInt?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  oauth_token_secret       String?
+  oauth_token              String?
+  userId                   String  @db.Uuid
+  refresh_token_expires_in Int?
+  users                    users   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+model addresses {
+  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at     DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime  @default(now()) @db.Timestamptz(6)
+  business_id    String?   @db.Uuid
+  latitude       Float?
+  longitude      Float?
+  city           String?   @db.VarChar
+  street_address String?   @db.VarChar
+  business       business? @relation(fields: [business_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model agent {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String   @db.VarChar
+  agent_type String
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  active     Boolean
+  on_duty    Boolean
+}
+
+model agent_type {
+  type String @id
+}
+
+model business {
+  id                         String                      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at                 DateTime                    @default(now()) @db.Timestamptz(6)
+  updated_at                 DateTime                    @default(now()) @db.Timestamptz(6)
+  name                       String?                     @db.VarChar
+  registered_by              String?                     @db.Uuid
+  owner_id                   String?                     @db.Uuid
+  registration_channel       String?
+  type                       String?
+  contactName                String?
+  description                String?
+  phoneNumber                String?                     @db.VarChar
+  contactEmail               String?                     @db.VarChar
+  preferredContactMethod     String?                     @db.VarChar
+  preferredDeliveryMethod    String?                     @db.VarChar
+  preferredPaymentMethod     String?                     @db.VarChar
+  addresses                  addresses[]
+  registeration_channel_type registeration_channel_type? @relation(fields: [registration_channel], references: [channel], onDelete: NoAction, onUpdate: NoAction)
+  business_type              business_type?              @relation(fields: [type], references: [type], onDelete: Restrict, onUpdate: Restrict)
+  orders                     orders[]
+  work_schedules             work_schedules?
+}
+
+model business_sector {
+  text String @id
+}
+
+model business_type {
+  type     String     @id
+  business business[]
+}
+
+model contact_details {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model courier_rides {
+  id                   String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  courier_id           String      @db.Uuid
+  status               String      @default("Inactive")
+  type                 String
+  model                String
+  color                String
+  license_plate_number String      @db.VarChar
+  created_at           DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime    @default(now()) @db.Timestamptz(6)
+  couriers             couriers    @relation(fields: [courier_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  ride_status          ride_status @relation(fields: [status], references: [status], onUpdate: Restrict)
+  ride_type            ride_type   @relation(fields: [type], references: [type], onUpdate: Restrict)
+}
+
+model couriers {
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  name          String          @db.VarChar
+  avatar        String?         @db.VarChar
+  DOB           DateTime?       @db.Date
+  gender        String?         @db.VarChar
+  email         String?         @db.VarChar
+  phoneNumber   String?         @db.VarChar
+  assigned      Boolean         @default(false)
+  courier_rides courier_rides[]
+  delivery      delivery[]
+}
+
+model delivery {
+  orderId         String           @db.Uuid
+  courierId       String           @db.Uuid
+  id              String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at      DateTime         @default(now()) @db.Timestamptz(6)
+  status          String?
+  tracking_number Int?
+  couriers        couriers         @relation(fields: [courierId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  orders          orders           @relation(fields: [orderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  delivery_status delivery_status? @relation(fields: [status], references: [status], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model delivery_orders {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  order_id   String?  @db.Uuid
+}
+
+model delivery_personnel {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String   @db.VarChar
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model delivery_request {
+  id                      String                    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at              DateTime                  @default(now()) @db.Timestamptz(6)
+  updated_at              DateTime?                 @db.Timestamptz(6)
+  delivery_method         String?
+  courierId               String?                   @db.Uuid
+  status                  String?                   @default("PENDING")
+  delivery_request_status delivery_request_status?  @relation(fields: [status], references: [status], onDelete: NoAction, onUpdate: NoAction)
+  delivery_request_orders delivery_request_orders[]
+}
+
+model delivery_request_orders {
+  id                  String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at          DateTime         @default(now()) @db.Timestamptz(6)
+  order_id            String           @db.Uuid
+  delivery_request_id String           @db.Uuid
+  delivery_request    delivery_request @relation(fields: [delivery_request_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  orders              orders           @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model delivery_request_status {
+  status           String             @id
+  delivery_request delivery_request[]
+}
+
+model delivery_status {
+  status   String     @id
+  delivery delivery[]
+}
+
+model locations {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  name       String   @db.VarChar
+}
+
+model order_fulfillment_type {
+  fulfillment_type String   @id
+  orders           orders[]
+}
+
+model order_item {
+  id         String   @id(map: "order_items_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  orderId    String?  @db.Uuid
+  productId  String   @db.Uuid
+  quantity   Int      @default(1)
+  price      Int
+  orders     orders?  @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  products   products @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model order_preference {
+  id         String   @id(map: "preference_table_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model order_status {
+  status               String                 @id @default("PENDING")
+  order_status_history order_status_history[]
+  orders               orders[]
+}
+
+model order_status_history {
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  order_id     String       @db.Uuid
+  status       String
+  created_at   DateTime     @default(now()) @db.Timestamptz(6)
+  orders       orders       @relation(fields: [order_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  order_status order_status @relation(fields: [status], references: [status], onUpdate: Restrict)
+}
+
+model order_supplier {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  supplierId String    @db.Uuid
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  order_id   String    @db.Uuid
+  orders     orders    @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  suppliers  suppliers @relation(fields: [supplierId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model orders {
+  id                      String                    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at              DateTime                  @default(now()) @db.Timestamptz(6)
+  origin                  String?                   @db.VarChar
+  destination             String?                   @db.VarChar
+  status                  String?                   @default("PENDING")
+  processedBy             String?                   @db.Uuid
+  customerId              String?                   @db.Uuid
+  fulfillment_type        String?
+  orderId                 String?
+  delivery                delivery[]
+  delivery_request_orders delivery_request_orders[]
+  order_item              order_item[]
+  order_status_history    order_status_history[]
+  order_supplier          order_supplier[]
+  business                business?                 @relation(fields: [customerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  order_fulfillment_type  order_fulfillment_type?   @relation(fields: [fulfillment_type], references: [fulfillment_type], onDelete: NoAction, onUpdate: NoAction)
+  order_status            order_status?             @relation(fields: [status], references: [status], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model products {
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at  DateTime     @default(now()) @db.Timestamptz(6)
+  name        String?      @db.VarChar
+  price       Int?         @default(0)
+  quantity    Int          @default(0)
+  description String?
+  inStock     Boolean      @default(true)
+  supplier_id String?      @db.Uuid
+  discount    Int?         @default(0)
+  mainImage   String?
+  order_item  order_item[]
+  suppliers   suppliers?   @relation(fields: [supplier_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+model registeration_channel_type {
+  channel  String     @id(map: "registeration_channel_pkey")
+  business business[]
+}
+
+model reports {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model ride_status {
+  status        String          @id
+  courier_rides courier_rides[]
+}
+
+model ride_type {
+  type          String          @id
+  courier_rides courier_rides[]
+}
+
+model sessions {
+  id           String    @id @default(dbgenerated("public.gen_random_uuid()")) @db.Uuid
+  sessionToken String
+  userId       String    @db.Uuid
+  expires      DateTime? @db.Timestamptz(6)
+  users        users     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
+}
+
+model supplier_categories_enum {
+  name                 String                 @id
+  description          String                 @default("\"\"")
+  suppliers_categories suppliers_categories[]
+}
+
+model supplier_service_zone {
+  id                   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at           DateTime @default(now()) @db.Timestamptz(6)
+  coverage_area_radius Int
+  supplier_id          String   @db.Uuid
+  location_id          String   @db.Uuid
+}
+
+model suppliers {
+  id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at           DateTime               @default(now()) @db.Timestamptz(6)
+  name                 String?                @db.VarChar
+  user_id              String?                @db.Uuid
+  description          String?
+  contactName          String?                @db.VarChar
+  contactEmail         String?                @db.VarChar
+  phoneNumber          String?                @db.VarChar
+  streetAddress        String?                @db.VarChar
+  zone                 String?                @db.VarChar
+  order_supplier       order_supplier[]
+  products             products[]
+  suppliers_categories suppliers_categories[]
+  work_schedules       work_schedules?
+}
+
+model suppliers_categories {
+  id                       String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  supplier_id              String                   @db.Uuid
+  category_name            String
+  supplier_categories_enum supplier_categories_enum @relation(fields: [category_name], references: [name], onDelete: Cascade, map: "suppliers_categories_categorie_name_fkey")
+  suppliers                suppliers                @relation(fields: [supplier_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+model user_invites {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime  @default(now()) @db.Timestamptz(6)
+  name       String?
+  email      String    @db.VarChar
+  role       String
+  user_role  user_role @relation(fields: [role], references: [role], onUpdate: Restrict)
+}
+
+model user_role {
+  role         String         @id
+  user_invites user_invites[]
+  users        users[]
+}
+
+model users {
+  id                     String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at             DateTime   @default(now()) @db.Timestamptz(6)
+  name                   String?    @db.VarChar
+  role                   String?
+  email                  String?    @unique @db.VarChar
+  image                  String?
+  emailVerified          DateTime?  @db.Timestamptz(6)
+  hasCompletedOnboarding Boolean?   @default(false)
+  accounts               accounts[]
+  sessions               sessions[]
+  user_role              user_role? @relation(fields: [role], references: [role], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model verification_tokens {
+  token      String    @id
+  identifier String
+  expires    DateTime? @db.Timestamptz(6)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model work_schedules {
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at  DateTime      @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime      @default(now()) @db.Timestamptz(6)
+  days        Boolean[]     @default([true, true, true, true, true, true, true])
+  business_id String?       @unique @db.Uuid
+  supplier_id String?       @unique @db.Uuid
+  business    business?     @relation(fields: [business_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  suppliers   suppliers?    @relation(fields: [supplier_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  work_shifts work_shifts[]
+}
+
+model work_shifts {
+  id             String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at     DateTime       @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime       @default(now()) @db.Timestamptz(6)
+  schedule_id    String         @db.Uuid
+  start_time     DateTime       @db.Time(6)
+  end_time       DateTime       @db.Time(6)
+  work_schedules work_schedules @relation(fields: [schedule_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+model zones {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at  DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime? @db.Timestamptz(6)
+  name        String?   @db.VarChar
+  description String?
+}
