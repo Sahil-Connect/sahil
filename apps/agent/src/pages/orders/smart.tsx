@@ -83,7 +83,7 @@ export default function SmartOrdersPage() {
       <Card className="max-w-3xl mx-auto">
         <div className="p-6">
           <h2 className="text-2xl font-semibold mb-2">Quick Order</h2>
-          <p className="text-gray-500 text-sm mb-6">Tell us in plain language and we'll suggest an order for you.</p>
+          <p className="text-gray-500 text-sm mb-6">Tell us in plain language and we will suggest an order for you.</p>
           
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>

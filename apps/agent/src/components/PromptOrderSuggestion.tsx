@@ -111,7 +111,7 @@ function SupplierCompareDrawer({ currentSupplier }: SupplierCompareDrawerProps) 
               </div>
             )}
             <div className="mt-4">
-              <Button className="w-full" variant={supplier.name === currentSupplier.name ? "outline" : "default"}>
+              <Button className="w-full" variant={supplier.name === currentSupplier.name ? "outline" : "primary"}>
                 {supplier.name === currentSupplier.name ? 'Current Selection' : 'Select Supplier'}
               </Button>
             </div>
@@ -139,7 +139,7 @@ export function PromptOrderSuggestion({ suggestion, onCompare }: PromptOrderSugg
   return (
     <div className="p-6">
       <h3 className="text-xl font-semibold mb-6">Suggested Order</h3>
-      <p className="text-gray-500 text-sm mb-4">Based on your request, here's what we suggest:</p>
+      <p className="text-gray-500 text-sm mb-4">Based on your request, here is what we suggest:</p>
 
       <div className="bg-gray-50 rounded-lg p-4 mb-6">
         <h4 className="text-lg font-medium mb-2">Supplier Information</h4>
@@ -210,50 +210,7 @@ export function PromptOrderSuggestion({ suggestion, onCompare }: PromptOrderSugg
         </Button>
       </div>
 
-      <Modal
-        open={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        title="Edit Item"
-      >
-        {editedItem && (
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Item Name</label>
-              <input 
-                value={editedItem.name} 
-                readOnly 
-                className="w-full p-2 border rounded-md bg-gray-50"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Quantity</label>
-              <input
-                type="number"
-                value={editedItem.quantity}
-                onChange={(e) => setEditedItem({ ...editedItem, quantity: parseInt(e.target.value) })}
-                className="w-full p-2 border rounded-md"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Price per {editedItem.unit}</label>
-              <input
-                type="number"
-                value={editedItem.price}
-                onChange={(e) => setEditedItem({ ...editedItem, price: parseFloat(e.target.value) })}
-                className="w-full p-2 border rounded-md"
-              />
-            </div>
-            <div className="flex justify-end space-x-2 mt-6">
-              <Button variant="outline" onClick={() => setIsEditModalOpen(false)}>
-                Cancel
-              </Button>
-              <Button onClick={handleSaveEdit}>
-                Save Changes
-              </Button>
-            </div>
-          </div>
-        )}
-      </Modal>
+
     </div>
   )
 }
