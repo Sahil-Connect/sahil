@@ -43,7 +43,6 @@ on:
         default: "sahil-terraform-table-locks"
         type: string
 
-# concurrency required to avoid terraform lock contention during ECR provisioning
 concurrency: ci-${{ github.repository }}-website-docker-pipeline
 
 jobs:
@@ -79,7 +78,6 @@ jobs:
           set -eux
           # lowercase the name
           repo="${GITHUB_REPOSITORY,,}"
-
           # replace / with _
           echo "ECR_REPO_NAME=${repo//\//_}" >> $GITHUB_ENV
 
@@ -160,7 +158,17 @@ jobs:
             
             echo "Previous image tagged as $NEW_VERSION"
             echo "version_tag=$NEW_VERSION" >> $GITHUB_OUTPUT
+          else
+            # If no previous image exists, set version_tag to an empty string
+            echo "version_tag=" >> $GITHUB_OUTPUT
           fi
           
+          # Always set image_tag and full_image
           echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
           echo "full_image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Debug outputs
+        run: |
+          echo "image_tag=${{ steps.build-publish.outputs.image_tag }}"
+          echo "version_tag=${{ steps.build-publish.outputs.version_tag }}"
+          echo "full_image=${{ steps.build-publish.outputs.full_image }}"
