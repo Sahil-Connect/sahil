@@ -122,6 +122,8 @@ jobs:
           ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
           IMAGE_TAG: ${{ inputs.image_tag }}
         run: |
+          set -e  # Exit immediately if any command fails
+
           # Get the current latest image digest (if it exists)
           PREVIOUS_IMAGE_MANIFEST=$(aws ecr batch-get-image \
             --repository-name $ECR_REPOSITORY \
