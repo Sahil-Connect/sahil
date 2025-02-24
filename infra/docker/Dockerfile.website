@@ -37,8 +37,7 @@ ENV TURBO_TOKEN=$TURBO_TOKEN
 
 #RUN echo ${TURBO_TEAM}
 
-#RUN yarn turbo run build --filter=website --api=${CACHE_SERVER_URL} --team=${TURBO_TEAM} --token=${TURBO_TOKEN}
-RUN yarn turbo run build --filter=website --api='https://cache-server.sahil.app' --team='team_sahil' --token='sAhILBiLLionDoLLarToK3n'
+RUN yarn turbo run build --filter=website --api=${CACHE_SERVER_URL} --team=${TURBO_TEAM} --token=${TURBO_TOKEN}
 
 
 FROM base AS runner
