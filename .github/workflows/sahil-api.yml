@@ -43,22 +43,16 @@ on:
         default: "sahil-terraform-table-locks"
         type: string
 
-# concurrency required to avoid terraform lock contention during ECR provisioning
-concurrency: ci-${{ github.repository }}-api-docker-pipeline
+env:
+  DATABASE_HOST: ${{ secrets.DATABASE_HOST }}  # Use GitHub Secrets for sensitive data
+  DATABASE_USER: ${{ secrets.DATABASE_USER }}
+  DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+  DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+  DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
 
 jobs:
   docker:
     runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write
-      contents: read
-
-    outputs:
-      image_tag: ${{ steps.build-publish.outputs.image_tag }}
-      version_tag: ${{ steps.build-publish.outputs.version_tag }}
-      full_image: ${{ steps.build-publish.outputs.full_image }}
-
     steps:
       - uses: actions/checkout@v3
 
@@ -77,10 +71,7 @@ jobs:
         shell: bash
         run: |
           set -eux
-          # lowercase the name
           repo="${GITHUB_REPOSITORY,,}"
-
-          # replace / with _
           echo "ECR_REPO_NAME=${repo//\//_}" >> $GITHUB_ENV
 
       - name: TF init
@@ -124,43 +115,17 @@ jobs:
           ECR_REPOSITORY: ${{ env.ECR_REPO_NAME }}
           IMAGE_TAG: ${{ inputs.image_tag }}
         run: |
-          # Get the current latest image digest (if it exists)
-          PREVIOUS_IMAGE_MANIFEST=$(aws ecr batch-get-image \
-            --repository-name $ECR_REPOSITORY \
-            --image-ids imageTag=$IMAGE_TAG \
-            --output text \
-            --query 'images[].imageManifest' || echo "")
+          docker build \
+            --build-arg DATABASE_HOST=$DATABASE_HOST \
+            --build-arg DATABASE_USER=$DATABASE_USER \
+            --build-arg DATABASE_PORT=$DATABASE_PORT \
+            --build-arg DATABASE_NAME=$DATABASE_NAME \
+            --build-arg DATABASE_PASSWORD=$DATABASE_PASSWORD \
+            -f "${{ inputs.path_to_dockerfile }}" \
+            -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
+            "${{ inputs.docker_build_dir }}"
           
-          # Build the new image
-          docker build "${{ inputs.docker_build_dir }}" -f "${{ inputs.path_to_dockerfile }}" -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-          
-          # Push the new image as latest
           docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-          
-          # If there was a previous image, tag it as v1, v2, etc.
-          if [ ! -z "$PREVIOUS_IMAGE_MANIFEST" ]; then
-            # Get the current highest version number
-            CURRENT_VERSION=$(aws ecr describe-images \
-              --repository-name $ECR_REPOSITORY \
-              --query 'imageDetails[].imageTags[?starts_with(@, `v`)]' \
-              --output text | grep -o 'v[0-9]*' | sed 's/v//' | sort -n | tail -1)
-            
-            # Calculate next version number
-            if [ -z "$CURRENT_VERSION" ]; then
-              NEW_VERSION="v1"
-            else
-              NEW_VERSION="v$((CURRENT_VERSION + 1))"
-            fi
-            
-            # Tag the previous image with the new version
-            aws ecr put-image \
-              --repository-name $ECR_REPOSITORY \
-              --image-tag $NEW_VERSION \
-              --image-manifest "$PREVIOUS_IMAGE_MANIFEST"
-            
-            echo "Previous image tagged as $NEW_VERSION"
-            echo "version_tag=$NEW_VERSION" >> $GITHUB_OUTPUT
-          fi
           
           echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
           echo "full_image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
