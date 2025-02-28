@@ -10,6 +10,8 @@
     "build-maps": "turbo run build --filter=maps",
     "dev-maps": "turbo run dev --filter=maps",
     "build-pay": "turbo run build --filter=pay",
+    "build-server": "turbo run build --filter=server",
+    "dev-server": "turbo run dev --filter=server",
     "dev-pay": "turbo run dev --filter=pay",
     "build": "turbo run build",
     "dev": "turbo run dev",
