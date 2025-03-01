@@ -1,0 +1,13 @@
+{
+  "name": "@sahil/constants",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

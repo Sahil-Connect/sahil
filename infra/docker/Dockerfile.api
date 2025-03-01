@@ -41,9 +41,11 @@ COPY turbo.json turbo.json
 
 # Build all required packages in order
 RUN yarn workspace @sahil/tsconfig build || true
+RUN yarn workspace @sahil/constants build || true
+RUN yarn workspace @sahil/lib build
 RUN yarn workspace @sahil/features build || true
 RUN yarn workspace ui build || true
-RUN yarn workspace @sahil/lib build
+RUN yarn workspace agent build
 
 # Build and bundle API with dependencies
 RUN cd apps/api && yarn install && yarn build

@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.0",
-    "@sahil/features": "*",
+    "@sahil/constants": "*",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "next": "^14.0.0",
