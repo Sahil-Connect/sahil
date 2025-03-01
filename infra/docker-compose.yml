@@ -1,0 +1,96 @@
+version: '3'
+
+services:
+  # Hasura Engine
+  sahil-hasura-local-dev:
+    container_name: sahil-hasura-engine
+    image: hasura/graphql-engine:v2.36.0
+    user: 1001:1001
+    ports:
+      - '8080:8080'
+    restart: always
+    environment:
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@sahil-pgdb:5432/${POSTGRES_DB}
+      PG_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@sahil-pgdb:5432/${POSTGRES_DB}
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+    depends_on:
+      sahil-pgdb:
+        condition: service_healthy
+
+  # PostgreSQL
+  sahil-pgdb:
+    image: postgres:15
+    container_name: sahil-pgdb
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - '5432:5432'
+    volumes:
+      - sahil_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Redis
+  sahil-redis:
+    container_name: sahil-redis
+    image: redis:6.0-alpine
+    restart: always
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    ports:
+      - '6379:6379'
+    volumes:
+      - sahil_redisdata:/data
+    depends_on:
+      sahil-pgdb:
+        condition: service_healthy
+
+  # Apps
+  sahil-website:
+    container_name: sahil-website
+    build:
+      context: ..
+      dockerfile: ./infra/docker/Dockerfile.website
+    image: sahil-website-test
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      sahil-hasura-local-dev:
+        condition: service_healthy
+
+  sahil-api:
+    container_name: sahil-api
+    build:
+      context: ..
+      dockerfile: ./infra/docker/Dockerfile.api
+    image: sahil-api
+    restart: always
+    ports:
+      - '8000:8000'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+    depends_on:
+      sahil-hasura-local-dev:
+        condition: service_healthy
+
+  # Add other apps similarly...
+
+# Volumes
+volumes:
+  sahil_pgdata:
+  sahil_redisdata:
