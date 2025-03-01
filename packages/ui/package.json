@@ -14,7 +14,7 @@
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
     "react": "^18.3.1",
-    "tsconfig": "*",
+    "@sahil/tsconfig": "*",
     "typescript": "^4.5.2"
   },
   "dependencies": {

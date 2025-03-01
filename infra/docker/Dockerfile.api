@@ -40,6 +40,7 @@ COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
 # Build all required packages in order
+WORKDIR /app
 RUN yarn workspace @sahil/tsconfig build || true
 RUN yarn workspace @sahil/constants build || true
 RUN yarn workspace @sahil/lib build

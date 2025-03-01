@@ -1,15 +1,16 @@
 {
-    "extends": "tsconfig/base.json",
-    "compilerOptions": {
-      "baseUrl": ".",
-      "rootDirs": ["src"],
-      "outDir": "dist",
-      "lib": ["es2020"],
-      "target": "es2020",
-      "module": "esnext",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "types": ["node"]
-    },
-    "exclude": ["node_modules", "dist"]
-  }
+  "extends": "@sahil/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["node"]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}
