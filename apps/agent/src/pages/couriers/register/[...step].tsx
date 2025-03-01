@@ -8,7 +8,7 @@ import {
   CourierFormSteps,
 } from "@sahil/features/Couriers/CourierRegistrationForm";
 import { useParams, useRouter } from "next/navigation";
-import { INITIAL_STEP } from "@sahil/features/Couriers/constants";
+import { INITIAL_STEP } from "@sahil/constants/src/couriers";
 import { useCourierFormStore } from "@sahil/lib/hooks/formStores/useCourierFormStore";
 import { CourierFormSummary } from "@sahil/features/Couriers/CourierRegistrationForm/CourierFormSummary";
 import { HiOutlineCheckCircle } from "react-icons/hi2";
