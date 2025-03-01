@@ -28,15 +28,25 @@ FROM base AS installer
 RUN apk add --no-cache libc6-compat
 RUN apk update
 WORKDIR /app
+
+# Copy all package.json files first
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
 RUN yarn install --network-timeout 100000
 
+# Copy source files
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
 
-RUN yarn turbo build --filter=api...
+# Build all required packages in order
+RUN yarn workspace @sahil/tsconfig build || true
+RUN yarn workspace @sahil/features build || true
+RUN yarn workspace ui build || true
+RUN yarn workspace @sahil/lib build
+
+# Build and bundle API with dependencies
+RUN cd apps/api && yarn install && yarn build
 
 FROM base AS runner
 WORKDIR /app
@@ -46,4 +56,4 @@ RUN adduser --system --uid 1001 expressjs
 USER expressjs
 COPY --from=installer /app .
 
-CMD node apps/api/src/server.js
+CMD node apps/api/dist/server.js

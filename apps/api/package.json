@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --project ./tsconfig.json",
+    "build": "node build.js",
     "clean": "rm -r dist",
     "dev": "nodemon src/server.ts --experimental-global-webcrypto",
     "format": "",
@@ -46,6 +46,8 @@
     "chalk": "^5.3.0",
     "concurrently": "^8.2.2",
     "typescript": "^5.3.3",
-    "@types/jsonwebtoken": "^8.5.0"
+    "@types/jsonwebtoken": "^8.5.0",
+    "esbuild": "^0.19.0",
+    "esbuild-node-externals": "^1.12.0"
   }
 }

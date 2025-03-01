@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { INSERT_NEW_BUSINESS } from "@sahil/lib/graphql/mutations/businesses";
+import { INSERT_NEW_BUSINESS } from "@sahil/lib/graphql";
 
 import { client } from "../../lib/graphql-request";
 
