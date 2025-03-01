@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.0",
+    "@apollo/client": "^3.8.1",
     "@sahil/constants": "*",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
