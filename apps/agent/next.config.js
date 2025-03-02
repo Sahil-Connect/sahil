@@ -19,6 +19,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    esmExternals: ['oslo', 'loose']
+  },
   output: "standalone"
 };
 

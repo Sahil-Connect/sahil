@@ -6,6 +6,8 @@
     "composite": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "paths": {
       "@sahil/features/*": ["../../packages/features/src/*"],
       "ui/*": ["../../packages/ui/src/*"]
