@@ -13,20 +13,19 @@ export const Hero = () => {
         <div className="lg:mb-24">
           <div className="flex justify-center">
             <p className="py-1.5 px-4 bg-white border border-gray-200 text-sm text-zinc-900 rounded-full transition hover:border-gray-300 focus:outline-none focus:border-gray-300">
-              Empowering businesses
+              Sahil - because delivery should be easy
             </p>
           </div>
           <div className="mt-5 max-w-5xl mx-auto text-center">
             <h1 className="font-bold font-jakarta text-zinc-900 text-2xl md:text-5xl lg:text-6xl">
-              Connecting businesses with{" "}
-              <span className="bg-clip-text bg-gradient-to-tl from-primary to-green-600 text-transparent">suppliers</span> &{" "}
-              <span className="bg-clip-text bg-gradient-to-tl from-primary to-green-600 text-transparent">customers</span>
+              The last-mile shouldn't end at your{" "}
+              <span className="bg-clip-text bg-gradient-to-tl from-primary to-green-600 text-transparent">door</span>—it should end where it{" "}
+              <span className="bg-clip-text bg-gradient-to-tl from-primary to-green-600 text-transparent">works best</span>
             </h1>
           </div>
           <div className="mt-5 max-w-[60ch] mx-auto text-center">
             <p className="text-base text-gray-600">
-              A logistics platform for emerging markets, linking small businesses 
-              with suppliers to automate procurement and distribution.
+              We empower logistics platforms with smart, secure drop points designed to eliminate failed deliveries and reduce wasted fuel, driver time, and customer frustration.
             </p>
           </div>
           <div className="mt-8 gap-3 flex justify-center">

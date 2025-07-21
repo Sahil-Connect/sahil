@@ -9,3 +9,4 @@ export * from "./JourneySection";
 export * from "./ContactCard";
 export * from "./PartnerCard";
 export * from "./partners";
+export * from "./AnimatedList";

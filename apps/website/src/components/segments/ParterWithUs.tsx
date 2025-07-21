@@ -31,11 +31,18 @@ export const ParterWithUs = () => {
   return (
     <SectionWrapper>
       <GridContainer>
-        <SectionTitle 
-          subtitle="Partners" 
-          title="Partner with Us" 
-          textCentered={true}
-        />
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <p className="text-sm font-medium text-primary uppercase tracking-wider mb-4">Partners</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6">
+            Join Our Network:
+            <br className="hidden md:block" />
+            Partnership Opportunities That Scale
+          </h2>
+          <p className="text-lg text-gray-600">
+            Discover how businesses, suppliers, and logistics partners can leverage 
+            our smart locker infrastructure to transform their delivery operations.
+          </p>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-4">
           {partnerDetails.map((partner, index) => (
             <PartnerCard

@@ -10,10 +10,18 @@ export const Features = () => {
   return (
     <SectionWrapper>
       <GridContainer>
-        <SectionTitle 
-          subtitle="Features" 
-          textCentered={true}
-        />
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <p className="text-sm font-medium text-primary uppercase tracking-wider mb-4">Features</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6">
+            Smart Infrastructure:
+            <br className="hidden md:block" />
+            Your Complete Delivery Solution
+          </h2>
+          <p className="text-lg text-gray-600">
+            Discover the core technologies that power our smart locker network, 
+            from seamless API integration to intelligent location optimization.
+          </p>
+        </div>
         <ul className="mb-20 grid gap-y-10 md:gap-x-8 md:grid-cols-2 lg:grid-cols-3">
           {featuresData.map(
             ({ id, title, description, image }) => {
